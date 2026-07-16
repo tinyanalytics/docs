@@ -1,0 +1,56 @@
+---
+title: "Filter your data"
+description: "Narrow every tinyanalytics report to the visitors you care about: filter by page, source, location, device, event, and more — across the whole dashboard."
+icon: "filter"
+---
+
+Filters narrow every report in tinyanalytics to a subset of your traffic — one country, one page, one campaign, or any combination. A filter applies across the whole dashboard at once and stays active as you move between reports, so you can ask a focused question and get a consistent answer everywhere.
+
+{/* TODO: add screenshot of active filters */}
+
+## Two ways to filter
+
+- **Click a row.** In any breakdown, table, or map, click a value — a page, a referrer, a country — to filter the dashboard by it. Click again to remove it. This is the fastest way to drill in.
+- **Add a filter manually.** Use the filter control to build a filter from a dimension, an operator, and one or more values.
+
+## What a filter is made of
+
+A filter has three parts: a **dimension** (what to filter on), an **operator** (how to compare), and one or more **values**.
+
+Common dimensions include page path, page title, referrer, channel, country, region, city, browser, operating system, device type, screen size, UTM parameters, event name, and tag.
+
+The operators are:
+
+| Operator | Matches when the value… |
+| --- | --- |
+| **is** / **is not** | equals / does not equal your value |
+| **contains** / **does not contain** | includes / excludes your text |
+| **starts with** / **ends with** | begins / ends with your text |
+| **matches regex** / **does not match regex** | matches / doesn't match your pattern |
+| **is set** / **is not set** | has any value / is empty |
+
+## Combining filters
+
+- **Several values on one filter** are combined with **OR** — `country is US or GB` matches visitors from either.
+- **Several filters** are combined with **AND** — `country is US` plus `page is /pricing` matches US visitors who saw the pricing page.
+
+## Filters follow you across reports
+
+An active filter stays applied as you switch between Overview, Pages, Sessions, and the rest. Set up a view once — say, mobile visitors from a campaign — and every report reflects it until you clear it. Filtering the Sessions list keeps whole sessions rather than trimming them to matching events, so "sessions that reached this page" answers correctly. See [Sessions](/guides/sessions#filtering-keeps-whole-sessions).
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    The metrics and breakdowns your filters re-scope.
+  </Card>
+  <Card title="Sessions" icon="list-timeline" href="/guides/sessions">
+    How filtering selects whole sessions.
+  </Card>
+  <Card title="Pages" icon="file-lines" href="/guides/pages">
+    Click a page to filter the whole dashboard.
+  </Card>
+  <Card title="Events explorer" icon="bolt" href="/guides/events">
+    Filter by event and property.
+  </Card>
+</CardGroup>

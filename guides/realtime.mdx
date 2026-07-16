@@ -1,0 +1,42 @@
+---
+title: "Realtime"
+description: "See who's on your site right now in tinyanalytics: a live count of active visitors and the sessions active in the last few minutes."
+icon: "signal-stream"
+---
+
+Realtime shows who's on your site right now. The live count is the number of **distinct sessions** active in the last few minutes, and it counts people rather than events — a visitor loading ten pages still counts as one. The number decays smoothly as visitors go idle, so it always reflects current activity.
+
+{/* TODO: add screenshot of the Realtime view */}
+
+## How the live count works
+
+- It counts **distinct sessions** seen in the last five minutes, so one active visitor is one, no matter how many pages they load.
+- It counts **people, not bots** — traffic identified as bots is filtered out before it reaches the live count.
+- It **decays gradually**. As each visitor goes quiet, their session ages out of the window, so the count falls one visitor at a time rather than dropping all at once.
+
+## Live sessions
+
+Alongside the count, the live sessions view lists the individual sessions active in the last few minutes — where each visitor came from, their location and device, and the pages they're on. Open a session to see its full timeline in [Sessions](/guides/sessions).
+
+## When Realtime is most useful
+
+- **Confirming an install.** After you add the tracking snippet, visit your own site and watch your session appear. See [verify your setup](/guides/verify-your-setup).
+- **Watching a launch or campaign.** See traffic arrive live when you publish a post, send an email, or go live on a channel.
+- **Spotting a spike.** Notice a surge as it happens, then switch to the [Overview](/guides/dashboard-overview) to break it down by source.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    Top-line metrics, trend, and breakdowns for any date range.
+  </Card>
+  <Card title="Sessions" icon="list-timeline" href="/guides/sessions">
+    Inspect a single visit from entry to exit.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Use Realtime to confirm tracking works.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Narrow reports to the visitors you care about.
+  </Card>
+</CardGroup>

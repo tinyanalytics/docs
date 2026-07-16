@@ -1,0 +1,41 @@
+---
+title: "Users"
+description: "See the people behind your traffic in tinyanalytics: a list of your site's users and a profile for each one with their full history and traits."
+icon: "user"
+---
+
+The Users report shows the people behind your traffic. Each user groups all of one person's sessions and events, so you can move from "how many visits" to "who is visiting." When you [identify users](/guides/identify-users), they appear under your own user IDs, with any traits you've attached.
+
+{/* TODO: add screenshot of the Users report */}
+
+## Identified users vs cookieless visitors
+
+- **Identified users** — people your app has named with [`identify()`](/guides/identify-users). They appear under your ID, their activity is unified across devices, and their traits (like plan or signup date) are shown.
+- **Cookieless visitors** — people who haven't been identified. They're grouped by the cookieless hash tinyanalytics derives on the server, which is a close estimate rather than an exact person. See [how tinyanalytics works](/how-it-works#how-does-tinyanalytics-count-visitors-without-cookies).
+
+## Open a user's profile
+
+Click a user to open their profile — their full history of sessions and events, and the traits attached to them. This is where you answer "what has this specific person done?" across all their visits.
+
+## Common workflows
+
+- **Follow a signed-in customer.** Identify users, then read one customer's full journey across sessions and devices.
+- **Segment by trait.** Attach traits with `identify()` or `setTraits()`, then filter reports by them.
+- **Investigate an account.** Open a profile to see everything one person did before and after a key action.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Identify users" icon="id-badge" href="/guides/identify-users">
+    Attach your own user IDs and traits.
+  </Card>
+  <Card title="Sessions" icon="list-timeline" href="/guides/sessions">
+    Inspect the individual visits behind a user.
+  </Card>
+  <Card title="Retention" icon="repeat" href="/guides/retention">
+    See how many users come back over time.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Narrow reports to a segment of users.
+  </Card>
+</CardGroup>

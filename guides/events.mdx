@@ -1,0 +1,44 @@
+---
+title: "Events explorer"
+description: "Explore your custom events in tinyanalytics: a ranked list of event names with counts, and a per-event breakdown of the properties you send."
+icon: "bolt"
+---
+
+The Events explorer shows the custom events your site sends, ranked by how often they fire. Expand any event to see a breakdown of the properties recorded on it — the keys and values you passed, with a count for each. It's how you turn `event('purchase', { plan: 'pro' })` calls into answers about what people do.
+
+{/* TODO: add screenshot of the Events explorer */}
+
+## Event names and counts
+
+The main view lists each custom event by name with its total count, most frequent first. These are the events you send with [`event()`](/guides/custom-events) — `signup`, `purchase`, `newsletter_signup`, and so on. Pageviews aren't listed here; they have their own reports.
+
+## Property breakdowns
+
+Expand an event to sample its properties. For each property key, you see the values that appeared and how many times — so `purchase` expands to show the split across `plan` values like `pro` and `free`, or `billing` values like `monthly` and `annual`. This is where event properties pay off: send the things that vary as properties, and break them down here.
+
+## Auto-captured interactions
+
+Alongside the events you send, tinyanalytics records interactions automatically — outbound link clicks, file downloads, button clicks, text copies, and form submissions. Each has its own type, so you can look at them separately from your custom events. See [what the script tracks out of the box](/guides/tracking-script#what-the-script-tracks-out-of-the-box).
+
+## Common workflows
+
+- **Measure a key action.** Send a custom event for it, then track its count over time here.
+- **Compare variants.** Break an event down by a property to compare plans, sources, or options.
+- **Turn events into goals and funnels.** Once an event is firing, use it in [Goals](/guides/goals) and [Funnels](/guides/funnels).
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Send named events and properties from your site.
+  </Card>
+  <Card title="Goals" icon="bullseye" href="/guides/goals">
+    Turn an event or page into a conversion goal.
+  </Card>
+  <Card title="Funnels" icon="filter-circle-dollar" href="/guides/funnels">
+    Measure a sequence of events end to end.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Narrow reports by event or property.
+  </Card>
+</CardGroup>

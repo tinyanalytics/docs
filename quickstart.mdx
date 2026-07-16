@@ -1,47 +1,72 @@
 ---
 title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+description: "Add your website, install the tinyanalytics tracking script, and see your first visit — in under five minutes."
+icon: "rocket"
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+This guide takes you from zero to your first tracked visit. It should take about five minutes. You add a site in tinyanalytics, paste one script tag into your HTML, and watch the visit appear in your dashboard.
 
 ## Prerequisites
 
-Before you begin, you must have:
+- A tinyanalytics account. Sign up or sign in at [dash.tinyanalytics.io](https://dash.tinyanalytics.io).
+- Access to your website's HTML — specifically the ability to add a tag to the `<head>`.
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+## Add your site and install the script
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Add your website">
+    In the dashboard, select **Add website** and enter your site's domain (for example, `example.com`).
+    {/* TODO: verify exact button label against the live dashboard (Add website vs Add site). */}
 
-    ```bash
-    npm install your-package
-    ```
+    tinyanalytics creates the site and opens its dashboard. Until the first visit arrives, that dashboard shows a setup panel with your tracking snippet and a grid of platform guides.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+  <Step title="Copy your tracking snippet">
+    Copy the snippet shown on the setup panel. It looks like this, with your own site ID already filled in:
 
-    ```bash
-    your-cli init
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js" data-site-id="123"></script>
     ```
+
+    <Note>
+      Always copy the snippet from your dashboard rather than typing it by hand. The dashboard fills in the correct script URL and your numeric `data-site-id` for you.
+    </Note>
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+  <Step title="Add the snippet to your site">
+    Paste the snippet into your site's HTML, just before the closing `</head>` tag, on every page you want to measure.
 
-    ```bash
-    your-cli start
-    ```
+    `defer` tells the browser to run the script after the HTML has parsed, so it never blocks your page from loading. If you use a site builder or a framework, see the [integration guides](/guides/tracking-script#framework-and-cms-installs) for where to paste it.
+  </Step>
+  <Step title="Deploy your site">
+    Publish the change so the snippet is live on your public pages.
+  </Step>
+  <Step title="See your first visit">
+    Open your site in a browser, then return to its tinyanalytics dashboard. Within a few seconds your visit appears, and the setup panel is replaced by your live dashboard.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Verify it's working
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+Your setup is correct when a visit to your own site shows up in the dashboard. If nothing appears after a minute:
+
+- Confirm the snippet is in the `<head>` of a **published** page, not a draft or preview.
+- Confirm the `data-site-id` matches the site you're viewing in the dashboard.
+- Disable ad blockers for the test, or set up a [first-party proxy](/guides/tracking-script#bypass-ad-blockers) so tracking isn't blocked.
+
+For a full checklist, see [verify your setup](/guides/verify-your-setup).
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Configure the script" icon="sliders" href="/guides/script-configuration">
+    Control SPA routing, auto-capture, path masking, and more with `data-*` attributes.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Measure signups, purchases, and other actions beyond pageviews.
+  </Card>
+  <Card title="Identify users" icon="user" href="/guides/identify-users">
+    Attach your own user IDs to follow people across devices.
+  </Card>
+  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-it-works">
+    Understand cookieless identity and where your data goes.
+  </Card>
+</CardGroup>

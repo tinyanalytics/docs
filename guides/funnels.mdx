@@ -1,0 +1,49 @@
+---
+title: "Funnels"
+description: "Measure conversion and drop-off through a sequence of steps in tinyanalytics: build a funnel from pages and events, and see where visitors fall away."
+icon: "filter-circle-dollar"
+---
+
+A funnel measures how many visitors make it through an ordered sequence of steps — from landing page to signup to purchase, for example. tinyanalytics shows the conversion and drop-off at each step, so you can see exactly where people fall away. You build a funnel once, and it recalculates over whatever date range and filters you choose.
+
+{/* TODO: add screenshot of a funnel */}
+
+## Build a funnel
+
+A funnel is an ordered list of **steps**. Each step is either:
+
+- a **page** — matched by its path, or
+- a **custom event** — matched by its name.
+
+Add the steps in the order visitors should follow them, name the funnel, and save it. You can create as many funnels as you need for different flows.
+
+## Read the results
+
+For each step, the funnel shows how many sessions reached it and what share continued from the previous step. The gaps between steps are your drop-off points — the places where the most people leave the flow.
+
+## Drill into who converted or dropped
+
+Click a step to list the sessions behind it — either the visitors who **reached** that step or those who **dropped off** at it. From there you can open individual sessions to see what those visitors did, which turns a drop-off number into something you can act on.
+
+## Common workflows
+
+- **Find the leakiest step.** See which transition loses the most visitors and focus there.
+- **Compare sources.** Filter the funnel by a channel or campaign to see which traffic converts best.
+- **Validate a change.** Compare conversion across date ranges before and after a change.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Goals" icon="bullseye" href="/guides/goals">
+    Track a single conversion instead of a sequence.
+  </Card>
+  <Card title="Journeys" icon="diagram-project" href="/guides/journeys">
+    See the paths visitors take, without a fixed order.
+  </Card>
+  <Card title="Sessions" icon="list-timeline" href="/guides/sessions">
+    Inspect the visits behind each step.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Send the events you use as funnel steps.
+  </Card>
+</CardGroup>

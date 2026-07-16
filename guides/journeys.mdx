@@ -1,0 +1,42 @@
+---
+title: "Journeys"
+description: "See the paths visitors take through your site in tinyanalytics: a flow diagram of the most common page sequences, up to ten steps deep."
+icon: "diagram-project"
+---
+
+The Journeys report shows the paths visitors actually take through your pages, drawn as a flow diagram. For each visit, tinyanalytics reads the ordered sequence of pages, groups the common sequences, and ranks them — so you can see how people move through your site, not just which pages they land on.
+
+{/* TODO: add screenshot of the Journeys Sankey */}
+
+## How to read the flow
+
+- Each path is a sequence of pages a set of sessions followed, with the number of sessions on it and its share of all sessions in the range.
+- **Repeated visits to the same page in a row are collapsed** into one step, so a path reflects real movement rather than reloads.
+- **Single-page visits are excluded** — a journey needs at least two pages, so bounces don't clutter the diagram.
+
+## Choose how deep to look
+
+Set the number of steps to follow, from **2 to 10** (the default is 3). Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
+
+## Common workflows
+
+- **Find the common route to a goal.** See which sequences lead visitors toward signup or purchase.
+- **Spot drop-off points.** Notice where popular paths end instead of continuing.
+- **Compare entry pages.** See where visitors go after landing on different pages.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Pages" icon="file-lines" href="/guides/pages">
+    Rank individual pages by traffic.
+  </Card>
+  <Card title="Funnels" icon="filter-circle-dollar" href="/guides/funnels">
+    Measure conversion through a fixed sequence of steps.
+  </Card>
+  <Card title="Sessions" icon="list-timeline" href="/guides/sessions">
+    Follow one visit's path in full detail.
+  </Card>
+  <Card title="Goals" icon="bullseye" href="/guides/goals">
+    Define the outcomes journeys lead toward.
+  </Card>
+</CardGroup>

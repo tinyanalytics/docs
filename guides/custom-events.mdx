@@ -1,0 +1,86 @@
+---
+title: "Track custom events"
+description: "Send named events with properties to measure the actions that matter — signups, purchases, and clicks — with the tinyanalytics JavaScript API."
+icon: "cursor-click"
+---
+
+Send a custom event to measure an action that matters to your product — a signup, a purchase, a plan upgrade. You call `window.tinyanalytics.event()` with a name and optional properties, and the event appears in your **Events** reports where you can break it down and build funnels and goals from it.
+
+```js
+window.tinyanalytics.event('signup', { plan: 'pro' })
+```
+
+<Note>
+  Many interactions are already captured for you — outbound links, downloads, button clicks, copies, and form submissions. Use custom events for actions that are specific to your app and that auto-capture can't infer. See [auto-capture](/guides/script-configuration#turn-auto-capture-on-or-off).
+</Note>
+
+## Send an event
+
+The API takes an event name and an optional properties object:
+
+```js
+// A simple event
+window.tinyanalytics.event('newsletter_signup')
+
+// An event with properties
+window.tinyanalytics.event('purchase', {
+  plan: 'pro',
+  billing: 'annual',
+  seats: 5
+})
+```
+
+- **Name** — a short, stable string like `signup` or `purchase`. An empty name is rejected.
+- **Properties** — an optional object of key/value pairs. Use them to break the event down later (for example, `purchase` by `plan`).
+
+Pick a small set of event names and reuse them. Put the things that vary into properties rather than encoding them in the name, so `purchase` with `{ plan: 'pro' }` and `{ plan: 'free' }` stay one event you can compare.
+
+## When is window.tinyanalytics available?
+
+The tracking script loads with `defer`, so `window.tinyanalytics` becomes available after the page's HTML has parsed. Calls made in response to user actions — clicks, form submits, route changes — are always safe, because they happen well after load.
+
+If you need to send an event very early in the page (before the script has run), guard the call:
+
+```js
+if (window.tinyanalytics) {
+  window.tinyanalytics.event('hero_viewed')
+}
+```
+
+## Example: track 404 pages
+
+A "page not found" screen rendered by your app still returns a normal page, so the tracker can't detect it on its own. Send a custom event from your not-found route to report it:
+
+```js
+window.tinyanalytics.event('not_found', { path: location.pathname })
+```
+
+You then see which missing URLs your visitors hit by breaking the `not_found` event down by its `path` property.
+
+## Verify it's working
+
+<Steps>
+  <Step title="Trigger the event">
+    Do the action in your browser — sign up, click the button, or load the page that fires the event.
+  </Step>
+  <Step title="Check the Events report">
+    Open your site's **Events** report in tinyanalytics. Your event appears by name within a few seconds, with its properties available for breakdowns.
+  </Step>
+</Steps>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Identify users" icon="user" href="/guides/identify-users">
+    Attach a user ID so events are tied to a person.
+  </Card>
+  <Card title="Configure the script" icon="sliders" href="/guides/script-configuration">
+    Turn auto-capture on or off, and tag events.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm events are arriving.
+  </Card>
+  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-it-works">
+    Where events go after you send them.
+  </Card>
+</CardGroup>

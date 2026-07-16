@@ -1,0 +1,53 @@
+---
+title: "Goals"
+description: "Track conversions in tinyanalytics: define a goal from a page or a custom event, then measure how many visitors complete it."
+icon: "bullseye"
+---
+
+A goal is a single outcome you want visitors to reach — a signup, a purchase, a visit to a key page. You define what counts as a conversion, and tinyanalytics measures how many sessions complete it over your chosen date range and filters. Goals are the simplest way to turn traffic into a success metric.
+
+{/* TODO: add screenshot of the Goals page */}
+
+## Define a goal
+
+A goal matches one of two things:
+
+- a **page** — a conversion happens when a visitor views a matching path, or
+- a **custom event** — a conversion happens when a visitor fires a matching [event](/guides/custom-events).
+
+For either type, you choose how the value is matched:
+
+| Match type | Converts when the path or event name… |
+| --- | --- |
+| **Exact** | matches your value exactly |
+| **Starts with** | begins with your value |
+| **Contains** | includes your value anywhere |
+| **Regex** | matches your regular expression |
+
+Give the goal a name, and it starts tracking conversions.
+
+## Read the results
+
+Each goal shows how many sessions converted and the conversion rate over your selected range. Because goals respect the dashboard's date range and filters, you can measure the same goal for different sources, countries, or time periods just by changing the filters.
+
+## Goals vs funnels
+
+- Use a **goal** to track a single outcome — "did they convert?"
+- Use a [**funnel**](/guides/funnels) to track a sequence of steps — "where did they drop off on the way?"
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Funnels" icon="filter-circle-dollar" href="/guides/funnels">
+    Measure a multi-step conversion path.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Send the events you turn into goals.
+  </Card>
+  <Card title="Events explorer" icon="bolt" href="/guides/events">
+    Find the events worth turning into goals.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Measure a goal for a specific segment.
+  </Card>
+</CardGroup>

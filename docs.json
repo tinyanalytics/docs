@@ -1,53 +1,71 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "tinyanalytics",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#345FCF",
+    "light": "#537FEB",
+    "dark": "#2249B7"
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
+    "tabs": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
+        "tab": "Get started",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "index",
+              "quickstart",
+              "how-it-works"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Install the tracker",
+            "pages": [
+              "guides/tracking-script",
+              "guides/script-configuration",
+              "guides/verify-your-setup"
+            ]
+          },
+          {
+            "group": "Track what matters",
+            "pages": [
+              "guides/custom-events",
+              "guides/identify-users"
+            ]
+          },
+          {
+            "group": "Explore your data",
+            "pages": [
+              "guides/dashboard-overview",
+              "guides/realtime",
+              "guides/pages",
+              "guides/sessions",
+              "guides/users",
+              "guides/events",
+              "guides/journeys",
+              "guides/retention",
+              "guides/funnels",
+              "guides/goals",
+              "guides/filters"
+            ]
+          }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    ]
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Open dashboard",
+      "href": "https://dash.tinyanalytics.io"
     }
   },
   "contextual": {
@@ -60,13 +78,7 @@
       "mcp",
       "cursor",
       "vscode"
-    ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    ],
+    "display": "header"
   }
 }
