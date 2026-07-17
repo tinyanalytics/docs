@@ -442,6 +442,29 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 - ⬜ **Requires the Mintlify dashboard / real assets (owner action, not in-repo):** turn on the docs assistant + starter questions + deflection; set up the agent-in-Slack + automations; add a real OG/social share image (no asset to embed yet — not fabricated). The contextual "Ask AI / copy / open in ChatGPT·Claude·Perplexity / MCP / Cursor / VS Code" menu is already configured in `docs.json` and documented in `resources/use-with-ai.mdx`; Mintlify auto-generates `/llms.txt` + `/llms-full.txt` from the (complete) titles/descriptions.
 - 📌 **Screenshots** remain a genuine gap: every feature/integration page would benefit from captured images from a live instance (open question #5 — who captures them / from which instance). The inline markers are removed, but the need is still tracked here.
 
+**Backlog — gap analysis vs Rybbit docs (checked 2026-07-17)**
+
+Compared our coverage against the live Rybbit docs sidebar (`rybbit.com/docs`) as a behavioral reference (structure only; no expression copied). Every "to add" below is backed by the product wiki (the feature exists) and is in scope for hosted tinyanalytics. Items Rybbit documents that we deliberately do **not** add follow, with reasons — so this stays an honest audit, not a copy of their table of contents.
+
+*To add (confirmed, sourced):*
+- ⬜ **Filter & exclude traffic** — new page for ingest-time exclusions: excluded IPs, excluded countries, excluded paths / hostnames / user-agents, plus the per-site bot-blocking toggle. Fold in "hide your own traffic" (exclude your own IP + the client opt-out already documented in `script-configuration`). Source: decisions 0054, 0160; `tracker/site-config.ts`. Rybbit splits this across *Filter traffic* + *Hiding your own traffic*. **Not documented anywhere today — highest-value gap.**
+- ⬜ **Autocapture** — promote the toggle section in `script-configuration` to a dedicated page covering each auto-captured event (outbound link, download, button click, copy, form submit, engagement), what each records, and the form-shape-only privacy guarantee. Source: decision 0110. (The on/off toggle is documented; the deep-dive page is the gap.)
+- ⬜ **Wix** integration guide — website builder, real header/custom-code install point (general web-dev fact).
+- ⬜ **WooCommerce** integration guide — WordPress e-commerce; real install point (WordPress/header).
+
+*Lower priority / optional:*
+- ⬜ **Site settings** orientation page — Rybbit has one; our per-site settings (domain, public/private link, exclusions, embed) are documented piecemeal.
+- ⬜ **Svelte (Vite, non-Kit)** integration — we ship SvelteKit; Rybbit also documents plain Svelte/Vite (different install point: `index.html` / app mount).
+- ⬜ **Per-endpoint API pages** — Rybbit enumerates individual endpoint pages (sending-events, export-events, live-feed, channel-performance, funnel-dropoff, weekly-report). Ours is capability-structured (core-endpoints table + playground); enumerate more only if users ask.
+- (Unchanged, already listed under Phase 4: PrestaShop, ThriveCart, Joomla, TYPO3.)
+
+*Checked and deliberately NOT added (no fabrication):*
+- 🚫 **Product MCP server** — Rybbit ships `/docs/mcp` (query your analytics via an MCP server). The tinyanalytics wiki shows **no such product MCP server** (only incidental mentions), so a page would invent a feature. `resources/use-with-ai` documents the *docs* MCP, a different thing. Revisit only if a product MCP server ships.
+- 🚫 **Architecture / Self-hosting / Self-host vs Cloud / Managing your installation / v1 migration** — operator- and self-host-facing; out of scope under the hosted-only boundary.
+- 🚫 **Contentful / Sanity / Strapi / GitBook / Mintlify / React Native** — deliberately omitted already (headless CMSs render through a framework that has a guide; GitBook/Mintlify install points unverifiable; no mobile SDK). Reasons recorded under Phase 4.
+
+*Confirmed already covered (no action):* tagging (`data-tag`), skip/mask paths, client opt-out, and the auto-capture toggle (all in `script-configuration`); definitions, comparison, bot detection, data import, identify, funnels, goals, teams, invitations, account/org settings, tracking script, and troubleshooting (≈ our `verify-your-setup`). On the core analytics reports we are **more** comprehensive than Rybbit (a page per report vs their lighter treatment).
+
 ---
 
 ## 11. Assumptions & open questions
