@@ -1,0 +1,41 @@
+---
+title: "API playground"
+description: "Try the tinyanalytics API against your own data from inside the dashboard — pick an endpoint, set parameters, run it, and copy a ready-to-use code snippet."
+icon: "terminal"
+---
+
+The API playground lets you **try the API against your own data** without leaving the dashboard — the fastest way to learn an endpoint's parameters and response before you write any code. Pick an endpoint, fill in the parameters, run it, and copy a ready-made snippet.
+
+{/* TODO: add screenshot of the API playground */}
+
+## What it's for
+
+- **Discover** the exact parameters and response shape of a read endpoint against live data.
+- **Copy a snippet** in the language you use — the playground generates the call for you.
+- **Confirm your key works** end to end before wiring the API into your app.
+
+## Authentication
+
+The generated snippets use an [API key](/api-reference/api-keys) as `Authorization: Bearer YOUR_API_KEY` — the same credential you'll use in production. Swap in a real key from your account settings to run a call.
+
+```bash
+curl "https://dash.tinyanalytics.io/api/sites/1/overview?start_date=2026-07-01&end_date=2026-07-15" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Analytics read API" icon="chart-line" href="/api-reference/read">
+    The endpoints the playground runs.
+  </Card>
+  <Card title="API keys" icon="key" href="/api-reference/api-keys">
+    Create the key the snippets need.
+  </Card>
+  <Card title="Scoped SQL query" icon="database" href="/api-reference/sql">
+    Run raw SQL when reports aren't enough.
+  </Card>
+  <Card title="API reference" icon="book-open" href="/api-reference/introduction">
+    Base URL, auth, and status codes.
+  </Card>
+</CardGroup>

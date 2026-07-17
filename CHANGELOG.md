@@ -8,6 +8,8 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Added a new **API reference** tab (Get started · Ingestion · Reading data · Access & tools groups)
+  for Phase 6, after the Integrations tab.
 - Added three **Guides** navigation groups for Phase 5 — **Product analytics**, **Monitor & automate**,
   and **Share & embed** — between the existing "Filter, save & share" and "Manage data" groups.
 - Expanded the **Integrations** tab with the platform long tail and added a **Docs & static sites**
@@ -43,6 +45,19 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 6 (first wave) **API reference** tab (8 pages), authored from the API architecture docs, the
+  decision records, and — for the wire contract — the tracker's actual Zod schema read at source:
+  `api-reference/introduction.mdx` (base URL `https://dash.tinyanalytics.io`, the session-cookie vs.
+  `Authorization: Bearer <key>` auth split, status codes), `api-reference/track.mdx` (`POST /api/track`,
+  the `type`-discriminated event body with exact field caps, the key-gated `ipAddress`/`userAgent`
+  overrides for server-side ingestion, `204` response), `api-reference/identify.mdx` (`POST /api/identify`,
+  traits, `isNewIdentify`), `api-reference/read.mdx` (site-scoped GET reads, the shared `start_date`/
+  `end_date`/`time_zone` window, the core endpoint shapes), `api-reference/sql.mdx`
+  (`POST /api/sites/{id}/query`, `scoped_events`/`scoped_events_bot`, 10 s / 1,000-row caps),
+  `api-reference/api-keys.mdx` (create/revoke, shown-once, owner-scoped), `api-reference/rate-limits.mdx`
+  (per-key ingestion limit → `429`, the public-vs-trusted CORS split), and `api-reference/playground.mdx`.
+  The ingestion rate-limit is documented without inventing a numeric default (it's instance-configured).
+  Build validates with zero broken links.
 - Phase 5 **Advanced product analytics & ops** documentation pages (13), each sourced from the product
   wiki's algorithm specs and decision records with citable specifics. **Product analytics** —
   `guides/feature-flags.mdx` (boolean/multivariate/remote-config, rollout %, targeting rules, sticky

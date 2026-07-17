@@ -193,6 +193,39 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Ingestion",
+            "pages": [
+              "api-reference/track",
+              "api-reference/identify"
+            ]
+          },
+          {
+            "group": "Reading data",
+            "pages": [
+              "api-reference/read",
+              "api-reference/sql"
+            ]
+          },
+          {
+            "group": "Access & tools",
+            "pages": [
+              "api-reference/api-keys",
+              "api-reference/rate-limits",
+              "api-reference/playground"
+            ]
+          }
+        ]
       }
     ]
   },

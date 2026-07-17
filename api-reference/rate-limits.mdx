@@ -1,0 +1,53 @@
+---
+title: "Rate limits & CORS"
+description: "How tinyanalytics rate-limits server-side ingestion per API key (429 when exceeded) and which origins may call the API — public ingestion is open, everything else is credentialed."
+icon: "shield-halved"
+---
+
+tinyanalytics applies a **per-key rate limit to server-side ingestion** and restricts **which origins** may call the API. Browser tracking is deliberately open; authenticated reads and writes are locked to trusted origins.
+
+## Ingestion rate limit
+
+Server-side calls to [`POST /api/track`](/api-reference/track) authenticated with an [API key](/api-reference/api-keys) are rate-limited **per key**. Exceed the limit and the request returns:
+
+```
+429 Too Many Requests
+```
+
+A few things worth knowing:
+
+- The limit applies **only to keyed (server-side) ingestion**. Browser tracking and analytics reads are not rate-limited this way.
+- A request with **no** or an **invalid** API key isn't rejected with `429` — it falls through to the normal browser-equivalent path (untrusted, with bot filtering on).
+- Stay within your window and space out bursts; if you're batching a backfill, add a short delay between requests and retry a `429` after a pause.
+
+## CORS: which origins can call the API
+
+tinyanalytics splits the API into two CORS zones:
+
+| Paths | Origins | Credentials |
+| --- | --- | --- |
+| Ingestion & assets — `/api/track`, `/api/identify`, `/script.js` | **Any origin** | Never sent |
+| Everything else — reads, management | **Trusted origins only** | Sent |
+
+This is what lets the tracking script POST from any of your visitors' pages while ensuring a third-party site can't read your logged-in analytics. A state-changing request from an untrusted origin is rejected with a `403`.
+
+<Note>
+  Server-to-server calls aren't subject to CORS — it's a browser mechanism. Reading analytics from your backend with a Bearer key works regardless of origin; CORS only governs requests made from a web page.
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="API keys" icon="key" href="/api-reference/api-keys">
+    Create the key ingestion is limited by.
+  </Card>
+  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track">
+    The endpoint the limit applies to.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Browser tracking needs no key or origin setup.
+  </Card>
+  <Card title="API reference" icon="book-open" href="/api-reference/introduction">
+    Authentication and response conventions.
+  </Card>
+</CardGroup>

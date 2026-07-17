@@ -1,0 +1,59 @@
+---
+title: "API keys"
+description: "Create an API key in your account settings and send it as Authorization: Bearer to authenticate server-side ingestion, analytics reads, and site management."
+icon: "key"
+---
+
+An API key authenticates programmatic access to tinyanalytics — server-side event ingestion, analytics reads, and site management. You create a key in your **account settings**, then send it on every request as a Bearer token:
+
+```bash
+curl https://dash.tinyanalytics.io/api/sites/1/overview \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Create and manage keys
+
+Keys are managed from your account settings:
+
+- A key is **shown once** at creation — copy it then, because tinyanalytics stores only a hash and can't show it again.
+- **Revoke** a key any time to cut off its access immediately.
+- A key inherits **its owner's access**: a request authenticates as the user who created the key, and is authorized by that user's organization membership and [team](/guides/teams) access. A key never grants more than its owner has.
+
+<Warning>
+  Treat an API key like a password. A leaked key can read and manage every site its owner can access — so keep it server-side, never ship it in browser code, and revoke it if it's exposed. Browser tracking doesn't need a key; the `data-site-id` in the snippet is enough.
+</Warning>
+
+## Where the key is required
+
+| Use | Needs a key? |
+| --- | --- |
+| Browser tracking (the snippet) | No — the site ID identifies the site. |
+| [Server-side ingestion](/api-reference/track) | Yes — and it enables the real-visitor IP/UA overrides. |
+| [Analytics reads](/api-reference/read) | Yes (unless the site is public). |
+| [Scoped SQL query](/api-reference/sql) | Yes. |
+| Site management | Yes. |
+
+## Sending the key
+
+Always send the key in the `Authorization` header — never in the URL. A key in a query string leaks into server logs, browser history, and referrer headers.
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track">
+    Use a key for server-side ingestion.
+  </Card>
+  <Card title="Rate limits & CORS" icon="shield-halved" href="/api-reference/rate-limits">
+    The per-key ingestion limit.
+  </Card>
+  <Card title="Account settings" icon="gear" href="/guides/account-settings">
+    Where you create and revoke keys.
+  </Card>
+  <Card title="API playground" icon="terminal" href="/api-reference/playground">
+    Try the API with your key.
+  </Card>
+</CardGroup>

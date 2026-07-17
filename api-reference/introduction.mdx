@@ -1,0 +1,68 @@
+---
+title: "API reference"
+description: "The tinyanalytics HTTP API: send events to /api/track and /api/identify, read your analytics with an API key, and run scoped SQL — all under https://dash.tinyanalytics.io."
+icon: "book-open"
+---
+
+The tinyanalytics HTTP API lets you **send events from a server** and **read your analytics programmatically**, alongside the browser [tracking script](/guides/tracking-script). Every endpoint lives under one base URL:
+
+```
+https://dash.tinyanalytics.io
+```
+
+Ingestion endpoints (`/api/track`, `/api/identify`) accept events; read endpoints (`/api/sites/{siteId}/…`) return your data as JSON. Most calls are a single request with a JSON body.
+
+## How do I authenticate?
+
+There are two credentials, and which you need depends on what you're doing:
+
+| What you're doing | Credential |
+| --- | --- |
+| **Sending events from a browser** | None — the `data-site-id` in the [snippet](/guides/tracking-script) identifies the site. |
+| **Sending events from a server** | An **API key** as `Authorization: Bearer <key>` (lets you send the visitor's real IP and user agent). |
+| **Reading analytics or managing sites** | An **API key** as `Authorization: Bearer <key>`. |
+
+You create an API key in your **account settings** — see [API keys](/api-reference/api-keys). Reads and management are authorized by the key owner's access, exactly as if they had signed in.
+
+```bash
+curl https://dash.tinyanalytics.io/api/sites/1/overview \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+<Note>
+  Browser ingestion is intentionally open (any origin, no credentials) so the tracker works from your visitors' pages. Every other endpoint requires a credential, and cross-origin reads are restricted to trusted origins — a third-party site can't read your logged-in analytics.
+</Note>
+
+## What do responses look like?
+
+- **Ingestion** (`/api/track`, `/api/identify`) returns **`204 No Content`** — the event is queued and written asynchronously, so there's no response body to parse.
+- **Reads** return **`200`** with a JSON body. List endpoints are shaped `{ "data": [ … ] }`.
+
+Common status codes:
+
+| Code | Meaning |
+| --- | --- |
+| `200` | Success (reads). |
+| `204` | Accepted (ingestion) — no body. |
+| `400` | Invalid input (a bad field or an unknown site ID). |
+| `401` | Missing or invalid credential on a private site. |
+| `403` | Authenticated, but not a member of the site's organization. |
+| `404` | Unknown site. |
+| `429` | Ingestion rate limit exceeded for the API key. |
+
+## Start here
+
+<CardGroup cols={2}>
+  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track">
+    Send pageviews and custom events to /api/track.
+  </Card>
+  <Card title="Identify API" icon="user" href="/api-reference/identify">
+    Attach a stable user ID and traits.
+  </Card>
+  <Card title="Analytics read API" icon="chart-line" href="/api-reference/read">
+    Read overview, timeseries, and breakdowns.
+  </Card>
+  <Card title="API keys" icon="key" href="/api-reference/api-keys">
+    Create and manage your keys.
+  </Card>
+</CardGroup>

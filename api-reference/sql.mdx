@@ -1,0 +1,67 @@
+---
+title: "Scoped SQL query"
+description: "Run read-only SQL against your site's analytics with POST /api/sites/{id}/query. Query two site-scoped virtual tables and get back rows with typed column metadata."
+icon: "database"
+---
+
+`POST /api/sites/{id}/query` runs a **read-only SQL query** against your site's analytics data and returns the rows with typed column metadata — the programmatic form of the [SQL query builder](/guides/sql-query-builder). You write a `SELECT` against two virtual tables that are already scoped to your site.
+
+```
+POST https://dash.tinyanalytics.io/api/sites/{id}/query
+```
+
+```bash
+curl -X POST https://dash.tinyanalytics.io/api/sites/1/query \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "SELECT pathname, count() AS views FROM scoped_events WHERE type = '\''pageview'\'' GROUP BY pathname ORDER BY views DESC LIMIT 20"
+  }'
+```
+
+## The two tables
+
+| Table | Contains |
+| --- | --- |
+| `scoped_events` | your analytics events |
+| `scoped_events_bot` | events classified as bot traffic |
+
+Both are automatically filtered to the site in the URL — you never write a `site_id` filter, and a query can't reach another site's data.
+
+## Response
+
+```json
+{
+  "data": [ { "pathname": "/", "views": "1024" } ],
+  "columns": [ { "name": "pathname", "type": "String" }, { "name": "views", "type": "UInt64" } ],
+  "meta": { "rowCount": 1 }
+}
+```
+
+`columns` preserves order and gives each column's type, so you can render results without inferring shapes.
+
+## Limits
+
+The query runs read-only, so it can never modify your data:
+
+- A single `SELECT` (or `WITH … SELECT`) reading the scoped tables and your own CTEs — writes, schema changes, multiple statements, and reads outside the scoped tables are rejected.
+- A query runs for at most **10 seconds** and returns at most **1,000 rows**.
+
+A SQL error comes back as a `400` with the database's message so you can fix the query.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="SQL query builder" icon="database" href="/guides/sql-query-builder">
+    The same capability, in the dashboard.
+  </Card>
+  <Card title="Analytics read API" icon="chart-line" href="/api-reference/read">
+    Fixed reports when you don't need raw SQL.
+  </Card>
+  <Card title="Custom dashboards" icon="table-cells-large" href="/guides/custom-dashboards">
+    Turn a query into a saved chart.
+  </Card>
+  <Card title="Metric definitions" icon="ruler" href="/guides/data-dictionary">
+    The events and columns you can query.
+  </Card>
+</CardGroup>
