@@ -8,6 +8,11 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Phase 7 in-repo polish pass across all 95 pages: audited GEO/SEO frontmatter (every page has a title,
+  a standalone benefit-bearing description, and an icon), verified heading hierarchy (one H1 per page),
+  confirmed descriptive link text (no "click here" anchors), and a clean `mint broken-links` sweep.
+  Removed the 44 internal `{/* TODO: screenshot */}` placeholder comments from all pages (they were
+  invisible on the rendered site; real screenshots from a live instance remain to be added).
 - Added a new **Resources** tab (Reference · How it works · Trust & privacy · AI groups) for Phase 6,
   after the API reference tab.
 - Added a new **API reference** tab (Get started · Ingestion · Reading data · Access & tools groups)
