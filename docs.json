@@ -39,6 +39,7 @@
           {
             "group": "Track what matters",
             "pages": [
+              "guides/autocapture",
               "guides/custom-events",
               "guides/identify-users"
             ]

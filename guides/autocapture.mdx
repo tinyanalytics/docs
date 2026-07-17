@@ -1,0 +1,86 @@
+---
+title: "Autocapture"
+description: "tinyanalytics automatically records common interactions — outbound link clicks, file downloads, button clicks, text copies, form submissions, and engagement — with no code to write."
+icon: "hand-pointer"
+---
+
+tinyanalytics records the interactions that matter on your site **automatically**, with no code to write. Outbound link clicks, file downloads, button clicks, text copies, form submissions, and engagement are all captured out of the box and appear in your [Events explorer](/guides/events) — so you can measure how visitors interact with a page before you instrument a single [custom event](/guides/custom-events).
+
+Autocapture is **on by default**. Each type is an independent toggle you can turn off in your [tracking script](/guides/script-configuration#turn-auto-capture-on-or-off).
+
+## What gets captured automatically
+
+| Interaction | Captured when a visitor… | What's stored | Toggle attribute |
+| --- | --- | --- | --- |
+| **Outbound link** | clicks a link to another domain | the destination URL and link text | `data-track-outbound` |
+| **File download** | clicks a link to a downloadable file | the file's URL | `data-track-downloads` |
+| **Button click** | clicks a button | the button's text | `data-track-clicks` |
+| **Copy** | copies text from the page | the copied text (truncated) | `data-track-copy` |
+| **Form submission** | submits a form | the form's shape — field count, name, and action | `data-track-forms` |
+| **Engagement** | finishes a page visit | scroll depth and time engaged | `data-track-engagement` |
+
+Each interaction is its own event type, so you can filter to it in the Events explorer's event-type view and build [goals](/guides/goals) or [funnels](/guides/funnels) from it.
+
+## Privacy: what forms never capture
+
+Form capture records the **shape** of a submission, never its contents:
+
+- A form submission stores the field count, form name, and action — **never what a visitor typed**.
+- An individual field change stores only the field's **name and type**, never its value.
+- Password, hidden, disabled, and read-only fields are **skipped entirely**.
+
+<Note>
+  Copy events do store the copied text (truncated). If visitors might copy sensitive content on a page, turn copy capture off with `data-track-copy="false"`.
+</Note>
+
+## Add properties to a captured event
+
+Attach custom properties to any auto-captured event by adding `data-ta-prop-<name>` attributes to the element. For example, to tag which plan an upgrade button belongs to:
+
+```html
+<button data-ta-prop-plan="pro">Upgrade to Pro</button>
+```
+
+The button click is then captured with `plan: "pro"` in its properties, so you can break that event down by plan.
+
+## Track an element yourself
+
+To handle a specific element with your own [custom event](/guides/custom-events) instead of the automatic capture, add `data-ta-event` to opt it out:
+
+```html
+<button data-ta-event onclick="window.tinyanalytics.event('signup', { plan: 'pro' })">
+  Sign up
+</button>
+```
+
+tinyanalytics skips the automatic button-click event for that element, leaving you to send exactly the event you want.
+
+## Turn autocapture off
+
+Every capture type is on by default and can be turned off independently by setting its attribute to `"false"`:
+
+```html
+<script defer src="https://dash.tinyanalytics.io/script.js"
+  data-site-id="YOUR_SITE_ID"
+  data-track-copy="false"
+  data-track-forms="false"></script>
+```
+
+See [configure the tracking script](/guides/script-configuration#turn-auto-capture-on-or-off) for the full list of attributes.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Send your own named events with properties.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every auto-capture toggle and data-* attribute.
+  </Card>
+  <Card title="Events explorer" icon="bolt" href="/guides/events">
+    See every captured event and its properties.
+  </Card>
+  <Card title="Goals" icon="bullseye" href="/guides/goals">
+    Turn a captured interaction into a conversion.
+  </Card>
+</CardGroup>

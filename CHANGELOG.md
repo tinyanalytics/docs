@@ -52,6 +52,12 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- `guides/autocapture.mdx` — **Autocapture** page (added to the "Track what matters" group), documenting
+  every automatically-captured interaction (outbound link, file download, button click, copy, form
+  submission, engagement), what each records, the form-shape-only privacy guarantee, and the
+  `data-ta-prop-*` / `data-ta-event` element conventions. Closes the second gap from the Rybbit-docs
+  analysis. Sourced from decision 0110 and `tracker/script/auto-capture.ts`. Build validates with zero
+  broken links.
 - `guides/exclude-traffic.mdx` — **Exclude traffic** page (added to the "Install the tracker" group),
   covering ingest-time exclusions by IP (single/CIDR/range), country, path glob, hostname glob, and
   user-agent substring, plus the block-bots toggle and hiding your own traffic (localStorage opt-out or
