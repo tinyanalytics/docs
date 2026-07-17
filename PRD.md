@@ -416,8 +416,9 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 - ✅ Second wave: Accounts & access group — Account settings, Organizations & members, Teams & site access, Roles & permissions, Invitations. Documents the current converged behavior (multi-org switching per 0083, emailed invitations per 0087, teams as the sole site-access mechanism per 0073–0075).
 - ⬜ Deferred: Billing & plans. **Depends on open question #2** (is signup open / pricing page live) and shipped with billing not enforced (decision 0152) — confirm before writing.
 
-**Phase 4 — Integrations breadth**
-- Top frameworks & CMS first (Next.js, React, WordPress, Webflow, Shopify, GTM), then the long tail. Batch-author from one template.
+**Phase 4 — Integrations breadth** — 🚧 first wave done (2026-07-17)
+- ✅ First wave: Integrations tab + Overview and the top platforms — Next.js, React, WordPress, Webflow, Shopify, Google Tag Manager. Batch-authored from one template.
+- ⬜ Long tail (later waves): Frameworks (Gatsby, Remix, Vue, Nuxt, Svelte, SvelteKit, Angular, Astro); CMS & builders (Framer, Ghost, Squarespace, Carrd, Bubble); E-commerce (BigCommerce, PrestaShop, ThriveCart); Docs & static sites (Docusaurus, GitBook, Mintlify, VitePress, Hugo, Jekyll); Server-side & tag managers (Laravel, Drupal, Joomla, TYPO3, Contentful, Sanity, Strapi); Mobile (React Native).
 
 **Phase 5 — Advanced product analytics & ops**
 - Feature flags, Experiments, Surveys, Custom dashboards, SQL query builder, Group/B2B analytics; Scheduled reports, Alerts, Uptime, Shortlinks; Public dashboards/embeds/widget.

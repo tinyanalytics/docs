@@ -1,0 +1,56 @@
+---
+title: "Install tinyanalytics on Webflow"
+description: "Add tinyanalytics to a Webflow site by pasting the tracking snippet into your project's custom head code, then publishing — no code and no plugins required."
+icon: "webflow"
+---
+
+To add tinyanalytics to a **Webflow** site, paste the tracking snippet into your project's custom head code and publish. It takes a minute, needs no plugins, and applies to every page on your site.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Add the snippet to your project head code
+
+<Steps>
+  <Step title="Open your project's custom code">
+    In the Webflow Designer, go to **Project Settings → Custom Code**.
+  </Step>
+  <Step title="Paste into Head Code">
+    Paste your tinyanalytics snippet into the **Head Code** field (the `<head>` section):
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+    ```
+  </Step>
+  <Step title="Save and publish">
+    Save the settings, then **publish** your site. Custom code only takes effect on the published site, not in the Designer preview.
+  </Step>
+</Steps>
+
+<Tip>
+  Adding the snippet at the **project** level applies it to every page. Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+## Verify
+
+Visit your **published** Webflow site in a browser, then check **Realtime** in your dashboard for your visit. Remember that tracking runs on the live site, not the Designer. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/overview">
+    The universal method and other platforms.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Measure signups, clicks, and purchases.
+  </Card>
+</CardGroup>

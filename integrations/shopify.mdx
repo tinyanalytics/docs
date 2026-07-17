@@ -1,0 +1,60 @@
+---
+title: "Install tinyanalytics on Shopify"
+description: "Add tinyanalytics to a Shopify store by pasting the tracking snippet into your theme.liquid layout, so every storefront page is tracked."
+icon: "shopify"
+---
+
+To add tinyanalytics to a **Shopify** store, paste the tracking snippet into your theme's `theme.liquid` layout. That file wraps every storefront page, so one edit tracks your whole store.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Add the snippet to theme.liquid
+
+<Steps>
+  <Step title="Open your theme's code">
+    In your Shopify admin, go to **Online Store → Themes**, then on your current theme choose **⋯ → Edit code**.
+  </Step>
+  <Step title="Open the layout file">
+    Under **Layout**, open `theme.liquid`.
+  </Step>
+  <Step title="Paste before </head>">
+    Paste your tinyanalytics snippet just before the closing `</head>` tag, then save:
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+  Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+<Note>
+  Editing `theme.liquid` tracks your **storefront** — product, collection, cart, and content pages. Shopify's hosted **checkout** pages are separate and can't be customized this way except on Shopify Plus, so checkout steps aren't tracked by this install.
+</Note>
+
+## Verify
+
+Open your storefront in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/overview">
+    The universal method and other platforms.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Measure add-to-cart, signups, and more.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+</CardGroup>

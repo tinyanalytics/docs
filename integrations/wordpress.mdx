@@ -1,0 +1,59 @@
+---
+title: "Install tinyanalytics on WordPress"
+description: "Add tinyanalytics to WordPress by pasting the tracking snippet into your site's header — using a headers-and-footers code plugin (no code) or your theme's header.php."
+icon: "wordpress"
+---
+
+To add tinyanalytics to **WordPress**, put the tracking snippet in your site's `<head>` so it loads on every page. The easiest way is a headers-and-footers code plugin — no theme editing required. If you're comfortable with code, you can add it to your theme instead.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Option 1: A header code plugin (recommended)
+
+The simplest approach, and it survives theme updates:
+
+<Steps>
+  <Step title="Install a headers-and-footers plugin">
+    From **Plugins → Add New**, install and activate a plugin that inserts code into your site header (for example, a "headers and footers" or "insert code" plugin).
+  </Step>
+  <Step title="Paste the snippet into the header">
+    In the plugin's settings, paste your tinyanalytics snippet into the **header** (`<head>`) section and save.
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+    ```
+  </Step>
+</Steps>
+
+## Option 2: Your theme's header
+
+If you'd rather not add a plugin, paste the snippet into your theme's `header.php`, just before the closing `</head>` tag.
+
+<Warning>
+  Edit a **child theme**, not the parent — a theme update will overwrite `header.php` in the parent theme and remove your snippet. A header code plugin (Option 1) avoids this entirely.
+</Warning>
+
+## Verify
+
+Open your site in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/overview">
+    The universal method and other platforms.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Measure signups, clicks, and purchases.
+  </Card>
+</CardGroup>

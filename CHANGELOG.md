@@ -8,6 +8,8 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Added a new **Integrations** tab with category groups (Overview, Frameworks, CMS & website builders,
+  E-commerce, Server-side & tag managers), seeded with the first wave of platform guides.
 - Added an **Accounts & access** group to the Guides tab (account settings, organizations, teams,
   roles, invitations).
 - Added a **Manage data** group to the Guides tab (data dictionary + the four import guides) and the
@@ -36,6 +38,13 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 4 (first wave) **Integrations** pages, batch-authored from one consistent template: an
+  `integrations/overview.mdx` (universal install method + platform picker) plus guides for the
+  highest-traffic platforms — `integrations/nextjs.mdx` (App Router + Pages Router via `next/script`),
+  `integrations/react.mdx`, `integrations/wordpress.mdx`, `integrations/webflow.mdx`,
+  `integrations/shopify.mdx`, and `integrations/google-tag-manager.mdx`. Each keeps the tinyanalytics
+  half (snippet, `data-site-id`, SPA-on-by-default) identical to the tracking-script docs and adds
+  platform-specific placement. Build validates with zero broken links.
 - Phase 3 (second wave) "Accounts & access" documentation pages, sourced from the wiki decision
   records (0071, 0072, 0073, 0074, 0075, 0083, 0087) and documenting the *current* converged behavior
   where later decisions superseded earlier ones (multi-org switching, emailed invitations, teams as

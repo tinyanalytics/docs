@@ -104,6 +104,43 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "integrations/overview"
+            ]
+          },
+          {
+            "group": "Frameworks",
+            "pages": [
+              "integrations/nextjs",
+              "integrations/react"
+            ]
+          },
+          {
+            "group": "CMS & website builders",
+            "pages": [
+              "integrations/wordpress",
+              "integrations/webflow"
+            ]
+          },
+          {
+            "group": "E-commerce",
+            "pages": [
+              "integrations/shopify"
+            ]
+          },
+          {
+            "group": "Server-side & tag managers",
+            "pages": [
+              "integrations/google-tag-manager"
+            ]
+          }
+        ]
       }
     ]
   },

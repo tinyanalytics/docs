@@ -1,0 +1,86 @@
+---
+title: "Install tinyanalytics on Next.js"
+description: "Add tinyanalytics to a Next.js app using the next/script component in your root layout — works with the App Router and Pages Router, and tracks client-side navigation automatically."
+icon: "code"
+---
+
+To add tinyanalytics to a **Next.js** app, load the tracking script with Next's `next/script` component in your root layout so it runs on every page. Client-side navigation between routes is tracked automatically, so you don't need to wire anything into the router.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
+
+## App Router (`app/`)
+
+Add a `<Script>` to your root layout, `app/layout.tsx`:
+
+```tsx app/layout.tsx
+import Script from "next/script";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Script
+          src="https://dash.tinyanalytics.io/script.js"
+          data-site-id="YOUR_SITE_ID"
+          strategy="afterInteractive"
+        />
+      </body>
+    </html>
+  );
+}
+```
+
+## Pages Router (`pages/`)
+
+Add the same `<Script>` to `pages/_app.tsx`:
+
+```tsx pages/_app.tsx
+import Script from "next/script";
+import type { AppProps } from "next/app";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Component {...pageProps} />
+      <Script
+        src="https://dash.tinyanalytics.io/script.js"
+        data-site-id="YOUR_SITE_ID"
+        strategy="afterInteractive"
+      />
+    </>
+  );
+}
+```
+
+<Tip>
+  Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options — pass each `data-*` attribute as a prop on `<Script>`.
+</Tip>
+
+## Client-side navigation is tracked automatically
+
+Next.js renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). You don't need to hook into `next/navigation` or the router — moving between pages is captured for you. See [Track single-page apps](/guides/script-configuration#track-single-page-apps) if you want to change this.
+
+## Verify
+
+Deploy or run your app, open it in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on React" icon="react" href="/integrations/react">
+    A plain React or Vite app instead.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option, passed as a `<Script>` prop.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Send events from your components.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+</CardGroup>
