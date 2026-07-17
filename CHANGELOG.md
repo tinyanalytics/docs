@@ -8,6 +8,8 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Added a **Manage data** group to the Guides tab (data dictionary + the four import guides) and the
+  migration overview (`migrate`) to the Get started tab, per the PRD's information architecture.
 - Regrouped the Guides tab navigation so the growing report set stays scannable: the single
   "Explore your data" group split into four — **Explore your data** (added `map` and `performance`),
   **Understand behavior** (journeys, retention, funnels, goals, cohorts), **Acquisition & AI**
@@ -32,6 +34,14 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 3 (first wave) "Migration & data" documentation pages, sourced from the wiki (decisions 0153,
+  0113; `algorithms/import-mappers.md`; `concepts/data-dictionary.md`; decision 0158): `migrate.mdx`
+  (switch-from overview), `guides/data-dictionary.mdx` (event/property/trait catalog with the
+  "verified" label), and four import guides — `guides/import-ga4.mdx` (live Google OAuth pull),
+  `guides/import-plausible.mdx`, `guides/import-umami.mdx`, and `guides/import-simple-analytics.mdx`
+  (file uploads). Each states its source-specific data losses honestly. Operator-only GA4 setup
+  (Google app verification, redirect URIs) is deliberately not documented; only the customer flow is.
+  Build validates with zero broken links.
 - Phase 2 (second wave) documentation pages completing "Explore your data", each sourced from the
   product wiki's decision records with citable specifics: `guides/performance.mdx` (Core Web Vitals
   at p50/p75/p90/p99), `guides/ai-traffic.mdx` (AI-assistant referrals), `guides/bots.mdx` (bots &

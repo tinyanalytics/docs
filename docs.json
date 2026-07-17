@@ -18,7 +18,8 @@
             "pages": [
               "index",
               "quickstart",
-              "how-it-works"
+              "how-it-works",
+              "migrate"
             ]
           }
         ]
@@ -80,6 +81,16 @@
               "guides/compare",
               "guides/annotations",
               "guides/export"
+            ]
+          },
+          {
+            "group": "Manage data",
+            "pages": [
+              "guides/data-dictionary",
+              "guides/import-ga4",
+              "guides/import-plausible",
+              "guides/import-umami",
+              "guides/import-simple-analytics"
             ]
           }
         ]

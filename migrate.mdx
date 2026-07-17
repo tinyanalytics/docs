@@ -1,0 +1,54 @@
+---
+title: "Switch to tinyanalytics from GA4, Plausible, or Umami"
+description: "Migrate to tinyanalytics without losing your history. Import your past data from Google Analytics 4, Plausible, Umami, and Simple Analytics, then analyze it alongside your new traffic."
+icon: "right-left"
+---
+
+You can switch to tinyanalytics without losing your history. tinyanalytics imports your past data from **Google Analytics 4, Plausible, Umami, and Simple Analytics**, so the day you migrate your reports don't start from zero — your imported history sits alongside your new traffic in the same dashboard. This removes the biggest reason people stay on a tool they've outgrown: *"I'll lose my data."*
+
+## How importing works
+
+There are two ways in, depending on where you're coming from:
+
+- **Google Analytics 4** — connect your Google account and tinyanalytics pulls your history directly. No file to download. See [Import from Google Analytics 4](/guides/import-ga4).
+- **Plausible, Umami, and Simple Analytics** — export your data from the tool as a file, then upload it. See [Import from Plausible](/guides/import-plausible), [Import from Umami](/guides/import-umami), and [Import from Simple Analytics](/guides/import-simple-analytics).
+
+Either way, tinyanalytics turns your old data into regular events, so **imported history flows through every report** — pages, sessions, funnels, retention, cohorts, and period comparison all include it, exactly like natively-tracked traffic.
+
+## What carries over — and what's approximate
+
+Importing reconstructs your history from what your old tool recorded, and different tools recorded different things. tinyanalytics is deliberately honest about the gaps rather than inventing data:
+
+| Carries over well | Approximate or unavailable |
+| --- | --- |
+| Pageviews, sessions, and their daily totals | Exact within-day timestamps (spread across the day) |
+| Countries and (for most sources) cities | Bounce rate and session duration (estimated for GA4) |
+| Referrers, sources, and campaigns | Some device details, depending on the source tool |
+| Browsers, operating systems, devices | Region and browser version (missing from some sources) |
+
+**Channels are re-derived by tinyanalytics' own rules**, not imported as-is, so your imported traffic is classified the same way your live traffic is — a Referral is a Referral by one consistent definition. Each import page lists exactly what's approximate for that source.
+
+## Good to know before you import
+
+<Note>
+  - **One import runs at a time per organization** — start the next when the first finishes.
+  - **Re-running an import adds the data again** (there's no automatic de-duplication). To redo an import, delete the previous one first — deleting removes all of that import's data cleanly.
+  - **Rows dated in the future are skipped**, and malformed rows are dropped and counted, so you can see how many events imported, skipped, or were invalid.
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Import from Google Analytics 4" icon="google" href="/guides/import-ga4">
+    Connect your Google account and pull your GA4 history.
+  </Card>
+  <Card title="Import from Plausible" icon="file-import" href="/guides/import-plausible">
+    Upload a Plausible export.
+  </Card>
+  <Card title="Import from Umami" icon="file-import" href="/guides/import-umami">
+    Upload a Umami export.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Install the tracking script and start collecting new data.
+  </Card>
+</CardGroup>

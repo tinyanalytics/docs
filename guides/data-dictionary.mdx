@@ -1,0 +1,60 @@
+---
+title: "Data dictionary"
+description: "Browse every event, property, and user trait your tinyanalytics site has collected — with inferred types, example values, and volume — and mark the canonical ones as verified for your team."
+icon: "book"
+---
+
+The data dictionary is an auto-generated catalog of **every custom event name, event property, and user trait your site has collected** — with each name's inferred type, example values, how often it appears, and when it was first and last seen. It answers the question every growing analytics account eventually asks: *"what does this name actually mean, and is it the real one?"* On top of the inventory, your team can add a description to each name and mark the official ones as **verified**.
+
+{/* TODO: screenshot of the data dictionary */}
+
+## What the dictionary catalogs
+
+tinyanalytics never rejects a new name — you can send any custom event or property and it's collected immediately. That's convenient, but over time a busy namespace fills with duplicates (`plan` vs. `subscription_plan`), typos (`singup`), and throwaways (`test_event`). The dictionary discovers and lists all of it automatically, across these kinds:
+
+| Kind | What it is | Comes from |
+| --- | --- | --- |
+| **Event** | A custom event name | Your [custom events](/guides/custom-events) |
+| **Event property** | A key inside a custom event's properties | The properties you send with events |
+| **User trait** | A trait set on an identified user | [`identify()`](/guides/identify-users) |
+| **Group trait** | A trait on a group (for B2B/account analytics) | Group identification |
+
+There's nothing to register — the inventory is read directly from your data every time you open the page.
+
+## What each entry tells you
+
+For every name, the dictionary infers and shows:
+
+- **Type** — string, numeric, boolean, or datetime, inferred from a sample of real values.
+- **Example values** — a few actual values so you can see what the name holds.
+- **Volume** — how often the name appears.
+- **First and last seen** — across all time, not just your selected date range, so freshness reaches past any dashboard window.
+
+Click an entry to open a detail drawer: an event shows its properties, and a property or trait shows its value distribution and which events carry it.
+
+## What does "verified" mean?
+
+**Verified means a human on your team reviewed the name and confirmed it's the official, canonical one** — not a typo, a test, or an abandoned field. It records who verified it and when, so the confirmation is attributable and trustworthy.
+
+Verified is a **label only**. Marking a name verified does not change what's collected, hide or exclude anything from your reports, reorder the list, or alter any data. It's a trust signal for your team — "this is the real event, use this one" — nothing more.
+
+<Note>
+  Adding descriptions and marking names verified requires an owner or admin role. A name you've described or verified keeps showing even after it stops appearing in new data, with a **"not seen"** badge — so a documented-but-silent property surfaces as exactly the staleness the dictionary exists to catch.
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Where event names and properties come from.
+  </Card>
+  <Card title="Identify users" icon="user-check" href="/guides/identify-users">
+    Where user traits come from.
+  </Card>
+  <Card title="Events explorer" icon="bolt" href="/guides/events">
+    Analyze the events the dictionary catalogs.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Filter reports by event and property.
+  </Card>
+</CardGroup>

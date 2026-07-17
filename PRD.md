@@ -411,8 +411,9 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 - ✅ First wave: Dashboard overview, Realtime, Pages, Sessions, Users, Events explorer, Journeys, Retention, Funnels, Goals, Filters.
 - ✅ Second wave: Performance (Core Web Vitals), Bots & AI crawlers, AI traffic, Google Search Console, Map & globe, Saved segments, Behavioral cohorts, Compare periods, Annotations, Export (CSV & PDF). Guides nav regrouped into four groups (Explore your data · Understand behavior · Acquisition & AI · Filter, save & share). Bot capture and GSC availability confirmed with the maintainer before writing.
 
-**Phase 3 — Migration & data (adoption drivers)**
-- Import from GA4 / Plausible / Umami; the migration overview; Data dictionary; Billing & plans; Accounts & access group.
+**Phase 3 — Migration & data (adoption drivers)** — 🚧 first wave done (2026-07-17)
+- ✅ First wave: migration overview (`migrate`), Data dictionary, and four import guides — GA4 (live OAuth pull), Plausible, Umami, Simple Analytics (file uploads). Added a "Manage data" group to Guides. Simple Analytics import added beyond the original three (it ships in the product).
+- ⬜ Second wave: Accounts & access group (Account settings, Organizations & members, Teams & site access, Roles & permissions, Invitations) and Billing & plans. **Billing depends on open question #2** (is signup open / pricing page live) and shipped with billing not enforced (decision 0152) — confirm before writing.
 
 **Phase 4 — Integrations breadth**
 - Top frameworks & CMS first (Next.js, React, WordPress, Webflow, Shopify, GTM), then the long tail. Batch-author from one template.
