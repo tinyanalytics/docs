@@ -84,6 +84,34 @@
             ]
           },
           {
+            "group": "Product analytics",
+            "pages": [
+              "guides/feature-flags",
+              "guides/experiments",
+              "guides/surveys",
+              "guides/custom-dashboards",
+              "guides/sql-query-builder",
+              "guides/group-analytics"
+            ]
+          },
+          {
+            "group": "Monitor & automate",
+            "pages": [
+              "guides/scheduled-reports",
+              "guides/alerts",
+              "guides/uptime-monitoring",
+              "guides/shortlinks"
+            ]
+          },
+          {
+            "group": "Share & embed",
+            "pages": [
+              "guides/public-dashboards",
+              "guides/embed-dashboard",
+              "guides/live-visitors-widget"
+            ]
+          },
+          {
             "group": "Manage data",
             "pages": [
               "guides/data-dictionary",

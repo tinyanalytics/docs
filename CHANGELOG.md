@@ -8,6 +8,8 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Added three **Guides** navigation groups for Phase 5 — **Product analytics**, **Monitor & automate**,
+  and **Share & embed** — between the existing "Filter, save & share" and "Manage data" groups.
 - Expanded the **Integrations** tab with the platform long tail and added a **Docs & static sites**
   navigation group (Hugo, Jekyll, Docusaurus, VitePress). Frameworks, CMS & website builders,
   E-commerce, and Server-side & tag managers groups all grew.
@@ -41,6 +43,24 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 5 **Advanced product analytics & ops** documentation pages (13), each sourced from the product
+  wiki's algorithm specs and decision records with citable specifics. **Product analytics** —
+  `guides/feature-flags.mdx` (boolean/multivariate/remote-config, rollout %, targeting rules, sticky
+  deterministic assignment, `window.tinyanalytics.flag()`), `guides/experiments.mdx` (flag + goal,
+  session-grain post-exposure attribution, exposure vs. assignment measurement, the ≥30-sample /
+  ≥95%-confidence z-test), `guides/surveys.mdx` (question types, branching, targeting, NPS),
+  `guides/custom-dashboards.mdx` (SQL cards + visualization types + `{{bucket}}`),
+  `guides/sql-query-builder.mdx` (`scoped_events`/`scoped_events_bot`, read-only, 10 s / 1,000-row caps),
+  `guides/group-analytics.mdx` (`group()`, up to 5 group types, account-grain funnels/retention).
+  **Monitor & automate** — `guides/scheduled-reports.mdx` (daily/weekly/monthly completed-period digests),
+  `guides/alerts.mdx` (metric thresholds, absolute/relative, 12 h cooldown, email/Slack/Discord/webhook),
+  `guides/uptime-monitoring.mdx` (HTTP/TCP monitors, validation rules, incident open/resolve on the 2nd
+  consecutive failure/success, P50/P90/P95/P99), `guides/shortlinks.mdx` (`/l/<slug>` trackable redirects,
+  clicks excluded from overview traffic). **Share & embed** — `guides/public-dashboards.mdx` (read-only
+  `/share` link; public sentinel vs. private link key), `guides/embed-dashboard.mdx` (iframe embed with
+  theme/hide-sidebar), `guides/live-visitors-widget.mdx` (card/inline live count). White-label/hide-branding
+  is deliberately left out pending plan-scope confirmation, and alerts are documented site-wide (the
+  per-alert filter picker isn't shipped in the dialog yet). Build validates with zero broken links.
 - Phase 4 (second wave) **Integrations** long-tail pages (19), batch-authored from the same template:
   frameworks — `integrations/vue.mdx`, `integrations/nuxt.mdx`, `integrations/astro.mdx`
   (with the `is:inline` requirement), `integrations/sveltekit.mdx`, `integrations/gatsby.mdx`

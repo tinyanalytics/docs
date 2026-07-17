@@ -1,0 +1,55 @@
+---
+title: "Embed a dashboard"
+description: "Put a read-only tinyanalytics dashboard inside your own site with an iframe. Build the embed snippet in your site settings, choose a theme, and copy it in."
+icon: "window-maximize"
+---
+
+Embedding puts a read-only tinyanalytics dashboard **inside your own page** with an `<iframe>` — for an internal wiki, a client portal, or a public "stats" page. You build the snippet in your site's embed settings, pick how it looks, and paste one tag into your HTML.
+
+{/* TODO: add screenshot of the dashboard embed settings tab */}
+
+## Build the embed snippet
+
+Open your site's settings and find the **Dashboard** embed tab. It generates a ready-to-paste `<iframe>` snippet with a live preview:
+
+- For a **public** site, the snippet embeds the open share link — no key needed.
+- For a **private** site, generate a **private link key** and the snippet embeds the keyed link. Regenerate or revoke the key any time to control access.
+
+```html
+<iframe
+  src="https://your-tinyanalytics-host/share/YOUR_SITE_ID/YOUR_KEY"
+  width="100%"
+  height="800"
+  style="border:0"
+></iframe>
+```
+
+<Note>
+  The embed shows the same read-only dashboard as a [public dashboard](/guides/public-dashboards) — viewers can browse reports and change the date range, but can't edit anything or reach your settings or account.
+</Note>
+
+## Match your page
+
+The settings tab lets you tune the embed to fit where it lives:
+
+- **Theme** — light, dark, or follow the viewer's system setting. An embedded theme never changes your own dashboard's theme in the same browser.
+- **Hide the sidebar** — drop the sub-navigation for a cleaner, single-view embed.
+
+Copy the snippet once you're happy with the preview, and paste it wherever you want the dashboard to appear.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Public dashboards" icon="share-nodes" href="/guides/public-dashboards">
+    Share the same view as a link instead of an embed.
+  </Card>
+  <Card title="Live-visitors widget" icon="chart-simple" href="/guides/live-visitors-widget">
+    Embed a compact live visitor count instead.
+  </Card>
+  <Card title="Custom dashboards" icon="table-cells-large" href="/guides/custom-dashboards">
+    Build the dashboard you want to embed.
+  </Card>
+  <Card title="Teams & site access" icon="users" href="/guides/teams">
+    Give teammates full, logged-in access.
+  </Card>
+</CardGroup>

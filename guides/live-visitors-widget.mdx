@@ -1,0 +1,42 @@
+---
+title: "Live-visitors widget"
+description: "Show a live count of who's on your site right now on any page. Build the widget snippet in your site settings, style it, and drop the iframe in."
+icon: "chart-simple"
+---
+
+The live-visitors widget shows a **live count of who's on your site right now** on any page you like — a landing page, a status page, an internal screen. You build a small `<iframe>` snippet in your site's embed settings, style it to match, and paste it in. It's self-contained, so there's nothing to install.
+
+{/* TODO: add screenshot of the live-visitors widget */}
+
+## Build the widget snippet
+
+Open your site's settings and find the **Widget** embed tab. Choose a look and options, watch the live preview, and copy the generated `<iframe>` snippet:
+
+- **Variant** — a **card** (a small panel with the count and a mini chart) or an **inline** count that sits in a line of text.
+- **Time window** — count visitors over the last 30 minutes, 24 hours, or 7 days.
+- **Theme and accent** — match your page's colors.
+- **Width** and a small **countries** breakdown you can show or hide.
+
+## Public and private sites
+
+- A **public** site's widget works on any page with no key.
+- A **private** site's widget carries the site's **private link key** in the snippet, so the count stays gated to people who have it — the widget shows only a live number, never the full dashboard.
+
+The widget reads a single live count and refreshes on its own, so it's safe to embed on a high-traffic page.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Realtime" icon="signal-stream" href="/guides/realtime">
+    See who's on your site right now in the dashboard.
+  </Card>
+  <Card title="Embed a dashboard" icon="window-maximize" href="/guides/embed-dashboard">
+    Embed the full read-only dashboard instead.
+  </Card>
+  <Card title="Public dashboards" icon="share-nodes" href="/guides/public-dashboards">
+    Share the whole dashboard by link.
+  </Card>
+  <Card title="Install the tracker" icon="download" href="/guides/tracking-script">
+    Start collecting the data the widget shows.
+  </Card>
+</CardGroup>

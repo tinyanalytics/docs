@@ -1,0 +1,53 @@
+---
+title: "Shortlinks"
+description: "Create short, trackable URLs that redirect to any destination and record every click as an analytics event — for emails, social posts, and ad campaigns."
+icon: "link"
+---
+
+A shortlink is a short, trackable URL that redirects to any destination and records **every click as an analytics event**. Drop it in an email, a social post, or an ad, and you get a full breakdown of who clicked — where they came from, which country, which device — without touching the destination page.
+
+{/* TODO: add screenshot of the shortlinks page */}
+
+## Create a shortlink
+
+Give tinyanalytics a **destination URL** and it generates a short link ending in `/l/<slug>`. You can:
+
+- Let tinyanalytics generate a short, unambiguous slug, or set a **custom slug** you'll remember.
+- Add a **title** so the link is easy to find in your list later.
+
+Copy the generated short URL and use it anywhere. When someone opens it, they're redirected straight to your destination — the click is recorded in the background, so the visitor never waits.
+
+<Tip>
+  Add campaign parameters to the short URL itself (for example `?utm_source=newsletter`) and tinyanalytics captures them with the click, so your shortlink traffic shows up correctly in acquisition reports.
+</Tip>
+
+## What each shortlink tracks
+
+Every shortlink has its own stats page covering, over your chosen range:
+
+- **Total clicks** and **unique visitors**.
+- **Clicks over time**.
+- **Top referrers, channels, countries, devices, and browsers**.
+
+Bots that follow the link (for example, a chat app generating a link preview) are redirected so the preview still works, but their clicks are **not counted**.
+
+<Note>
+  Shortlink clicks are **not** counted as site traffic in your overview, sessions, or users — a redirect click isn't a visit to your site. They appear on the shortlink's own stats page and in your [events explorer](/guides/events).
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Acquisition & channels" icon="signs-post" href="/guides/dashboard-overview">
+    See where your traffic comes from.
+  </Card>
+  <Card title="Events explorer" icon="bolt" href="/guides/events">
+    Find shortlink clicks among your events.
+  </Card>
+  <Card title="Goals" icon="bullseye" href="/guides/goals">
+    Measure what clicks go on to do.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Slice clicks by source, country, or device.
+  </Card>
+</CardGroup>

@@ -1,0 +1,53 @@
+---
+title: "Custom dashboards"
+description: "Build your own layout of charts, each backed by a SQL query you write. Cards follow the dashboard's date range automatically, and you drag them into any arrangement."
+icon: "table-cells-large"
+---
+
+A custom dashboard is your own layout of charts, each one backed by a SQL query you write against your site's data. Build a card, choose how to visualize it, and drag it into place — every card follows the dashboard's **date range and time bucket automatically**, so one date picker updates the whole board.
+
+{/* TODO: add screenshot of a custom dashboard */}
+
+## Build a card
+
+Each card is three choices:
+
+1. **A query** — read-only SQL against your site's data, using the same virtual tables as the [SQL query builder](/guides/sql-query-builder).
+2. **A visualization** — how to draw the rows (see the table below).
+3. **A column mapping** — which columns are the X axis, the value, and the series. The card preview shows your columns as you go, so mapping is point-and-click.
+
+## Which visualization fits your query?
+
+| Visualization | Best for | Reads |
+| --- | --- | --- |
+| **Line / area / bar** | a value over time or across categories | an X column, one or more Y columns, an optional series |
+| **Stat** | a single headline number | the first numeric value, with an optional label |
+| **Horizontal bar / pie** | a ranked breakdown | a label and a value (the long tail rolls into "Other") |
+| **Map** | values by country | ISO country codes and a value |
+| **Calendar** | activity by day | a date and a daily value |
+| **Table** | raw rows | any columns, sortable and paginated |
+
+## Use the dashboard's date range
+
+Cards respond to the dashboard's global date picker and time bucket, so you write the query once and it re-runs whenever the range changes. To bucket a time series by the dashboard's chosen granularity, use the `{{bucket}}` token in your SQL — tinyanalytics replaces it with the matching interval (hour, day, week, or month) before the query runs. Leave the range out entirely and the card reads across all time.
+
+## Arrange and save
+
+Drag a card to move it and pull its edge to resize it; the grid remembers each card's position. Saving writes the whole dashboard at once, so your layout, queries, and mappings are stored together.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="SQL query builder" icon="database" href="/guides/sql-query-builder">
+    Write and test the queries your cards run.
+  </Card>
+  <Card title="Metric definitions" icon="ruler" href="/guides/data-dictionary">
+    The events and properties you can query.
+  </Card>
+  <Card title="Export data" icon="file-export" href="/guides/export">
+    Take a report out as CSV or PDF.
+  </Card>
+  <Card title="Public dashboards" icon="share-nodes" href="/guides/public-dashboards">
+    Share a read-only dashboard by link.
+  </Card>
+</CardGroup>

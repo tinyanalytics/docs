@@ -1,0 +1,62 @@
+---
+title: "SQL query builder"
+description: "Run read-only SQL directly against your site's analytics when the standard reports aren't enough. Query two site-scoped virtual tables and turn any result into a dashboard card."
+icon: "database"
+---
+
+The SQL query builder lets you run read-only SQL directly against your site's analytics data — the escape hatch for questions the standard reports don't answer. You write a `SELECT` against two virtual tables that are **already scoped to your site**, run it, and read the results in a sortable table.
+
+{/* TODO: add screenshot of the query builder */}
+
+## Write a query
+
+Your data lives in two virtual tables you query by name:
+
+| Table | Contains |
+| --- | --- |
+| `scoped_events` | your real analytics events (pageviews, custom events, and more) |
+| `scoped_events_bot` | events tinyanalytics classified as bot traffic |
+
+Both are automatically filtered to the site you're viewing — you never write a `site_id` filter, and a query can't reach another site's data.
+
+```sql
+SELECT pathname, count() AS views
+FROM scoped_events
+WHERE type = 'pageview'
+GROUP BY pathname
+ORDER BY views DESC
+LIMIT 20
+```
+
+See [metric definitions](/guides/data-dictionary) for the events and properties you can query.
+
+## What you can and can't run
+
+The query builder is **read-only by design**, so exploring your data can never change or damage it:
+
+- **Allowed** — a single `SELECT` (or `WITH … SELECT`) reading `scoped_events` / `scoped_events_bot` and your own CTEs.
+- **Blocked** — writes, schema changes, multiple statements, and any attempt to read outside your scoped tables.
+- **Capped** — a query runs for at most **10 seconds** and returns at most **1,000 rows**, so a heavy query is trimmed rather than left to run away.
+
+If a query has a mistake, tinyanalytics returns the database's error message so you can fix the SQL directly.
+
+## Turn a query into a dashboard card
+
+Any query you've written is the same SQL a [custom dashboard](/guides/custom-dashboards) card runs. Once a query gives you what you want, save it as a card, pick a visualization, and it becomes a live chart that follows your dashboard's date range.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Custom dashboards" icon="table-cells-large" href="/guides/custom-dashboards">
+    Turn a query into a saved, shareable chart.
+  </Card>
+  <Card title="Metric definitions" icon="ruler" href="/guides/data-dictionary">
+    The events and properties available to query.
+  </Card>
+  <Card title="Export data" icon="file-export" href="/guides/export">
+    Take a report out as CSV or PDF.
+  </Card>
+  <Card title="Events explorer" icon="bolt" href="/guides/events">
+    Browse events without writing SQL.
+  </Card>
+</CardGroup>

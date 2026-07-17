@@ -1,0 +1,53 @@
+---
+title: "Scheduled reports"
+description: "Email a snapshot of your analytics on a schedule — daily, weekly, or monthly. Subscribe the recipients and tinyanalytics sends a stable report for each completed period."
+icon: "envelope"
+---
+
+A scheduled report emails a snapshot of your site's analytics on a cadence you choose — **daily, weekly, or monthly**. You subscribe the recipients once, and tinyanalytics sends each of them a clean summary of the last completed period, so the numbers are final and never shift mid-report.
+
+{/* TODO: add screenshot of the reports management page */}
+
+## Choose a cadence
+
+Each subscription runs on one schedule, and each report covers a **completed period** — so a report is never a half-finished day:
+
+| Cadence | Sent | Covers |
+| --- | --- | --- |
+| **Daily** | after each UTC midnight | yesterday |
+| **Weekly** | every Monday | the last 7 full days |
+| **Monthly** | on the 1st | the previous calendar month |
+
+Scheduling is in UTC.
+
+## What's in the email
+
+Every report is a compact digest of the period:
+
+- The **six headline metrics** — with the change versus the previous equal-length period.
+- **Top pages, referrers, countries, and devices** — the five biggest in each.
+
+If a site had **no pageviews** in the period, tinyanalytics skips the email entirely rather than sending an empty report.
+
+## Manage recipients
+
+Add the people who should receive the report. Recipients must be members of the site's organization — if someone leaves the org, they stop receiving the report automatically. Every email carries a **one-click unsubscribe** link, and each recipient can also turn report emails off in their [account settings](/guides/account-settings).
+
+Owners and admins can **send a report now** to preview it — a manual send goes out immediately without changing the schedule.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Alerts" icon="bell" href="/guides/alerts">
+    Get notified the moment a metric crosses a threshold.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    The headline metrics your report summarizes.
+  </Card>
+  <Card title="Export data" icon="file-export" href="/guides/export">
+    Pull a report out as CSV or PDF on demand.
+  </Card>
+  <Card title="Account settings" icon="gear" href="/guides/account-settings">
+    Turn report emails on or off for your account.
+  </Card>
+</CardGroup>
