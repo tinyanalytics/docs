@@ -1,0 +1,56 @@
+---
+title: "Organizations & members"
+description: "Understand organizations in tinyanalytics — the container for your sites and teammates. Rename your organization, add and manage members, switch between organizations, and control access."
+icon: "building"
+---
+
+An **organization** is the container for your sites and your teammates in tinyanalytics. Every site belongs to an organization, and every teammate is a member of it. You manage your organization — its name, its members, and their roles — under **Settings → Organization**. You can belong to more than one organization and switch between them.
+
+{/* TODO: screenshot of organization settings */}
+
+## What an organization holds
+
+- **Sites** — the websites you track. They belong to the organization, not to an individual.
+- **Members** — the people who can access the organization's sites, each with a [role](/guides/roles).
+- **Teams** — optional groups that grant members access to a subset of sites. See [Teams & site access](/guides/teams).
+
+## How do I add members to my organization?
+
+You add members by **email invitation**. As an owner or admin, invite someone by their email address; they receive a link to join, and once they accept they become a member with the role you chose. See [Invitations](/guides/invitations) for the full flow.
+
+## Managing members and roles
+
+The members table under **Settings → Organization** lists everyone in the organization with their role. Owners and admins can change a member's role or remove them. A few rules keep ownership safe:
+
+- Only an **owner** can change another owner's role.
+- You **can't change your own role**.
+- Every member has one of three roles — owner, admin, or member. See [Roles & permissions](/guides/roles).
+
+## Switching between organizations
+
+If you belong to more than one organization, use the **organization switcher** in the navigation sidebar to move between them. The active organization scopes what you see — your sites list and reports follow the organization you've switched to, and your choice persists across reloads.
+
+## Renaming or deleting an organization
+
+An **owner** can rename the organization or delete it from **Settings → Organization**.
+
+<Warning>
+  **Deleting an organization is permanent and removes its sites and their data.** It's owner-only and asks you to confirm. If you just want to remove a person, remove the member instead — deleting the organization affects everyone.
+</Warning>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Roles & permissions" icon="shield-halved" href="/guides/roles">
+    What owners, admins, and members can each do.
+  </Card>
+  <Card title="Invitations" icon="envelope" href="/guides/invitations">
+    Invite teammates by email.
+  </Card>
+  <Card title="Teams & site access" icon="users" href="/guides/teams">
+    Grant members access to a subset of sites.
+  </Card>
+  <Card title="Account settings" icon="user-gear" href="/guides/account-settings">
+    Your personal profile and password.
+  </Card>
+</CardGroup>

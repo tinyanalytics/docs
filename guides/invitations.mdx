@@ -1,0 +1,52 @@
+---
+title: "Invitations"
+description: "Invite people to your tinyanalytics organization by email. Send an invitation with a role, the invitee accepts through a link, and pending invitations can be revoked anytime."
+icon: "envelope"
+---
+
+You add teammates to your tinyanalytics organization by **inviting them by email**. As an owner or admin, you send an invitation with a starting role; the invitee gets a link, signs up or logs in, and accepts to become a member. Pending invitations appear in a list where you can revoke any that haven't been accepted yet.
+
+{/* TODO: screenshot of the invite dialog */}
+
+## How to invite someone
+
+<Steps>
+  <Step title="Send the invitation">
+    In **Settings → Organization**, open the invite dialog, enter the person's email address, and choose the [role](/guides/roles) they'll start with. tinyanalytics emails them an invitation link.
+  </Step>
+  <Step title="They accept">
+    The invitee opens the link. If they don't have an account yet, they sign up; if they do, they log in. Then they click **Accept** and join your organization with the role you assigned.
+  </Step>
+  <Step title="Manage from your dashboard">
+    Until they accept, the invitation shows in your **pending invitations** list. You can revoke it there anytime.
+  </Step>
+</Steps>
+
+## Who can invite and revoke?
+
+Both **owners** and **admins** can send invitations and revoke pending ones. Members can't invite people. The role you pick when inviting is the role the person starts with — you can change it later from the members table.
+
+## Revoking a pending invitation
+
+A pending invitation is one that's been sent but not yet accepted. Owners and admins can revoke any pending invitation from the invitations list, which invalidates its link. To remove someone who has *already* accepted, remove them from the members table instead — see [Organizations & members](/guides/organizations).
+
+<Note>
+  An invitation is tied to the email address you send it to. The invitee accepts using that address, so invite people at the email they'll sign in with.
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Organizations & members" icon="building" href="/guides/organizations">
+    Where you send invitations and manage members.
+  </Card>
+  <Card title="Roles & permissions" icon="shield-halved" href="/guides/roles">
+    Choose the right role for a new member.
+  </Card>
+  <Card title="Teams & site access" icon="users" href="/guides/teams">
+    Limit a new member to specific sites.
+  </Card>
+  <Card title="Account settings" icon="user-gear" href="/guides/account-settings">
+    What an invitee sets up when they join.
+  </Card>
+</CardGroup>

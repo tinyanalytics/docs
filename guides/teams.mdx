@@ -1,0 +1,57 @@
+---
+title: "Teams & site access"
+description: "Use teams in tinyanalytics to grant members access to a subset of your sites. Group members into teams, grant each team specific sites, and restrict a member to only their teams' sites."
+icon: "users"
+---
+
+**Teams** let you give members access to only some of your organization's sites instead of all of them. A team groups members together and grants that group a specific set of sites. By default every member can see all of your organization's sites; when you **restrict** a member, they see only the sites granted through the teams they belong to. Manage teams under **Settings → Teams**.
+
+{/* TODO: screenshot of teams settings */}
+
+## When do I need teams?
+
+Reach for teams when different people should see different sites — an agency giving each client's contact access to only that client's site, or a company where one team owns the marketing site and another owns the app. If everyone should see everything, you don't need teams at all: the default is full access to every site in the organization.
+
+## How team-based access works
+
+There are two pieces — a team grants sites, and a member's **restricted** flag decides whether that grant limits them:
+
+<Steps>
+  <Step title="Create a team and grant it sites">
+    Under **Settings → Teams**, create a team, add members to it, and select which sites it grants. A member can belong to more than one team; their access is the combined set of all their teams' sites.
+  </Step>
+  <Step title="Restrict the members who should be limited">
+    On the organization's members list, turn on **Restrict site access** for a member. A restricted member sees only the sites granted through their teams — every other site is hidden from their dashboard and returns no data.
+  </Step>
+</Steps>
+
+An unrestricted member still sees all sites, whether or not they're on a team. The restriction is what turns a team into a boundary.
+
+## Who can be restricted?
+
+Only **members** can be restricted. Owners and admins always have full access to every site and can't be limited by teams — they manage the organization, so restricting them wouldn't make sense. The **Restrict site access** toggle only appears for people with the member role.
+
+<Note>
+  Restriction takes effect immediately across the whole product: a restricted member's sites list, per-site reports, and site settings all reflect only their teams' sites. Add them to a team with more sites — or turn off the restriction — and their access widens right away.
+</Note>
+
+## Managing teams
+
+Owners and admins create, edit, and delete teams, choose each team's members and sites, and set the restricted flag. Members can view the Teams page but can't change it. Editing a team replaces its member and site lists with whatever you select, so it always reflects exactly what's checked.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Roles & permissions" icon="shield-halved" href="/guides/roles">
+    How roles and team access fit together.
+  </Card>
+  <Card title="Organizations & members" icon="building" href="/guides/organizations">
+    Where you add members and set the restricted flag.
+  </Card>
+  <Card title="Invitations" icon="envelope" href="/guides/invitations">
+    Invite the people you'll add to teams.
+  </Card>
+  <Card title="Account settings" icon="user-gear" href="/guides/account-settings">
+    Your personal profile and password.
+  </Card>
+</CardGroup>

@@ -92,6 +92,16 @@
               "guides/import-umami",
               "guides/import-simple-analytics"
             ]
+          },
+          {
+            "group": "Accounts & access",
+            "pages": [
+              "guides/account-settings",
+              "guides/organizations",
+              "guides/teams",
+              "guides/roles",
+              "guides/invitations"
+            ]
           }
         ]
       }

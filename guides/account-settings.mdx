@@ -1,0 +1,53 @@
+---
+title: "Account settings"
+description: "Manage your tinyanalytics account — update your name, change your password, create and revoke API keys, and delete your account — from the account settings page."
+icon: "user-gear"
+---
+
+Your account settings are where you manage your personal tinyanalytics profile: your name, your password, your API keys, and your account itself. Find them under **Settings → Account**. Account settings are personal to you — they're separate from your [organization's settings](/guides/organizations), which cover your sites and teammates.
+
+{/* TODO: screenshot of account settings */}
+
+## What you can manage
+
+| Setting | What you can do |
+| --- | --- |
+| **Profile** | Update your display name. Your account shows the email you sign in with. |
+| **Password** | Change your password, with a strength meter to help you pick a strong one. |
+| **API keys** | Create, list, and revoke API keys for programmatic access. |
+| **Delete account** | Permanently delete your account, confirmed with your password. |
+
+## How do I change my password?
+
+Open **Settings → Account** and use the **Change Password** option. You'll enter your current password and a new one; the strength meter guides you toward a strong choice.
+
+If you've forgotten your password and can't sign in, use the **password reset** link on the sign-in page — tinyanalytics emails you a link to set a new one.
+
+## API keys
+
+You can create and revoke **API keys** from your account settings for programmatic access to tinyanalytics. Create a key when you need one, copy it when it's shown, and revoke it anytime it's no longer needed. Detailed API usage is covered in the API reference.
+
+## Deleting your account
+
+The **Delete account** action permanently removes your account and is confirmed with your password. It's a personal action — it doesn't delete an organization or its data on its own. If you own an organization others rely on, transfer or wind it down first. See [Roles & permissions](/guides/roles) for what ownership involves.
+
+<Warning>
+  Deleting your account can't be undone. If you're the only owner of an organization, deal with the organization first so your teammates don't lose access.
+</Warning>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Organizations & members" icon="building" href="/guides/organizations">
+    Manage your sites and teammates.
+  </Card>
+  <Card title="Roles & permissions" icon="shield-halved" href="/guides/roles">
+    What owners, admins, and members can do.
+  </Card>
+  <Card title="Invitations" icon="envelope" href="/guides/invitations">
+    Invite people to your organization.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Add a site and install the tracking script.
+  </Card>
+</CardGroup>

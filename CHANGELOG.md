@@ -8,6 +8,8 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Added an **Accounts & access** group to the Guides tab (account settings, organizations, teams,
+  roles, invitations).
 - Added a **Manage data** group to the Guides tab (data dictionary + the four import guides) and the
   migration overview (`migrate`) to the Get started tab, per the PRD's information architecture.
 - Regrouped the Guides tab navigation so the growing report set stays scannable: the single
@@ -34,6 +36,13 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 3 (second wave) "Accounts & access" documentation pages, sourced from the wiki decision
+  records (0071, 0072, 0073, 0074, 0075, 0083, 0087) and documenting the *current* converged behavior
+  where later decisions superseded earlier ones (multi-org switching, emailed invitations, teams as
+  the sole site-access mechanism): `guides/account-settings.mdx`, `guides/organizations.mdx`,
+  `guides/teams.mdx`, `guides/roles.mdx` (with a full owner/admin/member permission matrix), and
+  `guides/invitations.mdx`. Operator-only auth/email internals are not documented. Billing & plans
+  remains deferred pending the open pricing/signup question. Build validates with zero broken links.
 - Phase 3 (first wave) "Migration & data" documentation pages, sourced from the wiki (decisions 0153,
   0113; `algorithms/import-mappers.md`; `concepts/data-dictionary.md`; decision 0158): `migrate.mdx`
   (switch-from overview), `guides/data-dictionary.mdx` (event/property/trait catalog with the
