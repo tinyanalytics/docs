@@ -1,0 +1,43 @@
+---
+title: "Metric definitions"
+description: "Plain definitions of every core tinyanalytics metric — sessions, users, pageviews, bounce rate, pages per session, and session duration — so you know exactly what each number counts."
+icon: "ruler"
+---
+
+This glossary defines every core tinyanalytics metric so you know exactly what each number counts. The definitions match how the metrics are computed, so a number here always means the same thing as the number on your dashboard.
+
+## Core metrics
+
+| Metric | Definition |
+| --- | --- |
+| **Sessions** | The number of distinct sessions in the date range. A session is one visitor's activity within a 30-minute sliding window of inactivity. |
+| **Users** | The number of distinct visitors. A visitor is counted by their identified ID if you've called [identify](/guides/identify-users), otherwise by a [cookieless fingerprint](/resources/cookieless-identity). One signed-in person on a phone and a laptop counts as one user. |
+| **Pageviews** | The total number of pages viewed — every page load and, in a single-page app, every route change. |
+| **Pages per session** | The mean number of pageviews per session. |
+| **Bounce rate** | The percentage of sessions with exactly one pageview. |
+| **Session duration** | The average time between a session's first and last event, in seconds. |
+
+## What counts as a session?
+
+A **session** is one visitor's activity within a **30-minute sliding window of inactivity**. Every event the visitor sends pushes the window forward; the session ends only after 30 minutes of silence, and their next visit starts a new one. Because the window slides, a visitor who's active across the half-hour boundary stays in a single session rather than being split in two.
+
+## How is a bounce counted?
+
+A **bounce** is a session with exactly one pageview — the visitor saw one page and didn't view another. Bounce rate is the percentage of sessions that bounced. Custom events don't change the count: a single-pageview session is a bounce even if the visitor clicked a button or submitted a form on that page.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Data dictionary" icon="book" href="/guides/data-dictionary">
+    The events, properties, and traits catalog.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    See these metrics for your site.
+  </Card>
+  <Card title="How cookieless identity works" icon="fingerprint" href="/resources/cookieless-identity">
+    How a visitor becomes a "user."
+  </Card>
+  <Card title="How traffic is classified" icon="signs-post" href="/resources/traffic-classification">
+    How referrers become channels.
+  </Card>
+</CardGroup>

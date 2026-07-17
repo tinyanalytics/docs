@@ -8,6 +8,8 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Added a new **Resources** tab (Reference · How it works · Trust & privacy · AI groups) for Phase 6,
+  after the API reference tab.
 - Added a new **API reference** tab (Get started · Ingestion · Reading data · Access & tools groups)
   for Phase 6, after the Integrations tab.
 - Added three **Guides** navigation groups for Phase 5 — **Product analytics**, **Monitor & automate**,
@@ -45,6 +47,17 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 6 (second wave) **Resources** tab (8 pages), the trust-and-mechanism content, each sourced from
+  the product wiki: `resources/metrics-glossary.mdx` (exact metric definitions), `resources/cookieless-identity.mdx`
+  (one-way `hash(ip+ua)`, the honest undercount/overcount limits, `identify()`), `resources/bot-detection.mdx`
+  (the detection layers, named AI crawlers, the datacenter-IP corroboration guard), `resources/traffic-classification.mdx`
+  (referrer + UTM → channel, paid-beats-organic, AI-before-search), `resources/data-handling.mdx` (what's
+  stored vs. never stored — no cookies, no raw IP), `resources/privacy.mdx` (privacy properties stated as
+  mechanism, not legal conclusions, with a not-legal-advice hedge), `resources/comparison.mdx` (honest
+  closed-source-vs-open-source framing against GA4/Plausible/Umami), and `resources/use-with-ai.mdx` (the
+  contextual AI menu + `/llms.txt`). The **Changelog** page is intentionally deferred — no verified product
+  changelog exists to source, and inventing release history would break the no-fabrication rule. Build
+  validates with zero broken links.
 - Phase 6 (first wave) **API reference** tab (8 pages), authored from the API architecture docs, the
   decision records, and — for the wire contract — the tracker's actual Zod schema read at source:
   `api-reference/introduction.mdx` (base URL `https://dash.tinyanalytics.io`, the session-cookie vs.

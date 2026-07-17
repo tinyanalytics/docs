@@ -226,6 +226,39 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Resources",
+        "groups": [
+          {
+            "group": "Reference",
+            "pages": [
+              "resources/metrics-glossary"
+            ]
+          },
+          {
+            "group": "How it works",
+            "pages": [
+              "resources/cookieless-identity",
+              "resources/bot-detection",
+              "resources/traffic-classification"
+            ]
+          },
+          {
+            "group": "Trust & privacy",
+            "pages": [
+              "resources/data-handling",
+              "resources/privacy",
+              "resources/comparison"
+            ]
+          },
+          {
+            "group": "AI",
+            "pages": [
+              "resources/use-with-ai"
+            ]
+          }
+        ]
       }
     ]
   },

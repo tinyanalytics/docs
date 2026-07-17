@@ -1,0 +1,41 @@
+---
+title: "How cookieless identity works"
+description: "tinyanalytics identifies visitors without cookies, using a one-way hash of IP and user agent instead of a stored identifier — so there's nothing on the visitor's device and no PII at rest."
+icon: "fingerprint"
+---
+
+tinyanalytics identifies visitors **without cookies**. Instead of storing an identifier on the visitor's device, it derives one on the server from the visitor's IP address and browser — a **one-way hash** — so there's nothing to store on the device, no consent banner for a tracking cookie, and no personal data kept at rest.
+
+## How a visitor is identified
+
+When an event arrives, tinyanalytics computes a short **fingerprint** by hashing the visitor's IP address and user agent together. The raw IP address is never stored — only the resulting hash, which can't be reversed back into an IP. That fingerprint is stable for as long as the visitor's IP-and-browser pair is, which is what makes multi-day reports like [Users](/guides/users), [retention](/guides/retention), and [cohorts](/guides/cohorts) meaningful.
+
+## It's an accurate estimate — and honest about its limits
+
+A cookieless fingerprint can't be exact, and tinyanalytics doesn't pretend otherwise. There are two inherent, opposite kinds of error:
+
+- **Undercounting** — several people behind one network (a household or office) on the same browser build collapse into one visitor.
+- **Overcounting** — one person moving from Wi-Fi to cellular, or updating their browser, can look like a new visitor.
+
+Every cookieless analytics tool lives with this trade-off. When you need exact, cross-device identity, [identify](/guides/identify-users) is the escape hatch.
+
+## Turning a visitor into a known person
+
+When your app calls `identify()` with a stable ID, tinyanalytics attributes that visitor's recent anonymous activity to the ID and counts them as one person from then on — across devices and sessions. Reports then key on the identified ID when there is one, and fall back to the cookieless fingerprint when there isn't, so a signed-in person on two devices is a single user everywhere.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Privacy & GDPR" icon="user-shield" href="/resources/privacy">
+    The privacy properties this design gives you.
+  </Card>
+  <Card title="Identify users" icon="user" href="/guides/identify-users">
+    Attach a stable ID for exact identity.
+  </Card>
+  <Card title="How your data is handled" icon="server" href="/resources/data-handling">
+    What's stored, and what never is.
+  </Card>
+  <Card title="Metric definitions" icon="ruler" href="/resources/metrics-glossary">
+    How "users" and "sessions" are counted.
+  </Card>
+</CardGroup>

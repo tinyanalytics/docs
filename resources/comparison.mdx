@@ -1,0 +1,49 @@
+---
+title: "tinyanalytics vs Google Analytics, Plausible & Umami"
+description: "An honest comparison: tinyanalytics is a cookieless, privacy-friendly, hosted analytics product with a deep feature set — closed-source, unlike open-source Plausible and Umami."
+icon: "scale-balanced"
+---
+
+tinyanalytics is a **cookieless, privacy-friendly, hosted** web analytics product with a deep feature set — web analytics plus product analytics, experiments, and monitoring. Here's an honest look at how it compares with Google Analytics, Plausible, and Umami, including the trade-offs.
+
+## At a glance
+
+| | tinyanalytics | Google Analytics 4 | Plausible | Umami |
+| --- | --- | --- | --- | --- |
+| **Cookieless** | Yes | No (uses cookies) | Yes | Yes |
+| **Hosting** | Hosted (cloud) | Hosted (cloud) | Cloud or self-host | Cloud or self-host |
+| **Open source** | No | No | Yes | Yes |
+| **Multi-day identity** | Yes (cookieless) | Yes (cookies) | No (privacy-first) | Limited |
+| **Scope** | Web + product analytics | Web + app analytics | Web analytics | Web analytics |
+
+## vs Google Analytics
+
+Google Analytics is free and powerful, but it uses cookies (which typically require a consent banner), can sample data at scale, and is complex to configure. tinyanalytics is cookieless, stores no personal data by default, and is designed to be simple to install and read — at the cost of the ad-platform integrations GA is built around.
+
+## vs Plausible and Umami
+
+Plausible and Umami are excellent lightweight, cookieless, **open-source** analytics tools. The honest difference is twofold:
+
+- **Openness.** Plausible and Umami are open source and can be self-hosted; **tinyanalytics is closed-source and hosted only.** If self-hosting or auditing the source is a requirement for you, they're the better fit.
+- **Depth.** tinyanalytics goes beyond core web analytics into [product analytics](/guides/feature-flags) — feature flags, experiments, surveys, funnels, retention, cohorts, custom dashboards, a SQL query builder — plus [uptime monitoring](/guides/uptime-monitoring) and [alerts](/guides/alerts). Plausible and Umami stay deliberately focused on web analytics.
+
+## Answering the trust question honestly
+
+Because tinyanalytics is closed-source, you can't audit its code the way you can Plausible's or Umami's. tinyanalytics answers that with **mechanism-level transparency** instead: these docs explain exactly [how cookieless identity works](/resources/cookieless-identity), [how bot detection works](/resources/bot-detection), and [what is and isn't stored](/resources/data-handling) — so you can evaluate the privacy properties on their merits, not on a claim.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Migrate to tinyanalytics" icon="arrow-right-arrow-left" href="/migrate">
+    Import your history from GA4, Plausible, or Umami.
+  </Card>
+  <Card title="Privacy & GDPR" icon="user-shield" href="/resources/privacy">
+    The privacy properties in detail.
+  </Card>
+  <Card title="How your data is handled" icon="server" href="/resources/data-handling">
+    What's stored, and what never is.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Install tinyanalytics in a few minutes.
+  </Card>
+</CardGroup>

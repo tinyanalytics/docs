@@ -1,0 +1,49 @@
+---
+title: "How your data is handled"
+description: "What tinyanalytics stores and what it never stores: event data tied to a cookieless identifier, no cookies, no raw IP addresses, and no personal data unless you choose to send it."
+icon: "server"
+---
+
+tinyanalytics is a **hosted analytics service**: your site sends events, and tinyanalytics stores and reports on them for you. This page explains what's stored, what's never stored, and how your data stays yours.
+
+## What tinyanalytics stores
+
+For each event your site sends, tinyanalytics keeps the analytics context it needs to build your reports:
+
+- **Page context** — the path, hostname, referrer, page title, and any campaign (UTM) parameters.
+- **Derived attributes** — an approximate location (country, region, city) from the IP, the marketing [channel](/resources/traffic-classification), and the device, browser, and OS from the user agent.
+- **A cookieless identifier** — a one-way [hashed fingerprint](/resources/cookieless-identity), not a stored ID.
+- **What you choose to send** — [custom events](/guides/custom-events) and their properties, plus any user ID and [traits](/guides/identify-users) you set with `identify()`.
+
+## What tinyanalytics never stores
+
+- **No cookies.** Nothing is written to your visitor's device.
+- **No raw IP addresses.** A visitor's IP is used only, in memory, to derive the hashed identifier and approximate location — it's never written to your analytics data.
+- **No personal data by default.** tinyanalytics stores no names, emails, or other identifying details unless *you* deliberately send them as an identified ID, a trait, or an event property.
+
+<Warning>
+  Because custom event properties and traits are free-form, you control whether any personal data enters tinyanalytics. Avoid putting raw personal information (like an email address) into event properties unless you intend to store it.
+</Warning>
+
+## Your data stays isolated and yours
+
+Each site's data is separate, and access is gated by [organization membership and teams](/guides/teams) — one organization can never read another's analytics. You can [export](/guides/export) your data as CSV or PDF, or query it directly with the [SQL query builder](/guides/sql-query-builder) and the [read API](/api-reference/read), at any time.
+
+Retention is applied at **read time**: a retention limit bounds how far back you can query, rather than deleting your event data.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Privacy & GDPR" icon="user-shield" href="/resources/privacy">
+    How this design supports privacy compliance.
+  </Card>
+  <Card title="How cookieless identity works" icon="fingerprint" href="/resources/cookieless-identity">
+    The one-way hash behind "users."
+  </Card>
+  <Card title="Export data" icon="file-export" href="/guides/export">
+    Take your data out any time.
+  </Card>
+  <Card title="Roles & permissions" icon="user-lock" href="/guides/roles">
+    Who can see and manage your data.
+  </Card>
+</CardGroup>

@@ -1,0 +1,41 @@
+---
+title: "How bot detection works"
+description: "tinyanalytics filters bots and crawlers with multiple detection layers — known bot user agents, datacenter networks, and request-behavior heuristics — so your reports count real people."
+icon: "robot"
+---
+
+tinyanalytics filters out bots and crawlers before they reach your reports, so your numbers reflect **real people**. Detection runs several independent layers on every incoming event, and a request flagged by any of them is dropped from your human analytics — while still returning a normal response, so a bot can't tell it was caught.
+
+## The detection layers
+
+tinyanalytics judges each request with layers that each catch a different kind of automation:
+
+- **Known bot user agents** — a large, categorized list of crawler signatures, including named bots like `Googlebot`, `GPTBot`, `ClaudeBot`, and `AhrefsBot`, plus scripting tools like `curl` and `python-requests`. Each match is tagged with a category (search, AI, social, monitoring, SEO, security, and more).
+- **Bot networks (ASN)** — requests from networks dedicated to bots, scanners, and AI-agent infrastructure are caught even when they arrive with a normal-looking browser user agent.
+- **Request-behavior heuristics** — missing headers a real browser always sends, request bursts and crawl-shaped traffic patterns, and known referrer-spam domains.
+- **Automation signals** — signs that the browser is being driven by automation rather than a person.
+
+## Real visitors on cloud IPs aren't mislabeled
+
+A visitor on a VPN, a corporate proxy, or a cloud-hosted browser can share an IP with a datacenter — so tinyanalytics treats a datacenter-network match as **supporting evidence only**. It never flags a request as a bot on that fact alone; another layer has to fire too. This keeps real people from being filtered out just because of where their traffic originates.
+
+## Seeing the bots
+
+Filtered bots don't disappear silently — the [bots & AI crawlers report](/guides/bots) shows the automated traffic that was kept out of your human analytics, including which AI crawlers are visiting your site. Detected AI-assistant *referrals* (a real person arriving from an AI answer) are a separate signal, covered in [AI traffic](/guides/ai-traffic).
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Bots & AI crawlers" icon="robot" href="/guides/bots">
+    The report of filtered bot traffic.
+  </Card>
+  <Card title="AI traffic" icon="microchip" href="/guides/ai-traffic">
+    Visitors who arrive from AI assistants.
+  </Card>
+  <Card title="How traffic is classified" icon="signs-post" href="/resources/traffic-classification">
+    How real referrers become channels.
+  </Card>
+  <Card title="How cookieless identity works" icon="fingerprint" href="/resources/cookieless-identity">
+    How human visitors are counted.
+  </Card>
+</CardGroup>
