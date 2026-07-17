@@ -52,6 +52,12 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- `guides/exclude-traffic.mdx` — **Exclude traffic** page (added to the "Install the tracker" group),
+  covering ingest-time exclusions by IP (single/CIDR/range), country, path glob, hostname glob, and
+  user-agent substring, plus the block-bots toggle and hiding your own traffic (localStorage opt-out or
+  IP exclusion). Draws the exclusion-vs-filter distinction (dropped at collection vs. hidden in a report)
+  and flags the user-agent substring semantics (no wildcards). Closes the highest-value gap from the
+  Rybbit-docs gap analysis. Sourced from decisions 0054 and 0160. Build validates with zero broken links.
 - Phase 6 (second wave) **Resources** tab (8 pages), the trust-and-mechanism content, each sourced from
   the product wiki: `resources/metrics-glossary.mdx` (exact metric definitions), `resources/cookieless-identity.mdx`
   (one-way `hash(ip+ua)`, the honest undercount/overcount limits, `identify()`), `resources/bot-detection.mdx`

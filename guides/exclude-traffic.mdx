@@ -1,0 +1,57 @@
+---
+title: "Exclude traffic"
+description: "Keep unwanted traffic out of your analytics at collection — exclude by IP, country, path, hostname, or user agent, block bots, and hide your own visits. Excluded traffic is never recorded."
+icon: "filter-circle-xmark"
+---
+
+Exclusions keep unwanted traffic out of your analytics by dropping it **at collection** — so internal tools, staging sites, monitoring bots, and your own visits never reach your reports. You set them per site in your settings, and from then on matching requests are quietly ignored: the visitor still gets a normal response, but nothing is recorded.
+
+<Note>
+  An **exclusion** is not the same as a [filter](/guides/filters). An exclusion drops the data before it's ever stored — it can't be recovered later. A filter just changes what a report *shows*; the data is still collected. Use an exclusion for traffic you never want to measure, and a filter to focus a report on traffic you did.
+</Note>
+
+## What you can exclude
+
+Configure these in your site's **Exclusions** settings (an owner or admin edits them). Each type matches a different signal:
+
+| Exclude by | Matches | Examples |
+| --- | --- | --- |
+| **IP address** | a single IP, a CIDR block, or a range (IPv4 and IPv6) | `203.0.113.10`, `10.0.0.0/8` |
+| **Country** | a two-letter country code | `US`, `DE` |
+| **Path** | a path pattern with `*` wildcards (must start with `/` or `*`) | `/admin/*`, `*/preview` |
+| **Hostname** | a hostname pattern with `*` wildcards | `staging.example.com`, `*.test` |
+| **User agent** | a **case-insensitive substring** — no wildcards | `UptimeRobot`, `curl` |
+
+<Warning>
+  Path and hostname use `*` as a wildcard, but **user agent matching is a plain substring** — a `*` in a user-agent entry is treated literally and won't act as a wildcard. Write `curl`, not `curl/*`.
+</Warning>
+
+Each list holds up to **100 entries** of up to **256 characters** each. Excluded traffic is dropped invisibly — a matching request gets the same successful response as any other, so there's no way for someone to tell they were excluded.
+
+## Block bots
+
+tinyanalytics filters out bots and crawlers automatically, and the **block-bots** toggle in your site settings controls it. It's **on by default**, so most sites never need to touch it — bot traffic is kept out of your reports without any configuration. See [how bot detection works](/resources/bot-detection) for what's caught.
+
+## Hide your own traffic
+
+To keep your own visits out of your stats, you have two options depending on whether you want to exclude a device or a network:
+
+- **One device (your browser)** — set a `localStorage` opt-out key so that browser stops sending anything. This is the quickest way to exclude yourself. See [opt out of tracking](/guides/script-configuration#opt-out-of-tracking).
+- **A whole network (your office or home IP)** — add your IP address to the **IP** exclusions above, so every device on that network is ignored.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Skip or mask paths, and opt a device out of tracking.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Focus a report without dropping any data.
+  </Card>
+  <Card title="How bot detection works" icon="robot" href="/resources/bot-detection">
+    What the block-bots toggle filters out.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm the right traffic is being tracked.
+  </Card>
+</CardGroup>

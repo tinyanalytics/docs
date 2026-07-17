@@ -32,6 +32,7 @@
             "pages": [
               "guides/tracking-script",
               "guides/script-configuration",
+              "guides/exclude-traffic",
               "guides/verify-your-setup"
             ]
           },
