@@ -118,26 +118,50 @@
             "group": "Frameworks",
             "pages": [
               "integrations/nextjs",
-              "integrations/react"
+              "integrations/react",
+              "integrations/vue",
+              "integrations/nuxt",
+              "integrations/astro",
+              "integrations/sveltekit",
+              "integrations/gatsby",
+              "integrations/remix",
+              "integrations/angular"
             ]
           },
           {
             "group": "CMS & website builders",
             "pages": [
               "integrations/wordpress",
-              "integrations/webflow"
+              "integrations/webflow",
+              "integrations/ghost",
+              "integrations/squarespace",
+              "integrations/framer",
+              "integrations/carrd",
+              "integrations/bubble"
+            ]
+          },
+          {
+            "group": "Docs & static sites",
+            "pages": [
+              "integrations/hugo",
+              "integrations/jekyll",
+              "integrations/docusaurus",
+              "integrations/vitepress"
             ]
           },
           {
             "group": "E-commerce",
             "pages": [
-              "integrations/shopify"
+              "integrations/shopify",
+              "integrations/bigcommerce"
             ]
           },
           {
             "group": "Server-side & tag managers",
             "pages": [
-              "integrations/google-tag-manager"
+              "integrations/google-tag-manager",
+              "integrations/laravel",
+              "integrations/drupal"
             ]
           }
         ]

@@ -416,9 +416,14 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 - ✅ Second wave: Accounts & access group — Account settings, Organizations & members, Teams & site access, Roles & permissions, Invitations. Documents the current converged behavior (multi-org switching per 0083, emailed invitations per 0087, teams as the sole site-access mechanism per 0073–0075).
 - ⬜ Deferred: Billing & plans. **Depends on open question #2** (is signup open / pricing page live) and shipped with billing not enforced (decision 0152) — confirm before writing.
 
-**Phase 4 — Integrations breadth** — 🚧 first wave done (2026-07-17)
+**Phase 4 — Integrations breadth** — 🚧 second wave done (2026-07-17)
 - ✅ First wave: Integrations tab + Overview and the top platforms — Next.js, React, WordPress, Webflow, Shopify, Google Tag Manager. Batch-authored from one template.
-- ⬜ Long tail (later waves): Frameworks (Gatsby, Remix, Vue, Nuxt, Svelte, SvelteKit, Angular, Astro); CMS & builders (Framer, Ghost, Squarespace, Carrd, Bubble); E-commerce (BigCommerce, PrestaShop, ThriveCart); Docs & static sites (Docusaurus, GitBook, Mintlify, VitePress, Hugo, Jekyll); Server-side & tag managers (Laravel, Drupal, Joomla, TYPO3, Contentful, Sanity, Strapi); Mobile (React Native).
+- ✅ Second wave (long tail): Frameworks — Vue, Nuxt, Astro, SvelteKit, Gatsby, Remix, Angular; CMS & builders — Ghost, Squarespace, Framer, Carrd, Bubble; Docs & static sites (new nav group) — Hugo, Jekyll, Docusaurus, VitePress; E-commerce — BigCommerce; Server-side — Laravel, Drupal. 19 pages, same template, platform placement stated accurately (e.g. Astro `is:inline`, Gatsby `<Script>`, plan-gating for Squarespace/Carrd).
+- ⬜ Remaining candidates (later, if demand warrants): E-commerce (PrestaShop, ThriveCart); Server-side & tag managers (Joomla, TYPO3).
+- 🚫 Deliberately **not** documented as platforms — no fabricated support:
+  - **React Native / native mobile** — tinyanalytics ships a browser DOM script (`script.js`), not a mobile SDK. There is no native install point to document; adding one would invent a capability the product doesn't have.
+  - **Headless CMSs (Contentful, Sanity, Strapi)** — these have no rendered frontend of their own; the site is served by a framework (Next.js, Nuxt, Astro, …) that already has a guide. Point users to the framework page rather than the CMS.
+  - **GitBook / Mintlify** — script injection depends on plan/hosting specifics we can't state as fact; revisit only if we can verify the exact install point.
 
 **Phase 5 — Advanced product analytics & ops**
 - Feature flags, Experiments, Surveys, Custom dashboards, SQL query builder, Group/B2B analytics; Scheduled reports, Alerts, Uptime, Shortlinks; Public dashboards/embeds/widget.

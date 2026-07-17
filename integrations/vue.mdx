@@ -1,0 +1,61 @@
+---
+title: "Install tinyanalytics on Vue"
+description: "Add tinyanalytics to a Vue app by pasting the tracking snippet into index.html — it loads on every route, and client-side navigation with Vue Router is tracked automatically."
+icon: "vuejs"
+---
+
+To add tinyanalytics to a **Vue** app, paste the tracking snippet into your `index.html` so it loads once for the whole app. Client-side navigation with Vue Router is tracked automatically, so you don't need to hook into the router.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
+
+## Add the snippet to `index.html`
+
+A Vue project created with Vite has a single `index.html` at the project root. Add the snippet inside its `<head>`:
+
+```html index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Vue App</title>
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+```
+
+<Tip>
+  Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+## Client-side navigation is tracked automatically
+
+Vue Router renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). You don't need to watch the route or call anything on navigation. See [Track single-page apps](/guides/script-configuration#track-single-page-apps) to change this behavior.
+
+## Verify
+
+Run or deploy your app, open it in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on Nuxt" icon="code" href="/integrations/nuxt">
+    A Nuxt (server-rendered Vue) app instead.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Send events from your components.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+</CardGroup>

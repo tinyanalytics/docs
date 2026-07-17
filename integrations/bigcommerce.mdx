@@ -1,0 +1,60 @@
+---
+title: "Install tinyanalytics on BigCommerce"
+description: "Add tinyanalytics to a BigCommerce store with Script Manager — create a script that loads in the head on all pages, no theme editing required."
+icon: "cart-shopping"
+---
+
+To add tinyanalytics to a **BigCommerce** store, use **Script Manager** to add the tracking snippet to every storefront page. It needs no theme editing and survives theme updates.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Add the snippet with Script Manager
+
+<Steps>
+  <Step title="Open Script Manager">
+    In your BigCommerce control panel, go to **Settings → Advanced → Data Solutions → Script Manager**, then click **Create a Script**.
+  </Step>
+  <Step title="Configure the script">
+    Set **Placement** to **Head**, **Location** to **All pages**, and **Script category** to your analytics category. Choose **Script type: Script**, then paste your snippet:
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+    ```
+  </Step>
+  <Step title="Save">
+    **Save** the script. It now loads on every storefront page.
+  </Step>
+</Steps>
+
+<Tip>
+  Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+<Note>
+  Script Manager runs on storefront pages. BigCommerce's hosted checkout is a separate, locked-down environment, so pageviews there aren't tracked on most plans — expect your funnel to end at the checkout hand-off.
+</Note>
+
+## Verify
+
+Open your storefront in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on Shopify" icon="shopify" href="/integrations/shopify">
+    A Shopify store instead.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Measure add-to-cart and checkout steps.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+</CardGroup>

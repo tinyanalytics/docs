@@ -8,6 +8,9 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Expanded the **Integrations** tab with the platform long tail and added a **Docs & static sites**
+  navigation group (Hugo, Jekyll, Docusaurus, VitePress). Frameworks, CMS & website builders,
+  E-commerce, and Server-side & tag managers groups all grew.
 - Added a new **Integrations** tab with category groups (Overview, Frameworks, CMS & website builders,
   E-commerce, Server-side & tag managers), seeded with the first wave of platform guides.
 - Added an **Accounts & access** group to the Guides tab (account settings, organizations, teams,
@@ -38,6 +41,18 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 4 (second wave) **Integrations** long-tail pages (19), batch-authored from the same template:
+  frameworks — `integrations/vue.mdx`, `integrations/nuxt.mdx`, `integrations/astro.mdx`
+  (with the `is:inline` requirement), `integrations/sveltekit.mdx`, `integrations/gatsby.mdx`
+  (Gatsby's `<Script>` component), `integrations/remix.mdx`, `integrations/angular.mdx`; CMS &
+  builders — `integrations/ghost.mdx`, `integrations/squarespace.mdx`, `integrations/framer.mdx`,
+  `integrations/carrd.mdx`, `integrations/bubble.mdx` (plan-gating noted for Squarespace and Carrd);
+  docs & static sites — `integrations/hugo.mdx`, `integrations/jekyll.mdx`,
+  `integrations/docusaurus.mdx`, `integrations/vitepress.mdx`; e-commerce —
+  `integrations/bigcommerce.mdx`; server-side — `integrations/laravel.mdx`, `integrations/drupal.mdx`.
+  React Native and headless CMSs (Contentful, Sanity, Strapi) are intentionally omitted — tinyanalytics
+  is a browser script with no mobile SDK, and headless CMSs render through a framework that already has
+  a guide. Build validates with zero broken links.
 - Phase 4 (first wave) **Integrations** pages, batch-authored from one consistent template: an
   `integrations/overview.mdx` (universal install method + platform picker) plus guides for the
   highest-traffic platforms — `integrations/nextjs.mdx` (App Router + Pages Router via `next/script`),

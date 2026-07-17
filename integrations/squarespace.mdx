@@ -1,0 +1,61 @@
+---
+title: "Install tinyanalytics on Squarespace"
+description: "Add tinyanalytics to a Squarespace site by pasting the tracking snippet into Settings → Advanced → Code Injection → Header, available on the Business plan and higher."
+icon: "squarespace"
+---
+
+To add tinyanalytics to a **Squarespace** site, paste the tracking snippet into the **Header** code injection. It applies to every page of your site.
+
+<Note>
+  Code Injection is available on the **Business plan and higher**. On the Personal plan, Squarespace doesn't allow custom header code, so this method isn't available.
+</Note>
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+- A Squarespace **Business plan or higher**.
+
+## Add the snippet to Code Injection
+
+<Steps>
+  <Step title="Open Code Injection">
+    In your Squarespace dashboard, go to **Settings → Advanced → Code Injection**.
+  </Step>
+  <Step title="Paste into Header">
+    Paste your tinyanalytics snippet into the **Header** field:
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+    ```
+  </Step>
+  <Step title="Save">
+    Click **Save**. The snippet loads on every page of your site.
+  </Step>
+</Steps>
+
+<Tip>
+  Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+## Verify
+
+Open your Squarespace site in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/overview">
+    The universal method and other platforms.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Measure signups and clicks.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+</CardGroup>

@@ -1,0 +1,56 @@
+---
+title: "Install tinyanalytics on Laravel"
+description: "Add tinyanalytics to a Laravel app by placing the tracking snippet in the head of your shared Blade layout so it renders on every page."
+icon: "laravel"
+---
+
+To add tinyanalytics to a **Laravel** app, place the tracking snippet in the `<head>` of your shared Blade layout so it renders on every page that extends it.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Add the snippet to your Blade layout
+
+Add the tag to the `<head>` of your layout, for example `resources/views/layouts/app.blade.php`:
+
+```blade resources/views/layouts/app.blade.php
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ config('app.name') }}</title>
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+  </head>
+  <body>
+    @yield('content')
+  </body>
+</html>
+```
+
+<Tip>
+  Put the snippet in the one layout your pages extend so it's present sitewide. Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+## Verify
+
+Serve or deploy your app, open it in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/overview">
+    The universal method and other platforms.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+    Send events from your app.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+    Confirm tracking works.
+  </Card>
+</CardGroup>
