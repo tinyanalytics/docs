@@ -52,6 +52,10 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Two integration guides closing gaps from the Rybbit-docs analysis: `integrations/wix.mdx` (Wix Custom
+  Code → Head, with Premium-plan gating noted) and `integrations/woocommerce.mdx` (WordPress header method
+  plus a purchase-tracking section — a custom event with `revenue`/`currency` on the order-received page).
+  Added to the CMS & website builders and E-commerce nav groups. Build validates with zero broken links.
 - `guides/autocapture.mdx` — **Autocapture** page (added to the "Track what matters" group), documenting
   every automatically-captured interaction (outbound link, file download, button click, copy, form
   submission, engagement), what each records, the form-shape-only privacy guarantee, and the

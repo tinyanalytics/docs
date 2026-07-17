@@ -449,8 +449,8 @@ Compared our coverage against the live Rybbit docs sidebar (`rybbit.com/docs`) a
 *To add (confirmed, sourced):*
 - ✅ **Exclude traffic** (`guides/exclude-traffic.mdx`, added to the "Install the tracker" group, 2026-07-18) — ingest-time exclusions: IP (single/CIDR/range, v4+v6), country, path glob, hostname glob, and user-agent **substring** (the 0160 gotcha — UA is substring, not glob; page states it explicitly), plus the block-bots toggle and both "hide your own traffic" routes (localStorage opt-out + IP exclusion). Distinguishes exclusion (dropped at collection) from a dashboard filter (hides a report view). Source: decisions 0054, 0160; caps 100 entries / 256 chars.
 - ✅ **Autocapture** (`guides/autocapture.mdx`, added to the "Track what matters" group, 2026-07-18) — dedicated page for each auto-captured event (outbound link, file download, button click, copy, form submission, engagement): what each records, the toggle attribute, the form-shape-only privacy guarantee (and the honest note that copy events store truncated copied text), plus the `data-ta-prop-*` (add props) and `data-ta-event` (opt an element out) conventions. Source: decision 0110; `tracker/script/auto-capture.ts` (read at source for the `data-ta-*` semantics and per-event props).
-- ⬜ **Wix** integration guide — website builder, real header/custom-code install point (general web-dev fact).
-- ⬜ **WooCommerce** integration guide — WordPress e-commerce; real install point (WordPress/header).
+- ✅ **Wix** (`integrations/wix.mdx`, 2026-07-18) — Custom Code → Head, all pages; Premium-plan gating noted (like Squarespace/Carrd); SPA tracking cross-link.
+- ✅ **WooCommerce** (`integrations/woocommerce.mdx`, 2026-07-18) — install via the WordPress header method (cross-links the WordPress guide) plus a purchase-tracking section (custom event on the order-received page with `revenue`/`currency`, verified against the tracker schema's reserved-prop convention).
 
 *Lower priority / optional:*
 - ⬜ **Site settings** orientation page — Rybbit has one; our per-site settings (domain, public/private link, exclusions, embed) are documented piecemeal.
