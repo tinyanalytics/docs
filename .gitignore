@@ -1,0 +1,5 @@
+# Local gstack /browse skill session artifacts (contain loopback daemon tokens — never commit)
+.gstack/
+
+# macOS
+.DS_Store
