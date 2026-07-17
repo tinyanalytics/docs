@@ -1,0 +1,65 @@
+---
+title: "Saved segments"
+description: "Save reusable filter sets in tinyanalytics — like 'US mobile visitors' or 'Organic traffic' — and apply them across every report with one click instead of rebuilding the same filters each time."
+icon: "bookmark"
+---
+
+A saved segment is a **named, reusable set of filters** — "US mobile visitors", "Organic traffic", "Arrived via AI" — that you apply across your whole dashboard with one click. Instead of rebuilding the same filters every visit, you save them once and pick them from the filter bar; the segment applies to every report at once and rides along as you move between them.
+
+{/* TODO: screenshot of the segment picker */}
+
+## How do I save a segment?
+
+Build the filters you want, then save them:
+
+<Steps>
+  <Step title="Filter your dashboard">
+    Add the filters that define your segment — for example, `country is US` and `device type is Mobile`. See [Filter your data](/guides/filters).
+  </Step>
+  <Step title="Save the current filters">
+    Open the segment picker on the filter bar and choose **Save current filters**. Give the segment a name and a scope (personal or site).
+  </Step>
+  <Step title="Apply it anytime">
+    The segment now appears in the picker. Selecting it applies its filters across every report; **Clear segment** removes them.
+  </Step>
+</Steps>
+
+## Who can see a segment? Personal vs. site scope
+
+Every segment has one of two scopes, which decides who sees it:
+
+| Scope | Who can see it | Who can edit it |
+| --- | --- | --- |
+| **Personal** | Only you | Only you |
+| **Site** | Everyone in your organization | Site owners and admins |
+
+A personal segment is invisible to everyone else. Site segments are shared with your whole team, so managing them (creating, renaming, deleting) requires an admin or owner role.
+
+## Managing your segments
+
+The **Segments** page lists your personal segments and your site's shared segments. From there you can apply a segment, rename it, change its scope, or delete it. You can save up to 500 segments per site.
+
+<Note>
+  A segment is a **snapshot** of filters, not a live link. If you edit a segment, a report you already opened with it applied keeps the filters it was opened with — reapply the segment to pick up your changes.
+</Note>
+
+## Segments vs. cohorts
+
+A **segment** filters on *attributes* — where a visitor is, what device they use, where they came from — and applies instantly. A [behavioral cohort](/guides/cohorts) is different: it groups users by *what they did over time* ("bought at least twice in 30 days but didn't open support"), which is computed on the server. Reach for a segment for attribute filters, and a cohort for behavior over time.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    The filters a segment saves and reuses.
+  </Card>
+  <Card title="Behavioral cohorts" icon="users-rectangle" href="/guides/cohorts">
+    Group users by what they did over time.
+  </Card>
+  <Card title="Compare periods" icon="arrow-right-arrow-left" href="/guides/compare">
+    Add a baseline to any segmented view.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    The reports a segment re-scopes.
+  </Card>
+</CardGroup>

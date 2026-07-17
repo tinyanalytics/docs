@@ -8,6 +8,11 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- Regrouped the Guides tab navigation so the growing report set stays scannable: the single
+  "Explore your data" group split into four — **Explore your data** (added `map` and `performance`),
+  **Understand behavior** (journeys, retention, funnels, goals, cohorts), **Acquisition & AI**
+  (AI traffic, Search Console, bots), and **Filter, save & share** (filters, segments, compare,
+  annotations, export). Navigation-only change; no pages moved on disk.
 - `PRD.md` bumped to v1.2 (execution underway): Phase 0 marked mostly done, Phase 1 done, Phase 2
   first wave done (with the second wave enumerated), and the brand-color open question resolved to
   indigo (`#345FCF` family).
@@ -27,6 +32,14 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+- Phase 2 (second wave) documentation pages completing "Explore your data", each sourced from the
+  product wiki's decision records with citable specifics: `guides/performance.mdx` (Core Web Vitals
+  at p50/p75/p90/p99), `guides/ai-traffic.mdx` (AI-assistant referrals), `guides/bots.mdx` (bots &
+  AI crawlers), `guides/search-console.mdx` (Google Search Console), `guides/map.mdx` (dashboard map
+  & globe), `guides/segments.mdx` (saved segments), `guides/cohorts.mdx` (behavioral cohorts),
+  `guides/compare.mdx` (period comparison), `guides/annotations.mdx` (chart annotations), and
+  `guides/export.mdx` (CSV & PDF export). Bot/AI-crawler and Search Console availability confirmed
+  with the maintainer before writing. Build validates with zero broken links.
 - Phase 2 (first wave) "Explore your data" documentation pages, sourced from the wiki's algorithm
   specs with exact metric definitions: `guides/dashboard-overview.mdx`, `guides/realtime.mdx`,
   `guides/pages.mdx`, `guides/sessions.mdx`, `guides/users.mdx`, `guides/events.mdx`,

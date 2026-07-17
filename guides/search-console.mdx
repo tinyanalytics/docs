@@ -1,0 +1,69 @@
+---
+title: "Google Search Console"
+description: "Connect Google Search Console to tinyanalytics to see your search queries, pages, countries, and devices — with clicks, impressions, CTR, and average position — next to your traffic."
+icon: "magnifying-glass"
+---
+
+Connect **Google Search Console** to tinyanalytics to see how people find you in Google Search — your top queries, pages, countries, and devices, each with clicks, impressions, click-through rate, and average position — right alongside your traffic analytics. It answers the question your pageview data can't: *what did people search to get here?*
+
+{/* TODO: screenshot of the Search Console report */}
+
+## How do I connect Google Search Console?
+
+You connect Search Console from its report page in three steps. You'll need a Google account that already has verified Search Console properties.
+
+<Steps>
+  <Step title="Open Search Console and connect">
+    Go to the **Search Console** report for your site and click **Connect**. You'll be sent to Google to sign in and grant read access to your Search Console data.
+  </Step>
+  <Step title="Pick a property">
+    After you approve, tinyanalytics lists the Search Console properties your Google account can access. Choose the one that matches this site.
+  </Step>
+  <Step title="View your search metrics">
+    Your queries, pages, countries, and devices load in the report. Everything stays on this one page — connect, view, and disconnect are all here.
+  </Step>
+</Steps>
+
+tinyanalytics only ever **reads** your Search Console data. You can disconnect at any time from the same page.
+
+## What search metrics does tinyanalytics show?
+
+The report breaks your Search Console data down across four dimensions, one tab each, and every row carries the same four metrics:
+
+| Dimension | Metrics per row |
+| --- | --- |
+| **Queries** — what people searched | Clicks · Impressions · CTR · Average position |
+| **Pages** — which of your pages appeared | Clicks · Impressions · CTR · Average position |
+| **Countries** — where searchers were | Clicks · Impressions · CTR · Average position |
+| **Devices** — desktop, mobile, tablet | Clicks · Impressions · CTR · Average position |
+
+Click a column header to sort. CTR is shown as a percentage, and average position to one decimal place.
+
+## Why is Search Console on its own date range?
+
+Search Console data is **daily and lags about two to three days** behind, so the report uses its own trailing window — **7, 28, or 90 days** — rather than the minute-level range the rest of the dashboard shares. A "last 30 minutes" view would be meaningless for search data that hasn't arrived yet.
+
+## The Search Console card on your dashboard
+
+Once a site is connected, your main dashboard shows a **Search Console** card with your top five queries over the last 28 days — a quick glance at what's driving search traffic without leaving the overview. The card appears only when Search Console is connected, so an unconnected dashboard stays uncluttered.
+
+<Note>
+  Search Console queries can be more sensitive than aggregate pageviews, so the report and its dashboard card are visible only to signed-in members of your site — never on a public or embedded dashboard.
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="AI traffic" icon="robot" href="/guides/ai-traffic">
+    How AI assistants send you visitors — the other discovery channel.
+  </Card>
+  <Card title="Top pages" icon="file-lines" href="/guides/pages">
+    Which pages get the most traffic once people arrive.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    Your traffic, with search data alongside it.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Narrow your analytics by page, source, and more.
+  </Card>
+</CardGroup>

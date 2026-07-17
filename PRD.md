@@ -407,9 +407,9 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 - ✅ Introduction, Quickstart, How it works, Install the tracking script, Script configuration, Custom events, Identify users, Verify/troubleshoot. (The "Switch from GA4/Plausible/Umami" migration overview is deferred to Phase 3, alongside import.)
 - *Outcome:* a new user can install and see data; assistant/`llms.txt` have real substance.
 
-**Phase 2 — Explore your data (the daily dashboard)** — 🚧 first wave done (2026-07-17)
+**Phase 2 — Explore your data (the daily dashboard)** — ✅ done (2026-07-17)
 - ✅ First wave: Dashboard overview, Realtime, Pages, Sessions, Users, Events explorer, Journeys, Retention, Funnels, Goals, Filters.
-- ⬜ Second wave: Performance (Core Web Vitals), Bots & AI crawlers, AI traffic, Google Search Console, Map & globe, Saved segments, Behavioral cohorts, Compare periods, Annotations, Export (CSV & PDF).
+- ✅ Second wave: Performance (Core Web Vitals), Bots & AI crawlers, AI traffic, Google Search Console, Map & globe, Saved segments, Behavioral cohorts, Compare periods, Annotations, Export (CSV & PDF). Guides nav regrouped into four groups (Explore your data · Understand behavior · Acquisition & AI · Filter, save & share). Bot capture and GSC availability confirmed with the maintainer before writing.
 
 **Phase 3 — Migration & data (adoption drivers)**
 - Import from GA4 / Plausible / Umami; the migration overview; Data dictionary; Billing & plans; Accounts & access group.

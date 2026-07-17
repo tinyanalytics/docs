@@ -1,0 +1,61 @@
+---
+title: "Bots & AI crawlers report"
+description: "See automated traffic separately from humans in tinyanalytics — bot requests, their share of traffic, and which AI crawlers (GPTBot, ClaudeBot, PerplexityBot, and more) are reading your site."
+icon: "spider"
+---
+
+The Bots & AI crawlers report shows automated traffic **separately from your human analytics**: how many bot requests your site gets, what share of all traffic they are, and which bots and AI crawlers are visiting. Bots never appear in your human sessions, visitor counts, or the live counter — so this report is where you go to see them on purpose, especially the AI crawlers reading your pages for models like ChatGPT, Claude, and Perplexity.
+
+{/* TODO: screenshot of the Bots & AI crawlers report */}
+
+## What the overview cards show
+
+The report opens with four cards summarizing automated traffic for the current window and filters:
+
+| Card | What it means |
+| --- | --- |
+| **Bot requests** | Total automated requests detected. |
+| **Bot share** | Bot requests as a percentage of all traffic (bots + humans). |
+| **UA pattern** | Bots identified by a known user-agent pattern. |
+| **Bot ASN** | Bots identified by a known hosting/crawler network. |
+
+## How does tinyanalytics detect bots?
+
+tinyanalytics flags a request as a bot in two ways: a **known user-agent pattern** (the signature a crawler announces itself with) and a **known network** (the ASN a crawler operates from, which catches bots that hide their user-agent). A request flagged either way is counted here instead of in your human analytics. Detected bots are given synthetic sessions and are kept entirely out of your session counts and live visitor counter, so automated traffic can never inflate your real numbers.
+
+## Which AI crawlers are reading my site?
+
+The report leads with an **AI crawlers** section naming the AI bots that visited — GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Bytespider, CCBot, and others. A crawler that hides its user-agent but comes from a known AI network is still counted and named by its **operator** (such as Anthropic or OpenAI). AI crawlers that can't be named individually roll up into **Other AI crawler**.
+
+The bot-traffic-over-time chart draws a second **"of which AI crawlers"** line beneath the total, so you can see AI crawling grow independently of ordinary bot traffic. It's styled in violet rather than the red of the total line — an AI crawler reading your site is usually something you *want* if you care about being cited in AI answers.
+
+## Breaking bots down
+
+Below the chart, bot traffic is broken down the same way human traffic is:
+
+- **Referrers, Pages, Countries** — where bots come from and what they hit.
+- **Devices** — the browser, operating system, and device a bot reports (often sparse for headless crawlers).
+- **Categories, patterns, and networks** — the bot's category (search, AI, social), the matched pattern, and the operating network.
+
+Click a filterable row to narrow the whole report to it.
+
+<Note>
+  **Crawling is not citation.** This report shows that an AI crawler *read* a page — the step that comes before you're cited in an AI answer. It cannot tell you whether a crawl produced a citation, and no user-agent or referrer can: that needs the AI platforms' own data. To see the *other* end of the funnel — humans who clicked through from an AI answer — use the [AI traffic report](/guides/ai-traffic).
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="AI traffic" icon="robot" href="/guides/ai-traffic">
+    Humans who clicked through from an AI assistant — the other half.
+  </Card>
+  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-it-works">
+    Why bot traffic is kept out of your human analytics.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Narrow bot traffic to one crawler, page, or country.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    Your human analytics, with bots kept separate.
+  </Card>
+</CardGroup>

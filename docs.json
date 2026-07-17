@@ -50,11 +50,36 @@
               "guides/sessions",
               "guides/users",
               "guides/events",
+              "guides/map",
+              "guides/performance"
+            ]
+          },
+          {
+            "group": "Understand behavior",
+            "pages": [
               "guides/journeys",
               "guides/retention",
               "guides/funnels",
               "guides/goals",
-              "guides/filters"
+              "guides/cohorts"
+            ]
+          },
+          {
+            "group": "Acquisition & AI",
+            "pages": [
+              "guides/ai-traffic",
+              "guides/search-console",
+              "guides/bots"
+            ]
+          },
+          {
+            "group": "Filter, save & share",
+            "pages": [
+              "guides/filters",
+              "guides/segments",
+              "guides/compare",
+              "guides/annotations",
+              "guides/export"
             ]
           }
         ]

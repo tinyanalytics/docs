@@ -1,0 +1,59 @@
+---
+title: "Compare periods"
+description: "Compare any date range against the previous period or the same dates a year ago in tinyanalytics — with change indicators on every metric, breakdown, and chart, so you can tell whether a number is good."
+icon: "arrow-right-arrow-left"
+---
+
+Period comparison adds a **baseline and a change indicator** to your whole dashboard, so "197 sessions" becomes "197 sessions, up 12% from last week". You pick a comparison mode next to the date range, and the baseline appears on every stat card, every breakdown, and the time-series chart at once — because "is this number good?" is unanswerable without something to compare it to.
+
+{/* TODO: screenshot of the compare menu and chart overlay */}
+
+## How do I turn on comparison?
+
+Open the **comparison menu** next to the date picker and choose a mode. The button's own label shows the active comparison, so you can always see what you're comparing against without opening the menu.
+
+| Mode | Compares against |
+| --- | --- |
+| **No comparison** | Nothing — the default. |
+| **Previous period** | The equal-length window immediately before your selected range. |
+| **Year over year** | The same dates one year earlier. |
+
+## What comparison adds to each report
+
+Turning on a comparison lights up the whole dashboard from a single toggle:
+
+- **Stat cards** gain a change percentage versus the baseline.
+- **Breakdown tables** gain a change column on every row, so you can see which pages, referrers, or countries moved.
+- **The time-series chart** draws a muted, dashed **baseline line** behind your current line, with a legend naming both date ranges and a tooltip that labels the baseline point with its *own* date — not a vague "previous".
+- **The Performance report** compares your Core Web Vitals, correctly treating *lower as better* (a rising LCP shows red, not green).
+
+## Previous period vs. year over year
+
+**Previous period** compares your range to the equal window just before it — last 7 days versus the 7 days before that. It's best for spotting recent movement.
+
+**Year over year** compares the **same calendar dates** one year earlier, which is best for seasonal businesses where "versus last month" is misleading. tinyanalytics compares the same dates directly, the way you'd expect when you read "year over year".
+
+## Reading the change indicators
+
+A change indicator shows the direction and size of the move. When there's **no baseline** — a referrer that sent zero traffic last period and some this period — tinyanalytics shows it as **new** rather than an arithmetically meaningless "+100%". Comparison is exact for every row shown, including a big mover that wasn't in last period's top rows, so you never miss the referrer that jumped from nowhere to the top.
+
+<Note>
+  Comparison is a property of the **date range**, which is why the control lives next to it. Changing your range keeps the comparison mode; the baseline recalculates for the new window.
+</Note>
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+    The metrics and breakdowns comparison annotates.
+  </Card>
+  <Card title="Annotations" icon="note-sticky" href="/guides/annotations">
+    Mark what changed on the date a number moved.
+  </Card>
+  <Card title="Core Web Vitals" icon="gauge-high" href="/guides/performance">
+    Compare performance, with lower-is-better handling.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/guides/filters">
+    Compare a filtered slice against its own baseline.
+  </Card>
+</CardGroup>
