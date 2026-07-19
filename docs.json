@@ -54,7 +54,9 @@
               "guides/users",
               "guides/events",
               "guides/map",
-              "guides/performance"
+              "guides/performance",
+              "guides/errors",
+              "guides/rollup"
             ]
           },
           {
@@ -88,6 +90,7 @@
           {
             "group": "Product analytics",
             "pages": [
+              "guides/revenue",
               "guides/feature-flags",
               "guides/experiments",
               "guides/surveys",
@@ -127,6 +130,7 @@
             "group": "Accounts & access",
             "pages": [
               "guides/account-settings",
+              "guides/site-settings",
               "guides/organizations",
               "guides/teams",
               "guides/roles",
@@ -156,6 +160,12 @@
               "integrations/gatsby",
               "integrations/remix",
               "integrations/angular"
+            ]
+          },
+          {
+            "group": "Mobile apps",
+            "pages": [
+              "integrations/react-native"
             ]
           },
           {

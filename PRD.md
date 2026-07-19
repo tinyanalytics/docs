@@ -453,7 +453,7 @@ Compared our coverage against the live Rybbit docs sidebar (`rybbit.com/docs`) a
 - ✅ **WooCommerce** (`integrations/woocommerce.mdx`, 2026-07-18) — install via the WordPress header method (cross-links the WordPress guide) plus a purchase-tracking section (custom event on the order-received page with `revenue`/`currency`, verified against the tracker schema's reserved-prop convention).
 
 *Lower priority / optional:*
-- ⬜ **Site settings** orientation page — Rybbit has one; our per-site settings (domain, public/private link, exclusions, embed) are documented piecemeal.
+- ✅ **Site settings** orientation page (`guides/site-settings.mdx`, added to "Accounts & access", 2026-07-19) — hub for the per-site Settings tabs: name/domain, reporting currency, public/private visibility, tracking + exclusions, embeds, imports, move-site, and delete. Canonical home for move-a-site-between-orgs (0161). Grounded in `settings/_components/general-tab.tsx`.
 - ⬜ **Svelte (Vite, non-Kit)** integration — we ship SvelteKit; Rybbit also documents plain Svelte/Vite (different install point: `index.html` / app mount).
 - ⬜ **Per-endpoint API pages** — Rybbit enumerates individual endpoint pages (sending-events, export-events, live-feed, channel-performance, funnel-dropoff, weekly-report). Ours is capability-structured (core-endpoints table + playground); enumerate more only if users ask.
 - (Unchanged, already listed under Phase 4: PrestaShop, ThriveCart, Joomla, TYPO3.)
@@ -461,9 +461,34 @@ Compared our coverage against the live Rybbit docs sidebar (`rybbit.com/docs`) a
 *Checked and deliberately NOT added (no fabrication):*
 - 🚫 **Product MCP server** — Rybbit ships `/docs/mcp` (query your analytics via an MCP server). The tinyanalytics wiki shows **no such product MCP server** (only incidental mentions), so a page would invent a feature. `resources/use-with-ai` documents the *docs* MCP, a different thing. Revisit only if a product MCP server ships.
 - 🚫 **Architecture / Self-hosting / Self-host vs Cloud / Managing your installation / v1 migration** — operator- and self-host-facing; out of scope under the hosted-only boundary.
-- 🚫 **Contentful / Sanity / Strapi / GitBook / Mintlify / React Native** — deliberately omitted already (headless CMSs render through a framework that has a guide; GitBook/Mintlify install points unverifiable; no mobile SDK). Reasons recorded under Phase 4.
+- 🚫 **Contentful / Sanity / Strapi / GitBook / Mintlify** — deliberately omitted (headless CMSs render through a framework that has a guide; GitBook/Mintlify install points unverifiable). Reasons recorded under Phase 4. (**React Native** was formerly listed here as "no mobile SDK" — that's now false: the SDK shipped (0165) and is documented, see the codebase gap analysis below.)
 
 *Confirmed already covered (no action):* tagging (`data-tag`), skip/mask paths, client opt-out, and the auto-capture toggle (all in `script-configuration`); definitions, comparison, bot detection, data import, identify, funnels, goals, teams, invitations, account/org settings, tracking script, and troubleshooting (≈ our `verify-your-setup`). On the core analytics reports we are **more** comprehensive than Rybbit (a page per report vs their lighter treatment).
+
+**Backlog — gap analysis vs the product codebase (checked 2026-07-19)**
+
+Diffed our docs against the actual product surface — the web app route tree (`apps/web/src/app/websites/[siteId]/*`), the SDK folder (`sdks/`), and decisions **0140–0181** (which postdate the Phase-1–6 build). Every route with no matching doc page was a candidate; each below is source-grounded (fact sheets from `apps/api/src`, `apps/web/src`, `sdks/`, and the wiki) and confirmed shipped + user-facing. Scope decisions confirmed with the owner: build all; document revenue plainly (no plan caveats — despite `requireFeature("revenue")`); the React Native SDK is published/installable.
+
+*New pages (all built 2026-07-19):*
+- ✅ **Error tracking** (`guides/errors.mdx`, "Explore your data") — opt-in `data-track-errors`; auto-captures `window.onerror` + unhandled rejections; manual `trackError(err, meta)`; report groups by message with occurrences, affected sessions, sparkline, and stack-trace drill-down; 60 s dedupe; `ResizeObserver`/cross-origin noise filtered. Source: `apps/api/src/api/errors.ts`, `tracker/script/tracker.ts`, `features.md`. Also added a script-config section + kept the `error` type accurate in `api-reference/track`.
+- ✅ **Revenue analytics** (`guides/revenue.mdx`, "Product analytics") — reserved `revenue` (major units, positive) + `currency` (3-letter format gate) props on a custom event; report = Total Revenue / AOV / Paying Sessions / Orders + timeseries + revenue-by-dimension (entry-acquisition credited); reporting currency (22 built-in rates, per-release, unlisted codes 1:1). Documented plainly per owner. Source: decision 0140, `revenue-currency.ts`, `revenue/page.tsx`.
+- ✅ **Cross-site rollup** (`guides/rollup.mdx`, "Explore your data") — combined stats across every accessible site in the active org (6 tiles + trend + per-site contribution), team-scoped access, users summed (no cross-site dedup), core metrics only. Source: decision 0076, `apps/web/src/app/rollup/`.
+- ✅ **React Native** (`integrations/react-native.mdx`, new "Mobile apps" group) — `@tinyanalytics/react-native` SDK: install (+AsyncStorage), create a mobile-type site (app identifier, read-only), `init()`, `screen()`/`event()`/`identify()`/`error()`, React Navigation tracker, install-id identity, full API + config tables, and the web-vs-mobile differences (screens-as-pageviews, no web vitals, empty channel). `analyticsHost` set to `https://dash.tinyanalytics.io` for consistency with the rest of the docs. Source: decision 0165, `sdks/react-native/{README.md,index.d.ts}`.
+
+*Enhancements (2026-07-19):*
+- ✅ `guides/pages.mdx` — added the alternate views (Titles / Entries / Exits / Hostnames) and a **Landing pages** section (entry-page report: bounce, avg duration, avg scroll, avg time). Source: decision 0178, `landing-pages-table.tsx`.
+- ✅ `guides/alerts.mdx` — added **Revenue** to the alert-metric table (was stale: previously said revenue "isn't wired" — it shipped; `ALERT_METRICS` includes `"revenue"`).
+- ✅ `guides/script-configuration.mdx` — dedicated "Capture JavaScript errors" section (the `data-track-errors` row already existed).
+- ✅ `guides/organizations.mdx` — move-a-site pointer into `site-settings`.
+- ✅ `integrations/overview.mdx` — mobile-app note pointing to the React Native SDK.
+
+*Deliberately NOT documented (accuracy over completeness):*
+- 🚫 **Pages URL / hostname mode** (0181) — the breakdown API shipped (`pathname_host`/`entry_page_host`/`exit_page_host`) but the **web UI has not** (no `pagesMode` toggle in `apps/web/src`). Documenting it would describe something users can't do. Revisit when the UI ships.
+- 🚫 Operator-internal surfaces flagged by the fact-sheets (superadmin site-move, `BILLING_ENFORCED` quota preHandler, ClickHouse storage internals) — out of scope under the hosted-only boundary.
+
+*Confirmed already covered (no action):* **Group & B2B analytics** (the owner's example — `guides/group-analytics.mdx` already documents `group()`/`setGroupTraits()`/`resetGroups()`, the grain toggle, account funnels/retention, inactivity alerts, flag-by-account; the miss was discoverability, not content); `data-web-vitals` (in `script-configuration`); group traits (already the 4th row in `data-dictionary`); the `error`/`performance` event types + `revenue`/`currency` props (already in `api-reference/track`, one wording tweak).
+
+*Open (owner input still needed):* **Billing & plans** page (open Q2); **screenshots** (need a live instance).
 
 ---
 

@@ -7,6 +7,29 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Added
+- **Codebase gap analysis (2026-07-19):** diffed the docs against the actual product surface (web
+  route tree + `sdks/` + decisions 0140–0181) and closed four missing pages, all source-grounded:
+  - **Error tracking** guide (`guides/errors`, "Explore your data") — the opt-in `data-track-errors`
+    capture, the manual `trackError()` call, and the message-grouped report with stack-trace drill-down.
+  - **Revenue analytics** guide (`guides/revenue`, "Product analytics") — the `revenue`/`currency`
+    reserved props, the report metrics (total, AOV, paying sessions, orders), and reporting-currency
+    conversion. Also documented Revenue as an alert metric in `guides/alerts` (previously stated as not
+    wired — it shipped).
+  - **Cross-site rollup** guide (`guides/rollup`, "Explore your data") — combined analytics across every
+    site in the active organization, with per-site contribution.
+  - **React Native** integration (`integrations/react-native`) in a new **Mobile apps** navigation group —
+    the `@tinyanalytics/react-native` SDK, the mobile-app site type, screen/event/identify tracking, the
+    React Navigation helper, and the install-id identity model.
+  - **Site settings** hub (`guides/site-settings`, "Accounts & access") — the per-site Settings tabs, and
+    the canonical home for moving a site between organizations and deleting a site.
+- Expanded `guides/pages` with the alternate views (Titles / Entries / Exits / Hostnames) and a **Landing
+  pages** section (entry-page report with bounce, average duration, scroll depth, and time on page).
+- Claude Code now discovers the repo's two authoring skills: `mintlify` (platform mechanics) and
+  `tinyanalytics-docs` (project conventions) are copied from `.agents/skills/` to `.claude/skills/`,
+  the only path Claude Code auto-loads. The `.agents/` copies remain the source for other agent tools.
+  Note: the two trees are duplicates — edit both when a skill changes.
+
 ### Changed
 - Phase 7 in-repo polish pass across all 95 pages: audited GEO/SEO frontmatter (every page has a title,
   a standalone benefit-bearing description, and an icon), verified heading hierarchy (one H1 per page),

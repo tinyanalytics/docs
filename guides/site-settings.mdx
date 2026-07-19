@@ -1,0 +1,69 @@
+---
+title: "Site settings"
+description: "Manage a tinyanalytics site: its name and domain, reporting currency, public/private visibility, tracking and traffic exclusions, embeds, imports, moving it between organizations, and deleting it."
+icon: "gear"
+---
+
+Every site has its own **Settings**, reached from the site's sidebar. This is where you rename the site, set its reporting currency, make its dashboard public or private, tune what the tracker collects, move the site to another organization, or delete it. Settings are organized into tabs — here's what each one controls and where to read more.
+
+## Site details
+
+Set the site's **name** (how it appears in your dashboard) and its **domain** — or, for a [mobile app](/integrations/react-native) site, its app identifier. The domain is a label for your own reference; tracking works by site ID, not by matching the domain.
+
+## Reporting currency
+
+Under **Revenue**, choose the currency your reports are shown in. Revenue events are stored in whatever currency they're sent in, then converted to this reporting currency when a report is read. See [Revenue analytics](/guides/revenue) for how sending and conversion work.
+
+## Visibility: public or private
+
+The **Public Dashboard** toggle controls who can see your analytics. Off (the default) keeps the dashboard private to your team; on makes it viewable by anyone with the link. For a shareable link that doesn't make everything public, use a private link instead — see [public dashboards](/guides/public-dashboards) and [embedding a dashboard](/guides/embed-dashboard).
+
+## Tracking and exclusions
+
+Two tabs shape what data comes in:
+
+- **Tracking** — the [tracking snippet](/guides/tracking-script) and its [configuration options](/guides/script-configuration).
+- **Exclusions** — drop traffic you don't want counted, by IP, country, path, hostname, or user agent, and toggle bot blocking. See [exclude traffic](/guides/exclude-traffic).
+
+You can also **import** historical data on the Import tab — see the [migration overview](/migrate).
+
+## Move a site to another organization
+
+You can move a site — with all its history — into another [organization](/guides/organizations) you also run, without help from support. The site keeps its ID, so its data moves with it.
+
+<Steps>
+  <Step title="Open the General tab">
+    In the site's **Settings → General**, find the **Move to another organization** card.
+  </Step>
+  <Step title="Pick the destination">
+    Choose a target organization from the dropdown. It lists only organizations where you're an owner or admin, excluding the site's current one.
+  </Step>
+  <Step title="Confirm the move">
+    Click **Move site** and confirm in the dialog.
+  </Step>
+</Steps>
+
+<Warning>
+  Moving a site **clears its team-access grants**. Members of the old organization who aren't in the destination organization will lose access to the site. You need to be an **owner or admin of both** the source and the destination organization. The move is reversible — move it back the same way.
+</Warning>
+
+## Delete a site
+
+The **Danger Zone** deletes a site and its data permanently. This can't be undone, so tinyanalytics asks you to confirm. If you only want to stop collecting for a while, remove the [tracking snippet](/guides/tracking-script) from your site instead of deleting.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Exclude traffic" icon="filter-circle-xmark" href="/guides/exclude-traffic">
+    Keep bots and internal visits out of your stats.
+  </Card>
+  <Card title="Public dashboards" icon="share-nodes" href="/guides/public-dashboards">
+    Share your dashboard by link.
+  </Card>
+  <Card title="Organizations & members" icon="building" href="/guides/organizations">
+    How sites are grouped and who can access them.
+  </Card>
+  <Card title="Revenue analytics" icon="dollar-sign" href="/guides/revenue">
+    Set your reporting currency.
+  </Card>
+</CardGroup>

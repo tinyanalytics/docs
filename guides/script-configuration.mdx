@@ -72,6 +72,18 @@ Web Vitals collection is off by default because it loads a small extra chunk of 
 
 tinyanalytics then sends one performance event per page load with LCP, CLS, INP, FCP, and TTFB, which power the **Performance** report.
 
+## Capture JavaScript errors
+
+Error capture is also off by default. Turn it on with `data-track-errors`:
+
+```html
+<script defer src="https://dash.tinyanalytics.io/script.js"
+  data-site-id="123"
+  data-track-errors></script>
+```
+
+tinyanalytics then records uncaught exceptions and unhandled promise rejections as `error` events, grouped by message in the **Errors** report. Benign `ResizeObserver` warnings and cross-origin third-party script errors are filtered out automatically. See [error tracking](/guides/errors) for the report and the manual `trackError()` call.
+
 ## Hide sensitive paths with skip and mask
 
 If your URLs contain personal or sensitive data — an order number, a token, an email — use path patterns to keep it out of your reports:
