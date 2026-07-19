@@ -1,12 +1,12 @@
 ---
 title: "Group & B2B analytics"
-description: "Roll your metrics up by account — company, workspace, or team — instead of by individual visitor. Tag events with an account and get account-grain funnels, retention, and counts."
+description: "Roll your metrics up by account — company, workspace, or team — instead of by visitor. Tag events with an account for account-grain funnels, retention, and counts."
 icon: "building"
 ---
 
 Group analytics answers a B2B question that per-person metrics can't: **how many accounts**, not just how many people. You tag events with the account they belong to — a company, workspace, or team — and then funnels, retention, active counts, and filters can all roll up to account grain, where every seat in one company counts as one account.
 
-## Tag events with an account
+## How do I tag events with an account?
 
 Associate the current visitor with an account by calling `window.tinyanalytics.group()`. From then on, every event that visitor sends is tagged with that account:
 
@@ -22,26 +22,40 @@ window.tinyanalytics.group('company', 'acme-inc', {
 - Pass **traits** to describe the account — its name, plan, or size — the same way [user traits](/guides/identify-users) describe a person. Update them later with `setGroupTraits(type, traits)`.
 - Call `resetGroups()` to forget the associations, for example when a user logs out.
 
-## Switch reports to account grain
+## How do I switch reports to account grain?
 
-Once events are tagged, a **grain toggle** on the dashboard swaps person-level metrics for account-level ones. The Users card becomes **active accounts** — the number of distinct accounts active in the period — and you can:
+Use the **grain toggle** on the dashboard. Once events are tagged, it swaps person-level metrics for account-level ones. The Users card becomes **active accounts** — the number of distinct accounts active in the period — and you can:
 
 - **Filter** to one account's activity, keeping every event in that account's sessions.
 - **Break down** any report by account to see your top companies.
 
-## Account-grain funnels and retention
+## How do account-grain funnels and retention work?
 
 [Funnels](/guides/funnels) and [retention](/guides/retention) can measure the **account** instead of the session or person. This changes what "completed" and "returned" mean:
 
 - A funnel step counts for an account when **any member, in any session** reaches it — so a company converts even if one person started the trial and a colleague finished it.
 - An account is retained when **any seat returns** in a later period, so a returning team reads as one retained account rather than several individual visitors.
 
-## Alert on quiet accounts, and target flags by account
+## What else does account grain unlock?
 
-Two more things account grain unlocks:
+Two more things:
 
 - **Inactivity alerts** — get notified when an account that used to be active goes quiet, so you can reach out before it churns. See [alerts](/guides/alerts).
 - **Flag targeting by account** — evaluate a [feature flag](/guides/feature-flags) per account so every seat in one company shares the same rollout, and rollout percentages count accounts rather than people.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How many group types can one site have?">
+    Up to **5**. A tinyanalytics site can register five group types — for example `company` and `workspace` — and the first types you send claim the slots.
+  </Accordion>
+  <Accordion title="When does a funnel step count for a whole account?">
+    When **any member, in any session** reaches it. An account-grain funnel in tinyanalytics credits the account even if one person started the trial and a colleague finished it. Retention works the same way: an account is retained when any seat returns in a later period.
+  </Accordion>
+  <Accordion title="How do I clear a visitor's account association when they log out?">
+    Call `resetGroups()`. It forgets the associations set by `window.tinyanalytics.group()`, so events the visitor sends afterward aren't tagged with the previous account.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

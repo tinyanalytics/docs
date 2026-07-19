@@ -31,6 +31,30 @@ project adheres to semantic versioning where practical.
   Note: the two trees are duplicates — edit both when a skill changes.
 
 ### Changed
+- **Mintlify component & GEO pass (2026-07-19)** across 95 pages, grounded in Mintlify's official
+  component contracts and style guide. The prose was already accurate and second-person; this pass
+  addressed structure, which was the actual gap — the docs used 5 of Mintlify's ~25 components.
+  - **API reference now uses native field components.** Markdown parameter tables became
+    `<ParamField>` blocks across all 8 pages, `api-reference/sql` response JSON became `<ResponseField>`
+    with `<Expandable>` for nested properties. Conceptual tables (credential matrix, status codes,
+    CORS zones, endpoint catalog) were deliberately left as tables — they are comparisons, not field lists.
+  - **`<CodeGroup>` on 7 pages** — 5 API endpoints now show the same HTTP request as cURL, JavaScript
+    (`fetch`), and Python (`requests`) tabs. Translations are mechanical; no new endpoints, fields, or
+    behavior were introduced.
+  - **FAQ blocks on 64 pages** (`<AccordionGroup>`, 2–4 questions, placed before `## Related`). Every
+    answer re-states a claim already established on its own page, phrased as users actually ask it.
+    This is the largest GEO change: AI answer engines cite passages, so each answer is self-contained.
+  - **Question-shaped headings: 26 → 58 pages.** Topic labels became the question the section answers.
+    Headings that are anchor-link targets were left alone to avoid breaking 37 inbound references.
+  - **`<Check>` callouts on 37 pages** confirming what success looks like (previously 0 uses), and
+    **`<Tabs>` on 3 pages** for genuine either/or variants (e.g. Next.js App Router vs Pages Router).
+  - **Callout types normalized** to a documented severity scale, capped at 2 per page. Notably
+    `migrate.mdx`'s "re-running an import adds the data again (no de-duplication)" was promoted from a
+    bundled `<Note>` to a standalone `<Warning>` — it is a silent double-counting trap, not an aside.
+  - Fixed a leaked `{/* TODO */}` comment in `quickstart.mdx` by verifying the **Add website** button
+    label against the product source, and normalized "snippet" → "the tracking script" on entry pages.
+  - Fixed a broken anchor (`guides/filters` → `guides/sessions`) introduced by a heading rename.
+    Note: `mint broken-links` does **not** validate URL fragments — anchors need a separate check.
 - Phase 7 in-repo polish pass across all 95 pages: audited GEO/SEO frontmatter (every page has a title,
   a standalone benefit-bearing description, and an icon), verified heading hierarchy (one H1 per page),
   confirmed descriptive link text (no "click here" anchors), and a clean `mint broken-links` sweep.

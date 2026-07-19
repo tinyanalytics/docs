@@ -29,13 +29,30 @@ An alert fires when the metric crosses a bound you define, in one of two ways:
 
 You can preview the current value and whether it would breach **as you type the thresholds**, and send a **test notification** to confirm your channels work before you rely on the alert.
 
-## Firing, recovery, and cooldown
+## How often can an alert fire?
 
 - tinyanalytics checks each alert **every minute**. It **fires** once when the metric first breaches, then holds until the metric recovers — it won't re-fire every minute.
 - When the metric returns within bounds, tinyanalytics sends a **recovery** all-clear.
 - A **cooldown** (12 hours by default) keeps a flapping metric from spamming you: a repeat breach inside the cooldown is suppressed. Recovery notices are never suppressed.
 
 A fire notification includes the breaching value and the top pages and referrers at the time, so you can start investigating from the message itself.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why is my tinyanalytics alert not firing again?">
+    An alert fires **once** when the metric first breaches, then holds until the metric recovers — it won't re-fire every minute. A **cooldown**, 12 hours by default, also suppresses a repeat breach that happens inside the cooldown window. Recovery notices are never suppressed.
+  </Accordion>
+  <Accordion title="How do I test that my alert notifications work?">
+    Send a **test notification** from the alert before you rely on it. tinyanalytics delivers alerts by email, Slack, Discord, or webhook, and the test confirms your channels are wired up. You can also preview the current metric value and whether it would breach as you type the thresholds.
+  </Accordion>
+  <Accordion title="What's the difference between an absolute and a relative alert?">
+    An **absolute** alert fires when the value crosses a fixed bound you set — for example, sessions in the last hour drop below 50. A **relative** alert fires when the value changes by more than a percentage versus the previous equal window — for example, pageviews jump more than 40% hour over hour.
+  </Accordion>
+  <Accordion title="How quickly does tinyanalytics detect a breach?">
+    tinyanalytics checks each alert **every minute**. You choose whether the metric is measured over the last **hour** or the last **day**, and the check runs against that window every minute.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

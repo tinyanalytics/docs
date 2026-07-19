@@ -10,7 +10,9 @@ icon: "user"
 POST https://dash.tinyanalytics.io/api/identify
 ```
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl -X POST https://dash.tinyanalytics.io/api/identify \
   -H "Content-Type: application/json" \
   -d '{
@@ -20,16 +22,52 @@ curl -X POST https://dash.tinyanalytics.io/api/identify \
   }'
 ```
 
+```js JavaScript
+await fetch("https://dash.tinyanalytics.io/api/identify", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    siteId: 1,
+    userId: "user_8f3a",
+    traits: { plan: "pro", company: "Acme" },
+  }),
+})
+```
+
+```python Python
+import requests
+
+requests.post(
+    "https://dash.tinyanalytics.io/api/identify",
+    json={
+        "siteId": 1,
+        "userId": "user_8f3a",
+        "traits": {"plan": "pro", "company": "Acme"},
+    },
+)
+```
+
+</CodeGroup>
+
 ## Fields
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `siteId` | number | yes | Your numeric site ID. |
-| `userId` | string | yes | Your stable ID for the user, up to 255 characters. |
-| `traits` | object | no | Key/value attributes, up to 2 KB serialized. A `null` value **deletes** that trait. |
-| `isNewIdentify` | boolean | no | Defaults to `true`. Send `false` to update traits **without** re-running the event backfill. |
+<ParamField body="siteId" type="number" required>
+  Your numeric site ID.
+</ParamField>
 
-## Backfill vs. traits-only update
+<ParamField body="userId" type="string" required>
+  Your stable ID for the user, up to 255 characters.
+</ParamField>
+
+<ParamField body="traits" type="object">
+  Key/value attributes, up to 2 KB serialized. A `null` value **deletes** that trait.
+</ParamField>
+
+<ParamField body="isNewIdentify" type="boolean">
+  Defaults to `true`. Send `false` to update traits **without** re-running the event backfill.
+</ParamField>
+
+## When should I skip the backfill?
 
 - **First identify** — send `{ siteId, userId, traits? }`. tinyanalytics tags the visitor's recent events with `userId` and merges any traits onto their profile.
 - **Traits-only update** — send `isNewIdentify: false` to change traits without the backfill, the equivalent of the browser SDK's `setTraits()`.
@@ -47,6 +85,20 @@ window.tinyanalytics.identify('user_8f3a', { plan: 'pro' })
 ```
 
 See [identify users](/guides/identify-users) for the full browser API.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How do I update traits without re-running the backfill?">
+    Send `isNewIdentify: false` in the `POST /api/identify` body. tinyanalytics updates the traits and skips tagging the visitor's recent events with the `userId` — the equivalent of the browser SDK's `setTraits()`.
+  </Accordion>
+  <Accordion title="How do I delete a trait?">
+    Send that key with a `null` value. Traits merge rather than replace: each identify updates only the keys you send and leaves the rest in place, so a `null` is the way to remove one.
+  </Accordion>
+  <Accordion title="Does identify overwrite a visitor's earlier events?">
+    No — it backfills. A first identify tags the visitor's recent events with the `userId` you sent and merges any traits onto their profile, so their history ties together the moment they sign in.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

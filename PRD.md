@@ -490,6 +490,34 @@ Diffed our docs against the actual product surface — the web app route tree (`
 
 *Open (owner input still needed):* **Billing & plans** page (open Q2); **screenshots** (need a live instance).
 
+**Mintlify component & GEO pass (done 2026-07-19)**
+
+Scope chosen by the owner: entry pages + API reference + all guides in full; integrations on a
+structure-only pass. Result across 95 pages — `ParamField`/`ResponseField`/`Expandable` in the API
+reference, `CodeGroup` on 7 pages, FAQ `AccordionGroup` on 64, `Check` on 37, `Tabs` on 3,
+question-shaped headings 26 → 58. House style captured in the commit; owner ruling on Revenue
+(no plan caveats) verified as held.
+
+*Deliberately not done, with reasons:*
+- 🚫 **`resources/*` (9 pages)** — outside the owner's chosen Tier 1+2 line. `resources/comparison.mdx`
+  and `resources/metrics-glossary.mdx` are the strongest remaining GEO candidates in the repo
+  ("tinyanalytics vs Google Analytics" and metric-definition queries are exactly what AI engines are
+  asked). **Recommended as the next pass.**
+- 🚫 **"snippet" → "the tracking script" across `integrations/*`** — 152 occurrences remain, mostly on
+  the 30 integration pages that were deliberately structure-only. Not a blind find-and-replace:
+  `guides/embed-dashboard` and `guides/live-visitors-widget` use "snippet" for the **embed iframe
+  snippet**, which is the product's own UI term (`dashboard-embed-tab.tsx` renders "Copy snippet") and
+  must stay. Needs a per-occurrence pass distinguishing concept from UI label.
+- 🚫 **Question-shaping anchored headings** — `script-configuration#track-single-page-apps` alone has
+  18 inbound references. Renaming these requires updating referrers in the same commit.
+- 🚫 **`Tabs` for WordPress/Drupal Option 1 vs Option 2** — Option 2 carries a `<Warning>` that editing
+  the parent theme gets the tracking script wiped by the next theme update, and that warning is also
+  the argument *for* Option 1. Tabs would hide a data-loss warning from the reader who most needs it.
+
+*Tooling note:* `mint broken-links` does **not** validate URL fragments. Anchor targets need a separate
+check (a slugify-and-compare script) — one broken anchor was found and fixed this way after
+`broken-links` reported clean.
+
 ---
 
 ## 11. Assumptions & open questions

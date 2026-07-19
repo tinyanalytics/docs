@@ -6,10 +6,29 @@ icon: "key"
 
 An API key authenticates programmatic access to tinyanalytics — server-side event ingestion, analytics reads, and site management. You create a key in your **account settings**, then send it on every request as a Bearer token:
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl https://dash.tinyanalytics.io/api/sites/1/overview \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
+
+```js JavaScript
+await fetch("https://dash.tinyanalytics.io/api/sites/1/overview", {
+  headers: { Authorization: "Bearer YOUR_API_KEY" },
+})
+```
+
+```python Python
+import requests
+
+requests.get(
+    "https://dash.tinyanalytics.io/api/sites/1/overview",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+)
+```
+
+</CodeGroup>
 
 ## Create and manage keys
 
@@ -40,6 +59,20 @@ Always send the key in the `Authorization` header — never in the URL. A key in
 ```
 Authorization: Bearer YOUR_API_KEY
 ```
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="I lost my API key — can I see it again?">
+    No. A key is shown once at creation, because tinyanalytics stores only a hash of it. If you didn't copy it, create a new key in your account settings and revoke the old one.
+  </Accordion>
+  <Accordion title="Can I put my API key in a query string?">
+    No — always send it in the `Authorization` header as `Bearer YOUR_API_KEY`. A key in a query string leaks into server logs, browser history, and referrer headers.
+  </Accordion>
+  <Accordion title="What can someone do with a leaked API key?">
+    A key inherits its owner's access, so a leaked key can read and manage every site its owner can access. Revoke it immediately in your account settings to cut off that access. Keep keys server-side and never ship one in browser code — browser tracking needs no key, since the `data-site-id` in the snippet is enough.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

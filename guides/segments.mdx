@@ -33,17 +33,31 @@ Every segment has one of two scopes, which decides who sees it:
 
 A personal segment is invisible to everyone else. Site segments are shared with your whole team, so managing them (creating, renaming, deleting) requires an admin or owner role.
 
-## Managing your segments
+## How do I manage my segments?
 
 The **Segments** page lists your personal segments and your site's shared segments. From there you can apply a segment, rename it, change its scope, or delete it. You can save up to 500 segments per site.
 
-<Note>
+<Warning>
   A segment is a **snapshot** of filters, not a live link. If you edit a segment, a report you already opened with it applied keeps the filters it was opened with — reapply the segment to pick up your changes.
-</Note>
+</Warning>
 
-## Segments vs. cohorts
+## Should I use a segment or a cohort?
 
 A **segment** filters on *attributes* — where a visitor is, what device they use, where they came from — and applies instantly. A [behavioral cohort](/guides/cohorts) is different: it groups users by *what they did over time* ("bought at least twice in 30 days but didn't open support"), which is computed on the server. Reach for a segment for attribute filters, and a cohort for behavior over time.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How many segments can I save in tinyanalytics?">
+    Up to 500 segments per site. You manage them from the **Segments** page, which lists your personal segments and your site's shared segments, and lets you apply, rename, rescope, or delete each one.
+  </Accordion>
+  <Accordion title="Can my team see the segments I save?">
+    Only if you save them with **site** scope. A personal segment is visible and editable by you alone. A site segment is visible to everyone in your organization, and creating, renaming, or deleting one requires a site owner or admin role.
+  </Accordion>
+  <Accordion title="If I edit a saved segment, does an open report update?">
+    No. A segment is a snapshot of filters, not a live link. A report you already opened with the segment applied keeps the filters it was opened with. Reapply the segment from the filter bar to pick up your changes.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

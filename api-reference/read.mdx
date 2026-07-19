@@ -6,20 +6,49 @@ icon: "chart-line"
 
 The analytics read API returns your reports as JSON, so you can pull metrics into your own systems. Every read is a **site-scoped `GET`** authenticated by an [API key](/api-reference/api-keys), and shares one date-window convention:
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl "https://dash.tinyanalytics.io/api/sites/1/overview?start_date=2026-07-01&end_date=2026-07-15" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
+
+```js JavaScript
+await fetch(
+  "https://dash.tinyanalytics.io/api/sites/1/overview?start_date=2026-07-01&end_date=2026-07-15",
+  {
+    headers: { Authorization: "Bearer YOUR_API_KEY" },
+  },
+)
+```
+
+```python Python
+import requests
+
+requests.get(
+    "https://dash.tinyanalytics.io/api/sites/1/overview",
+    params={"start_date": "2026-07-01", "end_date": "2026-07-15"},
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+)
+```
+
+</CodeGroup>
 
 ## Shared parameters
 
 The analytics reads share a UTC date window and time zone:
 
-| Parameter | Description |
-| --- | --- |
-| `start_date` | Start of the range (`YYYY-MM-DD`). |
-| `end_date` | End of the range (`YYYY-MM-DD`). |
-| `time_zone` | IANA time zone for bucketing, e.g. `America/New_York`. |
+<ParamField query="start_date" type="string">
+  Start of the range (`YYYY-MM-DD`).
+</ParamField>
+
+<ParamField query="end_date" type="string">
+  End of the range (`YYYY-MM-DD`).
+</ParamField>
+
+<ParamField query="time_zone" type="string">
+  IANA time zone for bucketing, e.g. `America/New_York`.
+</ParamField>
 
 Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, and breakdowns take a `dimension`. You can request a `compare=previous` baseline on `timeseries` and `breakdown`.
 
@@ -40,9 +69,23 @@ Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, a
   Beyond these, endpoints exist for performance, journeys, bots, errors, user traits, and more. The quickest way to discover an endpoint's exact parameters and response is the built-in [API playground](/api-reference/playground), which builds and runs each call against your own data.
 </Note>
 
-## Access
+## Who can read a site's analytics?
 
 A read is authorized exactly like signing in: the API key resolves to its owner, and the owner must have access to the site (via organization membership, or a [team](/guides/teams) that grants it). A **public** site's reads are open; a private site's reads require the key. An invalid key on a private site returns `401`; a valid key without access returns `403`.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need an API key to read a public site?">
+    No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-keys) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
+  </Accordion>
+  <Accordion title="How do I find an endpoint's exact parameters and response?">
+    Use the built-in [API playground](/api-reference/playground). It builds and runs each call against your own data, which is the quickest way to see an endpoint's parameters and response shape — including the endpoints beyond the six core reads, such as performance, journeys, bots, errors, and user traits.
+  </Accordion>
+  <Accordion title="Can I compare a date range against the previous period?">
+    Yes, on `timeseries` and `breakdown`. Request `compare=previous` to get a baseline. The `overview` endpoint already returns `{ "current", "previous", "change" }` — the headline metrics, the previous equal-length period, and the percent change.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

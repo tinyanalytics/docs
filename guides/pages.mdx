@@ -1,6 +1,6 @@
 ---
 title: "Pages"
-description: "See which pages get the most traffic in tinyanalytics: a ranked table of your pages with visitors, pageviews, and a per-page trend."
+description: "See which pages get the most traffic in tinyanalytics: a ranked table with sessions, pageviews, and per-page trends, plus entry, exit, hostname, and landing page views."
 icon: "file-lines"
 ---
 
@@ -17,7 +17,7 @@ The Pages report ranks your site's pages by how many people visit them. Each row
 
 Pages are ranked by visitors, most-visited first.
 
-## Switch views: titles, entries, exits, hostnames
+## How do I switch to titles, entries, exits, or hostnames?
 
 The Pages section has tabs that re-slice the same traffic by a different key, so you can answer different questions from one place:
 
@@ -29,7 +29,7 @@ The Pages section has tabs that re-slice the same traffic by a different key, so
 | **Exits** | **Exit pages** — the last page of each session, ranked by how many sessions end there. |
 | **Hostnames** | Traffic by hostname — useful when one site tracks several domains or subdomains. |
 
-## Landing pages
+## How do I read the Landing pages report?
 
 A **landing page** is the first page a visitor sees in a session — where the visit begins. The **Landing pages** report ranks your entry pages and adds the engagement metrics that tell you whether each one actually holds attention:
 
@@ -43,13 +43,15 @@ A **landing page** is the first page a visitor sees in a session — where the v
 | **Avg. scroll** | How far down the landing page visitors scrolled on average. |
 | **Avg. time** | The average time spent on the landing page itself. |
 
-Bounce here is measured against each session's **real, unfiltered pageview count** — so applying a dashboard filter can't inflate or deflate it. Missing engagement data shows as "—" rather than zero, so a page with no scroll signal isn't mistaken for one nobody scrolled.
+<Accordion title="How bounce and missing engagement values are calculated">
+  Bounce here is measured against each session's **real, unfiltered pageview count** — so applying a dashboard filter can't inflate or deflate it. Missing engagement data shows as "—" rather than zero, so a page with no scroll signal isn't mistaken for one nobody scrolled.
+</Accordion>
 
 <Tip>
   Read landing pages to judge your **acquisition quality**, not just volume: a page that draws many sessions but bounces most of them is pulling the wrong traffic — or making the wrong first impression.
 </Tip>
 
-## Filter by a page
+## How do I filter the dashboard by one page?
 
 **Click a row to filter the whole dashboard by that page.** Every metric, chart, and breakdown then re-scopes to visitors who saw it — a quick way to answer "how does this one page perform?" Click the row again to clear the filter. See [filter your data](/guides/filters).
 
@@ -58,6 +60,23 @@ Bounce here is measured against each session's **real, unfiltered pageview count
 - **Find your top content.** The default ranking shows which pages drive the most traffic.
 - **Check a page's momentum.** Read the trend sparkline to see whether a page is gaining or losing visits.
 - **Drill into one page.** Click a page to filter the dashboard, then read its sources, devices, and geography in the [Overview](/guides/dashboard-overview) breakdowns.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How are pages ranked in the Pages report?">
+    Pages are ranked by visitors, most-visited first. Each row shows the page's title and path, a trend sparkline over your selected date range, the number of distinct sessions that viewed it, and its total pageviews.
+  </Accordion>
+  <Accordion title="What's the difference between the Pages and Titles views?">
+    The Pages view ranks pages by their path, which is the standard read of your top content. The Titles view ranks them by their HTML `<title>` instead, which is useful when one path serves many titles. Both views re-slice the same traffic by a different key.
+  </Accordion>
+  <Accordion title="What's the difference between an entry page and an exit page?">
+    An entry page is the first page of a session and an exit page is the last. In the tinyanalytics Pages report, the **Entries** view ranks pages by how many sessions start there, and the **Exits** view ranks them by how many sessions end there.
+  </Accordion>
+  <Accordion title="How do I see stats for a single page?">
+    Click that page's row in the Pages report. Every metric, chart, and breakdown on the dashboard re-scopes to visitors who saw it, so you can read its sources, devices, and geography. Click the row again to clear the filter. See [filter your data](/guides/filters).
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

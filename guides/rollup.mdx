@@ -6,7 +6,7 @@ icon: "layer-group"
 
 The **Rollup** view combines analytics across every website in your organization into a single dashboard, so you can read your whole portfolio at once instead of opening each site one at a time. Open it from **Rollup** in the sidebar.
 
-## What the rollup shows
+## What does the rollup show?
 
 The rollup aggregates the sites in your **currently active organization** that you're allowed to see, over a shared date range. It has three parts:
 
@@ -16,7 +16,7 @@ The rollup aggregates the sites in your **currently active organization** that y
 
 The header tells you the scope at a glance: *"Combined analytics across N websites."*
 
-## Who sees which sites
+## Which sites appear in my rollup?
 
 The rollup follows your existing access — it isn't a separate permission. Every member of the organization can open it, and it spans exactly the sites that member can already reach:
 
@@ -29,6 +29,23 @@ Switch organizations with the org switcher at the top of the sidebar to roll up 
 
 - The rollup reports the **core traffic metrics** above. Cross-site breakdowns — by country, device, referrer, or page — live on each individual site's dashboard, not in the rollup.
 - **Users** in the rollup is the sum of each site's users. A person who visits two of your sites counts once per site, so treat the combined users figure as a portfolio total rather than a deduplicated headcount.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does the tinyanalytics rollup count a visitor to two sites as one user?">
+    No. Users in the rollup is the sum of each site's users, so a person who visits two of your sites counts once per site. Treat the combined users figure as a portfolio total rather than a deduplicated headcount.
+  </Accordion>
+  <Accordion title="Why does my rollup show fewer sites than my teammate's?">
+    The rollup spans exactly the sites you can already reach — it isn't a separate permission. If your [team](/guides/teams) is scoped to a subset of the organization's websites, your rollup covers only that subset, while a member who can see every site gets all of them.
+  </Accordion>
+  <Accordion title="Can I see a country, device, or referrer breakdown in the rollup?">
+    No. The tinyanalytics rollup reports core traffic metrics only: Sessions, Users, Pageviews, Pages / Session, Bounce Rate, and Avg. Duration, plus each site's share of the total. Cross-site breakdowns by country, device, referrer, or page live on each individual site's [dashboard](/guides/dashboard-overview).
+  </Accordion>
+  <Accordion title="How do I roll up a different set of websites?">
+    Switch organizations with the org switcher at the top of the sidebar. The rollup always aggregates the sites in your currently active organization, so changing organizations changes the portfolio it reports on. You need an [organization](/guides/organizations) with at least one website.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

@@ -4,7 +4,7 @@ description: "Attach your own stable user ID to visits so tinyanalytics can foll
 icon: "user"
 ---
 
-Call `identify()` with your own user ID to tie a visitor's activity to a known person. This makes people-level reports exact across devices and sessions: a signed-in user on a phone and a laptop counts as **one** user, instead of the two you'd get from cookieless estimation. You choose the ID, and tinyanalytics keys every people report on it.
+Call `identify()` with your own user ID to tie a visitor's activity to a known person. This makes people-level reports exact across devices and sessions. A signed-in user on a phone and a laptop counts as **one** user, instead of the two you'd get from cookieless estimation. You choose the ID, and tinyanalytics keys every people report on it.
 
 ```js
 window.tinyanalytics.identify('user_12345')
@@ -19,7 +19,7 @@ Without identification, tinyanalytics counts visitors with a cookieless hash, wh
 Call `identify()` once you know who the visitor is, typically right after they log in:
 
 ```js
-// Just an ID
+// ID only
 window.tinyanalytics.identify('user_12345')
 
 // An ID plus traits describing the person
@@ -35,7 +35,9 @@ When you call `identify()`, tinyanalytics:
 - Remembers the ID in the browser (`localStorage`), so the visitor stays identified across page loads and future sessions on that device.
 - Merges any `traits` you pass onto the person's profile.
 
-## The identity methods
+## Which identity methods are available?
+
+tinyanalytics exposes four identity methods on `window.tinyanalytics`:
 
 | Method | What it does |
 | --- | --- |
@@ -52,7 +54,7 @@ window.tinyanalytics.setTraits({ plan: 'enterprise' })
 window.tinyanalytics.clearUserId()
 ```
 
-## What gets stored, and choosing an ID
+## What does tinyanalytics store when you identify a user?
 
 The cookieless hash tinyanalytics uses for anonymous visitors is never stored on the device and contains no personal data. **Identification is different: the user ID and traits you pass are stored** so they can describe a person over time. Choose what you send accordingly:
 
@@ -73,6 +75,27 @@ The cookieless hash tinyanalytics uses for anonymous visitors is never stored on
     Open the **Users** report in tinyanalytics. The visitor now appears under your ID, with their traits and their earlier activity attributed to them.
   </Step>
 </Steps>
+
+<Check>
+  Identification is working when the visitor appears in the **Users** report under your own ID, with their traits and their earlier activity attributed to them.
+</Check>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does identify() apply to activity from before the call?">
+    Yes. When you call `identify()`, tinyanalytics backfills the last **30 days** of that visitor's events, so their earlier anonymous visits are credited to the person. One exception: an `identify()` call fired in the same instant as a pageview may not tag that exact pageview, because the backfill applies to events that are already saved.
+  </Accordion>
+  <Accordion title="How do I stop identifying a user when they log out?">
+    Call `window.tinyanalytics.clearUserId()`. It forgets the identified user on that device. tinyanalytics otherwise remembers the ID in the browser's `localStorage`, so the visitor stays identified across page loads and future sessions.
+  </Accordion>
+  <Accordion title="Does tinyanalytics store the user ID on the visitor's device?">
+    Yes. The user ID and any traits you pass to `identify()` are stored so they can describe a person over time, and the ID is kept in the browser's `localStorage`. This differs from the cookieless hash used for anonymous visitors, which is never stored on the device and contains no personal data.
+  </Accordion>
+  <Accordion title="Do I need identify() to count visitors in tinyanalytics?">
+    No. tinyanalytics counts visitors with a cookieless hash without any code from you. That count is a close estimate that can split one person across devices or merge several people on one network. Call `identify()` when you know who someone is to replace the estimate with your exact ID.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

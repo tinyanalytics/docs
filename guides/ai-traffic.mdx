@@ -30,7 +30,7 @@ The report includes a **"Pages AI sends people to"** breakdown, ranking the entr
 
 The report answers this directly with a **trend chart** of AI sessions over time and a **change versus the previous period** on the AI Sessions card. Each assistant row also carries its own change column, so you can see, for example, that Perplexity is rising while another assistant falls. A row with no traffic last period shows as new rather than a misleading "+100%".
 
-## Using AI traffic across the dashboard
+## How do I use AI traffic across the dashboard?
 
 Because the assistant is a first-class dimension, you can use it everywhere:
 
@@ -40,9 +40,23 @@ Because the assistant is a first-class dimension, you can use it everywhere:
 
 See [Filter your data](/guides/filters), [Saved segments](/guides/segments), and [Behavioral cohorts](/guides/cohorts).
 
-<Note>
+<Info>
   **What this report can and can't see.** It counts **click-throughs only** — humans who followed a link from an AI answer. It cannot see AI crawlers reading your site to train or ground their models, nor citations that are shown but never clicked. To see which AI crawlers are reading your pages, use the [Bots & AI crawlers report](/guides/bots). Crawling comes before citation, and citation comes before the click — this report measures the click.
-</Note>
+</Info>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does the AI traffic report show data from before I opened it?">
+    Yes. The AI traffic report works over all of your history the day you first open it, including traffic from before you knew to look for it. Attribution happens when the report is read rather than from a stored tag, so there's nothing to enable in advance.
+  </Accordion>
+  <Accordion title="Does the AI traffic report show AI crawlers reading my site?">
+    No. The AI traffic report counts click-throughs only — humans who followed a link from an AI assistant's answer. To see which AI crawlers read your pages, use the [Bots & AI crawlers report](/guides/bots). The report also can't see citations that are shown in an AI answer but never clicked.
+  </Accordion>
+  <Accordion title="How is a visitor counted if they arrive from ChatGPT and then browse my site?">
+    Once, as ChatGPT. Each session is attributed to the assistant it entered from, so later pages in that visit don't create a second attribution. Paid AI visits keep their assistant label too — a paid ChatGPT visit still counts as ChatGPT.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

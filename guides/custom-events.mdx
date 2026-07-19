@@ -47,9 +47,9 @@ if (window.tinyanalytics) {
 }
 ```
 
-## Example: track 404 pages
+## How do I track 404 pages?
 
-A "page not found" screen rendered by your app still returns a normal page, so the tracker can't detect it on its own. Send a custom event from your not-found route to report it:
+Send a custom event from your not-found route. A "page not found" screen rendered by your app still returns a normal page, so the tracking script can't detect it on its own:
 
 ```js
 window.tinyanalytics.event('not_found', { path: location.pathname })
@@ -67,6 +67,24 @@ You then see which missing URLs your visitors hit by breaking the `not_found` ev
     Open your site's **Events** report in tinyanalytics. Your event appears by name within a few seconds, with its properties available for breakdowns.
   </Step>
 </Steps>
+
+<Check>
+  Your custom event is working when it appears by name in the **Events** report within a few seconds of you triggering it, with its properties available for breakdowns.
+</Check>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why isn't my tinyanalytics custom event showing up?">
+    Two causes account for most cases. First, the event name can't be empty — tinyanalytics rejects an empty name. Second, the call must run after the tracking script has loaded; if you call `event()` very early in the page, guard it with `if (window.tinyanalytics)`.
+  </Accordion>
+  <Accordion title="Should variable data go in the event name or in the properties?">
+    Put it in the properties. Pick a small set of stable event names and reuse them, so `purchase` with `{ plan: 'pro' }` and `{ plan: 'free' }` stay one event you can compare. Encoding the variable part into the name splits it into separate events instead.
+  </Accordion>
+  <Accordion title="Do I need a custom event to track button clicks?">
+    No. tinyanalytics already captures outbound links, downloads, button clicks, copies, and form submissions automatically. Use `window.tinyanalytics.event()` for actions specific to your app that auto-capture can't infer, such as a signup or a plan upgrade.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

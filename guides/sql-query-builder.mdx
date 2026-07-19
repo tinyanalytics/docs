@@ -6,7 +6,7 @@ icon: "database"
 
 The SQL query builder lets you run read-only SQL directly against your site's analytics data — the escape hatch for questions the standard reports don't answer. You write a `SELECT` against two virtual tables that are **already scoped to your site**, run it, and read the results in a sortable table.
 
-## Write a query
+## How do I write a query?
 
 Your data lives in two virtual tables you query by name:
 
@@ -28,7 +28,7 @@ LIMIT 20
 
 See [metric definitions](/guides/data-dictionary) for the events and properties you can query.
 
-## What you can and can't run
+## What can I run, and what's blocked?
 
 The query builder is **read-only by design**, so exploring your data can never change or damage it:
 
@@ -38,9 +38,23 @@ The query builder is **read-only by design**, so exploring your data can never c
 
 If a query has a mistake, tinyanalytics returns the database's error message so you can fix the SQL directly.
 
-## Turn a query into a dashboard card
+## How do I turn a query into a dashboard card?
 
-Any query you've written is the same SQL a [custom dashboard](/guides/custom-dashboards) card runs. Once a query gives you what you want, save it as a card, pick a visualization, and it becomes a live chart that follows your dashboard's date range.
+Save the query as a card and pick a visualization. Any query you've written is the same SQL a [custom dashboard](/guides/custom-dashboards) card runs, so once a query gives you what you want, it becomes a live chart that follows your dashboard's date range.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need to filter by site ID in my query?">
+    No. Both `scoped_events` and `scoped_events_bot` are automatically filtered to the site you're viewing, so you never write a `site_id` filter. A query also can't reach another site's data.
+  </Accordion>
+  <Accordion title="Why did my query only return 1,000 rows?">
+    That's the cap. A query in the tinyanalytics SQL query builder returns at most **1,000 rows** and runs for at most **10 seconds**, so a heavy query is trimmed rather than left to run away. Aggregate in SQL — with `GROUP BY` and a tighter `WHERE` — to fit the result inside the cap.
+  </Accordion>
+  <Accordion title="Can I run INSERT, UPDATE, or DELETE in the SQL query builder?">
+    No. The query builder is read-only by design. Writes, schema changes, multiple statements, and any attempt to read outside your scoped tables are all blocked, so exploring your data can never change or damage it.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

@@ -17,7 +17,9 @@ You configure the tinyanalytics tracking script with `data-*` attributes on the 
   You don't have to write these by hand. In **Settings → Tracking**, the snippet builder lets you toggle options and copies the updated tag for you. Only non-default options are added, so your snippet stays as short as possible.
 </Tip>
 
-## All configuration attributes
+## Which `data-*` attributes can I set?
+
+Set any of the attributes below on the tracking script tag. Each one has a default, so you only add the ones whose behavior you want to change.
 
 <Info>
   **Boolean rule:** if an attribute is absent, its default applies. The literal value `"false"` turns it off. Any other present value turns it on.
@@ -91,7 +93,7 @@ If your URLs contain personal or sensitive data — an order number, a token, an
 - **Skip** drops the event entirely. Use `data-skip-paths`.
 - **Mask** records the pattern instead of the real path, so the sensitive part never leaves the browser. Use `data-mask-paths`.
 
-Patterns use a simple syntax:
+Patterns use this syntax:
 
 - `*` matches one path segment (`[^/]+`).
 - `**` matches any depth.
@@ -124,6 +126,23 @@ localStorage.setItem('disable-tinyanalytics', 'true')
 ```
 
 While that key is present, the script installs a no-op and sends nothing from that browser. This is the recommended way to keep your own visits out of your stats.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How do I turn off a tinyanalytics tracking option?">
+    Set the attribute to the literal value `"false"` on the tracking script tag — for example, `data-track-copy="false"`. If an attribute is absent its default applies, and any other present value turns it on.
+  </Accordion>
+  <Accordion title="Do I have to redeploy my site to change a tracking option?">
+    Yes. tinyanalytics configuration lives in the `data-*` attributes on the script tag in your HTML, so changing an option means updating the tag and re-deploying your site. Use the snippet builder in **Settings → Tracking** to generate the updated tag.
+  </Accordion>
+  <Accordion title="How do I keep my own visits out of tinyanalytics?">
+    Set a `disable-<namespace>` key in that browser's `localStorage` — with the default namespace, run `localStorage.setItem('disable-tinyanalytics', 'true')`. While the key is present, the tracking script installs a no-op and sends nothing from that browser.
+  </Accordion>
+  <Accordion title="What happens if a path pattern is malformed?">
+    A malformed `data-skip-paths` or `data-mask-paths` pattern is ignored rather than breaking tracking. Valid patterns use `*` for one path segment, `**` for any depth, and `re:<expression>` for a raw regular expression.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

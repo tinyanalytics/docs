@@ -44,7 +44,30 @@ More platforms are being added. Until your exact one has a guide, the universal 
 
 ## After you install
 
-However you add the snippet, confirm it's working the same way: open your site, then check **Realtime** in your dashboard for your own visit. See [Verify your setup](/guides/verify-your-setup) for the full check, including what a healthy install looks like in your browser's Network tab.
+However you add the tracking script, confirm it the same way: open your site, then check **Realtime** in your dashboard for your own visit.
+
+<Check>
+  Your install is working when your own visit appears in **Realtime** within a few seconds.
+</Check>
+
+See [Verify your setup](/guides/verify-your-setup) for the full check, including what a healthy install looks like in your browser's Network tab.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="My platform isn't listed — will tinyanalytics still work?">
+    Yes. Use the universal method above: paste the tracking script into your site's `<head>` (or just before `</body>`) anywhere you can add HTML. The platform guides only differ in *where* that tag goes, not in what it does.
+  </Accordion>
+  <Accordion title="Do I need to add the tracking script to every page?">
+    No — add it once in a shared layout, template, or header so it loads sitewide. Adding it per page works but is easy to get wrong when you add new pages later.
+  </Accordion>
+  <Accordion title="Will the tracking script slow down my site?">
+    No. The tag uses `defer`, so the browser runs it only after the HTML has parsed and it never blocks your page from rendering.
+  </Accordion>
+  <Accordion title="Do I need extra setup for a React or Vue single-page app?">
+    No. Route tracking is on by default, so client-side navigation is recorded as a new pageview automatically. See [Configure the tracking script](/guides/script-configuration#track-single-page-apps) if you want to change that.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

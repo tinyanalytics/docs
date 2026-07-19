@@ -6,7 +6,7 @@ icon: "gauge"
 
 The Overview is your site's home screen in tinyanalytics. It shows six top-line metrics, a trend chart, breakdown tables, and a map — all scoped to the date range and filters you pick. Everything on the page updates together, so narrowing to one country or one page re-scopes every number at once.
 
-## The six top-line metrics
+## What do the six top-line metrics mean?
 
 Each metric is shown for your selected date range, with its change versus the previous period of the same length.
 
@@ -23,27 +23,44 @@ Each metric is shown for your selected date range, with its change versus the pr
   A session counts as a bounce when it has **exactly one pageview**, even if the visitor clicked a button or submitted a form on that page.
 </Note>
 
-## The trend chart
+## How do I read the trend chart?
 
 The chart plots one metric over time. Pick the metric, and choose how to bucket it — by **hour**, **day**, **week**, or **month**. The line is continuous with no gaps: time buckets with no activity show as zero rather than being skipped, so the shape of your traffic is accurate.
 
-## Breakdowns
+## What do the breakdown tables show?
 
 Below the chart, tabbed breakdown tables rank the top values for a dimension over your date range — **Pages**, **Referrers**, **Geo**, **Devices**, **UTMs**, and **Events**. Each row shows a count and its share of the total.
 
 **Click any row to filter the whole dashboard by that value.** Clicking "United States" in the Geo breakdown, for example, re-scopes every metric, the chart, and the other breakdowns to US visitors. See [filter your data](/guides/filters).
 
-## The visitor map
+## What does the visitor map show?
 
 The map shows where your visitors are, shaded by volume. Like the breakdowns, it's scoped to your current date range and filters.
 
-## Live visitors
+## How many people are on my site right now?
 
 The Overview shows how many people are on your site right now — the count of distinct sessions active in the last few minutes. For the live view of who's on the site, open [Realtime](/guides/realtime).
 
-## Date range and comparison
+## How do date ranges and comparison work?
 
 Pick a date range from the presets or a custom range. Ranges are calculated in **your browser's time zone**, so "today" means your today. Turn on comparison to see each metric against the previous period of the same length, so you can tell whether a number is up or down.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What counts as a bounce in tinyanalytics?">
+    A session counts as a bounce when it has exactly one pageview. tinyanalytics reports bounce rate as the percentage of sessions with a single pageview, and a visitor who clicks a button or submits a form on that one page still bounces. Only viewing a second page ends the bounce.
+  </Accordion>
+  <Accordion title="How long is a session in tinyanalytics?">
+    A session is one visitor's activity within a 30-minute sliding window of inactivity. The Overview counts each distinct visit as one session, and reports session duration as the average time between a session's first and last activity, in seconds.
+  </Accordion>
+  <Accordion title="Why do all my dashboard numbers change when I click a breakdown row?">
+    Clicking a row in a breakdown table applies it as a filter across the whole Overview. Clicking "United States" in the Geo breakdown re-scopes the six top-line metrics, the trend chart, the map, and every other breakdown to US visitors at once. See [filter your data](/guides/filters) to manage active filters.
+  </Accordion>
+  <Accordion title="What time zone are tinyanalytics date ranges based on?">
+    Date ranges on the Overview are calculated in your browser's time zone, so "today" means your today. Both the presets and custom ranges follow this rule.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

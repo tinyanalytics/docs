@@ -16,7 +16,7 @@ Open the **comparison menu** next to the date picker and choose a mode. The butt
 | **Previous period** | The equal-length window immediately before your selected range. |
 | **Year over year** | The same dates one year earlier. |
 
-## What comparison adds to each report
+## What does comparison add to each report?
 
 Turning on a comparison lights up the whole dashboard from a single toggle:
 
@@ -25,19 +25,33 @@ Turning on a comparison lights up the whole dashboard from a single toggle:
 - **The time-series chart** draws a muted, dashed **baseline line** behind your current line, with a legend naming both date ranges and a tooltip that labels the baseline point with its *own* date — not a vague "previous".
 - **The Performance report** compares your Core Web Vitals, correctly treating *lower as better* (a rising LCP shows red, not green).
 
-## Previous period vs. year over year
+## Should I use previous period or year over year?
 
 **Previous period** compares your range to the equal window just before it — last 7 days versus the 7 days before that. It's best for spotting recent movement.
 
 **Year over year** compares the **same calendar dates** one year earlier, which is best for seasonal businesses where "versus last month" is misleading. tinyanalytics compares the same dates directly, the way you'd expect when you read "year over year".
 
-## Reading the change indicators
+## How do I read the change indicators?
 
 A change indicator shows the direction and size of the move. When there's **no baseline** — a referrer that sent zero traffic last period and some this period — tinyanalytics shows it as **new** rather than an arithmetically meaningless "+100%". Comparison is exact for every row shown, including a big mover that wasn't in last period's top rows, so you never miss the referrer that jumped from nowhere to the top.
 
 <Note>
   Comparison is a property of the **date range**, which is why the control lives next to it. Changing your range keeps the comparison mode; the baseline recalculates for the new window.
 </Note>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why does a row show 'new' instead of +100%?">
+    Because there's no baseline to compare against. When a row had zero traffic in the comparison period — a referrer that sent nothing last week and some this week — tinyanalytics labels it **new** rather than an arithmetically meaningless "+100%".
+  </Accordion>
+  <Accordion title="Does period comparison work on Core Web Vitals?">
+    Yes. The Performance report compares your Core Web Vitals against the baseline and correctly treats lower as better, so a rising LCP shows red rather than green. See [Core Web Vitals](/guides/performance).
+  </Accordion>
+  <Accordion title="Does changing the date range turn off my comparison?">
+    No. Comparison is a property of the date range, which is why the control sits next to it. Changing your range keeps the comparison mode you selected, and the baseline recalculates for the new window.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

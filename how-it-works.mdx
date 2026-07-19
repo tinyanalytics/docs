@@ -19,7 +19,7 @@ The script only sends what it can directly observe in the browser. Everything el
 
 tinyanalytics identifies a visitor with a short, one-way hash instead of a cookie. The server derives it from the visitor's IP address and browser user-agent, hashes them together, and keeps only the first 12 characters:
 
-```
+```text
 user_id = sha256(ip + user_agent) truncated to 12 characters
 ```
 
@@ -61,5 +61,11 @@ It does **not** send cookies, and it does not read personal data from the page. 
   </Card>
   <Card title="Install the tracking script" icon="code" href="/guides/tracking-script">
     Add the script and choose what it tracks.
+  </Card>
+  <Card title="Cookieless identity" icon="fingerprint" href="/resources/cookieless-identity">
+    The hash, its lifetime, and what it can and can't tell you.
+  </Card>
+  <Card title="Bot detection" icon="robot" href="/resources/bot-detection">
+    How tinyanalytics keeps crawlers out of your numbers.
   </Card>
 </CardGroup>

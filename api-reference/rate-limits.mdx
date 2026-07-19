@@ -35,6 +35,23 @@ This is what lets the tracking script POST from any of your visitors' pages whil
   Server-to-server calls aren't subject to CORS — it's a browser mechanism. Reading analytics from your backend with a Bearer key works regardless of origin; CORS only governs requests made from a web page.
 </Note>
 
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What happens when I exceed the ingestion rate limit?">
+    The request returns `429 Too Many Requests`. The limit applies per API key to server-side calls to [`POST /api/track`](/api-reference/track). Space out bursts, and if you're batching a backfill, add a short delay between requests and retry a `429` after a pause.
+  </Accordion>
+  <Accordion title="Are browser tracking and analytics reads rate-limited too?">
+    No. The per-key rate limit applies only to keyed server-side ingestion. Browser tracking and analytics reads are not rate-limited this way.
+  </Accordion>
+  <Accordion title="Does a request without an API key get a 429?">
+    No. A request with no API key, or an invalid one, isn't rejected with `429` — it falls through to the normal browser-equivalent path, which is untrusted and has bot filtering on.
+  </Accordion>
+  <Accordion title="Does CORS apply to calls from my backend?">
+    No. CORS is a browser mechanism, so server-to-server calls aren't subject to it. Reading analytics from your backend with a Bearer key works regardless of origin.
+  </Accordion>
+</AccordionGroup>
+
 ## Related
 
 <CardGroup cols={2}>

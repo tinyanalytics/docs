@@ -4,13 +4,13 @@ description: "Ask visitors a question inside your site — NPS, a rating, or ope
 icon: "comment-dots"
 ---
 
-A survey asks your visitors a question without sending them anywhere — an NPS score, a star rating, a line of open feedback — using a widget tinyanalytics shows inside your site. You build the questions in the dashboard; the widget, targeting, and results all work off your existing [tracking snippet](/guides/tracking-script), so there's **no extra code to add**.
+A survey asks your visitors a question without sending them anywhere — an NPS score, a star rating, a line of open feedback — using a widget tinyanalytics shows inside your site. You build the questions in the dashboard. The widget, targeting, and results all work off your existing [tracking snippet](/guides/tracking-script), so there's **no extra code to add**.
 
-## Turn surveys on for your site
+## How do I turn surveys on?
 
-Surveys are **off by default** for a new site. Enable surveys for the site first — until you do, drafting a survey alone won't put anything in front of visitors, and the widget code never loads. This keeps the tracker lean for sites that don't use surveys.
+Enable surveys for the site first. Surveys are **off by default** for a new site, and until you enable them, drafting a survey alone won't put anything in front of visitors — the widget code never loads. This keeps the tracker lean for sites that don't use surveys.
 
-## Build the questions
+## What question types can a survey ask?
 
 A survey is a sequence of questions. Each question is one of these types:
 
@@ -27,7 +27,7 @@ A survey is a sequence of questions. Each question is one of these types:
   Survey text is rendered as **plain text only** — the widget never interprets HTML, so a survey can't inject markup into your page.
 </Note>
 
-## Route answers with branching
+## How does branching work?
 
 Branching decides which question comes next, so respondents only see what's relevant:
 
@@ -38,7 +38,7 @@ Branching decides which question comes next, so respondents only see what's rele
 | **Based on the answer** | send detractors, passives, and promoters (or each choice) down different paths |
 | **End** | show the thank-you screen and finish |
 
-## Choose who sees it, and when
+## Who sees a survey, and when?
 
 Targeting keeps a survey in front of the right visitors. A survey can be limited by:
 
@@ -50,15 +50,32 @@ Targeting keeps a survey in front of the right visitors. A survey can be limited
 
 URL targeting re-checks on client-side navigation, so a survey scoped to one route still appears in a single-page app after the visitor navigates to it.
 
-## Read the responses
+## What do the survey results show?
 
-The survey's results page shows, over its lifetime:
+The survey's results page reports over its lifetime:
 
 - **Completion rate** and **dismissal rate** — how many people who saw it finished or closed it.
 - **Per-question distributions** — the spread of ratings and choices, plus a feed of open-text answers.
 - **NPS score** — for an NPS question, your score from −100 to 100, calculated as the share of promoters (9–10) minus the share of detractors (0–6).
 
 You can set a **response limit** so a survey stops itself automatically once it has collected enough answers.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why isn't my tinyanalytics survey showing on my site?">
+    Surveys are **off by default** for a new site, so check that surveys are enabled for the site. Until you enable them, drafting a survey alone won't put anything in front of visitors and the widget code never loads. Also check the survey's targeting rules — URL, CSS selector, device type, wait period, and feature-flag conditions all limit who sees it.
+  </Accordion>
+  <Accordion title="Do I need to add code to my site to run a survey?">
+    No. tinyanalytics surveys need **no extra code beyond your tracking snippet**. You build the questions in the dashboard, and the widget, targeting, and results all work off the [tracking snippet](/guides/tracking-script) you already installed.
+  </Accordion>
+  <Accordion title="How does tinyanalytics calculate the NPS score?">
+    tinyanalytics takes the share of promoters (visitors answering 9–10) and subtracts the share of detractors (0–6), producing a score from −100 to 100. NPS questions ask a 0–10 "how likely to recommend" question.
+  </Accordion>
+  <Accordion title="Do surveys work in single-page apps?">
+    Yes. URL targeting re-checks on client-side navigation, so a survey scoped to one route still appears in a single-page app after the visitor navigates to that route.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

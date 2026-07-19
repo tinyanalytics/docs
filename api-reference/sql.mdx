@@ -10,7 +10,9 @@ icon: "database"
 POST https://dash.tinyanalytics.io/api/sites/{id}/query
 ```
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl -X POST https://dash.tinyanalytics.io/api/sites/1/query \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
@@ -18,6 +20,38 @@ curl -X POST https://dash.tinyanalytics.io/api/sites/1/query \
     "query": "SELECT pathname, count() AS views FROM scoped_events WHERE type = '\''pageview'\'' GROUP BY pathname ORDER BY views DESC LIMIT 20"
   }'
 ```
+
+```js JavaScript
+await fetch("https://dash.tinyanalytics.io/api/sites/1/query", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    query:
+      "SELECT pathname, count() AS views FROM scoped_events WHERE type = 'pageview' GROUP BY pathname ORDER BY views DESC LIMIT 20",
+  }),
+})
+```
+
+```python Python
+import requests
+
+requests.post(
+    "https://dash.tinyanalytics.io/api/sites/1/query",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+    json={
+        "query": "SELECT pathname, count() AS views FROM scoped_events WHERE type = 'pageview' GROUP BY pathname ORDER BY views DESC LIMIT 20"
+    },
+)
+```
+
+</CodeGroup>
+
+<ParamField body="query" type="string" required>
+  A single read-only `SELECT` (or `WITH … SELECT`) against the two site-scoped virtual tables.
+</ParamField>
 
 ## The two tables
 
@@ -38,6 +72,33 @@ Both are automatically filtered to the site in the URL — you never write a `si
 }
 ```
 
+<ResponseField name="data" type="array">
+  The result rows, each an object keyed by the column names you selected.
+</ResponseField>
+
+<ResponseField name="columns" type="array">
+  One entry per selected column, in order.
+
+  <Expandable title="properties">
+    <ResponseField name="name" type="string">
+      The column name.
+    </ResponseField>
+    <ResponseField name="type" type="string">
+      The column's database type, e.g. `String` or `UInt64`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Metadata about the result set.
+
+  <Expandable title="properties">
+    <ResponseField name="rowCount" type="number">
+      How many rows `data` contains.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
 `columns` preserves order and gives each column's type, so you can render results without inferring shapes.
 
 ## Limits
@@ -48,6 +109,20 @@ The query runs read-only, so it can never modify your data:
 - A query runs for at most **10 seconds** and returns at most **1,000 rows**.
 
 A SQL error comes back as a `400` with the database's message so you can fix the query.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can a query reach another site's data?">
+    No. `scoped_events` and `scoped_events_bot` are automatically filtered to the site in the URL of `POST /api/sites/{id}/query`. You never write a `site_id` filter, and a query can't reach another site's data.
+  </Accordion>
+  <Accordion title="How many rows can a scoped SQL query return?">
+    At most **1,000 rows**, and the query runs for at most **10 seconds**. Both limits apply to every call to `POST /api/sites/{id}/query`.
+  </Accordion>
+  <Accordion title="What happens if my SQL is invalid?">
+    The endpoint returns a `400` with the database's own error message, so you can fix the query. Writes, schema changes, multiple statements, and reads outside the two scoped tables are rejected the same way — the query runs read-only and can never modify your data.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

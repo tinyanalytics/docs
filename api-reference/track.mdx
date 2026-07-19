@@ -16,7 +16,9 @@ Every event carries a `type` and the page context tinyanalytics can't derive on 
 
 Send a **pageview**:
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl -X POST https://dash.tinyanalytics.io/api/track \
   -H "Content-Type: application/json" \
   -d '{
@@ -29,9 +31,44 @@ curl -X POST https://dash.tinyanalytics.io/api/track \
   }'
 ```
 
+```js JavaScript
+await fetch("https://dash.tinyanalytics.io/api/track", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    type: "pageview",
+    siteId: 1,
+    pathname: "/pricing",
+    hostname: "example.com",
+    referrer: "https://google.com",
+    pageTitle: "Pricing",
+  }),
+})
+```
+
+```python Python
+import requests
+
+requests.post(
+    "https://dash.tinyanalytics.io/api/track",
+    json={
+        "type": "pageview",
+        "siteId": 1,
+        "pathname": "/pricing",
+        "hostname": "example.com",
+        "referrer": "https://google.com",
+        "pageTitle": "Pricing",
+    },
+)
+```
+
+</CodeGroup>
+
 Send a **custom event** with properties:
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl -X POST https://dash.tinyanalytics.io/api/track \
   -H "Content-Type: application/json" \
   -d '{
@@ -45,31 +82,106 @@ curl -X POST https://dash.tinyanalytics.io/api/track \
   }'
 ```
 
+```js JavaScript
+await fetch("https://dash.tinyanalytics.io/api/track", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    type: "custom_event",
+    siteId: 1,
+    pathname: "/checkout",
+    eventName: "purchase",
+    props: { plan: "pro", seats: 5 },
+    revenue: 49.0,
+    currency: "USD",
+  }),
+})
+```
+
+```python Python
+import requests
+
+requests.post(
+    "https://dash.tinyanalytics.io/api/track",
+    json={
+        "type": "custom_event",
+        "siteId": 1,
+        "pathname": "/checkout",
+        "eventName": "purchase",
+        "props": {"plan": "pro", "seats": 5},
+        "revenue": 49.0,
+        "currency": "USD",
+    },
+)
+```
+
+</CodeGroup>
+
 ## Fields
 
 Every event includes these base fields:
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `type` | string | yes | The event type (see below). |
-| `siteId` | number | yes | Your numeric site ID. |
-| `pathname` | string | yes | The page path, up to 2048 characters. |
-| `hostname` | string | no | Up to 253 characters. |
-| `querystring` | string | no | Up to 2048 characters. |
-| `referrer` | string | no | Up to 2048 characters. |
-| `pageTitle` | string | no | Up to 512 characters. |
-| `language` | string | no | Up to 35 characters. |
-| `screenWidth` / `screenHeight` | number | no | 0–65535. |
-| `userId` | string | no | A stable ID set via [identify](/api-reference/identify). |
+<ParamField body="type" type="string" required>
+  The event type. Valid values are listed below.
+</ParamField>
+
+<ParamField body="siteId" type="number" required>
+  Your numeric site ID.
+</ParamField>
+
+<ParamField body="pathname" type="string" required>
+  The page path, up to 2048 characters.
+</ParamField>
+
+<ParamField body="hostname" type="string">
+  Up to 253 characters.
+</ParamField>
+
+<ParamField body="querystring" type="string">
+  Up to 2048 characters.
+</ParamField>
+
+<ParamField body="referrer" type="string">
+  Up to 2048 characters.
+</ParamField>
+
+<ParamField body="pageTitle" type="string">
+  Up to 512 characters.
+</ParamField>
+
+<ParamField body="language" type="string">
+  Up to 35 characters.
+</ParamField>
+
+<ParamField body="screenWidth" type="number">
+  Viewport width in pixels, 0–65535.
+</ParamField>
+
+<ParamField body="screenHeight" type="number">
+  Viewport height in pixels, 0–65535.
+</ParamField>
+
+<ParamField body="userId" type="string">
+  A stable ID set via [identify](/api-reference/identify).
+</ParamField>
 
 A **`custom_event`** (and an `error`) adds:
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `eventName` | string | yes | Up to 256 characters — the grouping key in your Events reports. |
-| `props` | object | no | Free-form JSON, up to 8 KB serialized. |
-| `revenue` | number \| string | no | A revenue amount in major currency units (e.g. `49.0` = $49.00). See [Revenue analytics](/guides/revenue). |
-| `currency` | string | no | A 3-letter currency code, e.g. `USD`. |
+<ParamField body="eventName" type="string" required>
+  Up to 256 characters — the grouping key in your Events reports.
+</ParamField>
+
+<ParamField body="props" type="object">
+  Free-form JSON, up to 8 KB serialized.
+</ParamField>
+
+<ParamField body="revenue" type="number | string">
+  A revenue amount in major currency units (e.g. `49.0` = $49.00). See [Revenue analytics](/guides/revenue).
+</ParamField>
+
+<ParamField body="currency" type="string">
+  A 3-letter currency code, e.g. `USD`.
+</ParamField>
 
 <Note>
   Valid `type` values are `pageview`, `custom_event`, `error`, `performance`, `engagement`, and the auto-captured interactions (`outbound`, `file_download`, `button_click`, `copy`, `form_submit`, `input_change`). The browser tracker emits most of these for you — from a server you'll typically send `pageview` and `custom_event`. Unknown fields are rejected with a `400`.

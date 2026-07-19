@@ -1,17 +1,17 @@
 ---
 title: "Users"
-description: "See the people behind your traffic in tinyanalytics: a list of your site's users and a profile for each one with their full history and traits."
+description: "See the people behind your traffic in tinyanalytics: a list of your site's users and a profile for each one with their full session history, events, and traits."
 icon: "user"
 ---
 
 The Users report shows the people behind your traffic. Each user groups all of one person's sessions and events, so you can move from "how many visits" to "who is visiting." When you [identify users](/guides/identify-users), they appear under your own user IDs, with any traits you've attached.
 
-## Identified users vs cookieless visitors
+## What's the difference between identified users and cookieless visitors?
 
 - **Identified users** — people your app has named with [`identify()`](/guides/identify-users). They appear under your ID, their activity is unified across devices, and their traits (like plan or signup date) are shown.
 - **Cookieless visitors** — people who haven't been identified. They're grouped by the cookieless hash tinyanalytics derives on the server, which is a close estimate rather than an exact person. See [how tinyanalytics works](/how-it-works#how-does-tinyanalytics-count-visitors-without-cookies).
 
-## Open a user's profile
+## How do I see everything one person did?
 
 Click a user to open their profile — their full history of sessions and events, and the traits attached to them. This is where you answer "what has this specific person done?" across all their visits.
 
@@ -20,6 +20,20 @@ Click a user to open their profile — their full history of sessions and events
 - **Follow a signed-in customer.** Identify users, then read one customer's full journey across sessions and devices.
 - **Segment by trait.** Attach traits with `identify()` or `setTraits()`, then filter reports by them.
 - **Investigate an account.** Open a profile to see everything one person did before and after a key action.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How accurate is the tinyanalytics user count without cookies?">
+    Cookieless visitors are grouped by a hash tinyanalytics derives on the server, which is a close estimate of a person rather than an exact match. To count people exactly, [identify users](/guides/identify-users) with your own IDs — identified users are unified across devices. See [how tinyanalytics works](/how-it-works#how-does-tinyanalytics-count-visitors-without-cookies).
+  </Accordion>
+  <Accordion title="How do I see users under my own user IDs?">
+    Call [`identify()`](/guides/identify-users) from your app. People your app has named appear in the tinyanalytics Users report under your ID instead of a cookieless hash, their activity is unified across devices, and any traits you attached are shown on their profile.
+  </Accordion>
+  <Accordion title="What are user traits and where do I see them?">
+    Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`. They appear on the user's profile in the tinyanalytics Users report, and you can filter reports by them to segment your audience.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

@@ -26,7 +26,7 @@ Open your site's settings and find the **Dashboard** embed tab. It generates a r
   The embed shows the same read-only dashboard as a [public dashboard](/guides/public-dashboards) — viewers can browse reports and change the date range, but can't edit anything or reach your settings or account.
 </Note>
 
-## Match your page
+## How do I make the embed match my page?
 
 The settings tab lets you tune the embed to fit where it lives:
 
@@ -34,6 +34,20 @@ The settings tab lets you tune the embed to fit where it lives:
 - **Hide the sidebar** — drop the sub-navigation for a cleaner, single-view embed.
 
 Copy the snippet once you're happy with the preview, and paste it wherever you want the dashboard to appear.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I embed a dashboard from a private site?">
+    Yes. Generate a **private link key** for the site and the generated `<iframe>` snippet embeds the keyed link, so the site stays private. Regenerate or revoke the key any time to control access. A **public** site's snippet embeds the open share link and needs no key.
+  </Accordion>
+  <Accordion title="Does the embedded dashboard theme change my own dashboard?">
+    No. You can set the embed to light, dark, or follow the viewer's system setting, and an embedded theme never changes your own tinyanalytics dashboard's theme in the same browser.
+  </Accordion>
+  <Accordion title="Can people who see the embed edit my analytics?">
+    No. The embed shows the same read-only dashboard as a [public dashboard](/guides/public-dashboards). Viewers can browse reports and change the date range, but can't edit anything or reach your settings or account.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

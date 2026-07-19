@@ -1,6 +1,6 @@
 ---
 title: "Teams & site access"
-description: "Use teams in tinyanalytics to grant members access to a subset of your sites. Group members into teams, grant each team specific sites, and restrict a member to only their teams' sites."
+description: "Use teams in tinyanalytics to grant members access to a subset of your sites. Grant each team specific sites, then restrict a member to only their teams' sites."
 icon: "users"
 ---
 
@@ -33,9 +33,26 @@ Only **members** can be restricted. Owners and admins always have full access to
   Restriction takes effect immediately across the whole product: a restricted member's sites list, per-site reports, and site settings all reflect only their teams' sites. Add them to a team with more sites — or turn off the restriction — and their access widens right away.
 </Note>
 
-## Managing teams
+## Who can create and edit teams?
 
 Owners and admins create, edit, and delete teams, choose each team's members and sites, and set the restricted flag. Members can view the Teams page but can't change it. Editing a team replaces its member and site lists with whatever you select, so it always reflects exactly what's checked.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I restrict an owner or admin to specific sites?">
+    No. In tinyanalytics, owners and admins always have full access to every site and can't be limited by teams. The **Restrict site access** toggle only appears for people with the **member** role.
+  </Accordion>
+  <Accordion title="Do I need teams if everyone should see every site?">
+    No. By default every member can see all of your organization's sites, so if that's what you want, you don't need teams at all. Reach for teams only when different people should see different sites.
+  </Accordion>
+  <Accordion title="What happens if a member belongs to two teams?">
+    Their access is the **combined set** of all their teams' sites. A member can belong to more than one team, and a restricted member sees every site granted by any team they're in.
+  </Accordion>
+  <Accordion title="How quickly does restricting a member take effect?">
+    Immediately, across the whole product. A restricted member's sites list, per-site reports, and site settings all reflect only their teams' sites, and every other site is hidden and returns no data. Widen their access — or turn off the restriction — and it applies right away.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

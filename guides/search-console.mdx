@@ -41,13 +41,27 @@ Click a column header to sort. CTR is shown as a percentage, and average positio
 
 Search Console data is **daily and lags about two to three days** behind, so the report uses its own trailing window — **7, 28, or 90 days** — rather than the minute-level range the rest of the dashboard shares. A "last 30 minutes" view would be meaningless for search data that hasn't arrived yet.
 
-## The Search Console card on your dashboard
+## What is the Search Console card on my dashboard?
 
 Once a site is connected, your main dashboard shows a **Search Console** card with your top five queries over the last 28 days — a quick glance at what's driving search traffic without leaving the overview. The card appears only when Search Console is connected, so an unconnected dashboard stays uncluttered.
 
-<Note>
+<Info>
   Search Console queries can be more sensitive than aggregate pageviews, so the report and its dashboard card are visible only to signed-in members of your site — never on a public or embedded dashboard.
-</Note>
+</Info>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why is my Search Console data two or three days behind?">
+    Google Search Console data is daily and lags about two to three days behind. That's why the tinyanalytics Search Console report uses its own trailing window — 7, 28, or 90 days — instead of the minute-level date range the rest of the dashboard shares.
+  </Accordion>
+  <Accordion title="Can I disconnect Google Search Console from tinyanalytics?">
+    Yes, at any time from the Search Console report page — connect, view, and disconnect all live on that one page. tinyanalytics only ever reads your Search Console data; it never writes to it.
+  </Accordion>
+  <Accordion title="Does Search Console data appear on a public or embedded dashboard?">
+    No. Search Console queries can be more sensitive than aggregate pageviews, so the report and its dashboard card are visible only to signed-in members of your site. A public or embedded tinyanalytics dashboard never shows them.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

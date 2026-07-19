@@ -4,11 +4,11 @@ description: "tinyanalytics automatically records common interactions — outbou
 icon: "hand-pointer"
 ---
 
-tinyanalytics records the interactions that matter on your site **automatically**, with no code to write. Outbound link clicks, file downloads, button clicks, text copies, form submissions, and engagement are all captured out of the box and appear in your [Events explorer](/guides/events) — so you can measure how visitors interact with a page before you instrument a single [custom event](/guides/custom-events).
+tinyanalytics records the interactions that matter on your site **automatically**, with no code to write. Outbound link clicks, file downloads, button clicks, text copies, form submissions, and engagement are all captured out of the box and appear in your [Events explorer](/guides/events). You can measure how visitors interact with a page before you instrument a single [custom event](/guides/custom-events).
 
 Autocapture is **on by default**. Each type is an independent toggle you can turn off in your [tracking script](/guides/script-configuration#turn-auto-capture-on-or-off).
 
-## What gets captured automatically
+## What does tinyanalytics capture automatically?
 
 | Interaction | Captured when a visitor… | What's stored | Toggle attribute |
 | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ Autocapture is **on by default**. Each type is an independent toggle you can tur
 
 Each interaction is its own event type, so you can filter to it in the Events explorer's event-type view and build [goals](/guides/goals) or [funnels](/guides/funnels) from it.
 
-## Privacy: what forms never capture
+## What do form captures never record?
 
 Form capture records the **shape** of a submission, never its contents:
 
@@ -67,6 +67,23 @@ Every capture type is on by default and can be turned off independently by setti
 ```
 
 See [configure the tracking script](/guides/script-configuration#turn-auto-capture-on-or-off) for the full list of attributes.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need to write code to track button clicks in tinyanalytics?">
+    No. tinyanalytics autocapture is on by default and records button clicks, outbound link clicks, file downloads, text copies, form submissions, and engagement with no code to write. Write a [custom event](/guides/custom-events) only for actions autocapture can't infer.
+  </Accordion>
+  <Accordion title="Does tinyanalytics record what visitors type into forms?">
+    No. A tinyanalytics form submission stores the field count, form name, and action — never what a visitor typed. An individual field change stores only the field's name and type, and password, hidden, disabled, and read-only fields are skipped entirely.
+  </Accordion>
+  <Accordion title="How do I add my own properties to an auto-captured event?">
+    Add `data-ta-prop-<name>` attributes to the element. For example, `<button data-ta-prop-plan="pro">` captures the button click with `plan: "pro"` in its properties, so you can break that event down by plan in the Events explorer.
+  </Accordion>
+  <Accordion title="How do I stop autocapture on a single element?">
+    Add `data-ta-event` to that element. tinyanalytics then skips the automatic capture for it, so you can send your own [custom event](/guides/custom-events) instead. To turn a capture type off site-wide, set its toggle attribute to `"false"` on the tracking script.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

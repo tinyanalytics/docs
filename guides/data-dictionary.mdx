@@ -1,6 +1,6 @@
 ---
 title: "Data dictionary"
-description: "Browse every event, property, and user trait your tinyanalytics site has collected — with inferred types, example values, and volume — and mark the canonical ones as verified for your team."
+description: "Browse every event, property, and user trait your site has collected in tinyanalytics — with inferred types, example values, and volume — and mark the canonical ones verified."
 icon: "book"
 ---
 
@@ -19,7 +19,7 @@ tinyanalytics never rejects a new name — you can send any custom event or prop
 
 There's nothing to register — the inventory is read directly from your data every time you open the page.
 
-## What each entry tells you
+## What does each dictionary entry show?
 
 For every name, the dictionary infers and shows:
 
@@ -39,6 +39,23 @@ Verified is a **label only**. Marking a name verified does not change what's col
 <Note>
   Adding descriptions and marking names verified requires an owner or admin role. A name you've described or verified keeps showing even after it stops appearing in new data, with a **"not seen"** badge — so a documented-but-silent property surfaces as exactly the staleness the dictionary exists to catch.
 </Note>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does marking a name verified change my analytics data?">
+    No. In the tinyanalytics data dictionary, **verified is a label only**. It doesn't change what's collected, hide or exclude anything from your reports, reorder the list, or alter any data. It records that a human on your team confirmed the name is the official, canonical one — plus who verified it and when.
+  </Accordion>
+  <Accordion title="Do I need to register my events and properties first?">
+    No. There's nothing to register. tinyanalytics never rejects a new name, and the dictionary reads the inventory directly from your data every time you open the page. It discovers custom event names, event properties, user traits, and group traits automatically.
+  </Accordion>
+  <Accordion title="Why does an entry show a 'not seen' badge?">
+    A name you've described or verified keeps showing in the dictionary even after it stops appearing in new data, marked with a **"not seen"** badge. That's the point: a documented-but-silent property surfaces as staleness you can act on.
+  </Accordion>
+  <Accordion title="Who can add descriptions and verify names?">
+    Adding descriptions and marking names verified requires an **owner or admin** role. Anyone with access can browse the inventory, its inferred types, example values, volume, and first- and last-seen dates.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

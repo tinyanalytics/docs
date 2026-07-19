@@ -37,13 +37,30 @@ GA4 doesn't record everything tinyanalytics tracks natively, so some fields are 
 
 **Channels are re-derived by tinyanalytics**, not taken from GA4's channel grouping, so your imported organic, referral, and campaign traffic is classified by the same rules as your live traffic — imported traffic is indistinguishable from natively-tracked traffic.
 
-## After the import
+## Where does imported GA4 data appear?
 
 Imported GA4 data is stored as ordinary events, so it appears in **every report** — overview, pages, sessions, funnels, retention, cohorts, and [period comparison](/guides/compare). To undo an import, delete it: this removes all of that import's data cleanly. Re-running an import adds the data again, so delete the previous one before re-importing the same range.
 
 <Note>
   Only one import runs at a time per organization. Google Analytics 4 import requires the Google integration to be enabled for your account — the same connection used by [Google Search Console](/guides/search-console).
 </Note>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How many events can one GA4 import include?">
+    Each import is limited to **5,000,000 events**. tinyanalytics shows an estimated event count for your chosen date range before you start, so pick a shorter range if the estimate is higher than the limit.
+  </Accordion>
+  <Accordion title="What happens if I close the tab during a GA4 import?">
+    The import stops partway. The GA4 import is driven from your browser, so leave the tab open until it completes. If it does stop early, delete the partial import and start again.
+  </Accordion>
+  <Accordion title="Why are my imported GA4 timestamps spread through the day?">
+    GA4 gives daily aggregates rather than individual visits, so tinyanalytics spreads the events within each day. For the same reason, bounce and session duration are estimated — GA4 has no bounce metric — and custom events are attributed to the `/` path.
+  </Accordion>
+  <Accordion title="How do I undo a GA4 import?">
+    Delete the import. That removes all of that import's data cleanly. Re-running an import adds the data again, so delete the previous one before re-importing the same date range.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

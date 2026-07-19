@@ -6,12 +6,12 @@ icon: "filter"
 
 Filters narrow every report in tinyanalytics to a subset of your traffic — one country, one page, one campaign, or any combination. A filter applies across the whole dashboard at once and stays active as you move between reports, so you can ask a focused question and get a consistent answer everywhere.
 
-## Two ways to filter
+## How do I apply a filter?
 
 - **Click a row.** In any breakdown, table, or map, click a value — a page, a referrer, a country — to filter the dashboard by it. Click again to remove it. This is the fastest way to drill in.
 - **Add a filter manually.** Use the filter control to build a filter from a dimension, an operator, and one or more values.
 
-## What a filter is made of
+## What is a filter made of?
 
 A filter has three parts: a **dimension** (what to filter on), an **operator** (how to compare), and one or more **values**.
 
@@ -27,14 +27,28 @@ The operators are:
 | **matches regex** / **does not match regex** | matches / doesn't match your pattern |
 | **is set** / **is not set** | has any value / is empty |
 
-## Combining filters
+## How do I combine filters?
 
 - **Several values on one filter** are combined with **OR** — `country is US or GB` matches visitors from either.
 - **Several filters** are combined with **AND** — `country is US` plus `page is /pricing` matches US visitors who saw the pricing page.
 
 ## Filters follow you across reports
 
-An active filter stays applied as you switch between Overview, Pages, Sessions, and the rest. Set up a view once — say, mobile visitors from a campaign — and every report reflects it until you clear it. Filtering the Sessions list keeps whole sessions rather than trimming them to matching events, so "sessions that reached this page" answers correctly. See [Sessions](/guides/sessions#filtering-keeps-whole-sessions).
+An active filter stays applied as you switch between Overview, Pages, Sessions, and the rest. Set up a view once — say, mobile visitors from a campaign — and every report reflects it until you clear it. Filtering the Sessions list keeps whole sessions rather than trimming them to matching events, so "sessions that reached this page" answers correctly. See [Sessions](/guides/sessions#why-does-filtering-return-whole-sessions).
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How do I remove a filter in tinyanalytics?">
+    Click the same row again. If you filtered by clicking a value in a breakdown, table, or map — a page, a referrer, a country — clicking it a second time removes that filter. Filters you built with the filter control are removed from the control itself.
+  </Accordion>
+  <Accordion title="Can I filter tinyanalytics with a regular expression?">
+    Yes. Every filter uses a dimension, an operator, and one or more values, and the operators include **matches regex** and **does not match regex**. The other operators are is / is not, contains / does not contain, starts with / ends with, and is set / is not set.
+  </Accordion>
+  <Accordion title="Do filters stay applied when I switch reports?">
+    Yes. An active filter stays applied as you switch between Overview, Pages, Sessions, and the rest of the dashboard, until you clear it. Set up a view once — mobile visitors from a campaign, for example — and every report reflects it.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

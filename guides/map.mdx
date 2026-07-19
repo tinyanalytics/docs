@@ -1,16 +1,16 @@
 ---
 title: "Map & globe"
-description: "See where your visitors are in tinyanalytics — a country heat map on your dashboard and a full globe with timeline replay, coordinate bubbles, and country and region views."
+description: "See where your visitors are in tinyanalytics: a country heat map on your dashboard and a globe page with timeline replay, coordinate bubbles, and region views."
 icon: "earth-americas"
 ---
 
 tinyanalytics shows where your visitors are in two places: a **country heat map** on your main dashboard, and a dedicated **globe** page with four ways to explore location — a timeline that replays sessions over time, coordinate bubbles, and country and region choropleths. Both are interactive: click a country or region to filter your whole dashboard to it.
 
-## The dashboard map
+## What does the dashboard map show?
 
 Your main dashboard includes a world map that colors each country by how many sessions came from it — darker means more traffic. It respects your active date range and filters, so it always reflects the same slice of data as the rest of the dashboard. **Click a country** to filter every report to that country; click again to clear it. This is the same drill-down as clicking a country in a breakdown table.
 
-## The globe page
+## What are the four globe views?
 
 The globe page is a fuller view of the same location data, with four modes you switch between:
 
@@ -38,6 +38,20 @@ Location comes from a **privacy-preserving lookup of the visitor's IP address** 
 <Note>
   The timeline view loads sessions in pages and caps very busy ranges; when a range is truncated, the scrubber shows a notice. For an exhaustive list, use the [Sessions](/guides/sessions) report with a location filter.
 </Note>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does tinyanalytics store my visitors' IP addresses?">
+    No. Location comes from a privacy-preserving lookup of the visitor's IP address to a country, region, and approximate city, and the IP address itself is never stored. The same geo enrichment powers the map, the globe, and the Countries, Regions, and Cities breakdowns. See [how tinyanalytics works](/how-it-works).
+  </Accordion>
+  <Accordion title="How do I filter my dashboard to one country or region?">
+    Click the country on your dashboard map, or click a country or region in the globe page's Countries or Subdivisions view. Every report re-scopes to that location; click again to clear it. This is the same drill-down as clicking a country in a breakdown table.
+  </Accordion>
+  <Accordion title="What's the difference between the dashboard map and the globe page?">
+    The dashboard map is a country heat map shaded by sessions, sitting alongside your other metrics. The globe page is a fuller view of the same location data with four modes: Timeline replay, Coordinates bubbles, Countries, and Subdivisions. Both respect your active date range and filters.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

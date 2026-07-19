@@ -22,6 +22,23 @@ tinyanalytics counts visitors without cookies and without storing personal data 
 
 Because there is no cookie, the visitor count is a close estimate rather than an exact figure — a trade every cookieless tool makes. tinyanalytics is honest about this and gives you [`identify()`](/guides/identify-users) to attach your own stable user IDs when you need people-level accuracy. See [how tinyanalytics works](/how-it-works) for the full mechanism.
 
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need a cookie banner to use tinyanalytics?">
+    No. tinyanalytics sets no cookies and stores nothing on your visitor's device, so there is no storage to request consent for. Each visit is matched to a short, one-way hash the server derives from the request instead.
+  </Accordion>
+  <Accordion title="How accurate is cookieless visitor counting?">
+    It is a close estimate, not an exact figure. Several people sharing one network and browser can collapse into a single visitor, and one person switching from Wi-Fi to mobile data can be counted twice. Every cookieless tool shares this trade. Call [`identify()`](/guides/identify-users) to attach your own user IDs when you need exact, cross-device counts for signed-in users.
+  </Accordion>
+  <Accordion title="Can I move my data over from Google Analytics?">
+    Yes. tinyanalytics imports historical data from Google Analytics 4, Plausible, Umami, and Simple Analytics, so your reports keep their history. See [migrate to tinyanalytics](/migrate).
+  </Accordion>
+  <Accordion title="Do I need a separate tool for product analytics?">
+    No. The same tracking script covers web analytics, product analytics, and monitoring — custom events, feature flags, A/B experiments, surveys, cohorts, revenue, and uptime checks all run from the one install.
+  </Accordion>
+</AccordionGroup>
+
 ## Start here
 
 <CardGroup cols={2}>

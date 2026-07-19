@@ -10,12 +10,16 @@ Your tinyanalytics install is working when a visit to your own site shows up in 
 
 <Steps>
   <Step title="Visit a page on your site">
-    Open a published page that includes the tracking snippet. Use a normal browser tab, not a preview or a private window with tracking blocked.
+    Open a published page that includes the tracking script. Use a normal browser tab, not a preview or a private window with tracking blocked.
   </Step>
   <Step title="Watch Realtime">
     In tinyanalytics, open your site's **Realtime** report. Your visit appears within a few seconds. On a brand-new site, the setup panel is replaced by your dashboard once the first visit lands.
   </Step>
 </Steps>
+
+<Check>
+  tinyanalytics is installed correctly when your own visit appears in the **Realtime** report within a few seconds. If nothing appears after a minute, work through the troubleshooting below.
+</Check>
 
 ## Check the network requests
 
@@ -32,7 +36,7 @@ If `script.js` is missing, the snippet isn't on the page. If `script.js` loads b
   <Accordion title="I don't see any data at all" icon="circle-xmark">
     Work through these in order:
 
-    - **The snippet isn't on the live page.** View the page source of your published site and confirm the `<script … data-site-id="…">` tag is in the `<head>`. Drafts and previews don't count.
+    - **The tracking script isn't on the live page.** View the page source of your published site and confirm the `<script … data-site-id="…">` tag is in the `<head>`. Drafts and previews don't count.
     - **The site ID is wrong.** The `data-site-id` must match the site you're viewing in the dashboard. An invalid ID makes the script do nothing.
     - **An ad blocker is blocking the request.** See the ad-blocker section below.
     - **This browser is opted out.** See "My own visits are missing" below.
@@ -59,7 +63,7 @@ If `script.js` is missing, the snippet isn't on the page. If `script.js` loads b
     - The call must run after the script loads. If you call `event()` very early in the page, guard it with `if (window.tinyanalytics)`. See [track custom events](/guides/custom-events#when-is-windowtinyanalytics-available).
   </Accordion>
   <Accordion title="A specific path isn't being tracked" icon="filter">
-    Check your snippet for `data-skip-paths` — a path matching a skip pattern is never tracked. If a path shows up under a pattern like `/orders/*` instead of its real value, that's `data-mask-paths` working as intended to hide sensitive URLs. See [hide sensitive paths](/guides/script-configuration#hide-sensitive-paths-with-skip-and-mask).
+    Check your tracking script for `data-skip-paths` — a path matching a skip pattern is never tracked. If a path shows up under a pattern like `/orders/*` instead of its real value, that's `data-mask-paths` working as intended to hide sensitive URLs. See [hide sensitive paths](/guides/script-configuration#hide-sensitive-paths-with-skip-and-mask).
   </Accordion>
 </AccordionGroup>
 

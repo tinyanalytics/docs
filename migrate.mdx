@@ -30,11 +30,29 @@ Importing reconstructs your history from what your old tool recorded, and differ
 
 ## Good to know before you import
 
-<Note>
-  - **One import runs at a time per organization** — start the next when the first finishes.
-  - **Re-running an import adds the data again** (there's no automatic de-duplication). To redo an import, delete the previous one first — deleting removes all of that import's data cleanly.
-  - **Rows dated in the future are skipped**, and malformed rows are dropped and counted, so you can see how many events imported, skipped, or were invalid.
-</Note>
+<Warning>
+  **Re-running an import adds the data again.** There is no automatic de-duplication, so importing the same export twice double-counts it. To redo an import, delete the previous one first — deleting removes all of that import's data cleanly.
+</Warning>
+
+- **One import runs at a time per organization** — start the next when the first finishes.
+- **Rows dated in the future are skipped**, and malformed rows are dropped and counted, so you can see how many events imported, skipped, or were invalid.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Will I lose my Google Analytics history if I switch?">
+    No. tinyanalytics imports your history from Google Analytics 4, Plausible, Umami, and Simple Analytics, and stores it as regular events. Your imported history appears alongside new traffic in the same dashboard rather than starting your reports from zero.
+  </Accordion>
+  <Accordion title="Does imported data show up in funnels and retention?">
+    Yes. tinyanalytics converts imported data into regular events, so it flows through every report — pages, sessions, funnels, retention, cohorts, and period comparison all include it, exactly like natively-tracked traffic.
+  </Accordion>
+  <Accordion title="Can I run tinyanalytics alongside my old analytics tool?">
+    Yes. tinyanalytics is one script tag and does not conflict with Google Analytics, Plausible, or any other tracker. Running both for a period is a common way to compare numbers before you switch over fully.
+  </Accordion>
+  <Accordion title="Why don't my imported numbers exactly match my old tool?">
+    Different tools record different things, and tinyanalytics reconstructs history from what your old tool exported rather than inventing missing data. Exact within-day timestamps, bounce rate, and session duration are approximate for some sources, and channels are re-derived by tinyanalytics' own rules so imported traffic is classified the same way your live traffic is. Each import guide lists exactly what is approximate for that source.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

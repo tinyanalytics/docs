@@ -1,20 +1,20 @@
 ---
 title: "Events explorer"
-description: "Explore your custom events in tinyanalytics: a ranked list of event names with counts, and a per-event breakdown of the properties you send."
+description: "Explore your custom events in tinyanalytics: a ranked list of event names with counts, plus a per-event breakdown of the property keys and values you send."
 icon: "bolt"
 ---
 
 The Events explorer shows the custom events your site sends, ranked by how often they fire. Expand any event to see a breakdown of the properties recorded on it — the keys and values you passed, with a count for each. It's how you turn `event('purchase', { plan: 'pro' })` calls into answers about what people do.
 
-## Event names and counts
+## Which events appear in the list?
 
 The main view lists each custom event by name with its total count, most frequent first. These are the events you send with [`event()`](/guides/custom-events) — `signup`, `purchase`, `newsletter_signup`, and so on. Pageviews aren't listed here; they have their own reports.
 
-## Property breakdowns
+## How do I break an event down by property?
 
 Expand an event to sample its properties. For each property key, you see the values that appeared and how many times — so `purchase` expands to show the split across `plan` values like `pro` and `free`, or `billing` values like `monthly` and `annual`. This is where event properties pay off: send the things that vary as properties, and break them down here.
 
-## Auto-captured interactions
+## What does tinyanalytics capture automatically?
 
 Alongside the events you send, tinyanalytics records interactions automatically — outbound link clicks, file downloads, button clicks, text copies, and form submissions. Each has its own type, so you can look at them separately from your custom events. See [what the script tracks out of the box](/guides/tracking-script#what-the-script-tracks-out-of-the-box).
 
@@ -23,6 +23,20 @@ Alongside the events you send, tinyanalytics records interactions automatically 
 - **Measure a key action.** Send a custom event for it, then track its count over time here.
 - **Compare variants.** Break an event down by a property to compare plans, sources, or options.
 - **Turn events into goals and funnels.** Once an event is firing, use it in [Goals](/guides/goals) and [Funnels](/guides/funnels).
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why don't pageviews show up in the Events explorer?">
+    The tinyanalytics Events explorer lists only the custom events you send with [`event()`](/guides/custom-events), such as `signup` or `purchase`. Pageviews are excluded because they have their own reports — see [Pages](/guides/pages) and the [Dashboard overview](/guides/dashboard-overview).
+  </Accordion>
+  <Accordion title="How do I compare the values of an event property?">
+    Expand the event in the tinyanalytics Events explorer. For each property key you see the values that appeared and how many times, so a `purchase` event expands to show the split across `plan` values like `pro` and `free`. Send the things that vary as properties so they break down here.
+  </Accordion>
+  <Accordion title="Which interactions does tinyanalytics track without any code?">
+    tinyanalytics records outbound link clicks, file downloads, button clicks, text copies, and form submissions automatically, alongside the custom events you send. Each has its own type, so you can look at them separately. See [what the script tracks out of the box](/guides/tracking-script#what-the-script-tracks-out-of-the-box).
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

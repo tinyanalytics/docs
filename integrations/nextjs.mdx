@@ -11,50 +11,53 @@ To add tinyanalytics to a **Next.js** app, load the tracking script with Next's 
 - A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/quickstart).
 - Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
 
-## App Router (`app/`)
+## Add the tracking script
 
-Add a `<Script>` to your root layout, `app/layout.tsx`:
+<Tabs>
+  <Tab title="App Router">
+    Add a `<Script>` to your root layout, `app/layout.tsx`:
 
-```tsx app/layout.tsx
-import Script from "next/script";
+    ```tsx app/layout.tsx
+    import Script from "next/script";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-        <Script
-          src="https://dash.tinyanalytics.io/script.js"
-          data-site-id="YOUR_SITE_ID"
-          strategy="afterInteractive"
-        />
-      </body>
-    </html>
-  );
-}
-```
+    export default function RootLayout({ children }: { children: React.ReactNode }) {
+      return (
+        <html lang="en">
+          <body>
+            {children}
+            <Script
+              src="https://dash.tinyanalytics.io/script.js"
+              data-site-id="YOUR_SITE_ID"
+              strategy="afterInteractive"
+            />
+          </body>
+        </html>
+      );
+    }
+    ```
+  </Tab>
+  <Tab title="Pages Router">
+    Add the same `<Script>` to `pages/_app.tsx`:
 
-## Pages Router (`pages/`)
+    ```tsx pages/_app.tsx
+    import Script from "next/script";
+    import type { AppProps } from "next/app";
 
-Add the same `<Script>` to `pages/_app.tsx`:
-
-```tsx pages/_app.tsx
-import Script from "next/script";
-import type { AppProps } from "next/app";
-
-export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <>
-      <Component {...pageProps} />
-      <Script
-        src="https://dash.tinyanalytics.io/script.js"
-        data-site-id="YOUR_SITE_ID"
-        strategy="afterInteractive"
-      />
-    </>
-  );
-}
-```
+    export default function App({ Component, pageProps }: AppProps) {
+      return (
+        <>
+          <Component {...pageProps} />
+          <Script
+            src="https://dash.tinyanalytics.io/script.js"
+            data-site-id="YOUR_SITE_ID"
+            strategy="afterInteractive"
+          />
+        </>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 <Tip>
   Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options — pass each `data-*` attribute as a prop on `<Script>`.
@@ -67,6 +70,10 @@ Next.js renders route changes on the client, and tinyanalytics records each one 
 ## Verify
 
 Deploy or run your app, open it in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/guides/verify-your-setup) for the full check.
+
+<Check>
+  Your install is working when your own visit appears in **Realtime** in your dashboard.
+</Check>
 
 ## Related
 

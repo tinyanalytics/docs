@@ -4,15 +4,15 @@ description: "See the paths visitors take through your site in tinyanalytics: a 
 icon: "diagram-project"
 ---
 
-The Journeys report shows the paths visitors actually take through your pages, drawn as a flow diagram. For each visit, tinyanalytics reads the ordered sequence of pages, groups the common sequences, and ranks them — so you can see how people move through your site, not just which pages they land on.
+The Journeys report shows the paths visitors actually take through your pages, drawn as a flow diagram. For each visit, tinyanalytics reads the ordered sequence of pages, then groups and ranks the common sequences. You see how people move through your site, not just which pages they land on.
 
-## How to read the flow
+## How do I read the flow diagram?
 
-- Each path is a sequence of pages a set of sessions followed, with the number of sessions on it and its share of all sessions in the range.
+- **Each path** is a sequence of pages a set of sessions followed, with the number of sessions on it and its share of all sessions in the range.
 - **Repeated visits to the same page in a row are collapsed** into one step, so a path reflects real movement rather than reloads.
 - **Single-page visits are excluded** — a journey needs at least two pages, so bounces don't clutter the diagram.
 
-## Choose how deep to look
+## How many steps can a journey follow?
 
 Set the number of steps to follow, from **2 to 10** (the default is 3). Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
 
@@ -21,6 +21,20 @@ Set the number of steps to follow, from **2 to 10** (the default is 3). Fewer st
 - **Find the common route to a goal.** See which sequences lead visitors toward signup or purchase.
 - **Spot drop-off points.** Notice where popular paths end instead of continuing.
 - **Compare entry pages.** See where visitors go after landing on different pages.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why don't single-page visits appear in the Journeys report?">
+    The Journeys report excludes them by design. A journey needs at least two pages to be a path, so single-page visits — bounces — are left out and don't clutter the flow diagram. To see single-page visits, use the [Pages report](/guides/pages) or [Sessions](/guides/sessions).
+  </Accordion>
+  <Accordion title="How many steps deep can a journey go in tinyanalytics?">
+    Up to 10 steps. You set the depth anywhere from 2 to 10 steps, and the default is 3. Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
+  </Accordion>
+  <Accordion title="Why does reloading the same page count as one step?">
+    tinyanalytics collapses repeated visits to the same page in a row into a single step in the Journeys report. A path then reflects real movement between pages rather than reloads or repeated renders of the same page.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

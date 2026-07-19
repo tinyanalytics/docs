@@ -6,7 +6,7 @@ icon: "envelope"
 
 A scheduled report emails a snapshot of your site's analytics on a cadence you choose — **daily, weekly, or monthly**. You subscribe the recipients once, and tinyanalytics sends each of them a clean summary of the last completed period, so the numbers are final and never shift mid-report.
 
-## Choose a cadence
+## How often are reports sent?
 
 Each subscription runs on one schedule, and each report covers a **completed period** — so a report is never a half-finished day:
 
@@ -18,7 +18,7 @@ Each subscription runs on one schedule, and each report covers a **completed per
 
 Scheduling is in UTC.
 
-## What's in the email
+## What's in the report email?
 
 Every report is a compact digest of the period:
 
@@ -32,6 +32,23 @@ If a site had **no pageviews** in the period, tinyanalytics skips the email enti
 Add the people who should receive the report. Recipients must be members of the site's organization — if someone leaves the org, they stop receiving the report automatically. Every email carries a **one-click unsubscribe** link, and each recipient can also turn report emails off in their [account settings](/guides/account-settings).
 
 Owners and admins can **send a report now** to preview it — a manual send goes out immediately without changing the schedule.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why didn't my scheduled report arrive?">
+    If the site had **no pageviews** during the period, tinyanalytics skips the email rather than sending an empty report. Check also that you're still a member of the site's organization — recipients must be organization members, and someone who leaves stops receiving reports automatically.
+  </Accordion>
+  <Accordion title="How do I stop receiving tinyanalytics report emails?">
+    Use the **one-click unsubscribe** link in any report email, or turn report emails off in your [account settings](/guides/account-settings). Both apply to you only and leave the schedule running for everyone else.
+  </Accordion>
+  <Accordion title="What time zone are scheduled reports sent in?">
+    UTC. A daily report goes out after each UTC midnight and covers yesterday, a weekly report goes out every Monday covering the last 7 full days, and a monthly report goes out on the 1st covering the previous calendar month.
+  </Accordion>
+  <Accordion title="Can I see a report without waiting for the schedule?">
+    Yes. Owners and admins can **send a report now** to preview it. The manual send goes out immediately and doesn't change the schedule or the next scheduled send.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

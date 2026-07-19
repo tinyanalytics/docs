@@ -6,7 +6,7 @@ icon: "spider"
 
 The Bots & AI crawlers report shows automated traffic **separately from your human analytics**: how many bot requests your site gets, what share of all traffic they are, and which bots and AI crawlers are visiting. Bots never appear in your human sessions, visitor counts, or the live counter — so this report is where you go to see them on purpose, especially the AI crawlers reading your pages for models like ChatGPT, Claude, and Perplexity.
 
-## What the overview cards show
+## What do the overview cards show?
 
 The report opens with four cards summarizing automated traffic for the current window and filters:
 
@@ -27,7 +27,7 @@ The report leads with an **AI crawlers** section naming the AI bots that visited
 
 The bot-traffic-over-time chart draws a second **"of which AI crawlers"** line beneath the total, so you can see AI crawling grow independently of ordinary bot traffic. It's styled in violet rather than the red of the total line — an AI crawler reading your site is usually something you *want* if you care about being cited in AI answers.
 
-## Breaking bots down
+## How is bot traffic broken down?
 
 Below the chart, bot traffic is broken down the same way human traffic is:
 
@@ -37,9 +37,26 @@ Below the chart, bot traffic is broken down the same way human traffic is:
 
 Click a filterable row to narrow the whole report to it.
 
-<Note>
+<Info>
   **Crawling is not citation.** This report shows that an AI crawler *read* a page — the step that comes before you're cited in an AI answer. It cannot tell you whether a crawl produced a citation, and no user-agent or referrer can: that needs the AI platforms' own data. To see the *other* end of the funnel — humans who clicked through from an AI answer — use the [AI traffic report](/guides/ai-traffic).
-</Note>
+</Info>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do bots count toward my visitor numbers in tinyanalytics?">
+    No. Detected bots are given synthetic sessions and kept entirely out of your session counts, visitor counts, and live visitor counter, so automated traffic can never inflate your real numbers. The Bots & AI crawlers report is where you see that traffic on purpose.
+  </Accordion>
+  <Accordion title="Can tinyanalytics detect bots that hide their user-agent?">
+    Yes. tinyanalytics flags a request as a bot in two ways: a known user-agent pattern, and a known network (the ASN a crawler operates from). The network check catches crawlers that disguise their user-agent, and those are named by their operator, such as Anthropic or OpenAI.
+  </Accordion>
+  <Accordion title="Which AI crawlers does the tinyanalytics bots report name?">
+    The AI crawlers section names GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Bytespider, CCBot, and others. AI crawlers that can't be named individually roll up into **Other AI crawler**.
+  </Accordion>
+  <Accordion title="Does a crawl mean an AI assistant cited my page?">
+    No. The Bots & AI crawlers report shows only that an AI crawler read a page — the step that comes before a citation. No user-agent or referrer can tell you whether a crawl produced a citation. To see humans who clicked through from an AI answer, use the [AI traffic report](/guides/ai-traffic).
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

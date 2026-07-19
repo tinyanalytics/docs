@@ -22,7 +22,7 @@ You define a cohort from one or more **criteria**, each describing something a u
   </Step>
 </Steps>
 
-## The two criterion types
+## What are the two criterion types?
 
 A cohort in tinyanalytics is built from two building blocks, which together express "did X, not Y, over time":
 
@@ -39,13 +39,27 @@ Membership is **recomputed on a schedule** (about hourly) rather than the instan
 
 Cohorts are keyed on your **identified users** where you've called `identify()`, so a signed-in person stays in the right cohort across visits and devices. See [Identify users](/guides/identify-users).
 
-## Applying a cohort
+## How do I apply a cohort?
 
 Apply a cohort from the filter bar, the same way you apply a [segment](/guides/segments). It scopes every report to that group of users, and you can combine it with other filters. Because a cohort is a filter, "how much revenue came from users who bought twice last month" is just that cohort applied to your revenue view.
 
 <Note>
   **Limits per cohort:** up to 10 criteria per cohort, up to 100 cohorts per site, and windows up to 365 days. Cohorts share the same **personal** and **site** scopes as segments — personal cohorts are yours alone; site cohorts are shared with your organization and managed by admins.
 </Note>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How many behavioral cohorts can I create in tinyanalytics?">
+    Up to 100 cohorts per site, with up to 10 criteria in each cohort and windows up to 365 days. Cohorts use the same personal and site scopes as segments: personal cohorts are yours alone, and site cohorts are shared with your organization and managed by admins.
+  </Accordion>
+  <Accordion title="Why doesn't my cohort update immediately after someone qualifies?">
+    Cohort membership is recomputed on a schedule of about once an hour, not the instant you open a report. Working out who did what over the last *N* days is a query across your history rather than a live lookup. Each cohort shows when it was last refreshed, so membership can be up to about an hour behind.
+  </Accordion>
+  <Accordion title="What's the difference between a behavioral cohort and a saved segment?">
+    A behavioral cohort groups users by what they did over time — "checked out at least twice in the last 30 days" — and is computed on the server from your event history. A [saved segment](/guides/segments) filters on attributes such as country or device and applies instantly. Both apply as a filter across every report.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

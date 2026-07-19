@@ -16,10 +16,33 @@ The API playground lets you **try the API against your own data** without leavin
 
 The generated snippets use an [API key](/api-reference/api-keys) as `Authorization: Bearer YOUR_API_KEY` — the same credential you'll use in production. Swap in a real key from your account settings to run a call.
 
-```bash
+<CodeGroup>
+
+```bash cURL
 curl "https://dash.tinyanalytics.io/api/sites/1/overview?start_date=2026-07-01&end_date=2026-07-15" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
+
+```js JavaScript
+await fetch(
+  "https://dash.tinyanalytics.io/api/sites/1/overview?start_date=2026-07-01&end_date=2026-07-15",
+  {
+    headers: { Authorization: "Bearer YOUR_API_KEY" },
+  },
+)
+```
+
+```python Python
+import requests
+
+requests.get(
+    "https://dash.tinyanalytics.io/api/sites/1/overview",
+    params={"start_date": "2026-07-01", "end_date": "2026-07-15"},
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+)
+```
+
+</CodeGroup>
 
 ## Related
 
