@@ -29,6 +29,14 @@ Two rules resolve the overlaps:
   A visit from one of your own pages to another is labeled **Internal**, not counted as a new external referral — so on-site navigation doesn't pollute your acquisition data.
 </Note>
 
+## How are visits between my own subdomains classified?
+
+Hops between your root domain and any of its subdomains are **Internal**, in both directions — `example.com` to `app.example.com` and `app.example.com` back to `example.com`. The visitor stays in one session and no referral is recorded.
+
+**Sibling subdomains are the exception.** A hop from `app.example.com` to `blog.example.com` is still classified as a **Referral**, because neither domain contains the other. To fold those into your direct traffic, add your root domain to **Referrer Exclusions** — see [exclude traffic](/guides/exclude-traffic#how-do-i-stop-a-referrer-from-showing-up-as-a-referral).
+
+An excluded referrer is reported as **Direct**, not Internal. The two labels mean different things: Internal marks navigation inside your own site, while Direct means tinyanalytics has no referrer to attribute the visit to. Campaign parameters still take priority over both — a UTM-tagged link from an excluded referrer keeps its campaign channel.
+
 ## Tag your own links
 
 To classify your campaigns precisely, add UTM parameters to the links you control — for example `?utm_source=newsletter&utm_medium=email`. tinyanalytics reads them and files the visit under the right channel, and you can break any report down by source, medium, or campaign.

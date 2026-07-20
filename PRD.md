@@ -520,6 +520,47 @@ check (a slugify-and-compare script) — one broken anchor was found and fixed t
 
 ---
 
+## 10b. Product-sync pass (done 2026-07-20)
+
+Audited the 15 product commits from `4ee8613` (07-19 22:41) through `d400019` (07-20 18:42) — the
+window opened after the last docs commit that changed facts (`1afada1`, 07-19 22:21). 17 doc files
+updated. `mint validate`, `mint broken-links`, and a custom anchor check (45 refs) all clean.
+
+**Six pages were factually wrong, not merely incomplete.** See CHANGELOG for the itemized list. The
+recurring cause is that a changed *default* or a changed *interaction* silently invalidates prose
+that was accurate when written, and nothing in either repo flags the dependency.
+
+### Tooling gaps this pass exposed
+
+1. **No sync marker.** Neither repo records "docs are current as of product SHA X." The boundary had
+   to be recovered from commit timestamps, which only works while both repos share one author and
+   machine. *Recommendation:* record the audited product SHA in this file at the end of each sync
+   pass. **This pass audited through `d400019`.**
+2. **`mint broken-links` does not validate URL fragments.** Re-confirmed. Heading renames break
+   inbound anchors silently — this pass renamed a `guides/pages` heading and only the custom
+   slugify-and-compare script proved nothing pointed at the old slug.
+3. **Stale source comments are a documentation hazard.** `apps/api/src/api/sites-validation.ts`
+   asserts an `Etc/UTC` column default that migration 0035 does not create. Verify defaults against
+   migrations and schema, never against comments.
+
+### Deliberate non-actions
+
+| Not done | Reason |
+| --- | --- |
+| Standalone `guides/timezone` and `resources/multi-host-sites` pages (both recommended by the audit) | Concepts documented where their controls live — `guides/site-settings` and `guides/pages` — with cross-links. One canonical home beats five places to drift. Revisit if SEO reach for "analytics timezone" justifies a dedicated page. |
+| `guides/events` split into two pages | The page now covers both the dashboard Events card and the Events page. A split is defensible if the Events page grows further. |
+| Retention numeric-delta claim | The timezone mechanism is confirmed from source, but whether any given site sees a visible change is unmeasured, so the docs state the mechanism only. Cohort day/week *bucketing* remains UTC-derived — do **not** claim cohort labels shifted. |
+| `resources/*` GEO pass | Still outstanding from the 2026-07-19 pass; `comparison.mdx` and `metrics-glossary.mdx` remain the strongest remaining GEO candidates. |
+
+### Escalation for the product owner (not a docs issue)
+
+The Events log empty state links to **`https://rybbit.com/docs/track-events`**
+(`apps/web/src/components/dashboard/event-log/event-log.tsx:34`) — the product ships a UI that sends
+users to the reference implementation's documentation. This warrants attention on both product and
+clean-room grounds. It should almost certainly point at `guides/custom-events` in these docs.
+
+---
+
 ## 11. Assumptions & open questions
 
 | # | Assumption / question | Working default | Needs confirmation |

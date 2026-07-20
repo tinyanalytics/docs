@@ -7,7 +7,58 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Fixed
+- **Product-sync pass (2026-07-20):** audited the 15 product commits landed since the docs last
+  captured product facts (`4ee8613` onward) and corrected six pages that had become **factually
+  wrong**. These were verified against migrations, schema, and component source — not commit
+  messages — after an audit surfaced a stale code comment asserting a column default that does not
+  exist (`sites-validation.ts` claims `Etc/UTC`; migration 0035 adds a nullable column with no default).
+  - `guides/scheduled-reports` — "Scheduling is in UTC" (3 places) → reports run on the site's
+    **reporting timezone**, falling back to UTC only when none is set.
+  - `guides/dashboard-overview` — date ranges "calculated in your browser's time zone" (2 places) →
+    the site's reporting timezone when set, browser zone as fallback. Added the date picker's
+    per-view **Time zone** override.
+  - `guides/exclude-traffic` — the page asserted all exclusions "drop at collection, nothing is
+    recorded". False for the new **Referrer Exclusions**, which keep the visit and reclassify it as
+    Direct. Documented as a contrasted section rather than a sixth table row, so it cannot inherit
+    the drop semantics of its neighbors.
+  - `guides/pages` — "Click the row again to clear the filter" (2 places) → a row click now
+    navigates to the main dashboard pre-filtered; there is no toggle-off on the Pages and Landing
+    pages tables. Qualified the matching over-broad claim in `guides/filters`.
+  - `guides/journeys` — steps "2 to 10, default 3" (3 places) → **2 to 6, default 4**.
+  - `guides/bots` — "four cards" and bots detected "in two ways" → **eight cards** and **six
+    detection layers**; noted that overlapping layers can sum above the total, and that period
+    comparison is unavailable on this report.
+
 ### Added
+- **New product surfaces documented (2026-07-20), from the same sync pass:**
+  - **Per-site reporting timezone** (0182) — canonical section in `guides/site-settings` covering the
+    two states (unset ⇒ browser zone for the dashboard and UTC for reports; set ⇒ canonical for the
+    whole team), the historical re-bucketing warning, and that **alerts are unaffected** because
+    their windows roll from the current moment. Cross-linked from dashboard-overview, scheduled-reports,
+    retention, users, and alerts. *No standalone `guides/timezone` page:* one home to keep current
+    beats five places to drift.
+  - **Multi-host page identity / URL mode** (0181) — the **URLs** tab in `guides/pages`, the
+    multi-host banner, `?pagesMode=url` persistence in shared links, host-aware Entries/Exits, and
+    the fact that `www.` and apex are not merged. Added `Hostname`, `Entry Page`, and `Entry Hostname`
+    to `guides/filters` with their session-scoped "entered on" semantics, and the three composite
+    breakdown dimensions to `api-reference/read`.
+  - **Referrer exclusions and self-referral handling** (0190–0192) — new sections in
+    `guides/exclude-traffic` and `resources/traffic-classification`: root↔subdomain hops are Internal
+    in both directions, sibling subdomains remain Referral (fix: add the root domain), excluded
+    referrers become **Direct** not Internal, and UTM tags still win.
+  - **Events page** (0193) — `guides/events` previously described only the dashboard's Events card.
+    Added the trend chart's tabs, Top-N select (default **Top 5**), granularity select, and clickable
+    legend, plus the event log: **Realtime now defaults ON** at a 5-second refresh, 100 rows per page,
+    the paused-while-browsing-history banner, and that search matches only already-loaded rows.
+  - **Users page** (0187) — sortable columns with their default, hover-to-absolute timestamps,
+    profile Acquisition and Top pages cards (flagging that **Top pages is all-time, not the selected
+    date range**), copyable user ID, and the activity calendar's 95th-percentile scale. Documented the
+    `user_id` filter now matching a person across both identity columns.
+  - Smaller additions: goal edit/clone/delete actions (`guides/goals`), the AI chart's zoom and
+    suppressed annotations (`guides/ai-traffic`), the Journeys path-filter wildcards and journey cap,
+    weekly cohorts starting Monday (`guides/retention`), and comparison's unavailability on the Bots
+    report (`guides/compare`).
 - **Codebase gap analysis (2026-07-19):** diffed the docs against the actual product surface (web
   route tree + `sdks/` + decisions 0140–0181) and closed four missing pages, all source-grounded:
   - **Error tracking** guide (`guides/errors`, "Explore your data") — the opt-in `data-track-errors`

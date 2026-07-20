@@ -63,7 +63,9 @@ Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, a
 | `GET /api/sites/{id}/sessions` | `{ "data": [ … ] }` — the paginated session list (`page`, `limit`), newest first. |
 | `GET /api/sites/{id}/events` | `{ "data": [ … ] }` — the custom-event list, or one event's property breakdown when you pass `event_name`. |
 
-`breakdown` accepts dimensions including `pathname`, `referrer`, `channel`, `country`, `region`, `city`, `browser`, `os`, `device_type`, `utm_*`, and `event_name`.
+`breakdown` accepts dimensions including `pathname`, `hostname`, `entry_page`, `exit_page`, `referrer`, `channel`, `country`, `region`, `city`, `browser`, `os`, `device_type`, `utm_*`, and `event_name`.
+
+Three **composite dimensions** group by host and path together, for sites serving one path from several hostnames: `pathname_host`, `entry_page_host`, and `exit_page_host`. Their rows carry `hostname` and `pathname` as separate fields alongside the standard `value`, `count`, `percentage`, and `pageviews`, so you can read either part without parsing `value`. Hostnames are lowercased when grouped. See [Pages](/guides/pages) for the dashboard equivalent.
 
 <Note>
   Beyond these, endpoints exist for performance, journeys, bots, errors, user traits, and more. The quickest way to discover an endpoint's exact parameters and response is the built-in [API playground](/api-reference/playground), which builds and runs each call against your own data.

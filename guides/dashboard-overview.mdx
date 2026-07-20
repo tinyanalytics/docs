@@ -43,7 +43,11 @@ The Overview shows how many people are on your site right now — the count of d
 
 ## How do date ranges and comparison work?
 
-Pick a date range from the presets or a custom range. Ranges are calculated in **your browser's time zone**, so "today" means your today. Turn on comparison to see each metric against the previous period of the same length, so you can tell whether a number is up or down.
+Pick a date range from the presets or a custom range. Turn on comparison to see each metric against the previous period of the same length, so you can tell whether a number is up or down.
+
+Ranges are calculated in your site's **reporting timezone** when one is set, so everyone on the team reads the same days. If no reporting timezone is set, ranges follow **your browser's time zone** instead, and "today" means your today. See [set your reporting timezone](/guides/site-settings#which-timezone-are-my-reports-based-on).
+
+To read the dashboard in a different zone without changing the site's setting, open the date-range picker and use its **Time zone** section. It offers your site's zone and your browser's zone as shortcuts, plus the full time zone list. This override applies to your current view only — it isn't saved to the site and other viewers don't see it.
 
 ## Frequently asked questions
 
@@ -58,7 +62,10 @@ Pick a date range from the presets or a custom range. Ranges are calculated in *
     Clicking a row in a breakdown table applies it as a filter across the whole Overview. Clicking "United States" in the Geo breakdown re-scopes the six top-line metrics, the trend chart, the map, and every other breakdown to US visitors at once. See [filter your data](/guides/filters) to manage active filters.
   </Accordion>
   <Accordion title="What time zone are tinyanalytics date ranges based on?">
-    Date ranges on the Overview are calculated in your browser's time zone, so "today" means your today. Both the presets and custom ranges follow this rule.
+    Your site's **reporting timezone** when one is set on the site's **Settings → General** tab, so the whole team reads the same days. If no reporting timezone is set, date ranges follow your browser's time zone instead and "today" means your today. Both the presets and custom ranges follow this rule.
+  </Accordion>
+  <Accordion title="Can I view the dashboard in a different time zone?">
+    Yes. Open the date-range picker and use its **Time zone** section, which offers your site's zone and your browser's zone as shortcuts alongside the full time zone list. The override applies to your current view only — it isn't saved to the site, and other viewers still see the site's [reporting timezone](/guides/site-settings#which-timezone-are-my-reports-based-on).
   </Accordion>
 </AccordionGroup>
 

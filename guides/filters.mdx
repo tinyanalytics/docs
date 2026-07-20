@@ -8,14 +8,17 @@ Filters narrow every report in tinyanalytics to a subset of your traffic — one
 
 ## How do I apply a filter?
 
-- **Click a row.** In any breakdown, table, or map, click a value — a page, a referrer, a country — to filter the dashboard by it. Click again to remove it. This is the fastest way to drill in.
+- **Click a row.** In a breakdown, the map, or the Performance table, click a value — a referrer, a country — to filter the dashboard by it. Click again to remove it. This is the fastest way to drill in.
+- **Click a page.** In the [Pages](/guides/pages) and Landing pages tables, a row click instead opens the main dashboard already filtered to that page, carrying your date range and other active filters with it. There's no click-again-to-clear on these two tables — remove the filter on the dashboard, or use your browser's Back button.
 - **Add a filter manually.** Use the filter control to build a filter from a dimension, an operator, and one or more values.
 
 ## What is a filter made of?
 
 A filter has three parts: a **dimension** (what to filter on), an **operator** (how to compare), and one or more **values**.
 
-Common dimensions include page path, page title, referrer, channel, country, region, city, browser, operating system, device type, screen size, UTM parameters, event name, and tag.
+Common dimensions include page path, page title, hostname, referrer, channel, country, region, city, browser, operating system, device type, screen size, UTM parameters, event name, and tag.
+
+Two dimensions are **session-scoped** rather than pageview-scoped: **Entry Page** and **Entry Hostname** match the first page of a session, so they mean "entered on" rather than "visited anywhere". Use them to isolate the sessions that *started* somewhere, and page path or hostname to catch every session that reached it at any point.
 
 The operators are:
 
@@ -40,7 +43,10 @@ An active filter stays applied as you switch between Overview, Pages, Sessions, 
 
 <AccordionGroup>
   <Accordion title="How do I remove a filter in tinyanalytics?">
-    Click the same row again. If you filtered by clicking a value in a breakdown, table, or map — a page, a referrer, a country — clicking it a second time removes that filter. Filters you built with the filter control are removed from the control itself.
+    Click the same row again. If you filtered by clicking a value in a breakdown, the map, or the Performance table — a referrer, a country — clicking it a second time removes that filter. Filters you built with the filter control are removed from the control itself. The [Pages](/guides/pages) and Landing pages tables are the exception: a row click there navigates to a filtered dashboard, so you remove the filter on the dashboard or use your browser's Back button.
+  </Accordion>
+  <Accordion title="Can I filter by a user ID I set myself?">
+    Yes. A **User ID** filter matches a person whether their ID arrived as an anonymous visitor ID or as one you attached with [identify](/guides/identify-users). This applies to the is, is not, is set, and is not set operators.
   </Accordion>
   <Accordion title="Can I filter tinyanalytics with a regular expression?">
     Yes. Every filter uses a dimension, an operator, and one or more values, and the operators include **matches regex** and **does not match regex**. The other operators are is / is not, contains / does not contain, starts with / ends with, and is set / is not set.

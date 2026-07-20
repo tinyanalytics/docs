@@ -8,18 +8,30 @@ The Bots & AI crawlers report shows automated traffic **separately from your hum
 
 ## What do the overview cards show?
 
-The report opens with four cards summarizing automated traffic for the current window and filters:
+The report opens with eight cards summarizing automated traffic for the current window and filters. The first two are totals; the remaining six count how many requests each detection layer caught.
 
 | Card | What it means |
 | --- | --- |
 | **Bot requests** | Total automated requests detected. |
-| **Bot share** | Bot requests as a percentage of all traffic (bots + humans). |
-| **UA pattern** | Bots identified by a known user-agent pattern. |
-| **Bot ASN** | Bots identified by a known hosting/crawler network. |
+| **Bot share of traffic** | Bot requests as a percentage of all traffic (bots + humans). |
+| **UA pattern** | Caught by a known crawler, scanner, or automation string in the user agent. |
+| **Bot ASN** | Caught by originating from a hosting, cloud, proxy, or datacenter network. |
+| **Header heuristics** | Caught by HTTP headers missing what a real browser always sends. |
+| **Rate anomaly** | Caught by crawl-shaped bursts — many requests from one visitor, or one IP fanning across many paths or hosts. |
+| **Client signals** | Caught by automation tells in the browser itself, such as `navigator.webdriver` or impossible screen dimensions. |
+| **Referrer spam** | Caught by a referrer host on the Matomo referrer-spam blocklist. |
 
 ## How does tinyanalytics detect bots?
 
-tinyanalytics flags a request as a bot in two ways: a **known user-agent pattern** (the signature a crawler announces itself with) and a **known network** (the ASN a crawler operates from, which catches bots that hide their user-agent). A request flagged either way is counted here instead of in your human analytics. Detected bots are given synthetic sessions and are kept entirely out of your session counts and live visitor counter, so automated traffic can never inflate your real numbers.
+tinyanalytics runs **six detection layers** over every request, listed in the table above. They range from the obvious — a crawler that announces itself in its user agent — to signals that catch bots actively hiding, like datacenter networks, missing browser headers, crawl-shaped request bursts, and automation flags in the browser runtime.
+
+A request flagged by **any** layer is counted here instead of in your human analytics. Because the layers overlap, one request can be caught by several at once, so the six layer counts can add up to more than the **Bot requests** total.
+
+Detected bots are given synthetic sessions and kept entirely out of your session counts and live visitor counter, so automated traffic can never inflate your real numbers.
+
+<Note>
+  Period comparison isn't available on this report. The date-range picker on the Bots & AI crawlers page has no compare option — see [compare periods](/guides/compare).
+</Note>
 
 ## Which AI crawlers are reading my site?
 

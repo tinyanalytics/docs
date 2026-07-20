@@ -1,6 +1,6 @@
 ---
 title: "Pages"
-description: "See which pages get the most traffic in tinyanalytics: a ranked table with sessions, pageviews, and per-page trends, plus entry, exit, hostname, and landing page views."
+description: "See which pages get the most traffic in tinyanalytics: a ranked table with sessions, pageviews, and per-page trends, plus URL, title, entry, exit, hostname, and landing page views."
 icon: "file-lines"
 ---
 
@@ -17,17 +17,34 @@ The Pages report ranks your site's pages by how many people visit them. Each row
 
 Pages are ranked by visitors, most-visited first.
 
-## How do I switch to titles, entries, exits, or hostnames?
+## How do I switch to URLs, titles, entries, exits, or hostnames?
 
 The Pages section has tabs that re-slice the same traffic by a different key, so you can answer different questions from one place:
 
 | View | What it ranks |
 | --- | --- |
 | **Pages** | Pages by path — your top content. |
+| **URLs** | Pages by host **and** path together, so the same path on two hostnames stays separate. |
 | **Titles** | Pages by their `<title>` — useful when one path serves many titles. |
 | **Entries** | **Entry pages** — the first page of each session, ranked by how many sessions start there. |
 | **Exits** | **Exit pages** — the last page of each session, ranked by how many sessions end there. |
 | **Hostnames** | Traffic by hostname — useful when one site tracks several domains or subdomains. |
+
+## When should I use URL mode?
+
+Use **URLs** when one site serves the same path from more than one hostname — a marketing site and an app on `example.com` and `app.example.com`, or a staging subdomain sharing a path with production.
+
+By default the report is in **Pages** (path) mode, which groups `example.com/pricing` and `app.example.com/pricing` into a single `/pricing` row. Switching to **URLs** splits them into one row per hostname-and-path pair.
+
+Selecting the **URLs** tab turns URL mode on, and selecting **Pages** turns it back off. While it's on, the **Entries** and **Exits** views become host-aware too, and their headings read **Entry URLs** and **Exit URLs**.
+
+<Tip>
+  When your selected date range contains more than one hostname, tinyanalytics shows a banner above the report offering to **Switch to URL**. Dismissing it hides it for your current visit only.
+</Tip>
+
+<Note>
+  URL mode travels in the page address as `?pagesMode=url`, so a dashboard link you copy and share reopens in URL mode for whoever you send it to. Hostnames are matched in lowercase, and `www.example.com` and `example.com` are **not** merged — they rank as separate rows.
+</Note>
 
 ## How do I read the Landing pages report?
 
@@ -51,15 +68,24 @@ A **landing page** is the first page a visitor sees in a session — where the v
   Read landing pages to judge your **acquisition quality**, not just volume: a page that draws many sessions but bounces most of them is pulling the wrong traffic — or making the wrong first impression.
 </Tip>
 
-## How do I filter the dashboard by one page?
+## How do I see one page's full stats?
 
-**Click a row to filter the whole dashboard by that page.** Every metric, chart, and breakdown then re-scopes to visitors who saw it — a quick way to answer "how does this one page perform?" Click the row again to clear the filter. See [filter your data](/guides/filters).
+**Click a row to open the main dashboard already filtered to that page.** Every metric, chart, and breakdown is scoped to visitors who saw it, so you land on a complete picture of how that one page performs. Your current date range and any other active filters come along with you.
+
+Because the click navigates rather than toggling a filter in place, you clear it the way you clear any filter — remove the page filter on the dashboard, or use your browser's Back button. See [filter your data](/guides/filters).
+
+In **URLs** mode a row click applies **two** filters together, hostname and path, so you scope to that exact URL rather than to the path across every host.
+
+<Warning>
+  A click on an **Entries** row filters by **entry page** — sessions that *started* there — not by sessions that viewed the page at any point. The **Exits** view still filters by pages *visited*, so an Exits row click and an Entries row click don't mean the same thing.
+</Warning>
 
 ## Common workflows
 
 - **Find your top content.** The default ranking shows which pages drive the most traffic.
 - **Check a page's momentum.** Read the trend sparkline to see whether a page is gaining or losing visits.
-- **Drill into one page.** Click a page to filter the dashboard, then read its sources, devices, and geography in the [Overview](/guides/dashboard-overview) breakdowns.
+- **Drill into one page.** Click a page to open the dashboard filtered to it, and read its sources, devices, and geography in the [Overview](/guides/dashboard-overview) breakdowns.
+- **Separate two hostnames.** Switch to the **URLs** view when the same path is served from several domains or subdomains.
 
 ## Frequently asked questions
 
@@ -74,7 +100,10 @@ A **landing page** is the first page a visitor sees in a session — where the v
     An entry page is the first page of a session and an exit page is the last. In the tinyanalytics Pages report, the **Entries** view ranks pages by how many sessions start there, and the **Exits** view ranks them by how many sessions end there.
   </Accordion>
   <Accordion title="How do I see stats for a single page?">
-    Click that page's row in the Pages report. Every metric, chart, and breakdown on the dashboard re-scopes to visitors who saw it, so you can read its sources, devices, and geography. Click the row again to clear the filter. See [filter your data](/guides/filters).
+    Click that page's row in the Pages report. tinyanalytics opens the main dashboard already filtered to that page, carrying your date range and any other active filters with it, so you can read its sources, devices, and geography. The click navigates rather than toggling a filter in place, so you clear it by removing the page filter on the dashboard or using your browser's Back button. See [filter your data](/guides/filters).
+  </Accordion>
+  <Accordion title="Why do two hostnames share one row in the Pages report?">
+    The report groups by path by default, so `example.com/pricing` and `app.example.com/pricing` combine into one `/pricing` row. Switch to the **URLs** tab to group by host and path together and see them separately. When your date range contains more than one hostname, tinyanalytics offers this switch in a banner above the report.
   </Accordion>
 </AccordionGroup>
 

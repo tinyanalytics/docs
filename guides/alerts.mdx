@@ -20,6 +20,10 @@ Pick the metric to watch and the window to measure it over — the last **hour**
 | **Revenue** | total [revenue](/guides/revenue) in your reporting currency |
 | **Active accounts** | distinct [B2B accounts](/guides/group-analytics) active |
 
+<Note>
+  Alert windows roll backwards from the current moment — the last hour or the last day — so they never depend on where a calendar day begins. Your site's [reporting timezone](/guides/site-settings#which-timezone-are-my-reports-based-on) changes your charts and [scheduled reports](/guides/scheduled-reports), but leaves alerts untouched.
+</Note>
+
 ## Set the condition
 
 An alert fires when the metric crosses a bound you define, in one of two ways:

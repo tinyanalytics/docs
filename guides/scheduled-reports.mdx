@@ -12,11 +12,11 @@ Each subscription runs on one schedule, and each report covers a **completed per
 
 | Cadence | Sent | Covers |
 | --- | --- | --- |
-| **Daily** | after each UTC midnight | yesterday |
-| **Weekly** | every Monday | the last 7 full days |
-| **Monthly** | on the 1st | the previous calendar month |
+| **Daily** | after each midnight | yesterday |
+| **Weekly** | every Monday at 00:00 | the last 7 full days |
+| **Monthly** | on the 1st at 00:00 | the previous calendar month |
 
-Scheduling is in UTC.
+Those send times follow your site's **reporting timezone**, set on the site's **Settings → General** tab. If no reporting timezone is set, scheduling falls back to **UTC**. See [set your reporting timezone](/guides/site-settings#which-timezone-are-my-reports-based-on).
 
 ## What's in the report email?
 
@@ -43,7 +43,7 @@ Owners and admins can **send a report now** to preview it — a manual send goes
     Use the **one-click unsubscribe** link in any report email, or turn report emails off in your [account settings](/guides/account-settings). Both apply to you only and leave the schedule running for everyone else.
   </Accordion>
   <Accordion title="What time zone are scheduled reports sent in?">
-    UTC. A daily report goes out after each UTC midnight and covers yesterday, a weekly report goes out every Monday covering the last 7 full days, and a monthly report goes out on the 1st covering the previous calendar month.
+    Your site's **reporting timezone**, set on the site's **Settings → General** tab. A daily report goes out after each midnight in that zone and covers yesterday, a weekly report goes out every Monday at 00:00 covering the last 7 full days, and a monthly report goes out on the 1st at 00:00 covering the previous calendar month. If your site has no reporting timezone set, scheduling falls back to **UTC**.
   </Accordion>
   <Accordion title="Can I see a report without waiting for the schedule?">
     Yes. Owners and admins can **send a report now** to preview it. The manual send goes out immediately and doesn't change the schedule or the next scheduled send.

@@ -1,6 +1,6 @@
 ---
 title: "Journeys"
-description: "See the paths visitors take through your site in tinyanalytics: a flow diagram of the most common page sequences, up to ten steps deep."
+description: "See the paths visitors take through your site in tinyanalytics: a flow diagram of the most common page sequences, up to six steps deep, with date range, filters, and path matching."
 icon: "diagram-project"
 ---
 
@@ -14,7 +14,24 @@ The Journeys report shows the paths visitors actually take through your pages, d
 
 ## How many steps can a journey follow?
 
-Set the number of steps to follow, from **2 to 10** (the default is 3). Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
+Set the number of steps to follow, from **2 to 6** (the default is 4). Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
+
+A second slider caps **how many journeys** the diagram draws, from **10 to 200** in steps of 10 (the default is 50). Lower it to read only the dominant routes; raise it to see the long tail.
+
+## How do I narrow the diagram to certain pages?
+
+The report has its own date range, [filters](/guides/filters), and period comparison, so you can scope journeys the same way you scope any other report.
+
+To match pages by pattern, use the **Path filter** box, which supports two wildcards:
+
+| Wildcard | Matches |
+| --- | --- |
+| `*` | a single path segment — `/blog/*` matches `/blog/post`, not `/blog/2026/post` |
+| `**` | multiple segments — `/blog/**` matches both |
+
+<Note>
+  The Path filter's suggestions list every path on your site, regardless of the filters you currently have active.
+</Note>
 
 ## Common workflows
 
@@ -29,7 +46,10 @@ Set the number of steps to follow, from **2 to 10** (the default is 3). Fewer st
     The Journeys report excludes them by design. A journey needs at least two pages to be a path, so single-page visits — bounces — are left out and don't clutter the flow diagram. To see single-page visits, use the [Pages report](/guides/pages) or [Sessions](/guides/sessions).
   </Accordion>
   <Accordion title="How many steps deep can a journey go in tinyanalytics?">
-    Up to 10 steps. You set the depth anywhere from 2 to 10 steps, and the default is 3. Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
+    Up to 6 steps. You set the depth anywhere from 2 to 6 steps, and the default is 4. Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
+  </Accordion>
+  <Accordion title="How do I match a group of pages in the Journeys report?">
+    Use the **Path filter** box with its two wildcards: `*` matches a single path segment, so `/blog/*` matches `/blog/post` but not `/blog/2026/post`, while `**` matches multiple segments and matches both. The suggestions in that box list every path on your site regardless of your active filters.
   </Accordion>
   <Accordion title="Why does reloading the same page count as one step?">
     tinyanalytics collapses repeated visits to the same page in a row into a single step in the Journeys report. A path then reflects real movement between pages rather than reloads or repeated renders of the same page.

@@ -11,9 +11,40 @@ The Users report shows the people behind your traffic. Each user groups all of o
 - **Identified users** — people your app has named with [`identify()`](/guides/identify-users). They appear under your ID, their activity is unified across devices, and their traits (like plan or signup date) are shown.
 - **Cookieless visitors** — people who haven't been identified. They're grouped by the cookieless hash tinyanalytics derives on the server, which is a close estimate rather than an exact person. See [how tinyanalytics works](/how-it-works#how-does-tinyanalytics-count-visitors-without-cookies).
 
+## How do I sort and read the user list?
+
+The list shows one row per person, with their identity, country, channel, browser, OS, and device alongside four counts and two timestamps.
+
+Five columns sort the whole list, newest activity first by default:
+
+| Column | Sorts by |
+| --- | --- |
+| **Last seen** | most recent activity — the default, newest first |
+| **First seen** | when the person was first recorded |
+| **Sessions** | total visits |
+| **Pageviews** | total pages viewed |
+| **Events** | total [custom events](/guides/custom-events) fired |
+
+Click a column heading to sort by it; a new column starts with the largest values first, and clicking the active column reverses it. The dimension columns — user, country, channel, browser, OS, and device — aren't sortable.
+
+<Tip>
+  **Last seen** and **First seen** show relative times like "3 hours ago". Hover a row to swap them for the exact timestamp in your site's [reporting timezone](/guides/site-settings#which-timezone-are-my-reports-based-on).
+</Tip>
+
 ## How do I see everything one person did?
 
-Click a user to open their profile — their full history of sessions and events, and the traits attached to them. This is where you answer "what has this specific person done?" across all their visits.
+Click a user to open their profile — their full history of sessions and events, and the traits attached to them. This is where you answer "what has this specific person done?" across all their visits. Their user ID has a copy button, so you can paste it straight into a support ticket or a [filter](/guides/filters).
+
+A profile has two summary cards alongside the session history:
+
+- **Acquisition** — the channel and referrer that first brought this person in, plus the UTM source, medium, and campaign when the visit carried them. Rows with nothing to show are hidden.
+- **Top pages** — the 10 pages this person viewed most.
+
+<Warning>
+  **Top pages covers the person's entire history, not your selected date range.** Changing the dashboard's date range doesn't re-scope it.
+</Warning>
+
+The profile's activity calendar shades each day by how many sessions it held. Its scale caps at your 95th-busiest day, so a single outlier can't flatten every other day into the same shade, and days are drawn in your site's reporting timezone so the grid reads the same for everyone on the team.
 
 ## Common workflows
 
@@ -29,6 +60,12 @@ Click a user to open their profile — their full history of sessions and events
   </Accordion>
   <Accordion title="How do I see users under my own user IDs?">
     Call [`identify()`](/guides/identify-users) from your app. People your app has named appear in the tinyanalytics Users report under your ID instead of a cookieless hash, their activity is unified across devices, and any traits you attached are shown on their profile.
+  </Accordion>
+  <Accordion title="Why doesn't Top pages match my dashboard date range?">
+    The **Top pages** card on a user profile covers that person's entire history rather than your selected date range, showing the 10 pages they viewed most. Changing the dashboard date range doesn't re-scope it. The session history on the same profile does follow your date range.
+  </Accordion>
+  <Accordion title="Can I sort the tinyanalytics user list?">
+    Yes. Click any of the **Last seen**, **First seen**, **Sessions**, **Pageviews**, or **Events** headings to sort by that column. The list is sorted by Last seen, newest first, by default. A newly clicked column starts with its largest values first, and clicking the active column reverses the order. The user, country, channel, browser, OS, and device columns aren't sortable.
   </Accordion>
   <Accordion title="What are user traits and where do I see them?">
     Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`. They appear on the user's profile in the tinyanalytics Users report, and you can filter reports by them to segment your audience.
