@@ -12,6 +12,10 @@ https://dash.tinyanalytics.io
 
 Ingestion endpoints (`/api/track`, `/api/identify`) accept events; read endpoints (`/api/sites/{siteId}/…`) return your data as JSON. Most calls are a single request with a JSON body.
 
+## What can the API do?
+
+The API covers **133 endpoints across 29 groups** — far more than reading metrics. Alongside the analytics reads you can manage sites, define goals and funnels, drive feature flags and experiments, run surveys, build dashboards, configure alerts and scheduled reports, and operate uptime monitors. Every endpoint has its own page in the **Endpoints** section of this reference.
+
 ## How do I authenticate?
 
 There are two credentials, and which you need depends on what you're doing:
@@ -95,7 +99,13 @@ Common status codes:
   <Card title="Analytics read API" icon="chart-line" href="/api-reference/read">
     Read overview, timeseries, and breakdowns.
   </Card>
+  <Card title="All endpoints" icon="list" href="/api-reference/overview/get-overview">
+    Browse all 133 endpoints by group.
+  </Card>
   <Card title="API keys" icon="key" href="/api-reference/api-keys">
     Create and manage your keys.
+  </Card>
+  <Card title="API playground" icon="terminal" href="/api-reference/playground">
+    Run any call against your own data.
   </Card>
 </CardGroup>

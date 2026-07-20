@@ -561,6 +561,63 @@ clean-room grounds. It should almost certainly point at `guides/custom-events` i
 
 ---
 
+## 10c. API reference generation (done 2026-07-20)
+
+The hand-authored API reference described **9 endpoints**; the product's API playground exposes
+**158**. Coverage was ~6%, and `api-reference/read.mdx` deliberately punted the remainder to the
+playground — which sits behind dashboard auth, so 149 endpoints were invisible to logged-out
+readers and to every AI answer engine. Given this project's GEO emphasis, that was the largest
+single discoverability gap in the docs.
+
+`scripts/generate-openapi.ts` now generates `openapi.json` from the playground's own endpoint
+registry (`apps/web/src/app/websites/[siteId]/api-playground/utils/endpointConfig.ts`), and
+`docs.json` renders it as an **Endpoints** group. **133 of 158 endpoints across 29 groups** are
+published. Regenerate with `bun run scripts/generate-openapi.ts` (set `TINYANALYTICS_SRC` if the
+product checkout is not a sibling directory).
+
+### Why generate rather than hand-author
+
+`EndpointConfig` already carries method, path, name, description, required and specific params,
+path params, and a request-body example — most of an OpenAPI operation object. Generating means the
+reference cannot drift from the playground, and adding an endpoint to the product publishes it here
+on the next run. Hand-authoring 133 pages would guarantee drift.
+
+### Curation — documenting an endpoint is a compatibility promise
+
+The playground exposes everything the dashboard calls, including internal plumbing. The public
+reference commits to a subset; the rest are withheld **in the script's own config**, so the choice
+is visible and reversible in one line:
+
+| Withheld | Reason |
+| --- | --- |
+| Billing (2) | Account plumbing; shape follows the payment provider. |
+| Imports (4) | Migration tooling; batch semantics not settled. Reconsider — `POST /sites/:site/imports/:importId/events` is a genuine bulk-backfill use case. |
+| Google Analytics 4 (7) | OAuth handshake plus a proxy to Google's own API. |
+| Teams (4), Organizations member management (3 of 6) | Admin surface, not product API. |
+| Search Console OAuth (4 of 5) | Browser redirect flows, not callable API. Only `gsc/data` is published. |
+| `org-event-count` (1 of Misc's 3) | Internal quota counter. Retention and Journeys are published. |
+
+### Known gap: no response schemas
+
+`EndpointConfig` carries no response type, so every operation declares a bare `200` plus shared
+`401`/`403`/`429`. Endpoint pages document requests fully and **say nothing about response bodies** —
+stated plainly in `read.mdx` and `playground.mdx` rather than papered over. Two ways to close it:
+
+1. **Attach response schemas to the Fastify routes** in `apps/api` and generate from the live API.
+   Highest fidelity and self-maintaining, but it is a product change.
+2. **Capture live sample responses** per endpoint. Accurate to today, but goes stale silently.
+
+Until then the playground remains the way to see a real response, which is why it keeps its page.
+
+### Verification
+
+`mint validate` clean; `mint broken-links` clean; Redocly lint reports **0 errors, 1 warning**
+(`info-license`, not applicable to a proprietary API). `mint broken-links` does **not** traverse
+generated OpenAPI routes, so the four deep links added to `read.mdx` and `introduction.mdx` were
+cross-checked against the 133 routes extracted from a running `mint dev` nav payload.
+
+---
+
 ## 11. Assumptions & open questions
 
 | # | Assumption / question | Working default | Needs confirmation |

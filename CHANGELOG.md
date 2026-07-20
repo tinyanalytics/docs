@@ -31,6 +31,25 @@ project adheres to semantic versioning where practical.
     comparison is unavailable on this report.
 
 ### Added
+- **Generated API endpoint reference (2026-07-20)** — the reference documented **9 endpoints** while
+  the product's API playground exposed **158** (~6% coverage), and `api-reference/read` explicitly
+  deferred the rest to the playground, which sits behind dashboard auth. 149 endpoints were
+  unreachable for logged-out readers and uncitable by AI answer engines.
+  - Added `scripts/generate-openapi.ts`, which builds `openapi.json` from the playground's own
+    endpoint registry so the reference cannot drift from the product. Run with
+    `bun run scripts/generate-openapi.ts`.
+  - Added an **Endpoints** group to `docs.json` publishing **133 of 158 endpoints across 29 groups**,
+    each with full path, method, and parameters.
+  - Withheld 25 endpoints as internal rather than public API — billing, imports, GA4 and Search
+    Console OAuth handshakes, team and org member management, and the internal event counter. The
+    exclusions live in the script's config with their reasons, since documenting an endpoint is a
+    commitment not to change its shape.
+  - **Response bodies are not yet documented** — the source registry carries no response types, so
+    operations declare a bare `200` plus shared `401`/`403`/`429`. `api-reference/read` and
+    `api-reference/playground` state this plainly and point at the playground for real responses.
+  - Rewrote the playground hand-off in `api-reference/read`, `api-reference/introduction`, and
+    `api-reference/playground`: the reference now answers "what endpoints exist and what do they
+    take", the playground answers "what does the response look like".
 - **New product surfaces documented (2026-07-20), from the same sync pass:**
   - **Per-site reporting timezone** (0182) — canonical section in `guides/site-settings` covering the
     two states (unset ⇒ browser zone for the dashboard and UTC for reports; set ⇒ canonical for the

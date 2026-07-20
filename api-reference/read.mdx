@@ -67,8 +67,29 @@ Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, a
 
 Three **composite dimensions** group by host and path together, for sites serving one path from several hostnames: `pathname_host`, `entry_page_host`, and `exit_page_host`. Their rows carry `hostname` and `pathname` as separate fields alongside the standard `value`, `count`, `percentage`, and `pageviews`, so you can read either part without parsing `value`. Hostnames are lowercased when grouped. See [Pages](/guides/pages) for the dashboard equivalent.
 
+## Where are the rest of the endpoints?
+
+These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **133 endpoints across 29 groups** — every one with its full path, method, and parameters:
+
+<Columns cols={2}>
+  <Card title="Overview" icon="gauge" href="/api-reference/overview/get-overview">
+    Headline metrics, time series, and breakdowns.
+  </Card>
+  <Card title="Performance" icon="gauge-high" href="/api-reference/performance/get-performance-overview">
+    Core Web Vitals over time and by dimension.
+  </Card>
+  <Card title="Feature flags" icon="toggle-on" href="/api-reference/feature-flags/list-feature-flags">
+    Manage flags and evaluate them for a user.
+  </Card>
+  <Card title="Uptime monitors" icon="heart-pulse" href="/api-reference/uptime-monitors/list-monitors">
+    HTTP and TCP monitors and their history.
+  </Card>
+</Columns>
+
+Goals, funnels, segments, cohorts, surveys, experiments, dashboards, alerts, annotations, errors, revenue, sessions, users, bots, retention, and journeys each have their own group in the sidebar.
+
 <Note>
-  Beyond these, endpoints exist for performance, journeys, bots, errors, user traits, and more. The quickest way to discover an endpoint's exact parameters and response is the built-in [API playground](/api-reference/playground), which builds and runs each call against your own data.
+  **Response bodies aren't documented yet.** Each endpoint page lists its parameters in full, but not the shape of what comes back. To see a real response, run the call in the built-in [API playground](/api-reference/playground) against your own data.
 </Note>
 
 ## Who can read a site's analytics?
@@ -82,7 +103,10 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
     No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-keys) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
   </Accordion>
   <Accordion title="How do I find an endpoint's exact parameters and response?">
-    Use the built-in [API playground](/api-reference/playground). It builds and runs each call against your own data, which is the quickest way to see an endpoint's parameters and response shape — including the endpoints beyond the six core reads, such as performance, journeys, bots, errors, and user traits.
+    For **parameters**, use the **Endpoints** section of this reference — 133 endpoints across 29 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/playground) against your own data; response bodies aren't documented in the reference yet.
+  </Accordion>
+  <Accordion title="Does tinyanalytics have an API for goals, funnels, or feature flags?">
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), sessions, users, user traits, bots, catalog, retention, journeys, and [uptime monitoring](/api-reference/uptime-monitors/list-monitors) — 133 endpoints in total. Each has a page in the **Endpoints** section of this reference.
   </Accordion>
   <Accordion title="Can I compare a date range against the previous period?">
     Yes, on `timeseries` and `breakdown`. Request `compare=previous` to get a baseline. The `overview` endpoint already returns `{ "current", "previous", "change" }` — the headline metrics, the previous equal-length period, and the percent change.

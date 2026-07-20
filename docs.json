@@ -238,6 +238,10 @@
               "api-reference/rate-limits",
               "api-reference/playground"
             ]
+          },
+          {
+            "group": "Endpoints",
+            "openapi": "openapi.json"
           }
         ]
       },
