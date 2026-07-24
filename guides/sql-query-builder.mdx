@@ -1,10 +1,30 @@
 ---
 title: "SQL query builder"
-description: "Run read-only SQL directly against your site's analytics when the standard reports aren't enough. Query two site-scoped virtual tables and turn any result into a dashboard card."
+description: "Run read-only SQL directly against your site's analytics when the standard reports aren't enough — or describe what you want in plain English and let AI write the SQL. Query two site-scoped virtual tables and turn any result into a dashboard card."
 icon: "database"
 ---
 
-The SQL query builder lets you run read-only SQL directly against your site's analytics data — the escape hatch for questions the standard reports don't answer. You write a `SELECT` against two virtual tables that are **already scoped to your site**, run it, and read the results in a sortable table.
+The SQL query builder lets you run read-only SQL directly against your site's analytics data — the escape hatch for questions the standard reports don't answer. You write a `SELECT` against two virtual tables that are **already scoped to your site**, run it, and read the results in a sortable table. If you'd rather not write SQL, describe the question in plain English and let **Ask AI** generate the query for you.
+
+## Can I generate SQL from a question?
+
+Yes. Above the editor, the **Ask AI** box turns a plain-English question into a query. Type what you want — for example, *"top 10 pages by pageviews last week"* — and click **Generate**. tinyanalytics writes the SQL into the editor for you to review, run, or edit before running.
+
+Generated SQL is **validated by the same read-only guard as hand-written SQL** before it runs — the AI can't widen your scope, reach another site's data, or write anything. It's a faster way to reach the same guarded query, not a way around the rules.
+
+AI generation is metered per calendar month by plan:
+
+| Plan | AI queries per month |
+| --- | --- |
+| Free | 20 |
+| Growth | 500 |
+| Business | Unlimited |
+
+Running the SQL the AI produces — or any SQL you write yourself — is never metered. Only the generation step counts against the limit.
+
+<Tip>
+  **Bring your own key to skip the limit.** Add a personal Anthropic API key under **Settings → Account** and AI generation runs against your own Anthropic account instead of your plan's allowance — so it's billed to you and never counts against the monthly quota. See [account settings](/guides/account-settings#can-i-use-my-own-anthropic-key-for-ai-queries).
+</Tip>
 
 ## How do I write a query?
 
@@ -53,6 +73,12 @@ Save the query as a card and pick a visualization. Any query you've written is t
   </Accordion>
   <Accordion title="Can I run INSERT, UPDATE, or DELETE in the SQL query builder?">
     No. The query builder is read-only by design. Writes, schema changes, multiple statements, and any attempt to read outside your scoped tables are all blocked, so exploring your data can never change or damage it.
+  </Accordion>
+  <Accordion title="How many AI queries can I generate?">
+    AI generation is metered per calendar month by plan: **20** on Free, **500** on Growth, and **unlimited** on Business. Only the generation step counts — running the resulting SQL, or any SQL you write yourself, is never metered. Add your own Anthropic API key in **Settings → Account** to bypass the limit entirely.
+  </Accordion>
+  <Accordion title="Is AI-generated SQL still read-only and scoped to my site?">
+    Yes. Anything the AI produces runs through the same guard as hand-written SQL before it executes: a single `SELECT` reading only your scoped `scoped_events` / `scoped_events_bot` tables, capped at 1,000 rows and 10 seconds. The AI can't widen your scope, reach another site's data, or write anything.
   </Accordion>
 </AccordionGroup>
 

@@ -7,6 +7,39 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Changed
+- **Product-sync pass (2026-07-24):** brought the docs current with the 68 product commits landed
+  since the last sync point (`d400019`), covering the AI-query, Search Console, autocapture-targeting,
+  users-write, localization, and identity/accuracy changes (product decisions 0193–0214). Facts were
+  verified against source — `plans.ts`, tracker `config.ts`, `gsc-metrics.tsx`, and the exclusions/user
+  components — not commit messages. 14 pages updated.
+  - `guides/search-console` — rewrote for the report's new shape: a totals strip with
+    **impression-weighted** CTR/position and period-over-period comparison, a dual-axis clicks/impressions
+    **trend chart**, the **first-party join** (your sessions/pageviews and entry-page bounce/engaged next
+    to Google's metrics on Pages/Countries/Devices; Queries stays Google-only), row **drill-down**, **CSV
+    export**, and **Pacific-day** windows (Last 7 / 28 / 90 days, default 28, ending ~2 days ago).
+  - `guides/sql-query-builder` — documented **Ask AI** natural-language → SQL generation, the per-plan
+    monthly limits (Free 20, Growth 500, Business unlimited), and that generated SQL runs through the
+    same read-only guard.
+  - `guides/account-settings` — added the **dashboard language** section (7 locales: English, German,
+    Spanish, French, Portuguese, Japanese, Turkish; per-browser, instant) and the **Anthropic API key**
+    (BYOK) card that bypasses the AI-query limit.
+  - `guides/goals`, `guides/funnels`, `guides/autocapture`, `guides/events` — documented **autocapture
+    targeting**: goals and funnel steps on outbound links, button clicks, form submissions, and copies
+    with value patterns (`input_change` is not targetable; autocapture goals can't aggregate revenue),
+    plus the Events page **Autocapture** browser.
+  - `guides/users` — added the profile write actions: **Identify User** (anonymous visitors),
+    **Edit Traits** (identified users), and **Delete User** as the **GDPR erasure** tool (owner/admin only).
+  - `guides/ai-traffic` — noted that **AI Traffic** now appears as a glance metric on the home
+    website cards; `resources/metrics-glossary` gained an **AI traffic (AI sessions)** definition.
+  - `guides/script-configuration` — documented the `data-debounce` attribute (default 500 ms) and the
+    same-URL skip that stop SPA route changes from double-counting pageviews.
+  - `guides/exclude-traffic` — documented the **first-party proxy** IP-resolution toggle (framed as an
+    accuracy setting, not an exclusion).
+  - `resources/cookieless-identity` — added how identity is steadied for **rotating-egress** networks
+    (VPNs, WARP, iCloud Private Relay, corporate proxies); `resources/bot-detection` — noted the
+    shared-network (CGNAT) false-positive protection.
+
 ### Fixed
 - **Product-sync pass (2026-07-20):** audited the 15 product commits landed since the docs last
   captured product facts (`4ee8613` onward) and corrected six pages that had become **factually

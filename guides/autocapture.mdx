@@ -21,6 +21,25 @@ Autocapture is **on by default**. Each type is an independent toggle you can tur
 
 Each interaction is its own event type, so you can filter to it in the Events explorer's event-type view and build [goals](/guides/goals) or [funnels](/guides/funnels) from it.
 
+## Which autocaptured events can I build goals and funnels on?
+
+Four autocapture types can be a [goal](/guides/goals) or a [funnel](/guides/funnels) step directly — no custom event required:
+
+- **Outbound link** — matched against the destination URL
+- **Button click** — matched against the button text
+- **Form submission** — matched against the form's name, id, or action
+- **Copy** — matched against the copied text
+
+Add an optional **value pattern** to target a specific interaction — for example, a goal on outbound links to `*.stripe.com`, or a funnel step for the button that reads `Start free trial`. Patterns use `*` and `**` as wildcards; leave the pattern blank (or enter `*` for a funnel step) to match any event of that type.
+
+<Note>
+  Individual **`input_change`** events are captured for the Events explorer but can't be a goal or funnel target — they're too high-volume to build a conversion on.
+</Note>
+
+## How do I browse what's been captured?
+
+Open the **Autocapture** dialog on the [Events explorer](/guides/events) to see every distinct value an autocapture type has recorded over your current date range. Pick a type — outbound links, button clicks, form submissions, or copies — and the table lists each value with its **count**, its **share** of that type, and when it was **last seen**. It's the quickest way to find the exact button text or outbound URL to target before you build a goal or funnel on it.
+
 ## What do form captures never record?
 
 Form capture records the **shape** of a submission, never its contents:
@@ -82,6 +101,9 @@ See [configure the tracking script](/guides/script-configuration#turn-auto-captu
   </Accordion>
   <Accordion title="How do I stop autocapture on a single element?">
     Add `data-ta-event` to that element. tinyanalytics then skips the automatic capture for it, so you can send your own [custom event](/guides/custom-events) instead. To turn a capture type off site-wide, set its toggle attribute to `"false"` on the tracking script.
+  </Accordion>
+  <Accordion title="Can I make a conversion goal from an autocaptured button click or link?">
+    Yes. Outbound links, button clicks, form submissions, and copies can each be a [goal](/guides/goals) or a [funnel](/guides/funnels) step directly, with no custom event to write. Add a value pattern (with `*` and `**` wildcards) to target a specific interaction, or leave it blank to count every event of that type. Individual field-change (`input_change`) events can't be used as a target.
   </Accordion>
 </AccordionGroup>
 

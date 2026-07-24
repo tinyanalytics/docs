@@ -32,6 +32,7 @@ Set any of the attributes below on the tracking script tag. Each one has a defau
 | `data-namespace` | `tinyanalytics` | The global variable name (`window.tinyanalytics`) and the opt-out key prefix. |
 | `data-auto-pageview` | `true` | Send a pageview automatically when the page loads. |
 | `data-track-spa` | `true` | Track client-side route changes in single-page apps. |
+| `data-debounce` | `500` | Milliseconds to wait before recording an SPA pageview, so a burst of route changes counts once. `0` fires immediately. |
 | `data-track-outbound` | `true` | Record clicks on links to other domains. |
 | `data-track-downloads` | `true` | Record clicks on links to downloadable files. |
 | `data-track-clicks` | `true` | Record button clicks. |
@@ -48,6 +49,15 @@ Set any of the attributes below on the tracking script tag. Each one has a defau
 ## Track single-page apps
 
 SPA route tracking is **on by default** (`data-track-spa`). When your app changes routes on the client — as React, Vue, Svelte, and similar frameworks do — tinyanalytics records each route change as a new pageview. You don't need to configure anything for most single-page apps. Set `data-track-spa="false"` only if you want to record pageviews manually instead.
+
+### Why one navigation counts as one pageview
+
+Many SPA routers fire **several history events for a single navigation** (a `pushState` followed by a `replaceState`, plus one on hydration). Left unguarded, that inflates pageviews and collapses bounce rate. tinyanalytics prevents it two ways:
+
+- **Debounce (`data-debounce`, default 500 ms).** A burst of route changes within the window collapses into **one** pageview, sent after the burst so it carries the final URL. Lower it for snappier per-route tracking, or set `data-debounce="0"` to fire on every route change immediately.
+- **Same-URL skip.** A route change that leaves the URL unchanged records nothing, so a hydration re-render never becomes a phantom second pageview.
+
+A debounced pageview can be missed if the tab closes inside the window; the initial page-load pageview is never debounced.
 
 ## Turn auto-capture on or off
 
@@ -141,6 +151,9 @@ While that key is present, the script installs a no-op and sends nothing from th
   </Accordion>
   <Accordion title="What happens if a path pattern is malformed?">
     A malformed `data-skip-paths` or `data-mask-paths` pattern is ignored rather than breaking tracking. Valid patterns use `*` for one path segment, `**` for any depth, and `re:<expression>` for a raw regular expression.
+  </Accordion>
+  <Accordion title="Why is my single-page app double-counting pageviews?">
+    Many SPA routers fire more than one history event per navigation, and each could become a pageview. tinyanalytics collapses a burst of route changes into one pageview using a **500 ms debounce** (`data-debounce`) and skips any route change that doesn't alter the URL. If a tool navigates by `replaceState` only and you want a pageview per change, set `data-debounce="0"`.
   </Accordion>
 </AccordionGroup>
 

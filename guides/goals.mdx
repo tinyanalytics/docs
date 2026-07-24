@@ -8,12 +8,13 @@ A goal is a single outcome you want visitors to reach — a signup, a purchase, 
 
 ## How do I define a goal?
 
-A goal matches one of two things:
+A goal matches one of three things:
 
-- a **page** — a conversion happens when a visitor views a matching path, or
-- a **custom event** — a conversion happens when a visitor fires a matching [event](/guides/custom-events).
+- a **page** — a conversion happens when a visitor views a matching path,
+- a **custom event** — a conversion happens when a visitor fires a matching [event](/guides/custom-events), or
+- an **autocaptured interaction** — a conversion happens when a visitor triggers a matching [autocapture](/guides/autocapture) event (an outbound link, button click, form submission, or copy).
 
-For either type, you choose how the value is matched:
+For a page or custom-event goal, you choose how the value is matched:
 
 | Match type | Converts when the path or event name… |
 | --- | --- |
@@ -23,6 +24,21 @@ For either type, you choose how the value is matched:
 | **Regex** | matches your regular expression |
 
 Give the goal a name, and it starts tracking conversions.
+
+## Can I turn an autocaptured interaction into a goal?
+
+Yes. You can build a goal on any of four [autocapture](/guides/autocapture) event types without writing a custom event:
+
+- **Outbound link** — matched against the destination URL
+- **Button click** — matched against the button text
+- **Form submission** — matched against the form's name, id, or action
+- **Copy** — matched against the copied text
+
+Pick the type, then add an optional **value pattern** to narrow it — for example, an outbound goal that matches only links to `*.stripe.com`. Patterns use `*` (any run of characters) and `**` (any characters, including slashes); **leave the pattern blank to count every event of that type**. As you type, tinyanalytics suggests real values it has already captured, so you can target something you've actually seen.
+
+<Note>
+  **`input_change` isn't a goal target.** Individual field changes are captured for the [Events explorer](/guides/events) but are too high-volume to build a conversion on, so they can't be used as a goal. Autocapture goals also can't aggregate [revenue](/guides/revenue) — attach revenue to a [custom event](/guides/custom-events) instead.
+</Note>
 
 ## What do goal results show?
 
@@ -49,6 +65,9 @@ Each goal card carries three icon buttons for these actions:
   </Accordion>
   <Accordion title="Can a tinyanalytics goal match a URL pattern or regular expression?">
     Yes. A goal matches a page path or a custom event name using one of four match types: exact, starts with, contains, or regex. Choose regex to match a regular expression, such as a family of paths under one section of your site.
+  </Accordion>
+  <Accordion title="Can I set a goal on a button click or outbound link without writing code?">
+    Yes. A goal can target an [autocapture](/guides/autocapture) event — an outbound link, button click, form submission, or copy — with no custom event to write. Add an optional value pattern (with `*` and `**` wildcards) to narrow it, or leave the pattern blank to count every event of that type. Individual `input_change` events can't be used as a goal.
   </Accordion>
   <Accordion title="What's the difference between a goal and a funnel?">
     A goal tracks a single outcome — "did they convert?" — while a [funnel](/guides/funnels) tracks an ordered sequence of steps and shows where people drop off on the way. Use a goal when you only need the conversion count and rate for one page view or custom event.

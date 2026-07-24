@@ -1,10 +1,10 @@
 ---
 title: "Account settings"
-description: "Manage your tinyanalytics account — update your name, change your password, create and revoke API keys, and delete your account — from the account settings page."
+description: "Manage your tinyanalytics account — update your name, change your password, choose your dashboard language, add an Anthropic key for AI queries, create and revoke API keys, and delete your account."
 icon: "user-gear"
 ---
 
-Your account settings are where you manage your personal tinyanalytics profile: your name, your password, your API keys, and your account itself. Find them under **Settings → Account**. Account settings are personal to you — they're separate from your [organization's settings](/guides/organizations), which cover your sites and teammates.
+Your account settings are where you manage your personal tinyanalytics profile: your name, your password, your dashboard language, your API keys, and your account itself. Find them under **Settings → Account**. Account settings are personal to you — they're separate from your [organization's settings](/guides/organizations), which cover your sites and teammates.
 
 ## What you can manage
 
@@ -12,6 +12,8 @@ Your account settings are where you manage your personal tinyanalytics profile: 
 | --- | --- |
 | **Profile** | Update your display name. Your account shows the email you sign in with. |
 | **Password** | Change your password, with a strength meter to help you pick a strong one. |
+| **Language** | Choose the dashboard's display language, per browser. |
+| **Anthropic API key** | Add your own key so AI query generation bypasses your plan's limits. |
 | **API keys** | Create, list, and revoke API keys for programmatic access. |
 | **Delete account** | Permanently delete your account, confirmed with your password. |
 
@@ -20,6 +22,35 @@ Your account settings are where you manage your personal tinyanalytics profile: 
 Open **Settings → Account** and use the **Change Password** option. You'll enter your current password and a new one; the strength meter guides you toward a strong choice.
 
 If you've forgotten your password and can't sign in, use the **password reset** link on the sign-in page — tinyanalytics emails you a link to set a new one.
+
+## Can I change the dashboard language?
+
+Yes. The tinyanalytics dashboard is available in **seven languages**, and you choose yours from the **Language** card under **Settings → Account** — or from the **Language** submenu in the account menu (next to the theme toggle).
+
+| Language | Shown as |
+| --- | --- |
+| English | English |
+| German | Deutsch |
+| Spanish | Español |
+| French | Français |
+| Portuguese | Português |
+| Japanese | 日本語 |
+| Turkish | Türkçe |
+
+The language applies **instantly** — no reload, no save button. It's set **per browser**, so it isn't synced across your devices, and the first time you open the dashboard tinyanalytics matches your browser's preferred language, falling back to English.
+
+<Note>
+  This setting changes the **dashboard interface** only. It doesn't affect your analytics data — the "language" dimension in your reports still reflects each *visitor's* own browser language.
+</Note>
+
+## Can I use my own Anthropic key for AI queries?
+
+Yes. The **Anthropic API key** card under **Settings → Account** lets you add a personal Anthropic key so [AI query generation](/guides/sql-query-builder#can-i-generate-sql-from-a-question) runs against your own Anthropic account. When a key is saved, generation **bypasses your plan's monthly AI-query limit** and is billed to your Anthropic account instead.
+
+- Paste your key and **Save**. For your security, tinyanalytics never shows the key again after you save it — the card only confirms that a key is configured.
+- **Remove** the key at any time. AI generation then falls back to your plan's monthly limit (20 on Free, 500 on Growth, unlimited on Business).
+
+The key is used only for AI query generation; it's never used for anything else.
 
 ## How do I create and revoke API keys?
 
@@ -45,8 +76,17 @@ The **Delete account** action permanently removes your account and is confirmed 
   <Accordion title="Where do I manage my tinyanalytics API keys?">
     Under **Settings → Account**. You can create, list, and revoke API keys there for programmatic access. Copy a key when it's shown, and revoke it whenever it's no longer needed.
   </Accordion>
+  <Accordion title="What languages is the tinyanalytics dashboard available in?">
+    Seven: English, German (Deutsch), Spanish (Español), French (Français), Portuguese (Português), Japanese (日本語), and Turkish (Türkçe). Choose yours from the **Language** card under **Settings → Account** or from the account menu. It's set per browser and applies instantly. This changes the dashboard interface only — not your analytics data.
+  </Accordion>
+  <Accordion title="Does my dashboard language sync across devices?">
+    No. The dashboard language is stored per browser, so each browser you sign in from keeps its own choice. The first time you open the dashboard, tinyanalytics matches your browser's preferred language and falls back to English.
+  </Accordion>
+  <Accordion title="How do I stop AI queries from counting against my plan limit?">
+    Add a personal Anthropic API key under **Settings → Account**. AI query generation then runs against your own Anthropic account and is billed to you, bypassing your plan's monthly limit. Remove the key to fall back to the plan limit (20 on Free, 500 on Growth, unlimited on Business).
+  </Accordion>
   <Accordion title="What's the difference between account settings and organization settings?">
-    Account settings are personal to you: your display name, password, API keys, and your account itself. [Organization settings](/guides/organizations) cover your sites and teammates and are shared with everyone in the organization.
+    Account settings are personal to you: your display name, password, dashboard language, API keys, and your account itself. [Organization settings](/guides/organizations) cover your sites and teammates and are shared with everyone in the organization.
   </Accordion>
 </AccordionGroup>
 

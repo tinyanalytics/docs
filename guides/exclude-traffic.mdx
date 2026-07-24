@@ -57,6 +57,16 @@ One case still needs configuring: **hops between two sibling subdomains**, like 
 
 Yes. tinyanalytics filters out bots and crawlers automatically, and the **block-bots** toggle in your site settings controls it. It's **on by default**, so most sites never need to touch it — bot traffic is kept out of your reports without any configuration. See [how bot detection works](/resources/bot-detection) for what's caught.
 
+## What is the first-party proxy setting?
+
+The **Exclusions** tab also holds a **First-party proxy** toggle. It doesn't exclude anything — it changes how tinyanalytics reads a visitor's IP address when **your own reverse proxy sits in front of the tracker**.
+
+Turn it on only for one specific topology: your own proxy fronts the tracker **and** that proxy sits behind Cloudflare. In that setup, the network-level client IP is your proxy's address, and the real visitor is the first hop in the `X-Forwarded-For` header. The toggle tells tinyanalytics to trust that hop, so visitor IPs — and the country, region, and network derived from them — are correct instead of showing your proxy.
+
+<Warning>
+  **Leave first-party proxy off unless your topology needs it.** `X-Forwarded-For` is a header a client can set, so trusting it when nothing enforces it would let visitor IPs be spoofed. It's off by default, and most sites never turn it on.
+</Warning>
+
 ## How do I hide my own traffic?
 
 Pick the option that matches what you want to exclude — a single device or an entire network.

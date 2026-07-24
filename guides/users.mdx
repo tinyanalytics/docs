@@ -46,6 +46,32 @@ A profile has two summary cards alongside the session history:
 
 The profile's activity calendar shades each day by how many sessions it held. Its scale caps at your 95th-busiest day, so a single outlier can't flatten every other day into the same shade, and days are drawn in your site's reporting timezone so the grid reads the same for everyone on the team.
 
+## How do I identify, edit, or delete a user?
+
+Three actions live in the header of a user's profile, so you can manage a person right from where you're looking at them:
+
+| Action | Available for | Who can use it |
+| --- | --- | --- |
+| **Identify User** | anonymous (cookieless) visitors | any member with site access |
+| **Edit Traits** | identified users | any member with site access |
+| **Delete User** | any user | owner or admin only |
+
+- **Identify User** attaches one of your own user IDs — and, optionally, traits — to an anonymous visitor, then links that device's past activity to the ID. It's the manual counterpart to calling [`identify()`](/guides/identify-users) from your app: useful when you learn who a device belongs to after the fact.
+- **Edit Traits** changes the traits on an identified user. Edit them as form fields or as raw JSON. Saving **replaces** the whole trait set with what you submit, so include every trait you want to keep.
+- **Delete User** permanently erases that person from your analytics — see below.
+
+## How do I permanently delete a user's data (GDPR erasure)?
+
+Open the user's profile and use **Delete User** in the header. Deleting a user is the tool for a **GDPR "right to erasure" (right to be forgotten) request**: it permanently removes that person's events across every device tinyanalytics has linked to them, and then removes their stored profile. Only an **owner or admin** can do it.
+
+<Warning>
+  **Deleting a user can't be undone.** It's the one deliberate exception to tinyanalytics' rule that [data retention never deletes your history](/resources/data-handling) — this deletion is initiated by you, not a schedule. There is no recycle bin; the events are gone.
+</Warning>
+
+<Note>
+  For a brief period (up to about 24 hours), a returning visit from the same rotating-egress network *could* re-link to a just-deleted anonymous fingerprint before that link expires on its own. It clears automatically. For a firm erasure boundary, delete after the person's last visit rather than mid-session.
+</Note>
+
 ## Common workflows
 
 - **Follow a signed-in customer.** Identify users, then read one customer's full journey across sessions and devices.
@@ -68,7 +94,13 @@ The profile's activity calendar shades each day by how many sessions it held. It
     Yes. Click any of the **Last seen**, **First seen**, **Sessions**, **Pageviews**, or **Events** headings to sort by that column. The list is sorted by Last seen, newest first, by default. A newly clicked column starts with its largest values first, and clicking the active column reverses the order. The user, country, channel, browser, OS, and device columns aren't sortable.
   </Accordion>
   <Accordion title="What are user traits and where do I see them?">
-    Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`. They appear on the user's profile in the tinyanalytics Users report, and you can filter reports by them to segment your audience.
+    Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`, or edit them directly with **Edit Traits** on the user's profile. They appear on the user's profile in the tinyanalytics Users report, and you can filter reports by them to segment your audience.
+  </Accordion>
+  <Accordion title="How do I fulfill a GDPR erasure request in tinyanalytics?">
+    Open the person's profile in the Users report and use **Delete User** in the header. It permanently erases their events across every linked device and removes their stored profile. Only an owner or admin can do it, and it can't be undone — it's the one deliberate exception to tinyanalytics' rule that retention never deletes your history.
+  </Accordion>
+  <Accordion title="Can I identify a visitor or edit their traits from the dashboard?">
+    Yes. On an anonymous visitor's profile, **Identify User** attaches one of your own user IDs (and optional traits) and links their past activity — the manual counterpart to calling [`identify()`](/guides/identify-users). On an identified user's profile, **Edit Traits** lets you change their traits as fields or JSON; saving replaces the whole trait set. Both actions are available to any member with site access.
   </Accordion>
 </AccordionGroup>
 

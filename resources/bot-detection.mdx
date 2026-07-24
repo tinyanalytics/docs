@@ -15,9 +15,11 @@ tinyanalytics judges each request with layers that each catch a different kind o
 - **Request-behavior heuristics** — missing headers a real browser always sends, request bursts and crawl-shaped traffic patterns, and known referrer-spam domains.
 - **Automation signals** — signs that the browser is being driven by automation rather than a person.
 
-## Real visitors on cloud IPs aren't mislabeled
+## Real visitors on shared and cloud IPs aren't mislabeled
 
 A visitor on a VPN, a corporate proxy, or a cloud-hosted browser can share an IP with a datacenter — so tinyanalytics treats a datacenter-network match as **supporting evidence only**. It never flags a request as a bot on that fact alone; another layer has to fire too. This keeps real people from being filtered out just because of where their traffic originates.
+
+The same rule protects people on **shared networks** — carrier-grade NAT, office gateways, and campus Wi-Fi, where hundreds of real visitors leave through one IP. Signals that only describe a *crowd* behind an address (lots of requests, or lots of different browsers, from one IP) can corroborate a bot verdict but never convict on their own, so a busy shared network doesn't get mistaken for automation.
 
 ## Seeing the bots
 
