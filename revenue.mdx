@@ -1,54 +1,71 @@
 ---
 title: "Revenue analytics"
-description: "Attach a revenue amount and currency to any custom event in tinyanalytics, then read total revenue, average order value, paying sessions, and revenue by channel."
+description: "Measure revenue from client events or Stripe, including total and net revenue, refunds, average order value, paying sessions, and revenue by acquisition source."
 icon: "dollar-sign"
 ---
 
-Revenue analytics ties money to your traffic. You attach a **`revenue`** amount and a **`currency`** to any [custom event](/custom-events) — a purchase, an upgrade, a renewal — and tinyanalytics rolls it up into total revenue, average order value, and revenue by channel, country, and device. That shows you which traffic actually pays.
+Revenue analytics ties money to your traffic. Send revenue with a [custom event](/custom-events), connect [Stripe](/stripe-revenue), or use both. tinyanalytics reports total and net revenue, refunds, average order value, paying sessions, orders, and acquisition breakdowns so you can see which traffic produces revenue.
 
-## How do I send revenue with an event?
+## Choose a revenue source
 
-Add `revenue` and `currency` to any custom event you already send. These are **reserved property names** — tinyanalytics recognizes them and treats the event as a sale:
+<Tabs>
+  <Tab title="Client events">
+    Add `revenue` and `currency` to any custom event you already send. These are **reserved property names** — tinyanalytics recognizes them and treats the event as a sale:
 
-```js
-window.tinyanalytics.event('purchase', {
-  revenue: 49.99,
-  currency: 'USD'
-})
-```
+    ```js
+    window.tinyanalytics.event('purchase', {
+      revenue: 49.99,
+      currency: 'USD'
+    })
+    ```
 
-<ParamField body="revenue" type="number | string">
-  The amount in **major units** — dollars, euros, pounds — not cents. `49.99` means $49.99, not 49 cents. It accepts a number or a numeric string, and must be positive.
-</ParamField>
+    <ParamField body="revenue" type="number | string">
+      The amount in **major units** — dollars, euros, pounds — not cents. `49.99` means $49.99, not 49 cents. It accepts a number or a numeric string, and must be positive.
+    </ParamField>
 
-<ParamField body="currency" type="string">
-  A **3-letter code** like `USD`, `EUR`, or `GBP` (case-insensitive).
-</ParamField>
+    <ParamField body="currency" type="string">
+      A **3-letter code** like `USD`, `EUR`, or `GBP` (case-insensitive).
+    </ParamField>
 
-Only **custom events** carry revenue. A pageview never does.
+    Only **custom events** carry client revenue. A pageview never does.
 
-<Note>
-  Send one revenue event per completed sale, at the moment it completes — for a web store, on the order-confirmation page. Refunds and negative amounts aren't supported; revenue only adds up.
-</Note>
+    <Note>
+      Send one event per completed sale. Client revenue must be positive, so this source cannot represent refunds or negative adjustments.
+    </Note>
 
-You can send the same event [from your server](/api-reference/track) with an [API key](/api-reference/api-keys). That helps when the true "paid" moment is a webhook from your payment processor rather than a page in the browser.
+    You can send the same event [from your server](/api-reference/track) with an [API key](/api-reference/api-keys). This is useful when the true paid moment occurs on your backend.
+  </Tab>
+  <Tab title="Stripe">
+    Connect Stripe with a restricted key to receive server-verified charges, refunds, and lost disputes through a webhook. No tracking-code change is required.
+
+    Stripe revenue can be attributed through analytics IDs in Stripe metadata or, when you opt in, an email match to an already identified user. Collection starts when you connect; historical Stripe payments are not backfilled.
+
+    [Connect Stripe revenue →](/stripe-revenue)
+  </Tab>
+</Tabs>
 
 ## What does the Revenue report show?
 
-The Revenue report leads with four headline metrics, each with its change versus the previous period:
+Use the tabs at the top of the report to switch between **All**, **Client events**, and **Stripe**. The report includes these headline metrics:
 
 | Metric | What it means |
 | --- | --- |
-| **Total revenue** | The sum of all revenue in the period, in your reporting currency. |
+| **Total revenue** | Gross positive revenue in the period, in your reporting currency. |
+| **Net revenue** | Gross revenue minus Stripe refunds and lost disputes. |
+| **Refunds** | The amount subtracted by Stripe refunds and lost disputes. |
 | **Avg. order value** | Total revenue divided by the number of orders. |
 | **Paying sessions** | Distinct sessions that produced at least one revenue event. |
-| **Orders** | The number of revenue-bearing events. |
+| **Orders** | The number of completed revenue-bearing purchases. |
 
-Below that, a **revenue-over-time chart** shows the trend across your date range. A **"Revenue by" table** breaks revenue down across dimensions — channel, country, region, referrer, AI assistant, device, browser, operating system, and UTM tags.
+Below the metrics, a **revenue-over-time chart** shows the trend across your date range. A **Revenue by** table breaks revenue down across dimensions — channel, country, region, referrer, AI assistant, device, browser, operating system, and UTM tags.
 
 <Tip>
   Revenue in the breakdown is credited to the **session's entry acquisition** — the source that first brought the visitor in. That means revenue-by-channel reconciles with sessions-by-channel: the channel that *won the visit* gets the credit for the sale, even if the purchase happened pages later.
 </Tip>
+
+<Warning>
+  tinyanalytics does not deduplicate the same purchase across client events and Stripe. If both sources report it, the **All** tab counts it twice. Choose one source of truth or use the source-specific tabs.
+</Warning>
 
 ## How does tinyanalytics convert currencies?
 
@@ -58,12 +75,14 @@ Conversion uses built-in exchange rates for **22 major currencies** (USD, EUR, G
 
 ## Where else does revenue appear?
 
-Once your events carry revenue, it powers more than the Revenue report:
+Client revenue events power more than the Revenue report:
 
 - **[Goals](/goals)** — a revenue goal sums the money behind a conversion, not just its count.
 - **[Funnels](/funnels)** — each step shows the revenue of the sessions that reached it.
 - **[Experiments](/experiments)** — compare revenue and revenue-per-visitor across variants, counting only purchases after a visitor was exposed.
 - **[Alerts](/alerts)** — get notified when revenue crosses a threshold you set.
+
+These features currently read **client events only**; Stripe revenue is not included. Stripe data is available in the Revenue report and through [`scoped_stripe_revenue`](/sql-query-builder#how-do-i-query-stripe-revenue).
 
 ## Frequently asked questions
 
@@ -72,13 +91,16 @@ Once your events carry revenue, it powers more than the Revenue report:
     Send it in **major units** — dollars, euros, or pounds — not cents. In tinyanalytics, a `revenue` value of `49.99` means $49.99, not 49 cents. The field accepts a number or a numeric string, and the amount must be positive.
   </Accordion>
   <Accordion title="Can I track refunds or negative revenue in tinyanalytics?">
-    No. Refunds and negative amounts aren't supported — revenue in tinyanalytics only adds up. Send one revenue event per completed sale, at the moment it completes.
+    Yes, through the [Stripe integration](/stripe-revenue). Stripe refunds and lost disputes subtract from net revenue. Client revenue events must remain positive and cannot represent refunds.
   </Accordion>
   <Accordion title="What happens if I send a currency tinyanalytics has no exchange rate for?">
     The revenue is stored and counted at a 1:1 rate rather than dropped, so no revenue goes missing. tinyanalytics has built-in rates for 22 major currencies (USD, EUR, GBP, JPY, and the like), refreshed with each release. For exact multi-currency accounting, treat the reporting-currency total as a close estimate.
   </Accordion>
   <Accordion title="Which marketing channel gets credit for a sale?">
     The **session's entry acquisition** — the source that first brought the visitor in. The channel that won the visit gets the credit, even if the purchase happened several pages later. This is why revenue-by-channel reconciles with sessions-by-channel.
+  </Accordion>
+  <Accordion title="Why is revenue counted twice on the All tab?">
+    tinyanalytics does not deduplicate the same purchase across client events and Stripe. If both sources report it, **All** counts both records. Use the **Stripe** or **Client events** tab as your source of truth, or stop sending the duplicate client event.
   </Accordion>
 </AccordionGroup>
 
@@ -96,5 +118,8 @@ Once your events carry revenue, it powers more than the Revenue report:
   </Card>
   <Card title="Tracking API" icon="paper-plane" href="/api-reference/track">
     Send revenue events from your server.
+  </Card>
+  <Card title="Connect Stripe" icon="credit-card" href="/stripe-revenue">
+    Receive verified payments and refunds.
   </Card>
 </Columns>

@@ -46,6 +46,16 @@ Selecting the **URLs** tab turns URL mode on, and selecting **Pages** turns it b
   URL mode travels in the page address as `?pagesMode=url`, so a dashboard link you copy and share reopens in URL mode for whoever you send it to. Hostnames are matched in lowercase, and `www.example.com` and `example.com` are **not** merged — they rank as separate rows.
 </Note>
 
+## How do I show the hostname without splitting rows?
+
+Turn on **Show full URL** to display each row as `hostname/pathname` while keeping the Pages report grouped by path. The switch appears when the current page rows contain more than one hostname.
+
+This display option is useful when you want hostname context without changing the report's grouping. It also makes the row's external link open the displayed hostname. Because the row still represents a path grouped across hostnames, tinyanalytics shows its latest representative hostname; it does not split traffic by host.
+
+<Tip>
+  Use **Show full URL** for context. Use the **URLs** tab when `example.com/pricing` and `app.example.com/pricing` must become separate rows with separate metrics.
+</Tip>
+
 ## How do I read the Landing pages report?
 
 A **landing page** is the first page a visitor sees in a session — where the visit begins. The **Landing pages** report ranks your entry pages and adds the engagement metrics that tell you whether each one actually holds attention:
@@ -104,6 +114,9 @@ In **URLs** mode a row click applies **two** filters together, hostname and path
   </Accordion>
   <Accordion title="Why do two hostnames share one row in the Pages report?">
     The report groups by path by default, so `example.com/pricing` and `app.example.com/pricing` combine into one `/pricing` row. Switch to the **URLs** tab to group by host and path together and see them separately. When your date range contains more than one hostname, tinyanalytics offers this switch in a banner above the report.
+  </Accordion>
+  <Accordion title="What's the difference between Show full URL and the URLs tab?">
+    **Show full URL** adds a representative hostname to each displayed path but keeps traffic grouped by path. The **URLs** tab changes the grouping to hostname plus path, so the same path on two hostnames becomes two rows with separate metrics.
   </Accordion>
 </AccordionGroup>
 

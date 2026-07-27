@@ -1,10 +1,10 @@
 ---
 title: "Site settings"
-description: "Manage a tinyanalytics site: its name and domain, reporting currency and timezone, public or private visibility, traffic exclusions, moving it between organizations, and deleting it."
+description: "Manage a tinyanalytics site: its name, reporting settings, Stripe integration, visibility, traffic exclusions, organization, and deletion."
 icon: "gear"
 ---
 
-Every site has its own **Settings**, reached from the site's sidebar. This is where you rename the site, set its reporting currency, make its dashboard public or private, tune what the tracker collects, move the site to another organization, or delete it. Settings are organized into tabs — here's what each one controls and where to read more.
+Every site has its own **Settings**, reached from the site's sidebar. This is where you rename the site, set reporting defaults, manage integrations, control visibility and collection, move the site to another organization, or delete it.
 
 ## Site details
 
@@ -13,6 +13,12 @@ Set the site's **name** (how it appears in your dashboard) and its **domain** �
 ## Which currency are my reports shown in?
 
 Under **Revenue**, choose the currency your reports are shown in. Revenue events are stored in whatever currency they're sent in, then converted to this reporting currency when a report is read. See [Revenue analytics](/revenue) for how sending and conversion work.
+
+## Which integrations can I manage?
+
+Open **Settings → Integrations** to connect services that send or enrich site data. The Stripe integration receives server-verified charges, refunds, and lost disputes through a webhook. Its status shows the masked key fingerprint, test or live mode, webhook mode and endpoint health, connection date, and last received event.
+
+Use a least-privilege Stripe restricted key — never a secret key. See [Connect Stripe revenue](/stripe-revenue) for permissions, setup, attribution, and verification.
 
 ## Which timezone are my reports based on?
 
@@ -119,5 +125,8 @@ The **Danger Zone** deletes a site and its data permanently. tinyanalytics asks 
   </Card>
   <Card title="Revenue analytics" icon="dollar-sign" href="/revenue">
     Set your reporting currency.
+  </Card>
+  <Card title="Connect Stripe" icon="credit-card" href="/stripe-revenue">
+    Receive verified charges and refunds.
   </Card>
 </Columns>

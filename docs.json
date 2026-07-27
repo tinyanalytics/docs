@@ -2,6 +2,20 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
   "name": "tinyanalytics",
+  "description": "Learn how to install tinyanalytics, collect cookieless web and product analytics, explore reports, manage data, and use the API.",
+  "seo": {
+    "indexing": "navigable",
+    "metatags": {
+      "author": "Tinyanalytics",
+      "og:site_name": "tinyanalytics documentation",
+      "og:locale": "en_US",
+      "twitter:card": "summary_large_image",
+      "theme-color": "#006420"
+    },
+    "organization": {
+      "name": "Tinyanalytics"
+    }
+  },
   "colors": {
     "primary": "#006420",
     "light": "#009B32",
@@ -16,6 +30,14 @@
   },
   "favicon": "/favicon.svg",
   "redirects": [
+    {
+      "source": "/rollup",
+      "destination": "/organization-overview"
+    },
+    {
+      "source": "/guides/rollup",
+      "destination": "/organization-overview"
+    },
     {
       "source": "/guides",
       "destination": "/"
@@ -71,7 +93,7 @@
                   "users",
                   "events",
                   "map",
-                  "rollup"
+                  "organization-overview"
                 ]
               },
               {
@@ -117,6 +139,7 @@
                 "expanded": false,
                 "pages": [
                   "revenue",
+                  "stripe-revenue",
                   "feature-flags",
                   "experiments",
                   "surveys",

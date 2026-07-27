@@ -1,10 +1,10 @@
 ---
 title: "Scoped SQL query"
-description: "Run read-only SQL against your site's analytics with POST /api/sites/{id}/query. Query two site-scoped virtual tables and get back rows with typed column metadata."
+description: "Run read-only SQL against site-scoped analytics, bot, and Stripe revenue tables with POST /api/sites/{id}/query and receive typed result metadata."
 icon: "database"
 ---
 
-`POST /api/sites/{id}/query` runs a **read-only SQL query** against your site's analytics data and returns the rows with typed column metadata — the programmatic form of the [SQL query builder](/sql-query-builder). You write a `SELECT` against two virtual tables that are already scoped to your site.
+`POST /api/sites/{id}/query` runs a **read-only SQL query** against your site's analytics data and returns rows with typed column metadata — the programmatic form of the [SQL query builder](/sql-query-builder). You write a `SELECT` against virtual tables that are already scoped to your site.
 
 ```
 POST https://dash.tinyanalytics.io/api/sites/{id}/query
@@ -50,17 +50,31 @@ requests.post(
 </CodeGroup>
 
 <ParamField body="query" type="string" required>
-  A single read-only `SELECT` (or `WITH … SELECT`) against the two site-scoped virtual tables.
+  A single read-only `SELECT` (or `WITH … SELECT`) against the site-scoped virtual tables.
 </ParamField>
 
-## The two tables
+## The scoped tables
 
 | Table | Contains |
 | --- | --- |
 | `scoped_events` | your analytics events |
 | `scoped_events_bot` | events classified as bot traffic |
+| `scoped_stripe_revenue` | raw, signed Stripe charges, refunds, and disputes |
 
-Both are automatically filtered to the site in the URL — you never write a `site_id` filter, and a query can't reach another site's data.
+All three are automatically filtered to the site in the URL — you never write a `site_id` filter, and a query cannot reach another site's data.
+
+`scoped_stripe_revenue` is append-only. Deduplicate Stripe webhook replays by `stripe_event_id` before aggregating:
+
+```sql
+SELECT sum(amount) AS net_revenue
+FROM (
+  SELECT stripe_event_id, argMax(amount, timestamp) AS amount
+  FROM scoped_stripe_revenue
+  GROUP BY stripe_event_id
+)
+```
+
+See [query Stripe revenue](/sql-query-builder#how-do-i-query-stripe-revenue) for the table schema and currency caveats.
 
 ## Response
 
@@ -114,13 +128,13 @@ A SQL error comes back as a `400` with the database's message so you can fix the
 
 <AccordionGroup>
   <Accordion title="Can a query reach another site's data?">
-    No. `scoped_events` and `scoped_events_bot` are automatically filtered to the site in the URL of `POST /api/sites/{id}/query`. You never write a `site_id` filter, and a query can't reach another site's data.
+    No. All three scoped tables are automatically filtered to the site in the URL of `POST /api/sites/{id}/query`. You never write a `site_id` filter, and a query cannot reach another site's data.
   </Accordion>
   <Accordion title="How many rows can a scoped SQL query return?">
     At most **1,000 rows**, and the query runs for at most **10 seconds**. Both limits apply to every call to `POST /api/sites/{id}/query`.
   </Accordion>
   <Accordion title="What happens if my SQL is invalid?">
-    The endpoint returns a `400` with the database's own error message, so you can fix the query. Writes, schema changes, multiple statements, and reads outside the two scoped tables are rejected the same way — the query runs read-only and can never modify your data.
+    The endpoint returns a `400` with the database's own error message, so you can fix the query. Writes, schema changes, multiple statements, and reads outside the scoped tables are rejected the same way — the query runs read-only and can never modify your data.
   </Accordion>
 </AccordionGroup>
 

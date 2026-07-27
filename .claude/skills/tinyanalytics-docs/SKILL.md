@@ -94,7 +94,7 @@ Primary **Sage** (truthful, evidence-led, explains the mechanism), secondary
 - Honest, not hype. State limits in the page (e.g. "click-throughs only — not
   crawler ingestion"). Because users cannot read the source, honesty *is* the
   trust story.
-- Concrete, not abstract. "< 6 KB gzipped", not "lightweight".
+- Concrete, not abstract. "< 6.5 KB gzipped", not "lightweight".
 - Second person, active voice, sentence case (see the mintlify skill for the
   full writing standards — they apply here unchanged).
 
@@ -116,6 +116,27 @@ By archetype (details and examples in `PRD.md` §6):
 - **Integration guide** — keep the shared shape (prerequisites → snippet →
   verify → framework notes) so guides stay batch-consistent.
 - **Reference** — terse, complete, every field; no persuasion.
+
+## Component contract
+
+- Use `<Steps>` only for two or more ordered actions. End every procedure with
+  a visible **Verify** section and `<Check>` result.
+- Use `<Tabs>` for mutually exclusive choices, not sequential work. Keep shared
+  prerequisites, risks, and verification outside the tabs.
+- Group navigation cards with `<Columns>` and `<Card>`. Do not introduce new
+  `<CardGroup>` wrappers.
+- Keep required steps, safety constraints, limitations, and verification
+  visible. Accordions contain only optional FAQs, troubleshooting, and edge
+  cases.
+- Match callouts to meaning: `<Note>` for neutral context, `<Info>` for
+  supporting behavior or scope, `<Tip>` for optional improvements, `<Warning>`
+  for recoverable risks, `<Danger>` for irreversible actions, and `<Check>` for
+  successful results.
+- Add API fields and response examples only from verified product or OpenAPI
+  sources. Never infer a schema to complete a component.
+- Use diagrams and screenshots only when they materially improve
+  understanding. Screenshots must come from the live product and include
+  useful alt text.
 
 ## Before submitting
 

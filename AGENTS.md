@@ -32,7 +32,7 @@ tinyanalytics is privacy-friendly, cookieless web **and** product analytics, off
 
 - Second person, active voice, present tense; sentence case for headings.
 - Answer first: open every page and section with a direct, self-contained answer.
-- Specifics over adjectives ("under 6 KB gzipped", not "lightweight"). No marketing words.
+- Specifics over adjectives ("under 6.5 KB gzipped", not "lightweight"). No marketing words.
 - Bold for UI elements (**Add website**); code font for files, commands, paths, and endpoints.
 - Every how-to ends with a **Verify** step and a **Related** links block.
 

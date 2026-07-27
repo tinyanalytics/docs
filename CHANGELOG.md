@@ -8,6 +8,17 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- **Replaced Cross-site rollup with Organization overview (2026-07-27):** renamed and rewrote the
+  page for the new organization-level Overview — six combined metrics with sparklines, selectable
+  per-site trends, access-aware comparison, and the 50-site display cap. Added redirects from
+  `/rollup` and `/guides/rollup`.
+- **Corrected the tracking-script size claim (2026-07-27):** changed “under 6 KB gzipped” to the
+  enforced **under 6.5 KB gzipped** budget across the public pages, PRD, agent instructions, and
+  both copies of the project authoring skill.
+- **Completed Mintlify SEO configuration (2026-07-27):** added a global, benefit-bearing site
+  description; explicitly indexed navigable pages; set Open Graph locale/site-name, Twitter card,
+  author, and theme-color metadata; and configured the structured-data publisher organization as
+  **Tinyanalytics**. Canonical URLs remain Mintlify-generated until the final docs domain is confirmed.
 - **Updated documentation branding (2026-07-27):** changed the primary accent to `#006420` in
   light mode and `#009B32` in dark mode, and set Inter as the site-wide font.
 - **Flattened the main documentation routes (2026-07-27):** removed the separate `guides/`
@@ -71,6 +82,15 @@ project adheres to semantic versioning where practical.
     comparison is unavailable on this report.
 
 ### Added
+- **Stripe revenue guide (2026-07-27):** added `stripe-revenue` with restricted-key and manual
+  webhook setup, source tabs, charge/refund/dispute semantics, attribution, double-count prevention,
+  connection verification, and privacy boundaries. Extended the Revenue, site settings, SQL,
+  data-handling, and privacy pages for the same shipped source.
+- **Product-sync pass through `964f322` (2026-07-27):** audited product decisions 0215–0222 and
+  documented organization custom dashboards, seven alert templates, URL and event-property alert
+  scopes, distinct event-user alerts, the Pages **Show full URL** control, Goals/Funnels date and
+  filter controls, globally unique shortlink slugs, and the API playground's complete
+  customer-facing route catalog.
 - **Generated API endpoint reference (2026-07-20)** — the reference documented **9 endpoints** while
   the product's API playground exposed **158** (~6% coverage), and `api-reference/read` explicitly
   deferred the rest to the playground, which sits behind dashboard auth. 149 endpoints were

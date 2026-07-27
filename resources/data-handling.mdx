@@ -14,6 +14,7 @@ For each event your site sends, tinyanalytics keeps the analytics context it nee
 - **Derived attributes** — an approximate location (country, region, city) from the IP, the marketing [channel](/resources/traffic-classification), and the device, browser, and OS from the user agent.
 - **A cookieless identifier** — a one-way [hashed fingerprint](/resources/cookieless-identity), not a stored ID.
 - **What you choose to send** — [custom events](/custom-events) and their properties, plus any user ID and [traits](/identify-users) you set with `identify()`.
+- **Connected Stripe revenue** — when you [connect Stripe](/stripe-revenue), the amount, currency, adjustment type, Stripe event and charge IDs, live/test mode, and any analytics IDs resolved for attribution.
 
 ## What tinyanalytics never stores
 
@@ -24,6 +25,16 @@ For each event your site sends, tinyanalytics keeps the analytics context it nee
 <Warning>
   Because custom event properties and traits are free-form, you control whether any personal data enters tinyanalytics. Avoid putting raw personal information (like an email address) into event properties unless you intend to store it.
 </Warning>
+
+## How is a Stripe connection handled?
+
+tinyanalytics retains the restricted key and webhook signing secret needed to keep receiving Stripe events. The dashboard and API return only a masked key fingerprint, never the full restricted key.
+
+Stripe revenue rows do not store customer emails, names, card details, or free-form Stripe metadata. If you turn on the optional **Email fallback**, tinyanalytics processes the charge email long enough to match an existing identified user, then stores only the matched analytics ID in the revenue row. The email is not written to the analytics event store.
+
+<Note>
+  A Stripe charge ID linked to a session or identified-user ID is pseudonymous linkage, not anonymous data. Deleting the corresponding [user profile](/users) is the erasure path for the identity mapping.
+</Note>
 
 ## Your data stays isolated and yours
 

@@ -94,7 +94,7 @@ Primary **Sage** (truthful, evidence-led, explains the mechanism), secondary
 - Honest, not hype. State limits in the page (e.g. "click-throughs only — not
   crawler ingestion"). Because users cannot read the source, honesty *is* the
   trust story.
-- Concrete, not abstract. "< 6 KB gzipped", not "lightweight".
+- Concrete, not abstract. "< 6.5 KB gzipped", not "lightweight".
 - Second person, active voice, sentence case (see the mintlify skill for the
   full writing standards — they apply here unchanged).
 

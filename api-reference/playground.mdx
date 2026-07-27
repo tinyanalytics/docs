@@ -12,6 +12,17 @@ The API playground lets you **try the API against your own data** without leavin
 - **Copy a snippet** in the language you use — the playground generates the call for you.
 - **Confirm your key works** end to end before wiring the API into your app.
 
+The catalog covers the complete customer-facing REST surface. Alongside site analytics and management, it includes:
+
+- **Shortlinks** — create, read, update, delete, and read click statistics.
+- **Org Analytics** — combined overview, time series, per-site time series, and live visitors.
+- **Org Dashboards** — list, create, read, update, delete, and run a card.
+- **Stripe** — connect, inspect, and disconnect a site's revenue integration.
+- **User writes and discovery** — identify or delete a user, update traits, and discover autocaptured names and property values.
+- **Additional operations** — update a funnel, move a site, generate SQL with AI, read public tracking configuration and embed statistics, and manage your personal Anthropic key.
+
+Each entry's method, parameters, and example body follow the route's validation schema. If a customer-facing route is added, it should be added to the playground or consciously excluded.
+
 To look up an endpoint's **path, method, and parameters** without signing in, use the **Endpoints** section of this reference instead — it documents 133 endpoints across 29 groups.
 
 ## Authentication
@@ -45,6 +56,20 @@ requests.get(
 ```
 
 </CodeGroup>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does the playground include organization-level endpoints?">
+    Yes. **Org Analytics** covers the organization overview, combined and per-site time series, and live visitors. **Org Dashboards** covers dashboard CRUD and running a SQL card across its permitted site scope.
+  </Accordion>
+  <Accordion title="Can I test shortlink and Stripe endpoints?">
+    Yes. The **Shortlinks** category covers CRUD and click statistics. The **Revenue** category includes connecting Stripe, checking connection health, and disconnecting it.
+  </Accordion>
+  <Accordion title="Where do I see an endpoint's response body?">
+    Run the endpoint in the playground against your own data. The public endpoint reference documents paths, methods, and parameters, but response schemas are not available yet.
+  </Accordion>
+</AccordionGroup>
 
 ## Related
 

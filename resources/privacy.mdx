@@ -27,6 +27,7 @@ You decide how much personal data, if any, enters tinyanalytics:
 
 - Use a **non-identifying ID** (like an internal user ID or a hash) with [`identify()`](/identify-users) rather than an email address.
 - Keep raw personal information out of [custom event](/custom-events) properties and traits unless you have a reason and a basis to store it.
+- If you [connect Stripe](/stripe-revenue), leave **Email fallback** off unless you need it and have a basis for processing customer emails. The email is not stored in the analytics event store, but matching it is still personal-data processing.
 - Review what your team sends periodically, since properties and traits are free-form.
 
 ## Related

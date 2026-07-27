@@ -1,10 +1,10 @@
 ---
 title: "SQL query builder"
-description: "Run read-only SQL directly against your site's analytics when the standard reports aren't enough — or describe what you want in plain English and let AI write the SQL. Query two site-scoped virtual tables and turn any result into a dashboard card."
+description: "Run read-only SQL against site-scoped analytics, bot, and Stripe revenue tables, or describe your question in plain English and let AI write the query."
 icon: "database"
 ---
 
-The SQL query builder lets you run read-only SQL directly against your site's analytics data — the escape hatch for questions the standard reports don't answer. You write a `SELECT` against two virtual tables that are **already scoped to your site**, run it, and read the results in a sortable table. If you'd rather not write SQL, describe the question in plain English and let **Ask AI** generate the query for you.
+The SQL query builder lets you run read-only SQL directly against your site's analytics data when the standard reports do not answer your question. Write a `SELECT` against site-scoped analytics, bot, or Stripe revenue tables, or describe the result you want and let **Ask AI** generate a query for you.
 
 ## Can I generate SQL from a question?
 
@@ -28,14 +28,15 @@ Running the SQL the AI produces — or any SQL you write yourself — is never m
 
 ## How do I write a query?
 
-Your data lives in two virtual tables you query by name:
+Your data lives in three virtual tables you query by name:
 
 | Table | Contains |
 | --- | --- |
 | `scoped_events` | your real analytics events (pageviews, custom events, and more) |
 | `scoped_events_bot` | events tinyanalytics classified as bot traffic |
+| `scoped_stripe_revenue` | raw, signed Stripe charges, refunds, and disputes |
 
-Both are automatically filtered to the site you're viewing — you never write a `site_id` filter, and a query can't reach another site's data.
+All three are automatically filtered to the site you're viewing — you never write a `site_id` filter, and a query cannot reach another site's data. `scoped_stripe_revenue` is available even when Stripe is not connected; it simply returns no rows.
 
 ```sql
 SELECT pathname, count() AS views
@@ -48,11 +49,44 @@ LIMIT 20
 
 See [metric definitions](/data-dictionary) for the events and properties you can query.
 
+## How do I query Stripe revenue?
+
+`scoped_stripe_revenue` contains these columns:
+
+| Column | Meaning |
+| --- | --- |
+| `timestamp` | when tinyanalytics received the Stripe event |
+| `stripe_event_id` | Stripe event ID; the replay-deduplication key |
+| `charge_id` | related Stripe charge |
+| `kind` | `charge`, `refund`, or `dispute` |
+| `amount` | signed amount in major units; refunds and lost disputes are negative |
+| `currency` | uppercase Stripe currency code |
+| `invoice_id` / `subscription_id` | related Stripe objects, when present |
+| `livemode` | whether Stripe produced the event in live mode |
+| `session_id` / `user_id` / `identified_user_id` | analytics attribution IDs, when resolved |
+
+The table is append-only, so a webhook replay can produce more than one raw row for the same `stripe_event_id`. Deduplicate each event with `argMax` before aggregating:
+
+```sql
+SELECT sum(amount) AS net_revenue
+FROM (
+  SELECT
+    stripe_event_id,
+    argMax(amount, timestamp) AS amount
+  FROM scoped_stripe_revenue
+  GROUP BY stripe_event_id
+)
+```
+
+<Warning>
+  Do not run a direct `sum(amount)` or `count()` over `scoped_stripe_revenue`; webhook replays can double-count. Amounts remain in their original currencies, so group by `currency` or convert them before combining multiple currencies.
+</Warning>
+
 ## What can I run, and what's blocked?
 
 The query builder is **read-only by design**, so exploring your data can never change or damage it:
 
-- **Allowed** — a single `SELECT` (or `WITH … SELECT`) reading `scoped_events` / `scoped_events_bot` and your own CTEs.
+- **Allowed** — a single `SELECT` (or `WITH … SELECT`) reading the three scoped tables and your own CTEs.
 - **Blocked** — writes, schema changes, multiple statements, and any attempt to read outside your scoped tables.
 - **Capped** — a query runs for at most **10 seconds** and returns at most **1,000 rows**, so a heavy query is trimmed rather than left to run away.
 
@@ -66,7 +100,7 @@ Save the query as a card and pick a visualization. Any query you've written is t
 
 <AccordionGroup>
   <Accordion title="Do I need to filter by site ID in my query?">
-    No. Both `scoped_events` and `scoped_events_bot` are automatically filtered to the site you're viewing, so you never write a `site_id` filter. A query also can't reach another site's data.
+    No. `scoped_events`, `scoped_events_bot`, and `scoped_stripe_revenue` are automatically filtered to the site you're viewing, so you never write a `site_id` filter. A query also cannot reach another site's data.
   </Accordion>
   <Accordion title="Why did my query only return 1,000 rows?">
     That's the cap. A query in the tinyanalytics SQL query builder returns at most **1,000 rows** and runs for at most **10 seconds**, so a heavy query is trimmed rather than left to run away. Aggregate in SQL — with `GROUP BY` and a tighter `WHERE` — to fit the result inside the cap.
@@ -78,7 +112,10 @@ Save the query as a card and pick a visualization. Any query you've written is t
     AI generation is metered per calendar month by plan: **20** on Free, **500** on Growth, and **unlimited** on Business. Only the generation step counts — running the resulting SQL, or any SQL you write yourself, is never metered. Add your own Anthropic API key in **Settings → Account** to bypass the limit entirely.
   </Accordion>
   <Accordion title="Is AI-generated SQL still read-only and scoped to my site?">
-    Yes. Anything the AI produces runs through the same guard as hand-written SQL before it executes: a single `SELECT` reading only your scoped `scoped_events` / `scoped_events_bot` tables, capped at 1,000 rows and 10 seconds. The AI can't widen your scope, reach another site's data, or write anything.
+    Yes. Anything the AI produces runs through the same guard as hand-written SQL before it executes: a single `SELECT` reading only the scoped tables, capped at 1,000 rows and 10 seconds. The AI cannot widen your scope, reach another site's data, or write anything.
+  </Accordion>
+  <Accordion title="Why does my Stripe SQL total look too high?">
+    `scoped_stripe_revenue` is a raw, append-only table, so a Stripe webhook replay can create several rows with the same `stripe_event_id`. Group by that ID and use `argMax(amount, timestamp)` before summing. Also keep currencies separate unless you convert them.
   </Accordion>
 </AccordionGroup>
 

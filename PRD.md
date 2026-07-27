@@ -1,6 +1,6 @@
 # PRD — tinyanalytics documentation (AI-native, Mintlify)
 
-**Status:** Draft v1.2 (execution underway) · **Owner:** Docs · **Last updated:** 2026-07-17
+**Status:** Draft v1.3 (execution underway) · **Owner:** Docs · **Last updated:** 2026-07-27
 **Repo:** `tinyanalytics-docs` (Mintlify) · **Product repo:** `../tinyanalytics`
 **Reference (behavioral spec only):** `../rybbit/rybbit/docs` · **Competitor refs:** Plausible, Umami
 
@@ -84,7 +84,7 @@ Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`w
 
 **Setup & tracking**
 - Cloud onboarding: sign up at `dash.tinyanalytics.io`, add a site, install the snippet
-- Tracking script (`/script.js`, < 6 KB gz), `data-*` configuration, SPA route tracking
+- Tracking script (`/script.js`, < 6.5 KB gz), `data-*` configuration, SPA route tracking
 - First-party proxy / custom domain (adblocker bypass), Mode A snippet builder
 - Opt-out, path skip/mask, exclude yourself
 - Auto-pageviews; custom events; `identify()` + persistent identity
@@ -96,6 +96,7 @@ Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`w
 
 **Dashboard / web analytics**
 - Overview (stat cards, time-series chart, geo map, live counter), Realtime + live-sessions drawer
+- Organization overview (combined metrics, per-site trends, comparison table) across accessible sites
 - Pages, Sessions (+ detail/timeline), Events explorer (log, custom events, event types, downloads), Users (+ profiles + traits explorer)
 - Journeys (Sankey), Retention, Funnels, Goals, Performance (Core Web Vitals)
 - Bots & AI crawlers, AI traffic report, Google Search Console, Map/Globe
@@ -103,10 +104,10 @@ Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`w
 - Date-range presets, browser-timezone querying
 
 **Product analytics (advanced tier)**
-- Feature flags, Experiments (A/B), Surveys (NPS/feedback), Custom dashboards (editor + SQL cards), SQL query builder, Group / B2B analytics (+ group retention)
+- Client-event and Stripe revenue, Feature flags, Experiments (A/B), Surveys (NPS/feedback), Site and organization custom dashboards (editor + SQL cards), SQL query builder, Group / B2B analytics (+ group retention)
 
 **Monitoring & automation**
-- Scheduled email reports (subscriptions), Analytics alerts (email/Slack/Discord/webhook), Uptime monitoring (monitors, incidents, notification channels), Shortlinks
+- Scheduled email reports (subscriptions), scoped analytics alerts with templates (email/Slack/Discord/webhook), Uptime monitoring (monitors, incidents, notification channels), Shortlinks
 
 **Data management & sharing**
 - Data dictionary (event/property/trait catalog), Data import (GA4 live pull, Plausible, Umami)
@@ -197,6 +198,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - AI traffic
 - Google Search Console
 - Map & globe
+- Organization overview
 - Filters
 - Saved segments
 - Behavioral cohorts
@@ -205,6 +207,8 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - Export data (CSV & PDF)
 
 **Group — Product analytics**
+- Revenue analytics
+- Connect Stripe revenue
 - Feature flags
 - Experiments (A/B testing)
 - Surveys
@@ -292,7 +296,7 @@ icon: "cursor-click"                 # optional, Lucide/FontAwesome
 ### 6.3 Writing rules (from the copywriting pass)
 - Second person, active voice, present tense. One idea per sentence.
 - **Front-load meaning** in headings and the first two words of bullets (F-pattern; readers scan ~20–28% of words).
-- **Specifics over adjectives** — "< 6 KB gzipped," "counts distinct sessions every second," not "blazing fast." No praise adjectives ("seamless," "powerful").
+- **Specifics over adjectives** — "< 6.5 KB gzipped," "counts distinct sessions every second," not "blazing fast." No praise adjectives ("seamless," "powerful").
 - **Show the mechanism** where trust is at stake (identity, bots, privacy) — the reason-why is the persuasion.
 - **State limits honestly, in-product** — mirror the wiki's discipline (e.g. AI report is click-throughs only; import region breakdowns have known losses). Honesty *is* the credibility.
 - Bold for UI elements ("click **Add website**"); code font for files, commands, paths, endpoints.
@@ -393,7 +397,7 @@ Per the gap analysis, decision log, and the product's distribution model, these 
 - **Session replay** — excluded by design (decision 0049; privacy-first fit).
 - Anything Rybbit has that tinyanalytics lacks and hasn't built — verify each candidate against `wiki/features.md` before writing.
 - Server-side PDF export (tinyanalytics exports client-side).
-- Any billing/Stripe checkout flow beyond the shipped plan model (billing ships inert, `BILLING_ENFORCED=false`; document plans/limits as they actually behave, and mark cloud-only where relevant).
+- tinyanalytics' own billing/Stripe checkout flow beyond the shipped plan model (billing ships inert, `BILLING_ENFORCED=false`; document plans/limits as they actually behave, and mark cloud-only where relevant). The customer-facing Stripe revenue integration is separate, shipped, and in scope.
 
 **Rule:** if a feature isn't in `wiki/features.md` as user-facing, it doesn't get a page. When in doubt, check the decision record, then ask.
 
@@ -403,9 +407,9 @@ Per the gap analysis, decision log, and the product's distribution model, these 
 
 Ship in waves; each wave is independently useful and immediately deployable (Mintlify auto-deploys on merge).
 
-**Phase 0 — Foundations (config, no content debt)** — 🚧 mostly done (2026-07-17)
-- ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); favicon replaced with the ascending-bars mark; `AGENTS.md` rewritten; project skills shipped (§8.5).
-- ⬜ Pending: dedicated logo asset (the site name currently renders as the wordmark), real footer socials, site-level SEO `description` + an OpenGraph image.
+**Phase 0 — Foundations (config, no content debt)** — ✅ done (2026-07-27)
+- ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); favicon and light/dark logo assets replaced with the ascending-bars mark; `AGENTS.md` rewritten; project skills shipped (§8.5).
+- ✅ Site SEO configured with a global description, navigable-page indexing, Open Graph and Twitter defaults, and **Tinyanalytics** as the structured-data publisher. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. Canonical URLs remain automatic until the final docs domain is confirmed. Real footer socials remain an owner follow-up.
 
 **Phase 1 — The golden path (highest leverage)** — ✅ done (2026-07-17)
 - ✅ Introduction, Quickstart, How it works, Install the tracking script, Script configuration, Custom events, Identify users, Verify/troubleshoot. (The "Switch from GA4/Plausible/Umami" migration overview is deferred to Phase 3, alongside import.)
@@ -429,9 +433,9 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
   - **Headless CMSs (Contentful, Sanity, Strapi)** — these have no rendered frontend of their own; the site is served by a framework (Next.js, Nuxt, Astro, …) that already has a guide. Point users to the framework page rather than the CMS.
   - **GitBook / Mintlify** — script injection depends on plan/hosting specifics we can't state as fact; revisit only if we can verify the exact install point.
 
-**Phase 5 — Advanced product analytics & ops** — ✅ done (2026-07-17)
-- ✅ **Product analytics** group (6): Feature flags, Experiments (A/B), Surveys, Custom dashboards, SQL query builder, Group & B2B analytics. Sourced from `algorithms/{flag-evaluation,experiment-results,surveys,dashboard-cards,group-analytics}.md`, `concepts/scoped-sql-query.md`, and the tracker public-API table (`architecture/tracking-script.md` — `flag()`/`flagPayload()`/`flags()`, `group()`/`setGroupTraits()`/`resetGroups()`). Citable specifics kept exact: rollout %, exposure-vs-assignment measurement, the ≥30-sample / ≥95%-confidence significance rule, the 5-group-type cap, the 10 s / 1,000-row query caps.
-- ✅ **Monitor & automate** group (4): Scheduled reports, Alerts, Uptime monitoring, Shortlinks. Sourced from `algorithms/{scheduled-reports,analytics-alerts,uptime-monitoring}.md` and `architecture/shortlinks.md` (decisions 0131–0133, 0138–0139, 0116–0119, 0159/0168). Documents the shipped alert metrics (sessions/users/pageviews/bounce/event count/active accounts — **not revenue**, which isn't wired), the 12 h default cooldown, incident open/resolve on the 2nd consecutive failure/success, and that shortlink clicks are excluded from overview traffic.
+**Phase 5 — Advanced product analytics & ops** — ✅ done (2026-07-27)
+- ✅ **Product analytics** group (8): Revenue analytics, Stripe revenue connection, Feature flags, Experiments (A/B), Surveys, Custom dashboards, SQL query builder, Group & B2B analytics. Custom dashboards now cover both site and organization scope. Sourced from `algorithms/{revenue-normalization,flag-evaluation,experiment-results,surveys,dashboard-cards,group-analytics}.md`, `architecture/stripe-revenue.md`, `concepts/scoped-sql-query.md`, and the tracker public-API table (`architecture/tracking-script.md` — `flag()`/`flagPayload()`/`flags()`, `group()`/`setGroupTraits()`/`resetGroups()`). Citable specifics kept exact: rollout %, exposure-vs-assignment measurement, the ≥30-sample / ≥95%-confidence significance rule, the 5-group-type cap, the 10 s / 1,000-row query caps, and Stripe replay deduplication.
+- ✅ **Monitor & automate** group (4): Scheduled reports, Alerts, Uptime monitoring, Shortlinks. Sourced from `algorithms/{scheduled-reports,analytics-alerts,uptime-monitoring}.md` and `architecture/shortlinks.md` (decisions 0131–0133, 0138–0139, 0116–0119, 0159/0168, 0221). Alerts include client-event revenue, URL scope, event count/users with property filters, templates, and the 12 h default cooldown. Uptime incidents open/resolve on the 2nd consecutive failure/success; shortlink clicks remain excluded from overview traffic.
 - ✅ **Share & embed** group (3): Public dashboards, Embed a dashboard, Live-visitors widget. Sourced from decisions 0089 (widget + embed-stats), 0105 (`/share` full-dashboard link), 0126 (embed UX: theme/hideSidebar, keyless-public sentinel, private link key). Public/private bearer-link model stated plainly.
 - 13 pages at the documentation root, added as three guide groups (Product analytics · Monitor & automate · Share & embed). Build validates with zero broken links.
 - 🚫 Not over-claimed: **hideBranding / white-label** — 0126 frames it as a self-host-friendly toggle; on the hosted product its availability may be plan-gated, so the embed docs cover theme + hide-sidebar only and omit branding removal until plan scope is confirmed (ties to open question #2). Alert **segment/filter picker** is carried in the engine but not yet in the dialog (ships site-wide first), so alerts are documented as site-wide.
@@ -443,7 +447,7 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 
 **Phase 7 — AI-native activation & polish** — 🚧 in-repo polish done (2026-07-17)
 - ✅ In-repo polish pass across all 95 pages: GEO/SEO frontmatter audit (every page has a title, a standalone benefit-bearing description, and an icon — no gaps), heading-hierarchy check (one H1 per page, no stray body `# ` headings), descriptive-link audit (no "click here"/bare-"here" anchors), and a full `mint broken-links` sweep (zero broken). Removed the 44 internal `{/* TODO: screenshot */}` placeholder comments from all pages ahead of the first push (they were invisible on the site and shouldn't ship as raw TODOs).
-- ⬜ **Requires the Mintlify dashboard / real assets (owner action, not in-repo):** turn on the docs assistant + starter questions + deflection; set up the agent-in-Slack + automations; add a real OG/social share image (no asset to embed yet — not fabricated). The contextual "Ask AI / copy / open in ChatGPT·Claude·Perplexity / MCP / Cursor / VS Code" menu is already configured in `docs.json` and documented in `resources/use-with-ai.mdx`; Mintlify auto-generates `/llms.txt` + `/llms-full.txt` from the (complete) titles/descriptions.
+- ⬜ **Requires the Mintlify dashboard / owner action:** turn on the docs assistant + starter questions + deflection; set up the agent-in-Slack + automations. The contextual "Ask AI / copy / open in ChatGPT·Claude·Perplexity / MCP / Cursor / VS Code" menu is already configured in `docs.json` and documented in `resources/use-with-ai.mdx`; Mintlify auto-generates `/llms.txt` + `/llms-full.txt` from the (complete) titles/descriptions. A custom OG background remains optional; automatic social cards now use the supplied logo, page metadata, and primary color.
 - 📌 **Screenshots** remain a genuine gap: every feature/integration page would benefit from captured images from a live instance (open question #5 — who captures them / from which instance). The inline markers are removed, but the need is still tracked here.
 
 **Backlog — gap analysis vs Rybbit docs (checked 2026-07-17)**
@@ -475,8 +479,8 @@ Diffed our docs against the actual product surface — the web app route tree (`
 
 *New pages (all built 2026-07-19):*
 - ✅ **Error tracking** (`errors.mdx`, "Explore your data") — opt-in `data-track-errors`; auto-captures `window.onerror` + unhandled rejections; manual `trackError(err, meta)`; report groups by message with occurrences, affected sessions, sparkline, and stack-trace drill-down; 60 s dedupe; `ResizeObserver`/cross-origin noise filtered. Source: `apps/api/src/api/errors.ts`, `tracker/script/tracker.ts`, `features.md`. Also added a script-config section + kept the `error` type accurate in `api-reference/track`.
-- ✅ **Revenue analytics** (`revenue.mdx`, "Product analytics") — reserved `revenue` (major units, positive) + `currency` (3-letter format gate) props on a custom event; report = Total Revenue / AOV / Paying Sessions / Orders + timeseries + revenue-by-dimension (entry-acquisition credited); reporting currency (22 built-in rates, per-release, unlisted codes 1:1). Documented plainly per owner. Source: decision 0140, `revenue-currency.ts`, `revenue/page.tsx`.
-- ✅ **Cross-site rollup** (`rollup.mdx`, "Explore your data") — combined stats across every accessible site in the active org (6 tiles + trend + per-site contribution), team-scoped access, users summed (no cross-site dedup), core metrics only. Source: decision 0076, `apps/web/src/app/rollup/`.
+- ✅ **Revenue analytics** (`revenue.mdx` + `stripe-revenue.mdx`, "Product analytics") — reserved `revenue` (major units, positive) + `currency` props on a client event, plus the Stripe source's restricted-key connection, verified charges/refunds/disputes, source tabs, attribution, replay deduplication, and privacy boundaries. Source: decisions 0140 and 0216, `architecture/stripe-revenue.md`, `revenue-currency.ts`, `revenue/page.tsx`.
+- ✅ **Organization overview** (`organization-overview.mdx`, "Explore your data"; supersedes `rollup.mdx`) — combined stats across accessible sites in the active organization (6 cards with sparklines, selectable per-site trend, comparison table, 50-site display cap), team-scoped access, and users summed per site. Source: decisions 0076 and 0217, `apps/web/src/app/overview/`.
 - ✅ **React Native** (`integrations/react-native.mdx`, new "Mobile apps" group) — `@tinyanalytics/react-native` SDK: install (+AsyncStorage), create a mobile-type site (app identifier, read-only), `init()`, `screen()`/`event()`/`identify()`/`error()`, React Navigation tracker, install-id identity, full API + config tables, and the web-vs-mobile differences (screens-as-pageviews, no web vitals, empty channel). `analyticsHost` set to `https://dash.tinyanalytics.io` for consistency with the rest of the docs. Source: decision 0165, `sdks/react-native/{README.md,index.d.ts}`.
 
 *Enhancements (2026-07-19):*
@@ -622,6 +626,41 @@ cross-checked against the 133 routes extracted from a running `mint dev` nav pay
 
 ---
 
+## 10d. Product-sync pass (done 2026-07-27)
+
+Audited the shipped product from the previous documentation sync through product commit `964f322`
+and checked decisions **0215–0222** against the wiki and implementation. This pass documents only
+committed, user-facing behavior:
+
+- **Pages full-URL display** (0215) — the display-only hostname toggle is distinguished from URL
+  mode, which changes grouping.
+- **Stripe revenue** (0216) — a new connection guide, source-aware Revenue report, raw scoped SQL
+  table, settings pointer, and exact privacy/data-handling disclosures.
+- **Organization overview** (0217) — replaces Cross-site rollup in navigation and content, with
+  redirects from `/rollup` and `/guides/rollup`.
+- **Organization custom dashboards** (0219) — multi-site scopes, templates, creator/edit rights,
+  partial-access behavior, and site-level templates.
+- **Alerts v2** (0221) — seven templates, page-path scope, event-property filters, and distinct
+  event-user alerts.
+- **API playground coverage** (0222) — the in-product catalog now covers every customer-facing
+  REST route, including Shortlinks, organization analytics and dashboards, Stripe connections,
+  user writes, autocapture discovery, and AI query generation; the phantom goal-update method was
+  corrected from `PUT` to `PATCH`.
+- **Accuracy fixes** — the tracker budget is now documented as under **6.5 KB gzipped** (0203);
+  Goals and Funnels show their restored shared date/filter controls; custom shortlink slugs are
+  documented as globally unique.
+
+The public generated endpoint set remains at its existing curated boundary. Decision 0222 expands
+the signed-in product playground, but publishing the new read and management routes in OpenAPI
+requires an explicit public authentication and compatibility decision; the documentation project's
+hard boundary does not allow presenting ingestion API keys as read credentials. Cosmetic-only
+changes such as Journeys spacing and navigation loading indicators do not need durable documentation.
+
+**Current sync marker:** product commit `964f3229cdf1928eac98c4fc7588b0e3cdd791d3`
+(2026-07-27).
+
+---
+
 ## 11. Assumptions & open questions
 
 | # | Assumption / question | Working default | Needs confirmation |
@@ -667,10 +706,11 @@ The wiki is the behavioral spec; these are the primary sources per doc area. (Wi
 | Segments / Cohorts | decisions 0141, 0145; `algorithms/behavioral-cohorts.md` |
 | Feature flags / Experiments | `algorithms/flag-evaluation.md`, `algorithms/experiment-results.md` |
 | Surveys | `algorithms/surveys.md`, decision 0144 |
-| Custom dashboards / SQL query | `algorithms/dashboard-cards.md`, `concepts/scoped-sql-query.md`, decisions 0090, 0114, 0115 |
+| Custom dashboards / SQL query | `algorithms/dashboard-cards.md`, `concepts/scoped-sql-query.md`, decisions 0090, 0114, 0115, 0219 |
 | Group / B2B analytics | `algorithms/group-analytics.md`, decisions 0154, 0156, 0157 |
-| Revenue | `algorithms/revenue-normalization.md`, decision 0140 |
-| Reports / Alerts / Uptime | `algorithms/scheduled-reports.md`, `algorithms/analytics-alerts.md`, `algorithms/uptime-monitoring.md`, decisions 0131–0133, 0138, 0116–0119 |
+| Revenue / Stripe | `algorithms/revenue-normalization.md`, `architecture/stripe-revenue.md`, decisions 0140, 0216 |
+| Organization overview | decisions 0076, 0217; `apps/web/src/app/overview/` |
+| Reports / Alerts / Uptime | `algorithms/scheduled-reports.md`, `algorithms/analytics-alerts.md`, `algorithms/uptime-monitoring.md`, decisions 0131–0133, 0138, 0116–0119, 0221 |
 | Shortlinks | `architecture/shortlinks.md`, decision 0159 |
 | Data dictionary | `concepts/data-dictionary.md`, decision 0158 |
 | Import (GA4 / Plausible / Umami) | `algorithms/import-mappers.md`, `algorithms/plausible-reconstruction.md`, decisions 0153, 0113 |
@@ -678,7 +718,7 @@ The wiki is the behavioral spec; these are the primary sources per doc area. (Wi
 | Accounts / orgs / teams / roles | decisions 0071–0077, 0083, 0112 |
 | Billing & plans | decision 0152 |
 | How your data is handled (Resources, trust-level) | `architecture/overview.md`, `architecture/data-model.md`, `concepts/cookieless-identity.md` — concepts only, no operational detail |
-| API reference | `architecture/api-server.md`, decisions 0017–0021, 0051, 0093 |
+| API reference / playground | `architecture/api-server.md`, decisions 0017–0021, 0051, 0093, 0222 |
 | Channels / geo / definitions | `algorithms/channel-classification.md`, `algorithms/geo-enrichment.md`, decisions 0006, 0155 |
 | React Native / mobile | `architecture/react-native-sdk.md`, decision 0165 |
 
