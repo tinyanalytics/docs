@@ -8,33 +8,40 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- **Updated documentation branding (2026-07-27):** changed the primary accent to `#006420` in
+  light mode and `#009B32` in dark mode, and set Inter as the site-wide font.
+- **Flattened the main documentation routes (2026-07-27):** removed the separate `guides/`
+  directory and **Guides** navigation tab, moved all 55 guide articles to the documentation root,
+  and changed their public paths from `/doc/guides/<slug>` to `/doc/<slug>`. Updated navigation and
+  every internal link, with permanent redirects from `/guides` and `/guides/:slug*` so existing
+  bookmarks and indexed URLs continue to work.
 - **Product-sync pass (2026-07-24):** brought the docs current with the 68 product commits landed
   since the last sync point (`d400019`), covering the AI-query, Search Console, autocapture-targeting,
   users-write, localization, and identity/accuracy changes (product decisions 0193–0214). Facts were
   verified against source — `plans.ts`, tracker `config.ts`, `gsc-metrics.tsx`, and the exclusions/user
   components — not commit messages. 14 pages updated.
-  - `guides/search-console` — rewrote for the report's new shape: a totals strip with
+  - `search-console` — rewrote for the report's new shape: a totals strip with
     **impression-weighted** CTR/position and period-over-period comparison, a dual-axis clicks/impressions
     **trend chart**, the **first-party join** (your sessions/pageviews and entry-page bounce/engaged next
     to Google's metrics on Pages/Countries/Devices; Queries stays Google-only), row **drill-down**, **CSV
     export**, and **Pacific-day** windows (Last 7 / 28 / 90 days, default 28, ending ~2 days ago).
-  - `guides/sql-query-builder` — documented **Ask AI** natural-language → SQL generation, the per-plan
+  - `sql-query-builder` — documented **Ask AI** natural-language → SQL generation, the per-plan
     monthly limits (Free 20, Growth 500, Business unlimited), and that generated SQL runs through the
     same read-only guard.
-  - `guides/account-settings` — added the **dashboard language** section (7 locales: English, German,
+  - `account-settings` — added the **dashboard language** section (7 locales: English, German,
     Spanish, French, Portuguese, Japanese, Turkish; per-browser, instant) and the **Anthropic API key**
     (BYOK) card that bypasses the AI-query limit.
-  - `guides/goals`, `guides/funnels`, `guides/autocapture`, `guides/events` — documented **autocapture
+  - `goals`, `funnels`, `autocapture`, `events` — documented **autocapture
     targeting**: goals and funnel steps on outbound links, button clicks, form submissions, and copies
     with value patterns (`input_change` is not targetable; autocapture goals can't aggregate revenue),
     plus the Events page **Autocapture** browser.
-  - `guides/users` — added the profile write actions: **Identify User** (anonymous visitors),
+  - `users` — added the profile write actions: **Identify User** (anonymous visitors),
     **Edit Traits** (identified users), and **Delete User** as the **GDPR erasure** tool (owner/admin only).
-  - `guides/ai-traffic` — noted that **AI Traffic** now appears as a glance metric on the home
+  - `ai-traffic` — noted that **AI Traffic** now appears as a glance metric on the home
     website cards; `resources/metrics-glossary` gained an **AI traffic (AI sessions)** definition.
-  - `guides/script-configuration` — documented the `data-debounce` attribute (default 500 ms) and the
+  - `script-configuration` — documented the `data-debounce` attribute (default 500 ms) and the
     same-URL skip that stop SPA route changes from double-counting pageviews.
-  - `guides/exclude-traffic` — documented the **first-party proxy** IP-resolution toggle (framed as an
+  - `exclude-traffic` — documented the **first-party proxy** IP-resolution toggle (framed as an
     accuracy setting, not an exclusion).
   - `resources/cookieless-identity` — added how identity is steadied for **rotating-egress** networks
     (VPNs, WARP, iCloud Private Relay, corporate proxies); `resources/bot-detection` — noted the
@@ -46,20 +53,20 @@ project adheres to semantic versioning where practical.
   wrong**. These were verified against migrations, schema, and component source — not commit
   messages — after an audit surfaced a stale code comment asserting a column default that does not
   exist (`sites-validation.ts` claims `Etc/UTC`; migration 0035 adds a nullable column with no default).
-  - `guides/scheduled-reports` — "Scheduling is in UTC" (3 places) → reports run on the site's
+  - `scheduled-reports` — "Scheduling is in UTC" (3 places) → reports run on the site's
     **reporting timezone**, falling back to UTC only when none is set.
-  - `guides/dashboard-overview` — date ranges "calculated in your browser's time zone" (2 places) →
+  - `dashboard-overview` — date ranges "calculated in your browser's time zone" (2 places) →
     the site's reporting timezone when set, browser zone as fallback. Added the date picker's
     per-view **Time zone** override.
-  - `guides/exclude-traffic` — the page asserted all exclusions "drop at collection, nothing is
+  - `exclude-traffic` — the page asserted all exclusions "drop at collection, nothing is
     recorded". False for the new **Referrer Exclusions**, which keep the visit and reclassify it as
     Direct. Documented as a contrasted section rather than a sixth table row, so it cannot inherit
     the drop semantics of its neighbors.
-  - `guides/pages` — "Click the row again to clear the filter" (2 places) → a row click now
+  - `pages` — "Click the row again to clear the filter" (2 places) → a row click now
     navigates to the main dashboard pre-filtered; there is no toggle-off on the Pages and Landing
-    pages tables. Qualified the matching over-broad claim in `guides/filters`.
-  - `guides/journeys` — steps "2 to 10, default 3" (3 places) → **2 to 6, default 4**.
-  - `guides/bots` — "four cards" and bots detected "in two ways" → **eight cards** and **six
+    pages tables. Qualified the matching over-broad claim in `filters`.
+  - `journeys` — steps "2 to 10, default 3" (3 places) → **2 to 6, default 4**.
+  - `bots` — "four cards" and bots detected "in two ways" → **eight cards** and **six
     detection layers**; noted that overlapping layers can sum above the total, and that period
     comparison is unavailable on this report.
 
@@ -84,22 +91,22 @@ project adheres to semantic versioning where practical.
     `api-reference/playground`: the reference now answers "what endpoints exist and what do they
     take", the playground answers "what does the response look like".
 - **New product surfaces documented (2026-07-20), from the same sync pass:**
-  - **Per-site reporting timezone** (0182) — canonical section in `guides/site-settings` covering the
+  - **Per-site reporting timezone** (0182) — canonical section in `site-settings` covering the
     two states (unset ⇒ browser zone for the dashboard and UTC for reports; set ⇒ canonical for the
     whole team), the historical re-bucketing warning, and that **alerts are unaffected** because
     their windows roll from the current moment. Cross-linked from dashboard-overview, scheduled-reports,
-    retention, users, and alerts. *No standalone `guides/timezone` page:* one home to keep current
+    retention, users, and alerts. *No standalone `timezone` page:* one home to keep current
     beats five places to drift.
-  - **Multi-host page identity / URL mode** (0181) — the **URLs** tab in `guides/pages`, the
+  - **Multi-host page identity / URL mode** (0181) — the **URLs** tab in `pages`, the
     multi-host banner, `?pagesMode=url` persistence in shared links, host-aware Entries/Exits, and
     the fact that `www.` and apex are not merged. Added `Hostname`, `Entry Page`, and `Entry Hostname`
-    to `guides/filters` with their session-scoped "entered on" semantics, and the three composite
+    to `filters` with their session-scoped "entered on" semantics, and the three composite
     breakdown dimensions to `api-reference/read`.
   - **Referrer exclusions and self-referral handling** (0190–0192) — new sections in
-    `guides/exclude-traffic` and `resources/traffic-classification`: root↔subdomain hops are Internal
+    `exclude-traffic` and `resources/traffic-classification`: root↔subdomain hops are Internal
     in both directions, sibling subdomains remain Referral (fix: add the root domain), excluded
     referrers become **Direct** not Internal, and UTM tags still win.
-  - **Events page** (0193) — `guides/events` previously described only the dashboard's Events card.
+  - **Events page** (0193) — `events` previously described only the dashboard's Events card.
     Added the trend chart's tabs, Top-N select (default **Top 5**), granularity select, and clickable
     legend, plus the event log: **Realtime now defaults ON** at a 5-second refresh, 100 rows per page,
     the paused-while-browsing-history banner, and that search matches only already-loaded rows.
@@ -107,26 +114,26 @@ project adheres to semantic versioning where practical.
     profile Acquisition and Top pages cards (flagging that **Top pages is all-time, not the selected
     date range**), copyable user ID, and the activity calendar's 95th-percentile scale. Documented the
     `user_id` filter now matching a person across both identity columns.
-  - Smaller additions: goal edit/clone/delete actions (`guides/goals`), the AI chart's zoom and
-    suppressed annotations (`guides/ai-traffic`), the Journeys path-filter wildcards and journey cap,
-    weekly cohorts starting Monday (`guides/retention`), and comparison's unavailability on the Bots
-    report (`guides/compare`).
+  - Smaller additions: goal edit/clone/delete actions (`goals`), the AI chart's zoom and
+    suppressed annotations (`ai-traffic`), the Journeys path-filter wildcards and journey cap,
+    weekly cohorts starting Monday (`retention`), and comparison's unavailability on the Bots
+    report (`compare`).
 - **Codebase gap analysis (2026-07-19):** diffed the docs against the actual product surface (web
   route tree + `sdks/` + decisions 0140–0181) and closed four missing pages, all source-grounded:
-  - **Error tracking** guide (`guides/errors`, "Explore your data") — the opt-in `data-track-errors`
+  - **Error tracking** guide (`errors`, "Explore your data") — the opt-in `data-track-errors`
     capture, the manual `trackError()` call, and the message-grouped report with stack-trace drill-down.
-  - **Revenue analytics** guide (`guides/revenue`, "Product analytics") — the `revenue`/`currency`
+  - **Revenue analytics** guide (`revenue`, "Product analytics") — the `revenue`/`currency`
     reserved props, the report metrics (total, AOV, paying sessions, orders), and reporting-currency
-    conversion. Also documented Revenue as an alert metric in `guides/alerts` (previously stated as not
+    conversion. Also documented Revenue as an alert metric in `alerts` (previously stated as not
     wired — it shipped).
-  - **Cross-site rollup** guide (`guides/rollup`, "Explore your data") — combined analytics across every
+  - **Cross-site rollup** guide (`rollup`, "Explore your data") — combined analytics across every
     site in the active organization, with per-site contribution.
   - **React Native** integration (`integrations/react-native`) in a new **Mobile apps** navigation group —
     the `@tinyanalytics/react-native` SDK, the mobile-app site type, screen/event/identify tracking, the
     React Navigation helper, and the install-id identity model.
-  - **Site settings** hub (`guides/site-settings`, "Accounts & access") — the per-site Settings tabs, and
+  - **Site settings** hub (`site-settings`, "Accounts & access") — the per-site Settings tabs, and
     the canonical home for moving a site between organizations and deleting a site.
-- Expanded `guides/pages` with the alternate views (Titles / Entries / Exits / Hostnames) and a **Landing
+- Expanded `pages` with the alternate views (Titles / Entries / Exits / Hostnames) and a **Landing
   pages** section (entry-page report with bounce, average duration, scroll depth, and time on page).
 - Claude Code now discovers the repo's two authoring skills: `mintlify` (platform mechanics) and
   `tinyanalytics-docs` (project conventions) are copied from `.agents/skills/` to `.claude/skills/`,
@@ -156,7 +163,7 @@ project adheres to semantic versioning where practical.
     bundled `<Note>` to a standalone `<Warning>` — it is a silent double-counting trap, not an aside.
   - Fixed a leaked `{/* TODO */}` comment in `quickstart.mdx` by verifying the **Add website** button
     label against the product source, and normalized "snippet" → "the tracking script" on entry pages.
-  - Fixed a broken anchor (`guides/filters` → `guides/sessions`) introduced by a heading rename.
+  - Fixed a broken anchor (`filters` → `sessions`) introduced by a heading rename.
     Note: `mint broken-links` does **not** validate URL fragments — anchors need a separate check.
 - Phase 7 in-repo polish pass across all 95 pages: audited GEO/SEO frontmatter (every page has a title,
   a standalone benefit-bearing description, and an icon), verified heading hierarchy (one H1 per page),
@@ -206,13 +213,13 @@ project adheres to semantic versioning where practical.
   Code → Head, with Premium-plan gating noted) and `integrations/woocommerce.mdx` (WordPress header method
   plus a purchase-tracking section — a custom event with `revenue`/`currency` on the order-received page).
   Added to the CMS & website builders and E-commerce nav groups. Build validates with zero broken links.
-- `guides/autocapture.mdx` — **Autocapture** page (added to the "Track what matters" group), documenting
+- `autocapture.mdx` — **Autocapture** page (added to the "Track what matters" group), documenting
   every automatically-captured interaction (outbound link, file download, button click, copy, form
   submission, engagement), what each records, the form-shape-only privacy guarantee, and the
   `data-ta-prop-*` / `data-ta-event` element conventions. Closes the second gap from the Rybbit-docs
   analysis. Sourced from decision 0110 and `tracker/script/auto-capture.ts`. Build validates with zero
   broken links.
-- `guides/exclude-traffic.mdx` — **Exclude traffic** page (added to the "Install the tracker" group),
+- `exclude-traffic.mdx` — **Exclude traffic** page (added to the "Install the tracker" group),
   covering ingest-time exclusions by IP (single/CIDR/range), country, path glob, hostname glob, and
   user-agent substring, plus the block-bots toggle and hiding your own traffic (localStorage opt-out or
   IP exclusion). Draws the exclusion-vs-filter distinction (dropped at collection vs. hidden in a report)
@@ -244,20 +251,20 @@ project adheres to semantic versioning where practical.
   Build validates with zero broken links.
 - Phase 5 **Advanced product analytics & ops** documentation pages (13), each sourced from the product
   wiki's algorithm specs and decision records with citable specifics. **Product analytics** —
-  `guides/feature-flags.mdx` (boolean/multivariate/remote-config, rollout %, targeting rules, sticky
-  deterministic assignment, `window.tinyanalytics.flag()`), `guides/experiments.mdx` (flag + goal,
+  `feature-flags.mdx` (boolean/multivariate/remote-config, rollout %, targeting rules, sticky
+  deterministic assignment, `window.tinyanalytics.flag()`), `experiments.mdx` (flag + goal,
   session-grain post-exposure attribution, exposure vs. assignment measurement, the ≥30-sample /
-  ≥95%-confidence z-test), `guides/surveys.mdx` (question types, branching, targeting, NPS),
-  `guides/custom-dashboards.mdx` (SQL cards + visualization types + `{{bucket}}`),
-  `guides/sql-query-builder.mdx` (`scoped_events`/`scoped_events_bot`, read-only, 10 s / 1,000-row caps),
-  `guides/group-analytics.mdx` (`group()`, up to 5 group types, account-grain funnels/retention).
-  **Monitor & automate** — `guides/scheduled-reports.mdx` (daily/weekly/monthly completed-period digests),
-  `guides/alerts.mdx` (metric thresholds, absolute/relative, 12 h cooldown, email/Slack/Discord/webhook),
-  `guides/uptime-monitoring.mdx` (HTTP/TCP monitors, validation rules, incident open/resolve on the 2nd
-  consecutive failure/success, P50/P90/P95/P99), `guides/shortlinks.mdx` (`/l/<slug>` trackable redirects,
-  clicks excluded from overview traffic). **Share & embed** — `guides/public-dashboards.mdx` (read-only
-  `/share` link; public sentinel vs. private link key), `guides/embed-dashboard.mdx` (iframe embed with
-  theme/hide-sidebar), `guides/live-visitors-widget.mdx` (card/inline live count). White-label/hide-branding
+  ≥95%-confidence z-test), `surveys.mdx` (question types, branching, targeting, NPS),
+  `custom-dashboards.mdx` (SQL cards + visualization types + `{{bucket}}`),
+  `sql-query-builder.mdx` (`scoped_events`/`scoped_events_bot`, read-only, 10 s / 1,000-row caps),
+  `group-analytics.mdx` (`group()`, up to 5 group types, account-grain funnels/retention).
+  **Monitor & automate** — `scheduled-reports.mdx` (daily/weekly/monthly completed-period digests),
+  `alerts.mdx` (metric thresholds, absolute/relative, 12 h cooldown, email/Slack/Discord/webhook),
+  `uptime-monitoring.mdx` (HTTP/TCP monitors, validation rules, incident open/resolve on the 2nd
+  consecutive failure/success, P50/P90/P95/P99), `shortlinks.mdx` (`/l/<slug>` trackable redirects,
+  clicks excluded from overview traffic). **Share & embed** — `public-dashboards.mdx` (read-only
+  `/share` link; public sentinel vs. private link key), `embed-dashboard.mdx` (iframe embed with
+  theme/hide-sidebar), `live-visitors-widget.mdx` (card/inline live count). White-label/hide-branding
   is deliberately left out pending plan-scope confirmation, and alerts are documented site-wide (the
   per-alert filter picker isn't shipped in the dialog yet). Build validates with zero broken links.
 - Phase 4 (second wave) **Integrations** long-tail pages (19), batch-authored from the same template:
@@ -282,37 +289,37 @@ project adheres to semantic versioning where practical.
 - Phase 3 (second wave) "Accounts & access" documentation pages, sourced from the wiki decision
   records (0071, 0072, 0073, 0074, 0075, 0083, 0087) and documenting the *current* converged behavior
   where later decisions superseded earlier ones (multi-org switching, emailed invitations, teams as
-  the sole site-access mechanism): `guides/account-settings.mdx`, `guides/organizations.mdx`,
-  `guides/teams.mdx`, `guides/roles.mdx` (with a full owner/admin/member permission matrix), and
-  `guides/invitations.mdx`. Operator-only auth/email internals are not documented. Billing & plans
+  the sole site-access mechanism): `account-settings.mdx`, `organizations.mdx`,
+  `teams.mdx`, `roles.mdx` (with a full owner/admin/member permission matrix), and
+  `invitations.mdx`. Operator-only auth/email internals are not documented. Billing & plans
   remains deferred pending the open pricing/signup question. Build validates with zero broken links.
 - Phase 3 (first wave) "Migration & data" documentation pages, sourced from the wiki (decisions 0153,
   0113; `algorithms/import-mappers.md`; `concepts/data-dictionary.md`; decision 0158): `migrate.mdx`
-  (switch-from overview), `guides/data-dictionary.mdx` (event/property/trait catalog with the
-  "verified" label), and four import guides — `guides/import-ga4.mdx` (live Google OAuth pull),
-  `guides/import-plausible.mdx`, `guides/import-umami.mdx`, and `guides/import-simple-analytics.mdx`
+  (switch-from overview), `data-dictionary.mdx` (event/property/trait catalog with the
+  "verified" label), and four import guides — `import-ga4.mdx` (live Google OAuth pull),
+  `import-plausible.mdx`, `import-umami.mdx`, and `import-simple-analytics.mdx`
   (file uploads). Each states its source-specific data losses honestly. Operator-only GA4 setup
   (Google app verification, redirect URIs) is deliberately not documented; only the customer flow is.
   Build validates with zero broken links.
 - Phase 2 (second wave) documentation pages completing "Explore your data", each sourced from the
-  product wiki's decision records with citable specifics: `guides/performance.mdx` (Core Web Vitals
-  at p50/p75/p90/p99), `guides/ai-traffic.mdx` (AI-assistant referrals), `guides/bots.mdx` (bots &
-  AI crawlers), `guides/search-console.mdx` (Google Search Console), `guides/map.mdx` (dashboard map
-  & globe), `guides/segments.mdx` (saved segments), `guides/cohorts.mdx` (behavioral cohorts),
-  `guides/compare.mdx` (period comparison), `guides/annotations.mdx` (chart annotations), and
-  `guides/export.mdx` (CSV & PDF export). Bot/AI-crawler and Search Console availability confirmed
+  product wiki's decision records with citable specifics: `performance.mdx` (Core Web Vitals
+  at p50/p75/p90/p99), `ai-traffic.mdx` (AI-assistant referrals), `bots.mdx` (bots &
+  AI crawlers), `search-console.mdx` (Google Search Console), `map.mdx` (dashboard map
+  & globe), `segments.mdx` (saved segments), `cohorts.mdx` (behavioral cohorts),
+  `compare.mdx` (period comparison), `annotations.mdx` (chart annotations), and
+  `export.mdx` (CSV & PDF export). Bot/AI-crawler and Search Console availability confirmed
   with the maintainer before writing. Build validates with zero broken links.
 - Phase 2 (first wave) "Explore your data" documentation pages, sourced from the wiki's algorithm
-  specs with exact metric definitions: `guides/dashboard-overview.mdx`, `guides/realtime.mdx`,
-  `guides/pages.mdx`, `guides/sessions.mdx`, `guides/users.mdx`, `guides/events.mdx`,
-  `guides/journeys.mdx`, `guides/retention.mdx`, `guides/funnels.mdx`, `guides/goals.mdx`, and
-  `guides/filters.mdx`. Added as an "Explore your data" group under the Guides tab. Feature-guide
+  specs with exact metric definitions: `dashboard-overview.mdx`, `realtime.mdx`,
+  `pages.mdx`, `sessions.mdx`, `users.mdx`, `events.mdx`,
+  `journeys.mdx`, `retention.mdx`, `funnels.mdx`, `goals.mdx`, and
+  `filters.mdx`. Added as an "Explore your data" group under the Guides tab. Feature-guide
   pages carry `{/* TODO: screenshot */}` markers pending captured assets. Build validates with zero
   broken links.
 - Phase 1 "golden path" documentation pages, authored from the product wiki and written answer-first
   for SEO/GEO: `index.mdx` (Introduction), `quickstart.mdx`, `how-it-works.mdx`, and five Guides —
-  `guides/tracking-script.mdx`, `guides/script-configuration.mdx`, `guides/custom-events.mdx`,
-  `guides/identify-users.mdx`, and `guides/verify-your-setup.mdx`. Build validates with zero broken
+  `tracking-script.mdx`, `script-configuration.mdx`, `custom-events.mdx`,
+  `identify-users.mdx`, and `verify-your-setup.mdx`. Build validates with zero broken
   links (`mint validate`, `mint broken-links`).
 - `.agents/skills/mintlify/SKILL.md` — the official Mintlify authoring skill (MIT), copied in
   so in-repo AI tools get platform mechanics without network access.

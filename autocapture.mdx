@@ -1,0 +1,125 @@
+---
+title: "Autocapture"
+description: "tinyanalytics automatically records common interactions — outbound link clicks, file downloads, button clicks, text copies, form submissions, and engagement — with no code to write."
+icon: "hand-pointer"
+---
+
+tinyanalytics records the interactions that matter on your site **automatically**, with no code to write. Outbound link clicks, file downloads, button clicks, text copies, form submissions, and engagement are all captured out of the box and appear in your [Events explorer](/events). You can measure how visitors interact with a page before you instrument a single [custom event](/custom-events).
+
+Autocapture is **on by default**. Each type is an independent toggle you can turn off in your [tracking script](/script-configuration#turn-auto-capture-on-or-off).
+
+## What does tinyanalytics capture automatically?
+
+| Interaction | Captured when a visitor… | What's stored | Toggle attribute |
+| --- | --- | --- | --- |
+| **Outbound link** | clicks a link to another domain | the destination URL and link text | `data-track-outbound` |
+| **File download** | clicks a link to a downloadable file | the file's URL | `data-track-downloads` |
+| **Button click** | clicks a button | the button's text | `data-track-clicks` |
+| **Copy** | copies text from the page | the copied text (truncated) | `data-track-copy` |
+| **Form submission** | submits a form | the form's shape — field count, name, and action | `data-track-forms` |
+| **Engagement** | finishes a page visit | scroll depth and time engaged | `data-track-engagement` |
+
+Each interaction is its own event type, so you can filter to it in the Events explorer's event-type view and build [goals](/goals) or [funnels](/funnels) from it.
+
+## Which autocaptured events can I build goals and funnels on?
+
+Four autocapture types can be a [goal](/goals) or a [funnel](/funnels) step directly — no custom event required:
+
+- **Outbound link** — matched against the destination URL
+- **Button click** — matched against the button text
+- **Form submission** — matched against the form's name, id, or action
+- **Copy** — matched against the copied text
+
+Add an optional **value pattern** to target a specific interaction — for example, a goal on outbound links to `*.stripe.com`, or a funnel step for the button that reads `Start free trial`. Patterns use `*` and `**` as wildcards; leave the pattern blank (or enter `*` for a funnel step) to match any event of that type.
+
+<Note>
+  Individual **`input_change`** events are captured for the Events explorer but can't be a goal or funnel target — they're too high-volume to build a conversion on.
+</Note>
+
+## How do I browse what's been captured?
+
+Open the **Autocapture** dialog on the [Events explorer](/events) to see every distinct value an autocapture type has recorded over your current date range. Pick a type — outbound links, button clicks, form submissions, or copies — and the table lists each value with its **count**, its **share** of that type, and when it was **last seen**. It's the quickest way to find the exact button text or outbound URL to target before you build a goal or funnel on it.
+
+## What do form captures never record?
+
+Form capture records the **shape** of a submission, never its contents:
+
+- A form submission stores the field count, form name, and action — **never what a visitor typed**.
+- An individual field change stores only the field's **name and type**, never its value.
+- Password, hidden, disabled, and read-only fields are **skipped entirely**.
+
+<Note>
+  Copy events do store the copied text (truncated). If visitors might copy sensitive content on a page, turn copy capture off with `data-track-copy="false"`.
+</Note>
+
+## Add properties to a captured event
+
+Attach custom properties to any auto-captured event by adding `data-ta-prop-<name>` attributes to the element. For example, to tag which plan an upgrade button belongs to:
+
+```html
+<button data-ta-prop-plan="pro">Upgrade to Pro</button>
+```
+
+The button click is then captured with `plan: "pro"` in its properties, so you can break that event down by plan.
+
+## Track an element yourself
+
+To handle a specific element with your own [custom event](/custom-events) instead of the automatic capture, add `data-ta-event` to opt it out:
+
+```html
+<button data-ta-event onclick="window.tinyanalytics.event('signup', { plan: 'pro' })">
+  Sign up
+</button>
+```
+
+tinyanalytics skips the automatic button-click event for that element, leaving you to send exactly the event you want.
+
+## Turn autocapture off
+
+Every capture type is on by default and can be turned off independently by setting its attribute to `"false"`:
+
+```html
+<script defer src="https://dash.tinyanalytics.io/script.js"
+  data-site-id="YOUR_SITE_ID"
+  data-track-copy="false"
+  data-track-forms="false"></script>
+```
+
+See [configure the tracking script](/script-configuration#turn-auto-capture-on-or-off) for the full list of attributes.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need to write code to track button clicks in tinyanalytics?">
+    No. tinyanalytics autocapture is on by default and records button clicks, outbound link clicks, file downloads, text copies, form submissions, and engagement with no code to write. Write a [custom event](/custom-events) only for actions autocapture can't infer.
+  </Accordion>
+  <Accordion title="Does tinyanalytics record what visitors type into forms?">
+    No. A tinyanalytics form submission stores the field count, form name, and action — never what a visitor typed. An individual field change stores only the field's name and type, and password, hidden, disabled, and read-only fields are skipped entirely.
+  </Accordion>
+  <Accordion title="How do I add my own properties to an auto-captured event?">
+    Add `data-ta-prop-<name>` attributes to the element. For example, `<button data-ta-prop-plan="pro">` captures the button click with `plan: "pro"` in its properties, so you can break that event down by plan in the Events explorer.
+  </Accordion>
+  <Accordion title="How do I stop autocapture on a single element?">
+    Add `data-ta-event` to that element. tinyanalytics then skips the automatic capture for it, so you can send your own [custom event](/custom-events) instead. To turn a capture type off site-wide, set its toggle attribute to `"false"` on the tracking script.
+  </Accordion>
+  <Accordion title="Can I make a conversion goal from an autocaptured button click or link?">
+    Yes. Outbound links, button clicks, form submissions, and copies can each be a [goal](/goals) or a [funnel](/funnels) step directly, with no custom event to write. Add a value pattern (with `*` and `**` wildcards) to target a specific interaction, or leave it blank to count every event of that type. Individual field-change (`input_change`) events can't be used as a target.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Track custom events" icon="cursor-click" href="/custom-events">
+    Send your own named events with properties.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/script-configuration">
+    Every auto-capture toggle and data-* attribute.
+  </Card>
+  <Card title="Events explorer" icon="bolt" href="/events">
+    See every captured event and its properties.
+  </Card>
+  <Card title="Goals" icon="bullseye" href="/goals">
+    Turn a captured interaction into a conversion.
+  </Card>
+</Columns>

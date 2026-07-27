@@ -4,7 +4,7 @@ description: "The tinyanalytics HTTP API: send events to /api/track and /api/ide
 icon: "book-open"
 ---
 
-The tinyanalytics HTTP API lets you **send events from a server** and **read your analytics programmatically**, alongside the browser [tracking script](/guides/tracking-script). Every endpoint lives under one base URL:
+The tinyanalytics HTTP API lets you **send events from a server** and **read your analytics programmatically**, alongside the browser [tracking script](/tracking-script). Every endpoint lives under one base URL:
 
 ```
 https://dash.tinyanalytics.io
@@ -22,7 +22,7 @@ There are two credentials, and which you need depends on what you're doing:
 
 | What you're doing | Credential |
 | --- | --- |
-| **Sending events from a browser** | None — the `data-site-id` in the [snippet](/guides/tracking-script) identifies the site. |
+| **Sending events from a browser** | None — the `data-site-id` in the [snippet](/tracking-script) identifies the site. |
 | **Sending events from a server** | An **API key** as `Authorization: Bearer <key>` (lets you send the visitor's real IP and user agent). |
 | **Reading analytics or managing sites** | An **API key** as `Authorization: Bearer <key>`. |
 
@@ -77,7 +77,7 @@ Common status codes:
 
 <AccordionGroup>
   <Accordion title="Do I need an API key to send events from the browser?">
-    No. Browser ingestion needs no credential — the `data-site-id` in the [tracking script](/guides/tracking-script) identifies the site. You need an API key to send events from a server, to read analytics, or to manage sites.
+    No. Browser ingestion needs no credential — the `data-site-id` in the [tracking script](/tracking-script) identifies the site. You need an API key to send events from a server, to read analytics, or to manage sites.
   </Accordion>
   <Accordion title="Why do ingestion endpoints return no response body?">
     `/api/track` and `/api/identify` return `204 No Content` because the event is queued and written asynchronously. There is nothing to parse. Read endpoints return `200` with a JSON body instead, and list endpoints are shaped `{ "data": [ … ] }`.

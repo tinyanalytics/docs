@@ -1,0 +1,82 @@
+---
+title: "Import from Simple Analytics"
+description: "Move your Simple Analytics history into tinyanalytics by uploading a Simple Analytics export file. Your past pageviews, sessions, and referrers flow into every report."
+icon: "file-import"
+---
+
+You can import your **Simple Analytics** history into tinyanalytics by uploading a Simple Analytics export file. tinyanalytics reads your past events from the export and stores them as its own events, so your Simple Analytics history appears in every report alongside your new tinyanalytics data.
+
+## How to import from Simple Analytics
+
+<Steps>
+  <Step title="Export your data from Simple Analytics">
+    Export your stats from Simple Analytics as a CSV file for the period you want to keep.
+  </Step>
+  <Step title="Upload the file to tinyanalytics">
+    In your site's import settings, choose **Simple Analytics** and upload the export file. tinyanalytics parses it in your browser and imports the events.
+  </Step>
+  <Step title="See it in your dashboard">
+    When the import finishes, your Simple Analytics history is live across your reports.
+  </Step>
+</Steps>
+
+<Check>
+  The import worked when your Simple Analytics history appears in your tinyanalytics reports, and the import summary shows how many events imported, skipped, or were invalid.
+</Check>
+
+## What carries over from Simple Analytics
+
+A Simple Analytics export contains individual events with their timestamps. It doesn't include parsed device fields, so tinyanalytics derives the browser, OS, and device from each event's user agent:
+
+| Carries over | Notes |
+| --- | --- |
+| Pageviews and sessions with their timestamps | Event-level timing is preserved (in UTC) |
+| Countries | Where present in the export |
+| Referrers, sources, and campaigns | Used to derive the channel |
+| Browsers, operating systems, devices | Derived from the user agent |
+| Language | Combined from the visitor's language and region |
+
+**Channels are re-derived by tinyanalytics** from the referrer and campaign data, so imported Simple Analytics traffic is classified by the same rules as your live traffic.
+
+## Good to know
+
+<Note>
+  - **One import runs at a time per organization.**
+  - **Rows dated in the future are skipped**, and malformed rows are dropped and counted, so you'll see how many events imported, skipped, or were invalid.
+  - **Re-running adds the data again** — to redo an import, delete the previous one first (deleting removes all of that import's data).
+  - Imported data is stored as ordinary events, so it flows through **every report**, including funnels, retention, cohorts, and [period comparison](/compare).
+</Note>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Where do browser and device fields come from in a Simple Analytics import?">
+    From each event's user agent. A Simple Analytics export doesn't include parsed device fields, so tinyanalytics derives the browser, operating system, and device itself. Language is combined from the visitor's language and region.
+  </Accordion>
+  <Accordion title="Does a Simple Analytics import keep the original timestamps?">
+    Yes. A Simple Analytics export contains individual events with their timestamps, so pageviews and sessions keep event-level timing, recorded in UTC.
+  </Accordion>
+  <Accordion title="How do I redo a Simple Analytics import?">
+    Delete the previous import first, then run it again. Re-running an import **adds** the data a second time rather than replacing it, and deleting an import removes all of that import's data. Only one import runs at a time per organization.
+  </Accordion>
+  <Accordion title="Why did some rows get skipped during my import?">
+    Rows dated in the future are skipped, and malformed rows are dropped and counted. tinyanalytics reports how many events imported, skipped, or were invalid, so you can see exactly what happened to your export.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Switch to tinyanalytics" icon="right-left" href="/migrate">
+    The full migration overview.
+  </Card>
+  <Card title="Import from Plausible" icon="file-import" href="/import-plausible">
+    Coming from Plausible instead.
+  </Card>
+  <Card title="Import from Umami" icon="file-import" href="/import-umami">
+    Coming from Umami instead.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Install the script to start collecting new data.
+  </Card>
+</Columns>

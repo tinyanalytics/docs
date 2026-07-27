@@ -1,0 +1,80 @@
+---
+title: "AI traffic report"
+description: "See how much traffic AI assistants send your site in tinyanalytics — sessions and revenue from ChatGPT, Perplexity, Gemini, Claude, Copilot, and more, with a trend and which pages they land on."
+icon: "robot"
+---
+
+The AI traffic report shows how many visitors arrive at your site by clicking through from an **AI assistant** — ChatGPT, Perplexity, Gemini, Claude, Copilot, and others. It reports AI sessions, their share of all traffic, revenue from AI (when you track revenue), a breakdown by assistant, the pages AI sends people to, and how AI traffic is trending versus the previous period. It's one of the few analytics tools that surfaces AI referrals as a first-class report instead of burying them in "Referral".
+
+## What counts as AI traffic?
+
+AI traffic is a **human visitor who clicked a link in an AI assistant's answer** and landed on your site. tinyanalytics recognizes an AI referral from the referring source and attributes the session to the assistant it came from. Because attribution happens when the report is read — not from a stored tag — the report works over **all of your history the day you first open it**, including traffic from before you knew to look for it.
+
+Each session is attributed to the assistant it **entered from**. A visitor who arrives from ChatGPT and then browses your site is counted once, as ChatGPT.
+
+## Which AI assistants does tinyanalytics recognize?
+
+The report breaks AI traffic down by assistant, with search-style engines leading and tool-style products grouped together:
+
+- **ChatGPT, Perplexity, Gemini, Claude, Copilot, You.com** — named individually.
+- **AI Tools** — a single row rolling up assistant products that link out (such as coding and writing assistants), so the headline stays about citations without discarding data.
+- **Other AI** — recognized AI traffic that doesn't match a specific assistant.
+
+Paid AI visits keep their assistant label — a paid ChatGPT visit still counts as ChatGPT.
+
+## Which pages does AI send people to?
+
+The report includes a **"Pages AI sends people to"** breakdown, ranking the entry pages AI visitors land on. This tells you which of your pages AI assistants are citing and linking — the content that's earning you AI referrals — so you can double down on what's working.
+
+## Is my AI traffic growing?
+
+The report answers this directly with a **trend chart** of AI sessions over time and a **change versus the previous period** on the AI Sessions card. The chart works like the main dashboard's — hover for a tooltip, drag to zoom into a window — and its header shows icons for the assistants sending you the most traffic. [Annotations](/annotations) aren't drawn on this chart. Each assistant row also carries its own change column, so you can see, for example, that Perplexity is rising while another assistant falls. A row with no traffic last period shows as new rather than a misleading "+100%".
+
+## Where do I see AI traffic at a glance?
+
+Each **website card** on your home grid — the list of all your sites — shows **AI Traffic** as one of its four glance metrics, next to Users, Pages / Session, and average visit Duration. It's the count of sessions that entered from an AI assistant over the card's window, so you can spot which sites AI is sending people to without opening each one. The number matches the **AI Sessions** headline on that site's AI traffic report exactly — one attribution rule, wherever it's shown.
+
+## How do I use AI traffic across the dashboard?
+
+Because the assistant is a first-class dimension, you can use it everywhere:
+
+- **Filter** any report to a single assistant (for example, "visitors from Perplexity").
+- **Save a segment** like "arrived via ChatGPT" and apply it across every report.
+- **Build a cohort** such as "AI visitors who bought".
+
+See [Filter your data](/filters), [Saved segments](/segments), and [Behavioral cohorts](/cohorts).
+
+<Info>
+  **What this report can and can't see.** It counts **click-throughs only** — humans who followed a link from an AI answer. It cannot see AI crawlers reading your site to train or ground their models, nor citations that are shown but never clicked. To see which AI crawlers are reading your pages, use the [Bots & AI crawlers report](/bots). Crawling comes before citation, and citation comes before the click — this report measures the click.
+</Info>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does the AI traffic report show data from before I opened it?">
+    Yes. The AI traffic report works over all of your history the day you first open it, including traffic from before you knew to look for it. Attribution happens when the report is read rather than from a stored tag, so there's nothing to enable in advance.
+  </Accordion>
+  <Accordion title="Does the AI traffic report show AI crawlers reading my site?">
+    No. The AI traffic report counts click-throughs only — humans who followed a link from an AI assistant's answer. To see which AI crawlers read your pages, use the [Bots & AI crawlers report](/bots). The report also can't see citations that are shown in an AI answer but never clicked.
+  </Accordion>
+  <Accordion title="How is a visitor counted if they arrive from ChatGPT and then browse my site?">
+    Once, as ChatGPT. Each session is attributed to the assistant it entered from, so later pages in that visit don't create a second attribution. Paid AI visits keep their assistant label too — a paid ChatGPT visit still counts as ChatGPT.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Bots & AI crawlers" icon="spider" href="/bots">
+    See which AI crawlers read your site — the other half of the AI picture.
+  </Card>
+  <Card title="Search Console" icon="magnifying-glass" href="/search-console">
+    How people find you through Google Search.
+  </Card>
+  <Card title="Saved segments" icon="bookmark" href="/segments">
+    Save "arrived via AI" and apply it everywhere.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/dashboard-overview">
+    Where AI traffic fits among all your channels.
+  </Card>
+</Columns>

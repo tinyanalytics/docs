@@ -1,0 +1,58 @@
+---
+title: "Retention"
+description: "See how many visitors come back over time in tinyanalytics: cohort retention curves and a matrix, grouped by daily or weekly cohorts."
+icon: "repeat"
+---
+
+The Retention report shows how many of your visitors come back over time. tinyanalytics groups people into cohorts by when they first visited, then tracks what share of each cohort returns in the periods that follow. It answers the question growth depends on: do people stick around?
+
+## What are cohorts and periods?
+
+- A **cohort** is the group of people who first visited in the same day or week.
+- A **period** is how long after that first visit you're measuring — period 0 is the first day or week, period 1 is the next, and so on.
+- Each cell is the **percentage of the cohort that returned** in that period. Period 0 is always 100% by definition.
+
+## How do I read the chart and the matrix?
+
+- The **retention chart** draws one curve per cohort, so you can compare how different cohorts hold up over time.
+- The **retention matrix** is a grid: each row is a cohort, each column is a period since first visit, and the color shows the share returning — darker where more people came back.
+
+## Should I use daily or weekly cohorts?
+
+Toggle between **daily** and **weekly** cohorts. Weekly cohorts smooth out day-to-day noise and are usually easier to read for most sites; daily cohorts give a finer view when you have high traffic. Weekly cohorts start on **Monday**.
+
+<Note>
+  The report's date range follows your dashboard time zone, so it respects your site's [reporting timezone](/site-settings#which-timezone-are-my-reports-based-on) when one is set.
+</Note>
+
+<Tip>
+  Retention depends on recognizing returning visitors over time. tinyanalytics does this cookielessly, which is a close estimate for anonymous visitors. [Identify users](/identify-users) to make retention exact for signed-in people.
+</Tip>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why is period 0 always 100% in the retention matrix?">
+    Period 0 is the period in which the cohort first visited, so every member of the cohort is present in it by definition. That makes period 0 always 100%. The meaningful numbers start at period 1, which shows the share of the cohort that came back in the next day or week.
+  </Accordion>
+  <Accordion title="How accurate is retention for anonymous visitors?">
+    It's a close estimate. tinyanalytics recognizes returning visitors cookielessly, which works well for anonymous traffic but isn't exact. To make retention exact for signed-in people, [identify users](/identify-users) so their visits are tied to a stable ID.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Users" icon="user" href="/users">
+    See the people whose return visits drive retention.
+  </Card>
+  <Card title="Identify users" icon="id-badge" href="/identify-users">
+    Make retention exact for signed-in users.
+  </Card>
+  <Card title="Funnels" icon="filter-circle-dollar" href="/funnels">
+    Measure conversion through a sequence of steps.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/dashboard-overview">
+    Top-line metrics for your whole site.
+  </Card>
+</Columns>

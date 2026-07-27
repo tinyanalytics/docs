@@ -4,7 +4,7 @@ description: "Send pageviews and custom events to POST /api/track. The request b
 icon: "paper-plane"
 ---
 
-`POST /api/track` is the ingestion endpoint every event flows through — the browser [tracking script](/guides/tracking-script) uses it, and you can call it directly from a server to send events yourself. The body is a single JSON event, and the endpoint returns **`204 No Content`**: the event is validated and queued, then written asynchronously.
+`POST /api/track` is the ingestion endpoint every event flows through — the browser [tracking script](/tracking-script) uses it, and you can call it directly from a server to send events yourself. The body is a single JSON event, and the endpoint returns **`204 No Content`**: the event is validated and queued, then written asynchronously.
 
 ```
 POST https://dash.tinyanalytics.io/api/track
@@ -176,7 +176,7 @@ A **`custom_event`** (and an `error`) adds:
 </ParamField>
 
 <ParamField body="revenue" type="number | string">
-  A revenue amount in major currency units (e.g. `49.0` = $49.00). See [Revenue analytics](/guides/revenue).
+  A revenue amount in major currency units (e.g. `49.0` = $49.00). See [Revenue analytics](/revenue).
 </ParamField>
 
 <ParamField body="currency" type="string">
@@ -219,7 +219,7 @@ With a valid key, tinyanalytics honors the `ipAddress` and `userAgent` you suppl
   <Card title="Rate limits & CORS" icon="shield-halved" href="/api-reference/rate-limits">
     The ingestion rate limit and origin rules.
   </Card>
-  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+  <Card title="Track custom events" icon="cursor-click" href="/custom-events">
     The browser way to send the same events.
   </Card>
 </Columns>

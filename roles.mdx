@@ -1,0 +1,74 @@
+---
+title: "Roles & permissions"
+description: "tinyanalytics has three roles — owner, admin, and member. See what each can do, from viewing analytics to managing sites, members, teams, and the organization itself."
+icon: "shield-halved"
+---
+
+Every member of a tinyanalytics organization has one of three roles: **owner**, **admin**, or **member**. The role decides what they can do — from viewing analytics to managing sites, members, and the organization. Owners have full control, admins manage day-to-day, and members view the data they have access to.
+
+## What are the three tinyanalytics roles?
+
+- **Owner** — full control, including renaming and deleting the organization. An organization can have more than one owner.
+- **Admin** — manages sites, settings, members, and teams, but can't rename or delete the organization.
+- **Member** — views analytics for the sites they can access, and saves their own personal segments and cohorts.
+
+## What each role can do
+
+| Action | Owner | Admin | Member |
+| --- | :---: | :---: | :---: |
+| View analytics for accessible sites | ✓ | ✓ | ✓ |
+| Save personal segments and cohorts | ✓ | ✓ | ✓ |
+| Add, edit, and remove sites | ✓ | ✓ | — |
+| Edit site settings and tracking configuration | ✓ | ✓ | — |
+| Create goals, funnels, annotations, and shared segments/cohorts | ✓ | ✓ | — |
+| Invite, remove, and re-role members | ✓ | ✓ | — |
+| Create and manage teams; restrict members | ✓ | ✓ | — |
+| Connect Google Search Console; run imports | ✓ | ✓ | — |
+| Rename the organization | ✓ | — | — |
+| Delete the organization | ✓ | — | — |
+
+Anything that creates or changes shared data requires the **owner** or **admin** role — that's the "requires an admin" note you'll see throughout these guides. A plain member can always view the reports they have access to and save their own personal [segments](/segments) and [cohorts](/cohorts).
+
+## Rules that protect ownership
+
+- Only an **owner** can change another owner's role.
+- You **can't change your own role** — someone else with permission must.
+- A **member's site access can be narrowed** with [teams](/teams): mark them restricted, and they see only their teams' sites. Owners and admins can't be restricted.
+
+## How do roles relate to site access?
+
+Role controls *what* you can do; [teams](/teams) control *which sites* a restricted member can do it on. An unrestricted member has access to every site in the organization; a restricted member is limited to their teams' sites. Owners and admins always have access to all sites.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What's the difference between an owner and an admin in tinyanalytics?">
+    An **owner** has full control, including renaming and deleting the organization. An **admin** can do everything else — manage sites, settings, members, and teams — but can't rename or delete the organization. An organization can have more than one owner.
+  </Accordion>
+  <Accordion title="What can a plain member do without admin rights?">
+    A **member** can view analytics for the sites they have access to and save their own personal [segments](/segments) and [cohorts](/cohorts). Anything that creates or changes shared data — sites, site settings, goals, funnels, annotations, shared segments and cohorts, members, teams, imports — needs an owner or admin.
+  </Accordion>
+  <Accordion title="Can I change my own role?">
+    No. You **can't change your own role** — someone else with permission must. Only an **owner** can change another owner's role. Both rules protect an organization from losing its ownership.
+  </Accordion>
+  <Accordion title="How do I give someone access to only one site?">
+    Use [teams](/teams). Create a team, grant it the sites that person should see, add them to it, and mark them **restricted**. A restricted member sees only their teams' sites. Owners and admins can't be restricted — they always have access to every site.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Organizations & members" icon="building" href="/organizations">
+    Assign and change member roles.
+  </Card>
+  <Card title="Teams & site access" icon="users" href="/teams">
+    Limit a member to specific sites.
+  </Card>
+  <Card title="Invitations" icon="envelope" href="/invitations">
+    Invite a member with a starting role.
+  </Card>
+  <Card title="Account settings" icon="user-gear" href="/account-settings">
+    Your personal profile and password.
+  </Card>
+</Columns>

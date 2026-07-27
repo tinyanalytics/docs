@@ -148,15 +148,17 @@ Design principles:
 - **Sentence case, concise labels; verbs where they aid discovery** ("Track custom events" > "Custom events" when it's a how-to).
 - **Descriptions carry the promise** (and feed `llms.txt`/search).
 
-Mintlify structure: **tabs** at the top, **groups** within, nested pages where depth helps. Proposed tabs: **Get started · Guides · Integrations · API reference · Resources**. (Account/billing folds into Guides; there is no Self-hosting tab — the product is hosted-only, §9. The trust content a self-host section would have carried — architecture, security, data handling — lives in Resources at concept level.)
+Mintlify structure: **tabs** at the top, **groups** within, nested pages where depth helps. Current tabs: **Get started · Integrations · API reference · Resources**. The setup, analysis, product, and account groups live together in the main **Get started** section, and their MDX files live at the repository root so their public URLs are `/doc/<slug>`. There is no Self-hosting tab — the product is hosted-only (§9). The trust content a self-host section would have carried — architecture, security, and data handling — lives in Resources at concept level.
 
-### Tab: Get started
+### Main documentation tab
+
+#### Start here
 - Introduction — what tinyanalytics is, the privacy promise, web + product analytics in one
 - Quickstart — add a site, install the script, see your first event (≤ 6 steps)
 - How tinyanalytics works — ingestion → dashboard, cookieless identity in plain terms
 - Switch from Google Analytics / Plausible / Umami — the migration overview (links to import)
 
-### Tab: Guides
+#### Guides and feature groups
 
 **Group — Install the tracker**
 - The tracking script
@@ -297,8 +299,9 @@ icon: "cursor-click"                 # optional, Lucide/FontAwesome
 - Every how-to ends with a **Verify** step and a **Related** links block (also strengthens internal linking for AI + SEO).
 
 ### 6.4 Components to standardize on
-- `<Steps>` for sequences · `<CodeGroup>` for framework/language variants · `<Tabs>` for one-of-N reader choices (e.g. script tag vs npm) · `<Accordion>`/`<AccordionGroup>` for troubleshooting & FAQs · `<Card>`/`<CardGroup>` for hub pages · `<Note>`/`<Warning>`/`<Tip>` for asides · `<ParamField>`/`<ResponseField>` for API reference · `<Frame>` for screenshots.
+- `<Steps>` for sequences · `<CodeGroup>` for framework/language variants · `<Tabs>` for one-of-N reader choices (e.g. script tag vs npm) · `<Accordion>`/`<AccordionGroup>` for troubleshooting & FAQs · `<Card>` inside `<Columns>` for hub and related-link grids · `<Note>`/`<Info>`/`<Tip>`/`<Warning>`/`<Danger>`/`<Check>` according to meaning · `<ParamField>`/`<ResponseField>` for verified API reference fields · `<Frame>` for screenshots.
 - `<Prompt>` component on the "Use these docs with AI" page for the skill-install command (§8.3).
+- Keep prerequisites, required steps, risks, limitations, and verification visible. Accordions and other progressive-disclosure components contain optional detail only.
 
 ---
 
@@ -344,7 +347,8 @@ A dedicated Resources page, "Use these docs with AI," embeds the install prompt 
 
 ### 8.1 `docs.json`
 - `name`: "tinyanalytics" (currently "Mintlify Starter Kit").
-- `colors`: adopt the product's indigo accent (decision 0041) — replace the green starter palette. Confirm exact hex from `../tinyanalytics/DESIGN.md`.
+- `colors`: use the owner-approved green accents — `#006420` in light mode and `#009B32` in dark mode.
+- `fonts`: use Inter for headings and body text through Mintlify's Google Fonts integration.
 - `logo` / `favicon`: replace starter assets with the tinyanalytics ascending-bars mark (light/dark).
 - `navigation`: implement §5 (tabs → groups → pages).
 - `navbar`: primary CTA → the app (`https://dash.tinyanalytics.io`); links → GitHub, Support.
@@ -400,7 +404,7 @@ Per the gap analysis, decision log, and the product's distribution model, these 
 Ship in waves; each wave is independently useful and immediately deployable (Mintlify auto-deploys on merge).
 
 **Phase 0 — Foundations (config, no content debt)** — 🚧 mostly done (2026-07-17)
-- ✅ `docs.json` rebranded (name, indigo palette from DESIGN.md, tab/group nav, dashboard CTA, `contextual.display`); favicon replaced with the ascending-bars mark; `AGENTS.md` rewritten; project skills shipped (§8.5).
+- ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); favicon replaced with the ascending-bars mark; `AGENTS.md` rewritten; project skills shipped (§8.5).
 - ⬜ Pending: dedicated logo asset (the site name currently renders as the wordmark), real footer socials, site-level SEO `description` + an OpenGraph image.
 
 **Phase 1 — The golden path (highest leverage)** — ✅ done (2026-07-17)
@@ -429,7 +433,7 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 - ✅ **Product analytics** group (6): Feature flags, Experiments (A/B), Surveys, Custom dashboards, SQL query builder, Group & B2B analytics. Sourced from `algorithms/{flag-evaluation,experiment-results,surveys,dashboard-cards,group-analytics}.md`, `concepts/scoped-sql-query.md`, and the tracker public-API table (`architecture/tracking-script.md` — `flag()`/`flagPayload()`/`flags()`, `group()`/`setGroupTraits()`/`resetGroups()`). Citable specifics kept exact: rollout %, exposure-vs-assignment measurement, the ≥30-sample / ≥95%-confidence significance rule, the 5-group-type cap, the 10 s / 1,000-row query caps.
 - ✅ **Monitor & automate** group (4): Scheduled reports, Alerts, Uptime monitoring, Shortlinks. Sourced from `algorithms/{scheduled-reports,analytics-alerts,uptime-monitoring}.md` and `architecture/shortlinks.md` (decisions 0131–0133, 0138–0139, 0116–0119, 0159/0168). Documents the shipped alert metrics (sessions/users/pageviews/bounce/event count/active accounts — **not revenue**, which isn't wired), the 12 h default cooldown, incident open/resolve on the 2nd consecutive failure/success, and that shortlink clicks are excluded from overview traffic.
 - ✅ **Share & embed** group (3): Public dashboards, Embed a dashboard, Live-visitors widget. Sourced from decisions 0089 (widget + embed-stats), 0105 (`/share` full-dashboard link), 0126 (embed UX: theme/hideSidebar, keyless-public sentinel, private link key). Public/private bearer-link model stated plainly.
-- 13 pages under `guides/`, added as three new Guides groups (Product analytics · Monitor & automate · Share & embed). Build validates with zero broken links.
+- 13 pages at the documentation root, added as three guide groups (Product analytics · Monitor & automate · Share & embed). Build validates with zero broken links.
 - 🚫 Not over-claimed: **hideBranding / white-label** — 0126 frames it as a self-host-friendly toggle; on the hosted product its availability may be plan-gated, so the embed docs cover theme + hide-sidebar only and omit branding removal until plan scope is confirmed (ties to open question #2). Alert **segment/filter picker** is carried in the engine but not yet in the dialog (ships site-wide first), so alerts are documented as site-wide.
 
 **Phase 6 — API reference & Resources** — ✅ done (2026-07-17)
@@ -447,13 +451,13 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 Compared our coverage against the live Rybbit docs sidebar (`rybbit.com/docs`) as a behavioral reference (structure only; no expression copied). Every "to add" below is backed by the product wiki (the feature exists) and is in scope for hosted tinyanalytics. Items Rybbit documents that we deliberately do **not** add follow, with reasons — so this stays an honest audit, not a copy of their table of contents.
 
 *To add (confirmed, sourced):*
-- ✅ **Exclude traffic** (`guides/exclude-traffic.mdx`, added to the "Install the tracker" group, 2026-07-18) — ingest-time exclusions: IP (single/CIDR/range, v4+v6), country, path glob, hostname glob, and user-agent **substring** (the 0160 gotcha — UA is substring, not glob; page states it explicitly), plus the block-bots toggle and both "hide your own traffic" routes (localStorage opt-out + IP exclusion). Distinguishes exclusion (dropped at collection) from a dashboard filter (hides a report view). Source: decisions 0054, 0160; caps 100 entries / 256 chars.
-- ✅ **Autocapture** (`guides/autocapture.mdx`, added to the "Track what matters" group, 2026-07-18) — dedicated page for each auto-captured event (outbound link, file download, button click, copy, form submission, engagement): what each records, the toggle attribute, the form-shape-only privacy guarantee (and the honest note that copy events store truncated copied text), plus the `data-ta-prop-*` (add props) and `data-ta-event` (opt an element out) conventions. Source: decision 0110; `tracker/script/auto-capture.ts` (read at source for the `data-ta-*` semantics and per-event props).
+- ✅ **Exclude traffic** (`exclude-traffic.mdx`, added to the "Install the tracker" group, 2026-07-18) — ingest-time exclusions: IP (single/CIDR/range, v4+v6), country, path glob, hostname glob, and user-agent **substring** (the 0160 gotcha — UA is substring, not glob; page states it explicitly), plus the block-bots toggle and both "hide your own traffic" routes (localStorage opt-out + IP exclusion). Distinguishes exclusion (dropped at collection) from a dashboard filter (hides a report view). Source: decisions 0054, 0160; caps 100 entries / 256 chars.
+- ✅ **Autocapture** (`autocapture.mdx`, added to the "Track what matters" group, 2026-07-18) — dedicated page for each auto-captured event (outbound link, file download, button click, copy, form submission, engagement): what each records, the toggle attribute, the form-shape-only privacy guarantee (and the honest note that copy events store truncated copied text), plus the `data-ta-prop-*` (add props) and `data-ta-event` (opt an element out) conventions. Source: decision 0110; `tracker/script/auto-capture.ts` (read at source for the `data-ta-*` semantics and per-event props).
 - ✅ **Wix** (`integrations/wix.mdx`, 2026-07-18) — Custom Code → Head, all pages; Premium-plan gating noted (like Squarespace/Carrd); SPA tracking cross-link.
 - ✅ **WooCommerce** (`integrations/woocommerce.mdx`, 2026-07-18) — install via the WordPress header method (cross-links the WordPress guide) plus a purchase-tracking section (custom event on the order-received page with `revenue`/`currency`, verified against the tracker schema's reserved-prop convention).
 
 *Lower priority / optional:*
-- ✅ **Site settings** orientation page (`guides/site-settings.mdx`, added to "Accounts & access", 2026-07-19) — hub for the per-site Settings tabs: name/domain, reporting currency, public/private visibility, tracking + exclusions, embeds, imports, move-site, and delete. Canonical home for move-a-site-between-orgs (0161). Grounded in `settings/_components/general-tab.tsx`.
+- ✅ **Site settings** orientation page (`site-settings.mdx`, added to "Accounts & access", 2026-07-19) — hub for the per-site Settings tabs: name/domain, reporting currency, public/private visibility, tracking + exclusions, embeds, imports, move-site, and delete. Canonical home for move-a-site-between-orgs (0161). Grounded in `settings/_components/general-tab.tsx`.
 - ⬜ **Svelte (Vite, non-Kit)** integration — we ship SvelteKit; Rybbit also documents plain Svelte/Vite (different install point: `index.html` / app mount).
 - ⬜ **Per-endpoint API pages** — Rybbit enumerates individual endpoint pages (sending-events, export-events, live-feed, channel-performance, funnel-dropoff, weekly-report). Ours is capability-structured (core-endpoints table + playground); enumerate more only if users ask.
 - (Unchanged, already listed under Phase 4: PrestaShop, ThriveCart, Joomla, TYPO3.)
@@ -470,23 +474,23 @@ Compared our coverage against the live Rybbit docs sidebar (`rybbit.com/docs`) a
 Diffed our docs against the actual product surface — the web app route tree (`apps/web/src/app/websites/[siteId]/*`), the SDK folder (`sdks/`), and decisions **0140–0181** (which postdate the Phase-1–6 build). Every route with no matching doc page was a candidate; each below is source-grounded (fact sheets from `apps/api/src`, `apps/web/src`, `sdks/`, and the wiki) and confirmed shipped + user-facing. Scope decisions confirmed with the owner: build all; document revenue plainly (no plan caveats — despite `requireFeature("revenue")`); the React Native SDK is published/installable.
 
 *New pages (all built 2026-07-19):*
-- ✅ **Error tracking** (`guides/errors.mdx`, "Explore your data") — opt-in `data-track-errors`; auto-captures `window.onerror` + unhandled rejections; manual `trackError(err, meta)`; report groups by message with occurrences, affected sessions, sparkline, and stack-trace drill-down; 60 s dedupe; `ResizeObserver`/cross-origin noise filtered. Source: `apps/api/src/api/errors.ts`, `tracker/script/tracker.ts`, `features.md`. Also added a script-config section + kept the `error` type accurate in `api-reference/track`.
-- ✅ **Revenue analytics** (`guides/revenue.mdx`, "Product analytics") — reserved `revenue` (major units, positive) + `currency` (3-letter format gate) props on a custom event; report = Total Revenue / AOV / Paying Sessions / Orders + timeseries + revenue-by-dimension (entry-acquisition credited); reporting currency (22 built-in rates, per-release, unlisted codes 1:1). Documented plainly per owner. Source: decision 0140, `revenue-currency.ts`, `revenue/page.tsx`.
-- ✅ **Cross-site rollup** (`guides/rollup.mdx`, "Explore your data") — combined stats across every accessible site in the active org (6 tiles + trend + per-site contribution), team-scoped access, users summed (no cross-site dedup), core metrics only. Source: decision 0076, `apps/web/src/app/rollup/`.
+- ✅ **Error tracking** (`errors.mdx`, "Explore your data") — opt-in `data-track-errors`; auto-captures `window.onerror` + unhandled rejections; manual `trackError(err, meta)`; report groups by message with occurrences, affected sessions, sparkline, and stack-trace drill-down; 60 s dedupe; `ResizeObserver`/cross-origin noise filtered. Source: `apps/api/src/api/errors.ts`, `tracker/script/tracker.ts`, `features.md`. Also added a script-config section + kept the `error` type accurate in `api-reference/track`.
+- ✅ **Revenue analytics** (`revenue.mdx`, "Product analytics") — reserved `revenue` (major units, positive) + `currency` (3-letter format gate) props on a custom event; report = Total Revenue / AOV / Paying Sessions / Orders + timeseries + revenue-by-dimension (entry-acquisition credited); reporting currency (22 built-in rates, per-release, unlisted codes 1:1). Documented plainly per owner. Source: decision 0140, `revenue-currency.ts`, `revenue/page.tsx`.
+- ✅ **Cross-site rollup** (`rollup.mdx`, "Explore your data") — combined stats across every accessible site in the active org (6 tiles + trend + per-site contribution), team-scoped access, users summed (no cross-site dedup), core metrics only. Source: decision 0076, `apps/web/src/app/rollup/`.
 - ✅ **React Native** (`integrations/react-native.mdx`, new "Mobile apps" group) — `@tinyanalytics/react-native` SDK: install (+AsyncStorage), create a mobile-type site (app identifier, read-only), `init()`, `screen()`/`event()`/`identify()`/`error()`, React Navigation tracker, install-id identity, full API + config tables, and the web-vs-mobile differences (screens-as-pageviews, no web vitals, empty channel). `analyticsHost` set to `https://dash.tinyanalytics.io` for consistency with the rest of the docs. Source: decision 0165, `sdks/react-native/{README.md,index.d.ts}`.
 
 *Enhancements (2026-07-19):*
-- ✅ `guides/pages.mdx` — added the alternate views (Titles / Entries / Exits / Hostnames) and a **Landing pages** section (entry-page report: bounce, avg duration, avg scroll, avg time). Source: decision 0178, `landing-pages-table.tsx`.
-- ✅ `guides/alerts.mdx` — added **Revenue** to the alert-metric table (was stale: previously said revenue "isn't wired" — it shipped; `ALERT_METRICS` includes `"revenue"`).
-- ✅ `guides/script-configuration.mdx` — dedicated "Capture JavaScript errors" section (the `data-track-errors` row already existed).
-- ✅ `guides/organizations.mdx` — move-a-site pointer into `site-settings`.
+- ✅ `pages.mdx` — added the alternate views (Titles / Entries / Exits / Hostnames) and a **Landing pages** section (entry-page report: bounce, avg duration, avg scroll, avg time). Source: decision 0178, `landing-pages-table.tsx`.
+- ✅ `alerts.mdx` — added **Revenue** to the alert-metric table (was stale: previously said revenue "isn't wired" — it shipped; `ALERT_METRICS` includes `"revenue"`).
+- ✅ `script-configuration.mdx` — dedicated "Capture JavaScript errors" section (the `data-track-errors` row already existed).
+- ✅ `organizations.mdx` — move-a-site pointer into `site-settings`.
 - ✅ `integrations/overview.mdx` — mobile-app note pointing to the React Native SDK.
 
 *Deliberately NOT documented (accuracy over completeness):*
 - 🚫 **Pages URL / hostname mode** (0181) — the breakdown API shipped (`pathname_host`/`entry_page_host`/`exit_page_host`) but the **web UI has not** (no `pagesMode` toggle in `apps/web/src`). Documenting it would describe something users can't do. Revisit when the UI ships.
 - 🚫 Operator-internal surfaces flagged by the fact-sheets (superadmin site-move, `BILLING_ENFORCED` quota preHandler, ClickHouse storage internals) — out of scope under the hosted-only boundary.
 
-*Confirmed already covered (no action):* **Group & B2B analytics** (the owner's example — `guides/group-analytics.mdx` already documents `group()`/`setGroupTraits()`/`resetGroups()`, the grain toggle, account funnels/retention, inactivity alerts, flag-by-account; the miss was discoverability, not content); `data-web-vitals` (in `script-configuration`); group traits (already the 4th row in `data-dictionary`); the `error`/`performance` event types + `revenue`/`currency` props (already in `api-reference/track`, one wording tweak).
+*Confirmed already covered (no action):* **Group & B2B analytics** (the owner's example — `group-analytics.mdx` already documents `group()`/`setGroupTraits()`/`resetGroups()`, the grain toggle, account funnels/retention, inactivity alerts, flag-by-account; the miss was discoverability, not content); `data-web-vitals` (in `script-configuration`); group traits (already the 4th row in `data-dictionary`); the `error`/`performance` event types + `revenue`/`currency` props (already in `api-reference/track`, one wording tweak).
 
 *Open (owner input still needed):* **Billing & plans** page (open Q2); **screenshots** (need a live instance).
 
@@ -505,7 +509,7 @@ question-shaped headings 26 → 58. House style captured in the commit; owner ru
   asked). **Recommended as the next pass.**
 - 🚫 **"snippet" → "the tracking script" across `integrations/*`** — 152 occurrences remain, mostly on
   the 30 integration pages that were deliberately structure-only. Not a blind find-and-replace:
-  `guides/embed-dashboard` and `guides/live-visitors-widget` use "snippet" for the **embed iframe
+  `embed-dashboard` and `live-visitors-widget` use "snippet" for the **embed iframe
   snippet**, which is the product's own UI term (`dashboard-embed-tab.tsx` renders "Copy snippet") and
   must stay. Needs a per-occurrence pass distinguishing concept from UI label.
 - 🚫 **Question-shaping anchored headings** — `script-configuration#track-single-page-apps` alone has
@@ -537,7 +541,7 @@ that was accurate when written, and nothing in either repo flags the dependency.
    machine. *Recommendation:* record the audited product SHA in this file at the end of each sync
    pass. **This pass audited through `d400019`.**
 2. **`mint broken-links` does not validate URL fragments.** Re-confirmed. Heading renames break
-   inbound anchors silently — this pass renamed a `guides/pages` heading and only the custom
+   inbound anchors silently — this pass renamed a `pages` heading and only the custom
    slugify-and-compare script proved nothing pointed at the old slug.
 3. **Stale source comments are a documentation hazard.** `apps/api/src/api/sites-validation.ts`
    asserts an `Etc/UTC` column default that migration 0035 does not create. Verify defaults against
@@ -547,8 +551,8 @@ that was accurate when written, and nothing in either repo flags the dependency.
 
 | Not done | Reason |
 | --- | --- |
-| Standalone `guides/timezone` and `resources/multi-host-sites` pages (both recommended by the audit) | Concepts documented where their controls live — `guides/site-settings` and `guides/pages` — with cross-links. One canonical home beats five places to drift. Revisit if SEO reach for "analytics timezone" justifies a dedicated page. |
-| `guides/events` split into two pages | The page now covers both the dashboard Events card and the Events page. A split is defensible if the Events page grows further. |
+| Standalone `timezone` and `resources/multi-host-sites` pages (both recommended by the audit) | Concepts documented where their controls live — `site-settings` and `pages` — with cross-links. One canonical home beats five places to drift. Revisit if SEO reach for "analytics timezone" justifies a dedicated page. |
+| `events` split into two pages | The page now covers both the dashboard Events card and the Events page. A split is defensible if the Events page grows further. |
 | Retention numeric-delta claim | The timezone mechanism is confirmed from source, but whether any given site sees a visible change is unmeasured, so the docs state the mechanism only. Cohort day/week *bucketing* remains UTC-derived — do **not** claim cohort labels shifted. |
 | `resources/*` GEO pass | Still outstanding from the 2026-07-19 pass; `comparison.mdx` and `metrics-glossary.mdx` remain the strongest remaining GEO candidates. |
 
@@ -557,7 +561,7 @@ that was accurate when written, and nothing in either repo flags the dependency.
 The Events log empty state links to **`https://rybbit.com/docs/track-events`**
 (`apps/web/src/components/dashboard/event-log/event-log.tsx:34`) — the product ships a UI that sends
 users to the reference implementation's documentation. This warrants attention on both product and
-clean-room grounds. It should almost certainly point at `guides/custom-events` in these docs.
+clean-room grounds. It should almost certainly point at `custom-events` in these docs.
 
 ---
 
@@ -624,7 +628,7 @@ cross-checked against the 133 routes extracted from a running `mint dev` nav pay
 | --- | --- | --- | --- |
 | 1 | Docs domain | `docs.tinyanalytics.io` | App is `dash.tinyanalytics.io`; confirm docs host (subdomain vs `/docs`). Affects skill-install prompt + canonical URLs. |
 | 2 | Cloud is the only offering | Confirmed by owner (2026-07-16): closed-source, hosted-only | Is signup open to everyone? Pricing page live? Determines billing docs depth. |
-| 3 | Brand accent color | Indigo — confirmed by owner (2026-07-17); hex `#345FCF` / `#537FEB` / `#2249B7`, converted from DESIGN.md's oklch tokens | Resolved. Note: the live app currently runs a green trial theme (DESIGN.md 0171); the docs match the brand baseline, not the trial. |
+| 3 | Brand accent color | Green — updated by owner (2026-07-27): `#006420` for light mode and `#009B32` for dark mode | Resolved. |
 | 4 | Integration guide breadth for v1 | Top ~12 now, long tail later | Which platforms matter most to the audience? |
 | 5 | Screenshots | Needed for dashboard/feature pages | Who captures them / from which instance (demo seed)? |
 | 6 | API reference source | Hand-authored v1 | Is there an OpenAPI spec to auto-generate from later? |

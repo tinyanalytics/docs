@@ -36,7 +36,7 @@ Keys are managed from your account settings:
 
 - A key is **shown once** at creation — copy it then, because tinyanalytics stores only a hash and can't show it again.
 - **Revoke** a key any time to cut off its access immediately.
-- A key inherits **its owner's access**: a request authenticates as the user who created the key, and is authorized by that user's organization membership and [team](/guides/teams) access. A key never grants more than its owner has.
+- A key inherits **its owner's access**: a request authenticates as the user who created the key, and is authorized by that user's organization membership and [team](/teams) access. A key never grants more than its owner has.
 
 <Warning>
   Treat an API key like a password. A leaked key can read and manage every site its owner can access — so keep it server-side, never ship it in browser code, and revoke it if it's exposed. Browser tracking doesn't need a key; the `data-site-id` in the snippet is enough.
@@ -83,7 +83,7 @@ Authorization: Bearer YOUR_API_KEY
   <Card title="Rate limits & CORS" icon="shield-halved" href="/api-reference/rate-limits">
     The per-key ingestion limit.
   </Card>
-  <Card title="Account settings" icon="gear" href="/guides/account-settings">
+  <Card title="Account settings" icon="gear" href="/account-settings">
     Where you create and revoke keys.
   </Card>
   <Card title="API playground" icon="terminal" href="/api-reference/playground">

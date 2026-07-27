@@ -52,7 +52,7 @@ await analytics.init({
 
 ## Track screens and events
 
-Screen views are the mobile equivalent of pageviews — a screen name becomes the path you see in the [Pages](/guides/pages) report:
+Screen views are the mobile equivalent of pageviews — a screen name becomes the path you see in the [Pages](/pages) report:
 
 ```js
 // Screen view
@@ -91,6 +91,14 @@ const navTracker = analytics.createNavigationTracker();
 </NavigationContainer>;
 ```
 
+## Verify
+
+Run the app and send a screen view with `analytics.screen()`.
+
+<Check>
+  Your SDK setup is working when the screen name appears as a path in the **Pages** report for your mobile site.
+</Check>
+
 ## The mobile identity model
 
 Native apps sit behind carrier NAT and have no browser User-Agent, so the web fingerprint would collapse many devices into one. Instead the SDK mints a persistent **install ID** and sends it as `anonymousId`; the server derives a stable, site-scoped user ID from it. `identify()` layers your own product-user ID on top and backfills recent events — exactly as on the web. No cookies, no device fingerprinting, no personal data at rest. See [how cookieless identity works](/resources/cookieless-identity).
@@ -102,7 +110,7 @@ Native apps sit behind carrier NAT and have no browser User-Agent, so the web fi
 | `init(config)` | Configure and start. Loads or creates the install ID and flushes any queued events. |
 | `screen(name, props?, ctx?)` | Track a screen view. |
 | `pageview(path?, ctx?)` | Track an explicit path. |
-| `event(name, props?, ctx?)` | Track a [custom event](/guides/custom-events). |
+| `event(name, props?, ctx?)` | Track a [custom event](/custom-events). |
 | `error(error, props?, ctx?)` | Track a handled error (name, message, stack). |
 | `identify(userId, traits?)` | Associate the install with a stable user ID and optional traits. |
 | `setTraits(traits)` | Update the identified user's traits. |
@@ -130,22 +138,22 @@ Native apps sit behind carrier NAT and have no browser User-Agent, so the web fi
 ## What differs from web tracking
 
 - **Screens, not pages** — `screen()` names appear as paths in the Pages report; there's no auto-pageview from a URL.
-- **No Core Web Vitals** — the [Performance](/guides/performance) report is web-only.
+- **No Core Web Vitals** — the [Performance](/performance) report is web-only.
 - **Referrer and channel** aren't populated from a mobile app, so acquisition-by-channel reports stay empty for mobile sites.
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+  <Card title="Track custom events" icon="cursor-click" href="/custom-events">
     The event model, shared with the web.
   </Card>
-  <Card title="Identify users" icon="user" href="/guides/identify-users">
+  <Card title="Identify users" icon="user" href="/identify-users">
     Attach a stable user ID and traits.
   </Card>
   <Card title="Cookieless identity" icon="fingerprint" href="/resources/cookieless-identity">
     How the install ID stays private.
   </Card>
-  <Card title="Revenue analytics" icon="dollar-sign" href="/guides/revenue">
+  <Card title="Revenue analytics" icon="dollar-sign" href="/revenue">
     Track purchases from your app.
   </Card>
 </Columns>

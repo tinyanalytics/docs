@@ -33,17 +33,17 @@ For the theme-based alternative (a child theme's `header.php`), see the [WordPre
 
 ## Track purchases
 
-Because your WooCommerce checkout runs on your own site, the tracker is present on the **order-received** (thank-you) page. Fire a [custom event](/guides/custom-events) there to record each completed order, and include the order total as revenue:
+Because your WooCommerce checkout runs on your own site, the tracker is present on the **order-received** (thank-you) page. Fire a [custom event](/custom-events) there to record each completed order, and include the order total as revenue:
 
 ```js
 window.tinyanalytics.event('purchase', { revenue: 49.0, currency: 'USD' })
 ```
 
-Fill the amount in from the order shown on the thank-you page. You can then build a purchase [goal](/guides/goals) or a checkout [funnel](/guides/funnels) from that event.
+Fill the amount in from the order shown on the thank-you page. You can then build a purchase [goal](/goals) or a checkout [funnel](/funnels) from that event.
 
 ## Verify
 
-Open your store in a browser, then check **Realtime** in your dashboard for your visit. Place a test order and confirm the `purchase` event appears in your **Events** report. See [Verify your setup](/guides/verify-your-setup) for the full check.
+Open your store in a browser, then check **Realtime** in your dashboard for your visit. Place a test order and confirm the `purchase` event appears in your **Events** report. See [Verify your setup](/verify-your-setup) for the full check.
 
 <Check>
   Your install is working when your own visit appears in **Realtime** and a test order's `purchase` event appears in your **Events** report.
@@ -55,13 +55,13 @@ Open your store in a browser, then check **Realtime** in your dashboard for your
   <Card title="Install on WordPress" icon="wordpress" href="/integrations/wordpress">
     Every WordPress install method applies here.
   </Card>
-  <Card title="Track custom events" icon="cursor-click" href="/guides/custom-events">
+  <Card title="Track custom events" icon="cursor-click" href="/custom-events">
     Record purchases and other actions.
   </Card>
-  <Card title="Goals" icon="bullseye" href="/guides/goals">
+  <Card title="Goals" icon="bullseye" href="/goals">
     Turn a purchase into a conversion metric.
   </Card>
-  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+  <Card title="Verify your setup" icon="circle-check" href="/verify-your-setup">
     Confirm tracking works.
   </Card>
 </Columns>

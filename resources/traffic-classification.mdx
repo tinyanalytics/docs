@@ -20,6 +20,21 @@ Classification reads three inputs and applies them in a fixed order:
 - **Referrer** — when there are no campaign parameters, the referring domain decides the channel: a search engine means Organic Search, a social network means Organic Social, and so on.
 - **No referrer** — a visit with no referrer and no campaign parameters is **Direct**.
 
+```mermaid
+flowchart TD
+  A["New visit"] --> B{"Campaign or ad signal?"}
+  B -- "Yes" --> C["Campaign channel"]
+  B -- "No" --> D{"Referrer present?"}
+  D -- "No" --> E["Direct"]
+  D -- "Yes" --> F{"Excluded referrer?"}
+  F -- "Yes" --> E
+  F -- "No" --> G{"Own domain or subdomain?"}
+  G -- "Yes" --> H["Internal"]
+  G -- "No" --> I{"AI assistant domain?"}
+  I -- "Yes" --> J["AI"]
+  I -- "No" --> K["Search, social, or referral lookup"]
+```
+
 Two rules resolve the overlaps:
 
 - **Paid beats organic** — a visit from a search source *with* a paid signal (an ad medium or a click ID) is Paid Search, not Organic Search.
@@ -33,7 +48,7 @@ Two rules resolve the overlaps:
 
 Hops between your root domain and any of its subdomains are **Internal**, in both directions — `example.com` to `app.example.com` and `app.example.com` back to `example.com`. The visitor stays in one session and no referral is recorded.
 
-**Sibling subdomains are the exception.** A hop from `app.example.com` to `blog.example.com` is still classified as a **Referral**, because neither domain contains the other. To fold those into your direct traffic, add your root domain to **Referrer Exclusions** — see [exclude traffic](/guides/exclude-traffic#how-do-i-stop-a-referrer-from-showing-up-as-a-referral).
+**Sibling subdomains are the exception.** A hop from `app.example.com` to `blog.example.com` is still classified as a **Referral**, because neither domain contains the other. To fold those into your direct traffic, add your root domain to **Referrer Exclusions** — see [exclude traffic](/exclude-traffic#how-do-i-stop-a-referrer-from-showing-up-as-a-referral).
 
 An excluded referrer is reported as **Direct**, not Internal. The two labels mean different things: Internal marks navigation inside your own site, while Direct means tinyanalytics has no referrer to attribute the visit to. Campaign parameters still take priority over both — a UTM-tagged link from an excluded referrer keeps its campaign channel.
 
@@ -44,13 +59,13 @@ To classify your campaigns precisely, add UTM parameters to the links you contro
 ## Related
 
 <Columns cols={2}>
-  <Card title="AI traffic" icon="microchip" href="/guides/ai-traffic">
+  <Card title="AI traffic" icon="microchip" href="/ai-traffic">
     Visits that arrive from AI assistants.
   </Card>
-  <Card title="Shortlinks" icon="link" href="/guides/shortlinks">
+  <Card title="Shortlinks" icon="link" href="/shortlinks">
     Trackable links that carry campaign tags.
   </Card>
-  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+  <Card title="Dashboard overview" icon="gauge" href="/dashboard-overview">
     See your traffic by channel.
   </Card>
   <Card title="How bot detection works" icon="robot" href="/resources/bot-detection">

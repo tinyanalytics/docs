@@ -6,6 +6,21 @@ icon: "robot"
 
 tinyanalytics filters out bots and crawlers before they reach your reports, so your numbers reflect **real people**. Detection runs several independent layers on every incoming event, and a request flagged by any of them is dropped from your human analytics — while still returning a normal response, so a bot can't tell it was caught.
 
+```mermaid
+flowchart LR
+  A["Incoming event"] --> B["Known user-agent signals"]
+  A --> C["Bot-network signals"]
+  A --> D["Request-behavior signals"]
+  A --> E["Automation signals"]
+  B --> F{"Bot verdict"}
+  C --> F
+  D --> F
+  E --> F
+  F -- "Human" --> G["Human analytics"]
+  F -- "Automated" --> H["Bot traffic store"]
+  H --> I["Bots & AI crawlers report"]
+```
+
 ## The detection layers
 
 tinyanalytics judges each request with layers that each catch a different kind of automation:
@@ -23,15 +38,15 @@ The same rule protects people on **shared networks** — carrier-grade NAT, offi
 
 ## Seeing the bots
 
-Filtered bots don't disappear silently — the [bots & AI crawlers report](/guides/bots) shows the automated traffic that was kept out of your human analytics, including which AI crawlers are visiting your site. Detected AI-assistant *referrals* (a real person arriving from an AI answer) are a separate signal, covered in [AI traffic](/guides/ai-traffic).
+Filtered bots don't disappear silently — the [bots & AI crawlers report](/bots) shows the automated traffic that was kept out of your human analytics, including which AI crawlers are visiting your site. Detected AI-assistant *referrals* (a real person arriving from an AI answer) are a separate signal, covered in [AI traffic](/ai-traffic).
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Bots & AI crawlers" icon="robot" href="/guides/bots">
+  <Card title="Bots & AI crawlers" icon="robot" href="/bots">
     The report of filtered bot traffic.
   </Card>
-  <Card title="AI traffic" icon="microchip" href="/guides/ai-traffic">
+  <Card title="AI traffic" icon="microchip" href="/ai-traffic">
     Visitors who arrive from AI assistants.
   </Card>
   <Card title="How traffic is classified" icon="signs-post" href="/resources/traffic-classification">

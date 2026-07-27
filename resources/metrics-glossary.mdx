@@ -11,12 +11,12 @@ This glossary defines every core tinyanalytics metric so you know exactly what e
 | Metric | Definition |
 | --- | --- |
 | **Sessions** | The number of distinct sessions in the date range. A session is one visitor's activity within a 30-minute sliding window of inactivity. |
-| **Users** | The number of distinct visitors. A visitor is counted by their identified ID if you've called [identify](/guides/identify-users), otherwise by a [cookieless fingerprint](/resources/cookieless-identity). One signed-in person on a phone and a laptop counts as one user. |
+| **Users** | The number of distinct visitors. A visitor is counted by their identified ID if you've called [identify](/identify-users), otherwise by a [cookieless fingerprint](/resources/cookieless-identity). One signed-in person on a phone and a laptop counts as one user. |
 | **Pageviews** | The total number of pages viewed — every page load and, in a single-page app, every route change. |
 | **Pages per session** | The mean number of pageviews per session. |
 | **Bounce rate** | The percentage of sessions with exactly one pageview. |
 | **Session duration** | The average time between a session's first and last event, in seconds. |
-| **AI traffic (AI sessions)** | The number of sessions that *entered* from an [AI assistant](/guides/ai-traffic) — a visitor who clicked through from ChatGPT, Perplexity, Gemini, Claude, Copilot, and similar. Each session is counted once, by the assistant it arrived from. |
+| **AI traffic (AI sessions)** | The number of sessions that *entered* from an [AI assistant](/ai-traffic) — a visitor who clicked through from ChatGPT, Perplexity, Gemini, Claude, Copilot, and similar. Each session is counted once, by the assistant it arrived from. |
 
 ## What counts as a session?
 
@@ -29,10 +29,10 @@ A **bounce** is a session with exactly one pageview — the visitor saw one page
 ## Related
 
 <Columns cols={2}>
-  <Card title="Data dictionary" icon="book" href="/guides/data-dictionary">
+  <Card title="Data dictionary" icon="book" href="/data-dictionary">
     The events, properties, and traits catalog.
   </Card>
-  <Card title="Dashboard overview" icon="gauge" href="/guides/dashboard-overview">
+  <Card title="Dashboard overview" icon="gauge" href="/dashboard-overview">
     See these metrics for your site.
   </Card>
   <Card title="How cookieless identity works" icon="fingerprint" href="/resources/cookieless-identity">

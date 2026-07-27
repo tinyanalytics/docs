@@ -6,7 +6,18 @@
 | Owner | Documentation |
 | Date | July 27, 2026 |
 | Companion document | [`PRD.md`](./PRD.md) |
-| Implementation status | Not started |
+| Implementation status | In progress — Phase 1 started |
+
+### Implementation update — July 27, 2026
+
+- Migrated all 105 authored `CardGroup` wrappers to `Columns`.
+- Added visible verification results to the eight pages that used `Steps` without `Check`.
+- Reclassified four irreversible deletion callouts from `Warning` to `Danger`.
+- Added a repository component-audit script at `scripts/audit-components.mjs`.
+- Added the component contract to the tinyanalytics documentation skill.
+- Added verified Mermaid flows to the four priority concept pages.
+- Recorded 15 simple integration pages as one-step or tabs-only exceptions instead of adding decorative `Steps`.
+- Deferred the public skill-install `Prompt` because `docs.tinyanalytics.io` does not currently resolve; do not publish a copyable command with an unavailable source URL.
 
 ## 1. Summary
 
@@ -84,8 +95,7 @@ The baseline covers 104 authored MDX pages:
 
 | Area | Pages |
 | --- | ---: |
-| Root | 4 |
-| Guides | 55 |
+| Main documentation root | 59 |
 | Integrations | 29 |
 | API reference | 8 |
 | Resources | 8 |
@@ -554,4 +564,3 @@ Completion does not require adopting every Mintlify component. Components explic
 - [Fields](https://www.mintlify.com/docs/components/fields)
 - [Expandables](https://www.mintlify.com/docs/components/expandables)
 - [Panel](https://www.mintlify.com/docs/components/panel)
-

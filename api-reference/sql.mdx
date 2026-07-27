@@ -4,7 +4,7 @@ description: "Run read-only SQL against your site's analytics with POST /api/sit
 icon: "database"
 ---
 
-`POST /api/sites/{id}/query` runs a **read-only SQL query** against your site's analytics data and returns the rows with typed column metadata — the programmatic form of the [SQL query builder](/guides/sql-query-builder). You write a `SELECT` against two virtual tables that are already scoped to your site.
+`POST /api/sites/{id}/query` runs a **read-only SQL query** against your site's analytics data and returns the rows with typed column metadata — the programmatic form of the [SQL query builder](/sql-query-builder). You write a `SELECT` against two virtual tables that are already scoped to your site.
 
 ```
 POST https://dash.tinyanalytics.io/api/sites/{id}/query
@@ -127,16 +127,16 @@ A SQL error comes back as a `400` with the database's message so you can fix the
 ## Related
 
 <Columns cols={2}>
-  <Card title="SQL query builder" icon="database" href="/guides/sql-query-builder">
+  <Card title="SQL query builder" icon="database" href="/sql-query-builder">
     The same capability, in the dashboard.
   </Card>
   <Card title="Analytics read API" icon="chart-line" href="/api-reference/read">
     Fixed reports when you don't need raw SQL.
   </Card>
-  <Card title="Custom dashboards" icon="table-cells-large" href="/guides/custom-dashboards">
+  <Card title="Custom dashboards" icon="table-cells-large" href="/custom-dashboards">
     Turn a query into a saved chart.
   </Card>
-  <Card title="Metric definitions" icon="ruler" href="/guides/data-dictionary">
+  <Card title="Metric definitions" icon="ruler" href="/data-dictionary">
     The events and columns you can query.
   </Card>
 </Columns>

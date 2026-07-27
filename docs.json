@@ -3,11 +3,28 @@
   "theme": "almond",
   "name": "tinyanalytics",
   "colors": {
-    "primary": "#345FCF",
-    "light": "#537FEB",
-    "dark": "#2249B7"
+    "primary": "#006420",
+    "light": "#009B32",
+    "dark": "#009B32"
+  },
+  "fonts": {
+    "family": "Inter"
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
   },
   "favicon": "/favicon.svg",
+  "redirects": [
+    {
+      "source": "/guides",
+      "destination": "/"
+    },
+    {
+      "source": "/guides/:slug*",
+      "destination": "/:slug*"
+    }
+  ],
   "navigation": {
     "tabs": [
       {
@@ -22,28 +39,22 @@
               "how-it-works",
               "migrate"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "Guides",
-        "icon": "book-open",
-        "groups": [
+          },
           {
             "group": "Set up tracking",
             "pages": [
-              "guides/tracking-script",
-              "guides/script-configuration",
-              "guides/exclude-traffic",
-              "guides/verify-your-setup"
+              "tracking-script",
+              "script-configuration",
+              "exclude-traffic",
+              "verify-your-setup"
             ]
           },
           {
             "group": "Collect data",
             "pages": [
-              "guides/autocapture",
-              "guides/custom-events",
-              "guides/identify-users"
+              "autocapture",
+              "custom-events",
+              "identify-users"
             ]
           },
           {
@@ -53,47 +64,47 @@
                 "group": "Traffic & audience",
                 "expanded": false,
                 "pages": [
-                  "guides/dashboard-overview",
-                  "guides/realtime",
-                  "guides/pages",
-                  "guides/sessions",
-                  "guides/users",
-                  "guides/events",
-                  "guides/map",
-                  "guides/rollup"
+                  "dashboard-overview",
+                  "realtime",
+                  "pages",
+                  "sessions",
+                  "users",
+                  "events",
+                  "map",
+                  "rollup"
                 ]
               },
               {
                 "group": "Behavior & conversion",
                 "expanded": false,
                 "pages": [
-                  "guides/journeys",
-                  "guides/funnels",
-                  "guides/goals",
-                  "guides/retention",
-                  "guides/cohorts"
+                  "journeys",
+                  "funnels",
+                  "goals",
+                  "retention",
+                  "cohorts"
                 ]
               },
               {
                 "group": "Acquisition & quality",
                 "expanded": false,
                 "pages": [
-                  "guides/ai-traffic",
-                  "guides/search-console",
-                  "guides/bots",
-                  "guides/performance",
-                  "guides/errors"
+                  "ai-traffic",
+                  "search-console",
+                  "bots",
+                  "performance",
+                  "errors"
                 ]
               },
               {
                 "group": "Reporting tools",
                 "expanded": false,
                 "pages": [
-                  "guides/filters",
-                  "guides/segments",
-                  "guides/compare",
-                  "guides/annotations",
-                  "guides/export"
+                  "filters",
+                  "segments",
+                  "compare",
+                  "annotations",
+                  "export"
                 ]
               }
             ]
@@ -105,32 +116,32 @@
                 "group": "Product analytics",
                 "expanded": false,
                 "pages": [
-                  "guides/revenue",
-                  "guides/feature-flags",
-                  "guides/experiments",
-                  "guides/surveys",
-                  "guides/custom-dashboards",
-                  "guides/sql-query-builder",
-                  "guides/group-analytics"
+                  "revenue",
+                  "feature-flags",
+                  "experiments",
+                  "surveys",
+                  "custom-dashboards",
+                  "sql-query-builder",
+                  "group-analytics"
                 ]
               },
               {
                 "group": "Monitoring & automation",
                 "expanded": false,
                 "pages": [
-                  "guides/scheduled-reports",
-                  "guides/alerts",
-                  "guides/uptime-monitoring",
-                  "guides/shortlinks"
+                  "scheduled-reports",
+                  "alerts",
+                  "uptime-monitoring",
+                  "shortlinks"
                 ]
               },
               {
                 "group": "Sharing & embeds",
                 "expanded": false,
                 "pages": [
-                  "guides/public-dashboards",
-                  "guides/embed-dashboard",
-                  "guides/live-visitors-widget"
+                  "public-dashboards",
+                  "embed-dashboard",
+                  "live-visitors-widget"
                 ]
               }
             ]
@@ -142,23 +153,23 @@
                 "group": "Data & imports",
                 "expanded": false,
                 "pages": [
-                  "guides/data-dictionary",
-                  "guides/import-ga4",
-                  "guides/import-plausible",
-                  "guides/import-umami",
-                  "guides/import-simple-analytics"
+                  "data-dictionary",
+                  "import-ga4",
+                  "import-plausible",
+                  "import-umami",
+                  "import-simple-analytics"
                 ]
               },
               {
                 "group": "Account & access",
                 "expanded": false,
                 "pages": [
-                  "guides/account-settings",
-                  "guides/site-settings",
-                  "guides/organizations",
-                  "guides/teams",
-                  "guides/roles",
-                  "guides/invitations"
+                  "account-settings",
+                  "site-settings",
+                  "organizations",
+                  "teams",
+                  "roles",
+                  "invitations"
                 ]
               }
             ]

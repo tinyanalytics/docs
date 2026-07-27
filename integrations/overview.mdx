@@ -23,7 +23,7 @@ Three things make this work everywhere:
 
 - **`defer`** means the script never blocks your page from rendering.
 - **One tag, every page** — add it once in a shared layout, template, or header so it's present sitewide.
-- **Single-page apps just work.** Route tracking is on by default, so client-side navigation in React, Vue, and similar frameworks is recorded automatically — see [Configure the tracking script](/guides/script-configuration#track-single-page-apps).
+- **Single-page apps just work.** Route tracking is on by default, so client-side navigation in React, Vue, and similar frameworks is recorded automatically — see [Configure the tracking script](/script-configuration#track-single-page-apps).
 
 ## Pick your platform
 
@@ -50,7 +50,7 @@ However you add the tracking script, confirm it the same way: open your site, th
   Your install is working when your own visit appears in **Realtime** within a few seconds.
 </Check>
 
-See [Verify your setup](/guides/verify-your-setup) for the full check, including what a healthy install looks like in your browser's Network tab.
+See [Verify your setup](/verify-your-setup) for the full check, including what a healthy install looks like in your browser's Network tab.
 
 ## Frequently asked questions
 
@@ -65,20 +65,20 @@ See [Verify your setup](/guides/verify-your-setup) for the full check, including
     No. The tag uses `defer`, so the browser runs it only after the HTML has parsed and it never blocks your page from rendering.
   </Accordion>
   <Accordion title="Do I need extra setup for a React or Vue single-page app?">
-    No. Route tracking is on by default, so client-side navigation is recorded as a new pageview automatically. See [Configure the tracking script](/guides/script-configuration#track-single-page-apps) if you want to change that.
+    No. Route tracking is on by default, so client-side navigation is recorded as a new pageview automatically. See [Configure the tracking script](/script-configuration#track-single-page-apps) if you want to change that.
   </Accordion>
 </AccordionGroup>
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Install the tracking script" icon="code" href="/guides/tracking-script">
+  <Card title="Install the tracking script" icon="code" href="/tracking-script">
     The snippet and what it tracks out of the box.
   </Card>
-  <Card title="Configure the tracking script" icon="sliders" href="/guides/script-configuration">
+  <Card title="Configure the tracking script" icon="sliders" href="/script-configuration">
     Every `data-*` option you can set.
   </Card>
-  <Card title="Verify your setup" icon="circle-check" href="/guides/verify-your-setup">
+  <Card title="Verify your setup" icon="circle-check" href="/verify-your-setup">
     Confirm tracking works after you install.
   </Card>
   <Card title="Quickstart" icon="rocket" href="/quickstart">

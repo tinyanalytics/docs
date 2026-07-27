@@ -1,0 +1,69 @@
+---
+title: "Custom dashboards"
+description: "Build your own layout of charts, each backed by a SQL query you write. Cards follow the dashboard's date range automatically, and you drag them into any arrangement."
+icon: "table-cells-large"
+---
+
+A custom dashboard is your own layout of charts, each one backed by a SQL query you write against your site's data. Build a card, choose how to visualize it, and drag it into place. Every card follows the dashboard's **date range and time bucket automatically**, so one date picker updates the whole board.
+
+## How do I build a card?
+
+Each card is three choices:
+
+1. **A query** — read-only SQL against your site's data, using the same virtual tables as the [SQL query builder](/sql-query-builder).
+2. **A visualization** — how to draw the rows (see the table below).
+3. **A column mapping** — which columns are the X axis, the value, and the series. The card preview shows your columns as you go, so mapping is point-and-click.
+
+## Which visualization fits your query?
+
+| Visualization | Best for | Reads |
+| --- | --- | --- |
+| **Line / area / bar** | a value over time or across categories | an X column, one or more Y columns, an optional series |
+| **Stat** | a single headline number | the first numeric value, with an optional label |
+| **Horizontal bar / pie** | a ranked breakdown | a label and a value (the long tail rolls into "Other") |
+| **Map** | values by country | ISO country codes and a value |
+| **Calendar** | activity by day | a date and a daily value |
+| **Table** | raw rows | any columns, sortable and paginated |
+
+## How do cards follow the dashboard's date range?
+
+Cards respond to the dashboard's global date picker and time bucket automatically. You write the query once and it re-runs whenever the range changes. Leave the range out of your query entirely and the card reads across all time.
+
+<Tip>
+  To bucket a time series by the dashboard's chosen granularity, use the `{{bucket}}` token in your SQL. tinyanalytics replaces it with the matching interval — hour, day, week, or month — before the query runs.
+</Tip>
+
+## How do I arrange and save the layout?
+
+Drag a card to move it and pull its edge to resize it; the grid remembers each card's position. Saving writes the whole dashboard at once, so your layout, queries, and mappings are stored together.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I have to set a date range on every dashboard card?">
+    No. Cards follow the dashboard's global date picker and time bucket automatically, so one date picker updates the whole board. If you leave the range out of a card's query entirely, that card reads across all time.
+  </Accordion>
+  <Accordion title="How do I group a dashboard card by hour, day, week, or month?">
+    Use the `{{bucket}}` token in your SQL. tinyanalytics replaces it with the interval the dashboard's time bucket selects — hour, day, week, or month — before the query runs, so the card re-buckets whenever you change the dashboard granularity.
+  </Accordion>
+  <Accordion title="What SQL can I write in a dashboard card?">
+    Read-only SQL against the same site-scoped virtual tables the [SQL query builder](/sql-query-builder) uses. Any query you write there is the same SQL a card runs, so you can test a query first and then save it as a card.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="SQL query builder" icon="database" href="/sql-query-builder">
+    Write and test the queries your cards run.
+  </Card>
+  <Card title="Metric definitions" icon="ruler" href="/data-dictionary">
+    The events and properties you can query.
+  </Card>
+  <Card title="Export data" icon="file-export" href="/export">
+    Take a report out as CSV or PDF.
+  </Card>
+  <Card title="Public dashboards" icon="share-nodes" href="/public-dashboards">
+    Share a read-only dashboard by link.
+  </Card>
+</Columns>

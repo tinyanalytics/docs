@@ -8,7 +8,18 @@ tinyanalytics identifies visitors **without cookies**. Instead of storing an ide
 
 ## How a visitor is identified
 
-When an event arrives, tinyanalytics computes a short **fingerprint** by hashing the visitor's IP address and user agent together. The raw IP address is never stored — only the resulting hash, which can't be reversed back into an IP. That fingerprint is stable for as long as the visitor's IP-and-browser pair is, which is what makes multi-day reports like [Users](/guides/users), [retention](/guides/retention), and [cohorts](/guides/cohorts) meaningful.
+When an event arrives, tinyanalytics computes a short **fingerprint** by hashing the visitor's IP address and user agent together. The raw IP address is never stored — only the resulting hash, which can't be reversed back into an IP. That fingerprint is stable for as long as the visitor's IP-and-browser pair is, which is what makes multi-day reports like [Users](/users), [retention](/retention), and [cohorts](/cohorts) meaningful.
+
+```mermaid
+flowchart LR
+  A["Request IP address"] --> C["Normalize rotating relay networks when needed"]
+  C --> D["SHA-256 hash"]
+  B["Browser user agent"] --> D
+  D --> E["12-character cookieless ID"]
+  E --> F["Anonymous user in reports"]
+  E --> H["Stable identified user"]
+  G["identify(userId)"] --> H
+```
 
 ## It's an accurate estimate — and honest about its limits
 
@@ -17,7 +28,7 @@ A cookieless fingerprint can't be exact, and tinyanalytics doesn't pretend other
 - **Undercounting** — several people behind one network (a household or office) on the same browser build collapse into one visitor.
 - **Overcounting** — one person moving from Wi-Fi to cellular, or updating their browser, can look like a new visitor.
 
-Every cookieless analytics tool lives with this trade-off. When you need exact, cross-device identity, [identify](/guides/identify-users) is the escape hatch.
+Every cookieless analytics tool lives with this trade-off. When you need exact, cross-device identity, [identify](/identify-users) is the escape hatch.
 
 ## How does tinyanalytics handle VPNs and privacy relays?
 
@@ -40,7 +51,7 @@ When your app calls `identify()` with a stable ID, tinyanalytics attributes that
   <Card title="Privacy & GDPR" icon="user-shield" href="/resources/privacy">
     The privacy properties this design gives you.
   </Card>
-  <Card title="Identify users" icon="user" href="/guides/identify-users">
+  <Card title="Identify users" icon="user" href="/identify-users">
     Attach a stable ID for exact identity.
   </Card>
   <Card title="How your data is handled" icon="server" href="/resources/data-handling">

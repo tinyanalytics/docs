@@ -65,7 +65,7 @@ Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, a
 
 `breakdown` accepts dimensions including `pathname`, `hostname`, `entry_page`, `exit_page`, `referrer`, `channel`, `country`, `region`, `city`, `browser`, `os`, `device_type`, `utm_*`, and `event_name`.
 
-Three **composite dimensions** group by host and path together, for sites serving one path from several hostnames: `pathname_host`, `entry_page_host`, and `exit_page_host`. Their rows carry `hostname` and `pathname` as separate fields alongside the standard `value`, `count`, `percentage`, and `pageviews`, so you can read either part without parsing `value`. Hostnames are lowercased when grouped. See [Pages](/guides/pages) for the dashboard equivalent.
+Three **composite dimensions** group by host and path together, for sites serving one path from several hostnames: `pathname_host`, `entry_page_host`, and `exit_page_host`. Their rows carry `hostname` and `pathname` as separate fields alongside the standard `value`, `count`, `percentage`, and `pageviews`, so you can read either part without parsing `value`. Hostnames are lowercased when grouped. See [Pages](/pages) for the dashboard equivalent.
 
 ## Where are the rest of the endpoints?
 
@@ -94,7 +94,7 @@ Goals, funnels, segments, cohorts, surveys, experiments, dashboards, alerts, ann
 
 ## Who can read a site's analytics?
 
-A read is authorized exactly like signing in: the API key resolves to its owner, and the owner must have access to the site (via organization membership, or a [team](/guides/teams) that grants it). A **public** site's reads are open; a private site's reads require the key. An invalid key on a private site returns `401`; a valid key without access returns `403`.
+A read is authorized exactly like signing in: the API key resolves to its owner, and the owner must have access to the site (via organization membership, or a [team](/teams) that grants it). A **public** site's reads are open; a private site's reads require the key. An invalid key on a private site returns `401`; a valid key without access returns `403`.
 
 ## Frequently asked questions
 
@@ -125,7 +125,7 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
   <Card title="API keys" icon="key" href="/api-reference/api-keys">
     Create the key a read needs.
   </Card>
-  <Card title="Metric definitions" icon="ruler" href="/guides/data-dictionary">
+  <Card title="Metric definitions" icon="ruler" href="/data-dictionary">
     What each metric and dimension means.
   </Card>
 </Columns>
