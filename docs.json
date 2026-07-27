@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "almond",
   "name": "tinyanalytics",
   "colors": {
     "primary": "#345FCF",
@@ -12,9 +12,10 @@
     "tabs": [
       {
         "tab": "Get started",
+        "icon": "rocket",
         "groups": [
           {
-            "group": "Get started",
+            "group": "Start here",
             "pages": [
               "index",
               "quickstart",
@@ -26,9 +27,10 @@
       },
       {
         "tab": "Guides",
+        "icon": "book-open",
         "groups": [
           {
-            "group": "Install the tracker",
+            "group": "Set up tracking",
             "pages": [
               "guides/tracking-script",
               "guides/script-configuration",
@@ -37,7 +39,7 @@
             ]
           },
           {
-            "group": "Track what matters",
+            "group": "Collect data",
             "pages": [
               "guides/autocapture",
               "guides/custom-events",
@@ -45,105 +47,130 @@
             ]
           },
           {
-            "group": "Explore your data",
+            "group": "Analyze",
             "pages": [
-              "guides/dashboard-overview",
-              "guides/realtime",
-              "guides/pages",
-              "guides/sessions",
-              "guides/users",
-              "guides/events",
-              "guides/map",
-              "guides/performance",
-              "guides/errors",
-              "guides/rollup"
+              {
+                "group": "Traffic & audience",
+                "expanded": false,
+                "pages": [
+                  "guides/dashboard-overview",
+                  "guides/realtime",
+                  "guides/pages",
+                  "guides/sessions",
+                  "guides/users",
+                  "guides/events",
+                  "guides/map",
+                  "guides/rollup"
+                ]
+              },
+              {
+                "group": "Behavior & conversion",
+                "expanded": false,
+                "pages": [
+                  "guides/journeys",
+                  "guides/funnels",
+                  "guides/goals",
+                  "guides/retention",
+                  "guides/cohorts"
+                ]
+              },
+              {
+                "group": "Acquisition & quality",
+                "expanded": false,
+                "pages": [
+                  "guides/ai-traffic",
+                  "guides/search-console",
+                  "guides/bots",
+                  "guides/performance",
+                  "guides/errors"
+                ]
+              },
+              {
+                "group": "Reporting tools",
+                "expanded": false,
+                "pages": [
+                  "guides/filters",
+                  "guides/segments",
+                  "guides/compare",
+                  "guides/annotations",
+                  "guides/export"
+                ]
+              }
             ]
           },
           {
-            "group": "Understand behavior",
+            "group": "Build & operate",
             "pages": [
-              "guides/journeys",
-              "guides/retention",
-              "guides/funnels",
-              "guides/goals",
-              "guides/cohorts"
+              {
+                "group": "Product analytics",
+                "expanded": false,
+                "pages": [
+                  "guides/revenue",
+                  "guides/feature-flags",
+                  "guides/experiments",
+                  "guides/surveys",
+                  "guides/custom-dashboards",
+                  "guides/sql-query-builder",
+                  "guides/group-analytics"
+                ]
+              },
+              {
+                "group": "Monitoring & automation",
+                "expanded": false,
+                "pages": [
+                  "guides/scheduled-reports",
+                  "guides/alerts",
+                  "guides/uptime-monitoring",
+                  "guides/shortlinks"
+                ]
+              },
+              {
+                "group": "Sharing & embeds",
+                "expanded": false,
+                "pages": [
+                  "guides/public-dashboards",
+                  "guides/embed-dashboard",
+                  "guides/live-visitors-widget"
+                ]
+              }
             ]
           },
           {
-            "group": "Acquisition & AI",
+            "group": "Manage",
             "pages": [
-              "guides/ai-traffic",
-              "guides/search-console",
-              "guides/bots"
-            ]
-          },
-          {
-            "group": "Filter, save & share",
-            "pages": [
-              "guides/filters",
-              "guides/segments",
-              "guides/compare",
-              "guides/annotations",
-              "guides/export"
-            ]
-          },
-          {
-            "group": "Product analytics",
-            "pages": [
-              "guides/revenue",
-              "guides/feature-flags",
-              "guides/experiments",
-              "guides/surveys",
-              "guides/custom-dashboards",
-              "guides/sql-query-builder",
-              "guides/group-analytics"
-            ]
-          },
-          {
-            "group": "Monitor & automate",
-            "pages": [
-              "guides/scheduled-reports",
-              "guides/alerts",
-              "guides/uptime-monitoring",
-              "guides/shortlinks"
-            ]
-          },
-          {
-            "group": "Share & embed",
-            "pages": [
-              "guides/public-dashboards",
-              "guides/embed-dashboard",
-              "guides/live-visitors-widget"
-            ]
-          },
-          {
-            "group": "Manage data",
-            "pages": [
-              "guides/data-dictionary",
-              "guides/import-ga4",
-              "guides/import-plausible",
-              "guides/import-umami",
-              "guides/import-simple-analytics"
-            ]
-          },
-          {
-            "group": "Accounts & access",
-            "pages": [
-              "guides/account-settings",
-              "guides/site-settings",
-              "guides/organizations",
-              "guides/teams",
-              "guides/roles",
-              "guides/invitations"
+              {
+                "group": "Data & imports",
+                "expanded": false,
+                "pages": [
+                  "guides/data-dictionary",
+                  "guides/import-ga4",
+                  "guides/import-plausible",
+                  "guides/import-umami",
+                  "guides/import-simple-analytics"
+                ]
+              },
+              {
+                "group": "Account & access",
+                "expanded": false,
+                "pages": [
+                  "guides/account-settings",
+                  "guides/site-settings",
+                  "guides/organizations",
+                  "guides/teams",
+                  "guides/roles",
+                  "guides/invitations"
+                ]
+              }
             ]
           }
         ]
       },
       {
         "tab": "Integrations",
+        "icon": "puzzle-piece",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Choose an install method",
             "pages": [
               "integrations/overview"
             ]
@@ -163,76 +190,82 @@
             ]
           },
           {
-            "group": "Mobile apps",
+            "group": "Other platforms",
             "pages": [
-              "integrations/react-native"
-            ]
-          },
-          {
-            "group": "CMS & website builders",
-            "pages": [
-              "integrations/wordpress",
-              "integrations/webflow",
-              "integrations/wix",
-              "integrations/ghost",
-              "integrations/squarespace",
-              "integrations/framer",
-              "integrations/carrd",
-              "integrations/bubble"
-            ]
-          },
-          {
-            "group": "Docs & static sites",
-            "pages": [
-              "integrations/hugo",
-              "integrations/jekyll",
-              "integrations/docusaurus",
-              "integrations/vitepress"
-            ]
-          },
-          {
-            "group": "E-commerce",
-            "pages": [
-              "integrations/shopify",
-              "integrations/woocommerce",
-              "integrations/bigcommerce"
-            ]
-          },
-          {
-            "group": "Server-side & tag managers",
-            "pages": [
-              "integrations/google-tag-manager",
-              "integrations/laravel",
-              "integrations/drupal"
+              {
+                "group": "CMS & website builders",
+                "expanded": false,
+                "pages": [
+                  "integrations/wordpress",
+                  "integrations/webflow",
+                  "integrations/wix",
+                  "integrations/ghost",
+                  "integrations/squarespace",
+                  "integrations/framer",
+                  "integrations/carrd",
+                  "integrations/bubble"
+                ]
+              },
+              {
+                "group": "Docs & static sites",
+                "expanded": false,
+                "pages": [
+                  "integrations/hugo",
+                  "integrations/jekyll",
+                  "integrations/docusaurus",
+                  "integrations/vitepress"
+                ]
+              },
+              {
+                "group": "E-commerce",
+                "expanded": false,
+                "pages": [
+                  "integrations/shopify",
+                  "integrations/woocommerce",
+                  "integrations/bigcommerce"
+                ]
+              },
+              {
+                "group": "Server-side & tag managers",
+                "expanded": false,
+                "pages": [
+                  "integrations/google-tag-manager",
+                  "integrations/laravel",
+                  "integrations/drupal"
+                ]
+              },
+              {
+                "group": "Mobile apps",
+                "expanded": false,
+                "pages": [
+                  "integrations/react-native"
+                ]
+              }
             ]
           }
         ]
       },
       {
         "tab": "API reference",
+        "icon": "code",
         "groups": [
           {
-            "group": "Get started",
+            "group": "Start here",
             "pages": [
               "api-reference/introduction"
             ]
           },
           {
-            "group": "Ingestion",
+            "group": "Core API",
             "pages": [
               "api-reference/track",
-              "api-reference/identify"
-            ]
-          },
-          {
-            "group": "Reading data",
-            "pages": [
+              "api-reference/identify",
               "api-reference/read",
               "api-reference/sql"
             ]
           },
           {
-            "group": "Access & tools",
+            "group": "Authentication & tools",
             "pages": [
               "api-reference/api-keys",
               "api-reference/rate-limits",
@@ -240,23 +273,19 @@
             ]
           },
           {
-            "group": "Endpoints",
+            "group": "Endpoint reference",
             "openapi": "openapi.json"
           }
         ]
       },
       {
         "tab": "Resources",
+        "icon": "circle-info",
         "groups": [
           {
-            "group": "Reference",
+            "group": "Definitions & methods",
             "pages": [
-              "resources/metrics-glossary"
-            ]
-          },
-          {
-            "group": "How it works",
-            "pages": [
+              "resources/metrics-glossary",
               "resources/cookieless-identity",
               "resources/bot-detection",
               "resources/traffic-classification"
@@ -271,7 +300,7 @@
             ]
           },
           {
-            "group": "AI",
+            "group": "AI tools",
             "pages": [
               "resources/use-with-ai"
             ]
@@ -279,6 +308,12 @@
         ]
       }
     ]
+  },
+  "interaction": {
+    "drilldown": false
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
   },
   "navbar": {
     "primary": {
@@ -291,6 +326,7 @@
     "options": [
       "copy",
       "view",
+      "assistant",
       "chatgpt",
       "claude",
       "perplexity",

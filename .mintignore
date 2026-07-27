@@ -5,3 +5,7 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Internal planning
+PRD.md
+COMPONENTS-PRD.md
