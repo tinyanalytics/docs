@@ -1,0 +1,58 @@
+---
+title: "Realtime Analytics"
+sidebarTitle: "Realtime"
+description: "See bot-filtered active sessions and their current pages, sources, locations, and devices in a realtime analytics window that updates continuously."
+icon: "signal-stream"
+---
+
+Realtime analytics shows the **distinct sessions** active in the last few minutes, plus the pages, sources, locations, and devices behind them. One visitor loading ten pages still counts as one active session.
+
+## How does the live visitor count work?
+
+- It counts **distinct sessions** seen in the last five minutes, so one active visitor is one, no matter how many pages they load.
+- It counts **people, not bots** — traffic identified as bots is filtered out before it reaches the live count.
+- It **decays gradually**. As each visitor goes quiet, their session ages out of the window, so the count falls one visitor at a time rather than dropping all at once.
+
+## What do the live sessions show?
+
+Alongside the count, the live sessions view lists the individual sessions active in the last few minutes — where each visitor came from, their location and device, and the pages they're on. Open a session to see its full timeline in [Sessions](/session-analytics).
+
+## When should I use Realtime?
+
+- **Confirming an install.** After you add the tracking snippet, visit your own site and watch your session appear. See [verify your setup](/verify-tinyanalytics-installation).
+- **Watching a launch or campaign.** See traffic arrive live when you publish a post, send an email, or go live on a channel.
+- **Spotting a spike.** Notice a surge as it happens, then switch to the [Overview](/web-analytics-dashboard) to break it down by source.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does one visitor viewing ten pages count as ten in Realtime?">
+    No. The Realtime count is the number of distinct sessions seen in the last five minutes, so one active visitor counts as one no matter how many pages they load. It measures people rather than events.
+  </Accordion>
+  <Accordion title="Does the Realtime count include bots?">
+    No. Traffic identified as bots is filtered out before it reaches the tinyanalytics live count, so the number reflects people on your site rather than crawlers.
+  </Accordion>
+  <Accordion title="Why does my Realtime count drop gradually instead of all at once?">
+    The Realtime count decays by design. It counts distinct sessions active in the last five minutes, so as each visitor goes quiet their session ages out of that window individually. The number falls one visitor at a time, which keeps it an accurate read of current activity.
+  </Accordion>
+  <Accordion title="How do I use Realtime to check my tracking script works?">
+    Add the tracking snippet to your site, deploy it, then open your own site in a browser and watch Realtime. Your own session appears in the live count and in the live sessions list, which confirms the script is sending data. See [verify your setup](/verify-tinyanalytics-installation) for the full checklist.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Dashboard overview" icon="gauge" href="/web-analytics-dashboard">
+    Top-line metrics, trend, and breakdowns for any date range.
+  </Card>
+  <Card title="Sessions" icon="list-timeline" href="/session-analytics">
+    Inspect a single visit from entry to exit.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Use Realtime to confirm tracking works.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/analytics-filters">
+    Narrow reports to the visitors you care about.
+  </Card>
+</Columns>

@@ -1,6 +1,6 @@
 # PRD — tinyanalytics documentation (AI-native, Mintlify)
 
-**Status:** Draft v1.3 (execution underway) · **Owner:** Docs · **Last updated:** 2026-07-27
+**Status:** Draft v1.4 (execution underway) · **Owner:** Docs · **Last updated:** 2026-07-30
 **Repo:** `tinyanalytics-docs` (Mintlify) · **Product repo:** `../tinyanalytics`
 **Reference (behavioral spec only):** `../rybbit/rybbit/docs` · **Competitor refs:** Plausible, Umami
 
@@ -8,11 +8,12 @@
 
 ## 1. Summary
 
-Build the public documentation for **tinyanalytics** — privacy-friendly, cookieless web **and** product analytics, offered as a hosted service at `dash.tinyanalytics.io` — as an **AI-native** Mintlify site. The product is **closed-source and hosted-only today**: these docs document the cloud product, and self-hosting is explicitly out of scope (§9). "AI-native" here means the docs are engineered so that both humans *and* AI tools (the in-docs assistant, the writing agent, `llms.txt`, `skill.md`, the hosted MCP server, IDE assistants) can answer questions accurately and act on them. The content is authored from the product's own knowledge base (`../tinyanalytics/wiki`), organized with a task- and feature-based information architecture drawn from the best of Plausible and Umami, and written to a single, disciplined voice.
+Build the public documentation for **tinyanalytics** — privacy-friendly, cookieless web **and** product analytics, offered as a hosted service at `dash.tinyanalytics.io` — as an **AI-native** Mintlify site. The product is **closed-source and hosted-only today**: these docs document the cloud product, and self-hosting is explicitly out of scope (§9). "AI-native" here means the docs are engineered so that both humans _and_ AI tools (the in-docs assistant, the writing agent, `llms.txt`, `skill.md`, the hosted MCP server, IDE assistants) can answer questions accurately and act on them. The content is authored from the product's own knowledge base (`../tinyanalytics/wiki`), organized with a task- and feature-based information architecture drawn from the best of Plausible and Umami, and written to a single, disciplined voice.
 
 This PRD defines **what** to document, **how** to structure and write it, and **what** to configure for the AI layer. It does not write the pages — it is the plan the page-building work executes against.
 
 ### Why now
+
 The site is currently the empty Mintlify starter (two placeholder pages). The product, by contrast, ships a large, mature feature surface (§4). Every day without docs is friction on adoption and on migration off Google Analytics. And because the product is closed-source, the docs carry a burden open-source competitors outsource to "read the code": they are the **only** place a privacy-conscious buyer can verify how the mechanism works. AI-native docs additionally reduce support load: the assistant deflects questions, and `skill.md`/MCP let users' own AI tools drive tinyanalytics correctly.
 
 ---
@@ -20,6 +21,7 @@ The site is currently the empty Mintlify starter (two placeholder pages). The pr
 ## 2. Goals & non-goals
 
 ### Goals
+
 1. **Time-to-first-event < 5 minutes** for a new user following the Quickstart.
 2. **Cover 100% of shipped, user-facing features** (§4) — no documented feature that doesn't exist, no shipped feature left undocumented.
 3. **Answerable by AI**: the in-docs assistant and `llms.txt` resolve the top user questions (install, events, identify, import, privacy, billing) from page content alone.
@@ -28,6 +30,7 @@ The site is currently the empty Mintlify starter (two placeholder pages). The pr
 6. **One voice, scannable**: every page passes the copywriting scannability + specificity checks (§6).
 
 ### Non-goals (this PRD)
+
 - **Self-hosting documentation** — the product is closed-source and hosted-only; no installation, Docker, environment, upgrade, or backup docs. Revisit only if a self-host offering ships (§9).
 - Marketing site / landing page copy (separate surface).
 - Writing the actual MDX pages (a follow-on execution task, scoped by §4 + §8).
@@ -36,20 +39,22 @@ The site is currently the empty Mintlify starter (two placeholder pages). The pr
 - API SDK generation or auto-generated reference from OpenAPI (may come later; §7.4 covers the manual approach for v1).
 
 ### Success metrics
-| Metric | Target |
-| --- | --- |
-| Quickstart completion (add site → first event) | < 5 min, ≤ 6 steps |
-| Feature coverage vs `wiki/features.md` | 100% of user-facing rows |
-| Assistant deflection (top-20 questions answered from docs) | ≥ 90% |
-| Every page has `title` + `description` frontmatter | 100% |
-| Broken internal links / 404s in nav | 0 |
-| Pages that "make sense read by headings alone" (F-pattern) | 100% |
+
+| Metric                                                     | Target                   |
+| ---------------------------------------------------------- | ------------------------ |
+| Quickstart completion (add site → first event)             | < 5 min, ≤ 6 steps       |
+| Feature coverage vs `wiki/features.md`                     | 100% of user-facing rows |
+| Assistant deflection (top-20 questions answered from docs) | ≥ 90%                    |
+| Every page has `title` + `description` frontmatter         | 100%                     |
+| Broken internal links / 404s in nav                        | 0                        |
+| Pages that "make sense read by headings alone" (F-pattern) | 100%                     |
 
 ---
 
 ## 3. Audience & positioning
 
 ### Primary readers (psychographic, not demographic)
+
 1. **The privacy-conscious site owner** — wants GA-grade insight without cookie banners, GDPR risk, or handing data to Google. Values: ownership, simplicity, ethics. Often solo founder, indie hacker, agency.
 2. **The developer installing the tracker** — needs the snippet, the framework guide, the event API, and a way to verify it works. Values: correct copy-paste, no surprises, small script.
 3. **The privacy & compliance evaluator** — a DPO, agency, or founder vetting the GDPR/cookie-banner story before rollout. Can't audit the source (closed), so the docs must answer precisely: what is stored, what never is, how identity works. Values: precision, honesty, citable answers.
@@ -57,15 +62,19 @@ The site is currently the empty Mintlify starter (two placeholder pages). The pr
 5. **The migrator** — leaving GA4/Plausible/Umami, worried about losing history. Values: "I keep my data," low switching cost.
 
 ### Awareness stage (Schwartz)
-Docs readers are **product-aware** or **most-aware** — they already have or are evaluating tinyanalytics. Implication: pages lead with *how to do the thing* and *what it means*, not with *why analytics matters*. Persuasion lives in **descriptions, intros, and comparison pages**, not in every how-to.
+
+Docs readers are **product-aware** or **most-aware** — they already have or are evaluating tinyanalytics. Implication: pages lead with _how to do the thing_ and _what it means_, not with _why analytics matters_. Persuasion lives in **descriptions, intros, and comparison pages**, not in every how-to.
 
 ### Positioning statement (the docs' throughline)
+
 > tinyanalytics combines hosted web and product analytics, AI discovery, revenue, experiments, and monitoring for teams that want clear answers without tracking people.
 
 ### The single promise (repeat, don't dilute)
+
 **"Understand your traffic and your product without tracking people."** Core anonymous analytics sets no cookies, stores no raw IP addresses, and derives identity on the server instead of persisting an anonymous browser ID. Optional product features use purpose-specific browser storage and must be disclosed precisely. Every intro, the Introduction page, and the comparison pages ladder back to this.
 
 ### Voice & archetype
+
 - **Archetype:** primary **Sage** (truthful, evidence-led, explains the mechanism), with a **Everyman** secondary (plain-spoken, unpretentious). Never Ruler/luxury, never Jester.
 - **Voice traits (do/don't):**
   - Clear, not clever. (No puns in headings, no cleverness that obscures.)
@@ -78,11 +87,12 @@ Docs readers are **product-aware** or **most-aware** — they already have or ar
 
 ## 4. Scope — the feature surface to document
 
-Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`wiki/decisions/`). The clone documents **only what tinyanalytics ships**. Rybbit's `docs/content` tree is a *coverage checklist* (which topics exist), never a source of prose or structure.
+Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`wiki/decisions/`). The clone documents **only what tinyanalytics ships**. Rybbit's `docs/content` tree is a _coverage checklist_ (which topics exist), never a source of prose or structure.
 
 ### 4.1 Shipped, user-facing capabilities (must document)
 
 **Setup & tracking**
+
 - Cloud onboarding: sign up at `dash.tinyanalytics.io`, add a site, install the snippet
 - Tracking script (`/script.js`, < 6.5 KB gz), `data-*` configuration, SPA route tracking
 - First-party proxy / custom domain (adblocker bypass), Mode A snippet builder
@@ -95,8 +105,10 @@ Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`w
 - React Native SDK (mobile sites)
 
 **Dashboard / web analytics**
+
 - Overview (stat cards, time-series chart, geo map, live counter), Realtime + live-sessions drawer
 - Organization overview (combined metrics, per-site trends, comparison table) across accessible sites
+- User acquisition (first-ever-session attribution, new/returning users, engagement by first-touch channel/source/campaign/referrer)
 - Pages, Sessions (+ detail/timeline), Events explorer (log, custom events, event types, downloads), Users (+ profiles + traits explorer)
 - Journeys (Sankey), Retention, Funnels, Goals, Performance (Core Web Vitals)
 - Bots & AI crawlers, AI traffic report, Google Search Console, Map/Globe
@@ -104,33 +116,42 @@ Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`w
 - Date-range presets, browser-timezone querying
 
 **Product analytics (advanced tier)**
+
+- Ask AI at site and organization scope, with grounded reads, report links, approved writes, conversation history, feedback, and monthly credit/BYOK modes
 - Client-event and Stripe revenue, Feature flags, Experiments (A/B), Surveys (NPS/feedback), Site and organization custom dashboards (editor + SQL cards), SQL query builder, Group / B2B analytics (+ group retention)
 
 **Monitoring & automation**
+
 - Scheduled email reports (subscriptions), scoped analytics alerts with templates (email/Slack/Discord/webhook), Uptime monitoring (monitors, incidents, notification channels), Shortlinks
 
 **Data management & sharing**
+
 - Data dictionary (event/property/trait catalog), Data import (GA4 live pull, Plausible, Umami)
 - Public dashboards (share links), Dashboard embed (iframe), Live-visitors widget
 
 **Accounts & administration**
+
 - Account settings (name, password, API keys, delete), Organizations & members, Teams & site-access control, Organization switcher
 - Per-site config (exclusions: bots/IPs/countries/paths), Tracking settings
 - Invitations, Email verification, Password reset, Email preferences / one-click unsubscribe
 - Billing & plans (Free / Growth / Business; read-time retention limits)
 
 **Developer / API**
+
 - Tracking API (`POST /api/track` wire contract), Identify API
 - Read/analytics API (overview, timeseries, breakdown, sessions, events, and the broader read surface)
-- Scoped SQL query endpoint, API keys (ingestion), API playground, rate limits & CORS
+- Scoped SQL query endpoint, API keys (server-side ingestion, reads, and management as the key owner), API playground, rate limits & CORS
 
 **Concepts & reference (the "why it's trustworthy" layer)**
+
 - Cookieless identity model (one model: `sha256(ip+ua)`, `identify()` backfill, session window)
 - Bot detection (UA + ASN + client signals), Channel attribution, Geo enrichment
 - Metric definitions / glossary, Privacy & GDPR posture, Comparison vs GA4/Plausible/Umami/Rybbit
 
 ### 4.2 Integration guides (breadth matters for SEO + adoption)
-Port the *topic list* from Rybbit's `guides/` as a checklist; write original install steps against tinyanalytics' snippet. Grouped in §5. Target set (v1 aims for the high-traffic ones first):
+
+Port the _topic list_ from Rybbit's `guides/` as a checklist; write original install steps against tinyanalytics' snippet. Grouped in §5. Target set (v1 aims for the high-traffic ones first):
+
 - **Frameworks:** Next.js, React (Vite/CRA), Gatsby, Remix, Vue, Nuxt, Svelte, SvelteKit, Angular, Astro
 - **CMS / builders:** WordPress, Webflow, Framer, Ghost, Squarespace, Carrd, Bubble, Wix-style
 - **E-commerce:** Shopify, BigCommerce, PrestaShop, ThriveCart
@@ -143,6 +164,7 @@ Port the *topic list* from Rybbit's `guides/` as a checklist; write original ins
 ## 5. Information architecture
 
 Design principles:
+
 - **Task spine for setup, feature spine for the dashboard.** Blend Plausible's task orientation with Umami's per-feature filtering.
 - **Progressive disclosure.** Core analytics first (what everyone opens daily); advanced product-analytics tier separated so it doesn't overwhelm the site owner.
 - **Front-load meaning** in every nav label (F-pattern): first word carries scent.
@@ -154,6 +176,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 ### Main documentation tab
 
 #### Start here
+
 - Introduction — what tinyanalytics is, the privacy promise, web + product analytics in one
 - Quickstart — add a site, install the script, see your first event (≤ 6 steps)
 - How tinyanalytics works — ingestion → dashboard, cookieless identity in plain terms
@@ -162,6 +185,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 #### Guides and feature groups
 
 **Group — Install the tracker**
+
 - The tracking script
 - Script configuration (`data-*` attributes)
 - Single-page apps & SPA routing
@@ -170,6 +194,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - Verify your setup / troubleshooting the tracker
 
 **Group — Track what matters**
+
 - Pageviews
 - Custom events
 - Identify users
@@ -183,6 +208,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - Track 404s
 
 **Group — Explore your data**
+
 - Dashboard overview
 - Realtime
 - Pages
@@ -196,6 +222,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - Performance (Core Web Vitals)
 - Bots & AI crawlers
 - AI traffic
+- User acquisition
 - Google Search Console
 - Map & globe
 - Organization overview
@@ -207,6 +234,8 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - Export data (CSV & PDF)
 
 **Group — Product analytics**
+
+- Ask AI
 - Revenue analytics
 - Connect Stripe revenue
 - Feature flags
@@ -217,23 +246,27 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - Group & B2B analytics
 
 **Group — Monitor & automate**
+
 - Scheduled reports
 - Alerts
 - Uptime monitoring
 - Shortlinks
 
 **Group — Share & embed**
+
 - Public dashboards
 - Embed a dashboard
 - Live-visitors widget
 
 **Group — Manage data**
+
 - Data dictionary
 - Import from GA4
 - Import from Plausible
 - Import from Umami
 
 **Group — Accounts & access**
+
 - Account settings
 - Organizations & members
 - Teams & site access
@@ -242,6 +275,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - Billing & plans
 
 ### Tab: Integrations
+
 - Overview (how any install works: the snippet + verify)
 - **Frameworks** (Next.js, React, Gatsby, Remix, Vue, Nuxt, Svelte, SvelteKit, Angular, Astro)
 - **CMS & website builders** (WordPress, Webflow, Framer, Ghost, Squarespace, Carrd, Bubble)
@@ -251,7 +285,8 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - **Mobile** (React Native)
 
 ### Tab: API reference
-- Introduction & authentication (session cookie for reads, API key for ingestion — call out the distinction; decision 0093)
+
+- Introduction & authentication (session cookie for dashboard calls; API key for server-side ingestion, reads, and management as the key owner; browser ingestion stays keyless)
 - Tracking API (`POST /api/track` — the discriminated-union wire contract)
 - Identify API
 - Analytics read API (overview, timeseries, breakdown, sessions, events, live, …)
@@ -261,6 +296,7 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - API playground
 
 ### Tab: Resources
+
 - Metric definitions (glossary)
 - How cookieless identity works
 - How bot detection works
@@ -276,17 +312,20 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 ## 6. Content standards & templates
 
 ### 6.1 Page frontmatter (required on every page)
+
 ```yaml
 ---
-title: "Track custom events"        # concise, sentence case, verb-led for how-tos
-description: "Send named events with properties to measure the actions that matter — signups, clicks, purchases."  # the promise; feeds llms.txt, search, assistant
-icon: "cursor-click"                 # optional, Lucide/FontAwesome
+title: "Track custom events" # concise, sentence case, verb-led for how-tos
+description: "Send named events with properties to measure the actions that matter — signups, clicks, purchases." # the promise; feeds llms.txt, search, assistant
+icon: "cursor-click" # optional, Lucide/FontAwesome
 ---
 ```
+
 - **`description` is not optional and not filler.** It is the single highest-leverage AI-native field: it seeds `llms.txt`, semantic search, and the assistant's answer. Write it as a benefit-bearing sentence, specific over generic. (Bad: "Custom events documentation." Good: the example above.)
 - Titles: sentence case, front-loaded, ≤ ~60 chars. Verb-led for tasks, noun for concepts/reference.
 
 ### 6.2 Page archetypes (pick the matching template)
+
 1. **How-to (task)** — one job, start to finish. Intro (1–2 sentences, the outcome) → Prerequisites (if any) → `<Steps>` → Verify → Related. Use `<CodeGroup>` for multi-language/multi-framework.
 2. **Concept (explainer)** — what it is, why it works this way, the mechanism, the honest limits. Sage voice. End with "Related" links.
 3. **Feature guide (dashboard)** — what the view shows, how to read each metric, common workflows, gotchas. Screenshot near the top.
@@ -294,15 +333,17 @@ icon: "cursor-click"                 # optional, Lucide/FontAwesome
 5. **Reference (API / definitions)** — terse, complete, exhaustive. Tables, request/response, every field. No persuasion.
 
 ### 6.3 Writing rules (from the copywriting pass)
+
 - Second person, active voice, present tense. One idea per sentence.
 - **Front-load meaning** in headings and the first two words of bullets (F-pattern; readers scan ~20–28% of words).
 - **Specifics over adjectives** — "< 6.5 KB gzipped," "counts distinct sessions every second," not "blazing fast." No praise adjectives ("seamless," "powerful").
 - **Show the mechanism** where trust is at stake (identity, bots, privacy) — the reason-why is the persuasion.
-- **State limits honestly, in-product** — mirror the wiki's discipline (e.g. AI report is click-throughs only; import region breakdowns have known losses). Honesty *is* the credibility.
+- **State limits honestly, in-product** — mirror the wiki's discipline (e.g. AI report is click-throughs only; import region breakdowns have known losses). Honesty _is_ the credibility.
 - Bold for UI elements ("click **Add website**"); code font for files, commands, paths, endpoints.
 - Every how-to ends with a **Verify** step and a **Related** links block (also strengthens internal linking for AI + SEO).
 
 ### 6.4 Components to standardize on
+
 - `<Steps>` for sequences · `<CodeGroup>` for framework/language variants · `<Tabs>` for one-of-N reader choices (e.g. script tag vs npm) · `<Accordion>`/`<AccordionGroup>` for troubleshooting & FAQs · `<Card>` inside `<Columns>` for hub and related-link grids · `<Note>`/`<Info>`/`<Tip>`/`<Warning>`/`<Danger>`/`<Check>` according to meaning · `<ParamField>`/`<ResponseField>` for verified API reference fields · `<Frame>` for screenshots.
 - `<Prompt>` component on the "Use these docs with AI" page for the skill-install command (§8.3).
 - Keep prerequisites, required steps, risks, limitations, and verification visible. Accordions and other progressive-disclosure components contain optional detail only.
@@ -314,42 +355,50 @@ icon: "cursor-click"                 # optional, Lucide/FontAwesome
 The thesis: **most AI-native features are automatic once deployed on Mintlify — the work is feeding them good content and turning on/tuning the right config.**
 
 ### 7.1 Automatic (hosted by Mintlify — no build work, but content-quality-dependent)
+
 - **Markdown to agents** — every page serves as Markdown (`.md` URL) to AI tools; lower tokens, faster processing.
-- **`llms.txt` / `llms-full.txt`** — hosted automatically; quality is a direct function of page `title` + `description` (§6.1). *Action: enforce descriptions everywhere.*
+- **`llms.txt` / `llms-full.txt`** — hosted automatically; quality is a direct function of page `title` + `description` (§6.1). _Action: enforce descriptions everywhere._
 - **`skill.md`** — hosted automatically; lists doc capabilities for agents.
 - **Hosted MCP server** — users connect the docs to their AI tools for up-to-date product answers.
 - **Semantic search + 404 suggestions** — intent-based, no config.
 
-> Because these are generated *from* our content, the AI-native quality bar is really a **content quality bar**: complete coverage (§4), strong descriptions (§6.1), dense internal links (§6.3), and honest, mechanism-level explanations.
+> Because these are generated _from_ our content, the AI-native quality bar is really a **content quality bar**: complete coverage (§4), strong descriptions (§6.1), dense internal links (§6.3), and honest, mechanism-level explanations.
 
 ### 7.2 Configured — the in-docs **assistant** (reading)
+
 - Enable the assistant (dashboard). In `docs.json`, keep `assistant` available in the contextual menu.
 - Configure: starter questions (top user intents: "How do I install the script?", "How do I track a custom event?", "Do I need a cookie banner?", "How do I import from GA4?"), support/sales deflection email, and any external sources it may search.
 - Acceptance: assistant answers the top-20 questions (§2) from published content.
 
 ### 7.3 Configured — the **contextual menu** (discovering)
+
 Current `docs.json` already sets `contextual.options`. Finalize to:
+
 ```json
 "contextual": {
   "options": ["copy", "view", "assistant", "chatgpt", "claude", "perplexity", "mcp", "cursor", "vscode"],
   "display": "header"
 }
 ```
+
 Rationale: `copy`/`view` (Markdown), `assistant` (in-docs), the three AI chats users actually use, plus `mcp`/`cursor`/`vscode` for the developer audience. Drop options we won't support to avoid dead menu entries.
 
 ### 7.4 Configured — the **agent** & automations (writing/maintenance)
+
 - Add the agent to the team's Slack so anyone can request doc updates conversationally.
 - Set up **automations**: (a) on push to the product repo's changelog, open a PR proposing doc updates; (b) a scheduled "find stale pages / broken links" pass. Each automation = a prompt + a trigger.
 - Configure Claude Code / Cursor via `AGENTS.md` (§8.2) so contributor edits follow the Mintlify schema + our style.
 
 ### 7.5 Configured — teach users to install the skill (discovering)
-A dedicated Resources page, "Use these docs with AI," embeds the install prompt (§8.3) and explains the MCP connection + assistant. This turns readers into users whose *own* AI tools drive tinyanalytics correctly.
+
+A dedicated Resources page, "Use these docs with AI," embeds the install prompt (§8.3) and explains the MCP connection + assistant. This turns readers into users whose _own_ AI tools drive tinyanalytics correctly.
 
 ---
 
 ## 8. Technical configuration plan
 
 ### 8.1 `docs.json`
+
 - `name`: "tinyanalytics" (currently "Mintlify Starter Kit").
 - `colors`: use the owner-approved green accents — `#006420` in light mode and `#009B32` in dark mode.
 - `fonts`: use Inter for headings and body text through Mintlify's Google Fonts integration.
@@ -361,29 +410,40 @@ A dedicated Resources page, "Use these docs with AI," embeds the install prompt 
 - SEO/metadata: set site-level `description` and OpenGraph defaults (the OG-image gap is noted in decision 0041/0101 — provide one).
 
 ### 8.2 `AGENTS.md`
+
 Replace the placeholder with tinyanalytics specifics:
+
 - **Terminology:** "site" (a tracked website) vs "organization" vs "team"; "event" types; "cookieless identity"; product name lowercase **tinyanalytics**.
-- **Content boundaries:** the product is **hosted-only** — never document self-hosting, installation, or operator internals (admin console, instance ops); don't document unshipped features (§9); don't expose internal decision-record reasoning as user docs; API keys authenticate ingestion only (never reads).
+- **Content boundaries:** the product is **hosted-only** — never document self-hosting, installation, or operator internals (admin console, instance ops); don't document unshipped features (§9); don't expose internal decision-record reasoning as user docs; API keys authenticate server-side ingestion, reads, and management as their owner, while browser tracking stays keyless.
 - **Point at the project skills** (§8.5) so any AI tool loads them before editing.
 - **Style:** the §6.3 rules.
 - **Sources of truth:** `../tinyanalytics/wiki/features.md`, the decision log, and the product README — never invent behavior; when unsure, cite the wiki.
 
 ### 8.3 Skill-install prompt (`<Prompt>` component)
+
 On "Use these docs with AI":
+
 ```mdx
-<Prompt description="Install the tinyanalytics docs skill for your AI tools." actions={["copy", "cursor"]}>
-npx skills add https://docs.tinyanalytics.io
+<Prompt
+  description="Install the tinyanalytics docs skill for your AI tools."
+  actions={["copy", "cursor"]}
+>
+  npx skills add https://tinyanalytics.io/docs
 </Prompt>
 ```
-*(Domain assumption in §11.)*
+
+_(Domain assumption in §11.)_
 
 ### 8.4 `.mintignore` / housekeeping
+
 - Keep `PRD.md`, `README.md`, drafts out of the published build (extend `.mintignore` as needed). `.agents/` is auto-ignored by Mintlify, so the skills never publish.
 
 ### 8.5 Project skills (`.agents/skills/`) — ✅ shipped with this PRD revision
+
 Two in-repo skills, so any AI tool editing these docs (Claude Code, Cursor, the Mintlify agent) picks up both the platform mechanics and this project's rules:
+
 - **`.agents/skills/mintlify/SKILL.md`** — the official Mintlify authoring skill (MIT): components, `docs.json` patterns, frontmatter, CLI (`mint dev`, `mint broken-links`, `mint validate`), writing standards, and the research → plan → write → verify workflow.
-- **`.agents/skills/tinyanalytics-docs/SKILL.md`** — the project layer: what the product is (hosted-only, closed-source), sources of truth (`../tinyanalytics/wiki`, with the Rybbit reference as a coverage checklist only), **hard content boundaries** (no self-hosting/operator docs, no unshipped features, API keys = ingestion only), the terminology table, voice rules, page archetype shapes, and a pre-submit checklist that extends the Mintlify one.
+- **`.agents/skills/tinyanalytics-docs/SKILL.md`** — the project layer: what the product is (hosted-only, closed-source), sources of truth (`../tinyanalytics/wiki`, with the Rybbit reference as a coverage checklist only), **hard content boundaries** (no self-hosting/operator docs, no unshipped features, keys stay server-side and inherit owner access), the terminology table, voice rules, page archetype shapes, and a pre-submit checklist that extends the Mintlify one.
 
 Layering rationale: the generic skill can be refreshed from upstream (`npx skills add https://mintlify.com/docs`) without touching project rules; the project skill encodes what no upstream skill can know. `AGENTS.md` references both (§8.2).
 
@@ -392,7 +452,8 @@ Layering rationale: the generic skill can be refreshed from upstream (`npx skill
 ## 9. Out of scope — do NOT document (not shipped)
 
 Per the gap analysis, decision log, and the product's distribution model, these are absent, excluded, or internal. Documenting them would be a correctness bug:
-- **Self-hosting, in any form** — the product is closed-source and hosted-only. No installation, Docker/`setup.sh`, environment variables, SMTP/geo-database setup, updating, backup, or reverse-proxy-for-the-platform pages. (The internal compose stack exists for the team, not for users.) The *tracking proxy / custom domain* guide is **in** scope — that's a cloud-customer feature. Revisit this bullet only if a self-host offering actually ships.
+
+- **Self-hosting, in any form** — the product is closed-source and hosted-only. No installation, Docker/`setup.sh`, environment variables, SMTP/geo-database setup, updating, backup, or reverse-proxy-for-the-platform pages. (The internal compose stack exists for the team, not for users.) The _tracking proxy / custom domain_ guide is **in** scope — that's a cloud-customer feature. Revisit this bullet only if a self-host offering actually ships.
 - **Admin console & operator internals** — system-admin promotion, email diagnostics, instance ops (decisions 0112, 0123) are internal tooling, not user features.
 - **Session replay** — excluded by design (decision 0049; privacy-first fit).
 - Anything Rybbit has that tinyanalytics lacks and hasn't built — verify each candidate against `wiki/features.md` before writing.
@@ -408,32 +469,38 @@ Per the gap analysis, decision log, and the product's distribution model, these 
 Ship in waves; each wave is independently useful and immediately deployable (Mintlify auto-deploys on merge).
 
 **Phase 0 — Foundations (config, no content debt)** — ✅ done (2026-07-27)
+
 - ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); favicon and light/dark logo assets replaced with the ascending-bars mark; `AGENTS.md` rewritten; project skills shipped (§8.5).
-- ✅ Site SEO configured with a global description, navigable-page indexing, Open Graph and Twitter defaults, and **tinyanalytics** as the structured-data publisher. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. Canonical URLs remain automatic until the final docs domain is confirmed. Real footer socials remain an owner follow-up.
+- ✅ Site SEO configured with a global description, navigable-page indexing, Open Graph and Twitter defaults, and **tinyanalytics** as the structured-data publisher. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. The canonical base URL is `https://tinyanalytics.io/docs`. Real footer socials remain an owner follow-up.
 
 **Phase 1 — The golden path (highest leverage)** — ✅ done (2026-07-17)
+
 - ✅ Introduction, Quickstart, How it works, Install the tracking script, Script configuration, Custom events, Identify users, Verify/troubleshoot. (The "Switch from GA4/Plausible/Umami" migration overview is deferred to Phase 3, alongside import.)
-- *Outcome:* a new user can install and see data; assistant/`llms.txt` have real substance.
+- _Outcome:_ a new user can install and see data; assistant/`llms.txt` have real substance.
 
 **Phase 2 — Explore your data (the daily dashboard)** — ✅ done (2026-07-17)
+
 - ✅ First wave: Dashboard overview, Realtime, Pages, Sessions, Users, Events explorer, Journeys, Retention, Funnels, Goals, Filters.
 - ✅ Second wave: Performance (Core Web Vitals), Bots & AI crawlers, AI traffic, Google Search Console, Map & globe, Saved segments, Behavioral cohorts, Compare periods, Annotations, Export (CSV & PDF). Guides nav regrouped into four groups (Explore your data · Understand behavior · Acquisition & AI · Filter, save & share). Bot capture and GSC availability confirmed with the maintainer before writing.
 
 **Phase 3 — Migration & data (adoption drivers)** — 🚧 first wave done (2026-07-17)
+
 - ✅ First wave: migration overview (`migrate`), Data dictionary, and four import guides — GA4 (live OAuth pull), Plausible, Umami, Simple Analytics (file uploads). Added a "Manage data" group to Guides. Simple Analytics import added beyond the original three (it ships in the product).
 - ✅ Second wave: Accounts & access group — Account settings, Organizations & members, Teams & site access, Roles & permissions, Invitations. Documents the current converged behavior (multi-org switching per 0083, emailed invitations per 0087, teams as the sole site-access mechanism per 0073–0075).
 - ⬜ Deferred: Billing & plans. **Depends on open question #2** (is signup open / pricing page live) and shipped with billing not enforced (decision 0152) — confirm before writing.
 
 **Phase 4 — Integrations breadth** — 🚧 second wave done (2026-07-17)
+
 - ✅ First wave: Integrations tab + Overview and the top platforms — Next.js, React, WordPress, Webflow, Shopify, Google Tag Manager. Batch-authored from one template.
 - ✅ Second wave (long tail): Frameworks — Vue, Nuxt, Astro, SvelteKit, Gatsby, Remix, Angular; CMS & builders — Ghost, Squarespace, Framer, Carrd, Bubble; Docs & static sites (new nav group) — Hugo, Jekyll, Docusaurus, VitePress; E-commerce — BigCommerce; Server-side — Laravel, Drupal. 19 pages, same template, platform placement stated accurately (e.g. Astro `is:inline`, Gatsby `<Script>`, plan-gating for Squarespace/Carrd).
 - ⬜ Remaining candidates (later, if demand warrants): E-commerce (PrestaShop, ThriveCart); Server-side & tag managers (Joomla, TYPO3).
 - 🚫 Deliberately **not** documented as platforms — no fabricated support:
-  - **React Native / native mobile** — tinyanalytics ships a browser DOM script (`script.js`), not a mobile SDK. There is no native install point to document; adding one would invent a capability the product doesn't have.
+  - **React Native / native mobile** — this earlier gap conclusion was superseded when the `@tinyanalytics/react-native` SDK shipped in decision 0165. It is now documented under Mobile apps.
   - **Headless CMSs (Contentful, Sanity, Strapi)** — these have no rendered frontend of their own; the site is served by a framework (Next.js, Nuxt, Astro, …) that already has a guide. Point users to the framework page rather than the CMS.
   - **GitBook / Mintlify** — script injection depends on plan/hosting specifics we can't state as fact; revisit only if we can verify the exact install point.
 
 **Phase 5 — Advanced product analytics & ops** — ✅ done (2026-07-27)
+
 - ✅ **Product analytics** group (8): Revenue analytics, Stripe revenue connection, Feature flags, Experiments (A/B), Surveys, Custom dashboards, SQL query builder, Group & B2B analytics. Custom dashboards now cover both site and organization scope. Sourced from `algorithms/{revenue-normalization,flag-evaluation,experiment-results,surveys,dashboard-cards,group-analytics}.md`, `architecture/stripe-revenue.md`, `concepts/scoped-sql-query.md`, and the tracker public-API table (`architecture/tracking-script.md` — `flag()`/`flagPayload()`/`flags()`, `group()`/`setGroupTraits()`/`resetGroups()`). Citable specifics kept exact: rollout %, exposure-vs-assignment measurement, the ≥30-sample / ≥95%-confidence significance rule, the 5-group-type cap, the 10 s / 1,000-row query caps, and Stripe replay deduplication.
 - ✅ **Monitor & automate** group (4): Scheduled reports, Alerts, Uptime monitoring, Shortlinks. Sourced from `algorithms/{scheduled-reports,analytics-alerts,uptime-monitoring}.md` and `architecture/shortlinks.md` (decisions 0131–0133, 0138–0139, 0116–0119, 0159/0168, 0221). Alerts include client-event revenue, URL scope, event count/users with property filters, templates, and the 12 h default cooldown. Uptime incidents open/resolve on the 2nd consecutive failure/success; shortlink clicks remain excluded from overview traffic.
 - ✅ **Share & embed** group (3): Public dashboards, Embed a dashboard, Live-visitors widget. Sourced from decisions 0089 (widget + embed-stats), 0105 (`/share` full-dashboard link), 0126 (embed UX: theme/hideSidebar, keyless-public sentinel, private link key). Public/private bearer-link model stated plainly.
@@ -441,11 +508,13 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 - 🚫 Not over-claimed: **hideBranding / white-label** — 0126 frames it as a self-host-friendly toggle; on the hosted product its availability may be plan-gated, so the embed docs cover theme + hide-sidebar only and omit branding removal until plan scope is confirmed (ties to open question #2). Alert **segment/filter picker** is carried in the engine but not yet in the dialog (ships site-wide first), so alerts are documented as site-wide.
 
 **Phase 6 — API reference & Resources** — ✅ done (2026-07-17)
+
 - ✅ **API reference** tab (8 pages, new tab with Get started · Ingestion · Reading data · Access & tools groups): Introduction & authentication, Tracking API, Identify API, Analytics read API, Scoped SQL query, API keys, Rate limits & CORS, API playground. Sourced from `architecture/{api-server,ingestion-pipeline}.md`, the actual tracker Zod schema (`apps/api/src/tracker/schema.ts` — exact wire fields/caps, read at source), and decisions 0036 (API-key ingestion + Valkey rate limit), 0096 (API-key Bearer for reads/management), 0090 (scoped SQL), 0050 (CORS). Base URL `https://dash.tinyanalytics.io`; the two-credential model (session cookie vs `Authorization: Bearer <key>`) stated exactly; ingestion returns 204, reads return `{ data }`. Accuracy calls: the `ipAddress`/`userAgent` overrides are documented as **key-gated** (ignored without a valid key); the ingestion rate limit is described as per-key → 429 **without** citing a specific numeric default (it's env-configured, `INGEST_RATE_LIMIT_*`, no citable constant); the read API is documented at the pattern level + the stable core endpoints (not all ~40) with a pointer to the in-product playground for the full surface.
 - ✅ **Resources** tab (8 pages, new tab with Reference · How it works · Trust & privacy · AI groups): Metric definitions (glossary), How cookieless identity works, How bot detection works, How traffic is classified, How your data is handled, Privacy & GDPR, tinyanalytics vs GA/Plausible/Umami, Use these docs with AI. Sourced from `concepts/cookieless-identity.md`, `algorithms/{bot-detection,channel-classification,overview-metrics}.md`, `architecture/data-model.md` (confirmed **no raw-IP column** — grounds the privacy claims), and decision 0152 (read-time retention). Trust pages stay at mechanism level per the hosted-only boundary — no infra vendors, no operator internals. Privacy page asserts mechanism, not legal conclusions (explicit "not legal advice / depends on jurisdiction" hedge; no blanket "GDPR compliant" claim). Comparison page is honest about closed-source vs open-source Plausible/Umami and answers the trust question with the mechanism pages rather than dodging it.
 - 🚫 **Changelog** page deliberately deferred: there is no verified public product changelog to source, and fabricating release history would violate the no-invention rule. Revisit once a real product changelog/release feed exists (the docs' own `CHANGELOG.md` tracks the documentation site, not the product).
 
 **Phase 7 — AI-native activation & polish** — 🚧 in-repo polish done (2026-07-17)
+
 - ✅ In-repo polish pass across all 95 pages: GEO/SEO frontmatter audit (every page has a title, a standalone benefit-bearing description, and an icon — no gaps), heading-hierarchy check (one H1 per page, no stray body `# ` headings), descriptive-link audit (no "click here"/bare-"here" anchors), and a full `mint broken-links` sweep (zero broken). Removed the 44 internal `{/* TODO: screenshot */}` placeholder comments from all pages ahead of the first push (they were invisible on the site and shouldn't ship as raw TODOs).
 - ⬜ **Requires the Mintlify dashboard / owner action:** turn on the docs assistant + starter questions + deflection; set up the agent-in-Slack + automations. The contextual "Ask AI / copy / open in ChatGPT·Claude·Perplexity / MCP / Cursor / VS Code" menu is already configured in `docs.json` and documented in `resources/use-with-ai.mdx`; Mintlify auto-generates `/llms.txt` + `/llms-full.txt` from the (complete) titles/descriptions. A custom OG background remains optional; automatic social cards now use the supplied logo, page metadata, and primary color.
 - 📌 **Screenshots** remain a genuine gap: every feature/integration page would benefit from captured images from a live instance (open question #5 — who captures them / from which instance). The inline markers are removed, but the need is still tracked here.
@@ -454,49 +523,55 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 
 Compared our coverage against the live Rybbit docs sidebar (`rybbit.com/docs`) as a behavioral reference (structure only; no expression copied). Every "to add" below is backed by the product wiki (the feature exists) and is in scope for hosted tinyanalytics. Items Rybbit documents that we deliberately do **not** add follow, with reasons — so this stays an honest audit, not a copy of their table of contents.
 
-*To add (confirmed, sourced):*
+_To add (confirmed, sourced):_
+
 - ✅ **Exclude traffic** (`exclude-traffic.mdx`, added to the "Install the tracker" group, 2026-07-18) — ingest-time exclusions: IP (single/CIDR/range, v4+v6), country, path glob, hostname glob, and user-agent **substring** (the 0160 gotcha — UA is substring, not glob; page states it explicitly), plus the block-bots toggle and both "hide your own traffic" routes (localStorage opt-out + IP exclusion). Distinguishes exclusion (dropped at collection) from a dashboard filter (hides a report view). Source: decisions 0054, 0160; caps 100 entries / 256 chars.
 - ✅ **Autocapture** (`autocapture.mdx`, added to the "Track what matters" group, 2026-07-18) — dedicated page for each auto-captured event (outbound link, file download, button click, copy, form submission, engagement): what each records, the toggle attribute, the form-shape-only privacy guarantee (and the honest note that copy events store truncated copied text), plus the `data-ta-prop-*` (add props) and `data-ta-event` (opt an element out) conventions. Source: decision 0110; `tracker/script/auto-capture.ts` (read at source for the `data-ta-*` semantics and per-event props).
 - ✅ **Wix** (`integrations/wix.mdx`, 2026-07-18) — Custom Code → Head, all pages; Premium-plan gating noted (like Squarespace/Carrd); SPA tracking cross-link.
 - ✅ **WooCommerce** (`integrations/woocommerce.mdx`, 2026-07-18) — install via the WordPress header method (cross-links the WordPress guide) plus a purchase-tracking section (custom event on the order-received page with `revenue`/`currency`, verified against the tracker schema's reserved-prop convention).
 
-*Lower priority / optional:*
+_Lower priority / optional:_
+
 - ✅ **Site settings** orientation page (`site-settings.mdx`, added to "Accounts & access", 2026-07-19) — hub for the per-site Settings tabs: name/domain, reporting currency, public/private visibility, tracking + exclusions, embeds, imports, move-site, and delete. Canonical home for move-a-site-between-orgs (0161). Grounded in `settings/_components/general-tab.tsx`.
 - ⬜ **Svelte (Vite, non-Kit)** integration — we ship SvelteKit; Rybbit also documents plain Svelte/Vite (different install point: `index.html` / app mount).
 - ⬜ **Per-endpoint API pages** — Rybbit enumerates individual endpoint pages (sending-events, export-events, live-feed, channel-performance, funnel-dropoff, weekly-report). Ours is capability-structured (core-endpoints table + playground); enumerate more only if users ask.
 - (Unchanged, already listed under Phase 4: PrestaShop, ThriveCart, Joomla, TYPO3.)
 
-*Checked and deliberately NOT added (no fabrication):*
-- 🚫 **Product MCP server** — Rybbit ships `/docs/mcp` (query your analytics via an MCP server). The tinyanalytics wiki shows **no such product MCP server** (only incidental mentions), so a page would invent a feature. `resources/use-with-ai` documents the *docs* MCP, a different thing. Revisit only if a product MCP server ships.
+_Checked and deliberately NOT added (no fabrication):_
+
+- 🚫 **Product MCP server** — Rybbit ships `/docs/mcp` (query your analytics via an MCP server). The tinyanalytics wiki shows **no such product MCP server** (only incidental mentions), so a page would invent a feature. `resources/use-with-ai` documents the _docs_ MCP, a different thing. Revisit only if a product MCP server ships.
 - 🚫 **Architecture / Self-hosting / Self-host vs Cloud / Managing your installation / v1 migration** — operator- and self-host-facing; out of scope under the hosted-only boundary.
 - 🚫 **Contentful / Sanity / Strapi / GitBook / Mintlify** — deliberately omitted (headless CMSs render through a framework that has a guide; GitBook/Mintlify install points unverifiable). Reasons recorded under Phase 4. (**React Native** was formerly listed here as "no mobile SDK" — that's now false: the SDK shipped (0165) and is documented, see the codebase gap analysis below.)
 
-*Confirmed already covered (no action):* tagging (`data-tag`), skip/mask paths, client opt-out, and the auto-capture toggle (all in `script-configuration`); definitions, comparison, bot detection, data import, identify, funnels, goals, teams, invitations, account/org settings, tracking script, and troubleshooting (≈ our `verify-your-setup`). On the core analytics reports we are **more** comprehensive than Rybbit (a page per report vs their lighter treatment).
+_Confirmed already covered (no action):_ tagging (`data-tag`), skip/mask paths, client opt-out, and the auto-capture toggle (all in `script-configuration`); definitions, comparison, bot detection, data import, identify, funnels, goals, teams, invitations, account/org settings, tracking script, and troubleshooting (≈ our `verify-your-setup`). On the core analytics reports we are **more** comprehensive than Rybbit (a page per report vs their lighter treatment).
 
 **Backlog — gap analysis vs the product codebase (checked 2026-07-19)**
 
 Diffed our docs against the actual product surface — the web app route tree (`apps/web/src/app/websites/[siteId]/*`), the SDK folder (`sdks/`), and decisions **0140–0181** (which postdate the Phase-1–6 build). Every route with no matching doc page was a candidate; each below is source-grounded (fact sheets from `apps/api/src`, `apps/web/src`, `sdks/`, and the wiki) and confirmed shipped + user-facing. Scope decisions confirmed with the owner: build all; document revenue plainly (no plan caveats — despite `requireFeature("revenue")`); the React Native SDK is published/installable.
 
-*New pages (all built 2026-07-19):*
+_New pages (all built 2026-07-19):_
+
 - ✅ **Error tracking** (`errors.mdx`, "Explore your data") — opt-in `data-track-errors`; auto-captures `window.onerror` + unhandled rejections; manual `trackError(err, meta)`; report groups by message with occurrences, affected sessions, sparkline, and stack-trace drill-down; 60 s dedupe; `ResizeObserver`/cross-origin noise filtered. Source: `apps/api/src/api/errors.ts`, `tracker/script/tracker.ts`, `features.md`. Also added a script-config section + kept the `error` type accurate in `api-reference/track`.
 - ✅ **Revenue analytics** (`revenue.mdx` + `stripe-revenue.mdx`, "Product analytics") — reserved `revenue` (major units, positive) + `currency` props on a client event, plus the Stripe source's restricted-key connection, verified charges/refunds/disputes, source tabs, attribution, replay deduplication, and privacy boundaries. Source: decisions 0140 and 0216, `architecture/stripe-revenue.md`, `revenue-currency.ts`, `revenue/page.tsx`.
 - ✅ **Organization overview** (`organization-overview.mdx`, "Explore your data"; supersedes `rollup.mdx`) — combined stats across accessible sites in the active organization (6 cards with sparklines, selectable per-site trend, comparison table, 50-site display cap), team-scoped access, and users summed per site. Source: decisions 0076 and 0217, `apps/web/src/app/overview/`.
 - ✅ **React Native** (`integrations/react-native.mdx`, new "Mobile apps" group) — `@tinyanalytics/react-native` SDK: install (+AsyncStorage), create a mobile-type site (app identifier, read-only), `init()`, `screen()`/`event()`/`identify()`/`error()`, React Navigation tracker, install-id identity, full API + config tables, and the web-vs-mobile differences (screens-as-pageviews, no web vitals, empty channel). `analyticsHost` set to `https://dash.tinyanalytics.io` for consistency with the rest of the docs. Source: decision 0165, `sdks/react-native/{README.md,index.d.ts}`.
 
-*Enhancements (2026-07-19):*
+_Enhancements (2026-07-19):_
+
 - ✅ `pages.mdx` — added the alternate views (Titles / Entries / Exits / Hostnames) and a **Landing pages** section (entry-page report: bounce, avg duration, avg scroll, avg time). Source: decision 0178, `landing-pages-table.tsx`.
 - ✅ `alerts.mdx` — added **Revenue** to the alert-metric table (was stale: previously said revenue "isn't wired" — it shipped; `ALERT_METRICS` includes `"revenue"`).
 - ✅ `script-configuration.mdx` — dedicated "Capture JavaScript errors" section (the `data-track-errors` row already existed).
 - ✅ `organizations.mdx` — move-a-site pointer into `site-settings`.
 - ✅ `integrations/overview.mdx` — mobile-app note pointing to the React Native SDK.
 
-*Deliberately NOT documented (accuracy over completeness):*
+_Deliberately NOT documented (accuracy over completeness):_
+
 - 🚫 **Pages URL / hostname mode** (0181) — the breakdown API shipped (`pathname_host`/`entry_page_host`/`exit_page_host`) but the **web UI has not** (no `pagesMode` toggle in `apps/web/src`). Documenting it would describe something users can't do. Revisit when the UI ships.
 - 🚫 Operator-internal surfaces flagged by the fact-sheets (superadmin site-move, `BILLING_ENFORCED` quota preHandler, ClickHouse storage internals) — out of scope under the hosted-only boundary.
 
-*Confirmed already covered (no action):* **Group & B2B analytics** (the owner's example — `group-analytics.mdx` already documents `group()`/`setGroupTraits()`/`resetGroups()`, the grain toggle, account funnels/retention, inactivity alerts, flag-by-account; the miss was discoverability, not content); `data-web-vitals` (in `script-configuration`); group traits (already the 4th row in `data-dictionary`); the `error`/`performance` event types + `revenue`/`currency` props (already in `api-reference/track`, one wording tweak).
+_Confirmed already covered (no action):_ **Group & B2B analytics** (the owner's example — `group-analytics.mdx` already documents `group()`/`setGroupTraits()`/`resetGroups()`, the grain toggle, account funnels/retention, inactivity alerts, flag-by-account; the miss was discoverability, not content); `data-web-vitals` (in `script-configuration`); group traits (already the 4th row in `data-dictionary`); the `error`/`performance` event types + `revenue`/`currency` props (already in `api-reference/track`, one wording tweak).
 
-*Open (owner input still needed):* **Billing & plans** page (open Q2); **screenshots** (need a live instance).
+_Open (owner input still needed):_ **Billing & plans** page (open Q2); **screenshots** (need a live instance).
 
 **Mintlify component & GEO pass (done 2026-07-19)**
 
@@ -506,7 +581,8 @@ reference, `CodeGroup` on 7 pages, FAQ `AccordionGroup` on 64, `Check` on 37, `T
 question-shaped headings 26 → 58. House style captured in the commit; owner ruling on Revenue
 (no plan caveats) verified as held.
 
-*Deliberately not done, with reasons:*
+_Deliberately not done, with reasons:_
+
 - 🚫 **`resources/*` (9 pages)** — outside the owner's chosen Tier 1+2 line. `resources/comparison.mdx`
   and `resources/metrics-glossary.mdx` are the strongest remaining GEO candidates in the repo
   ("tinyanalytics vs Google Analytics" and metric-definition queries are exactly what AI engines are
@@ -520,9 +596,9 @@ question-shaped headings 26 → 58. House style captured in the commit; owner ru
   18 inbound references. Renaming these requires updating referrers in the same commit.
 - 🚫 **`Tabs` for WordPress/Drupal Option 1 vs Option 2** — Option 2 carries a `<Warning>` that editing
   the parent theme gets the tracking script wiped by the next theme update, and that warning is also
-  the argument *for* Option 1. Tabs would hide a data-loss warning from the reader who most needs it.
+  the argument _for_ Option 1. Tabs would hide a data-loss warning from the reader who most needs it.
 
-*Tooling note:* `mint broken-links` does **not** validate URL fragments. Anchor targets need a separate
+_Tooling note:_ `mint broken-links` does **not** validate URL fragments. Anchor targets need a separate
 check (a slugify-and-compare script) — one broken anchor was found and fixed this way after
 `broken-links` reported clean.
 
@@ -535,14 +611,14 @@ window opened after the last docs commit that changed facts (`1afada1`, 07-19 22
 updated. `mint validate`, `mint broken-links`, and a custom anchor check (45 refs) all clean.
 
 **Six pages were factually wrong, not merely incomplete.** See CHANGELOG for the itemized list. The
-recurring cause is that a changed *default* or a changed *interaction* silently invalidates prose
+recurring cause is that a changed _default_ or a changed _interaction_ silently invalidates prose
 that was accurate when written, and nothing in either repo flags the dependency.
 
 ### Tooling gaps this pass exposed
 
 1. **No sync marker.** Neither repo records "docs are current as of product SHA X." The boundary had
    to be recovered from commit timestamps, which only works while both repos share one author and
-   machine. *Recommendation:* record the audited product SHA in this file at the end of each sync
+   machine. _Recommendation:_ record the audited product SHA in this file at the end of each sync
    pass. **This pass audited through `d400019`.**
 2. **`mint broken-links` does not validate URL fragments.** Re-confirmed. Heading renames break
    inbound anchors silently — this pass renamed a `pages` heading and only the custom
@@ -553,12 +629,12 @@ that was accurate when written, and nothing in either repo flags the dependency.
 
 ### Deliberate non-actions
 
-| Not done | Reason |
-| --- | --- |
-| Standalone `timezone` and `resources/multi-host-sites` pages (both recommended by the audit) | Concepts documented where their controls live — `site-settings` and `pages` — with cross-links. One canonical home beats five places to drift. Revisit if SEO reach for "analytics timezone" justifies a dedicated page. |
-| `events` split into two pages | The page now covers both the dashboard Events card and the Events page. A split is defensible if the Events page grows further. |
-| Retention numeric-delta claim | The timezone mechanism is confirmed from source, but whether any given site sees a visible change is unmeasured, so the docs state the mechanism only. Cohort day/week *bucketing* remains UTC-derived — do **not** claim cohort labels shifted. |
-| `resources/*` GEO pass | Still outstanding from the 2026-07-19 pass; `comparison.mdx` and `metrics-glossary.mdx` remain the strongest remaining GEO candidates. |
+| Not done                                                                                     | Reason                                                                                                                                                                                                                                           |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Standalone `timezone` and `resources/multi-host-sites` pages (both recommended by the audit) | Concepts documented where their controls live — `site-settings` and `pages` — with cross-links. One canonical home beats five places to drift. Revisit if SEO reach for "analytics timezone" justifies a dedicated page.                         |
+| `events` split into two pages                                                                | The page now covers both the dashboard Events card and the Events page. A split is defensible if the Events page grows further.                                                                                                                  |
+| Retention numeric-delta claim                                                                | The timezone mechanism is confirmed from source, but whether any given site sees a visible change is unmeasured, so the docs state the mechanism only. Cohort day/week _bucketing_ remains UTC-derived — do **not** claim cohort labels shifted. |
+| `resources/*` GEO pass                                                                       | Still outstanding from the 2026-07-19 pass; `comparison.mdx` and `metrics-glossary.mdx` remain the strongest remaining GEO candidates.                                                                                                           |
 
 ### Escalation for the product owner (not a docs issue)
 
@@ -596,14 +672,14 @@ The playground exposes everything the dashboard calls, including internal plumbi
 reference commits to a subset; the rest are withheld **in the script's own config**, so the choice
 is visible and reversible in one line:
 
-| Withheld | Reason |
-| --- | --- |
-| Billing (2) | Account plumbing; shape follows the payment provider. |
-| Imports (4) | Migration tooling; batch semantics not settled. Reconsider — `POST /sites/:site/imports/:importId/events` is a genuine bulk-backfill use case. |
-| Google Analytics 4 (7) | OAuth handshake plus a proxy to Google's own API. |
-| Teams (4), Organizations member management (3 of 6) | Admin surface, not product API. |
-| Search Console OAuth (4 of 5) | Browser redirect flows, not callable API. Only `gsc/data` is published. |
-| `org-event-count` (1 of Misc's 3) | Internal quota counter. Retention and Journeys are published. |
+| Withheld                                            | Reason                                                                                                                                         |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Billing (2)                                         | Account plumbing; shape follows the payment provider.                                                                                          |
+| Imports (4)                                         | Migration tooling; batch semantics not settled. Reconsider — `POST /sites/:site/imports/:importId/events` is a genuine bulk-backfill use case. |
+| Google Analytics 4 (7)                              | OAuth handshake plus a proxy to Google's own API.                                                                                              |
+| Teams (4), Organizations member management (3 of 6) | Admin surface, not product API.                                                                                                                |
+| Search Console OAuth (4 of 5)                       | Browser redirect flows, not callable API. Only `gsc/data` is published.                                                                        |
+| `org-event-count` (1 of Misc's 3)                   | Internal quota counter. Retention and Journeys are published.                                                                                  |
 
 ### Known gap: no response schemas
 
@@ -650,35 +726,47 @@ committed, user-facing behavior:
   Goals and Funnels show their restored shared date/filter controls; custom shortlink slugs are
   documented as globally unique.
 
-The public generated endpoint set remains at its existing curated boundary. Decision 0222 expands
-the signed-in product playground, but publishing the new read and management routes in OpenAPI
-requires an explicit public authentication and compatibility decision; the documentation project's
-hard boundary does not allow presenting ingestion API keys as read credentials. Cosmetic-only
-changes such as Journeys spacing and navigation loading indicators do not need durable documentation.
+The public generated endpoint set remains curated. Decision 0096 is the current authentication
+contract: an API key resolves to its owner for customer read and management routes, while browser
+ingestion remains keyless. Cosmetic-only changes such as Journeys spacing and navigation loading
+indicators do not need durable documentation.
 
-**Current sync marker:** product commit `964f3229cdf1928eac98c4fc7588b0e3cdd791d3`
-(2026-07-27).
+## 10e. Product-sync pass (2026-07-30)
+
+Audited the shipped product from `964f322` through `f5dd577` and added or expanded public coverage for:
+
+- **User acquisition** (0224): first-ever-session attribution across six dimensions, new vs returning users, audience modes, selected-window engagement, filters, comparison, and the anonymous-identity caveat.
+- **Ask AI** (0242–0246): site and organization scope, grounded reads and report links, approved write tools, team-aware access, conversation actions, AI credits, and Anthropic BYOK.
+- **Billing and plans** (0152 plus the current plan catalog): Free/Growth/Business, the 14-day Business trial, pageview metering without collection blocking, read-time reporting history, and monthly AI credits.
+- **Recent email/export behavior** (0239 and the July email wave): partial CSV success warnings, scheduled-report headline summaries and section links, and richer alert context.
+- **Authoring contract corrections**: removed the stale “rotating hash” and “ingestion-only API key” rules so contributor guidance now matches the shipped privacy and key-owner permission models.
+
+The generated OpenAPI reference is refreshed from the product playground registry in the same pass.
+
+**Current sync marker:** product commit `f5dd5773073a7a11776d08c4e33e55dd451b939f`
+(2026-07-30).
 
 ---
 
 ## 11. Assumptions & open questions
 
-| # | Assumption / question | Working default | Needs confirmation |
-| --- | --- | --- | --- |
-| 1 | Docs domain | `docs.tinyanalytics.io` | App is `dash.tinyanalytics.io`; confirm docs host (subdomain vs `/docs`). Affects skill-install prompt + canonical URLs. |
-| 2 | Cloud is the only offering | Confirmed by owner (2026-07-16): closed-source, hosted-only | Is signup open to everyone? Pricing page live? Determines billing docs depth. |
-| 3 | Brand accent color | Green — updated by owner (2026-07-27): `#006420` for light mode and `#009B32` for dark mode | Resolved. |
-| 4 | Integration guide breadth for v1 | Top ~12 now, long tail later | Which platforms matter most to the audience? |
-| 5 | Screenshots | Needed for dashboard/feature pages | Who captures them / from which instance (demo seed)? |
-| 6 | API reference source | Hand-authored v1 | Is there an OpenAPI spec to auto-generate from later? |
-| 7 | Assistant external sources | None initially | Any external sites the assistant should also search? |
-| 8 | Product name casing | lowercase **tinyanalytics** everywhere | Confirm (matches README). |
-| 9 | Slack + repo access for the agent/automations | Deferred to Phase 7 | Which repo triggers doc-update PRs; Slack workspace access. |
-| 10 | Self-hosting may ship someday | Not documented until it exists | If the product open-sources or ships a self-host tier, add a Self-hosting tab then (the v1.0 draft of this PRD sketched one). |
+| #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |
+| --- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Docs domain                                   | `https://tinyanalytics.io/docs`                                                                                          | Resolved by owner (2026-07-30). Use this base for skill installation and canonical URLs.                                     |
+| 2   | Cloud is the only offering                    | Confirmed by owner (2026-07-16): closed-source, hosted-only; public pricing page verified in product source (2026-07-30) | Resolved for current billing-doc scope.                                                                                       |
+| 3   | Brand accent color                            | Green — updated by owner (2026-07-27): `#006420` for light mode and `#009B32` for dark mode                              | Resolved.                                                                                                                     |
+| 4   | Integration guide breadth for v1              | Top ~12 now, long tail later                                                                                             | Which platforms matter most to the audience?                                                                                  |
+| 5   | Screenshots                                   | Needed for dashboard/feature pages                                                                                       | Who captures them / from which instance (demo seed)?                                                                          |
+| 6   | API reference source                          | Hand-authored v1                                                                                                         | Is there an OpenAPI spec to auto-generate from later?                                                                         |
+| 7   | Assistant external sources                    | None initially                                                                                                           | Any external sites the assistant should also search?                                                                          |
+| 8   | Product name casing                           | lowercase **tinyanalytics** everywhere                                                                                   | Confirm (matches README).                                                                                                     |
+| 9   | Slack + repo access for the agent/automations | Deferred to Phase 7                                                                                                      | Which repo triggers doc-update PRs; Slack workspace access.                                                                   |
+| 10  | Self-hosting may ship someday                 | Not documented until it exists                                                                                           | If the product open-sources or ships a self-host tier, add a Self-hosting tab then (the v1.0 draft of this PRD sketched one). |
 
 ---
 
 ## 12. Acceptance criteria (definition of done, per phase)
+
 - Nav matches §5; zero broken links; every page has `title` + `description`.
 - Each how-to has a Verify step and a Related block; each concept states its limits.
 - Quickstart validated end-to-end against a real instance (≤ 6 steps, < 5 min).
@@ -692,39 +780,40 @@ changes such as Journeys spacing and navigation loading indicators do not need d
 
 The wiki is the behavioral spec; these are the primary sources per doc area. (Wiki paths are relative to `../tinyanalytics/wiki/`.)
 
-| Doc page / area | Primary wiki source(s) |
-| --- | --- |
-| How it works; Architecture | `architecture/overview.md`, `architecture/ingestion-pipeline.md`, `architecture/api-server.md`, `architecture/web-dashboard.md` |
-| The tracking script; Script config; SPA | `architecture/tracking-script.md`, decisions 0012, 0013 |
-| Custom events; auto-capture; downloads; engagement; 404 | decisions 0110, 0135, 0134, 0136, `algorithms/event-list.md` |
-| Identify / cookieless identity | `concepts/cookieless-identity.md`, `algorithms/cookieless-identity-derivation.md`, decisions 0045, 0146 |
-| Proxy / custom domain | `docs/proxy-guide.md` (product), decisions 0127, 0128 |
-| Overview / metrics / comparison | `algorithms/overview-metrics.md`, `algorithms/timeseries-bucketing.md`, decisions 0149–0151 |
-| Sessions / Users / Journeys / Retention / Funnels / Goals | `algorithms/session-list.md`, `algorithms/journeys.md`, decisions 0046, 0047, 0068, 0065, 0055 |
-| Bots & AI crawlers; AI traffic | `algorithms/bot-detection.md`, decisions 0084–0086, 0147, 0148, 0167 |
-| Performance / Web Vitals | decisions 0056, 0057, 0080 |
-| Segments / Cohorts | decisions 0141, 0145; `algorithms/behavioral-cohorts.md` |
-| Feature flags / Experiments | `algorithms/flag-evaluation.md`, `algorithms/experiment-results.md` |
-| Surveys | `algorithms/surveys.md`, decision 0144 |
-| Custom dashboards / SQL query | `algorithms/dashboard-cards.md`, `concepts/scoped-sql-query.md`, decisions 0090, 0114, 0115, 0219 |
-| Group / B2B analytics | `algorithms/group-analytics.md`, decisions 0154, 0156, 0157 |
-| Revenue / Stripe | `algorithms/revenue-normalization.md`, `architecture/stripe-revenue.md`, decisions 0140, 0216 |
-| Organization overview | decisions 0076, 0217; `apps/web/src/app/overview/` |
-| Reports / Alerts / Uptime | `algorithms/scheduled-reports.md`, `algorithms/analytics-alerts.md`, `algorithms/uptime-monitoring.md`, decisions 0131–0133, 0138, 0116–0119, 0221 |
-| Shortlinks | `architecture/shortlinks.md`, decision 0159 |
-| Data dictionary | `concepts/data-dictionary.md`, decision 0158 |
-| Import (GA4 / Plausible / Umami) | `algorithms/import-mappers.md`, `algorithms/plausible-reconstruction.md`, decisions 0153, 0113 |
-| Public dashboards / embed / widget | decisions 0089, 0105, 0126 |
-| Accounts / orgs / teams / roles | decisions 0071–0077, 0083, 0112 |
-| Billing & plans | decision 0152 |
-| How your data is handled (Resources, trust-level) | `architecture/overview.md`, `architecture/data-model.md`, `concepts/cookieless-identity.md` — concepts only, no operational detail |
-| API reference / playground | `architecture/api-server.md`, decisions 0017–0021, 0051, 0093, 0222 |
-| Channels / geo / definitions | `algorithms/channel-classification.md`, `algorithms/geo-enrichment.md`, decisions 0006, 0155 |
-| React Native / mobile | `architecture/react-native-sdk.md`, decision 0165 |
+| Doc page / area                                           | Primary wiki source(s)                                                                                                                             |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| How it works; Architecture                                | `architecture/overview.md`, `architecture/ingestion-pipeline.md`, `architecture/api-server.md`, `architecture/web-dashboard.md`                    |
+| The tracking script; Script config; SPA                   | `architecture/tracking-script.md`, decisions 0012, 0013                                                                                            |
+| Custom events; auto-capture; downloads; engagement; 404   | decisions 0110, 0135, 0134, 0136, `algorithms/event-list.md`                                                                                       |
+| Identify / cookieless identity                            | `concepts/cookieless-identity.md`, `algorithms/cookieless-identity-derivation.md`, decisions 0045, 0146                                            |
+| Proxy / custom domain                                     | `docs/proxy-guide.md` (product), decisions 0127, 0128                                                                                              |
+| Overview / metrics / comparison                           | `algorithms/overview-metrics.md`, `algorithms/timeseries-bucketing.md`, decisions 0149–0151                                                        |
+| Sessions / Users / Journeys / Retention / Funnels / Goals | `algorithms/session-list.md`, `algorithms/journeys.md`, decisions 0046, 0047, 0068, 0065, 0055                                                     |
+| Bots & AI crawlers; AI traffic                            | `algorithms/bot-detection.md`, decisions 0084–0086, 0147, 0148, 0167                                                                               |
+| Performance / Web Vitals                                  | decisions 0056, 0057, 0080                                                                                                                         |
+| Segments / Cohorts                                        | decisions 0141, 0145; `algorithms/behavioral-cohorts.md`                                                                                           |
+| Feature flags / Experiments                               | `algorithms/flag-evaluation.md`, `algorithms/experiment-results.md`                                                                                |
+| Surveys                                                   | `algorithms/surveys.md`, decision 0144                                                                                                             |
+| Custom dashboards / SQL query                             | `algorithms/dashboard-cards.md`, `concepts/scoped-sql-query.md`, decisions 0090, 0114, 0115, 0219                                                  |
+| Group / B2B analytics                                     | `algorithms/group-analytics.md`, decisions 0154, 0156, 0157                                                                                        |
+| Revenue / Stripe                                          | `algorithms/revenue-normalization.md`, `architecture/stripe-revenue.md`, decisions 0140, 0216                                                      |
+| Organization overview                                     | decisions 0076, 0217; `apps/web/src/app/overview/`                                                                                                 |
+| Reports / Alerts / Uptime                                 | `algorithms/scheduled-reports.md`, `algorithms/analytics-alerts.md`, `algorithms/uptime-monitoring.md`, decisions 0131–0133, 0138, 0116–0119, 0221 |
+| Shortlinks                                                | `architecture/shortlinks.md`, decision 0159                                                                                                        |
+| Data dictionary                                           | `concepts/data-dictionary.md`, decision 0158                                                                                                       |
+| Import (GA4 / Plausible / Umami)                          | `algorithms/import-mappers.md`, `algorithms/plausible-reconstruction.md`, decisions 0153, 0113                                                     |
+| Public dashboards / embed / widget                        | decisions 0089, 0105, 0126                                                                                                                         |
+| Accounts / orgs / teams / roles                           | decisions 0071–0077, 0083, 0112                                                                                                                    |
+| Billing & plans                                           | decision 0152                                                                                                                                      |
+| How your data is handled (Resources, trust-level)         | `architecture/overview.md`, `architecture/data-model.md`, `concepts/cookieless-identity.md` — concepts only, no operational detail                 |
+| API reference / playground                                | `architecture/api-server.md`, decisions 0017–0021, 0051, 0093, 0222                                                                                |
+| Channels / geo / definitions                              | `algorithms/channel-classification.md`, `algorithms/geo-enrichment.md`, decisions 0006, 0155                                                       |
+| React Native / mobile                                     | `architecture/react-native-sdk.md`, decision 0165                                                                                                  |
 
 ---
 
 ## Appendix B — Competitor IA references (for benchmarking, not copying)
+
 - **Plausible** (task-oriented): Get Started · Website Settings · Stats Dashboard · Goals and Events · Bypass Adblockers · APIs & Data Access · Account · Team · Billing.
 - **Umami** (feature-oriented): Introduction · Quickstart · Configuration · Tracking (functions, config, events, IDs, tags, links, pixels) · Filtering (sessions, replays, performance, breakdown, goals, funnel, journey, retention, UTM, revenue, attribution) · Boards · Teams · Reference (metric definitions, integrations).
-- **tinyanalytics** takes the *superset*: task spine (Plausible) for setup + feature spine (Umami) for the dashboard + its own advanced product-analytics/ops tier that neither documents in depth.
+- **tinyanalytics** takes the _superset_: task spine (Plausible) for setup + feature spine (Umami) for the dashboard + its own advanced product-analytics/ops tier that neither documents in depth.

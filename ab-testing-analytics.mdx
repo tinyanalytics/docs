@@ -1,0 +1,80 @@
+---
+title: "A/B Testing Analytics"
+sidebarTitle: "Experiments"
+description: "Compare feature-flag variants against a goal, then measure conversion, lift over control, sample size, and statistical significance."
+icon: "flask"
+---
+
+An experiment tells you which variant of a feature actually converts better — not which one you *think* wins. You point an experiment at a [multivariate feature flag](/feature-flag-analytics) and a [goal](/conversion-goal-tracking), and tinyanalytics counts conversions for each variant, computes the lift over your control, and tells you when the difference is statistically significant.
+
+## Before you start
+
+- A **multivariate feature flag** with the variants you want to test (for example `control` and `treatment`).
+- A **goal** that defines the conversion you care about — a signup, a purchase, a key page view.
+- Your app calls `window.tinyanalytics.flag()` where the visitor experiences the variant. This is what makes the measurement accurate.
+
+## How does an experiment count conversions?
+
+The unit of measurement is the **session**, not the pageview. For each variant, tinyanalytics counts the sessions that saw it and the sessions that then completed your goal. Attribution is **post-exposure**: a conversion only counts if it happened *at or after* the visitor first saw the variant.
+
+- A session that converts *before* ever seeing the variant is **not** credited to it — a variant can't take credit for behavior that preceded it.
+- A session that converts twice counts **once**.
+- Conversions can never exceed what your goal reports for the same period, because the experiment reuses the goal's own definition.
+
+## Where should I call flag()?
+
+Call `window.tinyanalytics.flag()` at the moment the visitor experiences the variant. This is the one step that decides whether your results are trustworthy. The call records an **exposure** — proof that this session actually experienced the variant — and the experiment counts those exposed sessions as its primary, statistically correct measurement.
+
+```js
+// Fire the exposure at the moment the visitor experiences the variant
+const variant = window.tinyanalytics.flag('checkout-test', 'control')
+render(variant === 'treatment' ? <NewCheckout /> : <OldCheckout />)
+```
+
+<Warning>
+  If no session ever calls `flag()` for the experiment's flag, tinyanalytics falls back to an **assignment** measurement — everyone the flag *would* have bucketed — and flags the results as less reliable, because assignment doesn't prove anyone saw the difference. Call `flag()` at the point of experience to keep your experiment on the accurate measurement.
+</Warning>
+
+## How do I read the results?
+
+Each variant shows its **sessions**, **conversions**, **conversion rate**, and **lift** versus the control:
+
+- **Control** is the variant named `control`, or the first one you declared. Every variant you declared appears in the table even before it has any traffic.
+- **Lift** is the variant's conversion rate relative to control. It reads as blank (not "0%") when the control itself hasn't converted yet — there's no baseline to compare against.
+- **Significance** is a two-proportion z-test computed against control. tinyanalytics needs **at least 30 converting-or-exposed sessions in each arm** before it will call anything — until then it shows **"Gathering data."** A result is marked **significant at 95% confidence** or higher.
+
+tinyanalytics never auto-picks a winner and applies no multiple-comparison correction. It surfaces which variant is leading once that lead is significant, and the call to ship stays yours.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why does my experiment say 'Gathering data'?">
+    Your arms don't have enough traffic yet. tinyanalytics needs **at least 30 converting-or-exposed sessions in each arm** before it calls significance, and shows "Gathering data" until then. Significance is a two-proportion z-test against control, marked significant at 95% confidence or higher.
+  </Accordion>
+  <Accordion title="Why is the lift column blank for my variant?">
+    The control hasn't converted yet, so there's no baseline to compare against. tinyanalytics shows lift as blank rather than "0%" in that case. Lift is the variant's conversion rate relative to control.
+  </Accordion>
+  <Accordion title="Do conversions that happen before a visitor sees the variant count?">
+    No. Attribution in tinyanalytics experiments is **post-exposure** — a conversion only counts if it happened at or after the visitor first saw the variant. A session that converts twice still counts once.
+  </Accordion>
+  <Accordion title="Does tinyanalytics pick the winning variant for me?">
+    No. tinyanalytics never auto-picks a winner and applies no multiple-comparison correction. It surfaces which variant is leading once that lead is statistically significant, and the decision to ship stays yours.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Feature flags" icon="toggle-on" href="/feature-flag-analytics">
+    Create the multivariate flag your experiment tests.
+  </Card>
+  <Card title="Goals" icon="bullseye" href="/conversion-goal-tracking">
+    Define the conversion the experiment measures.
+  </Card>
+  <Card title="Custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Send the events your goal is built from.
+  </Card>
+  <Card title="Funnels" icon="filter-circle-dollar" href="/funnel-analytics">
+    See where visitors drop off on the way to converting.
+  </Card>
+</Columns>

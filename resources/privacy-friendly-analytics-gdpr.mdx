@@ -1,0 +1,64 @@
+---
+title: "Privacy-Friendly Analytics and GDPR"
+sidebarTitle: "Privacy and GDPR"
+description: "Evaluate privacy-friendly analytics with no core analytics cookies, no raw IP storage, server-derived identity, and explicit optional browser state."
+icon: "user-shield"
+---
+
+tinyanalytics makes core anonymous analytics privacy-friendly by default. It sets no analytics cookies, stores no raw IP addresses, and counts anonymous visitors with a server-derived one-way identifier instead of a browser ID.
+
+## The privacy properties
+
+- **No analytics cookies.** Core anonymous analytics does not set cookies or write an anonymous analytics ID to the browser.
+- **No raw IP addresses stored.** A visitor's IP is used only in memory to derive a [hashed identifier](/resources/cookieless-analytics-identity) and an approximate location, then it's gone — it isn't kept with your data.
+- **No cross-site profile.** The cookieless identifier is derived for your site, not a stored ID that follows a person across the web.
+- **No personal data by default.** Names, emails, and other identifying details are stored only if *you* deliberately send them via `identify()`, traits, or event properties.
+
+## Which features use browser storage?
+
+Optional features use browser storage only when their behavior requires persistence:
+
+| Feature | What is stored | Why |
+| --- | --- | --- |
+| [`identify()`](/user-identification-analytics) | The user ID you provide | Keep a signed-in user identified across pages and visits |
+| [Feature flags](/feature-flag-analytics) | A random, site-specific visitor ID | Keep a visitor in the same variation |
+| [Group analytics](/b2b-account-analytics) | The group associations you provide | Retain account or workspace context |
+| [Surveys](/product-feedback-surveys) | Eligibility, impression, and completion markers | Respect wait periods and avoid repeat prompts |
+| [Opt-out](/exclude-traffic-from-analytics#how-do-i-hide-my-own-traffic) | A disabled marker | Remember that analytics should stay off in that browser |
+
+These values support a feature on your site; they are not a cross-site advertising profile. They can still matter under laws that regulate non-cookie browser storage, so include them in your consent review when you enable those features.
+
+## Do you still need a cookie-consent banner?
+
+Core anonymous analytics sets no cookies and does not persist an anonymous analytics ID in the browser. Whether *you* need consent still depends on your jurisdiction, the optional features you enable, and the data you choose to send. Review the rules that apply to you and your visitors.
+
+<Note>
+  This page describes how tinyanalytics works, not legal advice. Your obligations under GDPR, ePrivacy, CCPA, or other regulations depend on your specific use, the data you collect, and where your visitors are. Consult those regulations — or a professional — for your situation.
+</Note>
+
+## Keeping data collection privacy-friendly
+
+You decide how much personal data, if any, enters tinyanalytics:
+
+- Use a **non-identifying ID** (like an internal user ID or a hash) with [`identify()`](/user-identification-analytics) rather than an email address.
+- Keep raw personal information out of [custom event](/custom-event-tracking) properties and traits unless you have a reason and a basis to store it.
+- If you [connect Stripe](/stripe-revenue-analytics), leave **Email fallback** off unless you need it and have a basis for processing customer emails. The email is not stored in the analytics event store, but matching it is still personal-data processing.
+- Review the browser storage used by optional features before enabling them.
+- Review what your team sends periodically, since properties and traits are free-form.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="How cookieless identity works" icon="fingerprint" href="/resources/cookieless-analytics-identity">
+    The mechanism behind privacy-friendly identity.
+  </Card>
+  <Card title="How your data is handled" icon="server" href="/resources/analytics-data-handling">
+    Exactly what's stored and what isn't.
+  </Card>
+  <Card title="Identify users" icon="user" href="/user-identification-analytics">
+    Attach an ID without exposing personal data.
+  </Card>
+  <Card title="tinyanalytics vs the alternatives" icon="scale-balanced" href="/resources/tinyanalytics-vs-google-analytics-plausible-umami">
+    How it compares on privacy and openness.
+  </Card>
+</Columns>

@@ -1,0 +1,88 @@
+---
+title: "Analytics Metrics Glossary"
+sidebarTitle: "Metric definitions"
+description: "Plain definitions of tinyanalytics traffic, acquisition, conversion, AI, and revenue metrics so you know exactly what each number counts across reports."
+icon: "ruler"
+---
+
+This glossary defines the metrics you see most often in tinyanalytics. The same definition follows the metric across reports unless a page states a narrower scope.
+
+## Core metrics
+
+| Metric                       | Definition                                                                                                                                                                                                                                                                                                     |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Sessions**                 | The number of distinct sessions in the date range. A session is one visitor's activity within a 30-minute sliding window of inactivity.                                                                                                                                                                        |
+| **Users**                    | The number of distinct visitors. A visitor is counted by the ID you supplied with [identify](/user-identification-analytics), when present, otherwise by their [cookieless ID](/resources/cookieless-analytics-identity). One signed-in person on a phone and a laptop counts as one user when both devices use the same identified ID. |
+| **Pageviews**                | The total number of pages viewed — every page load and, in a single-page app, every route change.                                                                                                                                                                                                              |
+| **Events**                   | All accepted events in the range, including pageviews, custom events, autocaptured interactions, engagement, errors, and performance events. A report can narrow this to one event type.                                                                                                                       |
+| **Pages per session**        | The mean number of pageviews per session.                                                                                                                                                                                                                                                                      |
+| **Events per session**       | The number of accepted events divided by sessions.                                                                                                                                                                                                                                                             |
+| **Bounce rate**              | The percentage of sessions with exactly one pageview.                                                                                                                                                                                                                                                          |
+| **Session duration**         | The average time between a session's first and last event, in seconds.                                                                                                                                                                                                                                         |
+| **AI traffic (AI sessions)** | The number of sessions that _entered_ from an [AI assistant](/ai-referral-traffic-analytics) — a visitor who clicked through from ChatGPT, Perplexity, Gemini, Claude, Copilot, and similar. Each session is counted once, by the assistant it arrived from.                                                                      |
+
+## Acquisition metrics
+
+| Metric                         | Definition                                                                                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **New users**                  | Users whose first-ever event falls inside the selected date range.                                                                               |
+| **Returning users**            | Users active in the selected date range whose first-ever event happened before the range started.                                                |
+| **New-user share**             | New users divided by all users in the row or report, expressed as a percentage.                                                                  |
+| **First-touch channel/source** | The acquisition channel or source from a user's first-ever session. Later sessions do not rewrite it. See [User acquisition](/user-acquisition-analytics). |
+| **Session channel/source**     | The entry acquisition context of the session being measured. The same user can have sessions attributed to different sources over time.          |
+
+## Conversion and revenue metrics
+
+| Metric                   | Definition                                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------------------------- |
+| **Goal conversions**     | Sessions that matched a goal's page, custom-event, or autocapture rule inside the selected range.       |
+| **Goal conversion rate** | Converting sessions divided by all sessions in the same selected date range and filter scope.            |
+| **Total revenue**        | Gross positive revenue in the selected range, converted to the site's reporting currency.               |
+| **Net revenue**          | Total revenue minus Stripe refunds and lost disputes. Client-event revenue has no negative adjustments. |
+| **Refunds**              | The amount subtracted by Stripe refunds and lost disputes.                                              |
+| **Average order value**  | Total revenue divided by the number of orders.                                                          |
+| **Paying sessions**      | Distinct sessions that produced at least one revenue event.                                             |
+| **Orders**               | Completed revenue-bearing purchases reported by the selected revenue source.                            |
+
+## What counts as a session?
+
+A **session** is one visitor's activity within a **30-minute sliding window of inactivity**. Every event the visitor sends pushes the window forward; the session ends only after 30 minutes of silence, and their next visit starts a new one. Because the window slides, a visitor who's active across the half-hour boundary stays in a single session rather than being split in two.
+
+## How is a bounce counted?
+
+A **bounce** is a session with exactly one pageview — the visitor saw one page and didn't view another. Bounce rate is the percentage of sessions that bounced. Custom events don't change the count: a single-pageview session is a bounce even if the visitor clicked a button or submitted a form on that page.
+
+## Why can user counts change after identify?
+
+[`identify()`](/user-identification-analytics) can merge recent anonymous activity into the stable ID you provide. That can turn two anonymous cookieless IDs into one identified user and improve cross-device totals. Historical pageviews and events remain in place; only the effective user used by people-level reports changes.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Data dictionary" icon="book" href="/analytics-data-dictionary">
+    The events, properties, and traits catalog.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/web-analytics-dashboard">
+    See these metrics for your site.
+  </Card>
+  <Card
+    title="How cookieless identity works"
+    icon="fingerprint"
+    href="/resources/cookieless-analytics-identity"
+  >
+    How a visitor becomes a "user."
+  </Card>
+  <Card
+    title="How traffic is classified"
+    icon="signs-post"
+    href="/resources/analytics-channel-attribution"
+  >
+    How referrers become channels.
+  </Card>
+  <Card title="User acquisition" icon="user-plus" href="/user-acquisition-analytics">
+    Apply the new and returning definitions by first-touch source.
+  </Card>
+  <Card title="Revenue analytics" icon="dollar-sign" href="/revenue-analytics">
+    Understand the source and currency rules behind revenue metrics.
+  </Card>
+</Columns>

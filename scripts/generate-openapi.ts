@@ -95,7 +95,11 @@ const PARTIAL_CATEGORIES: Record<string, string[]> = {
  *   Imports              — migration tooling; batch semantics not settled
  *   Google Analytics 4   — OAuth handshake plus a proxy to Google's own API
  */
-const EXCLUDED_CATEGORIES = new Set(["Billing", "Imports", "Google Analytics 4"]);
+const EXCLUDED_CATEGORIES = new Set([
+  "Billing",
+  "Imports",
+  "Google Analytics 4",
+]);
 
 /**
  * Display names for categories whose internal label doesn't read well publicly.
@@ -110,35 +114,52 @@ const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
  * sidebar group, so they are written to stand alone when quoted out of context.
  */
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
-  Sites: "Read and update a site, its tracking config, its exclusions, and its private link.",
-  Organizations: "List the organizations you belong to and the sites inside them, and create new sites.",
-  Overview: "Headline metrics, time series, and dimension breakdowns for a site.",
+  Sites:
+    "Read and update a site, its tracking config, its exclusions, and its private link.",
+  Organizations:
+    "List the organizations you belong to and the sites inside them, and create new sites.",
+  Overview:
+    "Headline metrics, time series, and dimension breakdowns for a site.",
   Events: "Custom events, their property breakdowns, and the live event log.",
   Errors: "JavaScript errors captured from your site, grouped by error name.",
-  Goals: "Define, measure, and manage conversion goals matched on a page path or event name.",
-  Funnels: "Build and measure multi-step conversion funnels, including step drop-off.",
-  Revenue: "Revenue totals and breakdowns from the revenue you attach to events.",
-  Performance: "Core Web Vitals for a site, over time and broken down by dimension.",
-  Sessions: "The session list and the full pageview and event timeline of one session.",
-  Users: "The identified-user list and one user's profile, activity, and sessions.",
+  Goals:
+    "Define, measure, and manage conversion goals matched on a page path or event name.",
+  Funnels:
+    "Build and measure multi-step conversion funnels, including step drop-off.",
+  Revenue:
+    "Revenue totals and breakdowns from the revenue you attach to events.",
+  Performance:
+    "Core Web Vitals for a site, over time and broken down by dimension.",
+  Sessions:
+    "The session list and the full pageview and event timeline of one session.",
+  Users:
+    "The identified-user list and one user's profile, activity, and sessions.",
   "User Traits": "Read and write the traits attached to an identified user.",
   Segments: "Saved filter sets you can apply across reports.",
   Cohorts: "Behavioral cohorts defined by the actions visitors took.",
-  Groups: "Group analytics — accounts, companies, or workspaces a user belongs to.",
-  Catalog: "The inventory of event names, event properties, and traits seen on a site, with their descriptions and verified marks.",
+  Groups:
+    "Group analytics — accounts, companies, or workspaces a user belongs to.",
+  Catalog:
+    "The inventory of event names, event properties, and traits seen on a site, with their descriptions and verified marks.",
   Bots: "Bot and AI-crawler traffic, including the per-layer detection counts.",
   Alerts: "Threshold alerts that notify you when a metric moves.",
-  Annotations: "Dated notes drawn on your dashboard charts to mark what changed.",
+  Annotations:
+    "Dated notes drawn on your dashboard charts to mark what changed.",
   Surveys: "In-product surveys and their responses.",
-  "Feature Flags": "Feature flags, their rollout rules, and flag evaluation for a given user.",
+  "Feature Flags":
+    "Feature flags, their rollout rules, and flag evaluation for a given user.",
   Experiments: "A/B experiments built on feature flags, and their results.",
   Dashboards: "Custom dashboards and the widgets on them.",
   "Custom Query": "Run read-only SQL against your site's analytics data.",
-  Reports: "Scheduled email report subscriptions, including sending one on demand.",
-  "Search Console": "Google Search Console search analytics for a connected site.",
+  Reports:
+    "Scheduled email report subscriptions, including sending one on demand.",
+  "Search Console":
+    "Google Search Console search analytics for a connected site.",
   "Uptime — Monitors": "HTTP and TCP uptime monitors and their check history.",
-  "Uptime — Channels & Incidents": "Uptime notification channels and the incidents raised against your monitors.",
-  "Retention & Journeys": "Cohort retention curves and the page-to-page paths visitors take.",
+  "Uptime — Channels & Incidents":
+    "Uptime notification channels and the incidents raised against your monitors.",
+  "Retention & Journeys":
+    "Cohort retention curves and the page-to-page paths visitors take.",
 };
 
 /* ------------------------------------------------------------------ *
@@ -158,7 +179,8 @@ const COMMON_PARAMS = [
   },
   {
     name: "time_zone",
-    description: "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+    description:
+      "IANA time zone used to bucket the range, e.g. `America/New_York`.",
     schema: { type: "string", example: "America/New_York" },
   },
   {
@@ -171,7 +193,10 @@ const COMMON_PARAMS = [
 ];
 
 /** Path params carry no entry in parameterMetadata under their raw name. */
-const PATH_PARAM_OVERRIDES: Record<string, { description: string; schema: object }> = {
+const PATH_PARAM_OVERRIDES: Record<
+  string,
+  { description: string; schema: object }
+> = {
   site: { description: "Site ID.", schema: { type: "integer" } },
 };
 
@@ -191,14 +216,24 @@ function schemaFor(name: string) {
   if (!meta) return { schema: { type: "string" }, description: undefined };
 
   const parts: string[] = [];
-  if (meta.label && !isRedundantLabel(meta.label, name)) parts.push(`${meta.label}.`);
+  if (meta.label && !isRedundantLabel(meta.label, name))
+    parts.push(`${meta.label}.`);
   if (meta.placeholder) {
-    parts.push(/^e\.g\.?\s/i.test(meta.placeholder) ? `${meta.placeholder}.` : `Example: ${meta.placeholder}.`);
+    parts.push(
+      /^e\.g\.?\s/i.test(meta.placeholder)
+        ? `${meta.placeholder}.`
+        : `Example: ${meta.placeholder}.`,
+    );
   }
   const description = parts.length ? parts.join(" ") : undefined;
 
-  if (meta.type === "number") return { schema: { type: "integer" }, description };
-  if (meta.type === "select") return { schema: { type: "string", enum: meta.options ?? [] }, description };
+  if (meta.type === "number")
+    return { schema: { type: "integer" }, description };
+  if (meta.type === "select")
+    return {
+      schema: { type: "string", enum: meta.options ?? [] },
+      description,
+    };
   return { schema: { type: "string" }, description };
 }
 
@@ -226,7 +261,8 @@ function mergeSchemas(a: any, b: any): any {
     }
     return { type: "object", properties };
   }
-  if (a.type === "array") return { type: "array", items: mergeSchemas(a.items, b.items) };
+  if (a.type === "array")
+    return { type: "array", items: mergeSchemas(a.items, b.items) };
   return a;
 }
 
@@ -234,7 +270,10 @@ function mergeSchemas(a: any, b: any): any {
 function inferSchema(value: unknown): object {
   if (Array.isArray(value)) {
     if (value.length === 0) return { type: "array", items: {} };
-    return { type: "array", items: value.map(inferSchema).reduce(mergeSchemas) };
+    return {
+      type: "array",
+      items: value.map(inferSchema).reduce(mergeSchemas),
+    };
   }
   if (value !== null && typeof value === "object") {
     const properties: Record<string, object> = {};
@@ -243,7 +282,8 @@ function inferSchema(value: unknown): object {
     }
     return { type: "object", properties };
   }
-  if (typeof value === "number") return { type: Number.isInteger(value) ? "integer" : "number" };
+  if (typeof value === "number")
+    return { type: Number.isInteger(value) ? "integer" : "number" };
   if (typeof value === "boolean") return { type: "boolean" };
   return { type: "string" };
 }
@@ -260,11 +300,7 @@ function slugify(name: string): string {
 }
 
 function operationIdFor(method: string, path: string): string {
-  const slug = path
-    .replace(/[:{}]/g, "")
-    .split("/")
-    .filter(Boolean)
-    .join("-");
+  const slug = path.replace(/[:{}]/g, "").split("/").filter(Boolean).join("-");
   return `${method.toLowerCase()}-${slug}`;
 }
 
@@ -292,7 +328,9 @@ for (const category of endpointCategories) {
 
   if (endpoints.length === 0) continue;
   if (keepSome) {
-    dropped.push(`${category.name} (${category.endpoints.length - endpoints.length} of ${category.endpoints.length})`);
+    dropped.push(
+      `${category.name} (${category.endpoints.length - endpoints.length} of ${category.endpoints.length})`,
+    );
   }
 
   const displayName = CATEGORY_DISPLAY_NAMES[category.name] ?? category.name;
@@ -300,7 +338,9 @@ for (const category of endpointCategories) {
   tags.push({
     name: tag,
     "x-group": displayName,
-    ...(CATEGORY_DESCRIPTIONS[displayName] ? { description: CATEGORY_DESCRIPTIONS[displayName] } : {}),
+    ...(CATEGORY_DESCRIPTIONS[displayName]
+      ? { description: CATEGORY_DESCRIPTIONS[displayName] }
+      : {}),
   });
 
   for (const endpoint of endpoints) {
@@ -352,6 +392,10 @@ for (const category of endpointCategories) {
         "403": { $ref: "#/components/responses/Forbidden" },
         "429": { $ref: "#/components/responses/RateLimited" },
       },
+      // The authored guides are the canonical search landing pages. Generated endpoint
+      // pages remain directly linkable and available to docs AI, but noindex prevents
+      // 100+ thin request-only pages from competing with those guides in web search.
+      "x-mint": { metadata: { noindex: true } },
     };
 
     if (endpoint.hasRequestBody && endpoint.requestBodyExample) {
@@ -397,7 +441,9 @@ const spec = {
     },
     responses: {
       Unauthorized: { description: "Missing or invalid API key." },
-      Forbidden: { description: "The key is valid but its owner cannot access this site." },
+      Forbidden: {
+        description: "The key is valid but its owner cannot access this site.",
+      },
       RateLimited: { description: "Too many requests. Retry after a pause." },
     },
   },
@@ -406,7 +452,12 @@ const spec = {
 const outPath = join(DOCS_ROOT, "openapi.json");
 await writeFile(outPath, `${JSON.stringify(spec, null, 2)}\n`);
 
-const total = endpointCategories.reduce((n: number, c: any) => n + c.endpoints.length, 0);
+const total = endpointCategories.reduce(
+  (n: number, c: any) => n + c.endpoints.length,
+  0,
+);
 console.log(`Wrote ${outPath}`);
-console.log(`Published ${published} of ${total} endpoints across ${tags.length} tags.`);
+console.log(
+  `Published ${published} of ${total} endpoints across ${tags.length} tags.`,
+);
 console.log(`Withheld: ${dropped.join(", ")}`);

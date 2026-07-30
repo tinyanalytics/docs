@@ -1,0 +1,61 @@
+---
+title: "Framer Analytics Integration"
+sidebarTitle: "Framer"
+description: "Add tinyanalytics to a Framer site by pasting the tracking snippet into Site Settings → Custom Code → End of <head> tag, then publishing."
+icon: "code"
+---
+
+To add tinyanalytics to a **Framer** site, paste the tracking snippet into the site's custom head code and publish. It applies to every page and needs no plugins.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Add the snippet to Custom Code
+
+<Steps>
+  <Step title="Open Custom Code">
+    In Framer, open **Site Settings → General**, then scroll to **Custom Code**.
+  </Step>
+  <Step title="Paste into the head">
+    Paste your tinyanalytics snippet into the **End of `<head>` tag** field:
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+    ```
+  </Step>
+  <Step title="Publish">
+    Save, then **publish** your site. Custom code only runs on the published site, not in the editor preview.
+  </Step>
+</Steps>
+
+<Tip>
+  Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+## Verify
+
+Open your **published** Framer site in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/verify-tinyanalytics-installation) for the full check.
+
+<Check>
+  Your install is working when your visit to the **published** Framer site appears in **Realtime** in your dashboard.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/install-website-analytics">
+    The universal method and other platforms.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Measure signups and clicks.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Confirm tracking works.
+  </Card>
+</Columns>

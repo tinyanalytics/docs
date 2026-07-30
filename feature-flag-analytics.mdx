@@ -1,0 +1,113 @@
+---
+title: "Feature Flag Analytics"
+sidebarTitle: "Feature flags"
+description: "Roll features out to a percentage of visitors, target audiences, and keep assignments sticky, then read each flag from your app."
+icon: "toggle-on"
+---
+
+A feature flag turns a feature on or off — or splits visitors across several variants — without shipping new code. You create the flag in tinyanalytics, then read its value in your app with `window.tinyanalytics.flag()`. Every visitor gets a **sticky, consistent assignment**: the same person sees the same thing on every visit, and you can dial a rollout from 1% to 100% whenever you're ready.
+
+```js
+if (window.tinyanalytics.flag('new-checkout')) {
+  renderNewCheckout()
+}
+```
+
+## Which kind of flag do you need?
+
+Create a flag from the **Feature flags** page and pick a type. Each answers a different question:
+
+| Flag type | Use it to… | `flag()` returns |
+| --- | --- | --- |
+| **Boolean** | switch one feature on or off, optionally for a percentage of visitors | `true` / `false` |
+| **Multivariate** | split visitors across named variants (`control`, `blue`, `green`…) | the variant key, e.g. `'blue'` |
+| **Remote config** | push a value or settings object you can change without deploying | the flag's payload |
+
+## How do I read a flag in my app?
+
+Call the flag by key, and always pass a **fallback**. The fallback keeps your app behaving sensibly if the flag is unknown or the tracker hasn't loaded yet. Which method you call depends on the flag type:
+
+<Tabs>
+  <Tab title="Boolean or multivariate">
+    `flag()` returns the assigned value — `true` / `false` for a boolean flag, or the variant key for a multivariate one.
+
+    ```js
+    const variant = window.tinyanalytics.flag('checkout-test', 'control')
+    ```
+  </Tab>
+  <Tab title="Remote config">
+    `flagPayload()` returns the flag's payload — the value or settings object you push from the dashboard.
+
+    ```js
+    const config = window.tinyanalytics.flagPayload('pricing-config', { discount: 0 })
+    ```
+  </Tab>
+  <Tab title="Every flag at once">
+    `flags()` returns every current value in one call.
+
+    ```js
+    const all = window.tinyanalytics.flags()
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+  Calling `flag()` also records that the visitor **saw** the flag — one `feature_flag_exposure` event per value, per page load. That exposure is what powers [experiments](/ab-testing-analytics), so call `flag()` at the point the visitor actually experiences the feature, not in a config file that runs on every page. `flagPayload()` and `flags()` never record an exposure.
+</Note>
+
+## How do I roll a flag out gradually?
+
+Set a **rollout percentage** from 0 to 100. At 25%, one in four visitors gets the feature — and because assignments are sticky, that same quarter keeps it as you climb to 50%, 75%, and finally 100%. For a multivariate flag, give each variant its own weight. Weights that don't add up to 100 leave the remainder on the fallback value.
+
+## How do I target specific visitors?
+
+Add **targeting rules** so a flag only applies to visitors who match. Rules read a query parameter or a [user trait](/user-identification-analytics) and compare it with one of these operators:
+
+`equals` · `not_equals` · `contains` · `starts_with` · `ends_with` · `regex`
+
+Stack rules into **condition sets** that are checked in order. The first set a visitor matches decides their assignment, and a set with no rules matches everyone. This lets you give `plan = enterprise` users the new feature outright while rolling it out to 10% of everyone else.
+
+## Why does every visitor stay on the same variant?
+
+Assignments are **deterministic**. tinyanalytics computes each visitor's bucket from a persistent visitor ID the tracker keeps in the browser, so the same inputs always produce the same result. No assignment is ever stored server-side, and it survives restarts and reloads. Two consequences worth knowing:
+
+- Each flag buckets independently, so a visitor in the 10% of one flag isn't automatically in the 10% of another.
+- Stickiness is only as durable as that browser ID. If a visitor clears their site storage, they may re-bucket. Logging in mid-session never flips a variant — identity is used for *targeting rules*, not for bucketing.
+
+## Can a flag apply to a whole account?
+
+Yes. A flag can evaluate per **account** instead of per person, so every seat in one company shares the same rollout. See [group & B2B analytics](/b2b-account-analytics) to set that up.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why did a visitor suddenly switch to a different variant?">
+    They most likely cleared their site storage. tinyanalytics buckets each visitor from a persistent visitor ID the tracker keeps in the browser, so stickiness is only as durable as that ID. If the ID is gone, the visitor may re-bucket into a different variant.
+  </Accordion>
+  <Accordion title="Does logging in change which variant a visitor sees?">
+    No. Logging in mid-session never flips a variant. tinyanalytics uses identity for *targeting rules*, not for bucketing — bucketing comes from the persistent browser visitor ID.
+  </Accordion>
+  <Accordion title="Does calling flag() send an event to tinyanalytics?">
+    Yes. `window.tinyanalytics.flag()` records one `feature_flag_exposure` event per value, per page load, proving the visitor saw the flag. That exposure is what powers [experiments](/ab-testing-analytics). `flagPayload()` and `flags()` never record an exposure.
+  </Accordion>
+  <Accordion title="If a visitor is in the 10% rollout of one flag, are they in the 10% of another?">
+    No. Each flag buckets independently in tinyanalytics, so membership in one flag's rollout says nothing about another's.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Experiments" icon="flask" href="/ab-testing-analytics">
+    Turn a flag into an A/B test with a goal.
+  </Card>
+  <Card title="Identify users" icon="user" href="/user-identification-analytics">
+    Set the traits your targeting rules read.
+  </Card>
+  <Card title="Group & B2B analytics" icon="building" href="/b2b-account-analytics">
+    Roll a flag out by account, not by person.
+  </Card>
+  <Card title="Custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Measure what visitors do with the feature.
+  </Card>
+</Columns>

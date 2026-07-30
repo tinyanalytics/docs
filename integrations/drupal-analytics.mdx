@@ -1,0 +1,63 @@
+---
+title: "Drupal Analytics Integration"
+sidebarTitle: "Drupal"
+description: "Add tinyanalytics to a Drupal site by placing the tracking snippet in your theme's html.html.twig head, or use a no-code option like Google Tag Manager."
+icon: "drupal"
+---
+
+To add tinyanalytics to a **Drupal** site, add the tracking snippet to the `<head>` of your theme's `html.html.twig` template so it renders on every page. If you'd rather not edit a template, use a no-code option like Google Tag Manager.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Option 1 — Add the snippet to your theme
+
+Copy `html.html.twig` from your theme (or the system default) into your **custom or sub-theme** at `templates/html.html.twig`, then add the tag inside `<head>`:
+
+```twig templates/html.html.twig
+<head>
+  <head-placeholder token="{{ placeholder_token }}">
+  <title>{{ head_title|safe_join(' | ') }}</title>
+  <script defer src="https://dash.tinyanalytics.io/script.js"
+    data-site-id="YOUR_SITE_ID"></script>
+  <css-placeholder token="{{ placeholder_token }}">
+  <js-placeholder token="{{ placeholder_token }}">
+</head>
+```
+
+Clear the render cache (**Configuration → Performance → Clear all caches**) after editing.
+
+<Warning>
+  Edit a **custom or sub-theme**, never a contrib theme's files directly — theme updates would overwrite your change. Replace `YOUR_SITE_ID` with your real site ID.
+</Warning>
+
+## Option 2 — Google Tag Manager (no code)
+
+If you already run Google Tag Manager on your Drupal site, add tinyanalytics as a Custom HTML tag there instead of editing templates. See [Install with Google Tag Manager](/integrations/google-tag-manager-analytics).
+
+## Verify
+
+Open your Drupal site in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/verify-tinyanalytics-installation) for the full check.
+
+<Check>
+  Your install is working when your own visit appears in **Realtime** in your dashboard.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Install with Google Tag Manager" icon="google" href="/integrations/google-tag-manager-analytics">
+    The no-code route for any CMS.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Measure signups and clicks.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Confirm tracking works.
+  </Card>
+</Columns>

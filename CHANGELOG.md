@@ -7,7 +7,32 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Added
+
+- **Product coverage sync through `f5dd577` (2026-07-30):** added complete guides for first-touch
+  **User acquisition**, site and organization **Ask AI**, and **Billing and plans**. The new pages
+  document exact metric scopes, audience and permission boundaries, approval-gated AI writes,
+  conversation/credit behavior, the 14-day Business trial, pageview metering, and read-time
+  retention without deletion. All three are linked from the main navigation and landing page.
+- **Copyable AI integration prompt (2026-07-30):** added a self-contained Mintlify `Prompt` that
+  tells a coding assistant to use the supplied official docs, preserve framework conventions, keep
+  keys out of browser code, and verify the first pageview without relying on an unresolved docs URL.
+
 ### Changed
+
+- **Completed the authored-page SEO migration (2026-07-30):** renamed 107 routes so each URL and
+  H1 states one clear search intent, added concise sidebar labels and unique descriptions capped at
+  155 characters, updated every internal link and navigation entry, and added direct permanent
+  redirects for both current and legacy `/guides` URLs. Set the canonical base URL to
+  `https://tinyanalytics.io/docs`, made the eight authored API guides indexable, preserved
+  `noindex` on all 148 generated operations, and added a migration regression audit.
+- **Enriched product reference pages (2026-07-30):** expanded the metric glossary with acquisition,
+  conversion, events-per-session, and revenue definitions; distinguished in-product Ask AI from
+  using the public docs with an external assistant; updated Anthropic BYOK coverage; documented
+  partial-success CSV exports; and added the shipped scheduled-report and alert email context.
+- **Corrected contributor guardrails (2026-07-30):** replaced the stale rotating-identity wording
+  with the persistent server-derived cookieless model, and aligned API-key guidance with the shipped
+  key-owner contract for server-side ingestion, analytics reads, and site management.
 - **Aligned brand positioning and privacy copy (2026-07-28):** centered the public docs on
   “Understand your traffic and your product without tracking people,” added the shipped AI discovery
   and natural-language analysis story, replaced the generic repository README, and updated the
@@ -24,7 +49,7 @@ project adheres to semantic versioning where practical.
 - **Completed Mintlify SEO configuration (2026-07-27):** added a global, benefit-bearing site
   description; explicitly indexed navigable pages; set Open Graph locale/site-name, Twitter card,
   author, and theme-color metadata; and configured the structured-data publisher organization as
-  **tinyanalytics**. Canonical URLs remain Mintlify-generated until the final docs domain is confirmed.
+  **tinyanalytics**. The production canonical base was added after the docs URL was confirmed.
 - **Updated documentation branding (2026-07-27):** changed the primary accent to `#006420` in
   light mode and `#009B32` in dark mode, and set Inter as the site-wide font.
 - **Flattened the main documentation routes (2026-07-27):** removed the separate `guides/`
@@ -42,9 +67,9 @@ project adheres to semantic versioning where practical.
     **trend chart**, the **first-party join** (your sessions/pageviews and entry-page bounce/engaged next
     to Google's metrics on Pages/Countries/Devices; Queries stays Google-only), row **drill-down**, **CSV
     export**, and **Pacific-day** windows (Last 7 / 28 / 90 days, default 28, ending ~2 days ago).
-  - `sql-query-builder` — documented **Ask AI** natural-language → SQL generation, the per-plan
-    monthly limits (Free 20, Growth 500, Business unlimited), and that generated SQL runs through the
-    same read-only guard.
+  - `sql-query-builder` — documented **Ask AI** natural-language → SQL generation, the then-current
+    per-plan monthly limits, and that generated SQL runs through the same read-only guard. Current
+    allowances live in `billing-plans`.
   - `account-settings` — added the **dashboard language** section (7 locales: English, German,
     Spanish, French, Portuguese, Japanese, Turkish; per-browser, instant) and the **Anthropic API key**
     (BYOK) card that bypasses the AI-query limit.
@@ -65,6 +90,7 @@ project adheres to semantic versioning where practical.
     shared-network (CGNAT) false-positive protection.
 
 ### Fixed
+
 - **Product-sync pass (2026-07-20):** audited the 15 product commits landed since the docs last
   captured product facts (`4ee8613` onward) and corrected six pages that had become **factually
   wrong**. These were verified against migrations, schema, and component source — not commit
@@ -88,6 +114,7 @@ project adheres to semantic versioning where practical.
     comparison is unavailable on this report.
 
 ### Added
+
 - **Stripe revenue guide (2026-07-27):** added `stripe-revenue` with restricted-key and manual
   webhook setup, source tabs, charge/refund/dispute semantics, attribution, double-count prevention,
   connection verification, and privacy boundaries. Extended the Revenue, site settings, SQL,
@@ -121,7 +148,7 @@ project adheres to semantic versioning where practical.
     two states (unset ⇒ browser zone for the dashboard and UTC for reports; set ⇒ canonical for the
     whole team), the historical re-bucketing warning, and that **alerts are unaffected** because
     their windows roll from the current moment. Cross-linked from dashboard-overview, scheduled-reports,
-    retention, users, and alerts. *No standalone `timezone` page:* one home to keep current
+    retention, users, and alerts. _No standalone `timezone` page:_ one home to keep current
     beats five places to drift.
   - **Multi-host page identity / URL mode** (0181) — the **URLs** tab in `pages`, the
     multi-host banner, `?pagesMode=url` persistence in shared links, host-aware Entries/Exits, and
@@ -167,6 +194,7 @@ project adheres to semantic versioning where practical.
   Note: the two trees are duplicates — edit both when a skill changes.
 
 ### Changed
+
 - **Mintlify component & GEO pass (2026-07-19)** across 95 pages, grounded in Mintlify's official
   component contracts and style guide. The prose was already accurate and second-person; this pass
   addressed structure, which was the actual gap — the docs used 5 of Mintlify's ~25 components.
@@ -235,6 +263,7 @@ project adheres to semantic versioning where practical.
   out-of-scope guardrails.
 
 ### Added
+
 - Two integration guides closing gaps from the Rybbit-docs analysis: `integrations/wix.mdx` (Wix Custom
   Code → Head, with Premium-plan gating noted) and `integrations/woocommerce.mdx` (WordPress header method
   plus a purchase-tracking section — a custom event with `revenue`/`currency` on the order-received page).
@@ -313,7 +342,7 @@ project adheres to semantic versioning where practical.
   half (snippet, `data-site-id`, SPA-on-by-default) identical to the tracking-script docs and adds
   platform-specific placement. Build validates with zero broken links.
 - Phase 3 (second wave) "Accounts & access" documentation pages, sourced from the wiki decision
-  records (0071, 0072, 0073, 0074, 0075, 0083, 0087) and documenting the *current* converged behavior
+  records (0071, 0072, 0073, 0074, 0075, 0083, 0087) and documenting the _current_ converged behavior
   where later decisions superseded earlier ones (multi-org switching, emailed invitations, teams as
   the sole site-access mechanism): `account-settings.mdx`, `organizations.mdx`,
   `teams.mdx`, `roles.mdx` (with a full owner/admin/member permission matrix), and

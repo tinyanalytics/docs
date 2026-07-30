@@ -1,6 +1,7 @@
 ---
-title: "Introduction"
-description: "Understand your traffic and product without analytics cookies. tinyanalytics combines web and product analytics, AI discovery, revenue, experiments, and monitoring in one hosted platform."
+title: "Privacy-Friendly Web and Product Analytics"
+sidebarTitle: "Introduction"
+description: "Understand traffic and product behavior without analytics cookies using hosted web analytics, product analytics, AI, revenue, and monitoring."
 icon: "book-open"
 ---
 
@@ -14,57 +15,92 @@ No cookies. Just insights.
 
 tinyanalytics connects four jobs from a single tracking script:
 
-- **Web analytics** — pageviews, sessions, top pages, sources and channels, countries, devices, journeys, retention, funnels, and goals.
+- **Web analytics** — pageviews, sessions, top pages, sources and channels, first-touch user acquisition, countries, devices, journeys, retention, funnels, and goals.
 - **Product analytics** — custom events, user identification, feature flags, A/B experiments, surveys, behavioral cohorts, revenue, and B2B group analytics.
-- **AI discovery and acquisition** — AI referral traffic, AI crawlers, search performance, bots, and campaign attribution.
+- **AI analysis and discovery** — ask questions across one site or an organization, create supported reports with approval, measure AI referral traffic and crawlers, and connect search performance to on-site behavior.
 - **Monitoring and automation** — uptime checks, scheduled reports, and alerts to email, Slack, Discord, or a webhook.
 
 ## How is tinyanalytics private by default?
 
 Core anonymous analytics counts visitors without cookies or a stored browser ID. The server derives a short, one-way identifier from each request, and it never writes the raw IP address to your analytics data.
 
-Because no browser ID keeps anonymous identity stable, visitor counts are close estimates rather than exact figures. Use [`identify()`](/identify-users) to attach your own stable user IDs when you need cross-device accuracy for signed-in users. See [how tinyanalytics works](/how-it-works) for the full mechanism.
+Because no browser ID keeps anonymous identity stable, visitor counts are close estimates rather than exact figures. Use [`identify()`](/user-identification-analytics) to attach your own stable user IDs when you need cross-device accuracy for signed-in users. See [how tinyanalytics works](/how-tinyanalytics-works) for the full mechanism.
 
 <Note>
-  Optional product features can use browser storage for a specific purpose: `identify()` persists the ID you provide, feature flags keep assignments sticky, groups retain account associations, surveys respect wait periods and completed prompts, and opt-out stores a disabled marker. See [Privacy & GDPR](/resources/privacy) for the details.
+  Optional product features can use browser storage for a specific purpose:
+  `identify()` persists the ID you provide, feature flags keep assignments
+  sticky, groups retain account associations, surveys respect wait periods and
+  completed prompts, and opt-out stores a disabled marker. See [Privacy &
+  GDPR](/resources/privacy-friendly-analytics-gdpr) for the details.
 </Note>
 
 ## Frequently asked questions
 
 <AccordionGroup>
   <Accordion title="Do I need a cookie banner to use tinyanalytics?">
-    Core anonymous analytics sets no cookies and does not store an analytics ID in the browser. Whether you need consent still depends on your jurisdiction, the optional features you enable, and the data you send. Review [Privacy & GDPR](/resources/privacy) for the browser-storage details.
+    Core anonymous analytics sets no cookies and does not store an analytics ID
+    in the browser. Whether you need consent still depends on your jurisdiction,
+    the optional features you enable, and the data you send. Review [Privacy &
+    GDPR](/resources/privacy-friendly-analytics-gdpr) for the browser-storage details.
   </Accordion>
   <Accordion title="How accurate is cookieless visitor counting?">
-    It is a close estimate, not an exact figure. Several people sharing one network and browser can collapse into a single visitor, and one person switching from Wi-Fi to mobile data can be counted twice. Every cookieless tool shares this trade. Call [`identify()`](/identify-users) to attach your own user IDs when you need exact, cross-device counts for signed-in users.
+    It is a close estimate, not an exact figure. Several people sharing one
+    network and browser can collapse into a single visitor, and one person
+    switching from Wi-Fi to mobile data can be counted twice. Every cookieless
+    tool shares this trade. Call [`identify()`](/user-identification-analytics) to attach your
+    own user IDs when you need exact, cross-device counts for signed-in users.
   </Accordion>
   <Accordion title="Can I move my data over from Google Analytics?">
-    Yes. tinyanalytics imports historical data from Google Analytics 4, Plausible, Umami, and Simple Analytics, so your reports keep their history. See [migrate to tinyanalytics](/migrate).
+    Yes. tinyanalytics imports historical data from Google Analytics 4,
+    Plausible, Umami, and Simple Analytics, so your reports keep their history.
+    See [migrate to tinyanalytics](/migrate-analytics-data-to-tinyanalytics).
   </Accordion>
   <Accordion title="Do I need a separate tool for product analytics?">
-    No. The same platform covers web analytics, custom events, feature flags, experiments, surveys, cohorts, revenue, B2B groups, and monitoring.
+    No. The same platform covers web analytics, custom events, feature flags,
+    experiments, surveys, cohorts, revenue, B2B groups, and monitoring.
   </Accordion>
   <Accordion title="What makes tinyanalytics AI-native?">
-    tinyanalytics treats AI as both an acquisition channel and an analysis interface. Measure AI referrals and crawlers, then use natural-language questions to explore your own analytics data with the [SQL query builder](/sql-query-builder).
+    tinyanalytics treats AI as both an acquisition channel and an analysis
+    interface. Measure AI referrals and crawlers, then use [Ask AI](/ai-analytics-assistant) to
+    question one site or your whole organization in plain language. Answers are
+    grounded in the same report services as the dashboard, and supported write
+    actions require your approval. You can also generate reviewable site-scoped
+    SQL with the [SQL query builder](/sql-analytics-query-builder).
   </Accordion>
 </AccordionGroup>
 
 ## Start here
 
 <Columns cols={2}>
-  <Card title="Quickstart" icon="rocket" href="/quickstart">
-    Add your site, install the script, and see your first visit in under five minutes.
+  <Card title="Quickstart" icon="rocket" href="/tinyanalytics-quickstart">
+    Add your site, install the script, and see your first visit in under five
+    minutes.
   </Card>
-  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-it-works">
-    Follow a page visit from the tracking script to your dashboard, cookielessly.
+  <Card
+    title="How tinyanalytics works"
+    icon="diagram-project"
+    href="/how-tinyanalytics-works"
+  >
+    Follow a page visit from the tracking script to your dashboard,
+    cookielessly.
   </Card>
-  <Card title="Install the tracking script" icon="code" href="/tracking-script">
+  <Card title="Install the tracking script" icon="code" href="/install-tinyanalytics-tracking-script">
     Add one script tag to your site's HTML to start collecting data.
   </Card>
-  <Card title="Track custom events" icon="cursor-click" href="/custom-events">
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
     Measure signups, purchases, and the clicks that matter to you.
   </Card>
-  <Card title="Measure AI traffic" icon="sparkles" href="/ai-traffic">
+  <Card title="Measure AI traffic" icon="sparkles" href="/ai-referral-traffic-analytics">
     See which AI assistants send visitors and what those visitors do.
+  </Card>
+  <Card title="Ask AI" icon="comments" href="/ai-analytics-assistant">
+    Explore a site or your whole organization in plain language.
+  </Card>
+  <Card
+    title="Understand user acquisition"
+    icon="user-plus"
+    href="/user-acquisition-analytics"
+  >
+    Find the first source that acquired each new or returning user.
   </Card>
 </Columns>

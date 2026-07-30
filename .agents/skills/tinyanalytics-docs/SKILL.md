@@ -19,9 +19,11 @@ frontmatter fields, CLI, deploy) live in the sibling `mintlify` skill
 ## What you are documenting
 
 tinyanalytics is **privacy-friendly, cookieless web + product analytics**,
-offered as a **hosted service** at `dash.tinyanalytics.io`. Visitors are counted
-with a rotating, unstored hash — no cookies, no cookie banner, no cross-site
-tracking. It covers web analytics (overview, pages, sessions, users, journeys,
+offered as a **hosted service** at `dash.tinyanalytics.io`. For anonymous web
+analytics, the server derives a persistent, site-scoped, one-way ID from request
+signals; it does not write the raw IP address to analytics data or store a browser
+analytics ID. Anonymous user counts are therefore estimates, and `identify()` is
+the stable model for signed-in users. It covers web analytics (overview, pages, sessions, users, journeys,
 retention, funnels, goals) and product analytics (feature flags, experiments,
 surveys, cohorts, group/B2B analytics, revenue), plus uptime monitoring, alerts,
 scheduled reports, shortlinks, and GA4/Plausible/Umami import.
@@ -56,8 +58,8 @@ Never document:
 
 - **Self-hosting or installation of the platform** — no Docker, `setup.sh`,
   environment variables, SMTP/SES setup, backups, upgrades, or reverse-proxy
-  *for running tinyanalytics*. (The proxy guide for *tracking through your own
-  domain* is fine — that is a cloud-customer feature.)
+  _for running tinyanalytics_. (The proxy guide for _tracking through your own
+  domain_ is fine — that is a cloud-customer feature.)
 - **The admin console or operator internals** — system-admin promotion, email
   diagnostics, instance ops. Internal only.
 - **Unshipped features** — session replay is explicitly excluded by design
@@ -67,22 +69,24 @@ Never document:
 
 Security-sensitive precision:
 
-- **API keys authenticate ingestion (`/api/track`) only** — never present them
-  as auth for read/analytics endpoints (those use the session; decision 0093).
+- **API keys authenticate programmatic customer access** — server-side ingestion,
+  analytics reads, and site management. Reads and management use the key owner's
+  existing organization/team permissions (decision 0096). Browser tracking is
+  intentionally keyless; never put an API key in browser code.
 
 ## Terminology
 
-| Use | Not | Notes |
-| --- | --- | --- |
-| tinyanalytics (lowercase) | TinyAnalytics, Tiny Analytics | Even at sentence start |
-| site | website, property, project | A tracked website/app |
-| organization | workspace, account (for the org) | Top-level tenant |
-| team | group (for access) | Site-access unit inside an org |
-| custom event | track event, action | `type: "custom_event"` |
-| identify | login tracking, user stitching | `identify(userId)` |
-| cookieless identity | fingerprinting | Explain the mechanism; never call it fingerprinting without the rotation/unstored context |
-| tracking script / snippet | pixel, tag | Served at `/script.js` |
-| dashboard | console, panel | The web app |
+| Use                       | Not                              | Notes                                                                                                                   |
+| ------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| tinyanalytics (lowercase) | TinyAnalytics, Tiny Analytics    | Even at sentence start                                                                                                  |
+| site                      | website, property, project       | A tracked website/app                                                                                                   |
+| organization              | workspace, account (for the org) | Top-level tenant                                                                                                        |
+| team                      | group (for access)               | Site-access unit inside an org                                                                                          |
+| custom event              | track event, action              | `type: "custom_event"`                                                                                                  |
+| identify                  | login tracking, user stitching   | `identify(userId)`                                                                                                      |
+| cookieless identity       | browser fingerprinting           | Explain the server-derived one-way ID, its estimate limits, and that raw IP addresses are not written to analytics data |
+| tracking script / snippet | pixel, tag                       | Served at `/script.js`                                                                                                  |
+| dashboard                 | console, panel                   | The web app                                                                                                             |
 
 ## Voice
 
@@ -92,7 +96,7 @@ Primary **Sage** (truthful, evidence-led, explains the mechanism), secondary
 - Clear, not clever. No puns in headings.
 - Plain-spoken, not dumbed-down. Explain how it works; respect the reader.
 - Honest, not hype. State limits in the page (e.g. "click-throughs only — not
-  crawler ingestion"). Because users cannot read the source, honesty *is* the
+  crawler ingestion"). Because users cannot read the source, honesty _is_ the
   trust story.
 - Concrete, not abstract. "< 6.5 KB gzipped", not "lightweight".
 - Second person, active voice, sentence case (see the mintlify skill for the

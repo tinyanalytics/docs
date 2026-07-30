@@ -1,0 +1,133 @@
+---
+title: "Analytics Site Settings"
+sidebarTitle: "Site settings"
+description: "Manage a tinyanalytics site: its name, reporting settings, Stripe integration, visibility, traffic exclusions, organization, and deletion."
+icon: "gear"
+---
+
+Every site has its own **Settings**, reached from the site's sidebar. This is where you rename the site, set reporting defaults, manage integrations, control visibility and collection, move the site to another organization, or delete it.
+
+## Site details
+
+Set the site's **name** (how it appears in your dashboard) and its **domain** — or, for a [mobile app](/integrations/react-native-analytics) site, its app identifier. The domain is a label for your own reference; tracking works by site ID, not by matching the domain.
+
+## Which currency are my reports shown in?
+
+Under **Revenue**, choose the currency your reports are shown in. Revenue events are stored in whatever currency they're sent in, then converted to this reporting currency when a report is read. See [Revenue analytics](/revenue-analytics) for how sending and conversion work.
+
+## Which integrations can I manage?
+
+Open **Settings → Integrations** to connect services that send or enrich site data. The Stripe integration receives server-verified charges, refunds, and lost disputes through a webhook. Its status shows the masked key fingerprint, test or live mode, webhook mode and endpoint health, connection date, and last received event.
+
+Use a least-privilege Stripe restricted key — never a secret key. See [Connect Stripe revenue](/stripe-revenue-analytics) for permissions, setup, attribution, and verification.
+
+## Which timezone are my reports based on?
+
+Your site's **reporting timezone**, set under **Timezone** on the General tab, decides where each day starts and ends — for charts, date presets, and [scheduled reports](/scheduled-analytics-reports). Pick a zone in the **Reporting timezone** field. Only owners and admins can change it.
+
+A site can be in one of two states:
+
+| Reporting timezone | Dashboard days start | Scheduled reports run on |
+| --- | --- | --- |
+| **Not set** | each viewer's own browser time zone | UTC |
+| **Set** | the chosen zone, for everyone on the team | the chosen zone |
+
+Setting a zone makes it canonical for the whole team, so two teammates in different countries read the same daily totals. Sites created in the dashboard start with the creator's browser time zone already filled in; sites created through the API start with no zone set.
+
+<Warning>
+  **Changing the reporting timezone re-buckets your historical charts.** Past daily totals and chart shapes can shift, because days are grouped by different boundaries. Your stored event data is never altered — only how it's grouped into days. tinyanalytics asks you to confirm before applying the change.
+</Warning>
+
+<Note>
+  [Alerts](/analytics-alerts) are unaffected. They watch a rolling window that ends at the current moment, so they never depend on where a day begins.
+</Note>
+
+## Who can see my dashboard?
+
+The **Public Dashboard** toggle controls who can see your analytics. Off (the default) keeps the dashboard private to your team; on makes it viewable by anyone with the link. For a shareable link that doesn't make everything public, use a private link instead — see [public dashboards](/public-analytics-dashboards) and [embedding a dashboard](/embed-analytics-dashboard).
+
+## Tracking and exclusions
+
+Two tabs shape what data comes in:
+
+- **Tracking** — the [tracking snippet](/install-tinyanalytics-tracking-script) and its [configuration options](/configure-tinyanalytics-tracking-script).
+- **Exclusions** — drop traffic you don't want counted, by IP, country, path, hostname, or user agent, and toggle bot blocking. The same tab holds **Referrer Exclusions**, which reclassify a referrer as Direct instead of dropping the visit. See [exclude traffic](/exclude-traffic-from-analytics).
+
+You can also **import** historical data on the Import tab — see the [migration overview](/migrate-analytics-data-to-tinyanalytics).
+
+## Move a site to another organization
+
+You can move a site — with all its history — into another [organization](/analytics-organizations-members) you also run, without help from support. The site keeps its ID, so its data moves with it.
+
+<Steps>
+  <Step title="Open the General tab">
+    In the site's **Settings → General**, find the **Move to another organization** card.
+  </Step>
+  <Step title="Pick the destination">
+    Choose a target organization from the dropdown. It lists only organizations where you're an owner or admin, excluding the site's current one.
+  </Step>
+  <Step title="Confirm the move">
+    Click **Move site** and confirm in the dialog.
+  </Step>
+</Steps>
+
+<Warning>
+  Moving a site **clears its team-access grants**. Members of the old organization who aren't in the destination organization will lose access to the site. You need to be an **owner or admin of both** the source and the destination organization. The move is reversible — move it back the same way.
+</Warning>
+
+## Verify the move
+
+<Check>
+  The move is complete when the site appears under the destination organization with its existing history. Reapply any team-based access the site needs in the destination organization.
+</Check>
+
+## How do I delete a site?
+
+The **Danger Zone** deletes a site and its data permanently. tinyanalytics asks you to confirm. If you only want to stop collecting for a while, remove the [tracking snippet](/install-tinyanalytics-tracking-script) from your site instead of deleting.
+
+<Danger>
+  Deleting a site removes the site and all of its data permanently. This can't be undone.
+</Danger>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does changing a site's domain break my tracking?">
+    No. The domain is a label for your own reference — tracking works by **site ID**, not by matching the domain. You can rename the site and change its domain in **Settings** without touching the [tracking snippet](/install-tinyanalytics-tracking-script).
+  </Accordion>
+  <Accordion title="Can I move a tinyanalytics site to another organization?">
+    Yes, with all its history, from the site's **Settings → General**. You need to be an **owner or admin of both** the source and destination organization. The site keeps its ID, and the move is reversible — move it back the same way.
+  </Accordion>
+  <Accordion title="What happens to team access when I move a site?">
+    Moving a site **clears its team-access grants**. Members of the old organization who aren't in the destination organization lose access to the site. See [organizations & members](/analytics-organizations-members) for how access is granted.
+  </Accordion>
+  <Accordion title="What happens if I change my site's reporting timezone?">
+    Your historical charts re-bucket to the new zone's day boundaries, so past daily totals and chart shapes can shift. The stored event data is unchanged — only how it's grouped into days. [Scheduled reports](/scheduled-analytics-reports) also start running on the new zone's boundaries. tinyanalytics asks you to confirm before applying the change.
+  </Accordion>
+  <Accordion title="What timezone does tinyanalytics use if I never set one?">
+    Each viewer sees dates in their own browser time zone, so "today" means their today, and [scheduled reports](/scheduled-analytics-reports) run on UTC. Setting a **Reporting timezone** on the site's **Settings → General** tab replaces both with one zone that's canonical for the whole team.
+  </Accordion>
+  <Accordion title="How do I stop collecting data without deleting my site?">
+    Remove the [tracking snippet](/install-tinyanalytics-tracking-script) from your website. Deleting the site in the **Danger Zone** removes the site and its data permanently and can't be undone, so removing the snippet is the reversible option.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Exclude traffic" icon="filter-circle-xmark" href="/exclude-traffic-from-analytics">
+    Keep bots and internal visits out of your stats.
+  </Card>
+  <Card title="Public dashboards" icon="share-nodes" href="/public-analytics-dashboards">
+    Share your dashboard by link.
+  </Card>
+  <Card title="Organizations & members" icon="building" href="/analytics-organizations-members">
+    How sites are grouped and who can access them.
+  </Card>
+  <Card title="Revenue analytics" icon="dollar-sign" href="/revenue-analytics">
+    Set your reporting currency.
+  </Card>
+  <Card title="Connect Stripe" icon="credit-card" href="/stripe-revenue-analytics">
+    Receive verified charges and refunds.
+  </Card>
+</Columns>

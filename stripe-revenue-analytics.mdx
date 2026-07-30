@@ -1,0 +1,126 @@
+---
+title: "Stripe Revenue Analytics Integration"
+sidebarTitle: "Stripe revenue"
+description: "Connect Stripe to tinyanalytics with a restricted key and measure verified charges, refunds, and lost disputes alongside your web analytics."
+icon: "credit-card"
+---
+
+The Stripe revenue analytics integration brings server-verified charges, refunds, and lost disputes into your Revenue report. When analytics IDs match, tinyanalytics attributes each payment adjustment to a session or identified user.
+
+## Before you connect
+
+Create a Stripe **restricted key** that starts with `rk_live_` or `rk_test_`. Grant only:
+
+- **Webhook Endpoints: Write**
+- **Charges: Read**
+- **Refunds: Read**
+
+Test-mode restricted keys are supported.
+
+<Warning>
+  Never paste a Stripe secret key (`sk_…`) into tinyanalytics. The integration rejects secret keys. Use a least-privilege restricted key and keep it private.
+</Warning>
+
+## Connect Stripe
+
+<Steps>
+  <Step title="Open the integration">
+    In your site, open **Settings → Integrations**, find **Stripe**, and select **Connect**.
+  </Step>
+  <Step title="Enter the restricted key">
+    Paste the restricted key you created in Stripe. Turn on **Email fallback** only if you want tinyanalytics to match a charge's customer email to an already identified user when no analytics ID is present.
+  </Step>
+  <Step title="Save the connection">
+    tinyanalytics validates the key and creates the webhook automatically when the key has **Webhook Endpoints: Write** access.
+  </Step>
+</Steps>
+
+Connecting Stripe also adds `stripe.com` to the site's [referrer exclusions](/exclude-traffic-from-analytics#how-do-i-stop-a-referrer-from-showing-up-as-a-referral), so a return from Stripe does not start a new acquisition session.
+
+## Set up the webhook manually
+
+If the restricted key cannot create webhook endpoints, tinyanalytics shows a webhook URL and accepts a signing secret instead:
+
+<Steps>
+  <Step title="Create the Stripe webhook">
+    In Stripe, open **Developers → Webhooks**, add the URL shown by tinyanalytics, and listen for `charge.succeeded`, `refund.created`, `refund.failed`, and `charge.dispute.closed`.
+  </Step>
+  <Step title="Copy the signing secret">
+    Reveal the new endpoint's signing secret in Stripe. It starts with `whsec_`.
+  </Step>
+  <Step title="Finish the connection">
+    Paste the signing secret into tinyanalytics and save.
+  </Step>
+</Steps>
+
+## What appears in the Revenue report?
+
+The report separates revenue into three tabs:
+
+| Tab | Contains |
+| --- | --- |
+| **All** | client revenue events and Stripe revenue together |
+| **Client events** | revenue sent with [`event()`](/revenue-analytics#choose-a-revenue-source) or the Tracking API |
+| **Stripe** | server-verified charges, refunds, and lost disputes |
+
+Stripe charges add revenue. Refunds and lost disputes subtract revenue. A failed refund restores the amount that an earlier refund event subtracted.
+
+The Stripe view includes **Total Revenue, Net Revenue, Refunds, Avg. Order Value, Paying Sessions,** and **Orders**. Net revenue subtracts refunds and lost disputes; it does not subtract Stripe fees, taxes, or other accounting costs.
+
+<Warning>
+  tinyanalytics does not deduplicate a purchase reported by both your client event and Stripe. If both sources record the same sale, **All** counts it twice. Use the **Stripe** tab as your source of truth, or stop sending the duplicate client revenue event.
+</Warning>
+
+## How does Stripe attribution work?
+
+tinyanalytics checks Stripe metadata for `ta_session_id`, `ta_user_id`, or `ta_identified_user_id`. It can resolve that metadata from the charge, payment intent, or Checkout Session. When an analytics ID matches, the payment is tied to the corresponding session or user.
+
+If **Email fallback** is on, tinyanalytics can also match the charge email to a user you previously identified. The email is used during matching and is not written to the analytics event store.
+
+<Note>
+  Stripe data starts when you connect the integration. tinyanalytics does not backfill historical payments. Disconnecting stops new Stripe events but keeps the revenue already collected.
+</Note>
+
+## Where does Stripe revenue apply?
+
+Stripe revenue appears in the Revenue report and in `scoped_stripe_revenue` queries. [Goals](/conversion-goal-tracking), [funnels](/funnel-analytics), [experiments](/ab-testing-analytics), and [revenue alerts](/analytics-alerts) currently use client revenue events only.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I connect Stripe with a test-mode key?">
+    Yes. Both `rk_test_…` and `rk_live_…` restricted keys are supported. The connection status shows whether the key is in test or live mode.
+  </Accordion>
+  <Accordion title="Does connecting Stripe import my old payments?">
+    No. Collection starts when the connection is active; tinyanalytics does not backfill historical Stripe payments.
+  </Accordion>
+  <Accordion title="What happens when I disconnect Stripe?">
+    New Stripe events stop entering tinyanalytics, while the revenue already collected remains in your reports.
+  </Accordion>
+  <Accordion title="Does net revenue subtract Stripe fees?">
+    No. Net revenue is gross charge revenue minus refunds and lost disputes. It does not subtract Stripe fees, taxes, or other accounting costs.
+  </Accordion>
+</AccordionGroup>
+
+## Verify
+
+<Check>
+  The integration is working when **Settings → Integrations → Stripe** shows a connected key, webhook status, and a recent **Last event** time after a test or live charge. Open **Revenue → Stripe** and confirm the charge appears; issue a test refund if you also want to verify negative adjustments.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Revenue analytics" icon="dollar-sign" href="/revenue-analytics">
+    Compare client events and Stripe revenue.
+  </Card>
+  <Card title="Site settings" icon="gear" href="/analytics-site-settings">
+    Find the site's Integrations and Revenue settings.
+  </Card>
+  <Card title="SQL query builder" icon="database" href="/sql-analytics-query-builder">
+    Query raw, signed Stripe revenue rows.
+  </Card>
+  <Card title="How your data is handled" icon="server" href="/resources/analytics-data-handling">
+    See what the Stripe integration stores.
+  </Card>
+</Columns>

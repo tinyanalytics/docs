@@ -1,0 +1,120 @@
+---
+title: "Identify Users API"
+sidebarTitle: "Identify API"
+description: "Attach a stable user ID and traits with POST /api/identify, then connect the visitor's recent anonymous events to that identified user."
+icon: "user"
+
+---
+
+`POST /api/identify` associates a visitor with a **stable user ID** of your choosing — a database ID, an email hash — and optionally stores **traits** describing them. tinyanalytics backfills that ID onto the visitor's recent events, so their history ties together the moment they sign in. Like tracking, it returns **`204 No Content`**.
+
+```
+POST https://dash.tinyanalytics.io/api/identify
+```
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://dash.tinyanalytics.io/api/identify \
+  -H "Content-Type: application/json" \
+  -d '{
+    "siteId": 1,
+    "userId": "user_8f3a",
+    "traits": { "plan": "pro", "company": "Acme" }
+  }'
+```
+
+```js JavaScript
+await fetch("https://dash.tinyanalytics.io/api/identify", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    siteId: 1,
+    userId: "user_8f3a",
+    traits: { plan: "pro", company: "Acme" },
+  }),
+})
+```
+
+```python Python
+import requests
+
+requests.post(
+    "https://dash.tinyanalytics.io/api/identify",
+    json={
+        "siteId": 1,
+        "userId": "user_8f3a",
+        "traits": {"plan": "pro", "company": "Acme"},
+    },
+)
+```
+
+</CodeGroup>
+
+## Fields
+
+<ParamField body="siteId" type="number" required>
+  Your numeric site ID.
+</ParamField>
+
+<ParamField body="userId" type="string" required>
+  Your stable ID for the user, up to 255 characters.
+</ParamField>
+
+<ParamField body="traits" type="object">
+  Key/value attributes, up to 2 KB serialized. A `null` value **deletes** that trait.
+</ParamField>
+
+<ParamField body="isNewIdentify" type="boolean">
+  Defaults to `true`. Send `false` to update traits **without** re-running the event backfill.
+</ParamField>
+
+## When should I skip the backfill?
+
+- **First identify** — send `{ siteId, userId, traits? }`. tinyanalytics tags the visitor's recent events with `userId` and merges any traits onto their profile.
+- **Traits-only update** — send `isNewIdentify: false` to change traits without the backfill, the equivalent of the browser SDK's `setTraits()`.
+
+<Note>
+  Traits merge, they don't replace: each identify updates the keys you send and leaves the rest. Send a key with a `null` value to remove it.
+</Note>
+
+## The browser equivalent
+
+From a browser you don't call this endpoint directly — the tracking script wraps it:
+
+```js
+window.tinyanalytics.identify('user_8f3a', { plan: 'pro' })
+```
+
+See [identify users](/user-identification-analytics) for the full browser API.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How do I update traits without re-running the backfill?">
+    Send `isNewIdentify: false` in the `POST /api/identify` body. tinyanalytics updates the traits and skips tagging the visitor's recent events with the `userId` — the equivalent of the browser SDK's `setTraits()`.
+  </Accordion>
+  <Accordion title="How do I delete a trait?">
+    Send that key with a `null` value. Traits merge rather than replace: each identify updates only the keys you send and leaves the rest in place, so a `null` is the way to remove one.
+  </Accordion>
+  <Accordion title="Does identify overwrite a visitor's earlier events?">
+    No — it backfills. A first identify tags the visitor's recent events with the `userId` you sent and merges any traits onto their profile, so their history ties together the moment they sign in.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track-events-api">
+    Send the events an identify ties together.
+  </Card>
+  <Card title="Identify users" icon="user" href="/user-identification-analytics">
+    The browser identify() and setTraits() API.
+  </Card>
+  <Card title="Analytics read API" icon="chart-line" href="/api-reference/analytics-read-api">
+    Read the users and traits you've set.
+  </Card>
+  <Card title="Group & B2B analytics" icon="building" href="/b2b-account-analytics">
+    Associate visitors with accounts, not just IDs.
+  </Card>
+</Columns>

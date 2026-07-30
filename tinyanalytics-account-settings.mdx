@@ -1,0 +1,140 @@
+---
+title: "tinyanalytics Account Settings"
+sidebarTitle: "Account settings"
+description: "Update your tinyanalytics profile, password, language, Anthropic key, and API keys, or permanently delete your account from one settings page."
+icon: "user-gear"
+---
+
+Your account settings are where you manage your personal tinyanalytics profile: your name, your password, your dashboard language, your API keys, and your account itself. Find them under **Settings → Account**. Account settings are personal to you — they're separate from your [organization's settings](/analytics-organizations-members), which cover your sites and teammates.
+
+## What you can manage
+
+| Setting               | What you can do                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| **Profile**           | Update your display name. Your account shows the email you sign in with.                          |
+| **Password**          | Change your password, with a strength meter to help you pick a strong one.                        |
+| **Language**          | Choose the dashboard's display language, per browser.                                             |
+| **Anthropic API key** | Add your own key so Ask AI and SQL generation use your Anthropic account instead of plan credits. |
+| **API keys**          | Create, list, and revoke API keys for programmatic access.                                        |
+| **Delete account**    | Permanently delete your account, confirmed with your password.                                    |
+
+## How do I change my password?
+
+Open **Settings → Account** and use the **Change Password** option. You'll enter your current password and a new one; the strength meter guides you toward a strong choice.
+
+If you've forgotten your password and can't sign in, use the **password reset** link on the sign-in page — tinyanalytics emails you a link to set a new one.
+
+## Can I change the dashboard language?
+
+Yes. The tinyanalytics dashboard is available in **seven languages**, and you choose yours from the **Language** card under **Settings → Account** — or from the **Language** submenu in the account menu (next to the theme toggle).
+
+| Language   | Shown as  |
+| ---------- | --------- |
+| English    | English   |
+| German     | Deutsch   |
+| Spanish    | Español   |
+| French     | Français  |
+| Portuguese | Português |
+| Japanese   | 日本語    |
+| Turkish    | Türkçe    |
+
+The language applies **instantly** — no reload, no save button. It's set **per browser**, so it isn't synced across your devices, and the first time you open the dashboard tinyanalytics matches your browser's preferred language, falling back to English.
+
+<Note>
+  This setting changes the **dashboard interface** only. It doesn't affect your
+  analytics data — the "language" dimension in your reports still reflects each
+  *visitor's* own browser language.
+</Note>
+
+## Can I use my own Anthropic key for AI features?
+
+Yes. The **Anthropic API key** card under **Settings → Account** lets you add a personal Anthropic key so [Ask AI](/ai-analytics-assistant) and [AI query generation](/sql-analytics-query-builder#can-i-generate-sql-from-a-question) run against your own Anthropic account. When a key is saved, generation **bypasses your organization's monthly AI-credit allowance** and is billed to your Anthropic account instead.
+
+- Paste your key and **Save**. For your security, tinyanalytics never shows the key again after you save it — the card only confirms that a key is configured.
+- **Remove** the key at any time. AI generation then falls back to the organization's current [plan allowance](/tinyanalytics-pricing-plans).
+
+The key is used only for tinyanalytics AI generation. It is not used for analytics ingestion, dashboard reads, or any non-AI feature.
+
+## How do I create and revoke API keys?
+
+You can create and revoke **API keys** from your account settings for programmatic access to tinyanalytics. Create a key when you need one, copy it when it's shown, and revoke it anytime it's no longer needed. Detailed API usage is covered in the API reference.
+
+## What happens when I delete my account?
+
+The **Delete account** action permanently removes your account and is confirmed with your password. It's a personal action — it doesn't delete an organization or its data on its own. If you own an organization others rely on, transfer or wind it down first. See [Roles & permissions](/analytics-roles-permissions) for what ownership involves.
+
+<Danger>
+  Deleting your account can't be undone. If you're the only owner of an
+  organization, deal with the organization first so your teammates don't lose
+  access.
+</Danger>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How do I reset a forgotten tinyanalytics password?">
+    Use the **password reset** link on the sign-in page. tinyanalytics emails
+    you a link to set a new one. If you can still sign in, change it instead
+    from **Settings → Account** with the **Change Password** option, which asks
+    for your current password.
+  </Accordion>
+  <Accordion title="Does deleting my account delete my organization and its data?">
+    No. **Delete account** is a personal action — it permanently removes your
+    account and is confirmed with your password, but it doesn't delete an
+    organization or its data on its own. If you own an organization others rely
+    on, transfer or wind it down first.
+  </Accordion>
+  <Accordion title="Where do I manage my tinyanalytics API keys?">
+    Under **Settings → Account**. You can create, list, and revoke API keys
+    there for programmatic access. Copy a key when it's shown, and revoke it
+    whenever it's no longer needed.
+  </Accordion>
+  <Accordion title="What languages is the tinyanalytics dashboard available in?">
+    Seven: English, German (Deutsch), Spanish (Español), French (Français),
+    Portuguese (Português), Japanese (日本語), and Turkish (Türkçe). Choose
+    yours from the **Language** card under **Settings → Account** or from the
+    account menu. It's set per browser and applies instantly. This changes the
+    dashboard interface only — not your analytics data.
+  </Accordion>
+  <Accordion title="Does my dashboard language sync across devices?">
+    No. The dashboard language is stored per browser, so each browser you sign
+    in from keeps its own choice. The first time you open the dashboard,
+    tinyanalytics matches your browser's preferred language and falls back to
+    English.
+  </Accordion>
+  <Accordion title="How do I stop Ask AI from counting against my plan credits?">
+    Add a personal Anthropic API key under **Settings → Account**. Ask AI and AI
+    query generation then run against your Anthropic account and are billed to
+    you, bypassing the organization's monthly tinyanalytics AI-credit allowance.
+    Remove the key to fall back to the current [plan allowance](/tinyanalytics-pricing-plans).
+  </Accordion>
+  <Accordion title="What's the difference between account settings and organization settings?">
+    Account settings are personal to you: your display name, password, dashboard
+    language, API keys, and your account itself. [Organization
+    settings](/analytics-organizations-members) cover your sites and teammates and are shared with
+    everyone in the organization.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Organizations & members" icon="building" href="/analytics-organizations-members">
+    Manage your sites and teammates.
+  </Card>
+  <Card title="Roles & permissions" icon="shield-halved" href="/analytics-roles-permissions">
+    What owners, admins, and members can do.
+  </Card>
+  <Card title="Invitations" icon="envelope" href="/invite-organization-members">
+    Invite people to your organization.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/tinyanalytics-quickstart">
+    Add a site and install the tracking script.
+  </Card>
+  <Card title="Ask AI" icon="sparkles" href="/ai-analytics-assistant">
+    Use the assistant your Anthropic key can power.
+  </Card>
+  <Card title="Billing and plans" icon="credit-card" href="/tinyanalytics-pricing-plans">
+    Review AI credits, retention, and plan limits.
+  </Card>
+</Columns>

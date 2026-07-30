@@ -1,0 +1,160 @@
+---
+title: "React Native Analytics Integration"
+sidebarTitle: "React Native"
+description: "Track React Native screen views, custom events, errors, and identified users with the cookieless @tinyanalytics/react-native SDK."
+icon: "react"
+---
+
+The **`@tinyanalytics/react-native`** SDK brings cookieless analytics to React Native apps: screen views, custom events, errors, and `identify()` — all reported in the same dashboard as your websites. It uses a persistent install ID instead of a browser fingerprint, so no cookies and no device fingerprinting are involved.
+
+## Before you start
+
+- A **mobile-type site** in tinyanalytics. Mobile apps use a different identity model, so they need their own site type — a web site rejects it. See [Create a mobile site](#create-a-mobile-site) below.
+- A React Native app (React Native **0.72 or newer**).
+
+## Create a mobile site
+
+<Steps>
+  <Step title="Add a website">
+    In the dashboard, start adding a new site, then set the **Type** to **Mobile app** instead of Website.
+  </Step>
+  <Step title="Enter your app identifier">
+    Give the site your app's **bundle ID / package name** (for example `com.example.app`). This is read-only after the site is created.
+  </Step>
+  <Step title="Note the numeric site ID">
+    You'll pass this **site ID** to the SDK's `init()` below.
+  </Step>
+</Steps>
+
+## Install the SDK
+
+```sh
+npm install @tinyanalytics/react-native @react-native-async-storage/async-storage
+```
+
+`AsyncStorage` is optional but **recommended** — it persists the anonymous install ID across app restarts, so a returning user isn't counted as new each launch.
+
+## Initialize
+
+Call `init()` once, early in your app's startup. `analyticsHost` and `siteId` are the only required options:
+
+```js
+import analytics from "@tinyanalytics/react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+await analytics.init({
+  analyticsHost: "https://dash.tinyanalytics.io", // your API base URL
+  siteId: 210, // numeric ID of your mobile-type site
+  appIdentifier: "com.example.app", // your bundle ID / package name
+  appVersion: "1.4.0",
+  storage: AsyncStorage,
+});
+```
+
+## Track screens and events
+
+Screen views are the mobile equivalent of pageviews — a screen name becomes the path you see in the [Pages](/page-analytics) report:
+
+```js
+// Screen view
+await analytics.screen("Home");
+
+// Custom event with properties (revenue works the same as on the web)
+await analytics.event("purchase", { plan: "pro", revenue: 20, currency: "USD" });
+
+// Identify a logged-in user
+await analytics.identify("user_42", { email: "user@example.com" });
+
+// Report a handled error
+try {
+  risky();
+} catch (err) {
+  await analytics.error(err, { screen: "Checkout" });
+}
+```
+
+### Track screens automatically with React Navigation
+
+Wire the navigation tracker once and every route change becomes a screen view:
+
+```js
+import { NavigationContainer } from "@react-navigation/native";
+import analytics from "@tinyanalytics/react-native";
+
+const navTracker = analytics.createNavigationTracker();
+
+<NavigationContainer
+  ref={navigationRef}
+  onReady={() => navTracker.onReady(navigationRef.current)}
+  onStateChange={() => navTracker.onStateChange(navigationRef.current)}
+>
+  {/* … */}
+</NavigationContainer>;
+```
+
+## Verify
+
+Run the app and send a screen view with `analytics.screen()`.
+
+<Check>
+  Your SDK setup is working when the screen name appears as a path in the **Pages** report for your mobile site.
+</Check>
+
+## The mobile identity model
+
+Native apps sit behind carrier NAT and have no browser User-Agent, so the web fingerprint would collapse many devices into one. Instead the SDK mints a persistent **install ID** and sends it as `anonymousId`; the server derives a stable, site-scoped user ID from it. `identify()` layers your own product-user ID on top and backfills recent events — exactly as on the web. No cookies, no device fingerprinting, no personal data at rest. See [how cookieless identity works](/resources/cookieless-analytics-identity).
+
+## API
+
+| Method | What it does |
+| --- | --- |
+| `init(config)` | Configure and start. Loads or creates the install ID and flushes any queued events. |
+| `screen(name, props?, ctx?)` | Track a screen view. |
+| `pageview(path?, ctx?)` | Track an explicit path. |
+| `event(name, props?, ctx?)` | Track a [custom event](/custom-event-tracking). |
+| `error(error, props?, ctx?)` | Track a handled error (name, message, stack). |
+| `identify(userId, traits?)` | Associate the install with a stable user ID and optional traits. |
+| `setTraits(traits)` | Update the identified user's traits. |
+| `clearUser()` | Forget the identified user, e.g. on logout. |
+| `flush()` | Re-send events queued while offline. |
+| `createNavigationTracker(opts?)` | React Navigation `onReady` / `onStateChange` helpers. |
+| `cleanup()` | Remove the app-state listener. |
+
+### Configuration
+
+`analyticsHost` and `siteId` are required. The rest are optional:
+
+| Option | Default | What it does |
+| --- | --- | --- |
+| `appIdentifier` (`bundleId`) | the site ID | Your bundle ID / package name. |
+| `appVersion` | *(none)* | App version, recorded on each event. |
+| `tag` | *(none)* | A label stamped on every event from this run. |
+| `storage` | in-memory | Where the install ID is persisted — pass `AsyncStorage`. |
+| `debug` | `false` | Log diagnostics with `console.warn`. |
+| `autoTrackAppLifecycle` | `true` | Emit `app_open` / `app_background` events. |
+| `initialScreenName` | *(none)* | A screen name to track once on `init()`. |
+| `requestTimeoutMs` | `5000` | Per-request timeout in milliseconds. |
+| `maxQueueSize` | `100` | How many events to keep while offline. |
+
+## What differs from web tracking
+
+- **Screens, not pages** — `screen()` names appear as paths in the Pages report; there's no auto-pageview from a URL.
+- **No Core Web Vitals** — the [Performance](/core-web-vitals-analytics) report is web-only.
+- **Referrer and channel** aren't populated from a mobile app, so acquisition-by-channel reports stay empty for mobile sites.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
+    The event model, shared with the web.
+  </Card>
+  <Card title="Identify users" icon="user" href="/user-identification-analytics">
+    Attach a stable user ID and traits.
+  </Card>
+  <Card title="Cookieless identity" icon="fingerprint" href="/resources/cookieless-analytics-identity">
+    How the install ID stays private.
+  </Card>
+  <Card title="Revenue analytics" icon="dollar-sign" href="/revenue-analytics">
+    Track purchases from your app.
+  </Card>
+</Columns>

@@ -1,0 +1,133 @@
+---
+title: "Analytics Read API"
+sidebarTitle: "Read API"
+description: "Read overview, time-series, breakdown, session, event, and live analytics as JSON through site-scoped GET endpoints authenticated by API key."
+icon: "chart-line"
+
+---
+
+The analytics read API returns your reports as JSON, so you can pull metrics into your own systems. Every read is a **site-scoped `GET`** authenticated by an [API key](/api-reference/api-authentication), and shares one date-window convention:
+
+<CodeGroup>
+
+```bash cURL
+curl "https://dash.tinyanalytics.io/api/sites/1/overview?start_date=2026-07-01&end_date=2026-07-15" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```js JavaScript
+await fetch(
+  "https://dash.tinyanalytics.io/api/sites/1/overview?start_date=2026-07-01&end_date=2026-07-15",
+  {
+    headers: { Authorization: "Bearer YOUR_API_KEY" },
+  },
+)
+```
+
+```python Python
+import requests
+
+requests.get(
+    "https://dash.tinyanalytics.io/api/sites/1/overview",
+    params={"start_date": "2026-07-01", "end_date": "2026-07-15"},
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+)
+```
+
+</CodeGroup>
+
+## Shared parameters
+
+The analytics reads share a UTC date window and time zone:
+
+<ParamField query="start_date" type="string">
+  Start of the range (`YYYY-MM-DD`).
+</ParamField>
+
+<ParamField query="end_date" type="string">
+  End of the range (`YYYY-MM-DD`).
+</ParamField>
+
+<ParamField query="time_zone" type="string">
+  IANA time zone for bucketing, e.g. `America/New_York`.
+</ParamField>
+
+Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, and breakdowns take a `dimension`. You can request a `compare=previous` baseline on `timeseries` and `breakdown`.
+
+## Core endpoints
+
+| Endpoint | Returns |
+| --- | --- |
+| `GET /api/sites/{id}/live` | `{ "count" }` — distinct sessions active in the last 5 minutes. |
+| `GET /api/sites/{id}/overview` | `{ "current", "previous", "change" }` — the headline metrics, the previous equal-length period, and the percent change. |
+| `GET /api/sites/{id}/timeseries` | `{ "data": [{ "time", "value" }] }` — one `metric` bucketed over the range, zero-filled. |
+| `GET /api/sites/{id}/breakdown` | `{ "data": [{ "value", "count", "percentage", "pageviews" }] }` — the top values of one `dimension`. |
+| `GET /api/sites/{id}/sessions` | `{ "data": [ … ] }` — the paginated session list (`page`, `limit`), newest first. |
+| `GET /api/sites/{id}/events` | `{ "data": [ … ] }` — the custom-event list, or one event's property breakdown when you pass `event_name`. |
+
+`breakdown` accepts dimensions including `pathname`, `hostname`, `entry_page`, `exit_page`, `referrer`, `channel`, `country`, `region`, `city`, `browser`, `os`, `device_type`, `utm_*`, and `event_name`.
+
+Three **composite dimensions** group by host and path together, for sites serving one path from several hostnames: `pathname_host`, `entry_page_host`, and `exit_page_host`. Their rows carry `hostname` and `pathname` as separate fields alongside the standard `value`, `count`, `percentage`, and `pageviews`, so you can read either part without parsing `value`. Hostnames are lowercased when grouped. See [Pages](/page-analytics) for the dashboard equivalent.
+
+## Where are the rest of the endpoints?
+
+These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **133 endpoints across 29 groups** — every one with its full path, method, and parameters:
+
+<Columns cols={2}>
+  <Card title="Overview" icon="gauge" href="/api-reference/overview/get-overview">
+    Headline metrics, time series, and breakdowns.
+  </Card>
+  <Card title="Performance" icon="gauge-high" href="/api-reference/performance/get-performance-overview">
+    Core Web Vitals over time and by dimension.
+  </Card>
+  <Card title="Feature flags" icon="toggle-on" href="/api-reference/feature-flags/list-feature-flags">
+    Manage flags and evaluate them for a user.
+  </Card>
+  <Card title="Uptime monitors" icon="heart-pulse" href="/api-reference/uptime-monitors/list-monitors">
+    HTTP and TCP monitors and their history.
+  </Card>
+</Columns>
+
+Goals, funnels, segments, cohorts, surveys, experiments, dashboards, alerts, annotations, errors, revenue, sessions, users, bots, retention, and journeys each have their own group in the sidebar.
+
+<Note>
+  **Response bodies aren't documented yet.** Each endpoint page lists its parameters in full, but not the shape of what comes back. To see a real response, run the call in the built-in [API playground](/api-reference/api-playground) against your own data.
+</Note>
+
+## Who can read a site's analytics?
+
+A read is authorized exactly like signing in: the API key resolves to its owner, and the owner must have access to the site (via organization membership, or a [team](/team-site-access) that grants it). A **public** site's reads are open; a private site's reads require the key. An invalid key on a private site returns `401`; a valid key without access returns `403`.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need an API key to read a public site?">
+    No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-authentication) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
+  </Accordion>
+  <Accordion title="How do I find an endpoint's exact parameters and response?">
+    For **parameters**, use the **Endpoints** section of this reference — 133 endpoints across 29 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
+  </Accordion>
+  <Accordion title="Does tinyanalytics have an API for goals, funnels, or feature flags?">
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), sessions, users, user traits, bots, catalog, retention, journeys, and [uptime monitoring](/api-reference/uptime-monitors/list-monitors) — 133 endpoints in total. Each has a page in the **Endpoints** section of this reference.
+  </Accordion>
+  <Accordion title="Can I compare a date range against the previous period?">
+    Yes, on `timeseries` and `breakdown`. Request `compare=previous` to get a baseline. The `overview` endpoint already returns `{ "current", "previous", "change" }` — the headline metrics, the previous equal-length period, and the percent change.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Scoped SQL query" icon="database" href="/api-reference/sql-analytics-api">
+    Run arbitrary read-only SQL instead of fixed reports.
+  </Card>
+  <Card title="API playground" icon="terminal" href="/api-reference/api-playground">
+    Build and run any read against your data.
+  </Card>
+  <Card title="API keys" icon="key" href="/api-reference/api-authentication">
+    Create the key a read needs.
+  </Card>
+  <Card title="Metric definitions" icon="ruler" href="/analytics-data-dictionary">
+    What each metric and dimension means.
+  </Card>
+</Columns>

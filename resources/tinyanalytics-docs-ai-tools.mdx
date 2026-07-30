@@ -1,0 +1,95 @@
+---
+title: "Use tinyanalytics Documentation with AI Tools"
+sidebarTitle: "Use docs with AI"
+description: "Give external AI tools accurate tinyanalytics context through page Markdown, llms.txt, the hosted docs MCP server, or the contextual menu."
+icon: "wand-magic-sparkles"
+---
+
+There are two distinct ways to use AI with tinyanalytics: ask questions about your analytics inside the product, or give these public docs to an external assistant that is helping with an integration. Keeping those contexts separate helps the assistant use the right source.
+
+## How is AI used inside tinyanalytics?
+
+Use [Ask AI](/ai-analytics-assistant) inside the dashboard when the question is about your own analytics. It can:
+
+- answer site-level questions from the same report services as the dashboard;
+- compare the sites you can access across an organization;
+- link you to the report behind an answer; and
+- propose supported goals, dashboards, or annotations, with explicit approval before a change.
+
+tinyanalytics also measures AI as part of your acquisition data:
+
+- [AI traffic](/ai-referral-traffic-analytics) shows visits referred by AI assistants and the pages those visitors view.
+- [Bot and crawler reports](/bot-ai-crawler-analytics) separate automated traffic, including AI crawlers, from human visits.
+- The [SQL query builder](/sql-analytics-query-builder) turns a natural-language question into a query you can review and run against your analytics data.
+
+## Give an external AI the right context
+
+Give your coding assistant the relevant tinyanalytics page before asking it to write an integration or troubleshoot a setup. Every page is available as Markdown, through the documentation MCP server, and in the site's machine-readable index.
+
+<Prompt description="Ask a coding assistant to add tinyanalytics using the official documentation context." actions={["copy", "cursor"]}>
+Add tinyanalytics to this project using the official tinyanalytics documentation provided in your context.
+
+Identify the framework and the correct place for a site-wide tracking script. Use YOUR_SITE_ID as a placeholder. Do not invent a site ID, API key, endpoint, or self-hosting step. Preserve the framework's existing routing and security conventions. Explain exactly how I can verify the first pageview in the tinyanalytics dashboard. If the documentation does not confirm a required detail, stop and tell me what is missing instead of guessing.
+</Prompt>
+
+## Copy or open any page in an AI tool
+
+At the top of every page is a menu to take that page to your assistant of choice:
+
+- **Copy page** — copy the page as clean Markdown to paste into any chat.
+- **Open in ChatGPT / Claude / Perplexity** — send the page straight to your assistant with a prompt.
+- **View as Markdown** — see the raw Markdown behind the page.
+
+## Pull the docs into your editor
+
+The same menu connects the docs to your coding tools:
+
+- **MCP** — connect the documentation's MCP server so an AI agent can search and read these docs directly.
+- **Cursor / VS Code** — open the docs in your editor's AI assistant to reference them while you build your integration.
+
+## Machine-readable index
+
+These docs publish a machine-readable index for large language models, served at the site root:
+
+- `/llms.txt` — a structured map of every page.
+- `/llms-full.txt` — the full docs content in one file.
+
+Point an AI tool at either file to give it the whole documentation set as context.
+
+## Related
+
+<Columns cols={2}>
+  <Card
+    title="API reference"
+    icon="book-open"
+    href="/api-reference/tinyanalytics-api"
+  >
+    Have your AI build against the API.
+  </Card>
+  <Card title="Ask AI" icon="comments" href="/ai-analytics-assistant">
+    Ask questions about your own analytics inside tinyanalytics.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/tinyanalytics-quickstart">
+    Install tinyanalytics in a few minutes.
+  </Card>
+  <Card title="Integrations" icon="puzzle-piece" href="/integrations/install-website-analytics">
+    Ask your AI which install guide fits.
+  </Card>
+  <Card
+    title="How tinyanalytics works"
+    icon="diagram-project"
+    href="/how-tinyanalytics-works"
+  >
+    The mental model behind the docs.
+  </Card>
+  <Card title="Measure AI traffic" icon="sparkles" href="/ai-referral-traffic-analytics">
+    Understand referrals and visits from AI assistants.
+  </Card>
+  <Card
+    title="Ask questions with SQL"
+    icon="database"
+    href="/sql-analytics-query-builder"
+  >
+    Turn a natural-language question into a reviewable query.
+  </Card>
+</Columns>

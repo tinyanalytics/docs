@@ -1,0 +1,71 @@
+---
+title: "Organization Analytics Overview"
+sidebarTitle: "Organization overview"
+description: "Compare traffic across the sites you can access in your tinyanalytics organization, with combined metrics, per-site trends, and a site comparison table."
+icon: "layer-group"
+---
+
+The **Overview** page combines analytics from the sites you can access in your active organization. Use it to read portfolio-wide totals, compare site trends, and open a site's dashboard without loading each site separately.
+
+## What does the organization overview show?
+
+The overview applies one shared date range to the accessible sites in your active organization and shows:
+
+- **Six combined metrics** — **Users, Sessions, Pageviews, Pages / Session, Bounce Rate,** and **Avg. Duration**, each with a change versus the previous period and a sparkline.
+- **A per-site trend chart** — select any metric card to plot that metric across sites. The eight busiest sites appear first; hover a site in the legend to isolate its line, or drag over the chart to zoom.
+- **A site comparison table** — compare sessions, session change, users, and bounce rate, then select a row to open that site's [dashboard](/web-analytics-dashboard).
+- **Live status** — a live indicator shows when current activity is flowing into the overview.
+
+The overview combines these results in one organization-level request, so the page does not need to open every site dashboard in the background.
+
+## Which sites are included?
+
+The overview follows your existing access. It includes only sites in the **currently active organization** that you are allowed to see:
+
+- If you can access every site in the organization, the overview covers all of them.
+- If a [team](/team-site-access) limits you to a subset, the overview covers only that subset.
+- If you can access more than 50 sites, it shows the 50 busiest sites for the selected period.
+
+Switch organizations with the organization switcher in the sidebar to compare a different portfolio.
+
+## How are combined metrics calculated?
+
+Additive metrics such as sessions and pageviews are summed across the included sites. Ratio metrics — pages per session, bounce rate, and average duration — are recalculated from the combined underlying totals rather than averaging each site's displayed percentage.
+
+<Note>
+  **Users are summed per site, not deduplicated across the organization.** A person who visits two of your sites counts once on each site. Treat the organization total as a portfolio total, not a unique headcount across domains.
+</Note>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why does my overview show fewer sites than my teammate's?">
+    The organization overview includes exactly the sites you can access. If your [team](/team-site-access) is limited to a subset of the organization's sites, you see only that subset. A teammate with broader access can see more sites.
+  </Accordion>
+  <Accordion title="Does tinyanalytics deduplicate a user who visits two sites?">
+    No. Users are counted per site and then summed. A person who visits two included sites counts once on each site, so the organization total is a portfolio total rather than a cross-domain unique headcount.
+  </Accordion>
+  <Accordion title="How do I compare a different metric across sites?">
+    Select one of the six metric cards above the chart. The per-site chart switches to that metric. It shows the eight busiest sites first; hover the legend to isolate one line, or drag over the chart to zoom.
+  </Accordion>
+  <Accordion title="Why can I see only 50 sites?">
+    The organization overview shows the 50 busiest accessible sites when your organization contains more than 50 sites. Open an individual site's dashboard or build an [organization dashboard](/custom-analytics-dashboards) when you need a different comparison.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Custom dashboards" icon="table-cells-large" href="/custom-analytics-dashboards">
+    Build a reusable comparison across selected sites.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/web-analytics-dashboard">
+    Explore one site's traffic in detail.
+  </Card>
+  <Card title="Organizations & members" icon="building" href="/analytics-organizations-members">
+    Manage the organization whose sites appear here.
+  </Card>
+  <Card title="Teams & site access" icon="users" href="/team-site-access">
+    Control which sites each member can reach.
+  </Card>
+</Columns>

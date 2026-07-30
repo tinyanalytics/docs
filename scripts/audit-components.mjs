@@ -15,29 +15,29 @@ const ignoredDirectories = new Set([
 ]);
 const integrationStepExceptions = new Map([
   [
-    "integrations/angular.mdx",
+    "integrations/angular-analytics.mdx",
     "one file edit; verification is documented separately",
   ],
-  ["integrations/astro.mdx", "one shared-layout edit"],
-  ["integrations/docusaurus.mdx", "one configuration entry"],
+  ["integrations/astro-analytics.mdx", "one shared-layout edit"],
+  ["integrations/docusaurus-analytics.mdx", "one configuration entry"],
   [
-    "integrations/drupal.mdx",
+    "integrations/drupal-analytics.mdx",
     "mutually exclusive template and tag-manager methods",
   ],
-  ["integrations/gatsby.mdx", "one shared-layout edit"],
-  ["integrations/hugo.mdx", "one template or partial edit"],
-  ["integrations/jekyll.mdx", "one include or layout edit"],
-  ["integrations/laravel.mdx", "one shared-layout edit"],
+  ["integrations/gatsby-analytics.mdx", "one shared-layout edit"],
+  ["integrations/hugo-analytics.mdx", "one template or partial edit"],
+  ["integrations/jekyll-analytics.mdx", "one include or layout edit"],
+  ["integrations/laravel-analytics.mdx", "one shared-layout edit"],
   [
-    "integrations/nextjs.mdx",
+    "integrations/nextjs-analytics.mdx",
     "mutually exclusive App Router and Pages Router tabs",
   ],
-  ["integrations/nuxt.mdx", "one configuration entry"],
-  ["integrations/react.mdx", "one HTML-shell edit"],
-  ["integrations/remix.mdx", "one root-document edit"],
-  ["integrations/sveltekit.mdx", "one HTML-shell edit"],
-  ["integrations/vitepress.mdx", "one configuration entry"],
-  ["integrations/vue.mdx", "one HTML-shell edit"],
+  ["integrations/nuxt-analytics.mdx", "one configuration entry"],
+  ["integrations/react-analytics.mdx", "one HTML-shell edit"],
+  ["integrations/remix-analytics.mdx", "one root-document edit"],
+  ["integrations/sveltekit-analytics.mdx", "one HTML-shell edit"],
+  ["integrations/vitepress-analytics.mdx", "one configuration entry"],
+  ["integrations/vue-analytics.mdx", "one HTML-shell edit"],
 ]);
 
 async function findMdxFiles(directory) {
@@ -126,7 +126,8 @@ for (const absolutePath of files) {
 
   if (
     relativePath.startsWith(`integrations${path.sep}`) &&
-    relativePath !== path.join("integrations", "overview.mdx") &&
+    relativePath !==
+      path.join("integrations", "install-website-analytics.mdx") &&
     !source.includes("<Steps>")
   ) {
     const reason = integrationStepExceptions.get(relativePath);

@@ -1,0 +1,115 @@
+---
+title: "User Acquisition Analytics"
+sidebarTitle: "User acquisition"
+description: "Attribute users to their first channel, source, medium, campaign, or referrer, then compare new and returning user engagement."
+icon: "user-plus"
+---
+
+User acquisition answers a different question from the channel cards on your main dashboard: **which source first brought each user to you, and how did those users behave during the selected period?** It attributes every active user to the acquisition context of their first-ever session.
+
+Open a site, then choose **User acquisition** under **Acquisition & quality**.
+
+## How does first-touch attribution work?
+
+tinyanalytics finds each user's first-ever session and keeps that session's channel, source, medium, campaign, source/medium pair, and referrer as the user's first-touch acquisition values. A later visit from another source does not rewrite that history.
+
+The page combines two time scopes:
+
+| Data                        | Time scope                                                               |
+| --------------------------- | ------------------------------------------------------------------------ |
+| **First-touch dimension**   | The user's first-ever session, across all available history              |
+| **New or returning status** | Whether the user's first-ever event falls inside the selected date range |
+| **Sessions and engagement** | Activity inside the selected date range only                             |
+
+<Note>
+  Filters narrow the activity inside your selected window. They do not change a
+  user's historical first-touch source. For example, filtering to `country = DE`
+  answers “how did users active in Germany during this period first find us?”
+</Note>
+
+## Explore your acquisition mix
+
+<Steps>
+  <Step title="Choose the audience and date range">
+    Use **All users**, **Identified**, or **Anonymous** beside the date
+    controls. Identified means the user had an identified event inside the
+    selected window; Anonymous is its complement.
+  </Step>
+  <Step title="Choose a first-touch dimension">
+    Switch between **Channel**, **Source**, **Medium**, **Campaign**, **Source /
+    Medium**, and **Referrer**. The chart shows new users over time for the five
+    leading values, with the rest grouped as **Other**.
+  </Step>
+  <Step title="Compare user quality">
+    Read the table across **Users**, **New users**, **% New**, **Returning**,
+    **Sessions**, **Bounce**, **Avg duration**, and **Events/session**. Sort or
+    search the table to find the acquisition sources that bring people back and
+    produce deeper sessions.
+  </Step>
+</Steps>
+
+Click a value above the chart to isolate it and filter the table. Clear the selection to return to the full mix. When period comparison is active, the Users column also shows the change from the comparison window.
+
+## What do the columns mean?
+
+| Column             | Definition                                                                                  |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| **Users**          | Distinct users active in the selected window, grouped by their first-ever acquisition value |
+| **New users**      | Active users whose first-ever event falls inside the selected window                        |
+| **% New**          | New users divided by users for the row                                                      |
+| **Returning**      | Active users first seen before the selected window                                          |
+| **Sessions**       | Sessions those users had inside the selected window                                         |
+| **Bounce**         | Percentage of those sessions with exactly one pageview                                      |
+| **Avg duration**   | Average session duration for those users inside the window                                  |
+| **Events/session** | All tracked events divided by sessions inside the window                                    |
+
+## How should I interpret identified and anonymous users?
+
+The audience switch describes identity **inside the selected window**:
+
+- **Identified** includes users with at least one event linked to an ID you supplied with [`identify()`](/user-identification-analytics) during the window.
+- **Anonymous** includes users with no identified event during the window.
+- **All users** combines both groups.
+
+Identification can merge recent anonymous activity into the stable user ID, so an identified user's first-touch source can predate the moment you identified them.
+
+<Warning>
+  Anonymous first-touch attribution is an estimate. A change in IP address or
+  user agent can create a new cookieless ID, which can undercount returning
+  users. Use [`identify()`](/user-identification-analytics) for signed-in users when you need
+  stable cross-device acquisition history.
+</Warning>
+
+## Verify the report
+
+<Check>
+  Pick a date range that includes a known campaign. The row for that campaign
+  should show its first-time users under **New users**. Move the range forward:
+  those same active people move to **Returning**, but their first-touch campaign
+  stays unchanged.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card
+    title="Traffic classification"
+    icon="signs-post"
+    href="/resources/analytics-channel-attribution"
+  >
+    See how referrers and campaign parameters become channels.
+  </Card>
+  <Card title="Identify users" icon="id-card" href="/user-identification-analytics">
+    Keep signed-in acquisition history stable across devices.
+  </Card>
+  <Card title="AI traffic" icon="sparkles" href="/ai-referral-traffic-analytics">
+    Measure sessions arriving from AI assistants.
+  </Card>
+  <Card
+    title="Metric definitions"
+    icon="ruler"
+    href="/resources/analytics-metrics-glossary"
+  >
+    Use the same definitions across every report.
+  </Card>
+</Columns>

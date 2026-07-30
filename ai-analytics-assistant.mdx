@@ -1,0 +1,104 @@
+---
+title: "AI Analytics Assistant"
+sidebarTitle: "Ask AI"
+description: "Ask about one site or an organization, get answers grounded in tinyanalytics reports, and approve supported analytics changes before they run."
+icon: "sparkles"
+---
+
+Ask AI lets you explore your analytics in plain language. It reads the same report services that power the dashboard, keeps the site, organization, date range, and permissions explicit, and links you back to the report behind an answer.
+
+Use **Ask AI** in the dashboard header, press **⌘J**, or open **Ask AI** from the site or organization navigation for a full-page conversation.
+
+## What can Ask AI do?
+
+| Scope            | What you can ask                                                                                            | Supported actions                                                                                                                    |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **One site**     | Headline metrics, trends, breakdowns, sessions, goals, taxonomy, and other site reports                     | Build report links; owners and admins can create goals, dashboards, and annotations after approval; generate and run site-scoped SQL |
+| **Organization** | Portfolio totals and trends, site comparisons, live visitors, and a drill-down into any site you can access | Build site report links; owners and admins can create organization dashboards after approval                                         |
+
+The organization assistant cannot run cross-site SQL or perform the other site-level write actions. When a question needs one site, it names the site and uses that site's existing report services.
+
+## Ask a grounded question
+
+<Steps>
+  <Step title="Choose the right scope">
+    Open Ask AI from a site when the question is about that site. Open it from
+    the organization dashboard when you want to compare sites or understand the
+    portfolio as a whole.
+  </Step>
+  <Step title="State the metric and window">
+    Ask a complete question such as “Which channel brought the most new users in
+    the last 30 days?” or “Which site grew fastest this week compared with the
+    previous week?”
+  </Step>
+  <Step title="Follow the evidence">
+    Review the date range and site named in the answer. Expand the tool summary
+    when you want to inspect what Ask AI used, or follow its report link to
+    verify the number in the dashboard.
+  </Step>
+  <Step title="Approve any change">
+    If Ask AI proposes a supported write action, review the confirmation card
+    before approving it. Rejecting the action leaves your analytics
+    configuration unchanged.
+  </Step>
+</Steps>
+
+## Questions that work well
+
+- “How did sessions, users, and pageviews change this week?”
+- “Which landing pages have high traffic and high bounce rate?”
+- “Compare the sites in this organization and explain the biggest change.”
+- “Show revenue by channel, then link me to the report.”
+- “Create a dashboard for acquisition quality.”
+- “Create a goal for the `signup_completed` event.”
+
+Specific questions produce more useful answers. Name the site, metric, dimension, date range, and comparison you care about when they are not already clear from the conversation.
+
+## How are answers kept within my access?
+
+Ask AI uses your existing tinyanalytics permissions:
+
+- You must be a member of the site or organization. A public-dashboard viewer cannot use the assistant.
+- A team-restricted member can query only the sites that team grants them.
+- Owners and admins can enable or disable AI features under **Settings → Organization**.
+- Write tools appear only to roles that can manage the target, and every supported change requires an explicit approval step.
+
+Ask AI stores your conversation history so you can reopen, rename through the generated title, or delete a thread. The full-page view groups past conversations by date. Each answer also supports copy, feedback, regeneration of the latest answer, and suggested follow-up questions.
+
+## How do AI credits and my Anthropic key work?
+
+When plan metering is active, the composer shows the organization's monthly AI-credit usage. A fresh user turn consumes one credit; approving a paused action or regenerating the most recent stored answer does not consume a second credit.
+
+You can save your own Anthropic API key under **Settings → Account**. Ask AI and natural-language SQL generation then use your Anthropic account and do not consume the organization's tinyanalytics AI credits. The saved key is never shown again after you add it.
+
+See [Billing & plans](/tinyanalytics-pricing-plans) for the current allowances.
+
+## Verify an answer
+
+<Check>
+  Ask for a metric over a named date range, then open the report link in the
+  answer. The site, date range, filters, and displayed number should match the
+  dashboard. For a write request, confirm that nothing changes until you approve
+  the action card.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="SQL query builder" icon="database" href="/sql-analytics-query-builder">
+    Generate, review, and run a site-scoped analytics query.
+  </Card>
+  <Card title="Custom dashboards" icon="chart-line" href="/custom-analytics-dashboards">
+    Build the dashboards Ask AI can help create.
+  </Card>
+  <Card title="Account settings" icon="user-gear" href="/tinyanalytics-account-settings">
+    Add or remove your personal Anthropic key.
+  </Card>
+  <Card
+    title="Use these docs with AI"
+    icon="wand-magic-sparkles"
+    href="/resources/tinyanalytics-docs-ai-tools"
+  >
+    Give an external AI assistant accurate tinyanalytics context.
+  </Card>
+</Columns>

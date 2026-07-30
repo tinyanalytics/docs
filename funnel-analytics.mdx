@@ -1,0 +1,70 @@
+---
+title: "Funnel Analytics"
+sidebarTitle: "Funnels"
+description: "Measure conversion and drop-off through a sequence of steps in tinyanalytics: build a funnel from pages and events, and see where visitors fall away."
+icon: "filter-circle-dollar"
+---
+
+A funnel measures how many visitors make it through an ordered sequence of steps — from landing page to signup to purchase, for example. tinyanalytics shows the conversion and drop-off at each step, so you can see exactly where people fall away. You build a funnel once, and it recalculates over whatever date range and filters you choose.
+
+## How do I build a funnel?
+
+A funnel is an ordered list of **steps**. Each step is one of:
+
+- a **page** — matched by its path,
+- a **custom event** — matched by its name, or
+- an **autocaptured interaction** — an outbound link, button click, form submission, or copy (see [autocapture](/autocapture-analytics-events)).
+
+Add the steps in the order visitors should follow them, name the funnel, and save it. You can create as many funnels as you need for different flows.
+
+For an autocapture step, the step's value is a **value pattern** matched against the interaction — the destination URL for an outbound link, the text for a button click or copy, or the name, id, or action for a form submission. Use `*` and `**` as wildcards, or enter `*` to match **any** event of that type as the step.
+
+## How do I read the results?
+
+For each step, the funnel shows how many sessions reached it and what share continued from the previous step. The gaps between steps are your drop-off points — the places where the most people leave the flow.
+
+Use the date picker at the top of **Funnels** to change the reporting window. Select **Add filter** to narrow every funnel on the page; active filter chips appear beside the controls and can be removed without editing the funnel.
+
+## How do I see who converted or dropped off?
+
+Click a step to list the sessions behind it — either the visitors who **reached** that step or those who **dropped off** at it. From there you can open individual sessions to see what those visitors did, which turns a drop-off number into something you can act on.
+
+## Common workflows
+
+- **Find the leakiest step.** See which transition loses the most visitors and focus there.
+- **Compare sources.** Filter the funnel by a channel or campaign to see which traffic converts best.
+- **Validate a change.** Compare conversion across date ranges before and after a change.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What can I use as a funnel step in tinyanalytics?">
+    A funnel step is a page (matched by its path), a custom event (matched by its name), or an [autocaptured](/autocapture-analytics-events) interaction — an outbound link, button click, form submission, or copy. You add steps in the order visitors should follow them, name the funnel, and save it. You can create as many funnels as you need for different flows.
+  </Accordion>
+  <Accordion title="Can a funnel step be a button click or outbound link?">
+    Yes. A step can be an [autocapture](/autocapture-analytics-events) interaction — an outbound link, button click, form submission, or copy — with no custom event to write. Give the step a value pattern (with `*` and `**` wildcards) to match a specific interaction, or enter `*` to match any event of that type.
+  </Accordion>
+  <Accordion title="Can I see the individual visitors who dropped off in a funnel?">
+    Yes. Click a step in the funnel to list the sessions behind it — either the visitors who reached that step or those who dropped off at it. From there you can open individual sessions to see what those visitors did.
+  </Accordion>
+  <Accordion title="Do I have to rebuild a funnel to change the date range?">
+    No. You build a funnel once, and it recalculates over whatever date range and filters you choose. That means you can compare conversion before and after a change, or filter the same funnel by channel or campaign, without editing the funnel itself.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Goals" icon="bullseye" href="/conversion-goal-tracking">
+    Track a single conversion instead of a sequence.
+  </Card>
+  <Card title="Journeys" icon="diagram-project" href="/user-journey-analytics">
+    See the paths visitors take, without a fixed order.
+  </Card>
+  <Card title="Sessions" icon="list-timeline" href="/session-analytics">
+    Inspect the visits behind each step.
+  </Card>
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Send the events you use as funnel steps.
+  </Card>
+</Columns>

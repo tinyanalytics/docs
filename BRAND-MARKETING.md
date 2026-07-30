@@ -1190,7 +1190,7 @@ The defensible position is the combination of **simplicity, cookieless identity,
 - **Brand:** tinyanalytics
 - **Website:** `tinyanalytics.io`
 - **Dashboard:** `dash.tinyanalytics.io`
-- **Documentation:** `docs.tinyanalytics.io` **[TODO: confirm final docs domain]**
+- **Documentation:** `tinyanalytics.io/docs`
 - **Product noun:** tinyanalytics
 - **Tracked entity:** site
 

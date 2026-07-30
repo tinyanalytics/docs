@@ -1,0 +1,74 @@
+---
+title: "How tinyanalytics Handles Analytics Data"
+sidebarTitle: "Data handling"
+description: "See what analytics data tinyanalytics stores, what core anonymous tracking never stores, and which optional features use browser storage."
+icon: "server"
+---
+
+tinyanalytics is a hosted analytics service: your site sends events, and tinyanalytics stores and reports on them for you. Core anonymous analytics uses no analytics cookies or stored browser ID, while optional product features can persist the specific state they need.
+
+## What tinyanalytics stores
+
+For each event your site sends, tinyanalytics keeps the analytics context it needs to build your reports:
+
+- **Page context** — the path, hostname, referrer, page title, and any campaign (UTM) parameters.
+- **Derived attributes** — an approximate location (country, region, city) from the IP, the marketing [channel](/resources/analytics-channel-attribution), and the device, browser, and OS from the user agent.
+- **A cookieless identifier** — a one-way [server-derived ID](/resources/cookieless-analytics-identity), not an anonymous ID stored in the browser.
+- **What you choose to send** — [custom events](/custom-event-tracking) and their properties, plus any user ID and [traits](/user-identification-analytics) you set with `identify()`.
+- **Connected Stripe revenue** — when you [connect Stripe](/stripe-revenue-analytics), the amount, currency, adjustment type, Stripe event and charge IDs, live/test mode, and any analytics IDs resolved for attribution.
+
+## What core anonymous analytics never stores
+
+- **No analytics cookies.** Core anonymous analytics does not set a cookie.
+- **No anonymous browser ID.** Anonymous visitor identity is derived on the server instead of written to the browser.
+- **No raw IP addresses.** A visitor's IP is used only, in memory, to derive the hashed identifier and approximate location — it's never written to your analytics data.
+- **No personal data by default.** tinyanalytics stores no names, emails, or other identifying details unless *you* deliberately send them as an identified ID, a trait, or an event property.
+
+<Warning>
+  Because custom event properties and traits are free-form, you control whether any personal data enters tinyanalytics. Avoid putting raw personal information (like an email address) into event properties unless you intend to store it.
+</Warning>
+
+## What optional features store in the browser
+
+Some features need continuity between page loads and visits:
+
+- [`identify()`](/user-identification-analytics) persists the user ID you provide.
+- [Feature flags](/feature-flag-analytics) persist a random, site-specific visitor ID so variations stay consistent.
+- [Group analytics](/b2b-account-analytics) persists the group associations you provide.
+- [Surveys](/product-feedback-surveys) persist eligibility, impression, and completion markers.
+- [Browser opt-out](/exclude-traffic-from-analytics#how-do-i-hide-my-own-traffic) persists a disabled marker.
+
+These values are scoped to product behavior on your site; they do not create a cross-site advertising profile. See [Privacy & GDPR](/resources/privacy-friendly-analytics-gdpr) when assessing consent requirements.
+
+## How is a Stripe connection handled?
+
+tinyanalytics retains the restricted key and webhook signing secret needed to keep receiving Stripe events. The dashboard and API return only a masked key fingerprint, never the full restricted key.
+
+Stripe revenue rows do not store customer emails, names, card details, or free-form Stripe metadata. If you turn on the optional **Email fallback**, tinyanalytics processes the charge email long enough to match an existing identified user, then stores only the matched analytics ID in the revenue row. The email is not written to the analytics event store.
+
+<Note>
+  A Stripe charge ID linked to a session or identified-user ID is pseudonymous linkage, not anonymous data. Deleting the corresponding [user profile](/user-analytics) is the erasure path for the identity mapping.
+</Note>
+
+## Your data stays isolated and yours
+
+Each site's data is separate, and access is gated by [organization membership and teams](/team-site-access) — one organization can never read another's analytics. You can [export](/export-analytics-data) your data as CSV or PDF, or query it directly with the [SQL query builder](/sql-analytics-query-builder) and the [read API](/api-reference/analytics-read-api), at any time.
+
+Retention is applied at **read time**: a retention limit bounds how far back you can query, rather than deleting your event data.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Privacy & GDPR" icon="user-shield" href="/resources/privacy-friendly-analytics-gdpr">
+    How this design supports privacy compliance.
+  </Card>
+  <Card title="How cookieless identity works" icon="fingerprint" href="/resources/cookieless-analytics-identity">
+    The one-way hash behind "users."
+  </Card>
+  <Card title="Export data" icon="file-export" href="/export-analytics-data">
+    Take your data out any time.
+  </Card>
+  <Card title="Roles & permissions" icon="user-lock" href="/analytics-roles-permissions">
+    Who can see and manage your data.
+  </Card>
+</Columns>

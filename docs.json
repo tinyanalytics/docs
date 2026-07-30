@@ -10,7 +10,8 @@
       "og:site_name": "tinyanalytics documentation",
       "og:locale": "en_US",
       "twitter:card": "summary_large_image",
-      "theme-color": "#006420"
+      "theme-color": "#006420",
+      "canonical": "https://tinyanalytics.io/docs"
     },
     "organization": {
       "name": "tinyanalytics"
@@ -32,19 +33,1088 @@
   "redirects": [
     {
       "source": "/rollup",
-      "destination": "/organization-overview"
+      "destination": "/organization-analytics-overview",
+      "permanent": true
     },
     {
       "source": "/guides/rollup",
-      "destination": "/organization-overview"
+      "destination": "/organization-analytics-overview",
+      "permanent": true
     },
     {
       "source": "/guides",
-      "destination": "/"
+      "destination": "/",
+      "permanent": true
     },
     {
-      "source": "/guides/:slug*",
-      "destination": "/:slug*"
+      "source": "/quickstart",
+      "destination": "/tinyanalytics-quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/guides/quickstart",
+      "destination": "/tinyanalytics-quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works",
+      "destination": "/how-tinyanalytics-works",
+      "permanent": true
+    },
+    {
+      "source": "/guides/how-it-works",
+      "destination": "/how-tinyanalytics-works",
+      "permanent": true
+    },
+    {
+      "source": "/migrate",
+      "destination": "/migrate-analytics-data-to-tinyanalytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/migrate",
+      "destination": "/migrate-analytics-data-to-tinyanalytics",
+      "permanent": true
+    },
+    {
+      "source": "/tracking-script",
+      "destination": "/install-tinyanalytics-tracking-script",
+      "permanent": true
+    },
+    {
+      "source": "/guides/tracking-script",
+      "destination": "/install-tinyanalytics-tracking-script",
+      "permanent": true
+    },
+    {
+      "source": "/script-configuration",
+      "destination": "/configure-tinyanalytics-tracking-script",
+      "permanent": true
+    },
+    {
+      "source": "/guides/script-configuration",
+      "destination": "/configure-tinyanalytics-tracking-script",
+      "permanent": true
+    },
+    {
+      "source": "/exclude-traffic",
+      "destination": "/exclude-traffic-from-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/exclude-traffic",
+      "destination": "/exclude-traffic-from-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/verify-your-setup",
+      "destination": "/verify-tinyanalytics-installation",
+      "permanent": true
+    },
+    {
+      "source": "/guides/verify-your-setup",
+      "destination": "/verify-tinyanalytics-installation",
+      "permanent": true
+    },
+    {
+      "source": "/autocapture",
+      "destination": "/autocapture-analytics-events",
+      "permanent": true
+    },
+    {
+      "source": "/guides/autocapture",
+      "destination": "/autocapture-analytics-events",
+      "permanent": true
+    },
+    {
+      "source": "/custom-events",
+      "destination": "/custom-event-tracking",
+      "permanent": true
+    },
+    {
+      "source": "/guides/custom-events",
+      "destination": "/custom-event-tracking",
+      "permanent": true
+    },
+    {
+      "source": "/identify-users",
+      "destination": "/user-identification-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/identify-users",
+      "destination": "/user-identification-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard-overview",
+      "destination": "/web-analytics-dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/guides/dashboard-overview",
+      "destination": "/web-analytics-dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/realtime",
+      "destination": "/realtime-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/realtime",
+      "destination": "/realtime-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/pages",
+      "destination": "/page-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/pages",
+      "destination": "/page-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/sessions",
+      "destination": "/session-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/sessions",
+      "destination": "/session-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/users",
+      "destination": "/user-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/users",
+      "destination": "/user-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/events",
+      "destination": "/event-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/events",
+      "destination": "/event-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/map",
+      "destination": "/geographic-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/map",
+      "destination": "/geographic-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/organization-overview",
+      "destination": "/organization-analytics-overview",
+      "permanent": true
+    },
+    {
+      "source": "/guides/organization-overview",
+      "destination": "/organization-analytics-overview",
+      "permanent": true
+    },
+    {
+      "source": "/journeys",
+      "destination": "/user-journey-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/journeys",
+      "destination": "/user-journey-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/funnels",
+      "destination": "/funnel-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/funnels",
+      "destination": "/funnel-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/goals",
+      "destination": "/conversion-goal-tracking",
+      "permanent": true
+    },
+    {
+      "source": "/guides/goals",
+      "destination": "/conversion-goal-tracking",
+      "permanent": true
+    },
+    {
+      "source": "/retention",
+      "destination": "/user-retention-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/retention",
+      "destination": "/user-retention-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/cohorts",
+      "destination": "/behavioral-cohort-analysis",
+      "permanent": true
+    },
+    {
+      "source": "/guides/cohorts",
+      "destination": "/behavioral-cohort-analysis",
+      "permanent": true
+    },
+    {
+      "source": "/user-acquisition",
+      "destination": "/user-acquisition-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/user-acquisition",
+      "destination": "/user-acquisition-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/ai-traffic",
+      "destination": "/ai-referral-traffic-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/ai-traffic",
+      "destination": "/ai-referral-traffic-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/search-console",
+      "destination": "/google-search-console-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/search-console",
+      "destination": "/google-search-console-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/bots",
+      "destination": "/bot-ai-crawler-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/bots",
+      "destination": "/bot-ai-crawler-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/performance",
+      "destination": "/core-web-vitals-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/performance",
+      "destination": "/core-web-vitals-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/errors",
+      "destination": "/javascript-error-tracking",
+      "permanent": true
+    },
+    {
+      "source": "/guides/errors",
+      "destination": "/javascript-error-tracking",
+      "permanent": true
+    },
+    {
+      "source": "/filters",
+      "destination": "/analytics-filters",
+      "permanent": true
+    },
+    {
+      "source": "/guides/filters",
+      "destination": "/analytics-filters",
+      "permanent": true
+    },
+    {
+      "source": "/segments",
+      "destination": "/saved-analytics-segments",
+      "permanent": true
+    },
+    {
+      "source": "/guides/segments",
+      "destination": "/saved-analytics-segments",
+      "permanent": true
+    },
+    {
+      "source": "/compare",
+      "destination": "/analytics-period-comparison",
+      "permanent": true
+    },
+    {
+      "source": "/guides/compare",
+      "destination": "/analytics-period-comparison",
+      "permanent": true
+    },
+    {
+      "source": "/annotations",
+      "destination": "/analytics-annotations",
+      "permanent": true
+    },
+    {
+      "source": "/guides/annotations",
+      "destination": "/analytics-annotations",
+      "permanent": true
+    },
+    {
+      "source": "/export",
+      "destination": "/export-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/guides/export",
+      "destination": "/export-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/ask-ai",
+      "destination": "/ai-analytics-assistant",
+      "permanent": true
+    },
+    {
+      "source": "/guides/ask-ai",
+      "destination": "/ai-analytics-assistant",
+      "permanent": true
+    },
+    {
+      "source": "/revenue",
+      "destination": "/revenue-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/revenue",
+      "destination": "/revenue-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/stripe-revenue",
+      "destination": "/stripe-revenue-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/stripe-revenue",
+      "destination": "/stripe-revenue-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/feature-flags",
+      "destination": "/feature-flag-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/feature-flags",
+      "destination": "/feature-flag-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/experiments",
+      "destination": "/ab-testing-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/experiments",
+      "destination": "/ab-testing-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/surveys",
+      "destination": "/product-feedback-surveys",
+      "permanent": true
+    },
+    {
+      "source": "/guides/surveys",
+      "destination": "/product-feedback-surveys",
+      "permanent": true
+    },
+    {
+      "source": "/custom-dashboards",
+      "destination": "/custom-analytics-dashboards",
+      "permanent": true
+    },
+    {
+      "source": "/guides/custom-dashboards",
+      "destination": "/custom-analytics-dashboards",
+      "permanent": true
+    },
+    {
+      "source": "/sql-query-builder",
+      "destination": "/sql-analytics-query-builder",
+      "permanent": true
+    },
+    {
+      "source": "/guides/sql-query-builder",
+      "destination": "/sql-analytics-query-builder",
+      "permanent": true
+    },
+    {
+      "source": "/group-analytics",
+      "destination": "/b2b-account-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/group-analytics",
+      "destination": "/b2b-account-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/scheduled-reports",
+      "destination": "/scheduled-analytics-reports",
+      "permanent": true
+    },
+    {
+      "source": "/guides/scheduled-reports",
+      "destination": "/scheduled-analytics-reports",
+      "permanent": true
+    },
+    {
+      "source": "/alerts",
+      "destination": "/analytics-alerts",
+      "permanent": true
+    },
+    {
+      "source": "/guides/alerts",
+      "destination": "/analytics-alerts",
+      "permanent": true
+    },
+    {
+      "source": "/uptime-monitoring",
+      "destination": "/website-api-uptime-monitoring",
+      "permanent": true
+    },
+    {
+      "source": "/guides/uptime-monitoring",
+      "destination": "/website-api-uptime-monitoring",
+      "permanent": true
+    },
+    {
+      "source": "/shortlinks",
+      "destination": "/trackable-short-links",
+      "permanent": true
+    },
+    {
+      "source": "/guides/shortlinks",
+      "destination": "/trackable-short-links",
+      "permanent": true
+    },
+    {
+      "source": "/public-dashboards",
+      "destination": "/public-analytics-dashboards",
+      "permanent": true
+    },
+    {
+      "source": "/guides/public-dashboards",
+      "destination": "/public-analytics-dashboards",
+      "permanent": true
+    },
+    {
+      "source": "/embed-dashboard",
+      "destination": "/embed-analytics-dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/guides/embed-dashboard",
+      "destination": "/embed-analytics-dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/live-visitors-widget",
+      "destination": "/live-visitor-count-widget",
+      "permanent": true
+    },
+    {
+      "source": "/guides/live-visitors-widget",
+      "destination": "/live-visitor-count-widget",
+      "permanent": true
+    },
+    {
+      "source": "/data-dictionary",
+      "destination": "/analytics-data-dictionary",
+      "permanent": true
+    },
+    {
+      "source": "/guides/data-dictionary",
+      "destination": "/analytics-data-dictionary",
+      "permanent": true
+    },
+    {
+      "source": "/import-ga4",
+      "destination": "/import-google-analytics-4-data",
+      "permanent": true
+    },
+    {
+      "source": "/guides/import-ga4",
+      "destination": "/import-google-analytics-4-data",
+      "permanent": true
+    },
+    {
+      "source": "/import-plausible",
+      "destination": "/import-plausible-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/guides/import-plausible",
+      "destination": "/import-plausible-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/import-umami",
+      "destination": "/import-umami-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/guides/import-umami",
+      "destination": "/import-umami-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/import-simple-analytics",
+      "destination": "/import-simple-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/guides/import-simple-analytics",
+      "destination": "/import-simple-analytics-data",
+      "permanent": true
+    },
+    {
+      "source": "/account-settings",
+      "destination": "/tinyanalytics-account-settings",
+      "permanent": true
+    },
+    {
+      "source": "/guides/account-settings",
+      "destination": "/tinyanalytics-account-settings",
+      "permanent": true
+    },
+    {
+      "source": "/site-settings",
+      "destination": "/analytics-site-settings",
+      "permanent": true
+    },
+    {
+      "source": "/guides/site-settings",
+      "destination": "/analytics-site-settings",
+      "permanent": true
+    },
+    {
+      "source": "/organizations",
+      "destination": "/analytics-organizations-members",
+      "permanent": true
+    },
+    {
+      "source": "/guides/organizations",
+      "destination": "/analytics-organizations-members",
+      "permanent": true
+    },
+    {
+      "source": "/teams",
+      "destination": "/team-site-access",
+      "permanent": true
+    },
+    {
+      "source": "/guides/teams",
+      "destination": "/team-site-access",
+      "permanent": true
+    },
+    {
+      "source": "/roles",
+      "destination": "/analytics-roles-permissions",
+      "permanent": true
+    },
+    {
+      "source": "/guides/roles",
+      "destination": "/analytics-roles-permissions",
+      "permanent": true
+    },
+    {
+      "source": "/invitations",
+      "destination": "/invite-organization-members",
+      "permanent": true
+    },
+    {
+      "source": "/guides/invitations",
+      "destination": "/invite-organization-members",
+      "permanent": true
+    },
+    {
+      "source": "/billing-plans",
+      "destination": "/tinyanalytics-pricing-plans",
+      "permanent": true
+    },
+    {
+      "source": "/guides/billing-plans",
+      "destination": "/tinyanalytics-pricing-plans",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/overview",
+      "destination": "/integrations/install-website-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/overview",
+      "destination": "/integrations/install-website-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/nextjs",
+      "destination": "/integrations/nextjs-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/nextjs",
+      "destination": "/integrations/nextjs-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/react",
+      "destination": "/integrations/react-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/react",
+      "destination": "/integrations/react-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/vue",
+      "destination": "/integrations/vue-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/vue",
+      "destination": "/integrations/vue-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/nuxt",
+      "destination": "/integrations/nuxt-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/nuxt",
+      "destination": "/integrations/nuxt-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/astro",
+      "destination": "/integrations/astro-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/astro",
+      "destination": "/integrations/astro-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/sveltekit",
+      "destination": "/integrations/sveltekit-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/sveltekit",
+      "destination": "/integrations/sveltekit-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/gatsby",
+      "destination": "/integrations/gatsby-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/gatsby",
+      "destination": "/integrations/gatsby-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/remix",
+      "destination": "/integrations/remix-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/remix",
+      "destination": "/integrations/remix-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/angular",
+      "destination": "/integrations/angular-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/angular",
+      "destination": "/integrations/angular-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/wordpress",
+      "destination": "/integrations/wordpress-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/wordpress",
+      "destination": "/integrations/wordpress-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/webflow",
+      "destination": "/integrations/webflow-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/webflow",
+      "destination": "/integrations/webflow-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/wix",
+      "destination": "/integrations/wix-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/wix",
+      "destination": "/integrations/wix-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/ghost",
+      "destination": "/integrations/ghost-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/ghost",
+      "destination": "/integrations/ghost-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/squarespace",
+      "destination": "/integrations/squarespace-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/squarespace",
+      "destination": "/integrations/squarespace-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/framer",
+      "destination": "/integrations/framer-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/framer",
+      "destination": "/integrations/framer-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/carrd",
+      "destination": "/integrations/carrd-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/carrd",
+      "destination": "/integrations/carrd-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/bubble",
+      "destination": "/integrations/bubble-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/bubble",
+      "destination": "/integrations/bubble-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/hugo",
+      "destination": "/integrations/hugo-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/hugo",
+      "destination": "/integrations/hugo-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/jekyll",
+      "destination": "/integrations/jekyll-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/jekyll",
+      "destination": "/integrations/jekyll-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/docusaurus",
+      "destination": "/integrations/docusaurus-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/docusaurus",
+      "destination": "/integrations/docusaurus-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/vitepress",
+      "destination": "/integrations/vitepress-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/vitepress",
+      "destination": "/integrations/vitepress-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/shopify",
+      "destination": "/integrations/shopify-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/shopify",
+      "destination": "/integrations/shopify-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/woocommerce",
+      "destination": "/integrations/woocommerce-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/woocommerce",
+      "destination": "/integrations/woocommerce-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/bigcommerce",
+      "destination": "/integrations/bigcommerce-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/bigcommerce",
+      "destination": "/integrations/bigcommerce-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/google-tag-manager",
+      "destination": "/integrations/google-tag-manager-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/google-tag-manager",
+      "destination": "/integrations/google-tag-manager-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/laravel",
+      "destination": "/integrations/laravel-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/laravel",
+      "destination": "/integrations/laravel-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/drupal",
+      "destination": "/integrations/drupal-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/drupal",
+      "destination": "/integrations/drupal-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/integrations/react-native",
+      "destination": "/integrations/react-native-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/guides/integrations/react-native",
+      "destination": "/integrations/react-native-analytics",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/introduction",
+      "destination": "/api-reference/tinyanalytics-api",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/introduction",
+      "destination": "/api-reference/tinyanalytics-api",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/track",
+      "destination": "/api-reference/track-events-api",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/track",
+      "destination": "/api-reference/track-events-api",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/identify",
+      "destination": "/api-reference/identify-users-api",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/identify",
+      "destination": "/api-reference/identify-users-api",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/read",
+      "destination": "/api-reference/analytics-read-api",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/read",
+      "destination": "/api-reference/analytics-read-api",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/sql",
+      "destination": "/api-reference/sql-analytics-api",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/sql",
+      "destination": "/api-reference/sql-analytics-api",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/api-keys",
+      "destination": "/api-reference/api-authentication",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/api-keys",
+      "destination": "/api-reference/api-authentication",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/rate-limits",
+      "destination": "/api-reference/rate-limits-cors",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/rate-limits",
+      "destination": "/api-reference/rate-limits-cors",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/playground",
+      "destination": "/api-reference/api-playground",
+      "permanent": true
+    },
+    {
+      "source": "/guides/api-reference/playground",
+      "destination": "/api-reference/api-playground",
+      "permanent": true
+    },
+    {
+      "source": "/resources/metrics-glossary",
+      "destination": "/resources/analytics-metrics-glossary",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/metrics-glossary",
+      "destination": "/resources/analytics-metrics-glossary",
+      "permanent": true
+    },
+    {
+      "source": "/resources/cookieless-identity",
+      "destination": "/resources/cookieless-analytics-identity",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/cookieless-identity",
+      "destination": "/resources/cookieless-analytics-identity",
+      "permanent": true
+    },
+    {
+      "source": "/resources/bot-detection",
+      "destination": "/resources/analytics-bot-detection",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/bot-detection",
+      "destination": "/resources/analytics-bot-detection",
+      "permanent": true
+    },
+    {
+      "source": "/resources/traffic-classification",
+      "destination": "/resources/analytics-channel-attribution",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/traffic-classification",
+      "destination": "/resources/analytics-channel-attribution",
+      "permanent": true
+    },
+    {
+      "source": "/resources/data-handling",
+      "destination": "/resources/analytics-data-handling",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/data-handling",
+      "destination": "/resources/analytics-data-handling",
+      "permanent": true
+    },
+    {
+      "source": "/resources/privacy",
+      "destination": "/resources/privacy-friendly-analytics-gdpr",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/privacy",
+      "destination": "/resources/privacy-friendly-analytics-gdpr",
+      "permanent": true
+    },
+    {
+      "source": "/resources/comparison",
+      "destination": "/resources/tinyanalytics-vs-google-analytics-plausible-umami",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/comparison",
+      "destination": "/resources/tinyanalytics-vs-google-analytics-plausible-umami",
+      "permanent": true
+    },
+    {
+      "source": "/resources/use-with-ai",
+      "destination": "/resources/tinyanalytics-docs-ai-tools",
+      "permanent": true
+    },
+    {
+      "source": "/guides/resources/use-with-ai",
+      "destination": "/resources/tinyanalytics-docs-ai-tools",
+      "permanent": true
     }
   ],
   "navigation": {
@@ -57,26 +1127,26 @@
             "group": "Start here",
             "pages": [
               "index",
-              "quickstart",
-              "how-it-works",
-              "migrate"
+              "tinyanalytics-quickstart",
+              "how-tinyanalytics-works",
+              "migrate-analytics-data-to-tinyanalytics"
             ]
           },
           {
             "group": "Set up tracking",
             "pages": [
-              "tracking-script",
-              "script-configuration",
-              "exclude-traffic",
-              "verify-your-setup"
+              "install-tinyanalytics-tracking-script",
+              "configure-tinyanalytics-tracking-script",
+              "exclude-traffic-from-analytics",
+              "verify-tinyanalytics-installation"
             ]
           },
           {
             "group": "Collect data",
             "pages": [
-              "autocapture",
-              "custom-events",
-              "identify-users"
+              "autocapture-analytics-events",
+              "custom-event-tracking",
+              "user-identification-analytics"
             ]
           },
           {
@@ -86,47 +1156,48 @@
                 "group": "Traffic & audience",
                 "expanded": false,
                 "pages": [
-                  "dashboard-overview",
-                  "realtime",
-                  "pages",
-                  "sessions",
-                  "users",
-                  "events",
-                  "map",
-                  "organization-overview"
+                  "web-analytics-dashboard",
+                  "realtime-analytics",
+                  "page-analytics",
+                  "session-analytics",
+                  "user-analytics",
+                  "event-analytics",
+                  "geographic-analytics",
+                  "organization-analytics-overview"
                 ]
               },
               {
                 "group": "Behavior & conversion",
                 "expanded": false,
                 "pages": [
-                  "journeys",
-                  "funnels",
-                  "goals",
-                  "retention",
-                  "cohorts"
+                  "user-journey-analytics",
+                  "funnel-analytics",
+                  "conversion-goal-tracking",
+                  "user-retention-analytics",
+                  "behavioral-cohort-analysis"
                 ]
               },
               {
                 "group": "Acquisition & quality",
                 "expanded": false,
                 "pages": [
-                  "ai-traffic",
-                  "search-console",
-                  "bots",
-                  "performance",
-                  "errors"
+                  "user-acquisition-analytics",
+                  "ai-referral-traffic-analytics",
+                  "google-search-console-analytics",
+                  "bot-ai-crawler-analytics",
+                  "core-web-vitals-analytics",
+                  "javascript-error-tracking"
                 ]
               },
               {
                 "group": "Reporting tools",
                 "expanded": false,
                 "pages": [
-                  "filters",
-                  "segments",
-                  "compare",
-                  "annotations",
-                  "export"
+                  "analytics-filters",
+                  "saved-analytics-segments",
+                  "analytics-period-comparison",
+                  "analytics-annotations",
+                  "export-analytics-data"
                 ]
               }
             ]
@@ -138,33 +1209,34 @@
                 "group": "Product analytics",
                 "expanded": false,
                 "pages": [
-                  "revenue",
-                  "stripe-revenue",
-                  "feature-flags",
-                  "experiments",
-                  "surveys",
-                  "custom-dashboards",
-                  "sql-query-builder",
-                  "group-analytics"
+                  "ai-analytics-assistant",
+                  "revenue-analytics",
+                  "stripe-revenue-analytics",
+                  "feature-flag-analytics",
+                  "ab-testing-analytics",
+                  "product-feedback-surveys",
+                  "custom-analytics-dashboards",
+                  "sql-analytics-query-builder",
+                  "b2b-account-analytics"
                 ]
               },
               {
                 "group": "Monitoring & automation",
                 "expanded": false,
                 "pages": [
-                  "scheduled-reports",
-                  "alerts",
-                  "uptime-monitoring",
-                  "shortlinks"
+                  "scheduled-analytics-reports",
+                  "analytics-alerts",
+                  "website-api-uptime-monitoring",
+                  "trackable-short-links"
                 ]
               },
               {
                 "group": "Sharing & embeds",
                 "expanded": false,
                 "pages": [
-                  "public-dashboards",
-                  "embed-dashboard",
-                  "live-visitors-widget"
+                  "public-analytics-dashboards",
+                  "embed-analytics-dashboard",
+                  "live-visitor-count-widget"
                 ]
               }
             ]
@@ -176,23 +1248,24 @@
                 "group": "Data & imports",
                 "expanded": false,
                 "pages": [
-                  "data-dictionary",
-                  "import-ga4",
-                  "import-plausible",
-                  "import-umami",
-                  "import-simple-analytics"
+                  "analytics-data-dictionary",
+                  "import-google-analytics-4-data",
+                  "import-plausible-analytics-data",
+                  "import-umami-analytics-data",
+                  "import-simple-analytics-data"
                 ]
               },
               {
                 "group": "Account & access",
                 "expanded": false,
                 "pages": [
-                  "account-settings",
-                  "site-settings",
-                  "organizations",
-                  "teams",
-                  "roles",
-                  "invitations"
+                  "tinyanalytics-account-settings",
+                  "analytics-site-settings",
+                  "analytics-organizations-members",
+                  "team-site-access",
+                  "analytics-roles-permissions",
+                  "invite-organization-members",
+                  "tinyanalytics-pricing-plans"
                 ]
               }
             ]
@@ -206,21 +1279,21 @@
           {
             "group": "Choose an install method",
             "pages": [
-              "integrations/overview"
+              "integrations/install-website-analytics"
             ]
           },
           {
             "group": "Frameworks",
             "pages": [
-              "integrations/nextjs",
-              "integrations/react",
-              "integrations/vue",
-              "integrations/nuxt",
-              "integrations/astro",
-              "integrations/sveltekit",
-              "integrations/gatsby",
-              "integrations/remix",
-              "integrations/angular"
+              "integrations/nextjs-analytics",
+              "integrations/react-analytics",
+              "integrations/vue-analytics",
+              "integrations/nuxt-analytics",
+              "integrations/astro-analytics",
+              "integrations/sveltekit-analytics",
+              "integrations/gatsby-analytics",
+              "integrations/remix-analytics",
+              "integrations/angular-analytics"
             ]
           },
           {
@@ -230,49 +1303,49 @@
                 "group": "CMS & website builders",
                 "expanded": false,
                 "pages": [
-                  "integrations/wordpress",
-                  "integrations/webflow",
-                  "integrations/wix",
-                  "integrations/ghost",
-                  "integrations/squarespace",
-                  "integrations/framer",
-                  "integrations/carrd",
-                  "integrations/bubble"
+                  "integrations/wordpress-analytics",
+                  "integrations/webflow-analytics",
+                  "integrations/wix-analytics",
+                  "integrations/ghost-analytics",
+                  "integrations/squarespace-analytics",
+                  "integrations/framer-analytics",
+                  "integrations/carrd-analytics",
+                  "integrations/bubble-analytics"
                 ]
               },
               {
                 "group": "Docs & static sites",
                 "expanded": false,
                 "pages": [
-                  "integrations/hugo",
-                  "integrations/jekyll",
-                  "integrations/docusaurus",
-                  "integrations/vitepress"
+                  "integrations/hugo-analytics",
+                  "integrations/jekyll-analytics",
+                  "integrations/docusaurus-analytics",
+                  "integrations/vitepress-analytics"
                 ]
               },
               {
                 "group": "E-commerce",
                 "expanded": false,
                 "pages": [
-                  "integrations/shopify",
-                  "integrations/woocommerce",
-                  "integrations/bigcommerce"
+                  "integrations/shopify-analytics",
+                  "integrations/woocommerce-analytics",
+                  "integrations/bigcommerce-analytics"
                 ]
               },
               {
                 "group": "Server-side & tag managers",
                 "expanded": false,
                 "pages": [
-                  "integrations/google-tag-manager",
-                  "integrations/laravel",
-                  "integrations/drupal"
+                  "integrations/google-tag-manager-analytics",
+                  "integrations/laravel-analytics",
+                  "integrations/drupal-analytics"
                 ]
               },
               {
                 "group": "Mobile apps",
                 "expanded": false,
                 "pages": [
-                  "integrations/react-native"
+                  "integrations/react-native-analytics"
                 ]
               }
             ]
@@ -286,24 +1359,24 @@
           {
             "group": "Start here",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/tinyanalytics-api"
             ]
           },
           {
             "group": "Core API",
             "pages": [
-              "api-reference/track",
-              "api-reference/identify",
-              "api-reference/read",
-              "api-reference/sql"
+              "api-reference/track-events-api",
+              "api-reference/identify-users-api",
+              "api-reference/analytics-read-api",
+              "api-reference/sql-analytics-api"
             ]
           },
           {
             "group": "Authentication & tools",
             "pages": [
-              "api-reference/api-keys",
-              "api-reference/rate-limits",
-              "api-reference/playground"
+              "api-reference/api-authentication",
+              "api-reference/rate-limits-cors",
+              "api-reference/api-playground"
             ]
           },
           {
@@ -319,24 +1392,24 @@
           {
             "group": "Definitions & methods",
             "pages": [
-              "resources/metrics-glossary",
-              "resources/cookieless-identity",
-              "resources/bot-detection",
-              "resources/traffic-classification"
+              "resources/analytics-metrics-glossary",
+              "resources/cookieless-analytics-identity",
+              "resources/analytics-bot-detection",
+              "resources/analytics-channel-attribution"
             ]
           },
           {
             "group": "Trust & privacy",
             "pages": [
-              "resources/data-handling",
-              "resources/privacy",
-              "resources/comparison"
+              "resources/analytics-data-handling",
+              "resources/privacy-friendly-analytics-gdpr",
+              "resources/tinyanalytics-vs-google-analytics-plausible-umami"
             ]
           },
           {
             "group": "AI tools",
             "pages": [
-              "resources/use-with-ai"
+              "resources/tinyanalytics-docs-ai-tools"
             ]
           }
         ]

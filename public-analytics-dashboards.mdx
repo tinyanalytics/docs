@@ -1,0 +1,60 @@
+---
+title: "Public Analytics Dashboards"
+sidebarTitle: "Public dashboards"
+description: "Share a read-only analytics dashboard without a login through an open public link or a private bearer link that includes a secret key."
+icon: "share-nodes"
+---
+
+A public dashboard is a **read-only, shareable link** to your analytics — the full dashboard, minus the settings, query tools, and account controls. Share it with a client, a stakeholder, or your whole team without giving anyone a login. There are two ways to share, depending on how open you want it to be.
+
+## Share an open link (public site)
+
+Make the site **public** in its settings, and its dashboard becomes viewable at a share link — `/share/<site>/public` — with **no key required**. Anyone with the link sees the read-only dashboard.
+
+The moment you switch the site back to private, that open link stops working — access always follows the site's public setting.
+
+## Share a private link (keeps the site private)
+
+To share while keeping the site private, generate a **private link key** for the site. The share link then carries that secret key, and only people who have the link can view the dashboard. Regenerate the key to rotate access, or revoke it to cut off everyone at once.
+
+<Warning>
+  Both share links are **bearer links** — anyone who has the URL can view the dashboard, so treat a private link key like a password. Share it only with people who should see your data, and revoke it if it leaks.
+</Warning>
+
+## What can viewers of a shared dashboard do?
+
+A shared dashboard is strictly **read-only**. Viewers can browse the reports — overview, pages, sessions, users, events, goals, funnels, journeys, retention, and performance — and change the date range and filters. They **cannot** edit anything, reach your site settings, run queries, or see your account. Nothing about sharing exposes a login.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can someone change my analytics from a shared dashboard link?">
+    No. A shared tinyanalytics dashboard is strictly **read-only**. Viewers can browse the reports and change the date range and filters, but they can't edit anything, reach your site settings, run queries, or see your account. Sharing never exposes a login.
+  </Accordion>
+  <Accordion title="How do I revoke access to a shared dashboard?">
+    It depends which link you shared. For an open link, switch the site back to **private** in its settings and the `/share/<site>/public` link stops working immediately. For a private link, **revoke** the private link key to cut off everyone at once, or **regenerate** it to rotate access.
+  </Accordion>
+  <Accordion title="What's the difference between a public site and a private link key?">
+    Making a site **public** gives it an open share link that anyone can open with no key. A **private link key** keeps the site private and puts a secret key in the share URL, so only people who have that exact link can view the dashboard. Both show the same read-only dashboard.
+  </Accordion>
+  <Accordion title="Is a tinyanalytics share link password-protected?">
+    No. Both share links are **bearer links** — anyone who has the URL can view the dashboard. Treat a private link key like a password: share it only with people who should see your data, and revoke it if it leaks.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Embed a dashboard" icon="window-maximize" href="/embed-analytics-dashboard">
+    Put the same read-only view inside your own site.
+  </Card>
+  <Card title="Live-visitors widget" icon="chart-simple" href="/live-visitor-count-widget">
+    Show a live visitor count on any page.
+  </Card>
+  <Card title="Teams & site access" icon="users" href="/team-site-access">
+    Give teammates full, logged-in access instead.
+  </Card>
+  <Card title="Export data" icon="file-export" href="/export-analytics-data">
+    Send a one-off report as CSV or PDF.
+  </Card>
+</Columns>

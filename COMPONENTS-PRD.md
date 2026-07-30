@@ -1,14 +1,14 @@
 # PRD — tinyanalytics documentation component enrichment
 
-| Field | Value |
-| --- | --- |
-| Status | Draft v1.0 |
-| Owner | Documentation |
-| Date | July 27, 2026 |
-| Companion document | [`PRD.md`](./PRD.md) |
+| Field                 | Value                         |
+| --------------------- | ----------------------------- |
+| Status                | Draft v1.0                    |
+| Owner                 | Documentation                 |
+| Date                  | July 30, 2026                 |
+| Companion document    | [`PRD.md`](./PRD.md)          |
 | Implementation status | In progress — Phase 1 started |
 
-### Implementation update — July 27, 2026
+### Implementation update — July 30, 2026
 
 - Migrated all 105 authored `CardGroup` wrappers to `Columns`.
 - Added visible verification results to the eight pages that used `Steps` without `Check`.
@@ -17,7 +17,8 @@
 - Added the component contract to the tinyanalytics documentation skill.
 - Added verified Mermaid flows to the four priority concept pages.
 - Recorded 15 simple integration pages as one-step or tabs-only exceptions instead of adding decorative `Steps`.
-- Deferred the public skill-install `Prompt` because `docs.tinyanalytics.io` does not currently resolve; do not publish a copyable command with an unavailable source URL.
+- Added a self-contained integration-assistant `Prompt` that does not depend on the unresolved public skill-install URL.
+- The site now has 108 authored pages after the product-sync additions for User acquisition, Ask AI, and Billing and plans. The 104-page figures below remain the historical baseline for this component audit.
 
 ## 1. Summary
 
@@ -51,7 +52,7 @@ All work under this PRD follows the content, terminology, and voice requirements
 - Document tinyanalytics as a hosted service at `dash.tinyanalytics.io`.
 - Do not add self-hosting, platform installation, operator administration, or internal implementation guidance.
 - Do not document unshipped features.
-- Treat API keys as ingestion credentials only. Do not present them as authentication for reading analytics.
+- Treat API keys as sensitive customer API credentials. They authenticate server-side ingestion, analytics reads, and site management as the key owner; browser tracking remains keyless.
 - Verify product behavior against the wiki and product sources before changing factual content.
 - Do not invent response fields, workflow states, UI controls, screenshots, or platform behavior to make a component complete.
 
@@ -93,36 +94,36 @@ All work under this PRD follows the content, terminology, and voice requirements
 
 The baseline covers 104 authored MDX pages:
 
-| Area | Pages |
-| --- | ---: |
-| Main documentation root | 59 |
-| Integrations | 29 |
-| API reference | 8 |
-| Resources | 8 |
-| **Total** | **104** |
+| Area                    |   Pages |
+| ----------------------- | ------: |
+| Main documentation root |      59 |
+| Integrations            |      29 |
+| API reference           |       8 |
+| Resources               |       8 |
+| **Total**               | **104** |
 
 ### 6.1 Current component instances
 
-| Component | Instances | Pages using it | Assessment |
-| --- | ---: | ---: | --- |
-| `Card` | 428 | 104 | Broadly used for related links and hubs |
-| `CardGroup` | 105 | 104 | Replace with `Columns` |
-| `Accordion` | 265 | 65 | Strong coverage; audit for duplicated or required content |
-| `AccordionGroup` | 66 | 65 | Concentrated in guides |
-| `Step` | 84 | 29 | Underused in sequential integration procedures |
-| `Steps` | 29 | 29 | Normalize across procedural pages |
-| `Note` | 50 | 49 | Audit semantic fit |
-| `Check` | 37 | 37 | Eight procedural pages still lack verification |
-| `Tip` | 35 | 34 | Audit for essential instructions hidden as advice |
-| `Warning` | 22 | 17 | Separate recoverable warnings from destructive actions |
-| `CodeGroup` | 8 | 7 | Useful but sparse in hand-authored API content |
-| `Tab` | 7 | 3 | Appropriate for mutually exclusive alternatives |
-| `Info` | 6 | 5 | Audit overlap with `Note` |
-| `ParamField` | 25 | 5 | Expand only when fields are verified |
-| `ResponseField` | 6 | 1 | Known response-schema gaps block broad rollout |
-| `Tabs` | 3 | 3 | Keep selective |
-| `Expandable` | 2 | 1 | Keep primarily for nested API fields |
-| `Columns` | 1 | 1 | Becomes the standard grouping primitive |
+| Component        | Instances | Pages using it | Assessment                                                |
+| ---------------- | --------: | -------------: | --------------------------------------------------------- |
+| `Card`           |       428 |            104 | Broadly used for related links and hubs                   |
+| `CardGroup`      |       105 |            104 | Replace with `Columns`                                    |
+| `Accordion`      |       265 |             65 | Strong coverage; audit for duplicated or required content |
+| `AccordionGroup` |        66 |             65 | Concentrated in guides                                    |
+| `Step`           |        84 |             29 | Underused in sequential integration procedures            |
+| `Steps`          |        29 |             29 | Normalize across procedural pages                         |
+| `Note`           |        50 |             49 | Audit semantic fit                                        |
+| `Check`          |        37 |             37 | Eight procedural pages still lack verification            |
+| `Tip`            |        35 |             34 | Audit for essential instructions hidden as advice         |
+| `Warning`        |        22 |             17 | Separate recoverable warnings from destructive actions    |
+| `CodeGroup`      |         8 |              7 | Useful but sparse in hand-authored API content            |
+| `Tab`            |         7 |              3 | Appropriate for mutually exclusive alternatives           |
+| `Info`           |         6 |              5 | Audit overlap with `Note`                                 |
+| `ParamField`     |        25 |              5 | Expand only when fields are verified                      |
+| `ResponseField`  |         6 |              1 | Known response-schema gaps block broad rollout            |
+| `Tabs`           |         3 |              3 | Keep selective                                            |
+| `Expandable`     |         2 |              1 | Keep primarily for nested API fields                      |
+| `Columns`        |         1 |              1 | Becomes the standard grouping primitive                   |
 
 The following components currently have no authored-page usage: `Frame`, `Prompt`, `RequestExample`, `ResponseExample`, `Panel`, `Tile`, Mermaid diagrams, `Tree`, `Badge`, `Update`, `Tooltip`, `View`, and `Visibility`.
 
@@ -140,14 +141,14 @@ The following components currently have no authored-page usage: `Frame`, `Prompt
 
 ### 7.1 Structural components
 
-| Component | Use when | Do not use when |
-| --- | --- | --- |
-| `Steps` and `Step` | The reader must complete two or more ordered actions | The content is a conceptual sequence, unordered checklist, or single action |
-| `Tabs` | The reader chooses one mutually exclusive platform, language, router, or method | Readers need to compare all content at once, or the content is sequential |
-| `CodeGroup` | Two or more equivalent code examples represent the same task in different languages or variants | Only one canonical example exists |
-| `Columns` | Cards or short related items benefit from a responsive grid | Long prose would become harder to read side by side |
-| `Column` | A short comparison or paired visual needs a responsive side-by-side layout | Reading order would become ambiguous on mobile |
-| `Panel` | A page has genuinely supplementary tools or context that should replace the table of contents | Site-wide adoption, required instructions, or ordinary related links |
+| Component          | Use when                                                                                        | Do not use when                                                             |
+| ------------------ | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `Steps` and `Step` | The reader must complete two or more ordered actions                                            | The content is a conceptual sequence, unordered checklist, or single action |
+| `Tabs`             | The reader chooses one mutually exclusive platform, language, router, or method                 | Readers need to compare all content at once, or the content is sequential   |
+| `CodeGroup`        | Two or more equivalent code examples represent the same task in different languages or variants | Only one canonical example exists                                           |
+| `Columns`          | Cards or short related items benefit from a responsive grid                                     | Long prose would become harder to read side by side                         |
+| `Column`           | A short comparison or paired visual needs a responsive side-by-side layout                      | Reading order would become ambiguous on mobile                              |
+| `Panel`            | A page has genuinely supplementary tools or context that should replace the table of contents   | Site-wide adoption, required instructions, or ordinary related links        |
 
 Rules:
 
@@ -158,17 +159,17 @@ Rules:
 
 ### 7.2 Attention components
 
-| Component | Semantic use |
-| --- | --- |
-| `Note` | Neutral context that helps interpretation |
-| `Info` | Supporting information about behavior, scope, or availability |
-| `Tip` | Optional improvement or shortcut |
-| `Check` | Successful result or explicit verification outcome |
-| `Warning` | A recoverable risk, caveat, or action requiring care |
-| `Danger` | An irreversible or destructive action |
-| `Banner` | A temporary, site-wide announcement with an owner and removal date |
-| `Badge` | A short, verified status label that remains meaningful out of context |
-| `Update` | A dated change that materially affects the page's instructions |
+| Component | Semantic use                                                                 |
+| --------- | ---------------------------------------------------------------------------- |
+| `Note`    | Neutral context that helps interpretation                                    |
+| `Info`    | Supporting information about behavior, scope, or availability                |
+| `Tip`     | Optional improvement or shortcut                                             |
+| `Check`   | Successful result or explicit verification outcome                           |
+| `Warning` | A recoverable risk, caveat, or action requiring care                         |
+| `Danger`  | An irreversible or destructive action                                        |
+| `Banner`  | A temporary, site-wide announcement with an owner and removal date           |
+| `Badge`   | A short, verified status label that remains meaningful out of context        |
+| `Update`  | A dated change that materially affects the page's instructions               |
 | `Tooltip` | A brief definition for a secondary term that does not carry required meaning |
 
 Rules:
@@ -181,12 +182,12 @@ Rules:
 
 ### 7.3 Progressive disclosure
 
-| Component | Use when | Guardrail |
-| --- | --- | --- |
-| `Accordion` and `AccordionGroup` | Optional troubleshooting, FAQs, edge cases, or detailed explanations | The page must still be complete if all accordions remain closed |
-| `Expandable` | A verified API object contains nested fields | Do not use it as a general prose accordion |
-| `Visibility` | A controlled pilot needs different presentation for web readers and AI agents | Never maintain two conflicting versions of a product fact |
-| `View` | The documentation introduces a durable, global reader mode with a clear audience need | Do not create page-local pseudo-tabs with it |
+| Component                        | Use when                                                                              | Guardrail                                                       |
+| -------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `Accordion` and `AccordionGroup` | Optional troubleshooting, FAQs, edge cases, or detailed explanations                  | The page must still be complete if all accordions remain closed |
+| `Expandable`                     | A verified API object contains nested fields                                          | Do not use it as a general prose accordion                      |
+| `Visibility`                     | A controlled pilot needs different presentation for web readers and AI agents         | Never maintain two conflicting versions of a product fact       |
+| `View`                           | The documentation introduces a durable, global reader mode with a clear audience need | Do not create page-local pseudo-tabs with it                    |
 
 Rules:
 
@@ -197,14 +198,14 @@ Rules:
 
 ### 7.4 Visual context
 
-| Component | Use when | Required evidence |
-| --- | --- | --- |
-| `Frame` | A screenshot, diagram image, or video provides task-critical visual context | Real asset, useful alt text, and a caption or label that explains why it matters |
-| Mermaid | A process, relationship, state change, or decision has at least three meaningful nodes | Diagram matches verified product behavior and remains readable on mobile |
-| `Tree` | File placement or project structure is central to an integration step | Paths match the documented framework and supported setup |
-| `Tile` | A hub benefits from an asset-backed visual choice | Approved preview asset with consistent aspect ratio, size, alt text, and maintenance owner |
-| `Color` | An exact color value is itself part of the instruction | The value is a verified product or integration requirement |
-| Icon | A small visual cue improves card or callout scanning | Icon choice is consistent and has no standalone semantic burden |
+| Component | Use when                                                                               | Required evidence                                                                          |
+| --------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `Frame`   | A screenshot, diagram image, or video provides task-critical visual context            | Real asset, useful alt text, and a caption or label that explains why it matters           |
+| Mermaid   | A process, relationship, state change, or decision has at least three meaningful nodes | Diagram matches verified product behavior and remains readable on mobile                   |
+| `Tree`    | File placement or project structure is central to an integration step                  | Paths match the documented framework and supported setup                                   |
+| `Tile`    | A hub benefits from an asset-backed visual choice                                      | Approved preview asset with consistent aspect ratio, size, alt text, and maintenance owner |
+| `Color`   | An exact color value is itself part of the instruction                                 | The value is a verified product or integration requirement                                 |
+| Icon      | A small visual cue improves card or callout scanning                                   | Icon choice is consistent and has no standalone semantic burden                            |
 
 Rules:
 
@@ -215,14 +216,14 @@ Rules:
 
 ### 7.5 API documentation
 
-| Component | Use when | Guardrail |
-| --- | --- | --- |
-| `ParamField` | A request parameter, header, path value, or body field is verified | Include type and requirement status only when sourced |
-| `ResponseField` | A returned field and its type are verified | Do not infer schemas from a single example |
-| `Expandable` | A request or response field contains a verified nested object | Preserve readable nesting and avoid excessive depth |
-| `RequestExample` | A hand-authored API page benefits from a prominent request example | Use tested examples with safe placeholder values |
-| `ResponseExample` | A verified response example exists | Show only fields and statuses confirmed by the product |
-| `CodeGroup` | Equivalent examples exist in multiple languages or tools | Keep examples behaviorally equivalent |
+| Component         | Use when                                                           | Guardrail                                              |
+| ----------------- | ------------------------------------------------------------------ | ------------------------------------------------------ |
+| `ParamField`      | A request parameter, header, path value, or body field is verified | Include type and requirement status only when sourced  |
+| `ResponseField`   | A returned field and its type are verified                         | Do not infer schemas from a single example             |
+| `Expandable`      | A request or response field contains a verified nested object      | Preserve readable nesting and avoid excessive depth    |
+| `RequestExample`  | A hand-authored API page benefits from a prominent request example | Use tested examples with safe placeholder values       |
+| `ResponseExample` | A verified response example exists                                 | Show only fields and statuses confirmed by the product |
+| `CodeGroup`       | Equivalent examples exist in multiple languages or tools           | Keep examples behaviorally equivalent                  |
 
 Rules:
 
@@ -376,7 +377,7 @@ Work:
 - Convert verified inputs to consistent `ParamField` structures.
 - Add `RequestExample` and `CodeGroup` where tested examples exist.
 - Add `ResponseExample`, `ResponseField`, and `Expandable` only from verified schemas or behavior.
-- Keep authentication language aligned with ingestion-only API keys.
+- Keep authentication language aligned with the current API-key contract: server-side ingestion, reads, and management as the key owner; no key in browser tracking.
 - Record unresolved response-schema gaps as source follow-ups.
 
 Exit criteria:
@@ -467,7 +468,7 @@ Exit criteria:
 - [ ] Selected hand-authored API pages use `RequestExample` or `CodeGroup` consistently.
 - [ ] `ResponseExample` and `ResponseField` appear only where verified responses exist.
 - [ ] No API example exposes a real secret, user identity, or production identifier.
-- [ ] API keys are never described as credentials for reading analytics.
+- [ ] API-key examples explain the key-owner permission model and never expose a key in browser code.
 
 ### 10.4 Visual and AI components
 
@@ -504,18 +505,18 @@ If reliable documentation analytics are available, compare task exits and search
 
 ## 12. Risks and mitigations
 
-| Risk | Impact | Mitigation |
-| --- | --- | --- |
-| Component overuse | Pages become visually noisy and slower to scan | Require a reader-job rationale; plain prose is always acceptable |
-| Critical content is hidden | Readers miss required steps or safety constraints | Keep prerequisites, risks, limitations, and verification visible |
-| MDX syntax regressions | Pages fail to build or render | Migrate in small batches and run validation after each batch |
-| Broad `CardGroup` migration changes layout | Related links or hubs regress on some viewports | Preserve source order and perform representative visual checks |
-| Screenshots become stale | UI instructions lose trust | Record source, capture date, owner, and review trigger |
-| Sensitive data appears in assets | Privacy or security incident | Use approved sample data and review every asset before commit |
-| API schema is inferred | Documentation promises unsupported behavior | Require a product or OpenAPI source for every structured field |
-| Tabs and visibility create duplicate facts | Variants drift over time | Keep shared facts outside variants and restrict `Visibility` |
-| Diagrams oversimplify behavior | Readers form an incorrect mental model | Validate diagrams against product sources and keep caveats visible |
-| Mobile or assistive views break | Content becomes inaccessible | Preserve semantic order and test keyboard, screen reader, and mobile layouts |
+| Risk                                       | Impact                                            | Mitigation                                                                   |
+| ------------------------------------------ | ------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Component overuse                          | Pages become visually noisy and slower to scan    | Require a reader-job rationale; plain prose is always acceptable             |
+| Critical content is hidden                 | Readers miss required steps or safety constraints | Keep prerequisites, risks, limitations, and verification visible             |
+| MDX syntax regressions                     | Pages fail to build or render                     | Migrate in small batches and run validation after each batch                 |
+| Broad `CardGroup` migration changes layout | Related links or hubs regress on some viewports   | Preserve source order and perform representative visual checks               |
+| Screenshots become stale                   | UI instructions lose trust                        | Record source, capture date, owner, and review trigger                       |
+| Sensitive data appears in assets           | Privacy or security incident                      | Use approved sample data and review every asset before commit                |
+| API schema is inferred                     | Documentation promises unsupported behavior       | Require a product or OpenAPI source for every structured field               |
+| Tabs and visibility create duplicate facts | Variants drift over time                          | Keep shared facts outside variants and restrict `Visibility`                 |
+| Diagrams oversimplify behavior             | Readers form an incorrect mental model            | Validate diagrams against product sources and keep caveats visible           |
+| Mobile or assistive views break            | Content becomes inaccessible                      | Preserve semantic order and test keyboard, screen reader, and mobile layouts |
 
 ## 13. Deliverables
 

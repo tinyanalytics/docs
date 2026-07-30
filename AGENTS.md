@@ -18,7 +18,7 @@ tinyanalytics is privacy-friendly, cookieless web **and** product analytics, off
 - **Never document the admin console or operator internals** — instance ops, system-admin tooling, email diagnostics.
 - **Never document unshipped features** — session replay is excluded by design. Check `../tinyanalytics/wiki/features.md` before writing about anything.
 - **Never expose internal reasoning** — decision records inform pages; they are not pages.
-- **API keys authenticate ingestion only** — never present them as auth for reading analytics.
+- **API keys authenticate customer API access** — server-side ingestion, analytics reads, and site management. Reads and management inherit the key owner's permissions. Browser tracking stays keyless.
 
 ## Terminology
 
@@ -26,7 +26,7 @@ tinyanalytics is privacy-friendly, cookieless web **and** product analytics, off
 - **site** — a tracked website or app (not "property" or "project").
 - **organization** — the top-level tenant; **team** — a site-access group inside an organization.
 - **custom event** — a named event you send with `event()`; **identify** — attaching a user ID with `identify()`.
-- **cookieless identity** — the hash-based visitor model. Explain the mechanism; never call it "fingerprinting" without the rotation/unstored context.
+- **cookieless identity** — the server-derived, one-way visitor-ID model. Explain that anonymous counts are estimates and raw IP addresses are not written to analytics data; do not call it browser fingerprinting.
 
 ## Style
 

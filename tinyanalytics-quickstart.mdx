@@ -1,0 +1,93 @@
+---
+title: "Install tinyanalytics in 5 Minutes"
+sidebarTitle: "Quickstart"
+description: "Add a site, install the tinyanalytics script (under 6.5 KB gzipped), and verify your first cookieless visit in Realtime in about five minutes."
+icon: "rocket"
+---
+
+Install tinyanalytics in about five minutes: add a site, paste one tracking script into your HTML, and confirm your first visit in Realtime.
+
+## Prerequisites
+
+- A tinyanalytics account. Sign up or sign in at [dash.tinyanalytics.io](https://dash.tinyanalytics.io).
+- Access to your website's HTML — specifically the ability to add a tag to the `<head>`.
+
+## Add your site and install the script
+
+<Steps>
+  <Step title="Add your website">
+    In the dashboard, select **Add website** and enter your site's domain (for example, `example.com`).
+
+    tinyanalytics creates the site and opens its dashboard. Until the first visit arrives, that dashboard shows a setup panel with your tracking script and a grid of platform guides.
+  </Step>
+  <Step title="Copy your tracking script">
+    Copy the tracking script shown on the setup panel. It looks like this, with your own site ID already filled in:
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js" data-site-id="123"></script>
+    ```
+
+    <Note>
+      Always copy the tracking script from your dashboard rather than typing it by hand. The dashboard fills in the correct script URL and your numeric `data-site-id` for you.
+    </Note>
+  </Step>
+  <Step title="Add the tracking script to your site">
+    Paste the tracking script into your site's HTML, just before the closing `</head>` tag, on every page you want to measure.
+
+    `defer` tells the browser to run the script after the HTML has parsed, so it never blocks your page from loading. If you use a site builder or a framework, see the [integration guides](/install-tinyanalytics-tracking-script#framework-and-cms-installs) for where to paste it.
+  </Step>
+  <Step title="Deploy your site">
+    Publish the change so the tracking script is live on your public pages.
+  </Step>
+  <Step title="See your first visit">
+    Open your site in a browser, then return to its tinyanalytics dashboard. Within a few seconds your visit appears, and the setup panel is replaced by your live dashboard.
+  </Step>
+</Steps>
+
+## Verify it's working
+
+<Check>
+  Your setup is correct when a visit to your own site appears in the dashboard within a few seconds.
+</Check>
+
+If nothing appears after a minute, work through these three causes in order:
+
+- Confirm the tracking script is in the `<head>` of a **published** page, not a draft or preview.
+- Confirm the `data-site-id` matches the site you're viewing in the dashboard.
+- Disable ad blockers for the test, or set up a [first-party proxy](/install-tinyanalytics-tracking-script#bypass-ad-blockers) so tracking isn't blocked.
+
+For a full checklist, see [verify your setup](/verify-tinyanalytics-installation).
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need a cookie banner for tinyanalytics?">
+    Core anonymous analytics sets no cookies and stores no anonymous analytics ID in the browser. Optional features such as identification, feature flags, groups, surveys, and browser opt-out use purpose-specific browser storage. Whether you need consent depends on your jurisdiction and setup; see [Privacy & GDPR](/resources/privacy-friendly-analytics-gdpr).
+  </Accordion>
+  <Accordion title="Where do I put the tracking script in a framework or CMS?">
+    Add it once in a shared layout, template, or header so it loads on every page. tinyanalytics has step-by-step guides for Next.js, React, WordPress, Webflow, Shopify, and more — see the [integration guides](/integrations/install-website-analytics).
+  </Accordion>
+  <Accordion title="Does the tracking script work with single-page apps?">
+    Yes, with no extra setup. Route tracking is on by default, so client-side navigation in React, Vue, and similar frameworks is recorded as a new pageview automatically. See [track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+  </Accordion>
+  <Accordion title="How long until my first visit shows up?">
+    A few seconds. The tracking script sends the event as soon as the page loads, and the dashboard reflects it in near real time. If a minute passes with nothing, use the three checks above.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<Columns cols={2}>
+  <Card title="Configure the script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
+    Control SPA routing, auto-capture, path masking, and more with `data-*` attributes.
+  </Card>
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Measure signups, purchases, and other actions beyond pageviews.
+  </Card>
+  <Card title="Identify users" icon="user" href="/user-identification-analytics">
+    Attach your own user IDs to follow people across devices.
+  </Card>
+  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
+    Understand cookieless identity and where your data goes.
+  </Card>
+</Columns>

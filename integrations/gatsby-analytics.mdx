@@ -1,0 +1,67 @@
+---
+title: "Gatsby Analytics Integration"
+sidebarTitle: "Gatsby"
+description: "Load tinyanalytics with Gatsby's Script component in a shared layout so every page and client-side navigation is tracked."
+icon: "code"
+---
+
+To add tinyanalytics to a **Gatsby** site, load the tracking script with Gatsby's built-in `<Script>` component from a shared layout so it runs on every page. Client-side navigation between pages is tracked automatically.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
+
+## Add the `<Script>` to a shared layout
+
+Import `Script` from `gatsby` and render it in the layout your pages share, for example `src/components/layout.js`:
+
+```jsx src/components/layout.js
+import * as React from "react";
+import { Script } from "gatsby";
+
+export default function Layout({ children }) {
+  return (
+    <>
+      {children}
+      <Script
+        src="https://dash.tinyanalytics.io/script.js"
+        data-site-id="YOUR_SITE_ID"
+      />
+    </>
+  );
+}
+```
+
+<Tip>
+  Replace `YOUR_SITE_ID` with your real site ID. If you've toggled options in **Settings → Tracking**, pass each one as another `data-*` prop on `<Script>`.
+</Tip>
+
+## Client-side navigation is tracked automatically
+
+Gatsby renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). You don't need to hook into Gatsby's router. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+
+## Verify
+
+Build or deploy your site, open it in a browser, then check **Realtime** in your dashboard for your visit. See [Verify your setup](/verify-tinyanalytics-installation) for the full check.
+
+<Check>
+  Your install is working when your own visit appears in **Realtime** in your dashboard.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Install on React" icon="react" href="/integrations/react-analytics">
+    A plain React or Vite app instead.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Send events from your components.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Confirm tracking works.
+  </Card>
+</Columns>

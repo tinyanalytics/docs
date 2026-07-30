@@ -1,0 +1,124 @@
+---
+title: "tinyanalytics Pricing, Plans, and Limits"
+sidebarTitle: "Billing and plans"
+description: "Understand the Free, Growth, and Business plans, the 14-day Business trial, monthly AI credits, pageview metering, and how reporting retention works."
+icon: "credit-card"
+---
+
+tinyanalytics has three plans: **Free**, **Growth**, and **Business**. Core web analytics is included on every plan, including Free. Paid plans increase volume, reporting history, collaboration limits, AI credits, and access to growth or product features.
+
+For the live price at each pageview tier, visit [dash.tinyanalytics.io/pricing](https://dash.tinyanalytics.io/pricing).
+
+## What does each plan include?
+
+| Plan         |                               Starts at | Reporting history |
+| ------------ | --------------------------------------: | ----------------: |
+| **Free**     |       $0, up to 100,000 pageviews/month |          180 days |
+| **Growth**   |    $9/month for up to 500,000 pageviews |           3 years |
+| **Business** | $29/month for up to 1 million pageviews |         Unlimited |
+
+- **Free** includes core analytics for up to 3 sites and 1 seat, plus a starter allowance for goals, funnels, dashboards, reports, and AI.
+- **Growth** adds unlimited goals, funnels, dashboards, reports, segments, cohorts, and alerts, plus revenue, Search Console, and embeds.
+- **Business** adds unlimited sites and seats, surveys, feature flags, experiments, the query API, and unlimited AI credits.
+
+Growth and Business have additional pageview tiers. Annual billing costs ten months of the monthly price, so it includes two months free.
+
+<Note>
+  The pricing page is rendered from the same plan catalog the product uses for
+  limits. Use it as the source for current prices, volumes, and the complete
+  feature comparison.
+</Note>
+
+## What happens during the free trial?
+
+New organizations start with **14 days of Business**, with no credit card required. This lets you try the complete feature set. When the trial ends, the organization lands on Free unless you choose another plan.
+
+Your existing analytics data is not deleted when the trial ends, and the tracking script keeps collecting new events. Features or creation limits that are not part of Free become unavailable until you upgrade.
+
+## How do pageview limits work?
+
+Pageviews are measured per calendar month for the organization. The Billing page under **Settings → Billing** shows current usage against the plan's pageview tier.
+
+Reaching the displayed pageview allowance does not stop the tracking script or discard incoming events. The usage meter helps you choose the plan tier that matches your traffic.
+
+## Does retention delete my data?
+
+No. Reporting retention controls **how far back your organization can query**, not how long tinyanalytics stores individual event rows. For example, Free reports can query the latest 180 days and Growth reports can query the latest three years.
+
+If a requested range reaches beyond the plan's reporting history, tinyanalytics shortens the visible range. A comparison that needs an older baseline can be withheld and show an upgrade prompt rather than presenting an incomplete comparison as complete.
+
+## How do AI credits work?
+
+The current monthly plan allowances are:
+
+| Plan         | AI credits per month |
+| ------------ | -------------------: |
+| **Free**     |                   30 |
+| **Growth**   |                1,000 |
+| **Business** |            Unlimited |
+
+A fresh [Ask AI](/ai-analytics-assistant) turn or AI query generation uses the organization's monthly pool when metering is active. Saving your own Anthropic key under **Settings → Account** moves generation to your Anthropic account and bypasses the tinyanalytics credit allowance.
+
+## Manage your plan and usage
+
+<Steps>
+  <Step title="Open Billing">
+    Go to **Settings → Billing** for the active organization.
+  </Step>
+  <Step title="Review current usage">
+    Check the plan, trial status, monthly pageviews, reporting history, AI
+    credits, and the resources included in the plan.
+  </Step>
+  <Step title="Choose the right tier">
+    Select **Upgrade** or **Change plan**, then use the live pricing table to
+    choose the plan and pageview volume that fit your organization.
+  </Step>
+</Steps>
+
+<Check>
+  The Billing page should show the same plan name, pageview allowance, reporting
+  history, and resource limits as the selected pricing tier.
+</Check>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Will tinyanalytics stop collecting when I reach the pageview allowance?">
+    No. Pageviews are metered, but reaching the displayed allowance does not
+    stop collection or discard incoming events. Review **Settings → Billing**
+    and choose a larger tier when your traffic outgrows the current allowance.
+  </Accordion>
+  <Accordion title="What happens to my data when the Business trial ends?">
+    The organization lands on Free unless you choose a paid plan. Existing
+    analytics data is not deleted, and collection continues. Free plan feature
+    and creation limits apply after the trial.
+  </Accordion>
+  <Accordion title="Does a 180-day history limit mean older events are deleted?">
+    No. It limits how far back reports can query. It is not a deletion policy.
+  </Accordion>
+  <Accordion title="Why does my organization show no limits?">
+    Some earlier organizations can be grandfathered with features and limits
+    unlocked. The Billing page shows this status when it applies.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Ask AI" icon="sparkles" href="/ai-analytics-assistant">
+    Understand what an AI credit pays for.
+  </Card>
+  <Card title="Account settings" icon="user-gear" href="/tinyanalytics-account-settings">
+    Add your own Anthropic key.
+  </Card>
+  <Card title="Organizations" icon="building" href="/analytics-organizations-members">
+    Manage the organization attached to the plan.
+  </Card>
+  <Card
+    title="Metric definitions"
+    icon="ruler"
+    href="/resources/analytics-metrics-glossary"
+  >
+    See exactly what a pageview counts.
+  </Card>
+</Columns>

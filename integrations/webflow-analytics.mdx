@@ -1,0 +1,61 @@
+---
+title: "Webflow Analytics Integration"
+sidebarTitle: "Webflow"
+description: "Install tinyanalytics in Webflow's project head code and publish once to track every page without plugins or source-code changes."
+icon: "webflow"
+---
+
+To add tinyanalytics to a **Webflow** site, paste the tracking snippet into your project's custom head code and publish. It takes a minute, needs no plugins, and applies to every page on your site.
+
+## Before you start
+
+- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- Your snippet from **Settings → Tracking** in your dashboard.
+
+## Add the snippet to your project head code
+
+<Steps>
+  <Step title="Open your project's custom code">
+    In the Webflow Designer, go to **Project Settings → Custom Code**.
+  </Step>
+  <Step title="Paste into Head Code">
+    Paste your tinyanalytics snippet into the **Head Code** field (the `<head>` section):
+
+    ```html
+    <script defer src="https://dash.tinyanalytics.io/script.js"
+      data-site-id="YOUR_SITE_ID"></script>
+    ```
+  </Step>
+  <Step title="Save and publish">
+    Save the settings, then **publish** your site. Custom code only takes effect on the published site, not in the Designer preview.
+  </Step>
+</Steps>
+
+<Tip>
+  Adding the snippet at the **project** level applies it to every page. Replace `YOUR_SITE_ID` with your real site ID, and copy the full snippet from **Settings → Tracking** if you've toggled any options.
+</Tip>
+
+## Verify
+
+Visit your **published** Webflow site in a browser, then check **Realtime** in your dashboard for your visit. Remember that tracking runs on the live site, not the Designer. See [Verify your setup](/verify-tinyanalytics-installation) for the full check.
+
+<Check>
+  Your install is working when your visit to the **published** site appears in **Realtime** in your dashboard. Tracking runs on the live site, not the Designer.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/install-website-analytics">
+    The universal method and other platforms.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
+    Every `data-*` option you can set.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Confirm tracking works.
+  </Card>
+  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Measure signups, clicks, and purchases.
+  </Card>
+</Columns>

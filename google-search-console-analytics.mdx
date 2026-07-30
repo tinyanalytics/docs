@@ -1,0 +1,127 @@
+---
+title: "Google Search Console Analytics"
+sidebarTitle: "Search Console"
+description: "Connect Google Search Console to compare queries, pages, countries, and devices with clicks, impressions, CTR, position, and onsite behavior."
+icon: "magnifying-glass"
+---
+
+Connect **Google Search Console** to tinyanalytics to see how people find you in Google Search — your top queries, pages, countries, and devices, each with clicks, impressions, click-through rate, and average position — and, for pages, countries, and devices, joined to the traffic you already track. One row shows what a page ranks for *and* how the visitors it earns behave. It answers the question your pageview data can't: *what did people search to get here?*
+
+## How do I connect Google Search Console?
+
+You connect Search Console from its report page in three steps. You'll need a Google account that already has verified Search Console properties.
+
+<Steps>
+  <Step title="Open Search Console and connect">
+    Go to the **Search Console** report for your site and click **Connect**. You'll be sent to Google to sign in and grant read access to your Search Console data.
+  </Step>
+  <Step title="Pick a property">
+    After you approve, tinyanalytics lists the Search Console properties your Google account can access. Choose the one that matches this site.
+  </Step>
+  <Step title="View your search metrics">
+    Your totals, trend chart, and per-dimension tables load in the report. Everything stays on this one page — connect, view, and disconnect are all here.
+  </Step>
+</Steps>
+
+tinyanalytics only ever **reads** your Search Console data. You can disconnect at any time from the same page.
+
+## Verify
+
+<Check>
+  The connection is working when the totals, trend chart, and dimension tables load for the Search Console property you selected.
+</Check>
+
+## What search metrics does tinyanalytics show?
+
+The report opens with a **totals strip** — clicks, impressions, CTR, and average position for the whole window — then a **trend chart**, then a table you can switch across four dimensions, one tab each. Every row carries the same four Google metrics:
+
+| Dimension | Google metrics per row |
+| --- | --- |
+| **Queries** — what people searched | Clicks · Impressions · CTR · Average position |
+| **Pages** — which of your pages appeared | Clicks · Impressions · CTR · Average position |
+| **Countries** — where searchers were | Clicks · Impressions · CTR · Average position |
+| **Devices** — desktop, mobile, tablet | Clicks · Impressions · CTR · Average position |
+
+CTR is shown as a percentage and average position to one decimal place. Click a column header to sort, and use the search box to filter rows by name — searching never rescales the share-of-clicks bars, which are always computed over every fetched row.
+
+The totals are exact: clicks and impressions are summed, while CTR and average position are **impression-weighted**, so a 10-impression day can't swing the window average the way a 10,000-impression day does.
+
+## How do I see my traffic next to my search rankings?
+
+On the **Pages**, **Countries**, and **Devices** tabs, each row adds your first-party tinyanalytics metrics next to Google's — so a single row reads "ranks #4, gets 1,200 impressions, and converts to 340 sessions at 41% bounce."
+
+- **Pages** join on the page path and show your sessions and pageviews, plus **bounce rate** and **engaged** sessions for pages that start a visit.
+- **Countries** and **Devices** join on the same dimension and show your sessions and pageviews.
+- A row with no matching tinyanalytics traffic shows a **`—`**, never a fabricated `0` — a page Google sent impressions to but that you have no tracked traffic for is genuinely unknown, not zero.
+
+Click any Pages, Countries, or Devices row to drill straight into the matching tinyanalytics report, pre-filtered to that page, country, or device over the same Search Console window.
+
+<Note>
+  **Bounce rate and engaged are entry-page only.** They come from your landing-page data, which exists only for paths that *started* a session. A page that ranks and gets clicked but is rarely an entry point shows its sessions and pageviews with `—` for bounce and engaged.
+</Note>
+
+<Info>
+  **Queries stay Google-only.** tinyanalytics never sees a visitor's search terms server-side, so there is nothing first-party to join to a query. The Queries tab shows Google's clicks, impressions, CTR, and position only.
+</Info>
+
+## Is my search traffic growing?
+
+Two things answer this on the page:
+
+- **The trend chart** plots clicks and impressions per day across the window. Clicks read on the left axis with a shaded area; impressions read on their own right axis as a lighter line, because impressions typically dwarf clicks and a shared axis would flatten the clicks line. Hover for a per-day tooltip.
+- **Period comparison.** The totals strip shows each metric's change against the **previous equal-length window** — the same number of days immediately before your current one. A metric with no comparable prior data hides its change chip rather than showing a misleading swing.
+
+## Can I export my Search Console data?
+
+Yes. The table exports to **CSV** — the rows currently displayed, with their visible columns, including the joined tinyanalytics metrics on the Pages, Countries, and Devices tabs. Use it to pull rankings and traffic into a spreadsheet or a report.
+
+## Why is Search Console on its own date range?
+
+Search Console data is **daily and lags about two to three days** behind, so the report uses its own trailing window — **last 7 days, last 28 days, or last 3 months** (28 days is the default) — rather than the minute-level range the rest of the dashboard shares. A "last 30 minutes" view would be meaningless for search data that hasn't arrived yet.
+
+Google fixes Search Console's daily aggregation to the **America/Los_Angeles (Pacific)** time zone, and the report matches it: the window ends at the latest complete Pacific day (about two days ago) and spans exactly the number of days you pick. That alignment makes the totals match Google's own Performance report row-for-row. It also means the numbers can differ slightly from the rest of your dashboard when your reporting timezone isn't Pacific — the two answer different questions ("what does Google report" versus "my traffic in my timezone").
+
+## What is the Search Console card on my dashboard?
+
+Once a site is connected, your main dashboard shows a **Search Console** card with your top five queries over the last 28 days — a quick glance at what's driving search traffic without leaving the overview. The card appears only when Search Console is connected, so an unconnected dashboard stays uncluttered.
+
+<Info>
+  Search Console queries can be more sensitive than aggregate pageviews, so the report and its dashboard card are visible only to signed-in members of your site — never on a public or embedded dashboard.
+</Info>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I see my traffic and my Google rankings in one place?">
+    Yes. On the Pages, Countries, and Devices tabs, each row joins Google's clicks, impressions, CTR, and average position with your first-party tinyanalytics sessions and pageviews — and bounce rate and engaged sessions on entry pages. A row with no matching tracked traffic shows `—` rather than a fabricated `0`. The Queries tab stays Google-only, because tinyanalytics never sees search terms server-side.
+  </Accordion>
+  <Accordion title="Why is my Search Console data two or three days behind?">
+    Google Search Console data is daily and lags about two to three days behind. That's why the tinyanalytics Search Console report uses its own trailing window — last 7 days, last 28 days, or last 3 months — aligned to Google's Pacific-day aggregation and ending at the latest complete day, so the totals match Google's own Performance report.
+  </Accordion>
+  <Accordion title="Can I export Search Console data from tinyanalytics?">
+    Yes. The table exports to CSV — the rows currently shown, with their visible columns, including the joined tinyanalytics metrics on the Pages, Countries, and Devices tabs.
+  </Accordion>
+  <Accordion title="Can I disconnect Google Search Console from tinyanalytics?">
+    Yes, at any time from the Search Console report page — connect, view, and disconnect all live on that one page. tinyanalytics only ever reads your Search Console data; it never writes to it.
+  </Accordion>
+  <Accordion title="Does Search Console data appear on a public or embedded dashboard?">
+    No. Search Console queries can be more sensitive than aggregate pageviews, so the report and its dashboard card are visible only to signed-in members of your site. A public or embedded tinyanalytics dashboard never shows them.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="AI traffic" icon="robot" href="/ai-referral-traffic-analytics">
+    How AI assistants send you visitors — the other discovery channel.
+  </Card>
+  <Card title="Top pages" icon="file-lines" href="/page-analytics">
+    Which pages get the most traffic once people arrive.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/web-analytics-dashboard">
+    Your traffic, with search data alongside it.
+  </Card>
+  <Card title="Filter your data" icon="filter" href="/analytics-filters">
+    Narrow your analytics by page, source, and more.
+  </Card>
+</Columns>

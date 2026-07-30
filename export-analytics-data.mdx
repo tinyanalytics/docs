@@ -1,0 +1,80 @@
+---
+title: "Export Analytics Data"
+sidebarTitle: "Export data"
+description: "Export the active date range and filters as raw CSV report files or a shareable PDF summary of key metrics and top tables."
+icon: "file-arrow-down"
+---
+
+You can export your tinyanalytics data as **CSV** or **PDF** from the download menu on your dashboard. CSV gives you the raw numbers behind every report for spreadsheets or your own analysis; PDF gives you a shareable summary of your key metrics and top tables. Both exports respect your **current date range and filters**, so you download exactly what's on screen.
+
+## How do I export?
+
+Open the **download menu** in the dashboard controls and choose a format. The export runs for your active window and filters, and downloads when it's ready.
+
+## What's in the CSV export?
+
+The CSV export downloads a **ZIP file** containing one CSV per report, so you get the full picture in one download:
+
+- Every **breakdown dimension** — pages, referrers, channels, countries, regions, cities, browsers, operating systems, devices, UTMs, and more.
+- Your **overview time series** for the selected window.
+- Your **events** list.
+
+Only reports with data for the current window are included. This is the format to use when you want to pivot, chart, or join the data yourself.
+
+If one report fails while the others succeed, tinyanalytics still downloads the ZIP with the successful CSV files and shows how many files were skipped. If every report fails or returns no data, the export stops with an error instead of downloading an empty archive.
+
+## What's in the PDF export?
+
+The PDF export is a **formatted summary** for sharing or archiving. It includes:
+
+- The **title and date range**.
+- Your **six overview metrics** with their change versus the previous period.
+- The **top rows** of your key breakdown tables.
+
+The PDF covers your metrics and tables rather than pixel-perfect snapshots of the live charts — it's built for a quick, readable summary you can send to someone who doesn't log in.
+
+<Tip>
+  Both exports reflect the **date range and filters active when you export**. To
+  export a specific slice — one country, one campaign, one segment — apply it
+  first, then export.
+</Tip>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does my tinyanalytics export include the filters I have applied?">
+    Yes. Both the CSV and PDF exports respect the date range and filters active
+    at the moment you export, so you download exactly what's on screen. To
+    export one country, campaign, or segment, apply it in the dashboard first,
+    then export.
+  </Accordion>
+  <Accordion title="Why are some reports missing from my CSV export?">
+    Only reports with data for the current window are included. A breakdown with
+    no rows is left out of the ZIP. If a report request fails, tinyanalytics
+    downloads the other successful files and shows a warning with the number of
+    skipped CSVs.
+  </Accordion>
+  <Accordion title="What file do I get from a CSV export?">
+    A ZIP file containing one CSV per report: every breakdown dimension (pages,
+    referrers, channels, countries, regions, cities, browsers, operating
+    systems, devices, UTMs, and more), your overview time series for the
+    selected window, and your events list.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Filter your data" icon="filter" href="/analytics-filters">
+    Narrow to the exact slice before you export.
+  </Card>
+  <Card title="Saved segments" icon="bookmark" href="/saved-analytics-segments">
+    Apply a saved segment, then export it.
+  </Card>
+  <Card title="Dashboard overview" icon="gauge" href="/web-analytics-dashboard">
+    The metrics and tables your export captures.
+  </Card>
+  <Card title="Compare periods" icon="arrow-right-arrow-left" href="/analytics-period-comparison">
+    The previous-period change shown in the PDF.
+  </Card>
+</Columns>

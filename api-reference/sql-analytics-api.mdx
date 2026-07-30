@@ -1,0 +1,158 @@
+---
+title: "SQL Analytics API"
+sidebarTitle: "Scoped SQL"
+description: "Run read-only SQL against site-scoped analytics, bot, and Stripe revenue tables with POST /api/sites/{id}/query and receive typed result metadata."
+icon: "database"
+
+---
+
+`POST /api/sites/{id}/query` runs a **read-only SQL query** against your site's analytics data and returns rows with typed column metadata — the programmatic form of the [SQL query builder](/sql-analytics-query-builder). You write a `SELECT` against virtual tables that are already scoped to your site.
+
+```
+POST https://dash.tinyanalytics.io/api/sites/{id}/query
+```
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://dash.tinyanalytics.io/api/sites/1/query \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "SELECT pathname, count() AS views FROM scoped_events WHERE type = '\''pageview'\'' GROUP BY pathname ORDER BY views DESC LIMIT 20"
+  }'
+```
+
+```js JavaScript
+await fetch("https://dash.tinyanalytics.io/api/sites/1/query", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    query:
+      "SELECT pathname, count() AS views FROM scoped_events WHERE type = 'pageview' GROUP BY pathname ORDER BY views DESC LIMIT 20",
+  }),
+})
+```
+
+```python Python
+import requests
+
+requests.post(
+    "https://dash.tinyanalytics.io/api/sites/1/query",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+    json={
+        "query": "SELECT pathname, count() AS views FROM scoped_events WHERE type = 'pageview' GROUP BY pathname ORDER BY views DESC LIMIT 20"
+    },
+)
+```
+
+</CodeGroup>
+
+<ParamField body="query" type="string" required>
+  A single read-only `SELECT` (or `WITH … SELECT`) against the site-scoped virtual tables.
+</ParamField>
+
+## The scoped tables
+
+| Table | Contains |
+| --- | --- |
+| `scoped_events` | your analytics events |
+| `scoped_events_bot` | events classified as bot traffic |
+| `scoped_stripe_revenue` | raw, signed Stripe charges, refunds, and disputes |
+
+All three are automatically filtered to the site in the URL — you never write a `site_id` filter, and a query cannot reach another site's data.
+
+`scoped_stripe_revenue` is append-only. Deduplicate Stripe webhook replays by `stripe_event_id` before aggregating:
+
+```sql
+SELECT sum(amount) AS net_revenue
+FROM (
+  SELECT stripe_event_id, argMax(amount, timestamp) AS amount
+  FROM scoped_stripe_revenue
+  GROUP BY stripe_event_id
+)
+```
+
+See [query Stripe revenue](/sql-analytics-query-builder#how-do-i-query-stripe-revenue) for the table schema and currency caveats.
+
+## Response
+
+```json
+{
+  "data": [ { "pathname": "/", "views": "1024" } ],
+  "columns": [ { "name": "pathname", "type": "String" }, { "name": "views", "type": "UInt64" } ],
+  "meta": { "rowCount": 1 }
+}
+```
+
+<ResponseField name="data" type="array">
+  The result rows, each an object keyed by the column names you selected.
+</ResponseField>
+
+<ResponseField name="columns" type="array">
+  One entry per selected column, in order.
+
+  <Expandable title="properties">
+    <ResponseField name="name" type="string">
+      The column name.
+    </ResponseField>
+    <ResponseField name="type" type="string">
+      The column's database type, e.g. `String` or `UInt64`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Metadata about the result set.
+
+  <Expandable title="properties">
+    <ResponseField name="rowCount" type="number">
+      How many rows `data` contains.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+`columns` preserves order and gives each column's type, so you can render results without inferring shapes.
+
+## Limits
+
+The query runs read-only, so it can never modify your data:
+
+- A single `SELECT` (or `WITH … SELECT`) reading the scoped tables and your own CTEs — writes, schema changes, multiple statements, and reads outside the scoped tables are rejected.
+- A query runs for at most **10 seconds** and returns at most **1,000 rows**.
+
+A SQL error comes back as a `400` with the database's message so you can fix the query.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can a query reach another site's data?">
+    No. All three scoped tables are automatically filtered to the site in the URL of `POST /api/sites/{id}/query`. You never write a `site_id` filter, and a query cannot reach another site's data.
+  </Accordion>
+  <Accordion title="How many rows can a scoped SQL query return?">
+    At most **1,000 rows**, and the query runs for at most **10 seconds**. Both limits apply to every call to `POST /api/sites/{id}/query`.
+  </Accordion>
+  <Accordion title="What happens if my SQL is invalid?">
+    The endpoint returns a `400` with the database's own error message, so you can fix the query. Writes, schema changes, multiple statements, and reads outside the scoped tables are rejected the same way — the query runs read-only and can never modify your data.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="SQL query builder" icon="database" href="/sql-analytics-query-builder">
+    The same capability, in the dashboard.
+  </Card>
+  <Card title="Analytics read API" icon="chart-line" href="/api-reference/analytics-read-api">
+    Fixed reports when you don't need raw SQL.
+  </Card>
+  <Card title="Custom dashboards" icon="table-cells-large" href="/custom-analytics-dashboards">
+    Turn a query into a saved chart.
+  </Card>
+  <Card title="Metric definitions" icon="ruler" href="/analytics-data-dictionary">
+    The events and columns you can query.
+  </Card>
+</Columns>
