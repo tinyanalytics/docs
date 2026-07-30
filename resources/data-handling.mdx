@@ -1,10 +1,10 @@
 ---
 title: "How your data is handled"
-description: "What tinyanalytics stores and what it never stores: event data tied to a cookieless identifier, no cookies, no raw IP addresses, and no personal data unless you choose to send it."
+description: "What tinyanalytics stores, what core anonymous analytics never stores, and which optional features persist IDs, assignments, associations, or preferences in the browser."
 icon: "server"
 ---
 
-tinyanalytics is a **hosted analytics service**: your site sends events, and tinyanalytics stores and reports on them for you. This page explains what's stored, what's never stored, and how your data stays yours.
+tinyanalytics is a hosted analytics service: your site sends events, and tinyanalytics stores and reports on them for you. Core anonymous analytics uses no analytics cookies or stored browser ID, while optional product features can persist the specific state they need.
 
 ## What tinyanalytics stores
 
@@ -12,19 +12,32 @@ For each event your site sends, tinyanalytics keeps the analytics context it nee
 
 - **Page context** — the path, hostname, referrer, page title, and any campaign (UTM) parameters.
 - **Derived attributes** — an approximate location (country, region, city) from the IP, the marketing [channel](/resources/traffic-classification), and the device, browser, and OS from the user agent.
-- **A cookieless identifier** — a one-way [hashed fingerprint](/resources/cookieless-identity), not a stored ID.
+- **A cookieless identifier** — a one-way [server-derived ID](/resources/cookieless-identity), not an anonymous ID stored in the browser.
 - **What you choose to send** — [custom events](/custom-events) and their properties, plus any user ID and [traits](/identify-users) you set with `identify()`.
 - **Connected Stripe revenue** — when you [connect Stripe](/stripe-revenue), the amount, currency, adjustment type, Stripe event and charge IDs, live/test mode, and any analytics IDs resolved for attribution.
 
-## What tinyanalytics never stores
+## What core anonymous analytics never stores
 
-- **No cookies.** Nothing is written to your visitor's device.
+- **No analytics cookies.** Core anonymous analytics does not set a cookie.
+- **No anonymous browser ID.** Anonymous visitor identity is derived on the server instead of written to the browser.
 - **No raw IP addresses.** A visitor's IP is used only, in memory, to derive the hashed identifier and approximate location — it's never written to your analytics data.
 - **No personal data by default.** tinyanalytics stores no names, emails, or other identifying details unless *you* deliberately send them as an identified ID, a trait, or an event property.
 
 <Warning>
   Because custom event properties and traits are free-form, you control whether any personal data enters tinyanalytics. Avoid putting raw personal information (like an email address) into event properties unless you intend to store it.
 </Warning>
+
+## What optional features store in the browser
+
+Some features need continuity between page loads and visits:
+
+- [`identify()`](/identify-users) persists the user ID you provide.
+- [Feature flags](/feature-flags) persist a random, site-specific visitor ID so variations stay consistent.
+- [Group analytics](/group-analytics) persists the group associations you provide.
+- [Surveys](/surveys) persist eligibility, impression, and completion markers.
+- [Browser opt-out](/exclude-traffic#let-visitors-opt-out-in-the-browser) persists a disabled marker.
+
+These values are scoped to product behavior on your site; they do not create a cross-site advertising profile. See [Privacy & GDPR](/resources/privacy) when assessing consent requirements.
 
 ## How is a Stripe connection handled?
 

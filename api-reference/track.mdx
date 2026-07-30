@@ -2,6 +2,7 @@
 title: "Tracking API"
 description: "Send pageviews and custom events to POST /api/track. The request body is a JSON event keyed by type; the endpoint returns 204 and queues the event for ingestion."
 icon: "paper-plane"
+noindex: true
 ---
 
 `POST /api/track` is the ingestion endpoint every event flows through — the browser [tracking script](/tracking-script) uses it, and you can call it directly from a server to send events yourself. The body is a single JSON event, and the endpoint returns **`204 No Content`**: the event is validated and queued, then written asynchronously.

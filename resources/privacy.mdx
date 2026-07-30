@@ -1,21 +1,35 @@
 ---
 title: "Privacy & GDPR"
-description: "tinyanalytics is built to be privacy-friendly: no cookies, no raw IP storage, and a one-way hashed identifier instead of a persistent tracker — so no personal data is stored by default."
+description: "How tinyanalytics supports privacy-friendly analytics: no analytics cookies, no raw IP storage, cookieless identity, and clear browser-storage behavior for optional product features."
 icon: "user-shield"
 ---
 
-tinyanalytics is built to be **privacy-friendly by design**. It sets no cookies, stores no raw IP addresses, and identifies visitors with a one-way hash instead of a persistent tracker — so by default, no personal data is stored and nothing is placed on your visitor's device.
+tinyanalytics makes core anonymous analytics privacy-friendly by default. It sets no analytics cookies, stores no raw IP addresses, and counts anonymous visitors with a server-derived one-way identifier instead of a browser ID.
 
 ## The privacy properties
 
-- **No cookies.** tinyanalytics never writes a cookie or other identifier to the visitor's browser.
+- **No analytics cookies.** Core anonymous analytics does not set cookies or write an anonymous analytics ID to the browser.
 - **No raw IP addresses stored.** A visitor's IP is used only in memory to derive a [hashed identifier](/resources/cookieless-identity) and an approximate location, then it's gone — it isn't kept with your data.
-- **No cross-site profile.** The identifier is a hash, not a stored ID that follows a person across the web.
+- **No cross-site profile.** The cookieless identifier is derived for your site, not a stored ID that follows a person across the web.
 - **No personal data by default.** Names, emails, and other identifying details are stored only if *you* deliberately send them via `identify()`, traits, or event properties.
+
+## Which features use browser storage?
+
+Optional features use browser storage only when their behavior requires persistence:
+
+| Feature | What is stored | Why |
+| --- | --- | --- |
+| [`identify()`](/identify-users) | The user ID you provide | Keep a signed-in user identified across pages and visits |
+| [Feature flags](/feature-flags) | A random, site-specific visitor ID | Keep a visitor in the same variation |
+| [Group analytics](/group-analytics) | The group associations you provide | Retain account or workspace context |
+| [Surveys](/surveys) | Eligibility, impression, and completion markers | Respect wait periods and avoid repeat prompts |
+| [Opt-out](/exclude-traffic#let-visitors-opt-out-in-the-browser) | A disabled marker | Remember that analytics should stay off in that browser |
+
+These values support a feature on your site; they are not a cross-site advertising profile. They can still matter under laws that regulate non-cookie browser storage, so include them in your consent review when you enable those features.
 
 ## Do you still need a cookie-consent banner?
 
-Because tinyanalytics sets no cookies and stores no personal data by default, many sites can run it **without a cookie-consent banner**. Whether *you* need consent still depends on your jurisdiction and on what data you choose to send — so review the rules that apply to you and your visitors.
+Core anonymous analytics sets no cookies and does not persist an anonymous analytics ID in the browser. Whether *you* need consent still depends on your jurisdiction, the optional features you enable, and the data you choose to send. Review the rules that apply to you and your visitors.
 
 <Note>
   This page describes how tinyanalytics works, not legal advice. Your obligations under GDPR, ePrivacy, CCPA, or other regulations depend on your specific use, the data you collect, and where your visitors are. Consult those regulations — or a professional — for your situation.
@@ -28,6 +42,7 @@ You decide how much personal data, if any, enters tinyanalytics:
 - Use a **non-identifying ID** (like an internal user ID or a hash) with [`identify()`](/identify-users) rather than an email address.
 - Keep raw personal information out of [custom event](/custom-events) properties and traits unless you have a reason and a basis to store it.
 - If you [connect Stripe](/stripe-revenue), leave **Email fallback** off unless you need it and have a basis for processing customer emails. The email is not stored in the analytics event store, but matching it is still personal-data processing.
+- Review the browser storage used by optional features before enabling them.
 - Review what your team sends periodically, since properties and traits are free-form.
 
 ## Related

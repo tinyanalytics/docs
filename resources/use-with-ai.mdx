@@ -1,10 +1,18 @@
 ---
 title: "Use these docs with AI"
-description: "Read the tinyanalytics docs with your AI tools: copy any page as Markdown, open it in ChatGPT, Claude, or Perplexity, connect the docs MCP server, or pull them into Cursor and VS Code."
+description: "Give ChatGPT, Claude, Perplexity, Cursor, or VS Code accurate tinyanalytics context by copying a page, using Markdown and llms.txt, or connecting the docs MCP server."
 icon: "wand-magic-sparkles"
 ---
 
-These docs are built to be read by **AI tools**, not just people — so you can ask your assistant about tinyanalytics and get accurate, up-to-date answers. Every page can be handed to an AI in a few ways.
+Give your AI assistant the relevant tinyanalytics page before asking it to explain a feature, write an integration, or troubleshoot a setup. Every page is available as Markdown, through the documentation MCP server, and in the site's machine-readable index.
+
+## How is AI used inside tinyanalytics?
+
+tinyanalytics uses AI in the product as well as the documentation:
+
+- [AI traffic](/ai-traffic) shows visits referred by AI assistants and the pages those visitors view.
+- [Bot and crawler reports](/bots) separate automated traffic, including AI crawlers, from human visits.
+- The [SQL query builder](/sql-query-builder) turns a natural-language question into a query you can review and run against your analytics data.
 
 ## Copy or open any page in an AI tool
 
@@ -44,5 +52,11 @@ Point an AI tool at either file to give it the whole documentation set as contex
   </Card>
   <Card title="How tinyanalytics works" icon="diagram-project" href="/how-it-works">
     The mental model behind the docs.
+  </Card>
+  <Card title="Measure AI traffic" icon="sparkles" href="/ai-traffic">
+    Understand referrals and visits from AI assistants.
+  </Card>
+  <Card title="Ask questions with SQL" icon="database" href="/sql-query-builder">
+    Turn a natural-language question into a reviewable query.
   </Card>
 </Columns>

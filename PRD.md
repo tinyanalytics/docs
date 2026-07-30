@@ -60,10 +60,10 @@ The site is currently the empty Mintlify starter (two placeholder pages). The pr
 Docs readers are **product-aware** or **most-aware** — they already have or are evaluating tinyanalytics. Implication: pages lead with *how to do the thing* and *what it means*, not with *why analytics matters*. Persuasion lives in **descriptions, intros, and comparison pages**, not in every how-to.
 
 ### Positioning statement (the docs' throughline)
-> tinyanalytics gives you Google-Analytics-grade web **and** product insight — cookieless, privacy-first, and honest about its mechanisms — without a cookie banner or a data-sharing bargain.
+> tinyanalytics combines hosted web and product analytics, AI discovery, revenue, experiments, and monitoring for teams that want clear answers without tracking people.
 
 ### The single promise (repeat, don't dilute)
-**"Understand your traffic and your product without tracking people."** Cookieless by design: visitors are counted with a rotating, unstored hash — nothing personal to leak or consent to. Every intro, the Introduction page, and the comparison pages ladder back to this.
+**"Understand your traffic and your product without tracking people."** Core anonymous analytics sets no cookies, stores no raw IP addresses, and derives identity on the server instead of persisting an anonymous browser ID. Optional product features use purpose-specific browser storage and must be disclosed precisely. Every intro, the Introduction page, and the comparison pages ladder back to this.
 
 ### Voice & archetype
 - **Archetype:** primary **Sage** (truthful, evidence-led, explains the mechanism), with a **Everyman** secondary (plain-spoken, unpretentious). Never Ruler/luxury, never Jester.
@@ -409,7 +409,7 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 
 **Phase 0 — Foundations (config, no content debt)** — ✅ done (2026-07-27)
 - ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); favicon and light/dark logo assets replaced with the ascending-bars mark; `AGENTS.md` rewritten; project skills shipped (§8.5).
-- ✅ Site SEO configured with a global description, navigable-page indexing, Open Graph and Twitter defaults, and **Tinyanalytics** as the structured-data publisher. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. Canonical URLs remain automatic until the final docs domain is confirmed. Real footer socials remain an owner follow-up.
+- ✅ Site SEO configured with a global description, navigable-page indexing, Open Graph and Twitter defaults, and **tinyanalytics** as the structured-data publisher. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. Canonical URLs remain automatic until the final docs domain is confirmed. Real footer socials remain an owner follow-up.
 
 **Phase 1 — The golden path (highest leverage)** — ✅ done (2026-07-17)
 - ✅ Introduction, Quickstart, How it works, Install the tracking script, Script configuration, Custom events, Identify users, Verify/troubleshoot. (The "Switch from GA4/Plausible/Umami" migration overview is deferred to Phase 3, alongside import.)

@@ -2,6 +2,7 @@
 title: "Identify API"
 description: "Attach a stable user ID and traits to a visitor with POST /api/identify. tinyanalytics backfills the ID onto the visitor's recent events and stores the traits."
 icon: "user"
+noindex: true
 ---
 
 `POST /api/identify` associates a visitor with a **stable user ID** of your choosing — a database ID, an email hash — and optionally stores **traits** describing them. tinyanalytics backfills that ID onto the visitor's recent events, so their history ties together the moment they sign in. Like tracking, it returns **`204 No Content`**.

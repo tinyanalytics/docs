@@ -1,55 +1,47 @@
-# Mintlify Starter Kit
+# tinyanalytics documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+This repository contains the public documentation for **tinyanalytics**, the hosted web and product analytics platform that helps you understand traffic and product behavior without tracking people.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+The site is built with [Mintlify](https://www.mintlify.com) from MDX pages and `docs.json`.
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+## Before you edit
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+Read these files before changing documentation:
 
-## AI-assisted writing
+- [`AGENTS.md`](./AGENTS.md) for repository rules and verification requirements.
+- [`PRD.md`](./PRD.md) for the audience, information architecture, voice, and scope.
+- [`.agents/skills/tinyanalytics-docs/SKILL.md`](./.agents/skills/tinyanalytics-docs/SKILL.md) for product terminology, sources of truth, and content boundaries.
+- [`.agents/skills/mintlify/SKILL.md`](./.agents/skills/mintlify/SKILL.md) for Mintlify components and authoring rules.
+- [`BRAND-MARKETING.md`](./BRAND-MARKETING.md) for internal positioning, messaging, and claim-verification gates.
 
-Set up your AI coding tool to work with Mintlify:
+## Product boundaries
 
-```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+- Write for customers of the hosted service at [dash.tinyanalytics.io](https://dash.tinyanalytics.io).
+- Do not document self-hosting, operator internals, or unshipped features.
+- Verify product behavior against `../tinyanalytics/wiki/` before publishing it.
+- Use **tinyanalytics** in lowercase and call each tracked website or app a **site**.
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+Run a local preview from the repository root:
 
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
+```bash
 mint dev
 ```
 
 View your local preview at `http://localhost:3000`.
 
-## Publishing changes
+## Validate changes
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+Before opening a pull request, run:
 
-## Need help?
+```bash
+mint validate
+mint broken-links
+```
 
-### Troubleshooting
+Every page needs `title` and `description` frontmatter. Add new pages to the navigation in `docs.json`.
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+## Publishing
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+Changes deploy through the repository's connected Mintlify project after they reach the default branch.

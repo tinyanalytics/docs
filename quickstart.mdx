@@ -1,6 +1,6 @@
 ---
 title: "Quickstart"
-description: "Add your website, install the tinyanalytics tracking script, and see your first visit — in under five minutes."
+description: "Add a site, install the tinyanalytics script (under 6.5 KB gzipped), and verify your first cookieless visit in Realtime in about five minutes."
 icon: "rocket"
 ---
 
@@ -61,7 +61,7 @@ For a full checklist, see [verify your setup](/verify-your-setup).
 
 <AccordionGroup>
   <Accordion title="Do I need a cookie banner for tinyanalytics?">
-    No. tinyanalytics is cookieless — it writes nothing to your visitor's device, so there is no storage to ask consent for. Visitors are counted with a short, one-way hash the server derives from the request instead. See [how tinyanalytics works](/how-it-works) for the mechanism.
+    Core anonymous analytics sets no cookies and stores no anonymous analytics ID in the browser. Optional features such as identification, feature flags, groups, surveys, and browser opt-out use purpose-specific browser storage. Whether you need consent depends on your jurisdiction and setup; see [Privacy & GDPR](/resources/privacy).
   </Accordion>
   <Accordion title="Where do I put the tracking script in a framework or CMS?">
     Add it once in a shared layout, template, or header so it loads on every page. tinyanalytics has step-by-step guides for Next.js, React, WordPress, Webflow, Shopify, and more — see the [integration guides](/integrations/overview).

@@ -22,6 +22,10 @@ window.tinyanalytics.group('company', 'acme-inc', {
 - Pass **traits** to describe the account — its name, plan, or size — the same way [user traits](/identify-users) describe a person. Update them later with `setGroupTraits(type, traits)`.
 - Call `resetGroups()` to forget the associations, for example when a user logs out.
 
+<Note>
+  `group()` persists the associations you provide in browser storage so later events keep their account context. Call `resetGroups()` at logout, and review [Privacy & GDPR](/resources/privacy) when assessing consent requirements.
+</Note>
+
 ## How do I switch reports to account grain?
 
 Use the **grain toggle** on the dashboard. Once events are tagged, it swaps person-level metrics for account-level ones. The Users card becomes **active accounts** — the number of distinct accounts active in the period — and you can:

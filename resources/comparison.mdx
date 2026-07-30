@@ -1,35 +1,55 @@
 ---
 title: "tinyanalytics vs Google Analytics, Plausible & Umami"
-description: "An honest comparison: tinyanalytics is a cookieless, privacy-friendly, hosted analytics product with a deep feature set — closed-source, unlike open-source Plausible and Umami."
+description: "Compare tinyanalytics with Google Analytics 4, Plausible, and Umami on privacy, hosting, openness, product scope, and the trade-offs that determine the best fit."
 icon: "scale-balanced"
 ---
 
-tinyanalytics is a **cookieless, privacy-friendly, hosted** web analytics product with a deep feature set — web analytics plus product analytics, experiments, and monitoring. Here's an honest look at how it compares with Google Analytics, Plausible, and Umami, including the trade-offs.
+Choose tinyanalytics when you want hosted web and product analytics, AI discovery, experiments, revenue, and monitoring in one privacy-friendly platform. Choose an alternative when advertising integrations, open-source code, self-hosting, or a narrower analytics product matters more.
 
 ## At a glance
 
 | | tinyanalytics | Google Analytics 4 | Plausible | Umami |
 | --- | --- | --- | --- | --- |
-| **Cookieless** | Yes | No (uses cookies) | Yes | Yes |
-| **Hosting** | Hosted (cloud) | Hosted (cloud) | Cloud or self-host | Cloud or self-host |
+| **Cookieless by default** | Yes | No for standard JavaScript tags | Yes | Yes |
+| **Hosting** | Hosted | Hosted | Cloud or self-hosted | Cloud or self-hosted |
 | **Open source** | No | No | Yes | Yes |
-| **Multi-day identity** | Yes (cookieless) | Yes (cookies) | No (privacy-first) | Limited |
-| **Scope** | Web + product analytics | Web + app analytics | Web analytics | Web analytics |
+| **Primary scope** | Web, product, AI discovery, and monitoring | Web, app, and advertising ecosystem | Focused web and ecommerce analytics | Broad web and behavior analytics |
 
-## vs Google Analytics
+## When does tinyanalytics fit?
 
-Google Analytics is free and powerful, but it uses cookies (which typically require a consent banner), can sample data at scale, and is complex to configure. tinyanalytics is cookieless, stores no personal data by default, and is designed to be simple to install and read — at the cost of the ad-platform integrations GA is built around.
+tinyanalytics fits teams that want to:
 
-## vs Plausible and Umami
+- Use one hosted platform for traffic, product behavior, revenue, experiments, surveys, AI discovery, and uptime.
+- Run core anonymous analytics without analytics cookies or a stored browser ID.
+- Measure AI referrals and crawlers alongside conventional acquisition channels.
+- Ask natural-language questions of analytics data with the [SQL query builder](/sql-query-builder).
+- Avoid operating their own analytics infrastructure.
 
-Plausible and Umami are excellent lightweight, cookieless, **open-source** analytics tools. The honest difference is twofold:
+## vs Google Analytics 4
 
-- **Openness.** Plausible and Umami are open source and can be self-hosted; **tinyanalytics is closed-source and hosted only.** If self-hosting or auditing the source is a requirement for you, they're the better fit.
-- **Depth.** tinyanalytics goes beyond core web analytics into [product analytics](/feature-flags) — feature flags, experiments, surveys, funnels, retention, cohorts, custom dashboards, a SQL query builder — plus [uptime monitoring](/uptime-monitoring) and [alerts](/alerts). Plausible and Umami stay deliberately focused on web analytics.
+Google's [GA4 JavaScript tags use first-party cookies](https://support.google.com/analytics/answer/11397207) to distinguish users and sessions. Core anonymous tinyanalytics does not set analytics cookies or persist an anonymous analytics ID in the browser.
+
+Choose GA4 when your analytics workflow depends on Google's advertising, audience, and app-measurement ecosystem. Choose tinyanalytics when you prefer a smaller product surface that connects web analytics with product decisions, AI discovery, and monitoring.
+
+## vs Plausible
+
+[Plausible](https://plausible.io/privacy-focused-web-analytics) is an open-source, cookieless web analytics product available as a hosted cloud or self-hosted service. It emphasizes a single-page dashboard, minimal collection, a 2.5 KB gzipped script, and EU hosting on European-owned infrastructure.
+
+tinyanalytics expands the scope to feature flags, experiments, surveys, retention, cohorts, B2B groups, revenue, AI traffic, natural-language SQL, uptime monitoring, and alerts. Its script is under 6.5 KB gzipped.
+
+Choose Plausible when open-source code, self-hosting, EU infrastructure, or the smallest focused script is the priority. Choose tinyanalytics when you want the broader product and operations workflow in one hosted service.
+
+## vs Umami
+
+[Umami](https://docs.umami.is/docs/about) is open source, cookieless, and available as cloud or self-hosted software. Its current product covers custom events, dashboards, funnels, journeys, retention, revenue, and performance, so it is more than a basic traffic dashboard.
+
+tinyanalytics differs in its combination of AI referral and crawler reporting, natural-language SQL, feature flags, experiments, surveys, B2B group analytics, and uptime monitoring.
+
+Choose Umami when source access or self-hosting is required. Choose tinyanalytics when you prefer a hosted workflow that connects acquisition, product delivery, experimentation, revenue, and reliability.
 
 ## Answering the trust question honestly
 
-Because tinyanalytics is closed-source, you can't audit its code the way you can Plausible's or Umami's. tinyanalytics answers that with **mechanism-level transparency** instead: these docs explain exactly [how cookieless identity works](/resources/cookieless-identity), [how bot detection works](/resources/bot-detection), and [what is and isn't stored](/resources/data-handling) — so you can evaluate the privacy properties on their merits, not on a claim.
+tinyanalytics is closed source, so you cannot audit its code the way you can Plausible or Umami. These docs instead describe [how cookieless identity works](/resources/cookieless-identity), [how bot detection works](/resources/bot-detection), and [what is and is not stored](/resources/data-handling) so you can evaluate specific mechanisms.
 
 ## Related
 

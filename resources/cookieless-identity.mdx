@@ -1,14 +1,14 @@
 ---
 title: "How cookieless identity works"
-description: "tinyanalytics identifies visitors without cookies, using a one-way hash of IP and user agent instead of a stored identifier — so there's nothing on the visitor's device and no PII at rest."
+description: "How core anonymous analytics estimates visitors without cookies or a stored browser ID, using a one-way server-derived identifier while never storing raw IP addresses."
 icon: "fingerprint"
 ---
 
-tinyanalytics identifies visitors **without cookies**. Instead of storing an identifier on the visitor's device, it derives one on the server from the visitor's IP address and browser — a **one-way hash** — so there's nothing to store on the device, no consent banner for a tracking cookie, and no personal data kept at rest.
+Core anonymous analytics estimates visitors without cookies or a stored browser ID. tinyanalytics derives a one-way identifier on the server from the visitor's IP address and browser, then stores the result instead of the raw IP address.
 
 ## How a visitor is identified
 
-When an event arrives, tinyanalytics computes a short **fingerprint** by hashing the visitor's IP address and user agent together. The raw IP address is never stored — only the resulting hash, which can't be reversed back into an IP. That fingerprint is stable for as long as the visitor's IP-and-browser pair is, which is what makes multi-day reports like [Users](/users), [retention](/retention), and [cohorts](/cohorts) meaningful.
+When an event arrives, tinyanalytics computes a short **cookieless ID** by hashing the visitor's IP address and user agent together. The raw IP address is never stored — only the resulting hash, which can't be reversed back into an IP. That ID is stable for as long as the visitor's IP-and-browser pair is, which is what makes multi-day reports like [Users](/users), [retention](/retention), and [cohorts](/cohorts) meaningful.
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 
 ## It's an accurate estimate — and honest about its limits
 
-A cookieless fingerprint can't be exact, and tinyanalytics doesn't pretend otherwise. There are two inherent, opposite kinds of error:
+A cookieless ID can't be exact, and tinyanalytics doesn't pretend otherwise. There are two inherent, opposite kinds of error:
 
 - **Undercounting** — several people behind one network (a household or office) on the same browser build collapse into one visitor.
 - **Overcounting** — one person moving from Wi-Fi to cellular, or updating their browser, can look like a new visitor.
@@ -36,14 +36,18 @@ Some visitors browse through networks that **change their IP between requests** 
 
 tinyanalytics recognizes these rotating **datacenter and hosting networks** and steadies identity for them in two ways:
 
-- It derives the fingerprint from a **coarse network bucket** (a `/24` block for IPv4, `/48` for IPv6) instead of the exact rotating IP, so consecutive requests from the same relay land on the same visitor.
-- It can briefly **re-attach** a freshly rotated fingerprint to the visitor it just belonged to, within a short window.
+- It derives the ID from a **coarse network bucket** (a `/24` block for IPv4, `/48` for IPv6) instead of the exact rotating IP, so consecutive requests from the same relay land on the same visitor.
+- It can briefly **re-attach** a freshly rotated ID to the visitor it just belonged to, within a short window.
 
 This is deliberately biased toward safety: it only ever **merges** near-identical visitors on the same network with the same browser, and never splits a visitor further. When it isn't confident, it leaves them separate — the same behavior as before. It applies only to identity — a visitor's IP is still never stored — and only to events collected after the change; existing history is untouched. Regular home and mobile visitors are unaffected.
 
 ## Turning a visitor into a known person
 
-When your app calls `identify()` with a stable ID, tinyanalytics attributes that visitor's recent anonymous activity to the ID and counts them as one person from then on — across devices and sessions. Reports then key on the identified ID when there is one, and fall back to the cookieless fingerprint when there isn't, so a signed-in person on two devices is a single user everywhere.
+When your app calls `identify()` with a stable ID, tinyanalytics attributes that visitor's recent anonymous activity to the ID and counts them as one person from then on — across devices and sessions. Reports then key on the identified ID when there is one, and fall back to the cookieless ID when there isn't, so a signed-in person on two devices is a single user everywhere.
+
+<Note>
+  `identify()` persists the user ID you provide in browser storage. Feature flags, groups, surveys, and browser opt-out also store purpose-specific state. Core anonymous analytics does not store an analytics ID in the browser. See [Privacy & GDPR](/resources/privacy).
+</Note>
 
 ## Related
 

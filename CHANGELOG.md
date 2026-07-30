@@ -8,6 +8,12 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Changed
+- **Aligned brand positioning and privacy copy (2026-07-28):** centered the public docs on
+  “Understand your traffic and your product without tracking people,” added the shipped AI discovery
+  and natural-language analysis story, replaced the generic repository README, and updated the
+  comparison page against current first-party GA4, Plausible, and Umami documentation. Privacy pages
+  now distinguish core anonymous analytics from the purpose-specific browser storage used by
+  identification, feature flags, groups, surveys, and browser opt-out.
 - **Replaced Cross-site rollup with Organization overview (2026-07-27):** renamed and rewrote the
   page for the new organization-level Overview — six combined metrics with sparklines, selectable
   per-site trends, access-aware comparison, and the 50-site display cap. Added redirects from
@@ -18,7 +24,7 @@ project adheres to semantic versioning where practical.
 - **Completed Mintlify SEO configuration (2026-07-27):** added a global, benefit-bearing site
   description; explicitly indexed navigable pages; set Open Graph locale/site-name, Twitter card,
   author, and theme-color metadata; and configured the structured-data publisher organization as
-  **Tinyanalytics**. Canonical URLs remain Mintlify-generated until the final docs domain is confirmed.
+  **tinyanalytics**. Canonical URLs remain Mintlify-generated until the final docs domain is confirmed.
 - **Updated documentation branding (2026-07-27):** changed the primary accent to `#006420` in
   light mode and `#009B32` in dark mode, and set Inter as the site-wide font.
 - **Flattened the main documentation routes (2026-07-27):** removed the separate `guides/`

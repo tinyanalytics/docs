@@ -2,18 +2,18 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
   "name": "tinyanalytics",
-  "description": "Learn how to install tinyanalytics, collect cookieless web and product analytics, explore reports, manage data, and use the API.",
+  "description": "Learn how to understand traffic and product behavior without analytics cookies using tinyanalytics: web and product analytics, AI discovery, revenue, experiments, monitoring, and API access.",
   "seo": {
     "indexing": "navigable",
     "metatags": {
-      "author": "Tinyanalytics",
+      "author": "tinyanalytics",
       "og:site_name": "tinyanalytics documentation",
       "og:locale": "en_US",
       "twitter:card": "summary_large_image",
       "theme-color": "#006420"
     },
     "organization": {
-      "name": "Tinyanalytics"
+      "name": "tinyanalytics"
     }
   },
   "colors": {
@@ -80,7 +80,7 @@
             ]
           },
           {
-            "group": "Analyze",
+            "group": "Web Analytics",
             "pages": [
               {
                 "group": "Traffic & audience",
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "group": "Build & operate",
+            "group": "Product Analytics",
             "pages": [
               {
                 "group": "Product analytics",
@@ -170,7 +170,7 @@
             ]
           },
           {
-            "group": "Manage",
+            "group": "Account & Data Imports",
             "pages": [
               {
                 "group": "Data & imports",
@@ -364,9 +364,17 @@
       "chatgpt",
       "claude",
       "perplexity",
+      "grok",
+      "aistudio",
+      "devin",
+      "windsurf",
       "mcp",
+      "add-mcp",
       "cursor",
-      "vscode"
+      "vscode",
+      "devin-mcp",
+      "download-spec",
+      "download-pdf"
     ],
     "display": "header"
   }

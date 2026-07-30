@@ -1,32 +1,39 @@
 ---
 title: "Introduction"
-description: "tinyanalytics is privacy-friendly, cookieless web and product analytics — Google-Analytics-grade insight with no cookies, no cookie banner, and no personal data stored on your visitors' devices."
+description: "Understand your traffic and product without analytics cookies. tinyanalytics combines web and product analytics, AI discovery, revenue, experiments, and monitoring in one hosted platform."
 icon: "book-open"
 ---
 
-tinyanalytics is a privacy-friendly, cookieless analytics platform for your website and your product. You get the metrics you expect from Google Analytics — visitors, pageviews, sources, funnels, retention — without setting cookies, without a cookie banner, and without handing your visitors' data to a third party. It runs as a hosted service you sign in to at [dash.tinyanalytics.io](https://dash.tinyanalytics.io).
+tinyanalytics is hosted, privacy-friendly web and product analytics in one platform. Install one script to understand traffic, product behavior, revenue, AI discovery, experiments, and site reliability — without analytics cookies or raw IP addresses in your analytics data. Sign in at [dash.tinyanalytics.io](https://dash.tinyanalytics.io).
 
-The idea in one line: **understand your traffic and your product without tracking people.**
+**Understand your traffic and your product without tracking people.**
+
+No cookies. Just insights.
 
 ## What you can measure
 
-tinyanalytics covers three jobs from a single tracking script:
+tinyanalytics connects four jobs from a single tracking script:
 
 - **Web analytics** — pageviews, sessions, top pages, sources and channels, countries, devices, journeys, retention, funnels, and goals.
 - **Product analytics** — custom events, user identification, feature flags, A/B experiments, surveys, behavioral cohorts, revenue, and B2B group analytics.
-- **Monitoring** — uptime checks, scheduled email reports, and alerts to email, Slack, Discord, or a webhook.
+- **AI discovery and acquisition** — AI referral traffic, AI crawlers, search performance, bots, and campaign attribution.
+- **Monitoring and automation** — uptime checks, scheduled reports, and alerts to email, Slack, Discord, or a webhook.
 
 ## How is tinyanalytics private by default?
 
-tinyanalytics counts visitors without cookies and without storing personal data on the visitor's device. Instead of a cookie, each visit is matched to a short, one-way hash derived from the request. Nothing personal is written to the browser, so there is nothing to consent to and nothing to leak.
+Core anonymous analytics counts visitors without cookies or a stored browser ID. The server derives a short, one-way identifier from each request, and it never writes the raw IP address to your analytics data.
 
-Because there is no cookie, the visitor count is a close estimate rather than an exact figure — a trade every cookieless tool makes. tinyanalytics is honest about this and gives you [`identify()`](/identify-users) to attach your own stable user IDs when you need people-level accuracy. See [how tinyanalytics works](/how-it-works) for the full mechanism.
+Because no browser ID keeps anonymous identity stable, visitor counts are close estimates rather than exact figures. Use [`identify()`](/identify-users) to attach your own stable user IDs when you need cross-device accuracy for signed-in users. See [how tinyanalytics works](/how-it-works) for the full mechanism.
+
+<Note>
+  Optional product features can use browser storage for a specific purpose: `identify()` persists the ID you provide, feature flags keep assignments sticky, groups retain account associations, surveys respect wait periods and completed prompts, and opt-out stores a disabled marker. See [Privacy & GDPR](/resources/privacy) for the details.
+</Note>
 
 ## Frequently asked questions
 
 <AccordionGroup>
   <Accordion title="Do I need a cookie banner to use tinyanalytics?">
-    No. tinyanalytics sets no cookies and stores nothing on your visitor's device, so there is no storage to request consent for. Each visit is matched to a short, one-way hash the server derives from the request instead.
+    Core anonymous analytics sets no cookies and does not store an analytics ID in the browser. Whether you need consent still depends on your jurisdiction, the optional features you enable, and the data you send. Review [Privacy & GDPR](/resources/privacy) for the browser-storage details.
   </Accordion>
   <Accordion title="How accurate is cookieless visitor counting?">
     It is a close estimate, not an exact figure. Several people sharing one network and browser can collapse into a single visitor, and one person switching from Wi-Fi to mobile data can be counted twice. Every cookieless tool shares this trade. Call [`identify()`](/identify-users) to attach your own user IDs when you need exact, cross-device counts for signed-in users.
@@ -35,7 +42,10 @@ Because there is no cookie, the visitor count is a close estimate rather than an
     Yes. tinyanalytics imports historical data from Google Analytics 4, Plausible, Umami, and Simple Analytics, so your reports keep their history. See [migrate to tinyanalytics](/migrate).
   </Accordion>
   <Accordion title="Do I need a separate tool for product analytics?">
-    No. The same tracking script covers web analytics, product analytics, and monitoring — custom events, feature flags, A/B experiments, surveys, cohorts, revenue, and uptime checks all run from the one install.
+    No. The same platform covers web analytics, custom events, feature flags, experiments, surveys, cohorts, revenue, B2B groups, and monitoring.
+  </Accordion>
+  <Accordion title="What makes tinyanalytics AI-native?">
+    tinyanalytics treats AI as both an acquisition channel and an analysis interface. Measure AI referrals and crawlers, then use natural-language questions to explore your own analytics data with the [SQL query builder](/sql-query-builder).
   </Accordion>
 </AccordionGroup>
 
@@ -53,5 +63,8 @@ Because there is no cookie, the visitor count is a close estimate rather than an
   </Card>
   <Card title="Track custom events" icon="cursor-click" href="/custom-events">
     Measure signups, purchases, and the clicks that matter to you.
+  </Card>
+  <Card title="Measure AI traffic" icon="sparkles" href="/ai-traffic">
+    See which AI assistants send visitors and what those visitors do.
   </Card>
 </Columns>

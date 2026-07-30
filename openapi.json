@@ -195,6 +195,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "patch": {
@@ -254,6 +259,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -286,6 +296,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -322,6 +337,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -357,6 +377,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -391,6 +416,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -459,6 +489,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -493,6 +528,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -529,6 +569,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -563,6 +608,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -615,6 +665,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -638,6 +693,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -763,6 +823,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "get": {
@@ -795,6 +860,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -869,6 +939,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -962,6 +1037,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -1075,6 +1155,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -1196,6 +1281,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -1299,6 +1389,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -1404,6 +1499,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -1447,6 +1547,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -1539,6 +1644,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -1642,6 +1752,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -1725,6 +1840,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -1799,6 +1919,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -1872,6 +1997,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -1974,6 +2104,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -2075,6 +2210,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -2195,6 +2335,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "post": {
@@ -2260,6 +2405,11 @@
                 }
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -2361,6 +2511,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -2464,6 +2619,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -2541,6 +2701,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -2583,6 +2748,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -2617,6 +2787,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -2697,6 +2872,11 @@
                 ]
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -2819,6 +2999,11 @@
                 ]
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -2978,6 +3163,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -3021,6 +3211,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -3095,6 +3290,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -3195,6 +3395,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -3288,6 +3493,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -3373,6 +3583,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -3466,6 +3681,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -3601,6 +3821,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -3742,6 +3967,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -3812,6 +4042,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -3886,6 +4121,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -4041,6 +4281,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -4094,6 +4339,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -4138,6 +4388,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -4172,6 +4427,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -4234,6 +4494,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -4306,6 +4571,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -4340,6 +4610,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -4431,6 +4706,11 @@
                 ]
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -4524,6 +4804,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -4566,6 +4851,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -4600,6 +4890,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -4737,6 +5032,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -4803,6 +5103,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -4845,6 +5150,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -4879,6 +5189,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -4945,6 +5260,11 @@
                 "namePlural": "Companies"
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -5083,6 +5403,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -5135,6 +5460,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -5193,6 +5523,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -5257,6 +5592,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -5314,6 +5654,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -5388,6 +5733,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -5488,6 +5838,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -5581,6 +5936,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -5615,6 +5975,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -5712,6 +6077,11 @@
                 "enabled": true
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -5821,6 +6191,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -5862,6 +6237,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -5906,6 +6286,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -5981,6 +6366,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -6015,6 +6405,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -6074,6 +6469,11 @@
                 "scope": "site"
               }
             }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -6137,6 +6537,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -6179,6 +6584,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -6213,6 +6623,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -6324,6 +6739,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -6367,6 +6787,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -6432,6 +6857,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -6473,6 +6903,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -6527,6 +6962,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -6571,6 +7011,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -6605,6 +7050,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -6741,6 +7191,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -6807,6 +7262,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -6848,6 +7308,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -6940,6 +7405,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7005,6 +7475,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7039,6 +7514,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -7107,6 +7587,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7173,6 +7658,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -7214,6 +7704,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -7298,6 +7793,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7332,6 +7832,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -7466,6 +7971,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7509,6 +8019,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -7570,6 +8085,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -7611,6 +8131,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -7681,6 +8206,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7734,6 +8264,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7768,6 +8303,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -7844,6 +8384,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -7910,6 +8455,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -7951,6 +8501,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -7995,6 +8550,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -8086,6 +8646,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -8162,6 +8727,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -8262,6 +8832,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -8296,6 +8871,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -8356,6 +8936,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -8388,6 +8973,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -8461,6 +9051,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -8530,6 +9125,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -8603,6 +9203,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -8637,6 +9242,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -8673,6 +9283,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -8696,6 +9311,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       },
@@ -8774,6 +9394,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -8831,6 +9456,11 @@
               }
             }
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       },
       "delete": {
@@ -8863,6 +9493,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -8898,6 +9533,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -8951,6 +9591,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -8986,6 +9631,11 @@
           "429": {
             "$ref": "#/components/responses/RateLimited"
           }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
         }
       }
     },
@@ -9020,6 +9670,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -9116,6 +9771,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }
@@ -9217,6 +9877,11 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
           }
         }
       }

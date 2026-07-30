@@ -2,6 +2,7 @@
 title: "Rate limits & CORS"
 description: "How tinyanalytics rate-limits server-side ingestion per API key (429 when exceeded) and which origins may call the API — public ingestion is open, everything else is credentialed."
 icon: "shield-halved"
+noindex: true
 ---
 
 tinyanalytics applies a **per-key rate limit to server-side ingestion** and restricts **which origins** may call the API. Browser tracking is deliberately open; authenticated reads and writes are locked to trusted origins.
