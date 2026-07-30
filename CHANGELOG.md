@@ -9,6 +9,15 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **Stripe revenue attribution setup guide (2026-07-30):** documented the merchant-side work the
+  Stripe page previously left implicit — identifying visitors, reading `getUserId()` at checkout,
+  and writing `ta_identified_user_id` into Checkout `payment_intent_data` / `subscription_data` or
+  a PaymentIntent. Added the resolution order (session link → identified user's last session at or
+  before the payment → `(no session)`), customer-grained tagging so subscription renewals inherit
+  the link, read-time resolution, a `(no session)` troubleshooting table, and an attribution check.
+  Recorded that `ta_session_id` and `ta_user_id` are honored but not obtainable in the browser,
+  that the pre-load tracker stub returns `null` from `getUserId()`, and that email fallback matches
+  only identified users keyed by email or carrying an `email` trait.
 - **Product coverage sync through `f5dd577` (2026-07-30):** added complete guides for first-touch
   **User acquisition**, site and organization **Ask AI**, and **Billing and plans**. The new pages
   document exact metric scopes, audience and permission boundaries, approval-gated AI writes,
