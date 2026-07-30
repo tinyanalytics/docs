@@ -1,5 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#345FCF">
-  <rect x="3" y="14" width="4" height="7" rx="1.5" opacity="0.5"/>
-  <rect x="10" y="9" width="4" height="12" rx="1.5" opacity="0.75"/>
-  <rect x="17" y="4" width="4" height="17" rx="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_1" data-name="Path 1" d="M313.768,0,42.468,304.558H217.5V495.341L495.8,193.7,322.518,180.286Z" transform="translate(-42.468)" fill="#009b32"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Path_2" data-name="Path 2" d="M416.455,299.021c-144.624,0-270.732-80.776-335.608-199.574L0,190.207C89.173,325.629,242.538,415.213,416.455,415.213c175.517,0,330.12-91.224,418.913-228.742L754.2,95.349C690,216.368,562.724,299.021,416.455,299.021" transform="translate(0 -95.349)" fill="#009b32"/>
+    </clipPath>
+    <clipPath id="clip-converter_1">
+      <rect width="1200" height="1200"/>
+    </clipPath>
+  </defs>
+  <g id="converter_1" data-name="converter – 1" clip-path="url(#clip-converter_1)">
+    <g id="Group_6" data-name="Group 6">
+      <g id="logo" transform="translate(-132.635 -118.44)">
+        <g id="amblem" transform="translate(314.95 345.454)">
+          <g id="Group_2" data-name="Group 2" transform="translate(189.787)">
+            <g id="Group_1" data-name="Group 1" clip-path="url(#clip-path)">
+              <rect id="Rectangle_1" data-name="Rectangle 1" width="453.333" height="495.341" transform="translate(0 0)" fill="#009b32"/>
+            </g>
+          </g>
+          <g id="Group_4" data-name="Group 4" transform="translate(0 426.108)">
+            <g id="Group_3" data-name="Group 3" clip-path="url(#clip-path-2)">
+              <rect id="Rectangle_2" data-name="Rectangle 2" width="835.369" height="319.864" fill="#009b32"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>

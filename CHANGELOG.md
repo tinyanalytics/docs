@@ -45,6 +45,11 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Favicon now matches the main site (2026-07-30):** replaced `favicon.svg`, which was still the
+  blue `#345FCF` ascending-bars placeholder, with the current tinyanalytics emblem — the green
+  `#009b32` bolt over an arc — copied byte-for-byte from the marketing site's
+  `public/seo/favicon.svg`. The docs logo already used this mark, so only the favicon was off-brand.
+  No `docs.json` change was needed: `"favicon": "/favicon.svg"` already pointed at this path.
 - **Disabled search-engine indexing for all docs (2026-07-30):** added a global
   `robots: noindex` directive so every documentation page, including the complete
   integrations section, stays out of search-engine indexes. Added the policy to

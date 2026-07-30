@@ -402,7 +402,8 @@ A dedicated Resources page, "Use these docs with AI," embeds the install prompt 
 - `name`: "tinyanalytics" (currently "Mintlify Starter Kit").
 - `colors`: use the owner-approved green accents — `#006420` in light mode and `#009B32` in dark mode.
 - `fonts`: use Inter for headings and body text through Mintlify's Google Fonts integration.
-- `logo` / `favicon`: replace starter assets with the tinyanalytics ascending-bars mark (light/dark).
+- `logo` / `favicon`: replace starter assets with the tinyanalytics emblem — the green bolt over an
+  arc, as used on the marketing site (light/dark).
 - `navigation`: implement §5 (tabs → groups → pages).
 - `navbar`: primary CTA → the app (`https://dash.tinyanalytics.io`); links → GitHub, Support.
 - `footer.socials`: tinyanalytics' real handles (replace Mintlify's).
@@ -470,7 +471,7 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 
 **Phase 0 — Foundations (config, no content debt)** — ✅ done (2026-07-27)
 
-- ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); favicon and light/dark logo assets replaced with the ascending-bars mark; `AGENTS.md` rewritten; project skills shipped (§8.5).
+- ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); light/dark logo assets replaced with the tinyanalytics emblem — the green bolt over an arc; `AGENTS.md` rewritten; project skills shipped (§8.5). The favicon lagged behind on a blue ascending-bars placeholder until 2026-07-30, when it was matched to the marketing site's `public/seo/favicon.svg`.
 - ✅ Site metadata configured with a global description, Open Graph and Twitter defaults, and **tinyanalytics** as the structured-data publisher. All documentation pages inherit `robots: noindex`, including the integrations section. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. The canonical base URL is `https://tinyanalytics.io/docs`. Real footer socials remain an owner follow-up.
 
 **Phase 1 — The golden path (highest leverage)** — ✅ done (2026-07-17)
