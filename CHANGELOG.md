@@ -9,6 +9,22 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **MCP server guide (2026-07-30):** documented `POST https://dash.tinyanalytics.io/api/mcp`, the
+  Model Context Protocol endpoint that lets Claude Code, Cursor, VS Code, and Codex CLI read and
+  manage analytics with an existing API key. Covers the 47 tools grouped by task, tested
+  per-client configuration (the Claude Code command was verified against production), keeping the
+  key out of a committed repository, the required `start_date`/`end_date` on every date-ranged
+  report, the 120-requests-per-minute per-key limit, and the security posture — a key carries its
+  owner's access, no read-only keys exist yet, delete and tracking-configuration tools are not
+  offered on cloud, and returned analytics text is treated as untrusted input. The troubleshooting
+  table records observed failures, including the confusing OAuth/HTML error a client reports when
+  the `Authorization` header is missing. Added to **API reference → Authentication & tools** and
+  linked from the API introduction, API keys, and rate limits pages.
+- **Disambiguated the two MCP servers (2026-07-30):** *Use docs with AI* previously described "the
+  hosted docs MCP server" as the only MCP in the product's world. It now opens with three distinct
+  ways to use AI (in-product Ask AI, an agent connected to your analytics, or these docs as
+  context) and states plainly that the documentation MCP server serves these public pages while the
+  tinyanalytics MCP server serves your own data and needs an API key.
 - **Stripe revenue attribution setup guide (2026-07-30):** documented the merchant-side work the
   Stripe page previously left implicit — identifying visitors, reading `getUserId()` at checkout,
   and writing `ta_identified_user_id` into Checkout `payment_intent_data` / `subscription_data` or

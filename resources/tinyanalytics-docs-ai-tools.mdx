@@ -1,11 +1,17 @@
 ---
 title: "Use tinyanalytics Documentation with AI Tools"
 sidebarTitle: "Use docs with AI"
-description: "Give external AI tools accurate tinyanalytics context through page Markdown, llms.txt, the hosted docs MCP server, or the contextual menu."
+description: "Give external AI tools accurate tinyanalytics context through page Markdown, llms.txt, the hosted documentation MCP server, or the contextual menu."
 icon: "wand-magic-sparkles"
 ---
 
-There are two distinct ways to use AI with tinyanalytics: ask questions about your analytics inside the product, or give these public docs to an external assistant that is helping with an integration. Keeping those contexts separate helps the assistant use the right source.
+There are three distinct ways to use AI with tinyanalytics: ask questions about your analytics inside the product, connect an outside AI agent to your analytics data, or give these public docs to an assistant that is helping with an integration. Keeping those contexts separate helps the assistant use the right source.
+
+| You want to | Use |
+| --- | --- |
+| Ask about your own analytics, in tinyanalytics | [Ask AI](/ai-analytics-assistant) |
+| Let Claude Code, Cursor, VS Code, or Codex read and manage your analytics | [The tinyanalytics MCP server](/api-reference/mcp-server) |
+| Help an assistant write a tinyanalytics integration | These documentation pages, below |
 
 ## How is AI used inside tinyanalytics?
 
@@ -44,7 +50,7 @@ At the top of every page is a menu to take that page to your assistant of choice
 
 The same menu connects the docs to your coding tools:
 
-- **MCP** — connect the documentation's MCP server so an AI agent can search and read these docs directly.
+- **MCP** — connect the **documentation** MCP server so an AI agent can search and read these docs directly. This is not the same as the [tinyanalytics MCP server](/api-reference/mcp-server): the documentation server serves these public pages, while the tinyanalytics server serves your own analytics data and needs an API key.
 - **Cursor / VS Code** — open the docs in your editor's AI assistant to reference them while you build your integration.
 
 ## Machine-readable index
@@ -68,6 +74,9 @@ Point an AI tool at either file to give it the whole documentation set as contex
   </Card>
   <Card title="Ask AI" icon="comments" href="/ai-analytics-assistant">
     Ask questions about your own analytics inside tinyanalytics.
+  </Card>
+  <Card title="MCP server" icon="plug" href="/api-reference/mcp-server">
+    Connect an AI agent to your analytics data.
   </Card>
   <Card title="Quickstart" icon="rocket" href="/tinyanalytics-quickstart">
     Install tinyanalytics in a few minutes.

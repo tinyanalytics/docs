@@ -18,9 +18,13 @@ Server-side calls to [`POST /api/track`](/api-reference/track-events-api) authen
 
 A few things worth knowing:
 
-- The limit applies **only to keyed (server-side) ingestion**. Browser tracking and analytics reads are not rate-limited this way.
+- The limit applies **only to keyed (server-side) ingestion**. Browser tracking and analytics reads are not rate-limited this way; [MCP](/api-reference/mcp-server) has its own per-key limit, described below.
 - A request with **no** or an **invalid** API key isn't rejected with `429` — it falls through to the normal browser-equivalent path (untrusted, with bot filtering on).
 - Stay within your window and space out bursts; if you're batching a backfill, add a short delay between requests and retry a `429` after a pause.
+
+## MCP request limit
+
+Calls to the [MCP server](/api-reference/mcp-server) are limited to **120 requests per minute per API key**. Beyond that the endpoint returns `429 Too Many Requests` with a `Retry-After` header. This limit is separate from the ingestion limit above, and it's sized for normal agent work — building a dashboard, where each card is previewed before it's saved, is typically 30–60 calls over a couple of minutes.
 
 ## CORS: which origins can call the API
 

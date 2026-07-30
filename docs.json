@@ -1375,6 +1375,7 @@
             "group": "Authentication & tools",
             "pages": [
               "api-reference/api-authentication",
+              "api-reference/mcp-server",
               "api-reference/rate-limits-cors",
               "api-reference/api-playground"
             ]

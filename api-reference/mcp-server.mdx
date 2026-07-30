@@ -1,0 +1,226 @@
+---
+title: "Connect an AI Agent with the MCP Server"
+sidebarTitle: "MCP server"
+description: "Connect Claude Code, Cursor, VS Code, or Codex to your tinyanalytics data over the Model Context Protocol at https://dash.tinyanalytics.io/api/mcp using an API key."
+icon: "plug"
+
+---
+
+The tinyanalytics **MCP server** lets an AI agent read and manage your analytics directly, using the same [API key](/api-reference/api-authentication) you already use for the HTTP API. Point your agent at one endpoint and it can answer questions about your traffic, create goals and funnels, and build dashboards — without you writing any HTTP calls.
+
+```
+POST https://dash.tinyanalytics.io/api/mcp
+```
+
+Model Context Protocol (MCP) is an open standard that lets AI applications call external tools. tinyanalytics implements it as a stateless HTTP endpoint, so there's no session to manage and no software to install on your side.
+
+<Note>
+  This page is about giving an agent access to **your analytics data**. To give an
+  assistant these documentation pages instead — so it can help you write an
+  integration — see [Use docs with AI](/resources/tinyanalytics-docs-ai-tools).
+</Note>
+
+## What can an agent do through MCP?
+
+The server exposes **47 tools**, grouped by what you'd ask for:
+
+| You ask for | Tools the agent uses |
+| --- | --- |
+| **Traffic questions** | Overview totals, metric time series, breakdowns by 18 dimensions, live visitors, landing pages, acquisition, journeys, retention, and revenue |
+| **Site health** | Core Web Vitals, JavaScript errors, and bot and AI-crawler traffic |
+| **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, and server-side identification |
+| **Measurement setup** | Goals, funnels (including analysis without saving), custom SQL dashboards, and chart annotations |
+| **Anything else** | A read-only SQL query over your own event data, with the schema available as a tool |
+| **Getting started** | Create a site, get its tracking snippet, check whether tracking is live, and get the dashboard link |
+
+Every tool runs with **your key's access**: the agent sees exactly the sites you can see, and writes are refused unless your organization role allows them.
+
+## Which AI clients can connect today?
+
+The requirement is simple: the client must speak **Streamable HTTP** and let you set a **request header**. Clients that only support OAuth cannot connect yet.
+
+| Client | Status |
+| --- | --- |
+| **Claude Code** | Connects — the command below is tested against production |
+| **Cursor** | Connects — supports HTTP servers with custom headers |
+| **VS Code** | Connects — supports HTTP servers with custom headers |
+| **Codex CLI** | Connects — supports HTTP servers with custom headers |
+| **claude.ai (web)** | Not yet — needs OAuth support, which is planned |
+| **ChatGPT connectors** | Not yet — requires OAuth, which is planned |
+
+## How do I connect my agent?
+
+<Steps>
+  <Step title="Create an API key">
+    In tinyanalytics, open [**Settings → Account**](/tinyanalytics-account-settings) and create a key from the **API keys** card. Copy it immediately — it's [shown only once](/api-reference/api-authentication).
+
+    A key inherits its owner's access, so the agent will reach every site you can reach.
+  </Step>
+  <Step title="Add the server to your client">
+    Use the configuration for your client below, replacing `YOUR_API_KEY` with the key you just created.
+
+    <CodeGroup>
+
+    ```bash Claude Code
+    claude mcp add --transport http tinyanalytics https://dash.tinyanalytics.io/api/mcp \
+      --header "Authorization: Bearer YOUR_API_KEY"
+    ```
+
+    ```json Cursor
+    {
+      "mcpServers": {
+        "tinyanalytics": {
+          "url": "https://dash.tinyanalytics.io/api/mcp",
+          "headers": { "Authorization": "Bearer YOUR_API_KEY" }
+        }
+      }
+    }
+    ```
+
+    ```json VS Code
+    {
+      "servers": {
+        "tinyanalytics": {
+          "type": "http",
+          "url": "https://dash.tinyanalytics.io/api/mcp",
+          "headers": { "Authorization": "Bearer YOUR_API_KEY" }
+        }
+      }
+    }
+    ```
+
+    ```toml Codex CLI
+    [mcp_servers.tinyanalytics]
+    url = "https://dash.tinyanalytics.io/api/mcp"
+    http_headers = { Authorization = "Bearer YOUR_API_KEY" }
+    ```
+
+    </CodeGroup>
+
+    Cursor reads `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project), VS Code reads `.vscode/mcp.json`, and Codex CLI reads `~/.codex/config.toml`.
+  </Step>
+  <Step title="Keep the key out of your repository">
+    If the configuration file is committed, read the key from your environment instead of pasting it. In Claude Code, a project `.mcp.json` supports `${env:VAR}`:
+
+    ```json .mcp.json
+    {
+      "mcpServers": {
+        "tinyanalytics": {
+          "type": "http",
+          "url": "https://dash.tinyanalytics.io/api/mcp",
+          "headers": { "Authorization": "Bearer ${env:TINYANALYTICS_API_KEY}" }
+        }
+      }
+    }
+    ```
+  </Step>
+  <Step title="Ask your agent to list your sites">
+    Start a new session so the client picks up the server, then ask:
+
+    ```text
+    List my tinyanalytics sites.
+    ```
+
+    <Check>
+      The agent returns your organization and its sites, each with a numeric
+      site ID. That ID is what every other tool uses, so a successful
+      `list_sites` call confirms both the connection and the key.
+    </Check>
+  </Step>
+</Steps>
+
+## What should I ask first?
+
+Once connected, ask in plain language — the agent picks the tool:
+
+- "What were my top pages last week?"
+- "How much traffic came from AI assistants this month?"
+- "Which pages do people land on and immediately leave?"
+- "Create a goal for anyone who reaches /pricing."
+- "Build me a dashboard of signups per day."
+
+## Do I need to give dates?
+
+Yes, for anything over a date range. Every date-ranged report requires a start and end date in `YYYY-MM-DD`, read in the time zone you pass (UTC by default). Agents supply these automatically from your question — "last week" becomes concrete dates — but there is no relative range like `7d`, and there is no "all time" shortcut. For all of your history, ask for a range starting before the site existed.
+
+Live visitors, saved funnels, saved dashboards, and annotations don't take dates.
+
+## How many requests can an agent make?
+
+MCP calls are limited to **120 requests per minute per API key**. Beyond that the server returns `429 Too Many Requests` with a `Retry-After` header, and the agent should wait for the window to reset.
+
+That budget suits normal agent work: building a dashboard, where each card is previewed before saving, is typically 30–60 calls over a couple of minutes. This limit is separate from the [server-side ingestion limit](/api-reference/rate-limits-cors) on `POST /api/track`.
+
+## Is it safe to connect an agent?
+
+Connecting an agent gives it your key's access. Understand these four points before you do.
+
+- **Your key is your identity.** An agent connected with your key can do anything you can do through the API, for every site your account reaches. There are no read-only keys yet.
+- **Deletion is not available.** The tools that permanently delete a site, goal, funnel, dashboard, annotation, or a person's data are **not offered on tinyanalytics cloud**, and neither is changing a site's tracking configuration. An agent cannot destroy your data or silently switch off collection.
+- **Analytics text is untrusted input.** Page titles, referrers, and event names come from anonymous visitors to your site, which makes them a channel for prompt injection. tinyanalytics strips control and bidirectional characters from every value it returns and tells the model explicitly that returned text is data, never instructions. Keep that assumption in your own prompts too.
+- **Revoke a key any time.** Deleting the key in your account settings cuts off the agent immediately.
+
+<Warning>
+  Treat the key in your MCP configuration like a password. Prefer a per-machine
+  key you can revoke on its own, keep it out of committed files, and revoke it if
+  a laptop or configuration file is ever exposed.
+</Warning>
+
+## Troubleshooting
+
+| What you see | What it means |
+| --- | --- |
+| Your client tries to log you in, or reports a failed connection mentioning OAuth or an unexpected `<!DOCTYPE html>` response | The `Authorization` header is missing. The server answers `401`, and clients that see no header attempt an OAuth flow that doesn't exist yet. Add the header. |
+| `The API key was not recognized` | Stray whitespace, a wrapped line, or a missing `Bearer ` prefix in the header. |
+| `This API key has expired` or `is disabled` | Create a new key from the **API keys** card under [**Settings → Account**](/tinyanalytics-account-settings). |
+| A tool returns `403` | Your key's user can't access that site, or the action needs a higher organization role. Ask the agent to list your sites to see what the key reaches. |
+| A tool returns `404` for an ID | The ID is wrong. Ask the agent to list goals, funnels, dashboards, or annotations to get valid IDs. |
+| `Wrong path. The MCP endpoint is POST /api/mcp` | The URL has a trailing slash or an extra segment. Use exactly `https://dash.tinyanalytics.io/api/mcp`. |
+| `Rate limit reached for this API key` | You've passed 120 requests in a minute. Wait for the window, then ask for fewer, more aggregated results. |
+| `The MCP endpoint is temporarily disabled` | The endpoint is switched off on that deployment. On self-hosted instances, check `MCP_ENABLED`. |
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What is the tinyanalytics MCP server?">
+    It's an endpoint at `https://dash.tinyanalytics.io/api/mcp` that exposes your analytics to AI agents as 47 callable tools over the Model Context Protocol. You connect a client such as Claude Code, Cursor, VS Code, or Codex CLI with your API key, then ask questions in plain language instead of writing HTTP requests.
+  </Accordion>
+  <Accordion title="Do I need a special key or a paid plan for MCP?">
+    No. MCP uses the same [API key](/api-reference/api-authentication) as the rest of the API, created under [**Settings → Account**](/tinyanalytics-account-settings), and it reaches exactly the sites that key's owner can reach.
+  </Accordion>
+  <Accordion title="Can I connect claude.ai or ChatGPT?">
+    Not yet. Both require OAuth for custom connectors, and the tinyanalytics MCP server currently authenticates with an API key sent as a request header. Support for OAuth is planned. Today the endpoint works with developer clients that let you set a header: Claude Code, Cursor, VS Code, and Codex CLI.
+  </Accordion>
+  <Accordion title="Can an agent delete my analytics data?">
+    No. On tinyanalytics cloud the delete tools aren't offered at all, and neither is changing a site's tracking configuration — so the actions that can't be undone are unavailable to an agent. An agent can still create and update goals, funnels, dashboards, and annotations, and those changes are visible to your whole team.
+  </Accordion>
+  <Accordion title="How is this different from Ask AI inside tinyanalytics?">
+    [Ask AI](/ai-analytics-assistant) lives in the tinyanalytics dashboard and answers questions there. The MCP server brings the same data into the AI tool you already work in, so an agent can combine your analytics with your codebase — for example, checking whether a page you just changed is losing visitors.
+  </Accordion>
+  <Accordion title="Do I still need the HTTP API?">
+    Only if you're writing code. MCP is for AI agents working on your behalf; the [HTTP API](/api-reference/tinyanalytics-api) is for applications and scripts you build. Both use the same key and return the same data.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="API keys" icon="key" href="/api-reference/api-authentication">
+    Create the key your agent will use.
+  </Card>
+  <Card title="API reference" icon="book-open" href="/api-reference/tinyanalytics-api">
+    The HTTP API behind every MCP tool.
+  </Card>
+  <Card title="Ask AI" icon="comments" href="/ai-analytics-assistant">
+    Ask questions inside the tinyanalytics dashboard.
+  </Card>
+  <Card title="Use docs with AI" icon="wand-magic-sparkles" href="/resources/tinyanalytics-docs-ai-tools">
+    Give an assistant these documentation pages.
+  </Card>
+  <Card title="Rate limits & CORS" icon="shield-halved" href="/api-reference/rate-limits-cors">
+    The other limits that apply to API traffic.
+  </Card>
+  <Card title="SQL query API" icon="database" href="/api-reference/sql-analytics-api">
+    The read-only SQL an agent runs for you.
+  </Card>
+</Columns>

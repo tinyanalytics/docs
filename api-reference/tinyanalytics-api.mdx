@@ -30,6 +30,8 @@ There are two credentials, and which you need depends on what you're doing:
 
 You create an API key in your **account settings** — see [API keys](/api-reference/api-authentication). Reads and management are authorized by the key owner's access, exactly as if they had signed in.
 
+If an **AI agent** is doing the work rather than code you write, you can skip the HTTP calls entirely: the [MCP server](/api-reference/mcp-server) exposes this same surface as tools that Claude Code, Cursor, VS Code, and Codex CLI can call with the same key.
+
 <CodeGroup>
 
 ```bash cURL
