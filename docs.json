@@ -11,7 +11,8 @@
       "og:locale": "en_US",
       "twitter:card": "summary_large_image",
       "theme-color": "#006420",
-      "canonical": "https://tinyanalytics.io/docs"
+      "canonical": "https://tinyanalytics.io/docs",
+      "robots": "noindex"
     },
     "organization": {
       "name": "tinyanalytics"

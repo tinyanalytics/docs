@@ -150,6 +150,11 @@ if (
     "docs.json: canonical base URL is not https://tinyanalytics.io/docs",
   );
 }
+if (docs.seo?.metatags?.robots !== "noindex") {
+  errors.push(
+    'docs.json: every documentation page must inherit robots: "noindex"',
+  );
+}
 
 const navigationPages = [];
 function collectNavigationPages(value, key = "") {

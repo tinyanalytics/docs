@@ -45,6 +45,10 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Disabled search-engine indexing for all docs (2026-07-30):** added a global
+  `robots: noindex` directive so every documentation page, including the complete
+  integrations section, stays out of search-engine indexes. Added the policy to
+  the SEO regression audit.
 - **Completed the authored-page SEO migration (2026-07-30):** renamed 107 routes so each URL and
   H1 states one clear search intent, added concise sidebar labels and unique descriptions capped at
   155 characters, updated every internal link and navigation entry, and added direct permanent
