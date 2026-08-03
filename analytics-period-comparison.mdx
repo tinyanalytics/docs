@@ -1,60 +1,98 @@
 ---
 title: "Analytics Period Comparison"
 sidebarTitle: "Compare periods"
-description: "Compare any analytics period with the previous period or the same dates last year, with changes shown across metrics, tables, and charts."
+description: "Edit the date range and one of four equal-length baselines together, with the previous seven days applied by default to Last 7 days."
 icon: "arrow-right-arrow-left"
 ---
 
-Period comparison adds a **baseline and a change indicator** across your dashboard, so "197 sessions" becomes "197 sessions, up 12% from last week". You pick a comparison mode next to the date range, and the baseline appears on every stat card, every breakdown, and the time-series chart at once — because "is this number good?" is unanswerable without something to compare it to.
+Period comparison adds a baseline and change indicator to supported reports. You edit the current
+date window and its comparison in one picker, preview both exact ranges, then apply them together so
+cards, charts, tables, and exports use the same baseline.
 
-## How do I turn on comparison?
+A fresh **Last 7 days** view starts by comparing against the adjacent previous seven days. Other
+fresh presets and explicit date ranges start with comparison off.
 
-Open the **comparison menu** next to the date picker and choose a mode. The button's own label shows the active comparison, so you can always see what you're comparing against without opening the menu.
+## How do I change the comparison?
+
+Open the date picker, turn **Compare** on or off, choose a mode, and select **Apply**. The picker
+keeps the date range, timezone, chart bucket, and comparison as one draft: **Cancel**, Escape, or
+clicking outside closes it without changing the report or URL.
+
+The applied date trigger names the active baseline, so you can see the comparison without reopening
+the picker. Turning comparison off is also saved in the URL, so a reload or copied link does not
+silently turn the default back on.
+
+## Which comparison modes are available?
 
 | Mode | Compares against |
 | --- | --- |
-| **No comparison** | Nothing — the default. |
-| **Previous period** | The equal-length window immediately before your selected range. |
-| **Year over year** | The same dates one year earlier. |
+| **Previous period (same weekdays)** | An equal-length earlier range shifted by whole weeks, far enough back to avoid overlap. |
+| **Previous period (adjacent dates)** | The equal-length window immediately before the selected range. This is the fresh Last 7 days default. |
+| **Previous year** | The same calendar dates one year earlier. |
+| **Custom dates** | A historical, non-overlapping range with exactly the same number of days as the current range. |
 
-## What does comparison add to each report?
+Equal-length ranges keep count and rate changes meaningful. A custom comparison cannot include
+future dates, overlap the current window, or use a different duration.
 
-Turning on a comparison lights up the whole dashboard from a single toggle:
+## What does comparison add to a supported report?
 
-- **Stat cards** gain a change percentage versus the baseline.
-- **Breakdown tables** gain a change column on every row, so you can see which pages, referrers, or countries moved.
-- **The time-series chart** draws a muted, dashed **baseline line** behind your current line, with a legend naming both date ranges and a tooltip that labels the baseline point with its *own* date — not a vague "previous".
-- **The Performance report** compares your Core Web Vitals, correctly treating *lower as better* (a rising LCP shows red, not green).
+- **Stat cards** gain a change percentage versus the chosen baseline.
+- **Breakdown tables** gain a change column for the rows in the current period.
+- **Time-series charts** draw a muted baseline line with legends and tooltips that name the actual
+  baseline dates.
+- **Performance metrics** keep their lower-is-better meaning, so a rising LCP is treated as a
+  regression rather than an improvement.
+- **Exports** carry the same comparison mode and resolved windows as the dashboard.
 
-## Where isn't comparison available?
+When a row had no baseline value and appears in the current period, tinyanalytics labels it **new**
+instead of showing an arithmetically misleading “+100%”.
 
-Comparison covers your dashboard reports, with one exception: the [Bots & AI crawlers report](/bot-ai-crawler-analytics) has no comparison option next to its date range.
+## Which reports support comparison?
 
-## Should I use previous period or year over year?
+Comparison is available on site Overview, Pages and URLs, Acquisition, AI traffic, Performance,
+organization Overview, and the organization website list, plus compatible overview exports.
 
-**Previous period** compares your range to the equal window just before it — last 7 days versus the 7 days before that. It's best for spotting recent movement.
+Date-only or shape-specific reports—Sessions, Users, Events, Retention, Funnels, Journeys, Goals,
+Groups, Revenue, Globe, Bots, and custom SQL dashboards—hide the comparison control because they do
+not fetch or render a second dataset. If you navigate from a compared report to one of these pages,
+the page does not show stale comparison labels or deltas.
 
-**Year over year** compares the **same calendar dates** one year earlier, which is best for seasonal businesses where "versus last month" is misleading. tinyanalytics compares the same dates directly, the way you'd expect when you read "year over year".
+## How do I choose a baseline?
 
-## How do I read the change indicators?
-
-A change indicator shows the direction and size of the move. When there's **no baseline** — a referrer that sent zero traffic last period and some this period — tinyanalytics shows it as **new** rather than an arithmetically meaningless "+100%". Comparison is exact for every row shown, including a big mover that wasn't in last period's top rows, so you never miss the referrer that jumped from nowhere to the top.
+- Use **adjacent dates** for immediate movement: the last 7 days versus the 7 days before them.
+- Use **same weekdays** when weekday mix matters: a Thursday–Saturday campaign versus an earlier
+  Thursday–Saturday window.
+- Use **previous year** for seasonal questions where last week or last month is misleading.
+- Use **custom dates** for a known campaign, launch, or incident window with the same duration.
 
 <Note>
-  Comparison is a property of the **date range**, which is why the control lives next to it. Changing your range keeps the comparison mode; the baseline recalculates for the new window.
+  If your plan's reporting history does not include the full baseline, tinyanalytics
+  omits the comparison instead of presenting partial data as a complete period.
 </Note>
 
 ## Frequently asked questions
 
 <AccordionGroup>
+  <Accordion title="Why does Last 7 days already show a comparison?">
+    A fresh Last 7 days view defaults to **Previous period (adjacent dates)**,
+    so it compares with the preceding seven days. Turn **Compare** off and
+    select **Apply** to save an explicit off state that survives reload and
+    sharing.
+  </Accordion>
   <Accordion title="Why does a row show 'new' instead of +100%?">
-    Because there's no baseline to compare against. When a row had zero traffic in the comparison period — a referrer that sent nothing last week and some this week — tinyanalytics labels it **new** rather than an arithmetically meaningless "+100%".
+    The row had no baseline value and appears in the current period. With no
+    nonzero starting value, a percentage increase is undefined, so tinyanalytics
+    labels it **new**.
   </Accordion>
-  <Accordion title="Does period comparison work on Core Web Vitals?">
-    Yes. The Performance report compares your Core Web Vitals against the baseline and correctly treats lower as better, so a rising LCP shows red rather than green. See [Core Web Vitals](/core-web-vitals-analytics).
+  <Accordion title="Can I compare two ranges with different lengths?">
+    No. Previous, year-over-year, and custom baselines resolve to the same number
+    of days as the current range. Equal duration keeps count and rate changes
+    comparable.
   </Accordion>
-  <Accordion title="Does changing the date range turn off my comparison?">
-    No. Comparison is a property of the date range, which is why the control sits next to it. Changing your range keeps the comparison mode you selected, and the baseline recalculates for the new window.
+  <Accordion title="Does changing the date range apply immediately?">
+    No. The date range and baseline are one draft. Select **Apply** to commit
+    both, or use **Cancel**, Escape, or outside dismissal to leave the report and
+    URL unchanged.
   </Accordion>
 </AccordionGroup>
 
@@ -62,13 +100,13 @@ A change indicator shows the direction and size of the move. When there's **no b
 
 <Columns cols={2}>
   <Card title="Dashboard overview" icon="gauge" href="/web-analytics-dashboard">
-    The metrics and breakdowns comparison annotates.
+    Read the metrics, trend, and breakdowns a baseline annotates.
   </Card>
-  <Card title="Annotations" icon="note-sticky" href="/analytics-annotations">
-    Mark what changed on the date a number moved.
+  <Card title="Pages" icon="file-lines" href="/page-analytics">
+    Compare session-ranked pages and URLs.
   </Card>
   <Card title="Core Web Vitals" icon="gauge-high" href="/core-web-vitals-analytics">
-    Compare performance, with lower-is-better handling.
+    Compare performance with lower-is-better handling.
   </Card>
   <Card title="Filter your data" icon="filter" href="/analytics-filters">
     Compare a filtered slice against its own baseline.

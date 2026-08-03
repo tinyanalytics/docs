@@ -3,6 +3,7 @@ title: "Track Events API"
 sidebarTitle: "Tracking API"
 description: "Send pageviews and custom events to POST /api/track as typed JSON; the endpoint validates and queues each event, then returns 204."
 icon: "paper-plane"
+noindex: true
 
 ---
 
@@ -191,7 +192,8 @@ A **`custom_event`** (and an `error`) adds:
 
 ## Sending events from a server
 
-When you call `/api/track` from your backend, add an [API key](/api-reference/api-authentication) so the event is attributed to the **visitor**, not your server:
+When you call `/api/track` from your backend, add an [API key](/api-reference/api-authentication)
+with **Event ingestion: Write** so the event is attributed to the **visitor**, not your server:
 
 ```bash
 curl -X POST https://dash.tinyanalytics.io/api/track \
@@ -207,7 +209,12 @@ curl -X POST https://dash.tinyanalytics.io/api/track \
   }'
 ```
 
-With a valid key, tinyanalytics honors the `ipAddress` and `userAgent` you supply so geo, device, and cookieless identity reflect the real visitor — without them, every server-sent event would collapse to your server's own IP. **These override fields are ignored on a request without a valid key.** Server-side ingestion is subject to a [per-key rate limit](/api-reference/rate-limits-cors).
+With a valid key that grants **Event ingestion: Write**, tinyanalytics honors the `ipAddress` and
+`userAgent` you supply so geo, device, and cookieless identity reflect the real visitor—without
+them, every server-sent event would collapse to your server's own IP. These override fields are
+ignored on a request without a valid key. A valid restricted key that lacks the ingestion grant
+receives `403` instead of falling back to the browser path. Server-side ingestion is subject to a
+[per-key rate limit](/api-reference/rate-limits-cors).
 
 ## Related
 

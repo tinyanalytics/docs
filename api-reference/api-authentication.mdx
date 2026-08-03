@@ -1,12 +1,16 @@
 ---
 title: "API Authentication Keys"
 sidebarTitle: "API keys"
-description: "Create API authentication keys for server-side ingestion, analytics reads, and site management, with the same access as the key owner."
+description: "Create full-access or least-privilege API keys for ingestion, analytics reads, site management, SQL, and MCP, bounded by the owner's access."
 icon: "key"
+noindex: true
 
 ---
 
-An API key authenticates programmatic access to tinyanalytics — server-side event ingestion, analytics reads, and site management. You create a key in your **account settings**, then send it on every request as a Bearer token:
+An API key authenticates programmatic access to tinyanalytics—server-side event ingestion,
+analytics reads, site management, SQL, and MCP. Create either a full-access key or a restricted key
+with per-resource permissions in **Settings → Account**, then send it on every request as a Bearer
+token:
 
 <CodeGroup>
 
@@ -39,9 +43,40 @@ Keys are managed from your account settings:
 - A key is **shown once** at creation — copy it then, because tinyanalytics stores only a hash and can't show it again.
 - **Revoke** a key any time to cut off its access immediately.
 - A key inherits **its owner's access**: a request authenticates as the user who created the key, and is authorized by that user's organization membership and [team](/team-site-access) access. A key never grants more than its owner has.
+- Leave **Restrict permissions** off for full access, or turn it on and select at least one resource
+  for a least-privilege key. A restricted key is refused on any API route outside its grants.
+
+## Which permissions can I grant?
+
+| Resource | Available access | What it covers |
+| --- | --- | --- |
+| **Analytics** | Read | Traffic, acquisition, retention, revenue, performance, and errors. |
+| **Sessions** | Read | Visitor sessions and their activity. |
+| **Events** | Read / Write | Event reports and catalog descriptions. |
+| **Users** | Read / Write | Visitor profiles, traits, identify, and erasure. |
+| **Goals** | Read / Write | Conversion goals. |
+| **Funnels** | Read / Write | Conversion funnels. |
+| **Dashboards** | Read / Write | Dashboards, cards, and annotations. SQL-backed card preview separately needs **Custom SQL: Read**. |
+| **Sites** | Read / Write | Sites, tracking setup, configuration, and deletion. |
+| **Custom SQL** | Read | Read-only, site-scoped SQL. |
+| **Event ingestion** | Write | Trusted server-side tracking. |
+
+Selecting **Write** also selects **Read** for that resource when both actions exist. It does not
+grant read or write access to any other resource. Existing keys created without a permission list
+remain full-access keys.
+
+<Note>
+  A restricted key with **Sites: Read** can list the organizations and sites its
+  owner may access, but organization-list responses omit member rosters. Cookie
+  sessions and existing full-access keys retain the complete member directory.
+</Note>
 
 <Warning>
-  Treat an API key like a password. A leaked key can read and manage every site its owner can access — so keep it server-side, never ship it in browser code, and revoke it if it's exposed. Browser tracking doesn't need a key; the `data-site-id` in the snippet is enough.
+  Treat an API key like a password. A leaked full-access key can use every API
+  capability its owner can access; a leaked restricted key can use every grant
+  you selected. Keep keys server-side, never ship one in browser code, and
+  revoke an exposed key. Browser tracking needs no key—the `data-site-id` in the
+  snippet is enough.
 </Warning>
 
 ## Where the key is required
@@ -73,7 +108,22 @@ Authorization: Bearer YOUR_API_KEY
     No — always send it in the `Authorization` header as `Bearer YOUR_API_KEY`. A key in a query string leaks into server logs, browser history, and referrer headers.
   </Accordion>
   <Accordion title="What can someone do with a leaked API key?">
-    A key inherits its owner's access, so a leaked key can read and manage every site its owner can access. Revoke it immediately in your account settings to cut off that access. Keep keys server-side and never ship one in browser code — browser tracking needs no key, since the `data-site-id` in the snippet is enough.
+    A full-access key can use every API capability its owner can access. A
+    restricted key can use only its selected resources and actions, still
+    bounded by the owner's organization and team permissions. Revoke either key
+    immediately in account settings. Keep keys server-side and never ship one
+    in browser code.
+  </Accordion>
+  <Accordion title="Does a write permission include read access?">
+    Yes, but only for the same resource. Selecting **Goals: Write**, for
+    example, also selects **Goals: Read**; it does not grant Funnels, Sites, or
+    any other resource. Write-only **Event ingestion** has no matching read
+    permission.
+  </Accordion>
+  <Accordion title="How often can I create API keys?">
+    API-key creation is limited to 10 attempts per signed-in user each hour.
+    Invalid creation requests count toward the same security limit. A `429`
+    response includes `Retry-After`; wait for that window before trying again.
   </Accordion>
 </AccordionGroup>
 

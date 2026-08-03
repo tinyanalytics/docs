@@ -23,6 +23,15 @@ function routeToFile(route) {
   return route === "/" ? "index.mdx" : `${route.slice(1)}.mdx`;
 }
 
+// Sections deliberately kept out of search results: the API reference, which
+// would compete with the generated endpoint pages, and the install guides.
+// Every other authored page is indexable.
+const noindexPrefixes = ["api-reference/", "integrations/"];
+
+function mustNoindex(relativeFile) {
+  return noindexPrefixes.some((prefix) => relativeFile.startsWith(prefix));
+}
+
 function findMdxFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     if (
@@ -61,8 +70,8 @@ function parseFrontmatter(file) {
   };
 }
 
-if (mappings.length !== 108) {
-  errors.push(`migration plan has ${mappings.length} rows; expected 108`);
+if (mappings.length !== 109) {
+  errors.push(`migration plan has ${mappings.length} rows; expected 109`);
 }
 
 const authoredFiles = findMdxFiles(root).sort();
@@ -92,6 +101,7 @@ for (const file of actualFiles) {
 
 const titleOwners = new Map();
 const descriptionOwners = new Map();
+let authoredNoindexCount = 0;
 for (const mapping of mappings) {
   const relativeFile = routeToFile(mapping.newRoute);
   if (!actualFiles.has(relativeFile)) {
@@ -134,8 +144,13 @@ for (const mapping of mappings) {
   }
   titleOwners.set(page.title, relativeFile);
 
-  if (page.noindex) {
-    errors.push(`${relativeFile}: authored page must not set noindex`);
+  if (mustNoindex(relativeFile)) {
+    authoredNoindexCount += 1;
+    if (!page.noindex) {
+      errors.push(`${relativeFile}: excluded page must set noindex: true`);
+    }
+  } else if (page.noindex) {
+    errors.push(`${relativeFile}: indexable page must not set noindex`);
   }
   if (/^#\s+/m.test(page.source.replace(/^---\n[\s\S]*?\n---\n?/, ""))) {
     errors.push(`${relativeFile}: body contains an extra H1`);
@@ -150,10 +165,13 @@ if (
     "docs.json: canonical base URL is not https://tinyanalytics.io/docs",
   );
 }
-if (docs.seo?.metatags?.robots !== "noindex") {
+if (docs.seo?.metatags?.robots) {
   errors.push(
-    'docs.json: every documentation page must inherit robots: "noindex"',
+    `docs.json: seo.metatags.robots is "${docs.seo.metatags.robots}"; indexable pages must not inherit a site-wide robots directive`,
   );
+}
+if (docs.seo?.indexing !== "navigable") {
+  errors.push('docs.json: seo.indexing must stay "navigable"');
 }
 
 const navigationPages = [];
@@ -284,6 +302,9 @@ if (generatedNoindexCount !== 148) {
 }
 
 console.log(`Authored pages: ${authoredFiles.length}`);
+console.log(
+  `Indexable authored pages: ${authoredFiles.length - authoredNoindexCount} (${authoredNoindexCount} noindex)`,
+);
 console.log(`Approved route changes: ${changedMappings.length}`);
 console.log(`Permanent redirects: ${(docs.redirects ?? []).length}`);
 console.log(`Generated noindex operations: ${generatedNoindexCount}`);

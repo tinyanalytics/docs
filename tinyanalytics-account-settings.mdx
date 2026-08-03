@@ -1,7 +1,7 @@
 ---
 title: "tinyanalytics Account Settings"
 sidebarTitle: "Account settings"
-description: "Update your tinyanalytics profile, password, language, Anthropic key, and API keys, or permanently delete your account from one settings page."
+description: "Update your profile, password, language, Anthropic key, and full or least-privilege API keys, or permanently delete your account."
 icon: "user-gear"
 ---
 
@@ -15,7 +15,7 @@ Your account settings are where you manage your personal tinyanalytics profile: 
 | **Password**          | Change your password, with a strength meter to help you pick a strong one.                        |
 | **Language**          | Choose the dashboard's display language, per browser.                                             |
 | **Anthropic API key** | Add your own key so Ask AI and SQL generation use your Anthropic account instead of plan credits. |
-| **API keys**          | Create, list, and revoke API keys for programmatic access.                                        |
+| **API keys**          | Create, list, and revoke full-access or per-resource keys for programmatic access.                 |
 | **Delete account**    | Permanently delete your account, confirmed with your password.                                    |
 
 ## How do I change my password?
@@ -57,7 +57,19 @@ The key is used only for tinyanalytics AI generation. It is not used for analyti
 
 ## How do I create and revoke API keys?
 
-You can create and revoke **API keys** from your account settings for programmatic access to tinyanalytics. Create a key when you need one, copy it when it's shown, and revoke it anytime it's no longer needed. Detailed API usage is covered in the API reference.
+You can create and revoke **API keys** from your account settings for programmatic access to
+tinyanalytics. Name the key, then choose its access:
+
+- Leave **Restrict permissions** off for a full-access key that uses all of your existing site and
+  organization permissions.
+- Turn **Restrict permissions** on to grant only the resources an integration needs. Select at
+  least one read or write permission. Choosing write also includes read for the same resource when
+  both are available.
+
+The key list labels unrestricted keys **Full access** and shows how many resources a restricted key
+can use. Copy the secret when it is first shown, because tinyanalytics stores only a hash. Revoke a
+key whenever it is no longer needed. See [API authentication keys](/api-reference/api-authentication)
+for the complete resource table and request behavior.
 
 ## What happens when I delete my account?
 
@@ -86,8 +98,9 @@ The **Delete account** action permanently removes your account and is confirmed 
   </Accordion>
   <Accordion title="Where do I manage my tinyanalytics API keys?">
     Under **Settings → Account**. You can create, list, and revoke API keys
-    there for programmatic access. Copy a key when it's shown, and revoke it
-    whenever it's no longer needed.
+    there for programmatic access. Leave **Restrict permissions** off for full
+    access or turn it on to select per-resource read/write grants. Copy a key
+    when it's shown, and revoke it whenever it's no longer needed.
   </Accordion>
   <Accordion title="What languages is the tinyanalytics dashboard available in?">
     Seven: English, German (Deutsch), Spanish (Español), French (Français),

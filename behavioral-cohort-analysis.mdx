@@ -29,6 +29,22 @@ You define a cohort from one or more **criteria**, each describing something a u
   Your cohort is ready when it appears in the cohort picker and shows a last-refreshed time after tinyanalytics computes its membership.
 </Check>
 
+## How do I create a shared cohort with AI?
+
+Use **Create with AI** from the dashboard Cohort menu or the **Cohorts** page. Describe the
+behavioral audience in up to 500 characters—for example, “Users who viewed pricing but did not sign
+up in the last 30 days”—and tinyanalytics starts one ordinary Ask AI turn.
+
+Ask AI builds one to ten `performed` or `not performed` criteria with 1–365-day windows and shows
+the exact shared-site definition for approval. A site owner or admin must approve it before it is
+saved, and the definition still passes the same compiler and 100-cohort site limit as a manually
+created cohort. The new cohort appears in the list and picker without a reload; membership begins on
+the normal cohort refresh schedule.
+
+AI creation supports **shared site cohorts only**. Personal cohorts remain manual. The request uses
+one plan AI credit or your personal Anthropic key; approving the pending definition does not use a
+second credit.
+
 ## What are the two criterion types?
 
 A cohort in tinyanalytics is built from two building blocks, which together express "did X, not Y, over time":
@@ -65,6 +81,11 @@ Apply a cohort from the filter bar, the same way you apply a [segment](/saved-an
   </Accordion>
   <Accordion title="What's the difference between a behavioral cohort and a saved segment?">
     A behavioral cohort groups users by what they did over time — "checked out at least twice in the last 30 days" — and is computed on the server from your event history. A [saved segment](/saved-analytics-segments) filters on attributes such as country or device and applies instantly. Both apply as a filter across every report.
+  </Accordion>
+  <Accordion title="Can Ask AI create a personal cohort?">
+    No. **Create with AI** creates a shared site cohort after a site owner or
+    admin approves the exact behavioral definition. Personal cohorts remain in
+    the manual flow.
   </Accordion>
 </AccordionGroup>
 

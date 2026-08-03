@@ -1,7 +1,7 @@
 ---
 title: "Scheduled Analytics Reports"
 sidebarTitle: "Scheduled reports"
-description: "Email a stable analytics summary daily, weekly, or monthly for the last completed period, with recipients and sections you choose."
+description: "Email a stable analytics summary daily, weekly, or monthly, with an optional grounded AI narrative on weekly reports."
 icon: "envelope"
 ---
 
@@ -31,6 +31,25 @@ Every report is a compact digest of the period:
 The email ends with a direct dashboard link, the recipient's unsubscribe control, and the registered company imprint.
 
 If a site had **no pageviews** in the period, tinyanalytics skips the email entirely rather than sending an empty report.
+
+## How do I add an AI narrative to a weekly report?
+
+Turn on **AI narrative** for a weekly subscription. tinyanalytics adds 3–7 grounded insights about
+period changes, top traffic, goals, and revenue, followed by a suggested question you can ask in
+[Ask AI](/ai-analytics-assistant). The option is available only for weekly reports; daily and
+monthly subscriptions keep the standard analytics summary.
+
+The narrative is generated once after tinyanalytics confirms that at least one current recipient
+can receive the report, then the same analysis is included for each recipient. It uses the report's
+own dashboard-authoritative numbers rather than AI-generated SQL or model-invented totals.
+
+<Note>
+  The standard report always takes priority. If organization AI is disabled, the
+  AI allowance is unavailable, a source report fails, or the provider returns an
+  invalid response, tinyanalytics omits only the narrative and still sends the
+  ordinary analytics email. **Send report now** indicates whether the narrative
+  was included, omitted, or not requested.
+</Note>
 
 ## Manage recipients
 
@@ -65,6 +84,12 @@ Owners and admins can **send a report now** to preview it — a manual send goes
     send goes out immediately and doesn't change the schedule or the next
     scheduled send.
   </Accordion>
+  <Accordion title="Why did my weekly report arrive without the AI narrative?">
+    tinyanalytics omits only the AI section when organization AI is disabled,
+    the AI allowance or provider is unavailable, a supporting report fails, or
+    the generated response cannot be validated. The ordinary report still
+    sends with its metrics and breakdowns.
+  </Accordion>
 </AccordionGroup>
 
 ## Related
@@ -81,5 +106,8 @@ Owners and admins can **send a report now** to preview it — a manual send goes
   </Card>
   <Card title="Account settings" icon="gear" href="/tinyanalytics-account-settings">
     Turn report emails on or off for your account.
+  </Card>
+  <Card title="Ask AI" icon="sparkles" href="/ai-analytics-assistant">
+    Follow up on the question suggested by a weekly narrative.
   </Card>
 </Columns>

@@ -12,6 +12,21 @@ Filters narrow every report in tinyanalytics to a subset of your traffic — one
 - **Click a row.** In a breakdown, the map, or the Performance table, click a value — a referrer, a country — to filter the dashboard by it. Click again to remove it. This is the fastest way to drill in.
 - **Click a page.** In the [Pages](/page-analytics) and Landing pages tables, a row click instead opens the main dashboard already filtered to that page, carrying your date range and other active filters with it. There's no click-again-to-clear on these two tables — remove the filter on the dashboard, or use your browser's Back button.
 - **Add a filter manually.** Use the filter control to build a filter from a dimension, an operator, and one or more values.
+- **Describe a filter.** On a supported top-level report, open **Add filter**, enter a request such as “Visitors from Türkiye using Chrome” under **Describe your filter**, and submit it. Ask AI converts the request into the same typed filters and applies them to the open report.
+
+## How do natural-language filters work?
+
+**Describe your filter** starts one ordinary [Ask AI](/ai-analytics-assistant) turn. The assistant
+receives the current report, date range, timezone, and complete active filter list, then returns a
+validated replacement list. The resulting chips use the existing URL-synced dashboard state, so you
+can inspect, remove, reload, and share them exactly like manual filters.
+
+This action changes only your browser view, not a saved segment or server configuration, so it does
+not show an approval card. It uses one plan AI credit or your personal Anthropic key. If you leave
+the site or report before the result arrives, tinyanalytics ignores the stale result.
+
+The field appears only on top-level reports that use the shared filter controls. Saved-segment
+editors remain manual because they edit a separate draft rather than the open report.
 
 ## What is a filter made of?
 
@@ -54,6 +69,11 @@ An active filter stays applied as you switch between Overview, Pages, Sessions, 
   </Accordion>
   <Accordion title="Do filters stay applied when I switch reports?">
     Yes. An active filter stays applied as you switch between Overview, Pages, Sessions, and the rest of the dashboard, until you clear it. Set up a view once — mobile visitors from a campaign, for example — and every report reflects it.
+  </Accordion>
+  <Accordion title="Does describing a filter save a segment?">
+    No. **Describe your filter** changes the open report's URL-synced filter
+    state. Save the result separately as a [saved segment](/saved-analytics-segments)
+    when you want to reuse it later.
   </Accordion>
 </AccordionGroup>
 

@@ -3,6 +3,7 @@ title: "Analytics Read API"
 sidebarTitle: "Read API"
 description: "Read overview, time-series, breakdown, session, event, and live analytics as JSON through site-scoped GET endpoints authenticated by API key."
 icon: "chart-line"
+noindex: true
 
 ---
 
@@ -52,7 +53,19 @@ The analytics reads share a UTC date window and time zone:
   IANA time zone for bucketing, e.g. `America/New_York`.
 </ParamField>
 
-Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, and breakdowns take a `dimension`. You can request a `compare=previous` baseline on `timeseries` and `breakdown`.
+Endpoints that return a time series also take `bucket=hour\|day\|week\|month`, and breakdowns take a
+`dimension`. Comparison-capable reads accept one of these baseline modes:
+
+| Parameter | Meaning |
+| --- | --- |
+| `compare=previous_weekday` | Equal-length previous period aligned to the same weekdays. |
+| `compare=previous` | Equal-length period immediately before the current range. |
+| `compare=year` | The same dates one year earlier. |
+| `compare=custom` | An equal-length custom period supplied with `compare_start_date` and `compare_end_date`. |
+
+Custom comparison dates must be historical, non-overlapping, and equal in length to the current
+window. `none` is a dashboard URL value, not an API comparison mode; omit `compare` when you do not
+want a baseline on timeseries or breakdown reads.
 
 ## Core endpoints
 
@@ -71,7 +84,7 @@ Three **composite dimensions** group by host and path together, for sites servin
 
 ## Where are the rest of the endpoints?
 
-These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **133 endpoints across 29 groups** — every one with its full path, method, and parameters:
+These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **148 published endpoints across 29 groups**—every one with its full path, method, and parameters:
 
 <Columns cols={2}>
   <Card title="Overview" icon="gauge" href="/api-reference/overview/get-overview">
@@ -105,13 +118,18 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
     No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-authentication) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
   </Accordion>
   <Accordion title="How do I find an endpoint's exact parameters and response?">
-    For **parameters**, use the **Endpoints** section of this reference — 133 endpoints across 29 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
+    For **parameters**, use the **Endpoints** section of this reference—148 published endpoints across 29 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
   </Accordion>
   <Accordion title="Does tinyanalytics have an API for goals, funnels, or feature flags?">
-    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), sessions, users, user traits, bots, catalog, retention, journeys, and [uptime monitoring](/api-reference/uptime-monitors/list-monitors) — 133 endpoints in total. Each has a page in the **Endpoints** section of this reference.
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), sessions, users, user traits, bots, catalog, retention, journeys, and [uptime monitoring](/api-reference/uptime-monitors/list-monitors)—148 published endpoints in total. Each has a page in the **Endpoints** section of this reference.
   </Accordion>
   <Accordion title="Can I compare a date range against the previous period?">
-    Yes, on `timeseries` and `breakdown`. Request `compare=previous` to get a baseline. The `overview` endpoint already returns `{ "current", "previous", "change" }` — the headline metrics, the previous equal-length period, and the percent change.
+    Yes. Comparison-capable reads accept `previous_weekday`, `previous`, `year`,
+    or `custom`. A custom baseline also needs `compare_start_date` and
+    `compare_end_date`, with the same duration as the current window and no
+    overlap. For response compatibility, `overview` still returns `{ "current",
+    "previous", "change" }`; when you request a mode, its resolved baseline
+    fills the `previous` and `change` fields.
   </Accordion>
 </AccordionGroup>
 

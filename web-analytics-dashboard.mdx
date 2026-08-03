@@ -44,7 +44,14 @@ The Overview shows how many people are on your site right now — the count of d
 
 ## How do date ranges and comparison work?
 
-Pick a date range from the presets or a custom range. Turn on comparison to see each metric against the previous period of the same length, so you can tell whether a number is up or down.
+Open the date picker to edit the current range, timezone, and comparison baseline together. A fresh
+**Last 7 days** view compares against the adjacent previous seven days by default; other fresh
+presets and explicit date ranges start with comparison off. You can instead choose the previous
+period on the same weekdays, the previous year, or an equal-length custom historical range.
+
+The picker previews both exact windows and changes nothing until you select **Apply**. Turning
+comparison off is saved in the URL, so reloads and shared links preserve that choice. See
+[compare periods](/analytics-period-comparison) for supported reports and baseline rules.
 
 Ranges are calculated in your site's **reporting timezone** when one is set, so everyone on the team reads the same days. If no reporting timezone is set, ranges follow **your browser's time zone** instead, and "today" means your today. See [set your reporting timezone](/analytics-site-settings#which-timezone-are-my-reports-based-on).
 
@@ -80,7 +87,7 @@ To read the dashboard in a different zone without changing the site's setting, o
     Narrow every report to the visitors you care about.
   </Card>
   <Card title="Pages" icon="file-lines" href="/page-analytics">
-    Rank your pages by visitors and pageviews.
+    Rank pages and URLs by distinct sessions, with pageviews alongside.
   </Card>
   <Card title="Sessions" icon="list-timeline" href="/session-analytics">
     Inspect individual visits end to end.

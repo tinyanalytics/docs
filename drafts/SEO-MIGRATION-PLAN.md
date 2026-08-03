@@ -258,6 +258,7 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | `/api-reference/read`         | `/api-reference/analytics-read-api` | Analytics Read API           | Read API             |
 | `/api-reference/sql`          | `/api-reference/sql-analytics-api`  | SQL Analytics API            | Scoped SQL           |
 | `/api-reference/api-keys`     | `/api-reference/api-authentication` | API Authentication Keys      | API keys             |
+| `/api-reference/mcp-server`   | `/api-reference/mcp-server`         | Connect an AI Agent with the MCP Server | MCP server       |
 | `/api-reference/rate-limits`  | `/api-reference/rate-limits-cors`   | API Rate Limits and CORS     | Rate limits and CORS |
 | `/api-reference/playground`   | `/api-reference/api-playground`     | tinyanalytics API Playground | API playground       |
 

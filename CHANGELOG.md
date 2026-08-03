@@ -9,6 +9,17 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **Product coverage sync through `eccefd0` (2026-08-03):** documented the shipped July 31–August 2
+  product wave across Ask AI, AI-assisted filters/audiences/surveys/reports/query repair,
+  least-privilege API keys and MCP, the unified comparison picker, default Last 7 days baseline,
+  and session-ranked Pages/URLs. Regenerated the API reference from 133 of 158 to **148 of 192
+  endpoints across 29 groups**. The docs PRD now records both documented changes and reviewed
+  no-public-impact changes from the exact previous sync marker.
+- **Public-doc release gate (2026-08-03):** contributor instructions now require every shipped,
+  customer-visible feature, improvement, behavior change, and API change to update Mintlify before
+  release. The workflow advances an exact product SHA only after the affected pages, generated API
+  reference, `mint validate`, and `mint broken-links` are complete.
+
 - **MCP server guide (2026-07-30):** documented `POST https://dash.tinyanalytics.io/api/mcp`, the
   Model Context Protocol endpoint that lets Claude Code, Cursor, VS Code, and Codex CLI read and
   manage analytics with an existing API key. Covers the 47 tools grouped by task, tested
@@ -50,16 +61,20 @@ project adheres to semantic versioning where practical.
   `#009b32` bolt over an arc — copied byte-for-byte from the marketing site's
   `public/seo/favicon.svg`. The docs logo already used this mark, so only the favicon was off-brand.
   No `docs.json` change was needed: `"favicon": "/favicon.svg"` already pointed at this path.
-- **Disabled search-engine indexing for all docs (2026-07-30):** added a global
-  `robots: noindex` directive so every documentation page, including the complete
-  integrations section, stays out of search-engine indexes. Added the policy to
-  the SEO regression audit.
+- **Scoped search indexing to the product documentation (2026-08-03):** removed the site-wide
+  `robots: noindex` metatag from `docs.json`, so the 71 authored product, resource, and account
+  pages are indexable. Search exclusion is now declared per page instead: all 9 `/api-reference/`
+  guides and all 29 `/integrations/` install guides set `noindex: true` in frontmatter, joining the
+  148 generated endpoint operations that already carry `x-mint.metadata.noindex`. `seo.indexing`
+  stays `navigable`. The SEO regression audit enforces the split in both directions — excluded
+  sections must set `noindex`, every other authored page must not, and `docs.json` must carry no
+  site-wide robots directive.
 - **Completed the authored-page SEO migration (2026-07-30):** renamed 107 routes so each URL and
   H1 states one clear search intent, added concise sidebar labels and unique descriptions capped at
   155 characters, updated every internal link and navigation entry, and added direct permanent
   redirects for both current and legacy `/guides` URLs. Set the canonical base URL to
-  `https://tinyanalytics.io/docs`, made the eight authored API guides indexable, preserved
-  `noindex` on all 148 generated operations, and added a migration regression audit.
+  `https://tinyanalytics.io/docs`, preserved `noindex` on all 148 generated operations, and added
+  a migration regression audit.
 - **Enriched product reference pages (2026-07-30):** expanded the metric glossary with acquisition,
   conversion, events-per-session, and revenue definitions; distinguished in-product Ask AI from
   using the public docs with an external assistant; updated Anthropic BYOK coverage; documented

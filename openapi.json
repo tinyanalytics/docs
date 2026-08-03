@@ -168,7 +168,9 @@
         "operationId": "get-sites-site",
         "summary": "Get Site",
         "description": "Returns details for a specific site",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -204,7 +206,9 @@
         "operationId": "patch-sites-site",
         "summary": "Update Site",
         "description": "Updates a site's name, domain, public flag, surveys toggle, or reporting currency. Requires admin/owner role.",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -266,7 +270,9 @@
         "operationId": "delete-sites-site",
         "summary": "Delete Site",
         "description": "Permanently deletes a site and all its data. Requires admin/owner role.",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -304,7 +310,9 @@
         "operationId": "get-sites-site-has-data",
         "summary": "Get Site Has Data",
         "description": "Returns whether the site has received analytics events",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -342,7 +350,9 @@
         "operationId": "get-sites-site-is-public",
         "summary": "Get Site Public Status",
         "description": "Returns whether the site is publicly accessible",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -380,7 +390,9 @@
         "operationId": "get-sites-site-public-meta",
         "summary": "Get Site Public Meta",
         "description": "Returns the site's display name and domain (used by shared-dashboard embeds)",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -418,7 +430,9 @@
         "operationId": "put-sites-site-move",
         "summary": "Move Site",
         "description": "Moves the site to another organization. Requires admin/owner role in both organizations.",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -474,7 +488,9 @@
         "operationId": "put-sites-site-config",
         "summary": "Update Site Config",
         "description": "Updates tracking/config settings. Requires admin/owner role.",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -529,7 +545,10 @@
               "example": {
                 "public": true,
                 "blockBots": true,
-                "excludedCountries": ["CN", "RU"]
+                "excludedCountries": [
+                  "CN",
+                  "RU"
+                ]
               }
             }
           }
@@ -541,7 +560,9 @@
         "operationId": "get-sites-site-excluded-ips",
         "summary": "Get Excluded IPs",
         "description": "Returns the list of excluded IP addresses",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -579,7 +600,9 @@
         "operationId": "get-sites-site-excluded-countries",
         "summary": "Get Excluded Countries",
         "description": "Returns the list of excluded country codes",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -617,7 +640,9 @@
         "operationId": "get-sites-site-private-link-config",
         "summary": "Get Private Link Config",
         "description": "Returns the private link key configuration",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -653,7 +678,9 @@
         "operationId": "post-sites-site-private-link-config",
         "summary": "Update Private Link",
         "description": "Generates or revokes a private link key. Requires admin/owner role.",
-        "tags": ["sites"],
+        "tags": [
+          "sites"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -709,7 +736,9 @@
         "operationId": "get-organizations",
         "summary": "Get My Organizations",
         "description": "Returns all organizations the authenticated user is a member of, including all members for each organization",
-        "tags": ["organizations"],
+        "tags": [
+          "organizations"
+        ],
         "responses": {
           "200": {
             "description": "Success."
@@ -736,7 +765,9 @@
         "operationId": "post-organizations-organizationId-sites",
         "summary": "Create Site",
         "description": "Creates a new site in an organization. Requires admin/owner role.",
-        "tags": ["organizations"],
+        "tags": [
+          "organizations"
+        ],
         "parameters": [
           {
             "name": "organizationId",
@@ -861,7 +892,9 @@
         "operationId": "get-organizations-organizationId-sites",
         "summary": "Get Organization Sites",
         "description": "Returns all sites in an organization visible to the authenticated user",
-        "tags": ["organizations"],
+        "tags": [
+          "organizations"
+        ],
         "parameters": [
           {
             "name": "organizationId",
@@ -899,7 +932,9 @@
         "operationId": "get-sites-site-overview",
         "summary": "Get Overview",
         "description": "Returns high-level analytics metrics for a site",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -948,6 +983,38 @@
             },
             "in": "query",
             "required": false
+          },
+          {
+            "name": "compare",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -976,7 +1043,9 @@
         "operationId": "get-sites-site-overview-bucketed",
         "summary": "Get Overview (Time Series)",
         "description": "Returns time-series analytics data broken down by time buckets",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1072,7 +1141,9 @@
         "operationId": "get-sites-site-timeseries",
         "summary": "Get Time Series",
         "description": "Returns time-series analytics data for a specific metric, optionally with a period-over-period comparison",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1155,7 +1226,30 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["previous", "year"]
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1185,7 +1279,9 @@
         "operationId": "get-sites-site-breakdown",
         "summary": "Get Breakdown",
         "description": "Returns dimensional analytics broken down by a specific dimension, optionally with a period-over-period comparison",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1275,7 +1371,30 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["previous", "year"]
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1305,7 +1424,9 @@
         "operationId": "get-sites-site-page-titles",
         "summary": "Get Page Titles",
         "description": "Returns page title metrics with pagination",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1379,7 +1500,30 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["previous", "year"]
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1409,7 +1553,9 @@
         "operationId": "get-sites-site-landing-pages",
         "summary": "Get Landing Pages",
         "description": "Returns entry pages with the landed sessions' bounce rate and average duration, with pagination",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1483,7 +1629,30 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["previous", "year"]
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1513,7 +1682,9 @@
         "operationId": "get-sites-site-user-acquisition",
         "summary": "Get User Acquisition",
         "description": "GA4-style first-touch user acquisition: users attributed to the channel/source/medium/campaign of their first-ever session, with new-vs-returning classification (table) or new users per bucket (timeseries)",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1585,7 +1756,12 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "reached", "dropped"]
+              "enum": [
+                "day",
+                "week",
+                "reached",
+                "dropped"
+              ]
             }
           },
           {
@@ -1630,7 +1806,30 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["previous", "year"]
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1660,7 +1859,9 @@
         "operationId": "get-sites-site-live",
         "summary": "Get Live Visitors",
         "description": "Returns the count of active sessions within the specified time window",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1707,7 +1908,9 @@
         "operationId": "get-sites-site-embed-stats",
         "summary": "Get Embed Stats",
         "description": "Public embed-widget stats: live-visitor count over a fixed window, with optional mini-chart series and top countries",
-        "tags": ["overview"],
+        "tags": [
+          "overview"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1770,7 +1973,9 @@
         "operationId": "get-sites-site-events",
         "summary": "Get Events",
         "description": "Without event_name: custom event names with counts. With event_name: that event's property key/value breakdown.",
-        "tags": ["events"],
+        "tags": [
+          "events"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1865,7 +2070,9 @@
         "operationId": "get-sites-site-events-bucketed",
         "summary": "Get Event Time Series",
         "description": "Returns time-series counts for top custom events",
-        "tags": ["events"],
+        "tags": [
+          "events"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -1970,7 +2177,9 @@
         "operationId": "get-sites-site-events-log",
         "summary": "Get Event Log",
         "description": "Returns the most recent individual events (newest first, capped by limit)",
-        "tags": ["events"],
+        "tags": [
+          "events"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2056,7 +2265,9 @@
         "operationId": "get-sites-site-events-outbound",
         "summary": "Get Outbound Links",
         "description": "Returns outbound link clicks with occurrence counts",
-        "tags": ["events"],
+        "tags": [
+          "events"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2133,7 +2344,9 @@
         "operationId": "get-sites-site-events-downloads",
         "summary": "Get File Downloads",
         "description": "Returns file-download clicks by URL with counts and last-downloaded time",
-        "tags": ["events"],
+        "tags": [
+          "events"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2210,7 +2423,9 @@
         "operationId": "get-sites-site-events-autocapture",
         "summary": "Get Autocapture Events",
         "description": "Returns autocaptured interactions of a type (one row per display value, with count and last occurrence)",
-        "tags": ["events"],
+        "tags": [
+          "events"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2296,7 +2511,9 @@
         "operationId": "get-sites-site-events-autocapture-values",
         "summary": "Get Autocapture Values",
         "description": "Returns the most common property values for an autocaptured event type",
-        "tags": ["events"],
+        "tags": [
+          "events"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2382,7 +2599,9 @@
         "operationId": "get-sites-site-errors",
         "summary": "Get Errors",
         "description": "Without error_name: unique error messages with occurrence/session counts. With error_name: individual occurrences with context and stack traces.",
-        "tags": ["errors"],
+        "tags": [
+          "errors"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2486,7 +2705,9 @@
         "operationId": "get-sites-site-errors-bucketed",
         "summary": "Get Error Time Series",
         "description": "Returns error occurrence counts over time",
-        "tags": ["errors"],
+        "tags": [
+          "errors"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2591,7 +2812,9 @@
         "operationId": "get-sites-site-goals",
         "summary": "Get Goals",
         "description": "Returns paginated list of goals with conversion metrics",
-        "tags": ["goals"],
+        "tags": [
+          "goals"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2666,7 +2889,12 @@
             "description": "Sort By.",
             "schema": {
               "type": "string",
-              "enum": ["goalId", "name", "goalType", "createdAt"]
+              "enum": [
+                "goalId",
+                "name",
+                "goalType",
+                "createdAt"
+              ]
             }
           },
           {
@@ -2675,7 +2903,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -2703,7 +2934,9 @@
         "operationId": "post-sites-site-goals",
         "summary": "Create Goal",
         "description": "Creates a new goal",
-        "tags": ["goals"],
+        "tags": [
+          "goals"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2774,7 +3007,9 @@
         "operationId": "get-sites-site-goals-goalId-sessions",
         "summary": "Get Goal Sessions",
         "description": "Returns sessions that completed a specific goal",
-        "tags": ["goals"],
+        "tags": [
+          "goals"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2878,7 +3113,9 @@
         "operationId": "get-sites-site-goals-goalId-bucketed",
         "summary": "Get Goal Time Series",
         "description": "Returns bucketed session-conversion counts for a goal over the date range",
-        "tags": ["goals"],
+        "tags": [
+          "goals"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -2983,7 +3220,9 @@
         "operationId": "patch-sites-site-goals-goalId",
         "summary": "Update Goal",
         "description": "Updates an existing goal",
-        "tags": ["goals"],
+        "tags": [
+          "goals"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3061,7 +3300,9 @@
         "operationId": "delete-sites-site-goals-goalId",
         "summary": "Delete Goal",
         "description": "Deletes a goal",
-        "tags": ["goals"],
+        "tags": [
+          "goals"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3108,7 +3349,9 @@
         "operationId": "get-sites-site-funnels",
         "summary": "Get Funnels",
         "description": "Returns all saved funnels for a site",
-        "tags": ["funnels"],
+        "tags": [
+          "funnels"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3144,7 +3387,9 @@
         "operationId": "post-sites-site-funnels",
         "summary": "Create Funnel",
         "description": "Creates a saved funnel",
-        "tags": ["funnels"],
+        "tags": [
+          "funnels"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3229,7 +3474,9 @@
         "operationId": "post-sites-site-funnels-analyze",
         "summary": "Analyze Funnel",
         "description": "Analyzes funnel conversion data step-by-step",
-        "tags": ["funnels"],
+        "tags": [
+          "funnels"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3354,7 +3601,9 @@
         "operationId": "post-sites-site-funnels-stepNumber-sessions",
         "summary": "Get Funnel Step Sessions",
         "description": "Returns sessions that reached or dropped at a specific funnel step",
-        "tags": ["funnels"],
+        "tags": [
+          "funnels"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3419,7 +3668,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "reached", "dropped"]
+              "enum": [
+                "day",
+                "week",
+                "reached",
+                "dropped"
+              ]
             }
           },
           {
@@ -3510,7 +3764,9 @@
         "operationId": "patch-sites-site-funnels-funnelId",
         "summary": "Update Funnel",
         "description": "Updates a saved funnel's name and steps in place",
-        "tags": ["funnels"],
+        "tags": [
+          "funnels"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3602,7 +3858,9 @@
         "operationId": "delete-sites-site-funnels-funnelId",
         "summary": "Delete Funnel",
         "description": "Deletes a saved funnel",
-        "tags": ["funnels"],
+        "tags": [
+          "funnels"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3649,7 +3907,9 @@
         "operationId": "get-sites-site-revenue-overview",
         "summary": "Get Revenue Overview",
         "description": "Total revenue, AOV, order count and paying-session count (normalized to the site's reporting currency) with an auto previous-period comparison",
-        "tags": ["revenue"],
+        "tags": [
+          "revenue"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3726,7 +3986,9 @@
         "operationId": "get-sites-site-revenue-by-dimension",
         "summary": "Get Revenue by Dimension",
         "description": "Top-N revenue/orders/AOV attributed to each value of an acquisition dimension",
-        "tags": ["revenue"],
+        "tags": [
+          "revenue"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3828,7 +4090,9 @@
         "operationId": "get-sites-site-revenue-timeseries",
         "summary": "Get Revenue Timeseries",
         "description": "Revenue and order count per time bucket across the window (zero-filled)",
-        "tags": ["revenue"],
+        "tags": [
+          "revenue"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3924,7 +4188,9 @@
         "operationId": "post-sites-site-integrations-stripe",
         "summary": "Connect Stripe",
         "description": "Connects a Stripe restricted key to the site and auto-creates the webhook (owner/admin). Re-POST with webhookSecret for the manual fallback.",
-        "tags": ["revenue"],
+        "tags": [
+          "revenue"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -3986,7 +4252,9 @@
         "operationId": "get-sites-site-integrations-stripe",
         "summary": "Get Stripe Connection",
         "description": "Returns the site's Stripe connection status and health (any org member)",
-        "tags": ["revenue"],
+        "tags": [
+          "revenue"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4022,7 +4290,9 @@
         "operationId": "delete-sites-site-integrations-stripe",
         "summary": "Disconnect Stripe",
         "description": "Disconnects the Stripe connection (owner/admin); historical revenue data is kept",
-        "tags": ["revenue"],
+        "tags": [
+          "revenue"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4060,7 +4330,9 @@
         "operationId": "get-sites-site-performance-overview",
         "summary": "Get Performance Overview",
         "description": "Returns aggregate Core Web Vitals metrics, optionally with a period-over-period comparison",
-        "tags": ["performance"],
+        "tags": [
+          "performance"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4116,7 +4388,30 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["previous", "year"]
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -4146,7 +4441,9 @@
         "operationId": "get-sites-site-performance-time-series",
         "summary": "Get Performance Time Series",
         "description": "Returns performance metrics over time",
-        "tags": ["performance"],
+        "tags": [
+          "performance"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4214,6 +4511,38 @@
                 "year"
               ]
             }
+          },
+          {
+            "name": "compare",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -4242,7 +4571,9 @@
         "operationId": "get-sites-site-performance-by-dimension",
         "summary": "Get Performance by Dimension",
         "description": "Returns performance breakdown by dimension",
-        "tags": ["performance"],
+        "tags": [
+          "performance"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4347,7 +4678,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           }
         ],
@@ -4377,7 +4711,9 @@
         "operationId": "get-sites-site-sessions",
         "summary": "Get Sessions",
         "description": "Returns a paginated list of sessions",
-        "tags": ["sessions"],
+        "tags": [
+          "sessions"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4460,7 +4796,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["true", "false"]
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           },
           {
@@ -4517,7 +4856,9 @@
         "operationId": "get-sites-site-sessions-sessionId",
         "summary": "Get Session",
         "description": "Returns detailed session information with events",
-        "tags": ["sessions"],
+        "tags": [
+          "sessions"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4591,7 +4932,9 @@
         "operationId": "get-sites-site-session-locations",
         "summary": "Get Session Locations",
         "description": "Returns aggregated session locations for map visualization",
-        "tags": ["sessions"],
+        "tags": [
+          "sessions"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4668,7 +5011,9 @@
         "operationId": "get-sites-site-users",
         "summary": "Get Users",
         "description": "Returns a paginated list of users",
-        "tags": ["users"],
+        "tags": [
+          "users"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4757,7 +5102,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -4766,7 +5114,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["true", "false"]
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           },
           {
@@ -4784,7 +5135,12 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["username", "name", "email", "user_id"]
+              "enum": [
+                "username",
+                "name",
+                "email",
+                "user_id"
+              ]
             }
           }
         ],
@@ -4814,7 +5170,9 @@
         "operationId": "get-sites-site-users-session-count",
         "summary": "Get User Session Count",
         "description": "Returns daily session counts for a specific user",
-        "tags": ["users"],
+        "tags": [
+          "users"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4870,7 +5228,9 @@
         "operationId": "get-sites-site-users-userId",
         "summary": "Get User Info",
         "description": "Returns detailed user profile information",
-        "tags": ["users"],
+        "tags": [
+          "users"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4915,7 +5275,9 @@
         "operationId": "delete-sites-site-users-userId",
         "summary": "Delete User",
         "description": "Permanently deletes a user profile (GDPR erasure)",
-        "tags": ["users"],
+        "tags": [
+          "users"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -4962,7 +5324,9 @@
         "operationId": "post-sites-site-users-identify",
         "summary": "Identify User",
         "description": "Links an anonymous device id to a user id, merging optional traits and backfilling the device's events",
-        "tags": ["users"],
+        "tags": [
+          "users"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5037,7 +5401,9 @@
         "operationId": "put-sites-site-users-userId-traits",
         "summary": "Update User Traits",
         "description": "Replaces a user's traits wholesale (keys absent from the body are removed)",
-        "tags": ["users"],
+        "tags": [
+          "users"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5113,7 +5479,9 @@
         "operationId": "get-sites-site-user-traits-keys",
         "summary": "Get User Trait Keys",
         "description": "Returns known user trait keys with user counts",
-        "tags": ["user-traits"],
+        "tags": [
+          "user-traits"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5151,7 +5519,9 @@
         "operationId": "get-sites-site-user-traits-values",
         "summary": "Get User Trait Values",
         "description": "Returns values for a user trait key",
-        "tags": ["user-traits"],
+        "tags": [
+          "user-traits"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5216,7 +5586,9 @@
         "operationId": "get-sites-site-user-traits-users",
         "summary": "Get Users by Trait",
         "description": "Returns users matching a trait key and value",
-        "tags": ["user-traits"],
+        "tags": [
+          "user-traits"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5290,7 +5662,9 @@
         "operationId": "get-sites-site-segments",
         "summary": "List Segments",
         "description": "Returns the site's shared segments plus the caller's personal segments",
-        "tags": ["segments"],
+        "tags": [
+          "segments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5326,7 +5700,9 @@
         "operationId": "post-sites-site-segments",
         "summary": "Create Segment",
         "description": "Creates a named reusable filter set (personal or site scope)",
-        "tags": ["segments"],
+        "tags": [
+          "segments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5399,12 +5775,16 @@
                   {
                     "dimension": "country",
                     "op": "equals",
-                    "value": ["US"]
+                    "value": [
+                      "US"
+                    ]
                   },
                   {
                     "dimension": "device_type",
                     "op": "equals",
-                    "value": ["mobile"]
+                    "value": [
+                      "mobile"
+                    ]
                   }
                 ]
               }
@@ -5418,7 +5798,9 @@
         "operationId": "put-sites-site-segments-segmentId",
         "summary": "Update Segment",
         "description": "Updates a segment's name, scope, or filters",
-        "tags": ["segments"],
+        "tags": [
+          "segments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5496,7 +5878,10 @@
                   {
                     "dimension": "country",
                     "op": "equals",
-                    "value": ["US", "CA"]
+                    "value": [
+                      "US",
+                      "CA"
+                    ]
                   }
                 ]
               }
@@ -5508,7 +5893,9 @@
         "operationId": "delete-sites-site-segments-segmentId",
         "summary": "Delete Segment",
         "description": "Deletes a segment",
-        "tags": ["segments"],
+        "tags": [
+          "segments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5555,7 +5942,9 @@
         "operationId": "get-sites-site-cohorts",
         "summary": "List Cohorts",
         "description": "Returns the site's cohorts plus the caller's personal cohorts",
-        "tags": ["cohorts"],
+        "tags": [
+          "cohorts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5591,7 +5980,9 @@
         "operationId": "post-sites-site-cohorts",
         "summary": "Create Cohort",
         "description": "Creates a behavioral \"did X, not Y, over time\" cohort definition",
-        "tags": ["cohorts"],
+        "tags": [
+          "cohorts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5697,7 +6088,9 @@
                         {
                           "dimension": "event_name",
                           "op": "equals",
-                          "value": ["checkout"]
+                          "value": [
+                            "checkout"
+                          ]
                         }
                       ],
                       "windowDays": 30,
@@ -5710,7 +6103,9 @@
                         {
                           "dimension": "pathname",
                           "op": "equals",
-                          "value": ["/cancel"]
+                          "value": [
+                            "/cancel"
+                          ]
                         }
                       ],
                       "windowDays": 30
@@ -5728,7 +6123,9 @@
         "operationId": "put-sites-site-cohorts-cohortId",
         "summary": "Update Cohort",
         "description": "Updates a cohort's name, scope, definition, or enabled flag",
-        "tags": ["cohorts"],
+        "tags": [
+          "cohorts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5795,7 +6192,9 @@
         "operationId": "delete-sites-site-cohorts-cohortId",
         "summary": "Delete Cohort",
         "description": "Deletes a cohort",
-        "tags": ["cohorts"],
+        "tags": [
+          "cohorts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5842,7 +6241,9 @@
         "operationId": "get-sites-site-group-types",
         "summary": "List Group Types",
         "description": "Returns the site's registered group-type slots (index and display labels)",
-        "tags": ["groups"],
+        "tags": [
+          "groups"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5880,7 +6281,9 @@
         "operationId": "patch-sites-site-group-types-type",
         "summary": "Rename Group Type",
         "description": "Updates a group type's display labels. Requires manage role.",
-        "tags": ["groups"],
+        "tags": [
+          "groups"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5947,7 +6350,9 @@
         "operationId": "delete-sites-site-group-types-type",
         "summary": "Delete Unused Group Type",
         "description": "Reclaims a group-type slot only when it has no events in the last 30 days, removing its old event associations and profiles. Requires manage role.",
-        "tags": ["groups"],
+        "tags": [
+          "groups"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -5994,7 +6399,9 @@
         "operationId": "get-sites-site-groups",
         "summary": "List Groups",
         "description": "Paginated list of accounts of a group type active in the window",
-        "tags": ["groups"],
+        "tags": [
+          "groups"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6092,7 +6499,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"]
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           },
           {
@@ -6131,7 +6541,9 @@
         "operationId": "get-sites-site-groups-type-key",
         "summary": "Get Group Details",
         "description": "One account's profile traits, all-time activity roll-up, and member users",
-        "tags": ["groups"],
+        "tags": [
+          "groups"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6187,7 +6599,9 @@
         "operationId": "get-sites-site-catalog",
         "summary": "List Catalog Entries",
         "description": "Read-time inventory for one catalog kind (events, event props, user traits, group traits)",
-        "tags": ["catalog"],
+        "tags": [
+          "catalog"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6204,7 +6618,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["event", "event_prop", "user_trait", "group_trait"]
+              "enum": [
+                "event",
+                "event_prop",
+                "user_trait",
+                "group_trait"
+              ]
             }
           },
           {
@@ -6241,7 +6660,9 @@
         "operationId": "patch-sites-site-catalog",
         "summary": "Upsert Catalog Metadata",
         "description": "Sets the human description and/or verified mark for one catalog entry. Requires manage role.",
-        "tags": ["catalog"],
+        "tags": [
+          "catalog"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6309,7 +6730,9 @@
         "operationId": "get-sites-site-catalog-detail",
         "summary": "Get Catalog Entry Detail",
         "description": "Drill-down for one entry: its properties or value distribution",
-        "tags": ["catalog"],
+        "tags": [
+          "catalog"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6326,7 +6749,12 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["event", "event_prop", "user_trait", "group_trait"]
+              "enum": [
+                "event",
+                "event_prop",
+                "user_trait",
+                "group_trait"
+              ]
             }
           },
           {
@@ -6365,7 +6793,9 @@
         "operationId": "get-sites-site-bots-overview",
         "summary": "Get Bot Overview",
         "description": "Bot request count, share, and per-layer counts for the six live detection layers",
-        "tags": ["bots"],
+        "tags": [
+          "bots"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6442,7 +6872,9 @@
         "operationId": "get-sites-site-bots-by-dimension",
         "summary": "Get Bots by Dimension",
         "description": "Top-N values of one dimension among captured bots",
-        "tags": ["bots"],
+        "tags": [
+          "bots"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6544,7 +6976,9 @@
         "operationId": "get-sites-site-bots-over-time",
         "summary": "Get Bots Over Time",
         "description": "Bot requests per time bucket, plus the AI-crawler subset as a second line",
-        "tags": ["bots"],
+        "tags": [
+          "bots"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6640,7 +7074,9 @@
         "operationId": "get-sites-site-alerts",
         "summary": "List Alerts",
         "description": "Returns all metric/inactivity alerts for the site",
-        "tags": ["alerts"],
+        "tags": [
+          "alerts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6676,7 +7112,9 @@
         "operationId": "post-sites-site-alerts",
         "summary": "Create Alert",
         "description": "Creates a metric-threshold or account-inactivity alert",
-        "tags": ["alerts"],
+        "tags": [
+          "alerts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6778,7 +7216,9 @@
         "operationId": "put-sites-site-alerts-alertId",
         "summary": "Update Alert",
         "description": "Replaces the whole alert (send the complete object)",
-        "tags": ["alerts"],
+        "tags": [
+          "alerts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6887,7 +7327,9 @@
         "operationId": "delete-sites-site-alerts-alertId",
         "summary": "Delete Alert",
         "description": "Deletes an alert",
-        "tags": ["alerts"],
+        "tags": [
+          "alerts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6934,7 +7376,9 @@
         "operationId": "post-sites-site-alerts-alertId-test",
         "summary": "Test Alert",
         "description": "Evaluates a saved alert live and sends a [Test] notification (no state saved)",
-        "tags": ["alerts"],
+        "tags": [
+          "alerts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -6981,7 +7425,9 @@
         "operationId": "post-sites-site-alerts-preview",
         "summary": "Preview Alert",
         "description": "Dry-runs a draft metric alert against live data (no persist/deliver)",
-        "tags": ["alerts"],
+        "tags": [
+          "alerts"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7058,7 +7504,9 @@
         "operationId": "get-sites-site-annotations",
         "summary": "List Annotations",
         "description": "Returns the site's annotations plus sibling sites' global annotations",
-        "tags": ["annotations"],
+        "tags": [
+          "annotations"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7094,7 +7542,9 @@
         "operationId": "post-sites-site-annotations",
         "summary": "Create Annotation",
         "description": "Creates a dated chart marker",
-        "tags": ["annotations"],
+        "tags": [
+          "annotations"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7158,7 +7608,9 @@
         "operationId": "put-sites-site-annotations-annotationId",
         "summary": "Update Annotation",
         "description": "Patches a marker's date, content, or scope",
-        "tags": ["annotations"],
+        "tags": [
+          "annotations"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7221,7 +7673,9 @@
         "operationId": "delete-sites-site-annotations-annotationId",
         "summary": "Delete Annotation",
         "description": "Deletes a chart annotation",
-        "tags": ["annotations"],
+        "tags": [
+          "annotations"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7268,7 +7722,9 @@
         "operationId": "get-sites-site-surveys",
         "summary": "List Surveys",
         "description": "Returns all survey definitions for the site",
-        "tags": ["surveys"],
+        "tags": [
+          "surveys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7304,7 +7760,9 @@
         "operationId": "post-sites-site-surveys",
         "summary": "Create Survey",
         "description": "Creates a survey definition. Requires manage role.",
-        "tags": ["surveys"],
+        "tags": [
+          "surveys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7419,7 +7877,9 @@
         "operationId": "get-sites-site-surveys-surveyId",
         "summary": "Get Survey",
         "description": "Returns one survey definition",
-        "tags": ["surveys"],
+        "tags": [
+          "surveys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7464,7 +7924,9 @@
         "operationId": "put-sites-site-surveys-surveyId",
         "summary": "Update Survey",
         "description": "Partial update including lifecycle (startDate/endDate/archived)",
-        "tags": ["surveys"],
+        "tags": [
+          "surveys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7531,7 +7993,9 @@
         "operationId": "delete-sites-site-surveys-surveyId",
         "summary": "Delete Survey",
         "description": "Hard-deletes the survey definition",
-        "tags": ["surveys"],
+        "tags": [
+          "surveys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7578,7 +8042,9 @@
         "operationId": "get-sites-site-surveys-surveyId-responses",
         "summary": "List Survey Responses",
         "description": "Recent individual responses reconstructed from events",
-        "tags": ["surveys"],
+        "tags": [
+          "surveys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7634,7 +8100,9 @@
         "operationId": "get-sites-site-surveys-surveyId-stats",
         "summary": "Get Survey Stats",
         "description": "Aggregated per-question stats (shown/dismissed/sent, NPS)",
-        "tags": ["surveys"],
+        "tags": [
+          "surveys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7681,7 +8149,9 @@
         "operationId": "get-sites-site-feature-flags",
         "summary": "List Feature Flags",
         "description": "Returns all flags for the site with best-effort traffic stats",
-        "tags": ["feature-flags"],
+        "tags": [
+          "feature-flags"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7717,7 +8187,9 @@
         "operationId": "post-sites-site-feature-flags",
         "summary": "Create Feature Flag",
         "description": "Creates a flag. Requires manage role.",
-        "tags": ["feature-flags"],
+        "tags": [
+          "feature-flags"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7857,7 +8329,9 @@
         "operationId": "put-sites-site-feature-flags-flagId",
         "summary": "Update Feature Flag",
         "description": "Partial update; version auto-increments. Requires manage role.",
-        "tags": ["feature-flags"],
+        "tags": [
+          "feature-flags"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7924,7 +8398,9 @@
         "operationId": "delete-sites-site-feature-flags-flagId",
         "summary": "Delete Feature Flag",
         "description": "Hard-deletes the flag",
-        "tags": ["feature-flags"],
+        "tags": [
+          "feature-flags"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -7971,7 +8447,9 @@
         "operationId": "post-sites-site-feature-flags-evaluate",
         "summary": "Evaluate Flags (Server)",
         "description": "Evaluates server/both-runtime flags for one visitor (org-member gated)",
-        "tags": ["feature-flags"],
+        "tags": [
+          "feature-flags"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8065,7 +8543,9 @@
         "operationId": "post-site-site-feature-flags-evaluate",
         "summary": "Evaluate Flags (Client, public)",
         "description": "Public tracker-facing endpoint: evaluates client/both-runtime flags and rides active surveys (no auth)",
-        "tags": ["feature-flags"],
+        "tags": [
+          "feature-flags"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8133,7 +8613,9 @@
         "operationId": "get-site-site-tracking-config",
         "summary": "Get Tracking Config (public)",
         "description": "Public tracker-facing config: whether client-runtime feature flags and surveys are enabled (no auth)",
-        "tags": ["feature-flags"],
+        "tags": [
+          "feature-flags"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8171,7 +8653,9 @@
         "operationId": "get-sites-site-experiments",
         "summary": "List Experiments",
         "description": "All experiments with embedded feature flag and primary goal",
-        "tags": ["experiments"],
+        "tags": [
+          "experiments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8207,7 +8691,9 @@
         "operationId": "post-sites-site-experiments",
         "summary": "Create Experiment",
         "description": "Creates an experiment over a multivariate flag. Requires manage role.",
-        "tags": ["experiments"],
+        "tags": [
+          "experiments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8279,7 +8765,9 @@
         "operationId": "put-sites-site-experiments-experimentId",
         "summary": "Update Experiment",
         "description": "Partial update; primaryGoalId:null clears the goal",
-        "tags": ["experiments"],
+        "tags": [
+          "experiments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8346,7 +8834,9 @@
         "operationId": "delete-sites-site-experiments-experimentId",
         "summary": "Delete Experiment",
         "description": "Deletes the experiment",
-        "tags": ["experiments"],
+        "tags": [
+          "experiments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8393,7 +8883,9 @@
         "operationId": "get-sites-site-experiments-experimentId-results",
         "summary": "Get Experiment Results",
         "description": "Per-variant sessions/exposures/conversions/lift/revenue over the window",
-        "tags": ["experiments"],
+        "tags": [
+          "experiments"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8479,7 +8971,9 @@
         "operationId": "get-sites-site-dashboards",
         "summary": "List Dashboards",
         "description": "All custom dashboards for the site",
-        "tags": ["dashboards"],
+        "tags": [
+          "dashboards"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8515,7 +9009,9 @@
         "operationId": "post-sites-site-dashboards",
         "summary": "Create Dashboard",
         "description": "Creates a dashboard grid. Requires manage role.",
-        "tags": ["dashboards"],
+        "tags": [
+          "dashboards"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8628,7 +9124,9 @@
                       "vizType": "line",
                       "mapping": {
                         "xColumn": "d",
-                        "yColumns": ["views"],
+                        "yColumns": [
+                          "views"
+                        ],
                         "valueFormat": "number"
                       },
                       "gridPos": {
@@ -8651,7 +9149,9 @@
         "operationId": "get-sites-site-dashboards-dashboardId",
         "summary": "Get Dashboard",
         "description": "Returns one dashboard",
-        "tags": ["dashboards"],
+        "tags": [
+          "dashboards"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8696,7 +9196,9 @@
         "operationId": "put-sites-site-dashboards-dashboardId",
         "summary": "Update Dashboard",
         "description": "Updates a dashboard's name and/or config. Requires manage role.",
-        "tags": ["dashboards"],
+        "tags": [
+          "dashboards"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8759,7 +9261,9 @@
         "operationId": "delete-sites-site-dashboards-dashboardId",
         "summary": "Delete Dashboard",
         "description": "Deletes the dashboard",
-        "tags": ["dashboards"],
+        "tags": [
+          "dashboards"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8806,7 +9310,9 @@
         "operationId": "post-sites-site-dashboards-run-card",
         "summary": "Run Dashboard Card",
         "description": "Executes one card's scoped SQL under readonly caps, optionally windowed to a date range",
-        "tags": ["dashboards"],
+        "tags": [
+          "dashboards"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8878,7 +9384,9 @@
         "operationId": "post-sites-site-query",
         "summary": "Custom SQL Query",
         "description": "Runs a guarded read-only SELECT against site-scoped scoped_events / scoped_events_bot (max 1000 rows / 10s)",
-        "tags": ["custom-query"],
+        "tags": [
+          "custom-query"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -8934,7 +9442,9 @@
         "operationId": "post-sites-site-query-generate",
         "summary": "Generate Query (AI)",
         "description": "Generates ClickHouse SQL from a natural-language prompt, validated against the same scoped-query rules as the run endpoint",
-        "tags": ["custom-query"],
+        "tags": [
+          "custom-query"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -9014,7 +9524,9 @@
         "operationId": "get-sites-site-report-subscriptions",
         "summary": "List Report Subscriptions",
         "description": "Lists the site's scheduled email-report subscriptions",
-        "tags": ["reports"],
+        "tags": [
+          "reports"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -9050,7 +9562,9 @@
         "operationId": "post-sites-site-report-subscriptions",
         "summary": "Create Report Subscription",
         "description": "Creates a scheduled email report (recipients must be org members)",
-        "tags": ["reports"],
+        "tags": [
+          "reports"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -9103,6 +9617,9 @@
                       "type": "string"
                     }
                   },
+                  "aiNarrative": {
+                    "type": "boolean"
+                  },
                   "enabled": {
                     "type": "boolean"
                   }
@@ -9110,8 +9627,15 @@
               },
               "example": {
                 "cadence": "weekly",
-                "recipients": ["owner@example.com"],
-                "metrics": ["sessions", "pageviews", "users"],
+                "recipients": [
+                  "owner@example.com"
+                ],
+                "metrics": [
+                  "sessions",
+                  "pageviews",
+                  "users"
+                ],
+                "aiNarrative": true,
                 "enabled": true
               }
             }
@@ -9124,7 +9648,9 @@
         "operationId": "put-sites-site-report-subscriptions-subscriptionId",
         "summary": "Update Report Subscription",
         "description": "Partially updates a subscription",
-        "tags": ["reports"],
+        "tags": [
+          "reports"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -9171,8 +9697,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "cadence": {
-                    "type": "string"
+                  "aiNarrative": {
+                    "type": "boolean"
                   },
                   "enabled": {
                     "type": "boolean"
@@ -9180,7 +9706,7 @@
                 }
               },
               "example": {
-                "cadence": "monthly",
+                "aiNarrative": false,
                 "enabled": false
               }
             }
@@ -9191,7 +9717,9 @@
         "operationId": "delete-sites-site-report-subscriptions-subscriptionId",
         "summary": "Delete Report Subscription",
         "description": "Deletes a scheduled report subscription",
-        "tags": ["reports"],
+        "tags": [
+          "reports"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -9238,7 +9766,9 @@
         "operationId": "post-sites-site-report-subscriptions-subscriptionId-send",
         "summary": "Send Report Now",
         "description": "Sends the report immediately without advancing the schedule",
-        "tags": ["reports"],
+        "tags": [
+          "reports"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -9285,7 +9815,9 @@
         "operationId": "get-sites-site-gsc-data",
         "summary": "GSC Search Analytics",
         "description": "Proxies a Search Console search-analytics query for one dimension",
-        "tags": ["search-console"],
+        "tags": [
+          "search-console"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -9378,7 +9910,9 @@
         "operationId": "get-uptime-monitors",
         "summary": "List Monitors",
         "description": "Lists uptime monitors (with live 24h/7d/30d uptime) across your orgs. Not site-scoped.",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "organizationId",
@@ -9395,7 +9929,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["true", "false"]
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           },
           {
@@ -9404,7 +9941,10 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["http", "tcp"]
+              "enum": [
+                "http",
+                "tcp"
+              ]
             }
           },
           {
@@ -9450,7 +9990,9 @@
         "operationId": "post-uptime-monitors",
         "summary": "Create Monitor",
         "description": "Creates an org-scoped HTTP or TCP uptime monitor",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "responses": {
           "200": {
             "description": "Success."
@@ -9554,7 +10096,9 @@
         "operationId": "get-uptime-monitors-monitorId",
         "summary": "Get Monitor",
         "description": "Returns one monitor plus its current status snapshot",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9590,7 +10134,9 @@
         "operationId": "put-uptime-monitors-monitorId",
         "summary": "Update Monitor",
         "description": "Updates a monitor's name, interval, enabled flag, or config",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9652,7 +10198,9 @@
         "operationId": "delete-uptime-monitors-monitorId",
         "summary": "Delete Monitor",
         "description": "Deletes a monitor and unschedules its checks",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9690,7 +10238,9 @@
         "operationId": "get-uptime-monitors-monitorId-buckets",
         "summary": "Get Uptime Buckets",
         "description": "Zero-filled uptime-bar buckets over the last N days",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9765,7 +10315,9 @@
         "operationId": "get-uptime-monitors-monitorId-events",
         "summary": "Get Monitor Events",
         "description": "Paginated raw check events, optionally filtered by status/region",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9838,7 +10390,9 @@
         "operationId": "get-uptime-monitors-monitorId-stats",
         "summary": "Get Monitor Stats",
         "description": "Aggregated check stats plus a bucketed response-time series over N hours",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9913,7 +10467,9 @@
         "operationId": "get-uptime-monitors-monitorId-status",
         "summary": "Get Live Status",
         "description": "Live status snapshot with recent incidents and last checks",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9951,7 +10507,9 @@
         "operationId": "get-uptime-monitors-monitorId-uptime",
         "summary": "Get Uptime Summary",
         "description": "All-time uptime summary (monitoring span, last downtime, uptime %)",
-        "tags": ["uptime-monitors"],
+        "tags": [
+          "uptime-monitors"
+        ],
         "parameters": [
           {
             "name": "monitorId",
@@ -9989,7 +10547,9 @@
         "operationId": "get-uptime-notification-channels",
         "summary": "List Notification Channels",
         "description": "Lists notification channels across every org you belong to",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "responses": {
           "200": {
             "description": "Success."
@@ -10014,7 +10574,9 @@
         "operationId": "post-uptime-notification-channels",
         "summary": "Create Notification Channel",
         "description": "Creates an org-scoped channel (email/discord/slack/webhook)",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "responses": {
           "200": {
             "description": "Success."
@@ -10080,7 +10642,10 @@
                   "slackWebhookUrl": "https://hooks.slack.com/services/T00/B00/xxx"
                 },
                 "enabled": true,
-                "triggerEvents": ["down", "recovery"],
+                "triggerEvents": [
+                  "down",
+                  "recovery"
+                ],
                 "cooldownMinutes": 5
               }
             }
@@ -10093,7 +10658,9 @@
         "operationId": "put-uptime-notification-channels-channelId",
         "summary": "Update Notification Channel",
         "description": "Updates a channel's name, config, or routing",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "parameters": [
           {
             "name": "channelId",
@@ -10151,7 +10718,9 @@
         "operationId": "delete-uptime-notification-channels-channelId",
         "summary": "Delete Notification Channel",
         "description": "Deletes a notification channel",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "parameters": [
           {
             "name": "channelId",
@@ -10189,7 +10758,9 @@
         "operationId": "post-uptime-notification-channels-channelId-test",
         "summary": "Test Notification Channel",
         "description": "Sends a synthetic test incident through the channel",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "parameters": [
           {
             "name": "channelId",
@@ -10227,7 +10798,9 @@
         "operationId": "get-uptime-incidents",
         "summary": "List Incidents",
         "description": "Paginated incidents across all your orgs, filterable by status",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "parameters": [
           {
             "name": "status",
@@ -10282,7 +10855,9 @@
         "operationId": "patch-uptime-incidents-incidentId-acknowledge",
         "summary": "Acknowledge Incident",
         "description": "Marks an incident acknowledged",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "parameters": [
           {
             "name": "incidentId",
@@ -10320,7 +10895,9 @@
         "operationId": "patch-uptime-incidents-incidentId-resolve",
         "summary": "Resolve Incident",
         "description": "Resolves an incident and stamps its end time",
-        "tags": ["uptime-channels-incidents"],
+        "tags": [
+          "uptime-channels-incidents"
+        ],
         "parameters": [
           {
             "name": "incidentId",
@@ -10358,7 +10935,9 @@
         "operationId": "get-sites-site-retention",
         "summary": "Get Retention",
         "description": "Returns cohort-based retention analysis",
-        "tags": ["retention-journeys"],
+        "tags": [
+          "retention-journeys"
+        ],
         "parameters": [
           {
             "name": "site",
@@ -10414,7 +10993,12 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": ["day", "week", "reached", "dropped"]
+              "enum": [
+                "day",
+                "week",
+                "reached",
+                "dropped"
+              ]
             }
           },
           {
@@ -10452,7 +11036,9 @@
         "operationId": "get-sites-site-journeys",
         "summary": "Get Journeys",
         "description": "Returns most common page navigation paths",
-        "tags": ["retention-journeys"],
+        "tags": [
+          "retention-journeys"
+        ],
         "parameters": [
           {
             "name": "site",

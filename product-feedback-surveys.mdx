@@ -1,7 +1,7 @@
 ---
 title: "Product Feedback and NPS Surveys"
 sidebarTitle: "Surveys"
-description: "Collect NPS, rating, or open feedback inside your site with a targeted survey widget that uses the existing tinyanalytics tracking script."
+description: "Collect targeted NPS, rating, or open feedback, then ask AI to summarize themes from a bounded sample of open-text responses."
 icon: "comment-dots"
 ---
 
@@ -65,6 +65,25 @@ The survey's results page reports over its lifetime:
 
 You can set a **response limit** so a survey stops itself automatically once it has collected enough answers.
 
+## How do I analyze open-text responses with AI?
+
+When the results contain at least **five non-empty answers to open questions**, choose
+**Analyze responses**. tinyanalytics starts one fresh [Ask AI](/ai-analytics-assistant) conversation
+and analyzes a bounded sample of the latest responses.
+
+The analysis identifies themes, pain points, positive signals, possible next steps, and short
+illustrative excerpts. It distinguishes direct evidence from inference and describes the input as a
+sample; it does not turn qualitative text into percentages, counts, or frequency claims.
+
+For privacy, the browser and saved conversation carry only the survey ID. The server verifies your
+site access, reloads up to the latest **100 deduplicated submissions**, samples open answers across
+questions, and sends that bounded text to Anthropic for the current turn only. Raw answers are not
+copied into conversation history or its generated title, although the generated analysis and the
+survey reference remain in the conversation. Regenerating reloads the current response sample.
+
+The action uses one plan AI credit or your personal Anthropic key. Ordinary follow-up messages do not
+silently resend the survey sample.
+
 ## Frequently asked questions
 
 <AccordionGroup>
@@ -79,6 +98,16 @@ You can set a **response limit** so a survey stops itself automatically once it 
   </Accordion>
   <Accordion title="Do surveys work in single-page apps?">
     Yes. URL targeting re-checks on client-side navigation, so a survey scoped to one route still appears in a single-page app after the visitor navigates to that route.
+  </Accordion>
+  <Accordion title="Why don't I see Analyze responses?">
+    The action appears only after the loaded results contain at least five
+    non-empty open-text answers. Ratings, choices, and blank open responses do
+    not count toward that threshold.
+  </Accordion>
+  <Accordion title="Does AI store my raw survey answers in chat history?">
+    No. The saved conversation contains the prompt and survey reference, not the
+    raw sampled answers. The server reloads a bounded current sample for the
+    analysis turn, while the generated analysis itself remains in history.
   </Accordion>
 </AccordionGroup>
 
@@ -96,5 +125,8 @@ You can set a **response limit** so a survey stops itself automatically once it 
   </Card>
   <Card title="Custom dashboards" icon="table-cells-large" href="/custom-analytics-dashboards">
     Chart survey results alongside your other metrics.
+  </Card>
+  <Card title="Ask AI" icon="sparkles" href="/ai-analytics-assistant">
+    Understand how grounded AI turns, credits, and history work.
   </Card>
 </Columns>

@@ -1,22 +1,27 @@
 ---
 title: "AI Analytics Assistant"
 sidebarTitle: "Ask AI"
-description: "Ask about one site or an organization, get answers grounded in tinyanalytics reports, and approve supported analytics changes before they run."
+description: "Ask grounded analytics questions, explain reports, apply filters, and approve supported changes from one site or an organization."
 icon: "sparkles"
 ---
 
-Ask AI lets you explore your analytics in plain language. It reads the same report services that power the dashboard, keeps the site, organization, date range, and permissions explicit, and links you back to the report behind an answer.
+Ask AI lets you explore tinyanalytics in plain language. It reads the same report services that
+power the dashboard, keeps the site, organization, date range, filters, and permissions explicit,
+and links you back to the report behind an answer.
 
-Use **Ask AI** in the dashboard header, press **⌘J**, or open **Ask AI** from the site or organization navigation for a full-page conversation.
+Use **Ask AI** in the dashboard header, press **⌘J**, or open **Ask AI** from site or organization
+navigation for a full-page conversation. Supported report headers also offer **Explain this report**.
 
 ## What can Ask AI do?
 
-| Scope            | What you can ask                                                                                            | Supported actions                                                                                                                    |
-| ---------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **One site**     | Headline metrics, trends, breakdowns, sessions, goals, taxonomy, and other site reports                     | Build report links; owners and admins can create goals, dashboards, and annotations after approval; generate and run site-scoped SQL |
-| **Organization** | Portfolio totals and trends, site comparisons, live visitors, and a drill-down into any site you can access | Build site report links; owners and admins can create organization dashboards after approval                                         |
+| Scope | What you can ask | Supported actions |
+| --- | --- | --- |
+| **One site** | Headline metrics, trends, breakdowns, sessions, funnels, retention, revenue, goals, taxonomy, and other site reports | Build report links; apply filters to the open report; generate and run site-scoped SQL; managers can create, update, or delete supported analytics resources after approval |
+| **Organization** | Portfolio totals and trends, site comparisons, live visitors, and a drill-down into any site you can access | Build site report links; owners and admins can create organization dashboards after approval |
 
-The organization assistant cannot run cross-site SQL or perform the other site-level write actions. When a question needs one site, it names the site and uses that site's existing report services.
+The organization assistant cannot run cross-site SQL or perform site-level write actions. When an
+organization question needs one site, Ask AI names the site and uses that site's existing report
+services.
 
 ## Ask a grounded question
 
@@ -33,15 +38,57 @@ The organization assistant cannot run cross-site SQL or perform the other site-l
   </Step>
   <Step title="Follow the evidence">
     Review the date range and site named in the answer. Expand the tool summary
-    when you want to inspect what Ask AI used, or follow its report link to
-    verify the number in the dashboard.
+    to inspect what Ask AI used, or follow its report link to verify the number
+    in the dashboard.
   </Step>
-  <Step title="Approve any change">
-    If Ask AI proposes a supported write action, review the confirmation card
-    before approving it. Rejecting the action leaves your analytics
+  <Step title="Approve any persistent change">
+    If Ask AI proposes a supported write action, review the complete confirmation
+    card before approving it. Rejecting the action leaves your analytics
     configuration unchanged.
   </Step>
 </Steps>
+
+## How does Ask AI use the report I have open?
+
+An empty assistant thread starts with questions chosen for the current report and appends the exact
+active date window. These starter questions are selected in your browser, so opening Ask AI does not
+make a model request or consume an AI credit.
+
+On supported reports, **Explain this report** starts a fresh conversation with the report name,
+inclusive date range, timezone, metric, bucket, and active filters. It uses one ordinary Ask AI turn,
+so it consumes one plan credit or uses your Anthropic key. The answer stays grounded in the matching
+report service; for example, a Performance explanation uses Core Web Vitals rather than substituting
+general traffic metrics.
+
+The explanation action appears on Overview, Acquisition, Pages, Performance, Globe, Goals,
+AI traffic, Retention, Sessions, Users, Events, Errors, Bots, and organization Overview. Reports
+with important local state that is not in the shared dashboard controls, including Funnels and
+Revenue, do not show the one-click action yet. You can still ask Ask AI about their data directly.
+
+## How do I apply report filters in plain language?
+
+On a supported top-level site report, open **Add filter** and use **Describe your filter**. A request
+such as “Visitors from Türkiye using Chrome” starts one ordinary Ask AI turn and replaces the open
+report's filter list with validated tinyanalytics filters.
+
+The resulting chips use the same URL-synced filter controls as manual filters, so they are visible,
+removable, reloadable, and shareable. Applying filters changes only your current view; it does not
+write server configuration and therefore needs no approval. If you navigate to another site or
+report before the result arrives, tinyanalytics does not apply the stale result.
+
+## Which changes can Ask AI make?
+
+Site owners and admins can ask Ask AI to create, update, or delete goals, funnels, dashboards,
+annotations, analytics alerts, and shared saved segments. They can also create a shared behavioral
+cohort. Ask AI uses the same validation and permission checks as the dashboard and shows the exact
+definition before anything is saved.
+
+Every persistent action requires approval. Permanent deletes add a second step: type exact uppercase
+`DELETE` before the approval button becomes available. If the target changed after Ask AI listed it,
+the delete fails safely and asks you to refresh instead of acting on stale information.
+
+**Create with AI** in the Segment and Cohort menus starts this same flow. AI-created audiences are
+shared site resources; personal segments and cohorts remain a manual, personal workflow.
 
 ## Questions that work well
 
@@ -49,10 +96,11 @@ The organization assistant cannot run cross-site SQL or perform the other site-l
 - “Which landing pages have high traffic and high bounce rate?”
 - “Compare the sites in this organization and explain the biggest change.”
 - “Show revenue by channel, then link me to the report.”
-- “Create a dashboard for acquisition quality.”
-- “Create a goal for the `signup_completed` event.”
+- “Create a shared cohort of users who viewed pricing but did not sign up in 30 days.”
+- “Create an alert when signup conversions fall below 20 per day.”
 
-Specific questions produce more useful answers. Name the site, metric, dimension, date range, and comparison you care about when they are not already clear from the conversation.
+Specific questions produce more useful answers. Name the site, metric, dimension, date range, and
+comparison you care about when they are not already clear from the conversation.
 
 ## How are answers kept within my access?
 
@@ -61,15 +109,22 @@ Ask AI uses your existing tinyanalytics permissions:
 - You must be a member of the site or organization. A public-dashboard viewer cannot use the assistant.
 - A team-restricted member can query only the sites that team grants them.
 - Owners and admins can enable or disable AI features under **Settings → Organization**.
-- Write tools appear only to roles that can manage the target, and every supported change requires an explicit approval step.
+- Write tools appear only to roles that can manage the target, and every persistent change requires
+  an explicit approval step.
 
-Ask AI stores your conversation history so you can reopen, rename through the generated title, or delete a thread. The full-page view groups past conversations by date. Each answer also supports copy, feedback, regeneration of the latest answer, and suggested follow-up questions.
+Ask AI stores your conversation history so you can reopen, rename through the generated title, or
+delete a thread. The full-page view groups past conversations by date. Each answer supports copy,
+feedback, regeneration of the latest answer, and suggested follow-up questions.
 
 ## How do AI credits and my Anthropic key work?
 
-When plan metering is active, the composer shows the organization's monthly AI-credit usage. A fresh user turn consumes one credit; approving a paused action or regenerating the most recent stored answer does not consume a second credit.
+When plan metering is active, the composer shows the organization's monthly AI-credit usage. A fresh
+user turn consumes one credit. Approving or denying a genuine pending action, or regenerating the
+most recent stored answer, does not consume a second credit.
 
-You can save your own Anthropic API key under **Settings → Account**. Ask AI and natural-language SQL generation then use your Anthropic account and do not consume the organization's tinyanalytics AI credits. The saved key is never shown again after you add it.
+You can save your own Anthropic API key under **Settings → Account**. Ask AI and natural-language SQL
+generation then use your Anthropic account and do not consume the organization's tinyanalytics AI
+credits. The saved key is never shown again after you add it.
 
 See [Billing & plans](/tinyanalytics-pricing-plans) for the current allowances.
 
@@ -78,18 +133,24 @@ See [Billing & plans](/tinyanalytics-pricing-plans) for the current allowances.
 <Check>
   Ask for a metric over a named date range, then open the report link in the
   answer. The site, date range, filters, and displayed number should match the
-  dashboard. For a write request, confirm that nothing changes until you approve
-  the action card.
+  dashboard. For a persistent write, confirm that nothing changes until you
+  approve the action card.
 </Check>
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="SQL query builder" icon="database" href="/sql-analytics-query-builder">
-    Generate, review, and run a site-scoped analytics query.
+  <Card title="Filter your data" icon="filter" href="/analytics-filters">
+    Apply manual or natural-language filters to a report.
   </Card>
-  <Card title="Custom dashboards" icon="chart-line" href="/custom-analytics-dashboards">
-    Build the dashboards Ask AI can help create.
+  <Card title="SQL query builder" icon="database" href="/sql-analytics-query-builder">
+    Generate, repair, review, and run site-scoped analytics SQL.
+  </Card>
+  <Card title="Saved segments" icon="bookmark" href="/saved-analytics-segments">
+    Save reusable filters or create a shared segment with AI.
+  </Card>
+  <Card title="Behavioral cohorts" icon="users-rectangle" href="/behavioral-cohort-analysis">
+    Define a shared behavioral audience with AI approval.
   </Card>
   <Card title="Account settings" icon="user-gear" href="/tinyanalytics-account-settings">
     Add or remove your personal Anthropic key.

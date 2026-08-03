@@ -91,7 +91,20 @@ The query builder is **read-only by design**, so exploring your data can never c
 - **Blocked** — writes, schema changes, multiple statements, and any attempt to read outside your scoped tables.
 - **Capped** — a query runs for at most **10 seconds** and returns at most **1,000 rows**, so a heavy query is trimmed rather than left to run away.
 
-If a query has a mistake, tinyanalytics returns the database's error message so you can fix the SQL directly.
+If a query has a mistake, tinyanalytics returns the database's error message so you can fix the SQL
+directly or use **Fix with AI**.
+
+## How do I repair a failed query with AI?
+
+After a query fails, choose **Fix with AI** on its error card. tinyanalytics sends the current SQL
+and a bounded database diagnostic through the same guarded generator as the **Ask AI** box. A repair
+uses one plan AI credit or your personal Anthropic key, and the action discloses that cost before it
+runs.
+
+Successful repaired SQL must pass the same site-scoped, read-only validator. It replaces only the
+current tab's editor content and clears the obsolete error and result state. tinyanalytics **does not
+run the repaired query automatically**: review the change, then choose **Run** yourself. If repair is
+cancelled or fails validation, the original SQL and database error stay in place.
 
 ## How do I turn a query into a dashboard card?
 
@@ -118,6 +131,11 @@ Save the query as a card and pick a visualization. Any query you've written is t
   <Accordion title="Why does my Stripe SQL total look too high?">
     `scoped_stripe_revenue` is a raw, append-only table, so a Stripe webhook replay can create several rows with the same `stripe_event_id`. Group by that ID and use `argMax(amount, timestamp)` before summing. Also keep currencies separate unless you convert them.
   </Accordion>
+  <Accordion title="Does Fix with AI run the repaired query automatically?">
+    No. A successful repair replaces only the current editor content after the
+    SQL passes the read-only, site-scoped validator. Review it and choose
+    **Run** yourself. The repair uses one AI credit or your Anthropic key.
+  </Accordion>
 </AccordionGroup>
 
 ## Related
@@ -134,5 +152,8 @@ Save the query as a card and pick a visualization. Any query you've written is t
   </Card>
   <Card title="Events explorer" icon="bolt" href="/event-analytics">
     Browse events without writing SQL.
+  </Card>
+  <Card title="Ask AI" icon="sparkles" href="/ai-analytics-assistant">
+    Review the AI credit, grounding, and BYOK behavior.
   </Card>
 </Columns>

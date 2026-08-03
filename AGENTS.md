@@ -40,6 +40,21 @@ tinyanalytics is privacy-friendly, cookieless web **and** product analytics, off
 
 `../tinyanalytics/wiki/features.md` (capability matrix), `../tinyanalytics/wiki/` (behavior), and the product README. Never invent behavior — when unsure, cite the wiki or mark it with a `{/* TODO: verify against product */}` comment.
 
+## Product documentation release gate
+
+- Every shipped, customer-visible feature, improvement, behavior change, and API change in
+  `../tinyanalytics/` requires a paired Mintlify update before release. Prefer updating the page
+  that already owns the topic; create an MDX page and add it to `docs.json` only when no current
+  page can answer the user task.
+- Audit every product commit after the exact sync marker in `PRD.md` §10. Advance that marker only
+  after all affected pages are updated. Record reviewed internal-only changes as
+  `Public docs impact: none` so the audit has no silent gaps.
+- When the product API Playground registry changes, regenerate `openapi.json` with
+  `bun run scripts/generate-openapi.ts` before validation.
+- A product release is documentation-complete only after `mint validate` and
+  `mint broken-links` pass in this repository. This is the cross-repository contract in product
+  decision 0276.
+
 ## Verify before you finish
 
 Run `mint validate` and `mint broken-links` in this repo. Every page needs `title` + `description` frontmatter, and new pages must be added to `docs.json` navigation.

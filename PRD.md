@@ -1,6 +1,6 @@
 # PRD — tinyanalytics documentation (AI-native, Mintlify)
 
-**Status:** Draft v1.4 (execution underway) · **Owner:** Docs · **Last updated:** 2026-07-30
+**Status:** Draft v1.5 (execution underway) · **Owner:** Docs · **Last updated:** 2026-08-03
 **Repo:** `tinyanalytics-docs` (Mintlify) · **Product repo:** `../tinyanalytics`
 **Reference (behavioral spec only):** `../rybbit/rybbit/docs` · **Competitor refs:** Plausible, Umami
 
@@ -472,7 +472,7 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 **Phase 0 — Foundations (config, no content debt)** — ✅ done (2026-07-27)
 
 - ✅ `docs.json` rebranded (name, owner-approved green palette, Inter font, tab/group nav, dashboard CTA, `contextual.display`); light/dark logo assets replaced with the tinyanalytics emblem — the green bolt over an arc; `AGENTS.md` rewritten; project skills shipped (§8.5). The favicon lagged behind on a blue ascending-bars placeholder until 2026-07-30, when it was matched to the marketing site's `public/seo/favicon.svg`.
-- ✅ Site metadata configured with a global description, Open Graph and Twitter defaults, and **tinyanalytics** as the structured-data publisher. All documentation pages inherit `robots: noindex`, including the integrations section. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. The canonical base URL is `https://tinyanalytics.io/docs`. Real footer socials remain an owner follow-up.
+- ✅ Site metadata configured with a global description, Open Graph and Twitter defaults, and **tinyanalytics** as the structured-data publisher. The 71 authored product, resource, and account pages are indexable; search exclusion is declared per page, so every `/api-reference/` guide and every `/integrations/` install guide sets `noindex: true` alongside the 148 generated endpoint operations. Mintlify generates per-page Open Graph images from each page's title and description plus the site logo and primary color. The canonical base URL is `https://tinyanalytics.io/docs`. Real footer socials remain an owner follow-up.
 
 **Phase 1 — The golden path (highest leverage)** — ✅ done (2026-07-17)
 
@@ -746,6 +746,40 @@ The generated OpenAPI reference is refreshed from the product playground registr
 
 **Current sync marker:** product commit `f5dd5773073a7a11776d08c4e33e55dd451b939f`
 (2026-07-30).
+
+## 10f. Product-sync pass (2026-08-03)
+
+Audited every committed product change after `f5dd577` through `eccefd0` and updated the public
+contract for:
+
+- **Least-privilege API keys and MCP** (0257, 0268, 0269): full-access or per-resource keys,
+  read/write scope behavior, scoped MCP catalogs, and the corrected destructive-tool boundary for
+  explicitly scoped write keys.
+- **Scheduled-report AI digests** (0258): a weekly-only opt-in narrative, ordinary-report fallback,
+  current-recipient filtering, and send-now preview behavior.
+- **Ask AI depth and entry points** (0259–0265, 0270): funnel/retention/revenue reads, contextual
+  starters, one-click report explanations, survey-response analysis, natural-language report
+  filters, shared segment/cohort creation, signed persistent writes, and deliberate deletes.
+- **Custom-query repair** (0261, 0269): **Fix with AI** uses the existing credit/BYOK path, replaces
+  the editor only after guarded validation, and never runs repaired SQL automatically.
+- **Period comparison** (0271): one date+baseline picker, four baseline modes, atomic Apply/Cancel,
+  and the adjacent previous seven days as the fresh Last 7 days default with a persistent explicit
+  off state.
+- **Pages and URLs ranking** (0272): lists rank by the displayed distinct-session count before the
+  server top-N limit, with pageviews retained as separate row data.
+
+Reviewed changes with **Public docs impact: none**: the dashboard-list primitive refactor (0255),
+assistant stream rendering (0256), the shared Anthropic provider runtime (0266), trusted-origin PUT
+CORS correction (0267), deployment-only records, and hardening details that did not change a
+customer-facing guarantee beyond the API-key/MCP corrections documented above.
+
+No authored page was needed: each shipped behavior has an existing topic owner, so authored
+navigation remains unchanged. The generated OpenAPI reference was refreshed from **158 total / 133
+published** to **192 total / 148 published across 29 groups**, including the new comparison query
+vocabulary and report-subscription request fields.
+
+**Current sync marker:** product commit `eccefd07413343f03f182c2341888816ecd8f2f4`
+(2026-08-02).
 
 ---
 

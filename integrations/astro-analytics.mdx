@@ -3,6 +3,7 @@ title: "Astro Analytics Integration"
 sidebarTitle: "Astro"
 description: "Add tinyanalytics to an Astro site by placing the tracking snippet in a shared layout's head with is:inline so Astro leaves the third-party tag untouched."
 icon: "rocket"
+noindex: true
 ---
 
 To add tinyanalytics to an **Astro** site, put the tracking snippet in a shared layout's `<head>` and mark it `is:inline`. That tells Astro to leave the third-party script exactly as written instead of bundling it, so it loads on every page that uses the layout.

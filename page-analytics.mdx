@@ -1,11 +1,13 @@
 ---
 title: "Page Analytics"
 sidebarTitle: "Pages"
-description: "Rank pages by visitors, pageviews, and trends, then analyze URLs, titles, entries, exits, hostnames, and landing-page engagement."
+description: "Rank pages and URLs by distinct sessions before the top-N limit, then inspect pageviews, trends, titles, entries, exits, and hostnames."
 icon: "file-lines"
 ---
 
-The Pages report ranks your site's pages by how many people visit them. Each row is a page, with its number of visitors, its pageviews, and a small trend sparkline, so you can see your top content at a glance and how each page is trending.
+The Pages report ranks your site's pages by how many distinct sessions viewed them. Each row shows
+sessions, pageviews, and a trend sparkline, so the visible order matches the Sessions metric while
+repeat views remain available as separate context.
 
 ## What each column means
 
@@ -16,7 +18,10 @@ The Pages report ranks your site's pages by how many people visit them. Each row
 | **Sessions** | The number of distinct sessions that viewed the page. |
 | **Pageviews** | The total number of times the page was viewed. |
 
-Pages are ranked by visitors, most-visited first.
+Pages and URLs are ranked by **Sessions**, highest first, before the server applies its top-N limit.
+If two rows have the same session count, their displayed values break the tie alphabetically.
+Pageviews do not control the order, so one repeat-heavy session cannot push a page with broader
+session reach out of the list.
 
 ## How do I switch to URLs, titles, entries, exits, or hostnames?
 
@@ -93,7 +98,7 @@ In **URLs** mode a row click applies **two** filters together, hostname and path
 
 ## Common workflows
 
-- **Find your top content.** The default ranking shows which pages drive the most traffic.
+- **Find your top content.** The default ranking shows which pages reached the most sessions.
 - **Check a page's momentum.** Read the trend sparkline to see whether a page is gaining or losing visits.
 - **Drill into one page.** Click a page to open the dashboard filtered to it, and read its sources, devices, and geography in the [Overview](/web-analytics-dashboard) breakdowns.
 - **Separate two hostnames.** Switch to the **URLs** view when the same path is served from several domains or subdomains.
@@ -102,7 +107,11 @@ In **URLs** mode a row click applies **two** filters together, hostname and path
 
 <AccordionGroup>
   <Accordion title="How are pages ranked in the Pages report?">
-    Pages are ranked by visitors, most-visited first. Each row shows the page's title and path, a trend sparkline over your selected date range, the number of distinct sessions that viewed it, and its total pageviews.
+    Pages and URLs are ranked by distinct **Sessions**, highest first, before
+    the server applies its top-N limit. Ties use the displayed page or URL
+    alphabetically. Pageviews remain a separate column and do not control the
+    ranking, so repeat views in one session cannot displace a page seen in more
+    sessions.
   </Accordion>
   <Accordion title="What's the difference between the Pages and Titles views?">
     The Pages view ranks pages by their path, which is the standard read of your top content. The Titles view ranks them by their HTML `<title>` instead, which is useful when one path serves many titles. Both views re-slice the same traffic by a different key.

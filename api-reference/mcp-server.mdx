@@ -1,12 +1,16 @@
 ---
 title: "Connect an AI Agent with the MCP Server"
 sidebarTitle: "MCP server"
-description: "Connect Claude Code, Cursor, VS Code, or Codex to your tinyanalytics data over the Model Context Protocol at https://dash.tinyanalytics.io/api/mcp using an API key."
+description: "Connect Claude Code, Cursor, VS Code, or Codex to tinyanalytics over MCP with a scoped API key and 54 tools for analytics and setup."
 icon: "plug"
+noindex: true
 
 ---
 
-The tinyanalytics **MCP server** lets an AI agent read and manage your analytics directly, using the same [API key](/api-reference/api-authentication) you already use for the HTTP API. Point your agent at one endpoint and it can answer questions about your traffic, create goals and funnels, and build dashboards — without you writing any HTTP calls.
+The tinyanalytics **MCP server** lets an AI agent read and manage your analytics directly, using the
+same full-access or restricted [API key](/api-reference/api-authentication) as the HTTP API. Point
+your agent at one endpoint and it can answer traffic questions, create goals and funnels, and build
+dashboards without you writing HTTP calls.
 
 ```
 POST https://dash.tinyanalytics.io/api/mcp
@@ -22,7 +26,10 @@ Model Context Protocol (MCP) is an open standard that lets AI applications call 
 
 ## What can an agent do through MCP?
 
-The server exposes **47 tools**, grouped by what you'd ask for:
+The complete server catalog contains **54 tools** in nine domains. A full-access key receives the
+**47 default tools**. A restricted key receives only the tools allowed by its selected resources;
+an explicit matching write grant can also expose the catalog's gated configuration or delete tool
+for that resource.
 
 | You ask for | Tools the agent uses |
 | --- | --- |
@@ -33,7 +40,9 @@ The server exposes **47 tools**, grouped by what you'd ask for:
 | **Anything else** | A read-only SQL query over your own event data, with the schema available as a tool |
 | **Getting started** | Create a site, get its tracking snippet, check whether tracking is live, and get the dashboard link |
 
-Every tool runs with **your key's access**: the agent sees exactly the sites you can see, and writes are refused unless your organization role allows them.
+Every tool runs with both **your key's scopes and your account access**. The agent sees only the
+sites you can see, a restricted key sees only granted tools, and writes are refused unless your
+organization role also allows them.
 
 ## Which AI clients can connect today?
 
@@ -52,9 +61,9 @@ The requirement is simple: the client must speak **Streamable HTTP** and let you
 
 <Steps>
   <Step title="Create an API key">
-    In tinyanalytics, open [**Settings → Account**](/tinyanalytics-account-settings) and create a key from the **API keys** card. Copy it immediately — it's [shown only once](/api-reference/api-authentication).
+    In tinyanalytics, open [**Settings → Account**](/tinyanalytics-account-settings) and create a key from the **API keys** card. For least privilege, turn on **Restrict permissions** and grant only what the agent needs. A traffic-reading agent usually starts with **Sites: Read** and **Analytics: Read**; add Sessions, Events, Users, Goals, Funnels, Dashboards, or Custom SQL only for those tasks.
 
-    A key inherits its owner's access, so the agent will reach every site you can reach.
+    Copy the key immediately—it is [shown only once](/api-reference/api-authentication). The key can never reach a site that its owner cannot access.
   </Step>
   <Step title="Add the server to your client">
     Use the configuration for your client below, replacing `YOUR_API_KEY` with the key you just created.
@@ -153,10 +162,15 @@ That budget suits normal agent work: building a dashboard, where each card is pr
 
 ## Is it safe to connect an agent?
 
-Connecting an agent gives it your key's access. Understand these four points before you do.
+Connecting an agent gives it your key's access. Understand these points before you do.
 
-- **Your key is your identity.** An agent connected with your key can do anything you can do through the API, for every site your account reaches. There are no read-only keys yet.
-- **Deletion is not available.** The tools that permanently delete a site, goal, funnel, dashboard, annotation, or a person's data are **not offered on tinyanalytics cloud**, and neither is changing a site's tracking configuration. An agent cannot destroy your data or silently switch off collection.
+- **Prefer a restricted key.** Grant only the resources and read/write actions the agent needs. The
+  MCP tool list and direct REST calls enforce the same scopes, while your organization and team
+  permissions remain an additional boundary.
+- **Write scopes can include permanent actions.** A restricted key with an explicit matching write
+  grant can receive configuration or delete tools for Sites, Goals, Funnels, Dashboards,
+  Annotations, or Users. Do not grant those write scopes to an agent that only needs reads. The 47
+  tools on a full-access key omit these seven gated actions by default.
 - **Analytics text is untrusted input.** Page titles, referrers, and event names come from anonymous visitors to your site, which makes them a channel for prompt injection. tinyanalytics strips control and bidirectional characters from every value it returns and tells the model explicitly that returned text is data, never instructions. Keep that assumption in your own prompts too.
 - **Revoke a key any time.** Deleting the key in your account settings cuts off the agent immediately.
 
@@ -173,17 +187,22 @@ Connecting an agent gives it your key's access. Understand these four points bef
 | Your client tries to log you in, or reports a failed connection mentioning OAuth or an unexpected `<!DOCTYPE html>` response | The `Authorization` header is missing. The server answers `401`, and clients that see no header attempt an OAuth flow that doesn't exist yet. Add the header. |
 | `The API key was not recognized` | Stray whitespace, a wrapped line, or a missing `Bearer ` prefix in the header. |
 | `This API key has expired` or `is disabled` | Create a new key from the **API keys** card under [**Settings → Account**](/tinyanalytics-account-settings). |
-| A tool returns `403` | Your key's user can't access that site, or the action needs a higher organization role. Ask the agent to list your sites to see what the key reaches. |
+| A tool returns `403` | The key lacks the required resource scope, its owner can't access the site, or the action needs a higher organization role. Review the key's permissions and ask the agent to list your sites. |
 | A tool returns `404` for an ID | The ID is wrong. Ask the agent to list goals, funnels, dashboards, or annotations to get valid IDs. |
 | `Wrong path. The MCP endpoint is POST /api/mcp` | The URL has a trailing slash or an extra segment. Use exactly `https://dash.tinyanalytics.io/api/mcp`. |
 | `Rate limit reached for this API key` | You've passed 120 requests in a minute. Wait for the window, then ask for fewer, more aggregated results. |
-| `The MCP endpoint is temporarily disabled` | The endpoint is switched off on that deployment. On self-hosted instances, check `MCP_ENABLED`. |
+| `The MCP endpoint is temporarily disabled` | The hosted endpoint is temporarily unavailable. Try again later or contact support. |
 
 ## Frequently asked questions
 
 <AccordionGroup>
   <Accordion title="What is the tinyanalytics MCP server?">
-    It's an endpoint at `https://dash.tinyanalytics.io/api/mcp` that exposes your analytics to AI agents as 47 callable tools over the Model Context Protocol. You connect a client such as Claude Code, Cursor, VS Code, or Codex CLI with your API key, then ask questions in plain language instead of writing HTTP requests.
+    It's an endpoint at `https://dash.tinyanalytics.io/api/mcp` that exposes a
+    54-tool catalog over the Model Context Protocol. A full-access key receives
+    47 default tools; a restricted key receives the subset allowed by its
+    scopes and may receive matching gated actions when you explicitly grant
+    write access. Connect Claude Code, Cursor, VS Code, or Codex CLI with your
+    API key, then ask questions in plain language.
   </Accordion>
   <Accordion title="Do I need a special key or a paid plan for MCP?">
     No. MCP uses the same [API key](/api-reference/api-authentication) as the rest of the API, created under [**Settings → Account**](/tinyanalytics-account-settings), and it reaches exactly the sites that key's owner can reach.
@@ -192,7 +211,11 @@ Connecting an agent gives it your key's access. Understand these four points bef
     Not yet. Both require OAuth for custom connectors, and the tinyanalytics MCP server currently authenticates with an API key sent as a request header. Support for OAuth is planned. Today the endpoint works with developer clients that let you set a header: Claude Code, Cursor, VS Code, and Codex CLI.
   </Accordion>
   <Accordion title="Can an agent delete my analytics data?">
-    No. On tinyanalytics cloud the delete tools aren't offered at all, and neither is changing a site's tracking configuration — so the actions that can't be undone are unavailable to an agent. An agent can still create and update goals, funnels, dashboards, and annotations, and those changes are visible to your whole team.
+    Only if you explicitly give a restricted key the matching write scope. For
+    example, **Sites: Write** can expose site configuration and deletion, while
+    **Users: Write** can expose user erasure. A full-access key receives 47
+    default tools that omit the seven gated configuration/delete actions. Use a
+    restricted read-only key for analysis-only agents.
   </Accordion>
   <Accordion title="How is this different from Ask AI inside tinyanalytics?">
     [Ask AI](/ai-analytics-assistant) lives in the tinyanalytics dashboard and answers questions there. The MCP server brings the same data into the AI tool you already work in, so an agent can combine your analytics with your codebase — for example, checking whether a page you just changed is losing visitors.

@@ -29,6 +29,20 @@ Build the filters you want, then save them:
   Your segment is saved when it appears in the segment picker. Select it to apply the saved filters across your reports; choose **Clear segment** to remove them.
 </Check>
 
+## How do I create a shared segment with AI?
+
+Use **Create with AI** from the dashboard Segment menu or the **Segments** page. Describe the
+audience in up to 500 characters—for example, “Organic mobile visitors from Türkiye”—and
+tinyanalytics starts one ordinary Ask AI turn.
+
+Ask AI translates the description into real site filters and shows the exact shared-segment
+definition in an approval card. Nothing is saved until a site owner or admin approves it. The new
+segment appears in the list and picker without a reload after creation.
+
+AI creation supports **shared site segments only**. Create a personal segment with the manual flow
+when it should remain visible only to you. The request uses one plan AI credit or your personal
+Anthropic key; approving the pending definition does not use a second credit.
+
 ## Who can see a segment? Personal vs. site scope
 
 Every segment has one of two scopes, which decides who sees it:
@@ -63,6 +77,11 @@ A **segment** filters on *attributes* — where a visitor is, what device they u
   </Accordion>
   <Accordion title="If I edit a saved segment, does an open report update?">
     No. A segment is a snapshot of filters, not a live link. A report you already opened with the segment applied keeps the filters it was opened with. Reapply the segment from the filter bar to pick up your changes.
+  </Accordion>
+  <Accordion title="Can Ask AI create a personal segment?">
+    No. **Create with AI** creates a shared site segment after a site owner or
+    admin approves the exact filter definition. Personal segments remain in the
+    manual flow and are visible only to you.
   </Accordion>
 </AccordionGroup>
 

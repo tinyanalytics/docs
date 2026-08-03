@@ -17,6 +17,7 @@
 - Search for existing content before adding anything new. Avoid duplication unless it is done for a strategic reason
 - Check existing patterns for consistency
 - Start by making the smallest reasonable changes
+- Treat every shipped, customer-visible product feature, improvement, behavior change, and API change as requiring a paired documentation update before release. Audit from the exact product sync marker in `PRD.md`, update an existing page when possible, create and navigate a new page when necessary, and advance the marker only after validation.
 
 ## docs.json
 

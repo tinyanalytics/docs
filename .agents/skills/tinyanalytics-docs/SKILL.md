@@ -146,6 +146,10 @@ By archetype (details and examples in `PRD.md` §6):
 
 Everything in the mintlify skill's verification checklist, plus:
 
+- [ ] Every committed product change after the exact `PRD.md` sync marker was
+      mapped to a public page or recorded as `Public docs impact: none`; advance
+      the marker only after the complete pass validates
+- [ ] Product API Playground changes regenerated `openapi.json`
 - [ ] No self-hosting, installation, or operator content anywhere on the page
 - [ ] Every behavioral claim traceable to the wiki (or TODO-marked)
 - [ ] Feature exists in `../tinyanalytics/wiki/features.md` as user-facing
