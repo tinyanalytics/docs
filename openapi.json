@@ -2069,7 +2069,7 @@
       "get": {
         "operationId": "get-sites-site-events-bucketed",
         "summary": "Get Event Time Series",
-        "description": "Returns time-series counts for top custom events",
+        "description": "Returns time-series counts for top custom events; accepts the same activity constraints (q, event_types, event_names, event_props) as the event log",
         "tags": [
           "events"
         ],
@@ -2149,6 +2149,38 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_props",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2176,7 +2208,7 @@
       "get": {
         "operationId": "get-sites-site-events-log",
         "summary": "Get Event Log",
-        "description": "Returns the most recent individual events (newest first, capped by limit)",
+        "description": "Returns individual events (newest first, capped by limit) with composite-cursor pagination, directions, and server-side search/type/name/property filters",
         "tags": [
           "events"
         ],
@@ -2236,6 +2268,123 @@
             "description": "Example: 10.",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_props",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "before_timestamp",
+            "in": "query",
+            "required": false,
+            "description": "Example: ISO 8601, e.g. 2024-01-31T14:00:00.000Z.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/events/log/{eventId}": {
+      "get": {
+        "operationId": "get-sites-site-events-log-eventId",
+        "summary": "Get Event",
+        "description": "Returns one site-scoped event by its event_id (uniform 404 for unknown, zero, or other-site IDs)",
+        "tags": [
+          "events"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],

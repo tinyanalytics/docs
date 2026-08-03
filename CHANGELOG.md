@@ -9,6 +9,19 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **Event Activity Explorer (2026-08-03, product decision 0277):** rewrote the
+  [Events page guide](event-analytics.mdx) for the table-first explorer — Explore (default),
+  Trends, and Live views; server-backed search; event type/name pickers and typed event-property
+  filters; configurable columns; the Overview/Properties/Raw/Session detail tabs; `?event=<uuid>`
+  deep links; and Live's incremental pause/resume/clear lifecycle (replacing the old 5-second
+  full-page realtime refresh and loaded-rows-only search). Extended `openapi.json` with the
+  `events/log` activity parameters (`cursor`, `direction`, `order`, `q`, `event_types`,
+  `event_names`, `event_props`, legacy `before_timestamp`) and the new
+  `GET /sites/{site}/events/log/{eventId}` detail endpoint — **149 published endpoints across 29
+  groups**. The product change is uncommitted at documentation time, so the PRD sync marker stays at
+  `eccefd0` with a recorded note to advance it (and regenerate the reference after the product's
+  playground registry declares the new parameters) when the release commit lands.
+
 - **Agent Skills guide (2026-08-03):** documented
   [`tinyanalytics/agent-skills`](https://github.com/tinyanalytics/agent-skills), the MIT-licensed
   repository of five Agent Skills that was previously referenced nowhere in the docs. The new

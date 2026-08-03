@@ -781,6 +781,34 @@ vocabulary and report-subscription request fields.
 **Current sync marker:** product commit `eccefd07413343f03f182c2341888816ecd8f2f4`
 (2026-08-02).
 
+## 10g. Product-sync pass (2026-08-03 — Event Activity Explorer, pending product commit)
+
+Documented the **Event Activity Explorer** (product decision 0277), which rebuilds the Events page
+as a table-first explorer:
+
+- **`event-analytics.mdx`** rewritten for the three page-local views — **Explore** (default),
+  **Trends** (the existing chart), and **Live** — covering server-backed search, event type/name
+  pickers, typed event-property filters, configurable columns, the Overview/Properties/Raw/Session
+  detail tabs, `?event=<uuid>` deep links, and Live's incremental pause/resume/clear lifecycle. The
+  stale "Realtime refresh every 5 seconds" and "search filters only loaded rows" claims were
+  removed; the FAQs were replaced to match.
+- **`openapi.json`** extended by hand: `GET /sites/{site}/events/log` gains `cursor`, `direction`,
+  `order`, `q`, `event_types`, `event_names`, `event_props`, and the legacy `before_timestamp`, and
+  the new `GET /sites/{site}/events/log/{eventId}` detail path was added (**148 → 149 published
+  endpoints across 29 groups**; the count references in `tinyanalytics-api.mdx`,
+  `analytics-read-api.mdx`, and `api-playground.mdx` were updated). ⚠️ The product's playground
+  endpoint registry (`apps/web/.../api-playground/utils/endpoints/events.ts`) does **not** yet
+  declare these parameters, so the next `generate-openapi.ts` run would revert this hand edit —
+  the registry must be updated with the same contract when the product change lands.
+- **`analytics-read-api.mdx`** gained a short event-log paragraph pointing at the generated
+  reference.
+
+**Current sync marker:** product commit `eccefd07413343f03f182c2341888816ecd8f2f4`
+(2026-08-02) — **the Event Activity Explorer product change is uncommitted at documentation time**,
+so the marker cannot advance past it. Advance the marker to the explorer's release commit SHA once
+the product commit lands, and regenerate the OpenAPI reference after the playground registry picks
+up the new parameters.
+
 ---
 
 ## 11. Assumptions & open questions

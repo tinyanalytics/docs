@@ -1,7 +1,7 @@
 ---
 title: "Event Analytics"
 sidebarTitle: "Events"
-description: "Analyze custom event names and properties, follow their trends, and inspect a live searchable log of the events arriving from your site."
+description: "Search, filter, and inspect every event your site sends — explore history, follow trends, or watch events arrive live."
 icon: "bolt"
 ---
 
@@ -17,27 +17,47 @@ Expand an event to sample its properties. For each property key, you see the val
 
 ## How do I read the Events page?
 
-The **Events** page in your site's sidebar pairs a trend chart with a live log of individual events, for when you need to watch events arrive rather than read them in aggregate.
+The **Events** page in your site's sidebar is an activity explorer with three views — **Explore**, **Trends**, and **Live** — so you can search history, read aggregates, or watch events arrive.
 
-The chart has two tabs. **Custom Events** plots one line per event name; **Event Types** plots one line per event type, fixed at the 9 biggest. On the Custom Events tab, a **Top** select chooses how many event names to plot — 1, 3, 5, 8, or 10, defaulting to **Top 5**. A second select sets the bucket width: **Hour**, **Day**, **Week**, or **Month**, offering only the buckets your date range is wide enough to fill.
+**Explore** is the default: a table of individual events, newest first, over your selected date range and [filters](/analytics-filters). **Trends** keeps the trend chart: the **Custom Events** tab plots one line per event name and **Event Types** plots one line per event type, fixed at the 9 biggest. On the Custom Events tab, a **Top** select chooses how many event names to plot — 1, 3, 5, 8, or 10, defaulting to **Top 5** — and a second select sets the bucket width: **Hour**, **Day**, **Week**, or **Month**, offering only the buckets your date range is wide enough to fill. Each line has a legend chip with its color, name, and total; **click a chip to hide that series** and read the rest without it. Hidden series reset whenever you switch tabs, change the Top count, or change the date range.
 
-Each line has a chip in the legend showing its color, name, and total. **Click a chip to hide that series** and read the rest without it; click again to bring it back. Hidden series reset whenever you switch tabs, change the Top count, or change the date range.
+Your search, filters, columns, and view all live in the page URL, so you can copy the address bar to share exactly what you see.
+
+## How do I find specific events?
+
+Explore searches and filters on the server, across your whole selected range — not just the rows already on screen.
+
+- **Search** matches event names and types, page URLs, user IDs, and session IDs as you type (placeholder: "Search event, URL, user or session…").
+- **Event type** and **Event name** are searchable pickers fed by your event catalog, with counts and last-seen context; you can also type a name that hasn't been seen yet. Selecting event names requires the Custom event type — if your type selection excludes it, the page offers a one-click **Include Custom event** rescue instead of running an empty query.
+- **Property** adds typed filters over an event's own properties — for example, `plan` equals `pro`, or `amount` greater than 100 — with operators that match the property's type (text, number, or boolean). Keys and example values come from your catalog; free input is always allowed.
+
+Every active constraint appears as a chip you can remove individually, and **Reset** clears the page's search and filters without touching your date range. When nothing matches, the page says **"No events match this query"** with **Clear search** and **Reset filters** actions.
+
+## How do I change which columns the table shows?
+
+The **Columns** control shows, hides, and reorders columns — event, type, time, user, URL, device, country, referrer, channel, and more — and can add up to three **property columns** (for example, the `plan` property as its own column). **Timestamp order** switches the table between **Newest first** and **Oldest first**. Your column choices are remembered in the browser and travel in shared URLs.
+
+## What can I see on one event?
+
+Click any row to open a detail sheet with four tabs:
+
+- **Overview** — the event's type, time, user, page, referrer, device, and location at a glance.
+- **Properties** — every property on the event, searchable, with copy actions and one-click **filter equals / not equals** on scalar values.
+- **Raw** — the full event as JSON, ready to copy.
+- **Session** — the session this event belongs to, with the event highlighted in the timeline.
+
+The sheet header shows the **Event ID**, and **Copy event link** copies a URL that reopens this exact event — paste it in an issue or chat and a teammate lands on the same row. (Event IDs and their links exist for events received after this feature rolled out; older events paginate by timestamp instead.)
 
 ## How do I watch events as they happen?
 
-Below the chart, the **event log** lists individual events newest-first, 100 at a time, loading more as you scroll toward the bottom.
+Switch to the **Live** view to tail events as they arrive. Live polls only for events newer than the last one you received — it never re-downloads the whole list — and keeps at most 500 events on screen.
 
-<Note>
-  **Realtime is on by default**, refreshing the log every 5 seconds. The **Realtime** toggle above the log turns it off when you'd rather hold a stable view.
-</Note>
+- When you're at the top, new rows appear in place. When you've scrolled away or opened a detail sheet, a **"{count} new events"** pill collects arrivals; click it to jump to the top and flush them.
+- **Pause** freezes the feed while you inspect a payload; **Resume** continues from where it stopped, without duplicates. **Clear** empties the on-screen list without losing your place.
+- Polling suspends automatically while the browser tab is hidden and catches up when you return.
+- If the connection hiccups, a **"Live updates interrupted; retrying"** banner appears while it backs off and retries. If the feed loses its place, the page offers **Restart live feed** rather than silently skipping events.
 
-Scrolling into older events pauses the live stream automatically, so new arrivals can't shift the rows out from under you. A banner reads **"Live updates paused while browsing older events"** with a **Back to live** button that returns you to the top and resumes refreshing.
-
-The search box filters the log as you type, matching event names, page paths, user IDs, and the traits of [identified users](/user-identification-analytics).
-
-<Warning>
-  Search filters only the events **already loaded** into the log, not your full history. If you're looking for something older, scroll to load more events first, or narrow your date range and [filters](/analytics-filters) instead.
-</Warning>
+Live honors the same search, type, name, and property filters as Explore, so you can tail exactly the events you're debugging.
 
 ## What does tinyanalytics capture automatically?
 
@@ -47,8 +67,11 @@ Open the **Autocapture** dialog on the Events page to browse these by value: pic
 
 ## Common workflows
 
-- **Measure a key action.** Send a custom event for it, then track its count over time here.
+- **Measure a key action.** Send a custom event for it, then track its count over time in Trends.
+- **Debug an integration.** Search the event name in Explore, filter to a property value, open the event, and check the Raw tab and its Session.
+- **Validate tracking live.** Switch to Live, filter to the event you're instrumenting, and watch it arrive as you click through your site.
 - **Compare variants.** Break an event down by a property to compare plans, sources, or options.
+- **Share a finding.** Copy the page URL — view, search, filters, and columns included — or copy an event link from its detail sheet.
 - **Turn events into goals and funnels.** Once an event is firing, use it in [Goals](/conversion-goal-tracking) and [Funnels](/funnel-analytics).
 
 ## Frequently asked questions
@@ -60,11 +83,14 @@ Open the **Autocapture** dialog on the Events page to browse these by value: pic
   <Accordion title="How do I compare the values of an event property?">
     Expand the event in the tinyanalytics Events explorer. For each property key you see the values that appeared and how many times, so a `purchase` event expands to show the split across `plan` values like `pro` and `free`. Send the things that vary as properties so they break down here.
   </Accordion>
-  <Accordion title="Why does the event log stop updating when I scroll down?">
-    Scrolling into older events pauses the live stream on purpose, so incoming events can't shift rows while you're reading. A banner reads "Live updates paused while browsing older events" — click **Back to live** to return to the top and resume the 5-second refresh.
+  <Accordion title="Does Explore search all my events or only the ones on screen?">
+    Explore searches on the server across your whole selected date range and [filters](/analytics-filters) — including events that have never been loaded into your browser. The search box matches event names and types, page URLs, user IDs, and session IDs; use the **Property** control to match values inside an event's properties.
   </Accordion>
-  <Accordion title="Why can't I find an older event with the log's search box?">
-    Search matches only the events already loaded into the log, which starts at the newest 100 and grows as you scroll. It isn't a search over your full history. Scroll down to load more events, or narrow your date range and [filters](/analytics-filters) to bring the event you want into range.
+  <Accordion title="Why did the Live view stop updating?">
+    Live pauses polling automatically while the browser tab is hidden, and resumes when you return. If you clicked **Pause**, click **Resume** to continue from the same place. A temporary failure shows "Live updates interrupted; retrying" while it backs off; if the feed lost its place, click **Restart live feed**.
+  </Accordion>
+  <Accordion title="Can I link someone to a specific event?">
+    Yes. Open the event's detail sheet and choose **Copy event link** — the URL reopens that exact event for anyone with access to the site. Event IDs exist for events received after the activity explorer rolled out; older events are reached by scrolling the Explore table instead.
   </Accordion>
   <Accordion title="Which interactions does tinyanalytics track without any code?">
     tinyanalytics records outbound link clicks, file downloads, button clicks, text copies, and form submissions automatically, alongside the custom events you send. Each has its own type, so you can look at them separately. See [what the script tracks out of the box](/install-tinyanalytics-tracking-script#what-the-script-tracks-out-of-the-box).
