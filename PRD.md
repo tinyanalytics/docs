@@ -804,7 +804,7 @@ as a table-first explorer:
 - **`analytics-read-api.mdx`** gained a short event-log paragraph pointing at the generated
   reference.
 
-**Current sync marker:** product commit `079bb71301e7d1f53982ac0477a904004d21f55d`
+**Current sync marker:** product commit `f04719c782c228c25bdb050debf485693e4d381f`
 (`feat(events): table-first event activity explorer (0277)`, 2026-08-03) — the explorer product
 change landed and deployed in the same wave; the marker advances to it.
 
