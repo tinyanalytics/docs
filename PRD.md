@@ -781,7 +781,7 @@ vocabulary and report-subscription request fields.
 **Current sync marker:** product commit `eccefd07413343f03f182c2341888816ecd8f2f4`
 (2026-08-02).
 
-## 10g. Product-sync pass (2026-08-03 — Event Activity Explorer, pending product commit)
+## 10g. Product-sync pass (2026-08-03 — Event Activity Explorer, released as `079bb71`)
 
 Documented the **Event Activity Explorer** (product decision 0277), which rebuilds the Events page
 as a table-first explorer:
@@ -792,22 +792,21 @@ as a table-first explorer:
   detail tabs, `?event=<uuid>` deep links, and Live's incremental pause/resume/clear lifecycle. The
   stale "Realtime refresh every 5 seconds" and "search filters only loaded rows" claims were
   removed; the FAQs were replaced to match.
-- **`openapi.json`** extended by hand: `GET /sites/{site}/events/log` gains `cursor`, `direction`,
-  `order`, `q`, `event_types`, `event_names`, `event_props`, and the legacy `before_timestamp`, and
-  the new `GET /sites/{site}/events/log/{eventId}` detail path was added (**148 → 149 published
-  endpoints across 29 groups**; the count references in `tinyanalytics-api.mdx`,
-  `analytics-read-api.mdx`, and `api-playground.mdx` were updated). ⚠️ The product's playground
-  endpoint registry (`apps/web/.../api-playground/utils/endpoints/events.ts`) does **not** yet
-  declare these parameters, so the next `generate-openapi.ts` run would revert this hand edit —
-  the registry must be updated with the same contract when the product change lands.
+- **`openapi.json`** regenerated from the product's playground endpoint registry: `GET
+/sites/{site}/events/log` gains `cursor`, `direction`, `order`, `q`, `event_types`,
+  `event_names`, `event_props`, and the legacy `before_timestamp`, and the new `GET
+/sites/{site}/events/log/{eventId}` detail path was added (**148 → 149 published endpoints across
+  29 groups**; the count references in `tinyanalytics-api.mdx`, `analytics-read-api.mdx`, and
+  `api-playground.mdx` were updated). The product's playground registry
+  (`apps/web/.../api-playground/utils/endpoints/events.ts`) declares the same contract as of the
+  release commit, so regeneration is idempotent; `audit-seo-migration.mjs`'s expected noindex count
+  moved 148 → 149 with it.
 - **`analytics-read-api.mdx`** gained a short event-log paragraph pointing at the generated
   reference.
 
-**Current sync marker:** product commit `eccefd07413343f03f182c2341888816ecd8f2f4`
-(2026-08-02) — **the Event Activity Explorer product change is uncommitted at documentation time**,
-so the marker cannot advance past it. Advance the marker to the explorer's release commit SHA once
-the product commit lands, and regenerate the OpenAPI reference after the playground registry picks
-up the new parameters.
+**Current sync marker:** product commit `079bb71301e7d1f53982ac0477a904004d21f55d`
+(`feat(events): table-first event activity explorer (0277)`, 2026-08-03) — the explorer product
+change landed and deployed in the same wave; the marker advances to it.
 
 ---
 
@@ -815,7 +814,7 @@ up the new parameters.
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |
 | --- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Docs domain                                   | `https://tinyanalytics.io/docs`                                                                                          | Resolved by owner (2026-07-30). Use this base for skill installation and canonical URLs.                                     |
+| 1   | Docs domain                                   | `https://tinyanalytics.io/docs`                                                                                          | Resolved by owner (2026-07-30). Use this base for skill installation and canonical URLs.                                      |
 | 2   | Cloud is the only offering                    | Confirmed by owner (2026-07-16): closed-source, hosted-only; public pricing page verified in product source (2026-07-30) | Resolved for current billing-doc scope.                                                                                       |
 | 3   | Brand accent color                            | Green — updated by owner (2026-07-27): `#006420` for light mode and `#009B32` for dark mode                              | Resolved.                                                                                                                     |
 | 4   | Integration guide breadth for v1              | Top ~12 now, long tail later                                                                                             | Which platforms matter most to the audience?                                                                                  |
