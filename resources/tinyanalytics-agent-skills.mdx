@@ -1,0 +1,131 @@
+---
+title: "tinyanalytics Agent Skills for AI Coding Agents"
+sidebarTitle: "Agent skills"
+description: "Install five open-source Agent Skills so Claude Code, Cursor, or Codex can set up tinyanalytics, prove tracking works, and build dashboards."
+icon: "robot"
+---
+
+**tinyanalytics Agent Skills** are five open-source instruction packs that teach an AI coding agent to run tinyanalytics end to end—register, create the site, install the tracking script, prove real data arrives, then instrument events, answer questions from the data, and build goals, funnels, and dashboards. You state the intent; the agent does the analytics work.
+
+Install them into your agent with one command:
+
+```bash
+npx -y skills add tinyanalytics/agent-skills -y
+```
+
+The skills live in the public [tinyanalytics/agent-skills](https://github.com/tinyanalytics/agent-skills) repository and are MIT-licensed.
+
+<Note>
+  Agent Skills tell an agent **how to work with tinyanalytics**. They are not the
+  same as the [tinyanalytics MCP server](/api-reference/mcp-server), which gives an
+  agent a live connection to your analytics data, or [Ask AI](/ai-analytics-assistant),
+  which answers questions inside the dashboard. The comparison below shows which to reach for.
+</Note>
+
+## What is an Agent Skill?
+
+An Agent Skill is a Markdown file that an AI coding agent loads when a task matches its trigger, giving the agent step-by-step procedure, exact request bodies, and explicit failure handling for that task. tinyanalytics publishes five, each scoped to one job so an agent loads only what the current task needs.
+
+## Which skills are included?
+
+| Skill | What the agent does with it |
+| --- | --- |
+| `tinyanalytics-setup` | The orchestrator: obtains a working API key, reuses or creates the site, installs the snippet the way your framework expects, then verifies |
+| `verify-tinyanalytics-tracking` | Polls your site's overview for a real pageview and walks a diagnostic ladder—served HTML, site ID, script load, CSP, ad blocker—when it stays at zero |
+| `tinyanalytics-events` | Instruments [custom events](/custom-event-tracking) from the browser and server side, [revenue](/revenue-analytics) on events, [user identity and traits](/user-identification-analytics), and [B2B account tracking](/b2b-account-analytics) |
+| `tinyanalytics-insights` | Answers questions from your data: overview totals, time series with comparisons, breakdowns across **17 dimensions**, acquisition, live visitors, ad-hoc funnels, and guarded [custom SQL](/sql-analytics-query-builder) |
+| `tinyanalytics-dashboards` | Builds the measurement layer: [goals](/conversion-goal-tracking) by path, event, revenue, or scroll; saved [funnels](/funnel-analytics); SQL-card [dashboards](/custom-analytics-dashboards); and [annotations](/analytics-annotations) |
+
+Each skill declares when to skip itself, so an agent asked to instrument checkout reaches for `tinyanalytics-events` rather than re-running setup.
+
+## How do I install the Agent Skills?
+
+**Prerequisites:** Node.js (for `npx`) and an agent that supports skills—Claude Code, Cursor, and Codex all work, along with the other targets the [`skills`](https://github.com/vercel-labs/skills) CLI supports.
+
+<Steps>
+  <Step title="Add the skills to your project">
+    Run the install command from your project root:
+
+    ```bash
+    npx -y skills add tinyanalytics/agent-skills -y
+    ```
+
+    Keep both non-interactive flags. Without them the CLI opens a picker, which stalls an agent-driven install that has no one to answer it.
+  </Step>
+  <Step title="Ask for what you want">
+    Describe the outcome in your own words and let the matching skill trigger:
+
+    ```text
+    Set up tinyanalytics on this project and show me the first pageview.
+    ```
+
+    Other phrasings that match: *"add analytics to my site"*, *"is tracking working?"*, *"track signups"*, *"what were our top pages last week?"*, or *"build a signup funnel"*.
+  </Step>
+  <Step title="Answer the agent's account question">
+    The setup skill asks which email to register with rather than inventing one, and hands you the generated password and login URL afterward. If the response says a verification link was emailed, click it.
+  </Step>
+</Steps>
+
+## How does the agent get an API key?
+
+The setup skill works down an access ladder instead of assuming you already have a key:
+
+1. **A key already in your project's `.env` or environment** — it verifies the key still works and uses it.
+2. **No key** — a single headless registration call creates the user, organization, site, and API key together, so setup never requires the web UI.
+3. **Registration disabled on the instance** — the agent asks you to sign up and mint a key yourself from [Settings → Account](/tinyanalytics-account-settings), then paste it in.
+
+The key the agent creates or receives carries [its owner's access](/api-reference/api-authentication), exactly like a key you make by hand.
+
+<Warning>
+  The skills require the key to go into a gitignored `.env` and be read back as an
+  environment variable—never into chat output, a commit, a log, or any other file.
+  Review the agent's diff before committing, as you would for any generated code.
+</Warning>
+
+## How do the skills stay current?
+
+Every skill fetches [`dash.tinyanalytics.io/setup.md`](https://dash.tinyanalytics.io/setup.md) at run time and treats that page as the source of truth for endpoints, request bodies, and response shapes. Where an installed skill disagrees with the fetched page, the fetched page wins—so an old install still calls current endpoints. If the page is unreachable, the skill stops and tells you rather than guessing an endpoint from memory.
+
+Documented endpoints are additive-only, and anything scheduled for deprecation is dated in [`dash.tinyanalytics.io/llms.txt`](https://dash.tinyanalytics.io/llms.txt) first. To pick up new skills, re-run the install command.
+
+The same flow is written for people at [`dash.tinyanalytics.io/setup.md`](https://dash.tinyanalytics.io/setup.md) if you would rather follow it yourself.
+
+## Do the skills prove tracking actually works?
+
+Yes. The verification skill reports success **only on observed data**—it polls your site's overview endpoint until a real pageview appears, and never reports "verified" from the fact that a snippet was added. When the count stays at zero, it works through the served HTML, the site ID, whether the script loaded, your Content Security Policy, and ad blockers, reporting each finding as it goes. You can also [verify the installation yourself](/verify-tinyanalytics-installation).
+
+## Agent Skills, MCP server, or Ask AI?
+
+All four surfaces use AI with tinyanalytics, and they answer different questions:
+
+| You want to | Use |
+| --- | --- |
+| Have a coding agent install and operate tinyanalytics in your codebase | **Agent Skills**, on this page |
+| Give an agent a live connection to your analytics data | [The tinyanalytics MCP server](/api-reference/mcp-server) |
+| Ask about your own analytics inside the dashboard | [Ask AI](/ai-analytics-assistant) |
+| Give an assistant these documentation pages as context | [Use docs with AI](/resources/tinyanalytics-docs-ai-tools) |
+
+Agent Skills and the MCP server work well together: the skills supply the procedure, and the MCP server can supply the connection. The setup skill writes its steps as outcomes, so an agent already connected over MCP can reach them with MCP tools instead of raw HTTP calls.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="MCP server" icon="plug" href="/api-reference/mcp-server">
+    Connect an AI agent to your analytics data.
+  </Card>
+  <Card title="Use docs with AI" icon="wand-magic-sparkles" href="/resources/tinyanalytics-docs-ai-tools">
+    Give an assistant these pages as context.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/tinyanalytics-quickstart">
+    Install tinyanalytics yourself in a few minutes.
+  </Card>
+  <Card title="API keys" icon="key" href="/api-reference/api-authentication">
+    Understand what a key can reach.
+  </Card>
+  <Card title="Verify installation" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Confirm your first pageview by hand.
+  </Card>
+  <Card title="Ask AI" icon="comments" href="/ai-analytics-assistant">
+    Ask questions inside the dashboard.
+  </Card>
+</Columns>

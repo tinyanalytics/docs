@@ -70,8 +70,8 @@ function parseFrontmatter(file) {
   };
 }
 
-if (mappings.length !== 109) {
-  errors.push(`migration plan has ${mappings.length} rows; expected 109`);
+if (mappings.length !== 110) {
+  errors.push(`migration plan has ${mappings.length} rows; expected 110`);
 }
 
 const authoredFiles = findMdxFiles(root).sort();

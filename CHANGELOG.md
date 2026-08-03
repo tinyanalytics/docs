@@ -9,6 +9,18 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **Agent Skills guide (2026-08-03):** documented
+  [`tinyanalytics/agent-skills`](https://github.com/tinyanalytics/agent-skills), the MIT-licensed
+  repository of five Agent Skills that was previously referenced nowhere in the docs. The new
+  **Resources → AI tools → Agent skills** page covers the `npx -y skills add tinyanalytics/agent-skills -y`
+  install and why both non-interactive flags matter, what each of the five skills does
+  (`tinyanalytics-setup`, `verify-tinyanalytics-tracking`, `tinyanalytics-events`,
+  `tinyanalytics-insights`, `tinyanalytics-dashboards`), the API-key access ladder ending in headless
+  registration, the gitignored-`.env` secret rule, verification that reports success only on observed
+  data, and the runtime fetch of `dash.tinyanalytics.io/setup.md` that keeps a stale install calling
+  current endpoints. Added a fourth row to the AI-surface table on *Use docs with AI* and cross-linked
+  the MCP server guide, which now names Agent Skills as complementary.
+
 - **Product coverage sync through `eccefd0` (2026-08-03):** documented the shipped July 31–August 2
   product wave across Ask AI, AI-assisted filters/audiences/surveys/reports/query repair,
   least-privilege API keys and MCP, the unified comparison picker, default Last 7 days baseline,

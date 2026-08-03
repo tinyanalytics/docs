@@ -1410,7 +1410,8 @@
           {
             "group": "AI tools",
             "pages": [
-              "resources/tinyanalytics-docs-ai-tools"
+              "resources/tinyanalytics-docs-ai-tools",
+              "resources/tinyanalytics-agent-skills"
             ]
           }
         ]

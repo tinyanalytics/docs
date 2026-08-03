@@ -274,6 +274,7 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | `/resources/privacy`                | `/resources/privacy-friendly-analytics-gdpr`                   | Privacy-Friendly Analytics and GDPR                     | Privacy and GDPR       |
 | `/resources/comparison`             | `/resources/tinyanalytics-vs-google-analytics-plausible-umami` | tinyanalytics vs Google Analytics, Plausible, and Umami | Comparison             |
 | `/resources/use-with-ai`            | `/resources/tinyanalytics-docs-ai-tools`                       | Use tinyanalytics Documentation with AI Tools           | Use docs with AI       |
+| `/resources/tinyanalytics-agent-skills` | `/resources/tinyanalytics-agent-skills`                    | tinyanalytics Agent Skills for AI Coding Agents          | Agent skills           |
 
 ## 5. Redirect and migration strategy
 
