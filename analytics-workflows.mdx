@@ -9,9 +9,13 @@ A workflow turns a matching analytics event into a team notification. You choose
 
 Workflows are for internal automation. They do not send lifecycle messages to visitors, run arbitrary code, make user-defined HTTP requests outside a notification step, or trigger from a schedule, funnel, cohort, or alert.
 
-## Start from a template
+## Create a workflow
 
-Choose a template to create an editable draft:
+Click **New workflow** to open the template gallery, then follow the three-step guided setup:
+
+1. **Template** — pick a starting point. Each card names the destination types it targets, and you can change everything later.
+2. **Set up** — name the workflow, enter the trigger value (for example the custom event name or page path), choose **1–5 notification destinations** — you can connect a new email, Slack, Discord, or webhook destination without leaving the dialog — and adjust the notification title and message.
+3. **Review & turn on** — read the workflow back as one plain-English sentence and see how many times it would have run in the last 24 hours and 7 days. **Turn on workflow** publishes it immediately; **Save as draft** opens the editor instead. Closing the dialog after the review step keeps the draft in your list.
 
 | Template | Starting behavior |
 | --- | --- |
@@ -22,7 +26,7 @@ Choose a template to create an editable draft:
 | **Negative survey response event → Slack** | Send a survey-response event to Slack. |
 | **Blank workflow** | Start with an empty trigger and add each step yourself. |
 
-Templates create drafts only. Review the trigger, choose your own destinations, test the result, and publish it before it can start runs.
+**Blank workflow** skips the guided steps and opens the editor directly.
 
 ## Choose what starts a run
 
@@ -37,12 +41,12 @@ Every workflow has one trigger. It can match these event types:
 - **Form submit**
 - **Copy**
 
-For a pageview, enter a path pattern such as `/pricing*`. For a custom event, enter its event name. You can also narrow the match to a hostname and add up to **10 exact property filters**.
+For a pageview, enter a path pattern such as `/pricing*`. For a custom event, enter its event name. In the editor the trigger appears as a one-line card that summarizes all of this — click it to open the trigger panel, where **Filters** (hostname plus up to **10 exact property filters**) and **Repeat limit** sit in optional sections that stay collapsed until they hold values.
 
-Choose how often one actor can start the workflow:
+The repeat limit controls how often one actor can start the workflow:
 
-- **Every match** starts a run for every matching event.
-- **Once per actor in a time window** limits runs by session, anonymous user, identified user, or one of the five group slots. The window can be from **1 minute to 30 days**; a new draft defaults to once per session every 60 minutes.
+- **Every match** starts a run for every matching event. This is what a workflow does when no repeat limit is set — the trigger card says "runs on every match" so there is no ambiguity.
+- **Once per actor in a time window** limits runs by session, anonymous user, identified user, or one of the five group slots. The window can be from **1 minute to 30 days**. Some templates ship a limit (for example, the high-intent template starts at once per session per 24 hours).
 
 <Note>
   A scoped frequency limit starts a run only when the event has the selected
@@ -56,14 +60,18 @@ Build the path below the trigger with these bounded step types:
 
 | Step | What it does |
 | --- | --- |
-| **Delay** | Waits for a positive whole number of minutes, hours, or days, up to 30 days. |
-| **Condition** | Checks up to 10 clauses against the captured event and follows the true or false branch. Clauses can require all or any matches. |
+| **Wait** | Waits for a positive whole number of minutes, hours, or days, up to 30 days. |
+| **If** | Checks up to 10 clauses against the captured event and follows the true or false branch. Clauses can require all or any matches. |
 | **Notify** | Sends a title and message to 1–5 email, Slack, Discord, or webhook destinations. |
 | **Exit** | Ends the run successfully, with an optional reason. |
 
-For delay, condition, and notify steps, choose whether an error should **Stop the run** or **Continue to the next step**. A workflow can contain up to **20 nodes**, and each possible path must end cleanly.
+Each step is a one-line card; click it to configure the step in a side panel. The step's name, description, and error handling — **Stop the run** or **Continue to the next step** — live in the panel's **Advanced** section. A workflow can contain up to **20 nodes**, and each possible path must end cleanly.
 
 Notification titles and messages accept non-executable template paths such as `{{event.name}}`, `{{event.pathname}}`, `{{event.props.plan}}`, and `{{actor.identified_user_id}}`. TinyAnalytics fills them from the triggering event and records only the event fields the published workflow references.
+
+## Read a workflow at a glance
+
+A published workflow opens in a read-first view: its status, one sentence describing what it does — for example "When a pageview matches `/pricing*` → Wait 1 hour → Notify #sales" — its destinations, and **Runs** and **Metrics** tabs. Click **Edit workflow** to change it, and **Done** to return to the view. Never-published drafts open straight into the editor, since there is nothing to read yet; their view offers a **Turn on** button instead.
 
 ## Work with drafts safely
 
@@ -77,7 +85,7 @@ A dry run shows the exact path, condition branches, skipped delays, rendered mes
 
 ## Publish a version
 
-Click **Publish** when the draft is ready. TinyAnalytics validates the graph and estimates its impact from matching events in the last 24 hours and 7 days. It also shows the maximum notification fan-out and any missing or disabled destinations.
+Click **Publish changes** when the draft is ready (a never-published draft says **Turn on** instead). The dialog reads the workflow back as a sentence and states how many times it would have run in the last 24 hours and 7 days; the raw match counts, notification fan-out, and any missing or disabled destinations sit under **Details**.
 
 - An every-match estimate above **1,000 runs in 24 hours** requires explicit confirmation.
 - An estimate above **10,000 runs in 24 hours** cannot be published until you narrow the trigger or add a frequency limit.
@@ -96,11 +104,11 @@ The workflow list shows its status, trigger, current version, last-7-day run and
 | **Paused** | Stops new runs while existing queued, delayed, or running work continues. |
 | **Archived** | Stops new runs and hides from the default list; its versions and run history remain readable. |
 
-You can **Edit**, **Pause** or **Resume**, **Duplicate**, and **Archive** from the list. Duplicating creates a fresh draft; archiving cannot recall a notification that was already sent.
+You can **Edit**, **Pause** or **Resume**, **Duplicate**, and **Archive** from the list, or from the menu on the workflow's own page. Duplicating creates a fresh draft; archiving cannot recall a notification that was already sent. The workflow page shows status without version numbers; versions appear in the list and on individual runs.
 
 ## Inspect runs and delivery
 
-Use the editor's **Runs** tab to filter and open individual runs. Each run shows its named step timeline, condition branch, attempts, captured context, and the result for every destination. You can cancel a non-terminal delayed or queued run.
+Use the workflow's **Runs** tab to filter and open individual runs. Each run shows its named step timeline, condition branch, attempts, captured context, and the result for every destination. You can cancel a non-terminal delayed or queued run.
 
 The **Metrics** tab summarizes runs, completions, failures, cancellations, notifications, and failure rate for the date range you choose.
 

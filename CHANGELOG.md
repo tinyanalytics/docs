@@ -7,6 +7,21 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Changed
+
+- **Workflows guide updated for the UX v2 redesign (2026-08-05, product decision 0282,
+  sync pass 10j):** [analytics-workflows.mdx](analytics-workflows.mdx) now documents the
+  three-step guided creation dialog (template gallery, essentials with inline destination
+  connect, review & turn on with the would-have-run estimate), the read-first workflow page
+  with the one-sentence summary and the on-page lifecycle menu, the collapsed trigger card
+  with Filters/Repeat-limit panel sections, the **Wait**/**If** step vocabulary with
+  name/description/error handling under **Advanced**, and **Publish changes** / **Turn on**
+  with the summary-first dialog and its **Details** disclosure. Corrected a factual error:
+  a workflow without a repeat limit runs on **every match** — the page previously claimed a
+  once-per-session-per-60-minutes default that was a v1 display bug, not runtime behavior.
+  Ship together with product commit `11300b3` (the page describes the v2 editor; production
+  runs v1 until that web deploy).
+
 ### Added
 
 - **Workflows (2026-08-04, product decisions 0275/0279/0281):** added the

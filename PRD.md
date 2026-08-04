@@ -865,6 +865,40 @@ The local product checkout also contains `bf8ee39` (`fix(workflows): don't flag 
 publish bumps updatedAt`) one commit ahead of `origin/main`. It has no deployment record and is not
 documented as shipped or included in this sync marker; audit it again after it lands and deploys.
 
+## 10j. Product-sync pass (2026-08-05 — Workflows UX v2)
+
+Audited product commits `b6c5780..11300b3`:
+
+- **Workflows UX v2** (`11300b3`, product decision 0282) — rewrote the creation and editing
+  walkthroughs in `analytics-workflows.mdx`: "Start from a template" became **Create a
+  workflow** (the three-step guided dialog — template gallery, essentials with inline
+  destination connect, review & turn on — with the would-have-run estimate and the
+  saved-as-draft dismissal behavior); the trigger section now describes the collapsed trigger
+  card, the Filters/Repeat-limit panel sections, and corrects the frequency default to the
+  runtime truth (**no repeat limit = runs on every match** — the previous "defaults to once per
+  session every 60 minutes" line described a v1 display bug, not behavior); step names follow
+  the product vocabulary (**Wait** / **If** / Notify / Exit) with name/description/error
+  handling under **Advanced**; a new **Read a workflow at a glance** section covers the
+  view-first detail page and the draft-opens-in-editor rule; publishing is **Publish changes**
+  (or **Turn on** for a first activation) with the sentence-plus-estimate dialog and its
+  **Details** disclosure; lifecycle actions are documented on both the list and the workflow
+  page's menu, with version numbers scoped to the list and runs.
+- Reviewed with **Public docs impact: none**: `bf8ee39` (conflict-banner false positive on
+  publish — makes the already-documented "Reload latest" contract behave as written) and the
+  deployment-record commit `cf25553`.
+
+Workflows have been **live in production since 2026-08-04** (product deploy record `baee911`
+set `WORKFLOWS_ENABLED=true`), so this page is customer-visible and describes the v2
+experience. `11300b3` is committed but not yet pushed or deployed — prod currently runs the v1
+editor this pass's walkthroughs replace — so **publish this docs update together with the
+product web deploy of `11300b3`**, not before it (0276: neither side is release-complete
+alone).
+
+**Current sync marker:** product commit `11300b3` (`feat(web): workflows UX v2 — guided
+creation dialog + view-first detail (0282)`, 2026-08-05). The latest deployed customer
+application commit is `bf8ee39` (workflows conflict-detector fix, 2026-08-04, runbook row
+`cf25553`).
+
 ---
 
 ## 11. Assumptions & open questions
