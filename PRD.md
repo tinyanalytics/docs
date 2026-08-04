@@ -808,6 +808,21 @@ as a table-first explorer:
 (`feat(events): table-first event activity explorer (0277)`, 2026-08-03) — the explorer product
 change landed and deployed in the same wave; the marker advances to it.
 
+## 10h. Product-sync pass (2026-08-04 — Dashboard listing UX, released as `10e1b81`)
+
+Documented the **dashboard listing UX** change (product decision 0280):
+
+- **`custom-analytics-dashboards.mdx`** — the create step now states the scope separation (site
+  dashboards appear only on the site's page; organization dashboards appear only on the
+  organization-level **Dashboards** page) and the shared list view's name search and sort control
+  (recently updated, name, card count).
+
+No navigation or API reference impact: no endpoint, route, or page ownership changed.
+
+**Current sync marker:** product commit `10e1b81ece445f07398bc18dd02e25336119eec0`
+(`feat: dashboard listing UX — scope separation, shared list view (0280)`, 2026-08-04) — the
+product change landed and deployed in the same wave; the marker advances to it.
+
 ---
 
 ## 11. Assumptions & open questions
