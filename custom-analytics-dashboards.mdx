@@ -33,7 +33,7 @@ Custom dashboards turn read-only SQL queries into reusable charts. Build one for
 </Tabs>
 
 <Note>
-  Organization dashboards respect site access for every viewer. If a dashboard includes sites someone cannot access, tinyanalytics hides those sites and shows how many were omitted without revealing their IDs or names.
+  Organization dashboards respect site access for every viewer. If a dashboard includes sites someone cannot access, TinyAnalytics hides those sites and shows how many were omitted without revealing their IDs or names.
 </Note>
 
 ## Build a dashboard card
@@ -69,7 +69,7 @@ Custom dashboards turn read-only SQL queries into reusable charts. Build one for
 
 ## How do cards follow the date range?
 
-Cards respond to the dashboard's global date picker and time bucket automatically. To bucket a time series by the selected granularity, use `{{bucket}}` in your SQL. tinyanalytics replaces it with the matching hour, day, week, or month interval before the query runs.
+Cards respond to the dashboard's global date picker and time bucket automatically. To bucket a time series by the selected granularity, use `{{bucket}}` in your SQL. TinyAnalytics replaces it with the matching hour, day, week, or month interval before the query runs.
 
 ```sql
 SELECT
@@ -101,7 +101,7 @@ Any organization member can create a dashboard using only sites they can access.
     Create an organization dashboard, scope the card to **All accessible sites** or a selected subset, and include `site_id` in the query's `SELECT` and `GROUP BY`. Map `site_id` as the series; the dashboard displays the corresponding site names.
   </Accordion>
   <Accordion title="What happens when a viewer cannot access every selected site?">
-    tinyanalytics removes the inaccessible sites from that viewer's results and shows how many sites were hidden. It does not reveal their IDs or names.
+    TinyAnalytics removes the inaccessible sites from that viewer's results and shows how many sites were hidden. It does not reveal their IDs or names.
   </Accordion>
   <Accordion title="Can I publish an organization dashboard publicly?">
     No. Organization dashboards stay inside the organization and follow each viewer's site permissions. Use [public dashboards](/public-analytics-dashboards) for the supported site-level sharing options.

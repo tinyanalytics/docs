@@ -31,7 +31,7 @@ const REGISTRY = join(
 if (!existsSync(REGISTRY)) {
   console.error(
     `Cannot find the endpoint registry at:\n  ${REGISTRY}\n\n` +
-      `Set TINYANALYTICS_SRC to your tinyanalytics checkout, e.g.\n` +
+      `Set TINYANALYTICS_SRC to your TinyAnalytics checkout, e.g.\n` +
       `  TINYANALYTICS_SRC=~/src/tinyanalytics bun run scripts/generate-openapi.ts`,
   );
   process.exit(1);
@@ -419,10 +419,10 @@ for (const category of endpointCategories) {
 const spec = {
   openapi: "3.1.0",
   info: {
-    title: "tinyanalytics API",
+    title: "TinyAnalytics API",
     version: "1.0.0",
     description:
-      "The tinyanalytics HTTP API. Read your analytics, manage sites and goals, and drive " +
+      "The TinyAnalytics HTTP API. Read your analytics, manage sites and goals, and drive " +
       "feature flags, experiments, and surveys. Every call is authenticated with an API key " +
       "sent as `Authorization: Bearer <key>`.",
   },

@@ -1,20 +1,20 @@
 ---
-title: "Use tinyanalytics Documentation with AI Tools"
+title: "Use TinyAnalytics Documentation with AI Tools"
 sidebarTitle: "Use docs with AI"
-description: "Give external AI tools accurate tinyanalytics context through page Markdown, llms.txt, the hosted documentation MCP server, or the contextual menu."
+description: "Give external AI tools accurate TinyAnalytics context through page Markdown, llms.txt, the hosted documentation MCP server, or the contextual menu."
 icon: "wand-magic-sparkles"
 ---
 
-There are four distinct ways to use AI with tinyanalytics: ask questions about your analytics inside the product, connect an outside AI agent to your analytics data, install Agent Skills so a coding agent can set up and operate tinyanalytics in your codebase, or give these public docs to an assistant that is helping with an integration. Keeping those contexts separate helps the assistant use the right source.
+There are four distinct ways to use AI with TinyAnalytics: ask questions about your analytics inside the product, connect an outside AI agent to your analytics data, install Agent Skills so a coding agent can set up and operate TinyAnalytics in your codebase, or give these public docs to an assistant that is helping with an integration. Keeping those contexts separate helps the assistant use the right source.
 
 | You want to | Use |
 | --- | --- |
-| Ask about your own analytics, in tinyanalytics | [Ask AI](/ai-analytics-assistant) |
-| Let Claude Code, Cursor, VS Code, or Codex read and manage your analytics | [The tinyanalytics MCP server](/api-reference/mcp-server) |
-| Have a coding agent install tinyanalytics, verify it, and build dashboards | [Agent Skills](/resources/tinyanalytics-agent-skills) |
-| Help an assistant write a tinyanalytics integration | These documentation pages, below |
+| Ask about your own analytics, in TinyAnalytics | [Ask AI](/ai-analytics-assistant) |
+| Let Claude Code, Cursor, VS Code, or Codex read and manage your analytics | [The TinyAnalytics MCP server](/api-reference/mcp-server) |
+| Have a coding agent install TinyAnalytics, verify it, and build dashboards | [Agent Skills](/resources/tinyanalytics-agent-skills) |
+| Help an assistant write a TinyAnalytics integration | These documentation pages, below |
 
-## How is AI used inside tinyanalytics?
+## How is AI used inside TinyAnalytics?
 
 Use [Ask AI](/ai-analytics-assistant) inside the dashboard when the question is about your own analytics. It can:
 
@@ -27,7 +27,7 @@ Use [Ask AI](/ai-analytics-assistant) inside the dashboard when the question is 
 - propose supported goals, funnels, dashboards, annotations, alerts, shared segments, or shared
   cohorts, with explicit approval before a persistent change.
 
-tinyanalytics also measures AI as part of your acquisition data:
+TinyAnalytics also measures AI as part of your acquisition data:
 
 - [AI traffic](/ai-referral-traffic-analytics) shows visits referred by AI assistants and the pages those visitors view.
 - [Bot and crawler reports](/bot-ai-crawler-analytics) separate automated traffic, including AI crawlers, from human visits.
@@ -35,12 +35,12 @@ tinyanalytics also measures AI as part of your acquisition data:
 
 ## Give an external AI the right context
 
-Give your coding assistant the relevant tinyanalytics page before asking it to write an integration or troubleshoot a setup. Every page is available as Markdown, through the documentation MCP server, and in the site's machine-readable index.
+Give your coding assistant the relevant TinyAnalytics page before asking it to write an integration or troubleshoot a setup. Every page is available as Markdown, through the documentation MCP server, and in the site's machine-readable index.
 
-<Prompt description="Ask a coding assistant to add tinyanalytics using the official documentation context." actions={["copy", "cursor"]}>
-Add tinyanalytics to this project using the official tinyanalytics documentation provided in your context.
+<Prompt description="Ask a coding assistant to add TinyAnalytics using the official documentation context." actions={["copy", "cursor"]}>
+Add TinyAnalytics to this project using the official TinyAnalytics documentation provided in your context.
 
-Identify the framework and the correct place for a site-wide tracking script. Use YOUR_SITE_ID as a placeholder. Do not invent a site ID, API key, endpoint, or self-hosting step. Preserve the framework's existing routing and security conventions. Explain exactly how I can verify the first pageview in the tinyanalytics dashboard. If the documentation does not confirm a required detail, stop and tell me what is missing instead of guessing.
+Identify the framework and the correct place for a site-wide tracking script. Use YOUR_SITE_ID as a placeholder. Do not invent a site ID, API key, endpoint, or self-hosting step. Preserve the framework's existing routing and security conventions. Explain exactly how I can verify the first pageview in the TinyAnalytics dashboard. If the documentation does not confirm a required detail, stop and tell me what is missing instead of guessing.
 </Prompt>
 
 ## Copy or open any page in an AI tool
@@ -55,7 +55,7 @@ At the top of every page is a menu to take that page to your assistant of choice
 
 The same menu connects the docs to your coding tools:
 
-- **MCP** — connect the **documentation** MCP server so an AI agent can search and read these docs directly. This is not the same as the [tinyanalytics MCP server](/api-reference/mcp-server): the documentation server serves these public pages, while the tinyanalytics server serves your own analytics data and needs an API key.
+- **MCP** — connect the **documentation** MCP server so an AI agent can search and read these docs directly. This is not the same as the [TinyAnalytics MCP server](/api-reference/mcp-server): the documentation server serves these public pages, while the TinyAnalytics server serves your own analytics data and needs an API key.
 - **Cursor / VS Code** — open the docs in your editor's AI assistant to reference them while you build your integration.
 
 ## Machine-readable index
@@ -78,22 +78,22 @@ Point an AI tool at either file to give it the whole documentation set as contex
     Have your AI build against the API.
   </Card>
   <Card title="Ask AI" icon="comments" href="/ai-analytics-assistant">
-    Ask questions about your own analytics inside tinyanalytics.
+    Ask questions about your own analytics inside TinyAnalytics.
   </Card>
   <Card title="MCP server" icon="plug" href="/api-reference/mcp-server">
     Connect an AI agent to your analytics data.
   </Card>
   <Card title="Agent skills" icon="robot" href="/resources/tinyanalytics-agent-skills">
-    Let a coding agent set up and operate tinyanalytics.
+    Let a coding agent set up and operate TinyAnalytics.
   </Card>
   <Card title="Quickstart" icon="rocket" href="/tinyanalytics-quickstart">
-    Install tinyanalytics in a few minutes.
+    Install TinyAnalytics in a few minutes.
   </Card>
   <Card title="Integrations" icon="puzzle-piece" href="/integrations/install-website-analytics">
     Ask your AI which install guide fits.
   </Card>
   <Card
-    title="How tinyanalytics works"
+    title="How TinyAnalytics works"
     icon="diagram-project"
     href="/how-tinyanalytics-works"
   >

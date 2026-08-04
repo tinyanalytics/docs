@@ -1,6 +1,6 @@
-# tinyanalytics documentation — instructions for AI tools
+# TinyAnalytics documentation — instructions for AI tools
 
-This is the public documentation site for **tinyanalytics**, built on [Mintlify](https://mintlify.com). Pages are MDX with YAML frontmatter; site config is `docs.json`.
+This is the public documentation site for **TinyAnalytics**, built on [Mintlify](https://mintlify.com). Pages are MDX with YAML frontmatter; site config is `docs.json`.
 
 ## Read these first
 
@@ -10,7 +10,7 @@ This is the public documentation site for **tinyanalytics**, built on [Mintlify]
 
 ## What this product is
 
-tinyanalytics is privacy-friendly, cookieless web **and** product analytics, offered as a **hosted service** at `dash.tinyanalytics.io`. It is **closed-source and hosted-only** — write every page for a cloud customer.
+TinyAnalytics is privacy-friendly, cookieless web **and** product analytics, offered as a **hosted service** at `dash.tinyanalytics.io`. It is **closed-source and hosted-only** — write every page for a cloud customer.
 
 ## Content boundaries (do not cross)
 
@@ -22,7 +22,7 @@ tinyanalytics is privacy-friendly, cookieless web **and** product analytics, off
 
 ## Terminology
 
-- **tinyanalytics** — one word, all lowercase, even at the start of a sentence.
+- **TinyAnalytics** — one word with a capital **T** and **A**, including at the start of a sentence.
 - **site** — a tracked website or app (not "property" or "project").
 - **organization** — the top-level tenant; **team** — a site-access group inside an organization.
 - **custom event** — a named event you send with `event()`; **identify** — attaching a user ID with `identify()`.

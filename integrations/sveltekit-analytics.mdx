@@ -1,16 +1,16 @@
 ---
 title: "SvelteKit Analytics Integration"
 sidebarTitle: "SvelteKit"
-description: "Add tinyanalytics to src/app.html so the script loads across SvelteKit and records each client-side navigation automatically."
+description: "Add TinyAnalytics to src/app.html so the script loads across SvelteKit and records each client-side navigation automatically."
 icon: "code"
 noindex: true
 ---
 
-To add tinyanalytics to a **SvelteKit** app, paste the tracking snippet into `src/app.html`, the shell that wraps every page. It loads once for the whole app, and client-side navigation is tracked automatically.
+To add TinyAnalytics to a **SvelteKit** app, paste the tracking snippet into `src/app.html`, the shell that wraps every page. It loads once for the whole app, and client-side navigation is tracked automatically.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your snippet from **Settings → Tracking** in your dashboard.
 
 ## Add the snippet to `src/app.html`
@@ -38,7 +38,7 @@ Add the tag to the `<head>`, next to the `%sveltekit.head%` placeholder:
 
 ## Client-side navigation is tracked automatically
 
-SvelteKit renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). Moving between pages is captured for you. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+SvelteKit renders route changes on the client, and TinyAnalytics records each one as a new pageview by default (`data-track-spa`). Moving between pages is captured for you. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
 
 ## Verify
 

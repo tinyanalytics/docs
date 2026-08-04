@@ -7,7 +7,7 @@ noindex: true
 
 ---
 
-An API key authenticates programmatic access to tinyanalytics—server-side event ingestion,
+An API key authenticates programmatic access to TinyAnalytics—server-side event ingestion,
 analytics reads, site management, SQL, and MCP. Create either a full-access key or a restricted key
 with per-resource permissions in **Settings → Account**, then send it on every request as a Bearer
 token:
@@ -40,7 +40,7 @@ requests.get(
 
 Keys are managed from your account settings:
 
-- A key is **shown once** at creation — copy it then, because tinyanalytics stores only a hash and can't show it again.
+- A key is **shown once** at creation — copy it then, because TinyAnalytics stores only a hash and can't show it again.
 - **Revoke** a key any time to cut off its access immediately.
 - A key inherits **its owner's access**: a request authenticates as the user who created the key, and is authorized by that user's organization membership and [team](/team-site-access) access. A key never grants more than its owner has.
 - Leave **Restrict permissions** off for full access, or turn it on and select at least one resource
@@ -57,6 +57,7 @@ Keys are managed from your account settings:
 | **Goals** | Read / Write | Conversion goals. |
 | **Funnels** | Read / Write | Conversion funnels. |
 | **Dashboards** | Read / Write | Dashboards, cards, and annotations. SQL-backed card preview separately needs **Custom SQL: Read**. |
+| **Workflows** | Read / Write | Workflow definitions, versions, runs, and metrics. API-key mutation is not available in workflow version 1. |
 | **Sites** | Read / Write | Sites, tracking setup, configuration, and deletion. |
 | **Custom SQL** | Read | Read-only, site-scoped SQL. |
 | **Event ingestion** | Write | Trusted server-side tracking. |
@@ -64,6 +65,13 @@ Keys are managed from your account settings:
 Selecting **Write** also selects **Read** for that resource when both actions exist. It does not
 grant read or write access to any other resource. Existing keys created without a permission list
 remain full-access keys.
+
+<Note>
+  For workflows, use **Workflows: Read**. Although the shared permission model
+  includes a write grant, creating, editing, publishing, testing, pausing,
+  resuming, archiving, and cancelling require an owner or admin signed in with a
+  dashboard cookie session in workflow version 1.
+</Note>
 
 <Note>
   A restricted key with **Sites: Read** can list the organizations and sites its
@@ -102,7 +110,7 @@ Authorization: Bearer YOUR_API_KEY
 
 <AccordionGroup>
   <Accordion title="I lost my API key — can I see it again?">
-    No. A key is shown once at creation, because tinyanalytics stores only a hash of it. If you didn't copy it, create a new key in your account settings and revoke the old one.
+    No. A key is shown once at creation, because TinyAnalytics stores only a hash of it. If you didn't copy it, create a new key in your account settings and revoke the old one.
   </Accordion>
   <Accordion title="Can I put my API key in a query string?">
     No — always send it in the `Authorization` header as `Bearer YOUR_API_KEY`. A key in a query string leaks into server logs, browser history, and referrer headers.

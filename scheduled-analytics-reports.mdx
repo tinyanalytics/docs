@@ -5,7 +5,7 @@ description: "Email a stable analytics summary daily, weekly, or monthly, with a
 icon: "envelope"
 ---
 
-A scheduled report emails a snapshot of your site's analytics on a cadence you choose — **daily, weekly, or monthly**. You subscribe the recipients once, and tinyanalytics sends each of them a clean summary of the last completed period, so the numbers are final and never shift mid-report.
+A scheduled report emails a snapshot of your site's analytics on a cadence you choose — **daily, weekly, or monthly**. You subscribe the recipients once, and TinyAnalytics sends each of them a clean summary of the last completed period, so the numbers are final and never shift mid-report.
 
 ## How often are reports sent?
 
@@ -30,23 +30,23 @@ Every report is a compact digest of the period:
 
 The email ends with a direct dashboard link, the recipient's unsubscribe control, and the registered company imprint.
 
-If a site had **no pageviews** in the period, tinyanalytics skips the email entirely rather than sending an empty report.
+If a site had **no pageviews** in the period, TinyAnalytics skips the email entirely rather than sending an empty report.
 
 ## How do I add an AI narrative to a weekly report?
 
-Turn on **AI narrative** for a weekly subscription. tinyanalytics adds 3–7 grounded insights about
+Turn on **AI narrative** for a weekly subscription. TinyAnalytics adds 3–7 grounded insights about
 period changes, top traffic, goals, and revenue, followed by a suggested question you can ask in
 [Ask AI](/ai-analytics-assistant). The option is available only for weekly reports; daily and
 monthly subscriptions keep the standard analytics summary.
 
-The narrative is generated once after tinyanalytics confirms that at least one current recipient
+The narrative is generated once after TinyAnalytics confirms that at least one current recipient
 can receive the report, then the same analysis is included for each recipient. It uses the report's
 own dashboard-authoritative numbers rather than AI-generated SQL or model-invented totals.
 
 <Note>
   The standard report always takes priority. If organization AI is disabled, the
   AI allowance is unavailable, a source report fails, or the provider returns an
-  invalid response, tinyanalytics omits only the narrative and still sends the
+  invalid response, TinyAnalytics omits only the narrative and still sends the
   ordinary analytics email. **Send report now** indicates whether the narrative
   was included, omitted, or not requested.
 </Note>
@@ -61,12 +61,12 @@ Owners and admins can **send a report now** to preview it — a manual send goes
 
 <AccordionGroup>
   <Accordion title="Why didn't my scheduled report arrive?">
-    If the site had **no pageviews** during the period, tinyanalytics skips the
+    If the site had **no pageviews** during the period, TinyAnalytics skips the
     email rather than sending an empty report. Check also that you're still a
     member of the site's organization — recipients must be organization members,
     and someone who leaves stops receiving reports automatically.
   </Accordion>
-  <Accordion title="How do I stop receiving tinyanalytics report emails?">
+  <Accordion title="How do I stop receiving TinyAnalytics report emails?">
     Use the **one-click unsubscribe** link in any report email, or turn report
     emails off in your [account settings](/tinyanalytics-account-settings). Both apply to you
     only and leave the schedule running for everyone else.
@@ -85,7 +85,7 @@ Owners and admins can **send a report now** to preview it — a manual send goes
     scheduled send.
   </Accordion>
   <Accordion title="Why did my weekly report arrive without the AI narrative?">
-    tinyanalytics omits only the AI section when organization AI is disabled,
+    TinyAnalytics omits only the AI section when organization AI is disabled,
     the AI allowance or provider is unavailable, a supporting report fails, or
     the generated response cannot be validated. The ordinary report still
     sends with its metrics and breakdowns.

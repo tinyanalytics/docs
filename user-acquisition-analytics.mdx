@@ -11,7 +11,7 @@ Open a site, then choose **User acquisition** under **Acquisition & quality**.
 
 ## How does first-touch attribution work?
 
-tinyanalytics finds each user's first-ever session and keeps that session's channel, source, medium, campaign, source/medium pair, and referrer as the user's first-touch acquisition values. A later visit from another source does not rewrite that history.
+TinyAnalytics finds each user's first-ever session and keeps that session's channel, source, medium, campaign, source/medium pair, and referrer as the user's first-touch acquisition values. A later visit from another source does not rewrite that history.
 
 Within a session, the **entry pageview owns acquisition**: the session's channel, referrer, host, and campaign parameters all come from that one landing event, so a **Direct** landing stays Direct even when a later page in the same visit returns from an external link. Identity-provider hops are not acquisition — a sign-in redirect through `accounts.google.com` is treated as technical navigation, not Organic Search, unless the landing URL itself carries campaign parameters (`utm_source`, `utm_medium`, or `utm_campaign`).
 

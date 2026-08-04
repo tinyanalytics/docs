@@ -1,6 +1,6 @@
-# tinyanalytics documentation
+# TinyAnalytics documentation
 
-This repository contains the public documentation for **tinyanalytics**, the hosted web and product analytics platform that helps you understand traffic and product behavior without tracking people.
+This repository contains the public documentation for **TinyAnalytics**, the hosted web and product analytics platform that helps you understand traffic and product behavior without tracking people.
 
 The site is built with [Mintlify](https://www.mintlify.com) from MDX pages and `docs.json`.
 
@@ -19,7 +19,7 @@ Read these files before changing documentation:
 - Write for customers of the hosted service at [dash.tinyanalytics.io](https://dash.tinyanalytics.io).
 - Do not document self-hosting, operator internals, or unshipped features.
 - Verify product behavior against `../tinyanalytics/wiki/` before publishing it.
-- Use **tinyanalytics** in lowercase and call each tracked website or app a **site**.
+- Use **TinyAnalytics** with a capital **T** and **A**, and call each tracked website or app a **site**.
 
 ## Development
 

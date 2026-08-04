@@ -1,11 +1,11 @@
 ---
 title: "Import Simple Analytics Data"
 sidebarTitle: "Import from Simple Analytics"
-description: "Upload a Simple Analytics export to bring historical pageviews, sessions, and referrers into tinyanalytics alongside new traffic."
+description: "Upload a Simple Analytics export to bring historical pageviews, sessions, and referrers into TinyAnalytics alongside new traffic."
 icon: "file-import"
 ---
 
-You can import your **Simple Analytics** history into tinyanalytics by uploading a Simple Analytics export file. tinyanalytics reads your past events from the export and stores them as its own events, so your Simple Analytics history appears in every report alongside your new tinyanalytics data.
+You can import your **Simple Analytics** history into TinyAnalytics by uploading a Simple Analytics export file. TinyAnalytics reads your past events from the export and stores them as its own events, so your Simple Analytics history appears in every report alongside your new TinyAnalytics data.
 
 ## How to import from Simple Analytics
 
@@ -13,8 +13,8 @@ You can import your **Simple Analytics** history into tinyanalytics by uploading
   <Step title="Export your data from Simple Analytics">
     Export your stats from Simple Analytics as a CSV file for the period you want to keep.
   </Step>
-  <Step title="Upload the file to tinyanalytics">
-    In your site's import settings, choose **Simple Analytics** and upload the export file. tinyanalytics parses it in your browser and imports the events.
+  <Step title="Upload the file to TinyAnalytics">
+    In your site's import settings, choose **Simple Analytics** and upload the export file. TinyAnalytics parses it in your browser and imports the events.
   </Step>
   <Step title="See it in your dashboard">
     When the import finishes, your Simple Analytics history is live across your reports.
@@ -22,12 +22,12 @@ You can import your **Simple Analytics** history into tinyanalytics by uploading
 </Steps>
 
 <Check>
-  The import worked when your Simple Analytics history appears in your tinyanalytics reports, and the import summary shows how many events imported, skipped, or were invalid.
+  The import worked when your Simple Analytics history appears in your TinyAnalytics reports, and the import summary shows how many events imported, skipped, or were invalid.
 </Check>
 
 ## What carries over from Simple Analytics
 
-A Simple Analytics export contains individual events with their timestamps. It doesn't include parsed device fields, so tinyanalytics derives the browser, OS, and device from each event's user agent:
+A Simple Analytics export contains individual events with their timestamps. It doesn't include parsed device fields, so TinyAnalytics derives the browser, OS, and device from each event's user agent:
 
 | Carries over | Notes |
 | --- | --- |
@@ -37,7 +37,7 @@ A Simple Analytics export contains individual events with their timestamps. It d
 | Browsers, operating systems, devices | Derived from the user agent |
 | Language | Combined from the visitor's language and region |
 
-**Channels are re-derived by tinyanalytics** from the referrer and campaign data, so imported Simple Analytics traffic is classified by the same rules as your live traffic.
+**Channels are re-derived by TinyAnalytics** from the referrer and campaign data, so imported Simple Analytics traffic is classified by the same rules as your live traffic.
 
 ## Good to know
 
@@ -52,7 +52,7 @@ A Simple Analytics export contains individual events with their timestamps. It d
 
 <AccordionGroup>
   <Accordion title="Where do browser and device fields come from in a Simple Analytics import?">
-    From each event's user agent. A Simple Analytics export doesn't include parsed device fields, so tinyanalytics derives the browser, operating system, and device itself. Language is combined from the visitor's language and region.
+    From each event's user agent. A Simple Analytics export doesn't include parsed device fields, so TinyAnalytics derives the browser, operating system, and device itself. Language is combined from the visitor's language and region.
   </Accordion>
   <Accordion title="Does a Simple Analytics import keep the original timestamps?">
     Yes. A Simple Analytics export contains individual events with their timestamps, so pageviews and sessions keep event-level timing, recorded in UTC.
@@ -61,14 +61,14 @@ A Simple Analytics export contains individual events with their timestamps. It d
     Delete the previous import first, then run it again. Re-running an import **adds** the data a second time rather than replacing it, and deleting an import removes all of that import's data. Only one import runs at a time per organization.
   </Accordion>
   <Accordion title="Why did some rows get skipped during my import?">
-    Rows dated in the future are skipped, and malformed rows are dropped and counted. tinyanalytics reports how many events imported, skipped, or were invalid, so you can see exactly what happened to your export.
+    Rows dated in the future are skipped, and malformed rows are dropped and counted. TinyAnalytics reports how many events imported, skipped, or were invalid, so you can see exactly what happened to your export.
   </Accordion>
 </AccordionGroup>
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Switch to tinyanalytics" icon="right-left" href="/migrate-analytics-data-to-tinyanalytics">
+  <Card title="Switch to TinyAnalytics" icon="right-left" href="/migrate-analytics-data-to-tinyanalytics">
     The full migration overview.
   </Card>
   <Card title="Import from Plausible" icon="file-import" href="/import-plausible-analytics-data">

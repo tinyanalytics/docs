@@ -1,16 +1,16 @@
 ---
 title: "Angular Analytics Integration"
 sidebarTitle: "Angular"
-description: "Install tinyanalytics in src/index.html so one Angular analytics integration covers every route and tracks client-side navigation automatically."
+description: "Install TinyAnalytics in src/index.html so one Angular analytics integration covers every route and tracks client-side navigation automatically."
 icon: "angular"
 noindex: true
 ---
 
-To add tinyanalytics to an **Angular** app, paste the tracking snippet into `src/index.html`, the single HTML shell for the whole app. It loads once, and client-side navigation with the Angular Router is tracked automatically.
+To add TinyAnalytics to an **Angular** app, paste the tracking snippet into `src/index.html`, the single HTML shell for the whole app. It loads once, and client-side navigation with the Angular Router is tracked automatically.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your snippet from **Settings → Tracking** in your dashboard.
 
 ## Add the snippet to `src/index.html`
@@ -39,7 +39,7 @@ Add the tag inside the `<head>`:
 
 ## Client-side navigation is tracked automatically
 
-The Angular Router renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). You don't need to subscribe to router events. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+The Angular Router renders route changes on the client, and TinyAnalytics records each one as a new pageview by default (`data-track-spa`). You don't need to subscribe to router events. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
 
 ## Verify
 

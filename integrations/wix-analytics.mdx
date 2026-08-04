@@ -1,12 +1,12 @@
 ---
 title: "Wix Analytics Integration"
 sidebarTitle: "Wix"
-description: "Add tinyanalytics to a Wix site by pasting the tracking snippet into Settings → Custom Code, applied to every page's head. Requires a Wix Premium plan."
+description: "Add TinyAnalytics to a Wix site by pasting the tracking snippet into Settings → Custom Code, applied to every page's head. Requires a Wix Premium plan."
 icon: "wix"
 noindex: true
 ---
 
-To add tinyanalytics to a **Wix** site, paste the tracking snippet into **Custom Code** and apply it to every page's `<head>`. Wix loads it site-wide, including across its client-side page transitions.
+To add TinyAnalytics to a **Wix** site, paste the tracking snippet into **Custom Code** and apply it to every page's `<head>`. Wix loads it site-wide, including across its client-side page transitions.
 
 <Note>
   Custom Code requires a **Wix Premium (paid) plan**. On the free plan, Wix doesn't allow adding custom code, so this method isn't available.
@@ -14,7 +14,7 @@ To add tinyanalytics to a **Wix** site, paste the tracking snippet into **Custom
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your snippet from **Settings → Tracking** in your dashboard.
 - A Wix **Premium plan**.
 
@@ -25,7 +25,7 @@ To add tinyanalytics to a **Wix** site, paste the tracking snippet into **Custom
     In your Wix site dashboard, go to **Settings → Custom Code** (under Advanced).
   </Step>
   <Step title="Add a new code snippet">
-    Click **+ Add Custom Code** and paste your tinyanalytics snippet:
+    Click **+ Add Custom Code** and paste your TinyAnalytics snippet:
 
     ```html
     <script defer src="https://dash.tinyanalytics.io/script.js"
@@ -38,7 +38,7 @@ To add tinyanalytics to a **Wix** site, paste the tracking snippet into **Custom
 </Steps>
 
 <Tip>
-  Replace `YOUR_SITE_ID` with your real site ID. Wix moves between pages on the client, and tinyanalytics records those route changes automatically ([SPA tracking](/configure-tinyanalytics-tracking-script#track-single-page-apps) is on by default), so one snippet covers your whole site.
+  Replace `YOUR_SITE_ID` with your real site ID. Wix moves between pages on the client, and TinyAnalytics records those route changes automatically ([SPA tracking](/configure-tinyanalytics-tracking-script#track-single-page-apps) is on by default), so one snippet covers your whole site.
 </Tip>
 
 ## Verify

@@ -1,16 +1,16 @@
 ---
 name: tinyanalytics-docs
-description: Project conventions for writing tinyanalytics documentation. Use
+description: Project conventions for writing TinyAnalytics documentation. Use
   whenever creating or editing pages in this repo — sources of truth, hard
   content boundaries (hosted-only product), terminology, voice, and page
   templates. Pair with the mintlify skill for platform mechanics.
 compatibility: This repo (Mintlify site, docs.json at root). Product repo expected at ../tinyanalytics.
 metadata:
-  author: tinyanalytics
+  author: TinyAnalytics
   version: "1.0"
 ---
 
-# tinyanalytics documentation conventions
+# TinyAnalytics documentation conventions
 
 This skill is the project layer. Platform mechanics (components, `docs.json`,
 frontmatter fields, CLI, deploy) live in the sibling `mintlify` skill
@@ -18,7 +18,7 @@ frontmatter fields, CLI, deploy) live in the sibling `mintlify` skill
 
 ## What you are documenting
 
-tinyanalytics is **privacy-friendly, cookieless web + product analytics**,
+TinyAnalytics is **privacy-friendly, cookieless web + product analytics**,
 offered as a **hosted service** at `dash.tinyanalytics.io`. For anonymous web
 analytics, the server derives a persistent, site-scoped, one-way ID from request
 signals; it does not write the raw IP address to analytics data or store a browser
@@ -58,7 +58,7 @@ Never document:
 
 - **Self-hosting or installation of the platform** — no Docker, `setup.sh`,
   environment variables, SMTP/SES setup, backups, upgrades, or reverse-proxy
-  _for running tinyanalytics_. (The proxy guide for _tracking through your own
+  _for running TinyAnalytics_. (The proxy guide for _tracking through your own
   domain_ is fine — that is a cloud-customer feature.)
 - **The admin console or operator internals** — system-admin promotion, email
   diagnostics, instance ops. Internal only.
@@ -78,7 +78,7 @@ Security-sensitive precision:
 
 | Use                       | Not                              | Notes                                                                                                                   |
 | ------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| tinyanalytics (lowercase) | TinyAnalytics, Tiny Analytics    | Even at sentence start                                                                                                  |
+| TinyAnalytics             | all-lowercase form, Tiny Analytics | One word with a capital T and A, including at sentence start                                                          |
 | site                      | website, property, project       | A tracked website/app                                                                                                   |
 | organization              | workspace, account (for the org) | Top-level tenant                                                                                                        |
 | team                      | group (for access)               | Site-access unit inside an org                                                                                          |

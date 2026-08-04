@@ -52,10 +52,10 @@ Two more things:
 
 <AccordionGroup>
   <Accordion title="How many group types can one site have?">
-    Up to **5**. A tinyanalytics site can register five group types — for example `company` and `workspace` — and the first types you send claim the slots.
+    Up to **5**. A TinyAnalytics site can register five group types — for example `company` and `workspace` — and the first types you send claim the slots.
   </Accordion>
   <Accordion title="When does a funnel step count for a whole account?">
-    When **any member, in any session** reaches it. An account-grain funnel in tinyanalytics credits the account even if one person started the trial and a colleague finished it. Retention works the same way: an account is retained when any seat returns in a later period.
+    When **any member, in any session** reaches it. An account-grain funnel in TinyAnalytics credits the account even if one person started the trial and a colleague finished it. Retention works the same way: an account is retained when any seat returns in a later period.
   </Accordion>
   <Accordion title="How do I clear a visitor's account association when they log out?">
     Call `resetGroups()`. It forgets the associations set by `window.tinyanalytics.group()`, so events the visitor sends afterward aren't tagged with the previous account.

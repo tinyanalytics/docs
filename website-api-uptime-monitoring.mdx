@@ -1,11 +1,11 @@
 ---
 title: "Website and API Uptime Monitoring"
 sidebarTitle: "Uptime monitoring"
-description: "Probe a website or API on a schedule, record response times, open incidents after repeated failures, and alert your notification channels."
+description: "Probe a website or API on a schedule, record response times, open incidents after repeated failures, and alert your notification destinations."
 icon: "heart-pulse"
 ---
 
-Uptime monitoring checks that your site or API stays reachable and alerts you when it doesn't. You add a monitor with a URL and a check interval; tinyanalytics probes it on schedule, records the response time, and **opens an incident** when it fails — so you hear about downtime before your customers do.
+Uptime monitoring checks that your site or API stays reachable and alerts you when it doesn't. You add a monitor with a URL and a check interval; TinyAnalytics probes it on schedule, records the response time, and **opens an incident** when it fails — so you hear about downtime before your customers do.
 
 ## Add a monitor
 
@@ -30,12 +30,12 @@ If any rule fails, the check is recorded as a failure.
 
 ## When does an incident open?
 
-tinyanalytics doesn't page you for a single blip:
+TinyAnalytics doesn't page you for a single blip:
 
 - An **incident opens on the second consecutive failure** — one bad check isn't an outage.
 - It **resolves on the second consecutive success** — one lucky check isn't a recovery.
 
-When an incident opens or resolves, tinyanalytics notifies your channels — **email, Slack, Discord, or webhook** — set up under **Notifications**. You can **acknowledge** an incident to show you're on it, or **resolve** it manually.
+When an incident opens or resolves, TinyAnalytics notifies your organization-wide destinations — **email, Slack, Discord, or webhook**. Open the account menu and choose **Notification destinations** to manage them. You can **acknowledge** an incident to show you're on it, or **resolve** it manually.
 
 ## Read a monitor's health
 
@@ -45,16 +45,19 @@ Each monitor shows a **7-day uptime bar** at a glance and, in detail, its uptime
 
 <AccordionGroup>
   <Accordion title="Why didn't I get notified when a check failed?">
-    A single failed check isn't an outage. tinyanalytics opens an **incident on the second consecutive failure** and notifies your channels then. The incident **resolves on the second consecutive success**, so one lucky check doesn't count as a recovery either.
+    A single failed check isn't an outage. TinyAnalytics opens an **incident on the second consecutive failure** and notifies your channels then. The incident **resolves on the second consecutive success**, so one lucky check doesn't count as a recovery either.
   </Accordion>
-  <Accordion title="Can tinyanalytics monitor something that isn't a website?">
+  <Accordion title="Can TinyAnalytics monitor something that isn't a website?">
     Yes. A **TCP** monitor checks that a host and port accept a connection, which covers databases, mail servers, and other non-HTTP endpoints. **HTTP / HTTPS** monitors request a URL and check the response, with optional authentication headers, a custom user agent, and a request body.
   </Accordion>
   <Accordion title="Can I treat a slow or wrong response as downtime?">
     Yes, for HTTP monitors. You can require the response to match allowed status codes, stay under a response-time threshold, stay within response-size bounds, contain or not contain a string in the body, or carry a specific header. If any rule fails, the check is recorded as a failure.
   </Accordion>
   <Accordion title="Where do uptime notifications get sent?">
-    To the channels you set up under **Notifications** — **email, Slack, Discord, or webhook**. tinyanalytics notifies you when an incident opens and again when it resolves. You can **acknowledge** an incident to show you're on it, or **resolve** it manually.
+    To the organization-wide [notification destinations](/notification-destinations)
+    you manage from the account menu — **email, Slack, Discord, or webhook**.
+    TinyAnalytics notifies you when an incident opens and again when it resolves.
+    You can **acknowledge** an incident to show you're on it, or **resolve** it manually.
   </Accordion>
 </AccordionGroup>
 
@@ -70,7 +73,10 @@ Each monitor shows a **7-day uptime bar** at a glance and, in detail, its uptime
   <Card title="Scheduled reports" icon="envelope" href="/scheduled-analytics-reports">
     Get a routine analytics digest by email.
   </Card>
-  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
+  <Card title="Notification destinations" icon="paper-plane" href="/notification-destinations">
+    Connect the delivery endpoints shared by uptime, alerts, and workflows.
+  </Card>
+  <Card title="How TinyAnalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
     Where your analytics data comes from.
   </Card>
 </Columns>

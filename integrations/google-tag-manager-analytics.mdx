@@ -1,16 +1,16 @@
 ---
 title: "Google Tag Manager Analytics Integration"
 sidebarTitle: "Google Tag Manager"
-description: "Install tinyanalytics with a Google Tag Manager Custom HTML tag that fires on all pages, without changing your site's source code."
+description: "Install TinyAnalytics with a Google Tag Manager Custom HTML tag that fires on all pages, without changing your site's source code."
 icon: "google"
 noindex: true
 ---
 
-To add tinyanalytics through **Google Tag Manager (GTM)**, create a Custom HTML tag containing the tracking snippet and fire it on all pages. This keeps the install in your GTM container, so you don't touch your site's code.
+To add TinyAnalytics through **Google Tag Manager (GTM)**, create a Custom HTML tag containing the tracking snippet and fire it on all pages. This keeps the install in your GTM container, so you don't touch your site's code.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your snippet from **Settings → Tracking** in your dashboard.
 - GTM already installed on your site, with a container you can edit.
 
@@ -21,7 +21,7 @@ To add tinyanalytics through **Google Tag Manager (GTM)**, create a Custom HTML 
     In your GTM workspace, go to **Tags → New**, and choose the **Custom HTML** tag type.
   </Step>
   <Step title="Paste the snippet">
-    Paste your tinyanalytics snippet as the tag's HTML:
+    Paste your TinyAnalytics snippet as the tag's HTML:
 
     ```html
     <script defer src="https://dash.tinyanalytics.io/script.js"
@@ -41,7 +41,7 @@ To add tinyanalytics through **Google Tag Manager (GTM)**, create a Custom HTML 
 </Tip>
 
 <Note>
-  If you use GTM's consent settings, make sure the tag is allowed to fire — a tag blocked by consent won't load tinyanalytics. Core anonymous analytics uses no cookies or stored browser ID, but optional features can use browser storage. See [Privacy & GDPR](/resources/privacy-friendly-analytics-gdpr) when configuring consent.
+  If you use GTM's consent settings, make sure the tag is allowed to fire — a tag blocked by consent won't load TinyAnalytics. Core anonymous analytics uses no cookies or stored browser ID, but optional features can use browser storage. See [Privacy & GDPR](/resources/privacy-friendly-analytics-gdpr) when configuring consent.
 </Note>
 
 ## Verify
@@ -58,7 +58,7 @@ Use GTM **Preview** to confirm the tag fires, then open your site and check **Re
   <Card title="Install on any platform" icon="puzzle-piece" href="/integrations/install-website-analytics">
     The universal method and other platforms.
   </Card>
-  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
+  <Card title="How TinyAnalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
     Why cookieless tracking simplifies consent.
   </Card>
   <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">

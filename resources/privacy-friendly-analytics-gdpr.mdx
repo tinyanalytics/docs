@@ -5,7 +5,7 @@ description: "Evaluate privacy-friendly analytics with no core analytics cookies
 icon: "user-shield"
 ---
 
-tinyanalytics makes core anonymous analytics privacy-friendly by default. It sets no analytics cookies, stores no raw IP addresses, and counts anonymous visitors with a server-derived one-way identifier instead of a browser ID.
+TinyAnalytics makes core anonymous analytics privacy-friendly by default. It sets no analytics cookies, stores no raw IP addresses, and counts anonymous visitors with a server-derived one-way identifier instead of a browser ID.
 
 ## The privacy properties
 
@@ -33,12 +33,12 @@ These values support a feature on your site; they are not a cross-site advertisi
 Core anonymous analytics sets no cookies and does not persist an anonymous analytics ID in the browser. Whether *you* need consent still depends on your jurisdiction, the optional features you enable, and the data you choose to send. Review the rules that apply to you and your visitors.
 
 <Note>
-  This page describes how tinyanalytics works, not legal advice. Your obligations under GDPR, ePrivacy, CCPA, or other regulations depend on your specific use, the data you collect, and where your visitors are. Consult those regulations — or a professional — for your situation.
+  This page describes how TinyAnalytics works, not legal advice. Your obligations under GDPR, ePrivacy, CCPA, or other regulations depend on your specific use, the data you collect, and where your visitors are. Consult those regulations — or a professional — for your situation.
 </Note>
 
 ## Keeping data collection privacy-friendly
 
-You decide how much personal data, if any, enters tinyanalytics:
+You decide how much personal data, if any, enters TinyAnalytics:
 
 - Use a **non-identifying ID** (like an internal user ID or a hash) with [`identify()`](/user-identification-analytics) rather than an email address.
 - Keep raw personal information out of [custom event](/custom-event-tracking) properties and traits unless you have a reason and a basis to store it.
@@ -58,7 +58,7 @@ You decide how much personal data, if any, enters tinyanalytics:
   <Card title="Identify users" icon="user" href="/user-identification-analytics">
     Attach an ID without exposing personal data.
   </Card>
-  <Card title="tinyanalytics vs the alternatives" icon="scale-balanced" href="/resources/tinyanalytics-vs-google-analytics-plausible-umami">
+  <Card title="TinyAnalytics vs the alternatives" icon="scale-balanced" href="/resources/tinyanalytics-vs-google-analytics-plausible-umami">
     How it compares on privacy and openness.
   </Card>
 </Columns>

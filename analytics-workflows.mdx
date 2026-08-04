@@ -1,0 +1,144 @@
+---
+title: "Event-Triggered Analytics Workflows"
+sidebarTitle: "Workflows"
+description: "Trigger bounded automations from pageviews, custom events, errors, and autocapture, then notify your team by email, Slack, Discord, or webhook."
+icon: "diagram-project"
+---
+
+A workflow turns a matching analytics event into a team notification. You choose the trigger, add optional delays or conditions, and send the result to one or more [notification destinations](/notification-destinations). Open a site and choose **Workflows** under **Workspace** to get started.
+
+Workflows are for internal automation. They do not send lifecycle messages to visitors, run arbitrary code, make user-defined HTTP requests outside a notification step, or trigger from a schedule, funnel, cohort, or alert.
+
+## Start from a template
+
+Choose a template to create an editable draft:
+
+| Template | Starting behavior |
+| --- | --- |
+| **High-intent custom event → Slack** | Notify Slack when a named custom event occurs. |
+| **Demo request → email + Slack** | Notify email and Slack about a demo-request event. |
+| **Purchase notification → Discord/webhook** | Send purchase details to Discord or a webhook. |
+| **Error event → incident alert** | Notify your team when an error event occurs. |
+| **Negative survey response event → Slack** | Send a survey-response event to Slack. |
+| **Blank workflow** | Start with an empty trigger and add each step yourself. |
+
+Templates create drafts only. Review the trigger, choose your own destinations, test the result, and publish it before it can start runs.
+
+## Choose what starts a run
+
+Every workflow has one trigger. It can match these event types:
+
+- **Pageview**
+- **Custom event**
+- **Error**
+- **Outbound link**
+- **File download**
+- **Button click**
+- **Form submit**
+- **Copy**
+
+For a pageview, enter a path pattern such as `/pricing*`. For a custom event, enter its event name. You can also narrow the match to a hostname and add up to **10 exact property filters**.
+
+Choose how often one actor can start the workflow:
+
+- **Every match** starts a run for every matching event.
+- **Once per actor in a time window** limits runs by session, anonymous user, identified user, or one of the five group slots. The window can be from **1 minute to 30 days**; a new draft defaults to once per session every 60 minutes.
+
+<Note>
+  A scoped frequency limit starts a run only when the event has the selected
+  session, user, identified-user, or group value. If that value is missing,
+  TinyAnalytics skips the workflow for that event.
+</Note>
+
+## Add workflow steps
+
+Build the path below the trigger with these bounded step types:
+
+| Step | What it does |
+| --- | --- |
+| **Delay** | Waits for a positive whole number of minutes, hours, or days, up to 30 days. |
+| **Condition** | Checks up to 10 clauses against the captured event and follows the true or false branch. Clauses can require all or any matches. |
+| **Notify** | Sends a title and message to 1–5 email, Slack, Discord, or webhook destinations. |
+| **Exit** | Ends the run successfully, with an optional reason. |
+
+For delay, condition, and notify steps, choose whether an error should **Stop the run** or **Continue to the next step**. A workflow can contain up to **20 nodes**, and each possible path must end cleanly.
+
+Notification titles and messages accept non-executable template paths such as `{{event.name}}`, `{{event.pathname}}`, `{{event.props.plan}}`, and `{{actor.identified_user_id}}`. TinyAnalytics fills them from the triggering event and records only the event fields the published workflow references.
+
+## Work with drafts safely
+
+The editor saves draft changes automatically. If someone else changes the same workflow first, TinyAnalytics stops autosaving and shows **Reload latest** instead of silently overwriting their draft. Publishing never changes a run already in progress; that run keeps the immutable version it started with.
+
+## Test before publishing
+
+Open **Test** from the workflow editor to simulate the current draft against one sample event. You can enter the sample yourself or load a recent event that matches the trigger.
+
+A dry run shows the exact path, condition branches, skipped delays, rendered messages, missing values, and selected destinations. It does not create a run or consume a frequency cap. To make a real delivery test, confirm **Send real test notifications to the chosen destinations**, then click **Send test notifications**. Real test delivery is limited to **10 requests per minute per workflow**.
+
+## Publish a version
+
+Click **Publish** when the draft is ready. TinyAnalytics validates the graph and estimates its impact from matching events in the last 24 hours and 7 days. It also shows the maximum notification fan-out and any missing or disabled destinations.
+
+- An every-match estimate above **1,000 runs in 24 hours** requires explicit confirmation.
+- An estimate above **10,000 runs in 24 hours** cannot be published until you narrow the trigger or add a frequency limit.
+- A site can have up to **20 active workflows**. Draft, paused, and archived workflows do not count toward this limit.
+
+Publishing creates an immutable version. Later edits remain draft changes until you publish again, and runs already in progress keep the version that started them. Activation changes can take up to five seconds to reach every ingestion server.
+
+## Pause, resume, or archive a workflow
+
+The workflow list shows its status, trigger, current version, last-7-day run and failure counts, and last-triggered time.
+
+| Status | Behavior |
+| --- | --- |
+| **Draft** | Has never been published and cannot start runs. |
+| **Active** | Its current published version accepts matching events. |
+| **Paused** | Stops new runs while existing queued, delayed, or running work continues. |
+| **Archived** | Stops new runs and hides from the default list; its versions and run history remain readable. |
+
+You can **Edit**, **Pause** or **Resume**, **Duplicate**, and **Archive** from the list. Duplicating creates a fresh draft; archiving cannot recall a notification that was already sent.
+
+## Inspect runs and delivery
+
+Use the editor's **Runs** tab to filter and open individual runs. Each run shows its named step timeline, condition branch, attempts, captured context, and the result for every destination. You can cancel a non-terminal delayed or queued run.
+
+The **Metrics** tab summarizes runs, completions, failures, cancellations, notifications, and failure rate for the date range you choose.
+
+Notification delivery is **at least once**. TinyAnalytics retries a failed destination up to three times, after 1 minute, 5 minutes, and 30 minutes. A rare timeout or retry can deliver the same notification twice; webhook deliveries include an `Idempotency-Key` header so your receiver can deduplicate them.
+
+<Warning>
+  Workflow safeguards never block analytics collection. When a workflow reaches
+  its runtime limits or its automation subsystem is unavailable, TinyAnalytics
+  skips or delays workflow work while continuing to accept the analytics event.
+</Warning>
+
+## Who can manage workflows?
+
+Anyone with access to the site can read its workflows, versions, metrics, and run status. Organization owners and admins can create, edit, test-deliver, publish, pause, resume, archive, and cancel runs.
+
+An API key with **Workflows: Read** can read workflow data as its owner. Workflow mutations require an owner or admin signed in with a dashboard session in version 1; API keys, Ask AI, and MCP cannot create or operate workflows.
+
+## Verify
+
+<Check>
+  Publish a narrowly scoped workflow, send a confirmed test notification, and
+  trigger one matching event. The workflow is working when a new entry appears
+  under **Runs** and every selected destination shows a successful delivery.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Notification destinations" icon="paper-plane" href="/notification-destinations">
+    Connect email, Slack, Discord, or webhook delivery once for the organization.
+  </Card>
+  <Card title="Custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Send the named events a workflow can match.
+  </Card>
+  <Card title="Autocapture" icon="wand-magic-sparkles" href="/autocapture-analytics-events">
+    Capture outbound links, downloads, buttons, forms, and copy events.
+  </Card>
+  <Card title="Alerts" icon="bell" href="/analytics-alerts">
+    Watch a metric threshold instead of reacting to one event.
+  </Card>
+</Columns>

@@ -5,7 +5,7 @@ description: "Collect targeted NPS, rating, or open feedback, then ask AI to sum
 icon: "comment-dots"
 ---
 
-A survey asks your visitors a question without sending them anywhere — an NPS score, a star rating, a line of open feedback — using a widget tinyanalytics shows inside your site. You build the questions in the dashboard. The widget, targeting, and results all work off your existing [tracking snippet](/install-tinyanalytics-tracking-script), so there's **no extra code to add**.
+A survey asks your visitors a question without sending them anywhere — an NPS score, a star rating, a line of open feedback — using a widget TinyAnalytics shows inside your site. You build the questions in the dashboard. The widget, targeting, and results all work off your existing [tracking snippet](/install-tinyanalytics-tracking-script), so there's **no extra code to add**.
 
 ## How do I turn surveys on?
 
@@ -68,7 +68,7 @@ You can set a **response limit** so a survey stops itself automatically once it 
 ## How do I analyze open-text responses with AI?
 
 When the results contain at least **five non-empty answers to open questions**, choose
-**Analyze responses**. tinyanalytics starts one fresh [Ask AI](/ai-analytics-assistant) conversation
+**Analyze responses**. TinyAnalytics starts one fresh [Ask AI](/ai-analytics-assistant) conversation
 and analyzes a bounded sample of the latest responses.
 
 The analysis identifies themes, pain points, positive signals, possible next steps, and short
@@ -87,14 +87,14 @@ silently resend the survey sample.
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="Why isn't my tinyanalytics survey showing on my site?">
+  <Accordion title="Why isn't my TinyAnalytics survey showing on my site?">
     Surveys are **off by default** for a new site, so check that surveys are enabled for the site. Until you enable them, drafting a survey alone won't put anything in front of visitors and the widget code never loads. Also check the survey's targeting rules — URL, CSS selector, device type, wait period, and feature-flag conditions all limit who sees it.
   </Accordion>
   <Accordion title="Do I need to add code to my site to run a survey?">
-    No. tinyanalytics surveys need **no extra code beyond your tracking snippet**. You build the questions in the dashboard, and the widget, targeting, and results all work off the [tracking snippet](/install-tinyanalytics-tracking-script) you already installed.
+    No. TinyAnalytics surveys need **no extra code beyond your tracking snippet**. You build the questions in the dashboard, and the widget, targeting, and results all work off the [tracking snippet](/install-tinyanalytics-tracking-script) you already installed.
   </Accordion>
-  <Accordion title="How does tinyanalytics calculate the NPS score?">
-    tinyanalytics takes the share of promoters (visitors answering 9–10) and subtracts the share of detractors (0–6), producing a score from −100 to 100. NPS questions ask a 0–10 "how likely to recommend" question.
+  <Accordion title="How does TinyAnalytics calculate the NPS score?">
+    TinyAnalytics takes the share of promoters (visitors answering 9–10) and subtracts the share of detractors (0–6), producing a score from −100 to 100. NPS questions ask a 0–10 "how likely to recommend" question.
   </Accordion>
   <Accordion title="Do surveys work in single-page apps?">
     Yes. URL targeting re-checks on client-side navigation, so a survey scoped to one route still appears in a single-page app after the visitor navigates to that route.

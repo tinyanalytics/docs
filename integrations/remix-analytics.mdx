@@ -1,16 +1,16 @@
 ---
 title: "Remix Analytics Integration"
 sidebarTitle: "Remix"
-description: "Add tinyanalytics to app/root.tsx so the tracking script loads on every Remix route and records client-side navigation automatically."
+description: "Add TinyAnalytics to app/root.tsx so the tracking script loads on every Remix route and records client-side navigation automatically."
 icon: "code"
 noindex: true
 ---
 
-To add tinyanalytics to a **Remix** app, add the tracking script to the `<head>` of `app/root.tsx`, the document that wraps every route. It loads once for the whole app, and client-side navigation is tracked automatically.
+To add TinyAnalytics to a **Remix** app, add the tracking script to the `<head>` of `app/root.tsx`, the document that wraps every route. It loads once for the whole app, and client-side navigation is tracked automatically.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
 
 ## Add the script to `app/root.tsx`
@@ -48,7 +48,7 @@ export default function App() {
 
 ## Client-side navigation is tracked automatically
 
-Remix renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). You don't need to hook into the router. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+Remix renders route changes on the client, and TinyAnalytics records each one as a new pageview by default (`data-track-spa`). You don't need to hook into the router. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
 
 ## Verify
 

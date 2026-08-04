@@ -1,16 +1,16 @@
 ---
 title: "Vue Analytics Integration"
 sidebarTitle: "Vue"
-description: "Add tinyanalytics to index.html so one script covers the Vue app and tracks client-side navigation through Vue Router automatically."
+description: "Add TinyAnalytics to index.html so one script covers the Vue app and tracks client-side navigation through Vue Router automatically."
 icon: "vuejs"
 noindex: true
 ---
 
-To add tinyanalytics to a **Vue** app, paste the tracking snippet into your `index.html` so it loads once for the whole app. Client-side navigation with Vue Router is tracked automatically, so you don't need to hook into the router.
+To add TinyAnalytics to a **Vue** app, paste the tracking snippet into your `index.html` so it loads once for the whole app. Client-side navigation with Vue Router is tracked automatically, so you don't need to hook into the router.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
 
 ## Add the snippet to `index.html`
@@ -39,7 +39,7 @@ A Vue project created with Vite has a single `index.html` at the project root. A
 
 ## Client-side navigation is tracked automatically
 
-Vue Router renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). You don't need to watch the route or call anything on navigation. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this behavior.
+Vue Router renders route changes on the client, and TinyAnalytics records each one as a new pageview by default (`data-track-spa`). You don't need to watch the route or call anything on navigation. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this behavior.
 
 ## Verify
 

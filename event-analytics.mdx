@@ -59,9 +59,9 @@ Switch to the **Live** view to tail events as they arrive. Live polls only for e
 
 Live honors the same search, type, name, and property filters as Explore, so you can tail exactly the events you're debugging.
 
-## What does tinyanalytics capture automatically?
+## What does TinyAnalytics capture automatically?
 
-Alongside the events you send, tinyanalytics records interactions automatically — outbound link clicks, file downloads, button clicks, text copies, and form submissions. Each has its own type, so you can look at them separately from your custom events. See [what the script tracks out of the box](/install-tinyanalytics-tracking-script#what-the-script-tracks-out-of-the-box).
+Alongside the events you send, TinyAnalytics records interactions automatically — outbound link clicks, file downloads, button clicks, text copies, and form submissions. Each has its own type, so you can look at them separately from your custom events. See [what the script tracks out of the box](/install-tinyanalytics-tracking-script#what-the-script-tracks-out-of-the-box).
 
 Open the **Autocapture** dialog on the Events page to browse these by value: pick a type — outbound links, button clicks, form submissions, or copies — and see each distinct value with its count, its share of that type, and when it was last seen. It's the fastest way to find the exact link or button text before building an [autocapture goal or funnel](/autocapture-analytics-events#which-autocaptured-events-can-i-build-goals-and-funnels-on) on it.
 
@@ -78,10 +78,10 @@ Open the **Autocapture** dialog on the Events page to browse these by value: pic
 
 <AccordionGroup>
   <Accordion title="Why don't pageviews show up in the Events explorer?">
-    The tinyanalytics Events explorer lists only the custom events you send with [`event()`](/custom-event-tracking), such as `signup` or `purchase`. Pageviews are excluded because they have their own reports — see [Pages](/page-analytics) and the [Dashboard overview](/web-analytics-dashboard).
+    The TinyAnalytics Events explorer lists only the custom events you send with [`event()`](/custom-event-tracking), such as `signup` or `purchase`. Pageviews are excluded because they have their own reports — see [Pages](/page-analytics) and the [Dashboard overview](/web-analytics-dashboard).
   </Accordion>
   <Accordion title="How do I compare the values of an event property?">
-    Expand the event in the tinyanalytics Events explorer. For each property key you see the values that appeared and how many times, so a `purchase` event expands to show the split across `plan` values like `pro` and `free`. Send the things that vary as properties so they break down here.
+    Expand the event in the TinyAnalytics Events explorer. For each property key you see the values that appeared and how many times, so a `purchase` event expands to show the split across `plan` values like `pro` and `free`. Send the things that vary as properties so they break down here.
   </Accordion>
   <Accordion title="Does Explore search all my events or only the ones on screen?">
     Explore searches on the server across your whole selected date range and [filters](/analytics-filters) — including events that have never been loaded into your browser. The search box matches event names and types, page URLs, user IDs, and session IDs; use the **Property** control to match values inside an event's properties.
@@ -92,8 +92,8 @@ Open the **Autocapture** dialog on the Events page to browse these by value: pic
   <Accordion title="Can I link someone to a specific event?">
     Yes. Open the event's detail sheet and choose **Copy event link** — the URL reopens that exact event for anyone with access to the site. Event IDs exist for events received after the activity explorer rolled out; older events are reached by scrolling the Explore table instead.
   </Accordion>
-  <Accordion title="Which interactions does tinyanalytics track without any code?">
-    tinyanalytics records outbound link clicks, file downloads, button clicks, text copies, and form submissions automatically, alongside the custom events you send. Each has its own type, so you can look at them separately. See [what the script tracks out of the box](/install-tinyanalytics-tracking-script#what-the-script-tracks-out-of-the-box).
+  <Accordion title="Which interactions does TinyAnalytics track without any code?">
+    TinyAnalytics records outbound link clicks, file downloads, button clicks, text copies, and form submissions automatically, alongside the custom events you send. Each has its own type, so you can look at them separately. See [what the script tracks out of the box](/install-tinyanalytics-tracking-script#what-the-script-tracks-out-of-the-box).
   </Accordion>
 </AccordionGroup>
 

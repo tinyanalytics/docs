@@ -1,11 +1,11 @@
 ---
-title: "tinyanalytics Agent Skills for AI Coding Agents"
+title: "TinyAnalytics Agent Skills for AI Coding Agents"
 sidebarTitle: "Agent skills"
-description: "Install five open-source Agent Skills so Claude Code, Cursor, or Codex can set up tinyanalytics, prove tracking works, and build dashboards."
+description: "Install five open-source Agent Skills so Claude Code, Cursor, or Codex can set up TinyAnalytics, prove tracking works, and build dashboards."
 icon: "robot"
 ---
 
-**tinyanalytics Agent Skills** are five open-source instruction packs that teach an AI coding agent to run tinyanalytics end to end—register, create the site, install the tracking script, prove real data arrives, then instrument events, answer questions from the data, and build goals, funnels, and dashboards. You state the intent; the agent does the analytics work.
+**TinyAnalytics Agent Skills** are five open-source instruction packs that teach an AI coding agent to run TinyAnalytics end to end—register, create the site, install the tracking script, prove real data arrives, then instrument events, answer questions from the data, and build goals, funnels, and dashboards. You state the intent; the agent does the analytics work.
 
 Install them into your agent with one command:
 
@@ -16,15 +16,15 @@ npx -y skills add tinyanalytics/agent-skills -y
 The skills live in the public [tinyanalytics/agent-skills](https://github.com/tinyanalytics/agent-skills) repository and are MIT-licensed.
 
 <Note>
-  Agent Skills tell an agent **how to work with tinyanalytics**. They are not the
-  same as the [tinyanalytics MCP server](/api-reference/mcp-server), which gives an
+  Agent Skills tell an agent **how to work with TinyAnalytics**. They are not the
+  same as the [TinyAnalytics MCP server](/api-reference/mcp-server), which gives an
   agent a live connection to your analytics data, or [Ask AI](/ai-analytics-assistant),
   which answers questions inside the dashboard. The comparison below shows which to reach for.
 </Note>
 
 ## What is an Agent Skill?
 
-An Agent Skill is a Markdown file that an AI coding agent loads when a task matches its trigger, giving the agent step-by-step procedure, exact request bodies, and explicit failure handling for that task. tinyanalytics publishes five, each scoped to one job so an agent loads only what the current task needs.
+An Agent Skill is a Markdown file that an AI coding agent loads when a task matches its trigger, giving the agent step-by-step procedure, exact request bodies, and explicit failure handling for that task. TinyAnalytics publishes five, each scoped to one job so an agent loads only what the current task needs.
 
 ## Which skills are included?
 
@@ -56,7 +56,7 @@ Each skill declares when to skip itself, so an agent asked to instrument checkou
     Describe the outcome in your own words and let the matching skill trigger:
 
     ```text
-    Set up tinyanalytics on this project and show me the first pageview.
+    Set up TinyAnalytics on this project and show me the first pageview.
     ```
 
     Other phrasings that match: *"add analytics to my site"*, *"is tracking working?"*, *"track signups"*, *"what were our top pages last week?"*, or *"build a signup funnel"*.
@@ -65,6 +65,14 @@ Each skill declares when to skip itself, so an agent asked to instrument checkou
     The setup skill asks which email to register with rather than inventing one, and hands you the generated password and login URL afterward. If the response says a verification link was emailed, click it.
   </Step>
 </Steps>
+
+## Verify
+
+<Check>
+  Ask your agent to list the skills available in the current project. The
+  installation is complete when all five TinyAnalytics skills appear and a
+  request such as “is tracking working?” selects the verification skill.
+</Check>
 
 ## How does the agent get an API key?
 
@@ -96,12 +104,12 @@ Yes. The verification skill reports success **only on observed data**—it polls
 
 ## Agent Skills, MCP server, or Ask AI?
 
-All four surfaces use AI with tinyanalytics, and they answer different questions:
+All four surfaces use AI with TinyAnalytics, and they answer different questions:
 
 | You want to | Use |
 | --- | --- |
-| Have a coding agent install and operate tinyanalytics in your codebase | **Agent Skills**, on this page |
-| Give an agent a live connection to your analytics data | [The tinyanalytics MCP server](/api-reference/mcp-server) |
+| Have a coding agent install and operate TinyAnalytics in your codebase | **Agent Skills**, on this page |
+| Give an agent a live connection to your analytics data | [The TinyAnalytics MCP server](/api-reference/mcp-server) |
 | Ask about your own analytics inside the dashboard | [Ask AI](/ai-analytics-assistant) |
 | Give an assistant these documentation pages as context | [Use docs with AI](/resources/tinyanalytics-docs-ai-tools) |
 
@@ -117,7 +125,7 @@ Agent Skills and the MCP server work well together: the skills supply the proced
     Give an assistant these pages as context.
   </Card>
   <Card title="Quickstart" icon="rocket" href="/tinyanalytics-quickstart">
-    Install tinyanalytics yourself in a few minutes.
+    Install TinyAnalytics yourself in a few minutes.
   </Card>
   <Card title="API keys" icon="key" href="/api-reference/api-authentication">
     Understand what a key can reach.

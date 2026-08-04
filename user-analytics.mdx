@@ -10,7 +10,7 @@ The Users report shows the people behind your traffic. Each user groups all of o
 ## What's the difference between identified users and cookieless visitors?
 
 - **Identified users** — people your app has named with [`identify()`](/user-identification-analytics). They appear under your ID, their activity is unified across devices, and their traits (like plan or signup date) are shown.
-- **Cookieless visitors** — people who haven't been identified. They're grouped by the cookieless hash tinyanalytics derives on the server, which is a close estimate rather than an exact person. See [how tinyanalytics works](/how-tinyanalytics-works#how-does-tinyanalytics-count-visitors-without-cookies).
+- **Cookieless visitors** — people who haven't been identified. They're grouped by the cookieless hash TinyAnalytics derives on the server, which is a close estimate rather than an exact person. See [how TinyAnalytics works](/how-tinyanalytics-works#how-does-tinyanalytics-count-visitors-without-cookies).
 
 ## How do I sort and read the user list?
 
@@ -63,10 +63,10 @@ Three actions live in the header of a user's profile, so you can manage a person
 
 ## How do I permanently delete a user's data (GDPR erasure)?
 
-Open the user's profile and use **Delete User** in the header. Deleting a user is the tool for a **GDPR "right to erasure" (right to be forgotten) request**: it permanently removes that person's events across every device tinyanalytics has linked to them, and then removes their stored profile. Only an **owner or admin** can do it.
+Open the user's profile and use **Delete User** in the header. Deleting a user is the tool for a **GDPR "right to erasure" (right to be forgotten) request**: it permanently removes that person's events across every device TinyAnalytics has linked to them, and then removes their stored profile. Only an **owner or admin** can do it.
 
 <Danger>
-  **Deleting a user can't be undone.** It's the one deliberate exception to tinyanalytics' rule that [data retention never deletes your history](/resources/analytics-data-handling) — this deletion is initiated by you, not a schedule. There is no recycle bin; the events are gone.
+  **Deleting a user can't be undone.** It's the one deliberate exception to TinyAnalytics' rule that [data retention never deletes your history](/resources/analytics-data-handling) — this deletion is initiated by you, not a schedule. There is no recycle bin; the events are gone.
 </Danger>
 
 <Note>
@@ -82,23 +82,23 @@ Open the user's profile and use **Delete User** in the header. Deleting a user i
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="How accurate is the tinyanalytics user count without cookies?">
-    Cookieless visitors are grouped by a hash tinyanalytics derives on the server, which is a close estimate of a person rather than an exact match. To count people exactly, [identify users](/user-identification-analytics) with your own IDs — identified users are unified across devices. See [how tinyanalytics works](/how-tinyanalytics-works#how-does-tinyanalytics-count-visitors-without-cookies).
+  <Accordion title="How accurate is the TinyAnalytics user count without cookies?">
+    Cookieless visitors are grouped by a hash TinyAnalytics derives on the server, which is a close estimate of a person rather than an exact match. To count people exactly, [identify users](/user-identification-analytics) with your own IDs — identified users are unified across devices. See [how TinyAnalytics works](/how-tinyanalytics-works#how-does-tinyanalytics-count-visitors-without-cookies).
   </Accordion>
   <Accordion title="How do I see users under my own user IDs?">
-    Call [`identify()`](/user-identification-analytics) from your app. People your app has named appear in the tinyanalytics Users report under your ID instead of a cookieless hash, their activity is unified across devices, and any traits you attached are shown on their profile.
+    Call [`identify()`](/user-identification-analytics) from your app. People your app has named appear in the TinyAnalytics Users report under your ID instead of a cookieless hash, their activity is unified across devices, and any traits you attached are shown on their profile.
   </Accordion>
   <Accordion title="Why doesn't Top pages match my dashboard date range?">
     The **Top pages** card on a user profile covers that person's entire history rather than your selected date range, showing the 10 pages they viewed most. Changing the dashboard date range doesn't re-scope it. The session history on the same profile does follow your date range.
   </Accordion>
-  <Accordion title="Can I sort the tinyanalytics user list?">
+  <Accordion title="Can I sort the TinyAnalytics user list?">
     Yes. Click any of the **Last seen**, **First seen**, **Sessions**, **Pageviews**, or **Events** headings to sort by that column. The list is sorted by Last seen, newest first, by default. A newly clicked column starts with its largest values first, and clicking the active column reverses the order. The user, country, channel, browser, OS, and device columns aren't sortable.
   </Accordion>
   <Accordion title="What are user traits and where do I see them?">
-    Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`, or edit them directly with **Edit Traits** on the user's profile. They appear on the user's profile in the tinyanalytics Users report, and you can filter reports by them to segment your audience.
+    Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`, or edit them directly with **Edit Traits** on the user's profile. They appear on the user's profile in the TinyAnalytics Users report, and you can filter reports by them to segment your audience.
   </Accordion>
-  <Accordion title="How do I fulfill a GDPR erasure request in tinyanalytics?">
-    Open the person's profile in the Users report and use **Delete User** in the header. It permanently erases their events across every linked device and removes their stored profile. Only an owner or admin can do it, and it can't be undone — it's the one deliberate exception to tinyanalytics' rule that retention never deletes your history.
+  <Accordion title="How do I fulfill a GDPR erasure request in TinyAnalytics?">
+    Open the person's profile in the Users report and use **Delete User** in the header. It permanently erases their events across every linked device and removes their stored profile. Only an owner or admin can do it, and it can't be undone — it's the one deliberate exception to TinyAnalytics' rule that retention never deletes your history.
   </Accordion>
   <Accordion title="Can I identify a visitor or edit their traits from the dashboard?">
     Yes. On an anonymous visitor's profile, **Identify User** attaches one of your own user IDs (and optional traits) and links their past activity — the manual counterpart to calling [`identify()`](/user-identification-analytics). On an identified user's profile, **Edit Traits** lets you change their traits as fields or JSON; saving replaces the whole trait set. Both actions are available to any member with site access.

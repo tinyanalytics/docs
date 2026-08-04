@@ -5,7 +5,7 @@ description: "Watch traffic, page, event, revenue, or account activity and get n
 icon: "bell"
 ---
 
-An alert watches one metric on your site and notifies you when it crosses a threshold — across the whole site, on a page path, or for a specific event. tinyanalytics delivers the alert by **email, Slack, Discord, or webhook** and sends an all-clear when the metric returns to normal.
+An alert watches one metric on your site and notifies you when it crosses a threshold — across the whole site, on a page path, or for a specific event. TinyAnalytics delivers the alert through an organization-wide [notification destination](/notification-destinations) — **email, Slack, Discord, or webhook** — and sends an all-clear when the metric returns to normal.
 
 ## Start from a template
 
@@ -19,7 +19,7 @@ The create dialog starts with seven templates that prefill the metric, condition
 - **Revenue −20%**
 - **Blank**
 
-After choosing one, complete the three sections: **What to watch**, **When to notify**, and **Where to notify**. Open **Advanced** to change the window, check cadence, cooldown, or saved segment. When you edit an alert with non-default advanced settings, that section opens automatically.
+After choosing one, complete the three sections: **What to watch**, **When to notify**, and **Where to notify**. The last section uses destinations shared by your organization. Open **Advanced** to change the window, check cadence, cooldown, or saved segment. When you edit an alert with non-default advanced settings, that section opens automatically.
 
 ## What can you alert on?
 
@@ -52,7 +52,7 @@ For **Event count** or **Event users**, enter the event name and optionally add 
 
 <Warning>
   A saved segment overrides the inline page-path scope; they do not combine.
-  When you choose a segment under **Advanced**, tinyanalytics disables the Page
+  When you choose a segment under **Advanced**, TinyAnalytics disables the Page
   path row.
 </Warning>
 
@@ -63,12 +63,12 @@ An alert fires when the metric crosses a bound you define, in one of two ways:
 - **Absolute** — the value goes above an upper bound or below a lower bound (for example, sessions in the last hour drop below 50).
 - **Relative** — the value changes by more than a percentage versus the previous equal window (for example, pageviews jump more than 40% hour over hour).
 
-You can preview the current value and whether it would breach **as you type the thresholds**, and send a **test notification** to confirm your channels work before you rely on the alert.
+You can preview the current value and whether it would breach **as you type the thresholds**, and send a **test notification** to confirm your destinations work before you rely on the alert.
 
 ## How often can an alert fire?
 
-- tinyanalytics checks each alert **every minute**. It **fires** once when the metric first breaches, then holds until the metric recovers — it won't re-fire every minute.
-- When the metric returns within bounds, tinyanalytics sends a **recovery** all-clear.
+- TinyAnalytics checks each alert **every minute**. It **fires** once when the metric first breaches, then holds until the metric recovers — it won't re-fire every minute.
+- When the metric returns within bounds, TinyAnalytics sends a **recovery** all-clear.
 - A **cooldown** (12 hours by default) keeps a flapping metric from spamming you: a repeat breach inside the cooldown is suppressed. Recovery notices are never suppressed.
 
 A fire notification includes the site, watched metric, window, breach reason, and the top pages and referrers at the time, so you can start investigating from the message itself. Email alerts include a direct **View alert** link. Recovery messages clearly mark the alert as resolved and do not repeat stale spike context.
@@ -82,7 +82,7 @@ A fire notification includes the site, watched metric, window, breach reason, an
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="Why is my tinyanalytics alert not firing again?">
+  <Accordion title="Why is my TinyAnalytics alert not firing again?">
     An alert fires **once** when the metric first breaches, then holds until the
     metric recovers — it won't re-fire every minute. A **cooldown**, 12 hours by
     default, also suppresses a repeat breach that happens inside the cooldown
@@ -90,8 +90,8 @@ A fire notification includes the site, watched metric, window, breach reason, an
   </Accordion>
   <Accordion title="How do I test that my alert notifications work?">
     Send a **test notification** from the alert before you rely on it.
-    tinyanalytics delivers alerts by email, Slack, Discord, or webhook, and the
-    test confirms your channels are wired up. You can also preview the current
+    TinyAnalytics delivers alerts by email, Slack, Discord, or webhook, and the
+    test confirms your destinations are wired up. You can also preview the current
     metric value and whether it would breach as you type the thresholds.
   </Accordion>
   <Accordion title="What's the difference between an absolute and a relative alert?">
@@ -100,8 +100,8 @@ A fire notification includes the site, watched metric, window, breach reason, an
     fires when the value changes by more than a percentage versus the previous
     equal window — for example, pageviews jump more than 40% hour over hour.
   </Accordion>
-  <Accordion title="How quickly does tinyanalytics detect a breach?">
-    tinyanalytics checks each alert **every minute**. You choose whether the
+  <Accordion title="How quickly does TinyAnalytics detect a breach?">
+    TinyAnalytics checks each alert **every minute**. You choose whether the
     metric is measured over the last **hour** or the last **day**, and the check
     runs against that window every minute.
   </Accordion>
@@ -125,6 +125,12 @@ A fire notification includes the site, watched metric, window, breach reason, an
   </Card>
   <Card title="Uptime monitoring" icon="heart-pulse" href="/website-api-uptime-monitoring">
     Alert when your site or API goes down.
+  </Card>
+  <Card title="Workflows" icon="diagram-project" href="/analytics-workflows">
+    React to one matching event with delays, conditions, and notifications.
+  </Card>
+  <Card title="Notification destinations" icon="paper-plane" href="/notification-destinations">
+    Connect email, Slack, Discord, or webhook delivery.
   </Card>
   <Card title="Group & B2B analytics" icon="building" href="/b2b-account-analytics">
     Alert when an account goes quiet.

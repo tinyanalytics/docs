@@ -9,7 +9,7 @@ The data dictionary is an auto-generated catalog of **every custom event name, e
 
 ## What the dictionary catalogs
 
-tinyanalytics never rejects a new name — you can send any custom event or property and it's collected immediately. That's convenient, but over time a busy namespace fills with duplicates (`plan` vs. `subscription_plan`), typos (`singup`), and throwaways (`test_event`). The dictionary discovers and lists all of it automatically, across these kinds:
+TinyAnalytics never rejects a new name — you can send any custom event or property and it's collected immediately. That's convenient, but over time a busy namespace fills with duplicates (`plan` vs. `subscription_plan`), typos (`singup`), and throwaways (`test_event`). The dictionary discovers and lists all of it automatically, across these kinds:
 
 | Kind | What it is | Comes from |
 | --- | --- | --- |
@@ -45,10 +45,10 @@ Verified is a **label only**. Marking a name verified does not change what's col
 
 <AccordionGroup>
   <Accordion title="Does marking a name verified change my analytics data?">
-    No. In the tinyanalytics data dictionary, **verified is a label only**. It doesn't change what's collected, hide or exclude anything from your reports, reorder the list, or alter any data. It records that a human on your team confirmed the name is the official, canonical one — plus who verified it and when.
+    No. In the TinyAnalytics data dictionary, **verified is a label only**. It doesn't change what's collected, hide or exclude anything from your reports, reorder the list, or alter any data. It records that a human on your team confirmed the name is the official, canonical one — plus who verified it and when.
   </Accordion>
   <Accordion title="Do I need to register my events and properties first?">
-    No. There's nothing to register. tinyanalytics never rejects a new name, and the dictionary reads the inventory directly from your data every time you open the page. It discovers custom event names, event properties, user traits, and group traits automatically.
+    No. There's nothing to register. TinyAnalytics never rejects a new name, and the dictionary reads the inventory directly from your data every time you open the page. It discovers custom event names, event properties, user traits, and group traits automatically.
   </Accordion>
   <Accordion title="Why does an entry show a 'not seen' badge?">
     A name you've described or verified keeps showing in the dictionary even after it stops appearing in new data, marked with a **"not seen"** badge. That's the point: a documented-but-silent property surfaces as staleness you can act on.

@@ -15,7 +15,7 @@ POST https://dash.tinyanalytics.io/api/track
 
 ## The event shape
 
-Every event carries a `type` and the page context tinyanalytics can't derive on its own. The server always derives identity, geo, channel, and device itself — **it never trusts the client for those** — so you send page context only.
+Every event carries a `type` and the page context TinyAnalytics can't derive on its own. The server always derives identity, geo, channel, and device itself — **it never trusts the client for those** — so you send page context only.
 
 Send a **pageview**:
 
@@ -209,7 +209,7 @@ curl -X POST https://dash.tinyanalytics.io/api/track \
   }'
 ```
 
-With a valid key that grants **Event ingestion: Write**, tinyanalytics honors the `ipAddress` and
+With a valid key that grants **Event ingestion: Write**, TinyAnalytics honors the `ipAddress` and
 `userAgent` you supply so geo, device, and cookieless identity reflect the real visitor—without
 them, every server-sent event would collapse to your server's own IP. These override fields are
 ignored on a request without a valid key. A valid restricted key that lacks the ingestion grant

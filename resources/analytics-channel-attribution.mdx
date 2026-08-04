@@ -5,7 +5,7 @@ description: "See how referrers and campaign parameters become one analytics cha
 icon: "signs-post"
 ---
 
-tinyanalytics labels every visit with a single marketing **channel** — where the visitor came from — by reading the visit's referrer and its campaign (UTM) parameters. This is what powers your acquisition reports, so you can see which sources actually drive traffic.
+TinyAnalytics labels every visit with a single marketing **channel** — where the visitor came from — by reading the visit's referrer and its campaign (UTM) parameters. This is what powers your acquisition reports, so you can see which sources actually drive traffic.
 
 ## The channels
 
@@ -17,7 +17,7 @@ A visit is classified into one channel, such as:
 
 Classification reads three inputs and applies them in a fixed order:
 
-- **Campaign parameters** — `utm_source`, `utm_medium`, `utm_campaign`, and ad click IDs (`gclid`, `gad_source`) take priority when present. They're how a link tells tinyanalytics exactly which channel it belongs to.
+- **Campaign parameters** — `utm_source`, `utm_medium`, `utm_campaign`, and ad click IDs (`gclid`, `gad_source`) take priority when present. They're how a link tells TinyAnalytics exactly which channel it belongs to.
 - **Referrer** — when there are no campaign parameters, the referring domain decides the channel: a search engine means Organic Search, a social network means Organic Social, and so on.
 - **No referrer** — a visit with no referrer and no campaign parameters is **Direct**.
 
@@ -51,11 +51,11 @@ Hops between your root domain and any of its subdomains are **Internal**, in bot
 
 **Sibling subdomains are the exception.** A hop from `app.example.com` to `blog.example.com` is still classified as a **Referral**, because neither domain contains the other. To fold those into your direct traffic, add your root domain to **Referrer Exclusions** — see [exclude traffic](/exclude-traffic-from-analytics#how-do-i-stop-a-referrer-from-showing-up-as-a-referral).
 
-An excluded referrer is reported as **Direct**, not Internal. The two labels mean different things: Internal marks navigation inside your own site, while Direct means tinyanalytics has no referrer to attribute the visit to. Campaign parameters still take priority over both — a UTM-tagged link from an excluded referrer keeps its campaign channel.
+An excluded referrer is reported as **Direct**, not Internal. The two labels mean different things: Internal marks navigation inside your own site, while Direct means TinyAnalytics has no referrer to attribute the visit to. Campaign parameters still take priority over both — a UTM-tagged link from an excluded referrer keeps its campaign channel.
 
 ## Tag your own links
 
-To classify your campaigns precisely, add UTM parameters to the links you control — for example `?utm_source=newsletter&utm_medium=email`. tinyanalytics reads them and files the visit under the right channel, and you can break any report down by source, medium, or campaign.
+To classify your campaigns precisely, add UTM parameters to the links you control — for example `?utm_source=newsletter&utm_medium=email`. TinyAnalytics reads them and files the visit under the right channel, and you can break any report down by source, medium, or campaign.
 
 ## Related
 

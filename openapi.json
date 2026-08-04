@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "tinyanalytics API",
+    "title": "TinyAnalytics API",
     "version": "1.0.0",
-    "description": "The tinyanalytics HTTP API. Read your analytics, manage sites and goals, and drive feature flags, experiments, and surveys. Every call is authenticated with an API key sent as `Authorization: Bearer <key>`."
+    "description": "The TinyAnalytics HTTP API. Read your analytics, manage sites and goals, and drive feature flags, experiments, and surveys. Every call is authenticated with an API key sent as `Authorization: Bearer <key>`."
   },
   "servers": [
     {
@@ -10695,7 +10695,7 @@
       "get": {
         "operationId": "get-uptime-notification-channels",
         "summary": "List Notification Channels",
-        "description": "Lists notification channels across every org you belong to",
+        "description": "Lists notification destinations across every org you belong to",
         "tags": [
           "uptime-channels-incidents"
         ],

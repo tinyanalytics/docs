@@ -1,11 +1,11 @@
 ---
 title: "Import Plausible Analytics Data"
 sidebarTitle: "Import from Plausible"
-description: "Upload a Plausible export to bring historical pageviews, sessions, sources, and countries into tinyanalytics alongside new traffic."
+description: "Upload a Plausible export to bring historical pageviews, sessions, sources, and countries into TinyAnalytics alongside new traffic."
 icon: "file-import"
 ---
 
-You can import your **Plausible** history into tinyanalytics by uploading a Plausible export file. tinyanalytics reconstructs your past traffic from the export and stores it as events, so your Plausible history appears in every report next to your new tinyanalytics data.
+You can import your **Plausible** history into TinyAnalytics by uploading a Plausible export file. TinyAnalytics reconstructs your past traffic from the export and stores it as events, so your Plausible history appears in every report next to your new TinyAnalytics data.
 
 ## How to import from Plausible
 
@@ -13,8 +13,8 @@ You can import your **Plausible** history into tinyanalytics by uploading a Plau
   <Step title="Export your data from Plausible">
     In Plausible, export your stats as a CSV file for the date range you want to keep.
   </Step>
-  <Step title="Upload the file to tinyanalytics">
-    In your site's import settings, choose **Plausible** and upload the export file. tinyanalytics parses it in your browser and imports the events.
+  <Step title="Upload the file to TinyAnalytics">
+    In your site's import settings, choose **Plausible** and upload the export file. TinyAnalytics parses it in your browser and imports the events.
   </Step>
   <Step title="See it in your dashboard">
     When the import finishes, your Plausible history is live across your reports.
@@ -22,12 +22,12 @@ You can import your **Plausible** history into tinyanalytics by uploading a Plau
 </Steps>
 
 <Check>
-  The import worked when your Plausible history appears in your tinyanalytics reports, and the import summary shows how many events imported, skipped, or were invalid.
+  The import worked when your Plausible history appears in your TinyAnalytics reports, and the import summary shows how many events imported, skipped, or were invalid.
 </Check>
 
 ## What carries over from Plausible — and what's approximate
 
-A Plausible export contains daily totals per dimension rather than individual visits, so tinyanalytics reconstructs events from those aggregates. What that means for your data:
+A Plausible export contains daily totals per dimension rather than individual visits, so TinyAnalytics reconstructs events from those aggregates. What that means for your data:
 
 | Carries over | Approximate or unavailable |
 | --- | --- |
@@ -36,7 +36,7 @@ A Plausible export contains daily totals per dimension rather than individual vi
 | Sources, referrers, and campaigns | **Page titles** and **language** aren't included |
 | Browsers, operating systems, devices | **Screen size** isn't included |
 
-**Channels are re-derived by tinyanalytics** from the source and campaign data, so imported Plausible traffic is classified by the same rules as your live traffic.
+**Channels are re-derived by TinyAnalytics** from the source and campaign data, so imported Plausible traffic is classified by the same rules as your live traffic.
 
 ## Good to know
 
@@ -51,7 +51,7 @@ A Plausible export contains daily totals per dimension rather than individual vi
 
 <AccordionGroup>
   <Accordion title="Why are my imported Plausible timestamps spread through the day?">
-    A Plausible export contains daily totals per dimension rather than individual visits, so tinyanalytics reconstructs events from those aggregates and spreads them within each day. Pageviews and sessions keep their daily totals.
+    A Plausible export contains daily totals per dimension rather than individual visits, so TinyAnalytics reconstructs events from those aggregates and spreads them within each day. Pageviews and sessions keep their daily totals.
   </Accordion>
   <Accordion title="What doesn't carry over from a Plausible export?">
     **Cities**, **page titles**, **language**, and **screen size** aren't in a Plausible export, so they aren't imported. Countries, sources, referrers, campaigns, browsers, operating systems, and devices do carry over.
@@ -60,14 +60,14 @@ A Plausible export contains daily totals per dimension rather than individual vi
     Delete the previous import first, then run it again. Re-running an import **adds** the data a second time rather than replacing it, and deleting an import removes all of that import's data. Only one import runs at a time per organization.
   </Accordion>
   <Accordion title="Are my imported Plausible channels the same as Plausible's?">
-    No — **channels are re-derived by tinyanalytics** from the source and campaign data in your export. Imported Plausible traffic is classified by the same rules as your live tinyanalytics traffic.
+    No — **channels are re-derived by TinyAnalytics** from the source and campaign data in your export. Imported Plausible traffic is classified by the same rules as your live TinyAnalytics traffic.
   </Accordion>
 </AccordionGroup>
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Switch to tinyanalytics" icon="right-left" href="/migrate-analytics-data-to-tinyanalytics">
+  <Card title="Switch to TinyAnalytics" icon="right-left" href="/migrate-analytics-data-to-tinyanalytics">
     The full migration overview.
   </Card>
   <Card title="Import from Umami" icon="file-import" href="/import-umami-analytics-data">

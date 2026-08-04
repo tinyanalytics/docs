@@ -1,7 +1,7 @@
 ---
 title: "Custom Event Tracking"
 sidebarTitle: "Custom events"
-description: "Send named events with properties to measure the actions that matter — signups, purchases, and clicks — with the tinyanalytics JavaScript API."
+description: "Send named events with properties to measure the actions that matter — signups, purchases, and clicks — with the TinyAnalytics JavaScript API."
 icon: "hand-pointer"
 ---
 
@@ -65,7 +65,7 @@ You then see which missing URLs your visitors hit by breaking the `not_found` ev
     Do the action in your browser — sign up, click the button, or load the page that fires the event.
   </Step>
   <Step title="Check the Events report">
-    Open your site's **Events** report in tinyanalytics. Your event appears by name within a few seconds, with its properties available for breakdowns.
+    Open your site's **Events** report in TinyAnalytics. Your event appears by name within a few seconds, with its properties available for breakdowns.
   </Step>
 </Steps>
 
@@ -76,14 +76,14 @@ You then see which missing URLs your visitors hit by breaking the `not_found` ev
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="Why isn't my tinyanalytics custom event showing up?">
-    Two causes account for most cases. First, the event name can't be empty — tinyanalytics rejects an empty name. Second, the call must run after the tracking script has loaded; if you call `event()` very early in the page, guard it with `if (window.tinyanalytics)`.
+  <Accordion title="Why isn't my TinyAnalytics custom event showing up?">
+    Two causes account for most cases. First, the event name can't be empty — TinyAnalytics rejects an empty name. Second, the call must run after the tracking script has loaded; if you call `event()` very early in the page, guard it with `if (window.tinyanalytics)`.
   </Accordion>
   <Accordion title="Should variable data go in the event name or in the properties?">
     Put it in the properties. Pick a small set of stable event names and reuse them, so `purchase` with `{ plan: 'pro' }` and `{ plan: 'free' }` stay one event you can compare. Encoding the variable part into the name splits it into separate events instead.
   </Accordion>
   <Accordion title="Do I need a custom event to track button clicks?">
-    No. tinyanalytics already captures outbound links, downloads, button clicks, copies, and form submissions automatically. Use `window.tinyanalytics.event()` for actions specific to your app that auto-capture can't infer, such as a signup or a plan upgrade.
+    No. TinyAnalytics already captures outbound links, downloads, button clicks, copies, and form submissions automatically. Use `window.tinyanalytics.event()` for actions specific to your app that auto-capture can't infer, such as a signup or a plan upgrade.
   </Accordion>
 </AccordionGroup>
 
@@ -99,7 +99,7 @@ You then see which missing URLs your visitors hit by breaking the `not_found` ev
   <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
     Confirm events are arriving.
   </Card>
-  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
+  <Card title="How TinyAnalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
     Where events go after you send them.
   </Card>
 </Columns>

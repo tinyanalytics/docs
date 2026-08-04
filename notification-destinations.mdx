@@ -1,0 +1,85 @@
+---
+title: "Notification Destinations for Alerts and Workflows"
+sidebarTitle: "Notification destinations"
+description: "Connect organization-wide email, Slack, Discord, or webhook destinations for analytics alerts, uptime incidents, and event-triggered workflows."
+icon: "paper-plane"
+---
+
+Notification destinations are the organization-wide delivery endpoints used by analytics alerts, uptime incidents, and workflows. Configure an email address, Slack incoming webhook, Discord webhook, or generic webhook once, then reuse it across the organization.
+
+If you're an organization owner or admin, open the account menu and choose **Notification destinations**. You can also find it through Command-K. Destinations no longer live under Uptime or a site's settings because they belong to an organization, not to one site.
+
+## Add a destination
+
+<Steps>
+  <Step title="Open Notification destinations">
+    Switch to the organization you want, open the account menu, and choose
+    **Notification destinations**.
+  </Step>
+  <Step title="Choose a delivery type">
+    Click **Create** on **Email**, **Slack**, **Discord**, or **Webhook**.
+  </Step>
+  <Step title="Enter the connection details">
+    Give the destination a recognizable name. Enter an email address, a Slack
+    incoming-webhook URL with an optional channel label, a Discord webhook URL,
+    or a generic webhook URL, depending on the type.
+  </Step>
+  <Step title="Create and test it">
+    Click **Create destination**, open its action menu, and choose **Test**. A
+    successful test confirms that TinyAnalytics can reach it.
+  </Step>
+</Steps>
+
+## Where each destination is used
+
+| Feature | How it uses destinations |
+| --- | --- |
+| [Analytics alerts](/analytics-alerts) | Choose where threshold breaches and recovery notices are delivered. |
+| [Uptime monitoring](/website-api-uptime-monitoring) | Sends incident-opened and incident-resolved notifications to enabled organization destinations. |
+| [Workflows](/analytics-workflows) | A notify step sends its rendered title and message to 1–5 selected destinations. |
+
+Scheduled reports use their own organization-member recipient list and are not connected to notification destinations.
+
+## Manage existing destinations
+
+The **Active destinations** table shows each destination's name, type, connection detail, and status. Open the action menu to:
+
+- **Disable** or **Enable** delivery without deleting the configuration.
+- **Test** an enabled destination.
+- **Edit** its name or connection details.
+- **Delete** it permanently.
+
+<Warning>
+  Before disabling or deleting a destination, check the alerts and workflow
+  notify steps that use it. A workflow validates its selected destinations when
+  you publish and checks them again when it sends.
+</Warning>
+
+## Who can manage destinations?
+
+Organization members can read the destinations available to features they can access. Only organization owners and admins can create, edit, enable, disable, test, or delete them. Webhook credentials are masked for members who cannot manage the organization.
+
+## Verify
+
+<Check>
+  Open the destination's action menu and choose **Test**. The setup is complete
+  when TinyAnalytics reports **Test notification sent** and the message arrives
+  at the configured email address, Slack channel, Discord channel, or webhook.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Workflows" icon="diagram-project" href="/analytics-workflows">
+    Trigger notifications from pageviews, events, errors, and autocapture.
+  </Card>
+  <Card title="Analytics alerts" icon="bell" href="/analytics-alerts">
+    Notify your team when a metric crosses a threshold.
+  </Card>
+  <Card title="Uptime monitoring" icon="heart-pulse" href="/website-api-uptime-monitoring">
+    Open incidents after repeated endpoint failures.
+  </Card>
+  <Card title="Roles & permissions" icon="shield-halved" href="/analytics-roles-permissions">
+    See what organization owners, admins, and members can manage.
+  </Card>
+</Columns>

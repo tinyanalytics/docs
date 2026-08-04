@@ -39,30 +39,37 @@ Add it to **Referrer Exclusions** on the same **Exclusions** tab. Matching visit
   **Referrer exclusions don't drop traffic.** Unlike the five lists above, the visit is still recorded in full — only its referrer is cleared and its [channel](/resources/analytics-channel-attribution) becomes Direct. This is the one item on the Exclusions tab that keeps your data.
 </Warning>
 
-Enter a bare domain like `stripe.com`. A few rules worth knowing:
+Enter the narrowest host that represents the return hop, such as `checkout.stripe.com` or `login.example.com`. A few rules worth knowing:
 
 - **A bare domain also covers its subdomains.** `stripe.com` matches `checkout.stripe.com` too.
 - **`*` wildcards are supported**, and an explicit pattern matches exactly what it says — `*.stripe.com` covers the subdomains but *not* bare `stripe.com`.
 - **Matching ignores `www.`** and is case-insensitive; entries are stored lowercased.
 - **UTM tags still win.** A visit from an excluded referrer that carries [UTM parameters](/resources/analytics-channel-attribution#tag-your-own-links) keeps its UTM-derived channel — only the stored referrer is cleared.
 
+<Warning>
+  Do not exclude a broad search domain such as `google.com`. Because a bare
+  domain also covers its subdomains, that would erase real Google search
+  attribution. Technical sign-in hops such as `accounts.google.com` are already
+  handled automatically.
+</Warning>
+
 The list holds up to **100 entries** of up to **256 characters** each. It applies to incoming tracked traffic, not to [imported historical data](/migrate-analytics-data-to-tinyanalytics) or [short links](/trackable-short-links).
 
 ## Why does my own domain show up as a referral?
 
-Usually it doesn't — tinyanalytics already recognizes hops between your root domain and its subdomains. A visitor moving from `example.com` to `app.example.com`, or back the other way, stays one session and is classified **Internal** rather than counted as a new referral. Own-domain rows also disappear from the Referrers report retroactively, so history cleans up without a backfill.
+Usually it doesn't — TinyAnalytics already recognizes hops between your root domain and its subdomains. A visitor moving from `example.com` to `app.example.com`, or back the other way, stays one session and is classified **Internal** rather than counted as a new referral. Own-domain rows also disappear from the Referrers report retroactively, so history cleans up without a backfill.
 
-One case still needs configuring: **hops between two sibling subdomains**, like `app.example.com` to `blog.example.com`. Because they share no parent-child relationship, tinyanalytics treats them as separate sites. Add your root domain (`example.com`) to **Referrer Exclusions** to cover them.
+One case still needs configuring: **hops between two sibling subdomains**, like `app.example.com` to `blog.example.com`. Because they share no parent-child relationship, TinyAnalytics treats them as separate sites. Add your root domain (`example.com`) to **Referrer Exclusions** to cover them.
 
-## Does tinyanalytics block bots automatically?
+## Does TinyAnalytics block bots automatically?
 
-Yes. tinyanalytics filters out bots and crawlers automatically, and the **block-bots** toggle in your site settings controls it. It's **on by default**, so most sites never need to touch it — bot traffic is kept out of your reports without any configuration. See [how bot detection works](/resources/analytics-bot-detection) for what's caught.
+Yes. TinyAnalytics filters out bots and crawlers automatically, and the **block-bots** toggle in your site settings controls it. It's **on by default**, so most sites never need to touch it — bot traffic is kept out of your reports without any configuration. See [how bot detection works](/resources/analytics-bot-detection) for what's caught.
 
 ## What is the first-party proxy setting?
 
-The **Exclusions** tab also holds a **First-party proxy** toggle. It doesn't exclude anything — it changes how tinyanalytics reads a visitor's IP address when **your own reverse proxy sits in front of the tracker**.
+The **Exclusions** tab also holds a **First-party proxy** toggle. It doesn't exclude anything — it changes how TinyAnalytics reads a visitor's IP address when **your own reverse proxy sits in front of the tracker**.
 
-Turn it on only for one specific topology: your own proxy fronts the tracker **and** that proxy sits behind Cloudflare. In that setup, the network-level client IP is your proxy's address, and the real visitor is the first hop in the `X-Forwarded-For` header. The toggle tells tinyanalytics to trust that hop, so visitor IPs — and the country, region, and network derived from them — are correct instead of showing your proxy.
+Turn it on only for one specific topology: your own proxy fronts the tracker **and** that proxy sits behind Cloudflare. In that setup, the network-level client IP is your proxy's address, and the real visitor is the first hop in the `X-Forwarded-For` header. The toggle tells TinyAnalytics to trust that hop, so visitor IPs — and the country, region, and network derived from them — are correct instead of showing your proxy.
 
 <Warning>
   **Leave first-party proxy off unless your topology needs it.** `X-Forwarded-For` is a header a client can set, so trusting it when nothing enforces it would let visitor IPs be spoofed. It's off by default, and most sites never turn it on.
@@ -87,14 +94,14 @@ Pick the option that matches what you want to exclude — a single device or an 
   <Accordion title="What's the difference between excluding and filtering traffic?">
     An exclusion drops data at collection, before it's ever stored — the traffic never reaches your reports and can't be recovered. A [filter](/analytics-filters) only changes what a report *shows*; the data is still collected. Use an exclusion for traffic you never want to measure, and a filter to focus a report on traffic you did.
   </Accordion>
-  <Accordion title="Can I recover traffic that tinyanalytics excluded?">
+  <Accordion title="Can I recover traffic that TinyAnalytics excluded?">
     No. Excluded traffic is dropped at collection and never stored, so there's nothing to restore. If you might want the data later, use a [filter](/analytics-filters) instead — a filter changes what a report shows without dropping anything.
   </Accordion>
   <Accordion title="Why isn't my user agent exclusion matching?">
     User agent exclusions match a **case-insensitive substring**, not a wildcard pattern. A `*` in a user-agent entry is treated as a literal character, so write `curl` rather than `curl/*`. Path and hostname exclusions do support `*` wildcards.
   </Accordion>
   <Accordion title="How many exclusion entries can I add?">
-    Each exclusion list in tinyanalytics holds up to **100 entries** of up to **256 characters** each. That limit applies per list — IP address, country, path, hostname, user agent, and referrer each get their own.
+    Each exclusion list in TinyAnalytics holds up to **100 entries** of up to **256 characters** each. That limit applies per list — IP address, country, path, hostname, user agent, and referrer each get their own.
   </Accordion>
   <Accordion title="Why does my own domain appear as a referral?">
     Hops between your root domain and its subdomains are already handled — `example.com` to `app.example.com`, in either direction, stays one session and is classified Internal. Sibling subdomains like `app.example.com` to `blog.example.com` are the exception, because they share no parent-child relationship. Add your root domain to **Referrer Exclusions** on the site's **Settings → Exclusions** tab to cover them.

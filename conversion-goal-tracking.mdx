@@ -1,11 +1,11 @@
 ---
 title: "Conversion Goal Tracking"
 sidebarTitle: "Goals"
-description: "Track conversions in tinyanalytics: define a goal from a page or a custom event, then measure how many visitors complete it."
+description: "Track conversions in TinyAnalytics: define a goal from a page or a custom event, then measure how many visitors complete it."
 icon: "bullseye"
 ---
 
-A goal is a single outcome you want visitors to reach — a signup, a purchase, a visit to a key page. You define what counts as a conversion, and tinyanalytics measures how many sessions complete it over your chosen date range and filters. Goals are the simplest way to turn traffic into a success metric.
+A goal is a single outcome you want visitors to reach — a signup, a purchase, a visit to a key page. You define what counts as a conversion, and TinyAnalytics measures how many sessions complete it over your chosen date range and filters. Goals are the simplest way to turn traffic into a success metric.
 
 ## How do I define a goal?
 
@@ -35,7 +35,7 @@ Yes. You can build a goal on any of four [autocapture](/autocapture-analytics-ev
 - **Form submission** — matched against the form's name, id, or action
 - **Copy** — matched against the copied text
 
-Pick the type, then add an optional **value pattern** to narrow it — for example, an outbound goal that matches only links to `*.stripe.com`. Patterns use `*` (any run of characters) and `**` (any characters, including slashes); **leave the pattern blank to count every event of that type**. As you type, tinyanalytics suggests real values it has already captured, so you can target something you've actually seen.
+Pick the type, then add an optional **value pattern** to narrow it — for example, an outbound goal that matches only links to `*.stripe.com`. Patterns use `*` (any run of characters) and `**` (any characters, including slashes); **leave the pattern blank to count every event of that type**. As you type, TinyAnalytics suggests real values it has already captured, so you can target something you've actually seen.
 
 <Note>
   **`input_change` isn't a goal target.** Individual field changes are captured for the [Events explorer](/event-analytics) but are too high-volume to build a conversion on, so they can't be used as a goal. Autocapture goals also can't aggregate [revenue](/revenue-analytics) — attach revenue to a [custom event](/custom-event-tracking) instead.
@@ -66,7 +66,7 @@ Each goal card carries three icon buttons for these actions:
   <Accordion title="Can I measure a goal for one country or traffic source?">
     Yes. Goals respect the dashboard's date range and filters, so you measure the same goal for different sources, countries, or time periods by changing the filters — no second goal needed. See [Filter your data](/analytics-filters).
   </Accordion>
-  <Accordion title="Can a tinyanalytics goal match a URL pattern or regular expression?">
+  <Accordion title="Can a TinyAnalytics goal match a URL pattern or regular expression?">
     Yes. A goal matches a page path or a custom event name using one of four match types: exact, starts with, contains, or regex. Choose regex to match a regular expression, such as a family of paths under one section of your site.
   </Accordion>
   <Accordion title="Can I set a goal on a button click or outbound link without writing code?">

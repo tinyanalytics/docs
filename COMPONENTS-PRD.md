@@ -1,4 +1,4 @@
-# PRD — tinyanalytics documentation component enrichment
+# PRD — TinyAnalytics documentation component enrichment
 
 | Field                 | Value                         |
 | --------------------- | ----------------------------- |
@@ -14,7 +14,7 @@
 - Added visible verification results to the eight pages that used `Steps` without `Check`.
 - Reclassified four irreversible deletion callouts from `Warning` to `Danger`.
 - Added a repository component-audit script at `scripts/audit-components.mjs`.
-- Added the component contract to the tinyanalytics documentation skill.
+- Added the component contract to the TinyAnalytics documentation skill.
 - Added verified Mermaid flows to the four priority concept pages.
 - Recorded 15 simple integration pages as one-step or tabs-only exceptions instead of adding decorative `Steps`.
 - Added a self-contained integration-assistant `Prompt` that does not depend on the unresolved public skill-install URL.
@@ -22,7 +22,7 @@
 
 ## 1. Summary
 
-Enrich the 104 authored tinyanalytics documentation pages with deliberate, consistent Mintlify components that make tasks easier to complete and concepts easier to understand.
+Enrich the 104 authored TinyAnalytics documentation pages with deliberate, consistent Mintlify components that make tasks easier to complete and concepts easier to understand.
 
 This project is not a visual redesign and does not set a component quota. A component belongs on a page only when it improves scanning, sequencing, comparison, comprehension, accessibility, or navigation. Plain prose remains the correct format when it communicates the answer most clearly.
 
@@ -49,7 +49,7 @@ All work under this PRD follows the content, terminology, and voice requirements
 
 ### 3.1 Product boundaries
 
-- Document tinyanalytics as a hosted service at `dash.tinyanalytics.io`.
+- Document TinyAnalytics as a hosted service at `dash.tinyanalytics.io`.
 - Do not add self-hosting, platform installation, operator administration, or internal implementation guidance.
 - Do not document unshipped features.
 - Treat API keys as sensitive customer API credentials. They authenticate server-side ingestion, analytics reads, and site management as the key owner; browser tracking remains keyless.
@@ -234,7 +234,7 @@ Rules:
 
 ### 7.6 AI prompt component
 
-Use `Prompt` on `resources/use-with-ai.mdx` for a copyable, self-contained prompt that helps a reader give an AI tool the tinyanalytics documentation context it needs.
+Use `Prompt` on `resources/use-with-ai.mdx` for a copyable, self-contained prompt that helps a reader give an AI tool the TinyAnalytics documentation context it needs.
 
 The prompt must:
 
@@ -391,7 +391,7 @@ Exit criteria:
 
 Prioritize Mermaid candidates:
 
-- how tinyanalytics works;
+- how TinyAnalytics works;
 - cookieless identity;
 - bot detection;
 - traffic classification.
@@ -540,7 +540,7 @@ Completion does not require adopting every Mintlify component. Components explic
 1. Who owns live-product screenshot capture, redaction, and refresh?
 2. Which source will supply verified response schemas for the hand-authored read and SQL API pages?
 3. Should the component audit become a blocking CI check after its first stable release?
-4. Should the component contract live directly in the tinyanalytics documentation skill or in a linked reference file?
+4. Should the component contract live directly in the TinyAnalytics documentation skill or in a linked reference file?
 5. Are maintainable visual assets available for an integrations-overview `Tile` pilot?
 6. Which documentation analytics and support-search data are available for before-and-after evaluation?
 

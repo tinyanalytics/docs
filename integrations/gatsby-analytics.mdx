@@ -1,16 +1,16 @@
 ---
 title: "Gatsby Analytics Integration"
 sidebarTitle: "Gatsby"
-description: "Load tinyanalytics with Gatsby's Script component in a shared layout so every page and client-side navigation is tracked."
+description: "Load TinyAnalytics with Gatsby's Script component in a shared layout so every page and client-side navigation is tracked."
 icon: "code"
 noindex: true
 ---
 
-To add tinyanalytics to a **Gatsby** site, load the tracking script with Gatsby's built-in `<Script>` component from a shared layout so it runs on every page. Client-side navigation between pages is tracked automatically.
+To add TinyAnalytics to a **Gatsby** site, load the tracking script with Gatsby's built-in `<Script>` component from a shared layout so it runs on every page. Client-side navigation between pages is tracked automatically.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
 
 ## Add the `<Script>` to a shared layout
@@ -40,7 +40,7 @@ export default function Layout({ children }) {
 
 ## Client-side navigation is tracked automatically
 
-Gatsby renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). You don't need to hook into Gatsby's router. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+Gatsby renders route changes on the client, and TinyAnalytics records each one as a new pageview by default (`data-track-spa`). You don't need to hook into Gatsby's router. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
 
 ## Verify
 

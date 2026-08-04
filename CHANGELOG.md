@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the tinyanalytics documentation site are recorded here.
+All notable changes to the TinyAnalytics documentation site are recorded here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to semantic versioning where practical.
@@ -8,6 +8,18 @@ project adheres to semantic versioning where practical.
 ## [Unreleased]
 
 ### Added
+
+- **Workflows (2026-08-04, product decisions 0275/0279/0281):** added the
+  [Event-triggered workflows guide](analytics-workflows.mdx) for the now-enabled production
+  feature. It covers all eight trigger types, actor frequency limits, delay/condition/notify/exit
+  steps, templates, dry-run and real-delivery tests, publish estimates, immutable versions,
+  draft/active/paused/archived behavior, run details, metrics, retries, at-least-once delivery,
+  runtime safeguards, permissions, and API-key read access.
+- **Notification destinations (2026-08-04):** added the
+  [organization-wide destination guide](notification-destinations.mdx) for email, Slack, Discord,
+  and generic webhooks. Updated Alerts, Uptime, Site settings, Roles, and Workflows to use the final
+  global **Notification destinations** location rather than the superseded Uptime or per-site
+  settings locations.
 
 - **Event Activity Explorer (2026-08-03, product decision 0277):** rewrote the
   [Events page guide](event-analytics.mdx) for the table-first explorer — Explore (default),
@@ -60,7 +72,7 @@ project adheres to semantic versioning where practical.
   hosted docs MCP server" as the only MCP in the product's world. It now opens with three distinct
   ways to use AI (in-product Ask AI, an agent connected to your analytics, or these docs as
   context) and states plainly that the documentation MCP server serves these public pages while the
-  tinyanalytics MCP server serves your own data and needs an API key.
+  TinyAnalytics MCP server serves your own data and needs an API key.
 - **Stripe revenue attribution setup guide (2026-07-30):** documented the merchant-side work the
   Stripe page previously left implicit — identifying visitors, reading `getUserId()` at checkout,
   and writing `ta_identified_user_id` into Checkout `payment_intent_data` / `subscription_data` or
@@ -81,8 +93,21 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Product coverage sync through `b6c5780` (2026-08-04):** audited all 26 product commits after
+  `10e1b81`; confirmed deployed Workflows at the live health endpoint and the global destination
+  route; documented the final behavior through deployed application commit `c2c3cb7`; added the
+  Workflows API-key permission boundary; regenerated the OpenAPI notification-destination copy; and
+  advanced the PRD sync marker through the latest deployment record.
+- **Safer referrer-exclusion guidance (2026-08-04):** now recommends the narrowest payment or auth
+  workflow host and warns that excluding a broad search domain such as `google.com` erases real
+  search attribution. Technical sign-in hops such as `accounts.google.com` remain automatic.
+
+- **Updated product-name casing (2026-08-04):** changed the displayed brand name from the
+  all-lowercase form to **TinyAnalytics** across every documentation page, site metadata,
+  internal writing guidance, and generated API copy. Technical identifiers such as domains,
+  package names, routes, repository paths, and `window.tinyanalytics` remain unchanged.
 - **Favicon now matches the main site (2026-07-30):** replaced `favicon.svg`, which was still the
-  blue `#345FCF` ascending-bars placeholder, with the current tinyanalytics emblem — the green
+  blue `#345FCF` ascending-bars placeholder, with the current TinyAnalytics emblem — the green
   `#009b32` bolt over an arc — copied byte-for-byte from the marketing site's
   `public/seo/favicon.svg`. The docs logo already used this mark, so only the favicon was off-brand.
   No `docs.json` change was needed: `"favicon": "/favicon.svg"` already pointed at this path.
@@ -123,7 +148,7 @@ project adheres to semantic versioning where practical.
 - **Completed Mintlify SEO configuration (2026-07-27):** added a global, benefit-bearing site
   description; explicitly indexed navigable pages; set Open Graph locale/site-name, Twitter card,
   author, and theme-color metadata; and configured the structured-data publisher organization as
-  **tinyanalytics**. The production canonical base was added after the docs URL was confirmed.
+  **TinyAnalytics**. The production canonical base was added after the docs URL was confirmed.
 - **Updated documentation branding (2026-07-27):** changed the primary accent to `#006420` in
   light mode and `#009B32` in dark mode, and set Inter as the site-wide font.
 - **Flattened the main documentation routes (2026-07-27):** removed the separate `guides/`
@@ -321,15 +346,15 @@ project adheres to semantic versioning where practical.
 - `PRD.md` bumped to v1.2 (execution underway): Phase 0 marked mostly done, Phase 1 done, Phase 2
   first wave done (with the second wave enumerated), and the brand-color open question resolved to
   indigo (`#345FCF` family).
-- Rebranded `docs.json` from the Mintlify starter: name → `tinyanalytics`, indigo brand palette
+- Rebranded `docs.json` from the Mintlify starter: name → `TinyAnalytics`, indigo brand palette
   (`#345FCF` / `#537FEB` / `#2249B7`, converted from DESIGN.md's oklch tokens), tab + group
   navigation (Get started, Guides), primary CTA to `dash.tinyanalytics.io`, and `contextual.display`
   set to `header`. Removed the starter logo (the site name renders as the wordmark) and the
   placeholder footer socials.
-- Replaced the starter `favicon.svg` with the tinyanalytics ascending-bars mark in brand indigo.
+- Replaced the starter `favicon.svg` with the TinyAnalytics ascending-bars mark in brand indigo.
 - Rewrote `AGENTS.md` with the product's terminology, hard content boundaries (hosted-only), style
   rules, sources of truth, and pointers to both project skills.
-- `PRD.md` revised to v1.1 (**hosted-only**): tinyanalytics is closed-source and cloud-only, so
+- `PRD.md` revised to v1.1 (**hosted-only**): TinyAnalytics is closed-source and cloud-only, so
   the Self-hosting tab was removed (5 tabs now), the self-hoster persona became a privacy &
   compliance evaluator, goal 5 became "trust without source access", trust-level content
   (architecture/security/data handling) moved into Resources, Phase 3 re-scoped to
@@ -405,14 +430,14 @@ project adheres to semantic versioning where practical.
   docs & static sites — `integrations/hugo.mdx`, `integrations/jekyll.mdx`,
   `integrations/docusaurus.mdx`, `integrations/vitepress.mdx`; e-commerce —
   `integrations/bigcommerce.mdx`; server-side — `integrations/laravel.mdx`, `integrations/drupal.mdx`.
-  React Native and headless CMSs (Contentful, Sanity, Strapi) are intentionally omitted — tinyanalytics
+  React Native and headless CMSs (Contentful, Sanity, Strapi) are intentionally omitted — TinyAnalytics
   is a browser script with no mobile SDK, and headless CMSs render through a framework that already has
   a guide. Build validates with zero broken links.
 - Phase 4 (first wave) **Integrations** pages, batch-authored from one consistent template: an
   `integrations/overview.mdx` (universal install method + platform picker) plus guides for the
   highest-traffic platforms — `integrations/nextjs.mdx` (App Router + Pages Router via `next/script`),
   `integrations/react.mdx`, `integrations/wordpress.mdx`, `integrations/webflow.mdx`,
-  `integrations/shopify.mdx`, and `integrations/google-tag-manager.mdx`. Each keeps the tinyanalytics
+  `integrations/shopify.mdx`, and `integrations/google-tag-manager.mdx`. Each keeps the TinyAnalytics
   half (snippet, `data-site-id`, SPA-on-by-default) identical to the tracking-script docs and adds
   platform-specific placement. Build validates with zero broken links.
 - Phase 3 (second wave) "Accounts & access" documentation pages, sourced from the wiki decision

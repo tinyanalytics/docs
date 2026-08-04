@@ -1,11 +1,11 @@
 ---
 title: "Identify Users Across Sessions and Devices"
 sidebarTitle: "Identify users"
-description: "Attach your own stable user ID to visits so tinyanalytics can follow a person across devices and sessions — cookielessly and exactly."
+description: "Attach your own stable user ID to visits so TinyAnalytics can follow a person across devices and sessions — cookielessly and exactly."
 icon: "user"
 ---
 
-Call `identify()` with your own user ID to tie a visitor's activity to a known person. This makes people-level reports exact across devices and sessions. A signed-in user on a phone and a laptop counts as **one** user, instead of the two you'd get from cookieless estimation. You choose the ID, and tinyanalytics keys every people report on it.
+Call `identify()` with your own user ID to tie a visitor's activity to a known person. This makes people-level reports exact across devices and sessions. A signed-in user on a phone and a laptop counts as **one** user, instead of the two you'd get from cookieless estimation. You choose the ID, and TinyAnalytics keys every people report on it.
 
 ```js
 window.tinyanalytics.identify('user_12345')
@@ -13,7 +13,7 @@ window.tinyanalytics.identify('user_12345')
 
 ## Why identify users?
 
-Without identification, tinyanalytics counts visitors with a cookieless hash, which is a close estimate that can split one person across devices or merge several people on one network (see [how tinyanalytics works](/how-tinyanalytics-works#its-an-estimate-and-tinyanalytics-says-so)). When you know who someone is — because they signed in — `identify()` replaces that estimate with your exact ID, so **Users**, **Retention**, and **Cohorts** all agree and follow the real person.
+Without identification, TinyAnalytics counts visitors with a cookieless hash, which is a close estimate that can split one person across devices or merge several people on one network (see [how TinyAnalytics works](/how-tinyanalytics-works#its-an-estimate-and-tinyanalytics-says-so)). When you know who someone is — because they signed in — `identify()` replaces that estimate with your exact ID, so **Users**, **Retention**, and **Cohorts** all agree and follow the real person.
 
 ## Identify a signed-in user
 
@@ -30,7 +30,7 @@ window.tinyanalytics.identify('user_12345', {
 })
 ```
 
-When you call `identify()`, tinyanalytics:
+When you call `identify()`, TinyAnalytics:
 
 - Attaches your ID to the visitor's **recent activity** — it backfills the last 30 days of that visitor's events, so their earlier anonymous visits are credited to the person.
 - Remembers the ID in the browser (`localStorage`), so the visitor stays identified across page loads and future sessions on that device.
@@ -38,7 +38,7 @@ When you call `identify()`, tinyanalytics:
 
 ## Which identity methods are available?
 
-tinyanalytics exposes four identity methods on `window.tinyanalytics`:
+TinyAnalytics exposes four identity methods on `window.tinyanalytics`:
 
 | Method | What it does |
 | --- | --- |
@@ -55,9 +55,9 @@ window.tinyanalytics.setTraits({ plan: 'enterprise' })
 window.tinyanalytics.clearUserId()
 ```
 
-## What does tinyanalytics store when you identify a user?
+## What does TinyAnalytics store when you identify a user?
 
-The cookieless hash tinyanalytics uses for anonymous visitors is never stored on the device and contains no personal data. **Identification is different: the user ID and traits you pass are stored** so they can describe a person over time. Choose what you send accordingly:
+The cookieless hash TinyAnalytics uses for anonymous visitors is never stored on the device and contains no personal data. **Identification is different: the user ID and traits you pass are stored** so they can describe a person over time. Choose what you send accordingly:
 
 - Use a **stable, internal ID** — your database user ID, for example — not something that changes.
 - Avoid putting personal data you don't want to keep into the ID or traits. If you don't want to store email addresses, don't pass them.
@@ -73,7 +73,7 @@ The cookieless hash tinyanalytics uses for anonymous visitors is never stored on
     Trigger your `identify()` call in the browser — usually by logging into your app.
   </Step>
   <Step title="Find the person in Users">
-    Open the **Users** report in tinyanalytics. The visitor now appears under your ID, with their traits and their earlier activity attributed to them.
+    Open the **Users** report in TinyAnalytics. The visitor now appears under your ID, with their traits and their earlier activity attributed to them.
   </Step>
 </Steps>
 
@@ -85,16 +85,16 @@ The cookieless hash tinyanalytics uses for anonymous visitors is never stored on
 
 <AccordionGroup>
   <Accordion title="Does identify() apply to activity from before the call?">
-    Yes. When you call `identify()`, tinyanalytics backfills the last **30 days** of that visitor's events, so their earlier anonymous visits are credited to the person. One exception: an `identify()` call fired in the same instant as a pageview may not tag that exact pageview, because the backfill applies to events that are already saved.
+    Yes. When you call `identify()`, TinyAnalytics backfills the last **30 days** of that visitor's events, so their earlier anonymous visits are credited to the person. One exception: an `identify()` call fired in the same instant as a pageview may not tag that exact pageview, because the backfill applies to events that are already saved.
   </Accordion>
   <Accordion title="How do I stop identifying a user when they log out?">
-    Call `window.tinyanalytics.clearUserId()`. It forgets the identified user on that device. tinyanalytics otherwise remembers the ID in the browser's `localStorage`, so the visitor stays identified across page loads and future sessions.
+    Call `window.tinyanalytics.clearUserId()`. It forgets the identified user on that device. TinyAnalytics otherwise remembers the ID in the browser's `localStorage`, so the visitor stays identified across page loads and future sessions.
   </Accordion>
-  <Accordion title="Does tinyanalytics store the user ID on the visitor's device?">
+  <Accordion title="Does TinyAnalytics store the user ID on the visitor's device?">
     Yes. The user ID and any traits you pass to `identify()` are stored so they can describe a person over time, and the ID is kept in the browser's `localStorage`. This differs from the cookieless hash used for anonymous visitors, which is never stored on the device and contains no personal data.
   </Accordion>
-  <Accordion title="Do I need identify() to count visitors in tinyanalytics?">
-    No. tinyanalytics counts visitors with a cookieless hash without any code from you. That count is a close estimate that can split one person across devices or merge several people on one network. Call `identify()` when you know who someone is to replace the estimate with your exact ID.
+  <Accordion title="Do I need identify() to count visitors in TinyAnalytics?">
+    No. TinyAnalytics counts visitors with a cookieless hash without any code from you. That count is a close estimate that can split one person across devices or merge several people on one network. Call `identify()` when you know who someone is to replace the estimate with your exact ID.
   </Accordion>
 </AccordionGroup>
 
@@ -104,7 +104,7 @@ The cookieless hash tinyanalytics uses for anonymous visitors is never stored on
   <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
     Send named events that tie to the identified person.
   </Card>
-  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
+  <Card title="How TinyAnalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
     Cookieless identity and how identify makes counts exact.
   </Card>
   <Card title="Configure the script" icon="sliders" href="/configure-tinyanalytics-tracking-script">

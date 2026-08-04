@@ -1,12 +1,12 @@
-# tinyanalytics documentation SEO migration plan
+# TinyAnalytics documentation SEO migration plan
 
 **Status:** Repository migration complete — production launch pending  
 **Prepared:** 2026-07-30  
 **Executed:** 2026-07-30  
-**Scope:** 108 authored Mintlify pages, navigation, metadata, redirects, crawlability, and launch monitoring  
-**Excluded:** 148 generated OpenAPI operations, which intentionally remain `noindex`
+**Scope:** 112 authored Mintlify pages, navigation, metadata, redirects, crawlability, and launch monitoring
+**Excluded:** 149 generated OpenAPI operations, which intentionally remain `noindex`
 
-The repository migration uses the approved decisions: `https://tinyanalytics.io/docs`, one atomic pre-index rename, the approved Title Case H1 pattern with lowercase **tinyanalytics**, and concise sidebar labels. Mintlify `/docs` activation, the main-site rewrite or proxy, Search Console verification, sitemap submission, and eight-week monitoring remain owner actions.
+The repository migration uses the approved decisions: `https://tinyanalytics.io/docs`, one atomic pre-index rename, the approved Title Case H1 pattern with **TinyAnalytics** brand casing, and concise sidebar labels. Mintlify `/docs` activation, the main-site rewrite or proxy, Search Console verification, sitemap submission, and eight-week monitoring remain owner actions.
 
 ## 1. Goal
 
@@ -17,7 +17,7 @@ Examples that define the target:
 | Current route     | Proposed route              | Proposed H1 / page title             |
 | ----------------- | --------------------------- | ------------------------------------ |
 | `/stripe-revenue` | `/stripe-revenue-analytics` | Stripe Revenue Analytics Integration |
-| `/how-it-works`   | `/how-tinyanalytics-works`  | How tinyanalytics Works              |
+| `/how-it-works`   | `/how-tinyanalytics-works`  | How TinyAnalytics Works              |
 | `/realtime`       | `/realtime-analytics`       | Realtime Analytics                   |
 
 This is an SEO migration, not a blind keyword-appending exercise. A route changes only when the new route names the subject more clearly. Titles stay concise and unique, and keyword repetition is avoided.
@@ -69,8 +69,8 @@ The crawl also reports platform-level performance, security-header, schema, imag
 1. Assign one primary intent to every page. Avoid two pages targeting the same query unless one is a clear parent and the other a narrower child.
 2. Use readable, lowercase, hyphenated routes. Keep them descriptive but no longer than necessary.
 3. Use the proposed H1 as frontmatter `title`. Add `sidebarTitle` wherever the SEO title is longer than the current navigation label.
-4. Keep **tinyanalytics** lowercase, even in title case.
-5. Keep the authored H1 generally under 50–55 characters so Mintlify's appended ` - tinyanalytics` does not create an unnecessarily long browser title.
+4. Keep **TinyAnalytics** in its branded capital-T/capital-A form, including in title case.
+5. Keep the authored H1 generally under 50–55 characters so Mintlify's appended ` - TinyAnalytics` does not create an unnecessarily long browser title.
 6. Rewrite descriptions to 120–155 characters where practical. Lead with the outcome, include the natural query phrase once, and do not repeat the title verbatim.
 7. Do not add meta-keyword stuffing. Mintlify `keywords` may help internal search, but Google does not need a page-level keyword list.
 8. Open each page with a self-contained definition or outcome using the same language as the H1.
@@ -86,18 +86,18 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | Current route   | Proposed route                             | Proposed H1 / page title                   | Sidebar title |
 | --------------- | ------------------------------------------ | ------------------------------------------ | ------------- |
 | `/`             | `/`                                        | Privacy-Friendly Web and Product Analytics | Introduction  |
-| `/quickstart`   | `/tinyanalytics-quickstart`                | Install tinyanalytics in 5 Minutes         | Quickstart    |
-| `/how-it-works` | `/how-tinyanalytics-works`                 | How tinyanalytics Works                    | How it works  |
-| `/migrate`      | `/migrate-analytics-data-to-tinyanalytics` | Migrate Analytics Data to tinyanalytics    | Migrate       |
+| `/quickstart`   | `/tinyanalytics-quickstart`                | Install TinyAnalytics in 5 Minutes         | Quickstart    |
+| `/how-it-works` | `/how-tinyanalytics-works`                 | How TinyAnalytics Works                    | How it works  |
+| `/migrate`      | `/migrate-analytics-data-to-tinyanalytics` | Migrate Analytics Data to TinyAnalytics    | Migrate       |
 
 ### Set up tracking
 
 | Current route           | Proposed route                             | Proposed H1 / page title                    | Sidebar title        |
 | ----------------------- | ------------------------------------------ | ------------------------------------------- | -------------------- |
-| `/tracking-script`      | `/install-tinyanalytics-tracking-script`   | Install the tinyanalytics Tracking Script   | Tracking script      |
-| `/script-configuration` | `/configure-tinyanalytics-tracking-script` | Configure the tinyanalytics Tracking Script | Script configuration |
+| `/tracking-script`      | `/install-tinyanalytics-tracking-script`   | Install the TinyAnalytics Tracking Script   | Tracking script      |
+| `/script-configuration` | `/configure-tinyanalytics-tracking-script` | Configure the TinyAnalytics Tracking Script | Script configuration |
 | `/exclude-traffic`      | `/exclude-traffic-from-analytics`          | Exclude Internal and Unwanted Traffic       | Exclude traffic      |
-| `/verify-your-setup`    | `/verify-tinyanalytics-installation`       | Verify Your tinyanalytics Installation      | Verify your setup    |
+| `/verify-your-setup`    | `/verify-tinyanalytics-installation`       | Verify Your TinyAnalytics Installation      | Verify your setup    |
 
 ### Collect data
 
@@ -171,6 +171,8 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | -------------------- | -------------------------------- | --------------------------------- | ----------------- |
 | `/scheduled-reports` | `/scheduled-analytics-reports`   | Scheduled Analytics Reports       | Scheduled reports |
 | `/alerts`            | `/analytics-alerts`              | Analytics Alerts                  | Alerts            |
+| `/workflows`         | `/analytics-workflows`           | Event-Triggered Analytics Workflows | Workflows        |
+| `/notification-destinations` | `/notification-destinations` | Notification Destinations for Alerts and Workflows | Notification destinations |
 | `/uptime-monitoring` | `/website-api-uptime-monitoring` | Website and API Uptime Monitoring | Uptime monitoring |
 | `/shortlinks`        | `/trackable-short-links`         | Trackable Short Links             | Shortlinks        |
 
@@ -196,19 +198,19 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 
 | Current route       | Proposed route                     | Proposed H1 / page title                 | Sidebar title         |
 | ------------------- | ---------------------------------- | ---------------------------------------- | --------------------- |
-| `/account-settings` | `/tinyanalytics-account-settings`  | tinyanalytics Account Settings           | Account settings      |
+| `/account-settings` | `/tinyanalytics-account-settings`  | TinyAnalytics Account Settings           | Account settings      |
 | `/site-settings`    | `/analytics-site-settings`         | Analytics Site Settings                  | Site settings         |
 | `/organizations`    | `/analytics-organizations-members` | Organizations and Members                | Organizations         |
 | `/teams`            | `/team-site-access`                | Team-Based Site Access                   | Teams                 |
 | `/roles`            | `/analytics-roles-permissions`     | Analytics Roles and Permissions          | Roles and permissions |
 | `/invitations`      | `/invite-organization-members`     | Invite Organization Members              | Invitations           |
-| `/billing-plans`    | `/tinyanalytics-pricing-plans`     | tinyanalytics Pricing, Plans, and Limits | Billing and plans     |
+| `/billing-plans`    | `/tinyanalytics-pricing-plans`     | TinyAnalytics Pricing, Plans, and Limits | Billing and plans     |
 
 ### Integrations — overview and frameworks
 
 | Current route             | Proposed route                            | Proposed H1 / page title             | Sidebar title |
 | ------------------------- | ----------------------------------------- | ------------------------------------ | ------------- |
-| `/integrations/overview`  | `/integrations/install-website-analytics` | Install tinyanalytics on Any Website | Overview      |
+| `/integrations/overview`  | `/integrations/install-website-analytics` | Install TinyAnalytics on Any Website | Overview      |
 | `/integrations/nextjs`    | `/integrations/nextjs-analytics`          | Next.js Analytics Integration        | Next.js       |
 | `/integrations/react`     | `/integrations/react-analytics`           | React Analytics Integration          | React         |
 | `/integrations/vue`       | `/integrations/vue-analytics`             | Vue Analytics Integration            | Vue           |
@@ -252,7 +254,7 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 
 | Current route                 | Proposed route                      | Proposed H1 / page title     | Sidebar title        |
 | ----------------------------- | ----------------------------------- | ---------------------------- | -------------------- |
-| `/api-reference/introduction` | `/api-reference/tinyanalytics-api`  | tinyanalytics API Reference  | Introduction         |
+| `/api-reference/introduction` | `/api-reference/tinyanalytics-api`  | TinyAnalytics API Reference  | Introduction         |
 | `/api-reference/track`        | `/api-reference/track-events-api`   | Track Events API             | Tracking API         |
 | `/api-reference/identify`     | `/api-reference/identify-users-api` | Identify Users API           | Identify API         |
 | `/api-reference/read`         | `/api-reference/analytics-read-api` | Analytics Read API           | Read API             |
@@ -260,7 +262,7 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | `/api-reference/api-keys`     | `/api-reference/api-authentication` | API Authentication Keys      | API keys             |
 | `/api-reference/mcp-server`   | `/api-reference/mcp-server`         | Connect an AI Agent with the MCP Server | MCP server       |
 | `/api-reference/rate-limits`  | `/api-reference/rate-limits-cors`   | API Rate Limits and CORS     | Rate limits and CORS |
-| `/api-reference/playground`   | `/api-reference/api-playground`     | tinyanalytics API Playground | API playground       |
+| `/api-reference/playground`   | `/api-reference/api-playground`     | TinyAnalytics API Playground | API playground       |
 
 ### Resources
 
@@ -270,11 +272,11 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | `/resources/cookieless-identity`    | `/resources/cookieless-analytics-identity`                     | How Cookieless Analytics Identifies Visitors            | Cookieless identity    |
 | `/resources/bot-detection`          | `/resources/analytics-bot-detection`                           | How Analytics Bot Detection Works                       | Bot detection          |
 | `/resources/traffic-classification` | `/resources/analytics-channel-attribution`                     | Analytics Channels and Attribution                      | Traffic classification |
-| `/resources/data-handling`          | `/resources/analytics-data-handling`                           | How tinyanalytics Handles Analytics Data                | Data handling          |
+| `/resources/data-handling`          | `/resources/analytics-data-handling`                           | How TinyAnalytics Handles Analytics Data                | Data handling          |
 | `/resources/privacy`                | `/resources/privacy-friendly-analytics-gdpr`                   | Privacy-Friendly Analytics and GDPR                     | Privacy and GDPR       |
-| `/resources/comparison`             | `/resources/tinyanalytics-vs-google-analytics-plausible-umami` | tinyanalytics vs Google Analytics, Plausible, and Umami | Comparison             |
-| `/resources/use-with-ai`            | `/resources/tinyanalytics-docs-ai-tools`                       | Use tinyanalytics Documentation with AI Tools           | Use docs with AI       |
-| `/resources/tinyanalytics-agent-skills` | `/resources/tinyanalytics-agent-skills`                    | tinyanalytics Agent Skills for AI Coding Agents          | Agent skills           |
+| `/resources/comparison`             | `/resources/tinyanalytics-vs-google-analytics-plausible-umami` | TinyAnalytics vs Google Analytics, Plausible, and Umami | Comparison             |
+| `/resources/use-with-ai`            | `/resources/tinyanalytics-docs-ai-tools`                       | Use TinyAnalytics Documentation with AI Tools           | Use docs with AI       |
+| `/resources/tinyanalytics-agent-skills` | `/resources/tinyanalytics-agent-skills`                    | TinyAnalytics Agent Skills for AI Coding Agents          | Agent skills           |
 
 ## 5. Redirect and migration strategy
 
@@ -288,7 +290,7 @@ Execution rules:
 4. Update every navigation entry, card, Related block, inline link, prompt, and product deep link to the new route.
 5. Update canonical URLs to the final production domain and verify each rendered page self-canonicalizes to its new URL.
 6. Keep redirects for at least one year; retaining them indefinitely is preferable for documentation links in old emails, issues, and AI answers.
-7. Keep the 148 generated endpoint pages `noindex` and outside the authored redirect migration unless an OpenAPI operation path itself changes.
+7. Keep the 149 generated endpoint pages `noindex` and outside the authored redirect migration unless an OpenAPI operation path itself changes.
 
 ## 6. Content enrichment during the same execution
 
@@ -322,7 +324,7 @@ Changing only the URL and H1 is insufficient. Each renamed page should receive a
 ### Phase 1 — approve the page map and copy pattern
 
 - Review every row in §4.
-- Confirm Title Case for H1s while keeping **tinyanalytics** lowercase.
+- Confirm Title Case for H1s while keeping **TinyAnalytics** in its branded capital-T/capital-A form.
 - Confirm that concise `sidebarTitle` labels should remain.
 - Mark any route that should stay unchanged for product or support reasons.
 - Freeze the map before file renames begin.
@@ -390,7 +392,7 @@ Add migration-specific checks:
 
 1. **Canonical base URL:** `https://tinyanalytics.io/docs` is recorded in `docs.json`; the owner still needs to enable **Host at `/docs`** in Mintlify and configure the main-site rewrite or proxy.
 2. **Migration timing:** the repository uses one atomic pre-index migration.
-3. **H1 style:** the approved Title Case pattern is applied while preserving lowercase **tinyanalytics**.
+3. **H1 style:** the approved Title Case pattern is applied while preserving **TinyAnalytics** brand casing.
 4. **Mapping edits:** all 108 rows in §4 are applied without changes.
 5. **Search Console owner:** still unassigned. The owner must verify the domain, submit the sitemap after the production crawl opens, and monitor the migration for eight weeks.
 
@@ -405,5 +407,5 @@ Add migration-specific checks:
 - [Mintlify: custom domains and canonical URLs](https://www.mintlify.com/docs/customize/custom-domain)
 - [Mintlify: host documentation at `/docs`](https://www.mintlify.com/docs/deploy/docs-subpath)
 - [Mintlify: page metadata](https://mintlify.com/docs/pages)
-- Live tinyanalytics preview: rendered metadata, crawl policy, sitemap, and AI index endpoints.
+- Live TinyAnalytics preview: rendered metadata, crawl policy, sitemap, and AI index endpoints.
 - Local documentation inventory: all 108 authored MDX pages, `docs.json`, and the generated OpenAPI configuration.

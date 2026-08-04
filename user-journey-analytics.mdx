@@ -5,7 +5,7 @@ description: "Visualize the most common page sequences visitors follow, up to si
 icon: "diagram-project"
 ---
 
-The Journeys report shows the paths visitors actually take through your pages, drawn as a flow diagram. For each visit, tinyanalytics reads the ordered sequence of pages, then groups and ranks the common sequences. You see how people move through your site, not just which pages they land on.
+The Journeys report shows the paths visitors actually take through your pages, drawn as a flow diagram. For each visit, TinyAnalytics reads the ordered sequence of pages, then groups and ranks the common sequences. You see how people move through your site, not just which pages they land on.
 
 ## How do I read the flow diagram?
 
@@ -46,14 +46,14 @@ To match pages by pattern, use the **Path filter** box, which supports two wildc
   <Accordion title="Why don't single-page visits appear in the Journeys report?">
     The Journeys report excludes them by design. A journey needs at least two pages to be a path, so single-page visits — bounces — are left out and don't clutter the flow diagram. To see single-page visits, use the [Pages report](/page-analytics) or [Sessions](/session-analytics).
   </Accordion>
-  <Accordion title="How many steps deep can a journey go in tinyanalytics?">
+  <Accordion title="How many steps deep can a journey go in TinyAnalytics?">
     Up to 6 steps. You set the depth anywhere from 2 to 6 steps, and the default is 4. Fewer steps show the broad shape of entry-to-next-page movement; more steps trace longer paths toward a conversion or an exit.
   </Accordion>
   <Accordion title="How do I match a group of pages in the Journeys report?">
     Use the **Path filter** box with its two wildcards: `*` matches a single path segment, so `/blog/*` matches `/blog/post` but not `/blog/2026/post`, while `**` matches multiple segments and matches both. The suggestions in that box list every path on your site regardless of your active filters.
   </Accordion>
   <Accordion title="Why does reloading the same page count as one step?">
-    tinyanalytics collapses repeated visits to the same page in a row into a single step in the Journeys report. A path then reflects real movement between pages rather than reloads or repeated renders of the same page.
+    TinyAnalytics collapses repeated visits to the same page in a row into a single step in the Journeys report. A path then reflects real movement between pages rather than reloads or repeated renders of the same page.
   </Accordion>
 </AccordionGroup>
 

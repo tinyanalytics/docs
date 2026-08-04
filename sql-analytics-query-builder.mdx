@@ -9,7 +9,7 @@ The SQL query builder lets you run read-only SQL directly against your site's an
 
 ## Can I generate SQL from a question?
 
-Yes. Above the editor, the **Ask AI** box turns a plain-English question into a query. Type what you want — for example, *"top 10 pages by pageviews last week"* — and click **Generate**. tinyanalytics writes the SQL into the editor for you to review, run, or edit before running.
+Yes. Above the editor, the **Ask AI** box turns a plain-English question into a query. Type what you want — for example, *"top 10 pages by pageviews last week"* — and click **Generate**. TinyAnalytics writes the SQL into the editor for you to review, run, or edit before running.
 
 Generated SQL is **validated by the same read-only guard as hand-written SQL** before it runs — the AI can't widen your scope, reach another site's data, or write anything. It's a faster way to reach the same guarded query, not a way around the rules.
 
@@ -34,7 +34,7 @@ Your data lives in three virtual tables you query by name:
 | Table | Contains |
 | --- | --- |
 | `scoped_events` | your real analytics events (pageviews, custom events, and more) |
-| `scoped_events_bot` | events tinyanalytics classified as bot traffic |
+| `scoped_events_bot` | events TinyAnalytics classified as bot traffic |
 | `scoped_stripe_revenue` | raw, signed Stripe charges, refunds, and disputes |
 
 All three are automatically filtered to the site you're viewing — you never write a `site_id` filter, and a query cannot reach another site's data. `scoped_stripe_revenue` is available even when Stripe is not connected; it simply returns no rows.
@@ -56,7 +56,7 @@ See [metric definitions](/analytics-data-dictionary) for the events and properti
 
 | Column | Meaning |
 | --- | --- |
-| `timestamp` | when tinyanalytics received the Stripe event |
+| `timestamp` | when TinyAnalytics received the Stripe event |
 | `stripe_event_id` | Stripe event ID; the replay-deduplication key |
 | `charge_id` | related Stripe charge |
 | `kind` | `charge`, `refund`, or `dispute` |
@@ -91,18 +91,18 @@ The query builder is **read-only by design**, so exploring your data can never c
 - **Blocked** — writes, schema changes, multiple statements, and any attempt to read outside your scoped tables.
 - **Capped** — a query runs for at most **10 seconds** and returns at most **1,000 rows**, so a heavy query is trimmed rather than left to run away.
 
-If a query has a mistake, tinyanalytics returns the database's error message so you can fix the SQL
+If a query has a mistake, TinyAnalytics returns the database's error message so you can fix the SQL
 directly or use **Fix with AI**.
 
 ## How do I repair a failed query with AI?
 
-After a query fails, choose **Fix with AI** on its error card. tinyanalytics sends the current SQL
+After a query fails, choose **Fix with AI** on its error card. TinyAnalytics sends the current SQL
 and a bounded database diagnostic through the same guarded generator as the **Ask AI** box. A repair
 uses one plan AI credit or your personal Anthropic key, and the action discloses that cost before it
 runs.
 
 Successful repaired SQL must pass the same site-scoped, read-only validator. It replaces only the
-current tab's editor content and clears the obsolete error and result state. tinyanalytics **does not
+current tab's editor content and clears the obsolete error and result state. TinyAnalytics **does not
 run the repaired query automatically**: review the change, then choose **Run** yourself. If repair is
 cancelled or fails validation, the original SQL and database error stay in place.
 
@@ -117,7 +117,7 @@ Save the query as a card and pick a visualization. Any query you've written is t
     No. `scoped_events`, `scoped_events_bot`, and `scoped_stripe_revenue` are automatically filtered to the site you're viewing, so you never write a `site_id` filter. A query also cannot reach another site's data.
   </Accordion>
   <Accordion title="Why did my query only return 1,000 rows?">
-    That's the cap. A query in the tinyanalytics SQL query builder returns at most **1,000 rows** and runs for at most **10 seconds**, so a heavy query is trimmed rather than left to run away. Aggregate in SQL — with `GROUP BY` and a tighter `WHERE` — to fit the result inside the cap.
+    That's the cap. A query in the TinyAnalytics SQL query builder returns at most **1,000 rows** and runs for at most **10 seconds**, so a heavy query is trimmed rather than left to run away. Aggregate in SQL — with `GROUP BY` and a tighter `WHERE` — to fit the result inside the cap.
   </Accordion>
   <Accordion title="Can I run INSERT, UPDATE, or DELETE in the SQL query builder?">
     No. The query builder is read-only by design. Writes, schema changes, multiple statements, and any attempt to read outside your scoped tables are all blocked, so exploring your data can never change or damage it.

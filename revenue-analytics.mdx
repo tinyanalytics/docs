@@ -5,13 +5,13 @@ description: "Measure client-event and Stripe revenue, refunds, average order va
 icon: "dollar-sign"
 ---
 
-Revenue analytics ties money to your traffic. Send revenue with a [custom event](/custom-event-tracking), connect [Stripe](/stripe-revenue-analytics), or use both. tinyanalytics reports total and net revenue, refunds, average order value, paying sessions, orders, and acquisition breakdowns so you can see which traffic produces revenue.
+Revenue analytics ties money to your traffic. Send revenue with a [custom event](/custom-event-tracking), connect [Stripe](/stripe-revenue-analytics), or use both. TinyAnalytics reports total and net revenue, refunds, average order value, paying sessions, orders, and acquisition breakdowns so you can see which traffic produces revenue.
 
 ## Choose a revenue source
 
 <Tabs>
   <Tab title="Client events">
-    Add `revenue` and `currency` to any custom event you already send. These are **reserved property names** — tinyanalytics recognizes them and treats the event as a sale:
+    Add `revenue` and `currency` to any custom event you already send. These are **reserved property names** — TinyAnalytics recognizes them and treats the event as a sale:
 
     ```js
     window.tinyanalytics.event('purchase', {
@@ -65,10 +65,10 @@ Below the metrics, a **revenue-over-time chart** shows the trend across your dat
 </Tip>
 
 <Warning>
-  tinyanalytics does not deduplicate the same purchase across client events and Stripe. If both sources report it, the **All** tab counts it twice. Choose one source of truth or use the source-specific tabs.
+  TinyAnalytics does not deduplicate the same purchase across client events and Stripe. If both sources report it, the **All** tab counts it twice. Choose one source of truth or use the source-specific tabs.
 </Warning>
 
-## How does tinyanalytics convert currencies?
+## How does TinyAnalytics convert currencies?
 
 You can receive revenue in many currencies but read your reports in one. Set a **reporting currency** in your site's [general settings](/analytics-site-settings) — the default is USD. Every amount is **stored in the currency it was sent in**, then converted to your reporting currency when a report is read.
 
@@ -89,19 +89,19 @@ These features currently read **client events only**; Stripe revenue is not incl
 
 <AccordionGroup>
   <Accordion title="Should I send revenue in cents or dollars?">
-    Send it in **major units** — dollars, euros, or pounds — not cents. In tinyanalytics, a `revenue` value of `49.99` means $49.99, not 49 cents. The field accepts a number or a numeric string, and the amount must be positive.
+    Send it in **major units** — dollars, euros, or pounds — not cents. In TinyAnalytics, a `revenue` value of `49.99` means $49.99, not 49 cents. The field accepts a number or a numeric string, and the amount must be positive.
   </Accordion>
-  <Accordion title="Can I track refunds or negative revenue in tinyanalytics?">
+  <Accordion title="Can I track refunds or negative revenue in TinyAnalytics?">
     Yes, through the [Stripe integration](/stripe-revenue-analytics). Stripe refunds and lost disputes subtract from net revenue. Client revenue events must remain positive and cannot represent refunds.
   </Accordion>
-  <Accordion title="What happens if I send a currency tinyanalytics has no exchange rate for?">
-    The revenue is stored and counted at a 1:1 rate rather than dropped, so no revenue goes missing. tinyanalytics has built-in rates for 22 major currencies (USD, EUR, GBP, JPY, and the like), refreshed with each release. For exact multi-currency accounting, treat the reporting-currency total as a close estimate.
+  <Accordion title="What happens if I send a currency TinyAnalytics has no exchange rate for?">
+    The revenue is stored and counted at a 1:1 rate rather than dropped, so no revenue goes missing. TinyAnalytics has built-in rates for 22 major currencies (USD, EUR, GBP, JPY, and the like), refreshed with each release. For exact multi-currency accounting, treat the reporting-currency total as a close estimate.
   </Accordion>
   <Accordion title="Which marketing channel gets credit for a sale?">
     The **session's entry acquisition** — the source that first brought the visitor in. The channel that won the visit gets the credit, even if the purchase happened several pages later. This is why revenue-by-channel reconciles with sessions-by-channel.
   </Accordion>
   <Accordion title="Why is revenue counted twice on the All tab?">
-    tinyanalytics does not deduplicate the same purchase across client events and Stripe. If both sources report it, **All** counts both records. Use the **Stripe** or **Client events** tab as your source of truth, or stop sending the duplicate client event.
+    TinyAnalytics does not deduplicate the same purchase across client events and Stripe. If both sources report it, **All** counts both records. Use the **Stripe** or **Client events** tab as your source of truth, or stop sending the duplicate client event.
   </Accordion>
 </AccordionGroup>
 

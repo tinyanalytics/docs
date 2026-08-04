@@ -1,15 +1,15 @@
 ---
-title: "How tinyanalytics Handles Analytics Data"
+title: "How TinyAnalytics Handles Analytics Data"
 sidebarTitle: "Data handling"
-description: "See what analytics data tinyanalytics stores, what core anonymous tracking never stores, and which optional features use browser storage."
+description: "See what analytics data TinyAnalytics stores, what core anonymous tracking never stores, and which optional features use browser storage."
 icon: "server"
 ---
 
-tinyanalytics is a hosted analytics service: your site sends events, and tinyanalytics stores and reports on them for you. Core anonymous analytics uses no analytics cookies or stored browser ID, while optional product features can persist the specific state they need.
+TinyAnalytics is a hosted analytics service: your site sends events, and TinyAnalytics stores and reports on them for you. Core anonymous analytics uses no analytics cookies or stored browser ID, while optional product features can persist the specific state they need.
 
-## What tinyanalytics stores
+## What TinyAnalytics stores
 
-For each event your site sends, tinyanalytics keeps the analytics context it needs to build your reports:
+For each event your site sends, TinyAnalytics keeps the analytics context it needs to build your reports:
 
 - **Page context** — the path, hostname, referrer, page title, and any campaign (UTM) parameters.
 - **Derived attributes** — an approximate location (country, region, city) from the IP, the marketing [channel](/resources/analytics-channel-attribution), and the device, browser, and OS from the user agent.
@@ -22,10 +22,10 @@ For each event your site sends, tinyanalytics keeps the analytics context it nee
 - **No analytics cookies.** Core anonymous analytics does not set a cookie.
 - **No anonymous browser ID.** Anonymous visitor identity is derived on the server instead of written to the browser.
 - **No raw IP addresses.** A visitor's IP is used only, in memory, to derive the hashed identifier and approximate location — it's never written to your analytics data.
-- **No personal data by default.** tinyanalytics stores no names, emails, or other identifying details unless *you* deliberately send them as an identified ID, a trait, or an event property.
+- **No personal data by default.** TinyAnalytics stores no names, emails, or other identifying details unless *you* deliberately send them as an identified ID, a trait, or an event property.
 
 <Warning>
-  Because custom event properties and traits are free-form, you control whether any personal data enters tinyanalytics. Avoid putting raw personal information (like an email address) into event properties unless you intend to store it.
+  Because custom event properties and traits are free-form, you control whether any personal data enters TinyAnalytics. Avoid putting raw personal information (like an email address) into event properties unless you intend to store it.
 </Warning>
 
 ## What optional features store in the browser
@@ -42,9 +42,9 @@ These values are scoped to product behavior on your site; they do not create a c
 
 ## How is a Stripe connection handled?
 
-tinyanalytics retains the restricted key and webhook signing secret needed to keep receiving Stripe events. The dashboard and API return only a masked key fingerprint, never the full restricted key.
+TinyAnalytics retains the restricted key and webhook signing secret needed to keep receiving Stripe events. The dashboard and API return only a masked key fingerprint, never the full restricted key.
 
-Stripe revenue rows do not store customer emails, names, card details, or free-form Stripe metadata. If you turn on the optional **Email fallback**, tinyanalytics processes the charge email long enough to match an existing identified user, then stores only the matched analytics ID in the revenue row. The email is not written to the analytics event store.
+Stripe revenue rows do not store customer emails, names, card details, or free-form Stripe metadata. If you turn on the optional **Email fallback**, TinyAnalytics processes the charge email long enough to match an existing identified user, then stores only the matched analytics ID in the revenue row. The email is not written to the analytics event store.
 
 <Note>
   A Stripe charge ID linked to a session or identified-user ID is pseudonymous linkage, not anonymous data. Deleting the corresponding [user profile](/user-analytics) is the erasure path for the identity mapping.

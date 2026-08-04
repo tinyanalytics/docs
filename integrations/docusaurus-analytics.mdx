@@ -1,16 +1,16 @@
 ---
 title: "Docusaurus Analytics Integration"
 sidebarTitle: "Docusaurus"
-description: "Add tinyanalytics to the scripts array in docusaurus.config.js so every docs page and client-side route change is tracked."
+description: "Add TinyAnalytics to the scripts array in docusaurus.config.js so every docs page and client-side route change is tracked."
 icon: "book"
 noindex: true
 ---
 
-To add tinyanalytics to a **Docusaurus** site, add the tracking script to the `scripts` array in `docusaurus.config.js`. Docusaurus injects it into every page, and client-side navigation between docs pages is tracked automatically.
+To add TinyAnalytics to a **Docusaurus** site, add the tracking script to the `scripts` array in `docusaurus.config.js`. Docusaurus injects it into every page, and client-side navigation between docs pages is tracked automatically.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
 
 ## Add the script in `docusaurus.config.js`
@@ -37,7 +37,7 @@ export default {
 
 ## Client-side navigation is tracked automatically
 
-Docusaurus is a single-page app that renders navigation on the client, and tinyanalytics records each page change as a new pageview by default (`data-track-spa`). See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+Docusaurus is a single-page app that renders navigation on the client, and TinyAnalytics records each page change as a new pageview by default (`data-track-spa`). See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
 
 ## Verify
 

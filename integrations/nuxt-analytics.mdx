@@ -1,16 +1,16 @@
 ---
 title: "Nuxt Analytics Integration"
 sidebarTitle: "Nuxt"
-description: "Declare tinyanalytics in nuxt.config so every page loads the script and Nuxt client-side route changes are tracked automatically."
+description: "Declare TinyAnalytics in nuxt.config so every page loads the script and Nuxt client-side route changes are tracked automatically."
 icon: "code"
 noindex: true
 ---
 
-To add tinyanalytics to a **Nuxt** app, declare the tracking script in `nuxt.config` so Nuxt injects it into the `<head>` of every page. Route changes are tracked automatically, so you don't need to touch the router.
+To add TinyAnalytics to a **Nuxt** app, declare the tracking script in `nuxt.config` so Nuxt injects it into the `<head>` of every page. Route changes are tracked automatically, so you don't need to touch the router.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
 
 ## Add the script in `nuxt.config`
@@ -39,7 +39,7 @@ export default defineNuxtConfig({
 
 ## Client-side navigation is tracked automatically
 
-Nuxt renders route changes on the client, and tinyanalytics records each one as a new pageview by default (`data-track-spa`). Moving between pages is captured for you. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
+Nuxt renders route changes on the client, and TinyAnalytics records each one as a new pageview by default (`data-track-spa`). Moving between pages is captured for you. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this.
 
 ## Verify
 

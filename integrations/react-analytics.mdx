@@ -1,16 +1,16 @@
 ---
 title: "React Analytics Integration"
 sidebarTitle: "React"
-description: "Add tinyanalytics to a Vite or Create React App index.html so one script tracks the full single-page app and its client-side routes."
+description: "Add TinyAnalytics to a Vite or Create React App index.html so one script tracks the full single-page app and its client-side routes."
 icon: "react"
 noindex: true
 ---
 
-To add tinyanalytics to a **React** app built with Vite or Create React App, put the tracking snippet in your `index.html`. Because it's a single-page app, one tag in the HTML shell covers every route — client-side navigation is tracked automatically.
+To add TinyAnalytics to a **React** app built with Vite or Create React App, put the tracking snippet in your `index.html`. Because it's a single-page app, one tag in the HTML shell covers every route — client-side navigation is tracked automatically.
 
 ## Before you start
 
-- A tinyanalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics site. If you don't have one yet, follow the [Quickstart](/tinyanalytics-quickstart).
 - Your site's numeric **site ID**, from **Settings → Tracking** in your dashboard.
 
 ## Add the snippet to index.html
@@ -40,7 +40,7 @@ That's it — the script loads once for the whole app and needs no changes as yo
 
 ## Client-side routing is tracked automatically
 
-React apps change routes on the client (with React Router or similar), and tinyanalytics records each route change as a new pageview by default (`data-track-spa`). You don't need to hook into your router. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this behavior.
+React apps change routes on the client (with React Router or similar), and TinyAnalytics records each route change as a new pageview by default (`data-track-spa`). You don't need to hook into your router. See [Track single-page apps](/configure-tinyanalytics-tracking-script#track-single-page-apps) to change this behavior.
 
 ## Verify
 

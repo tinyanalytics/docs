@@ -7,7 +7,7 @@ noindex: true
 
 ---
 
-tinyanalytics applies a **per-key rate limit to server-side ingestion** and restricts **which origins** may call the API. Browser tracking is deliberately open; authenticated reads and writes are locked to trusted origins.
+TinyAnalytics applies a **per-key rate limit to server-side ingestion** and restricts **which origins** may call the API. Browser tracking is deliberately open; authenticated reads and writes are locked to trusted origins.
 
 ## Ingestion rate limit
 
@@ -28,7 +28,7 @@ A few things worth knowing:
 ## API key creation limit
 
 Creating API keys is limited to **10 attempts per signed-in user per hour**. Invalid request bodies
-count toward the same security window. When the limit is reached, tinyanalytics returns `429 Too
+count toward the same security window. When the limit is reached, TinyAnalytics returns `429 Too
 Many Requests` with `Retry-After`; if the shared security limiter is temporarily unavailable, key
 creation fails closed with `503` instead of minting an unbounded key.
 
@@ -38,7 +38,7 @@ Calls to the [MCP server](/api-reference/mcp-server) are limited to **120 reques
 
 ## CORS: which origins can call the API
 
-tinyanalytics splits the API into two CORS zones:
+TinyAnalytics splits the API into two CORS zones:
 
 | Paths | Origins | Credentials |
 | --- | --- | --- |

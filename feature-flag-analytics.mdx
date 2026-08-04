@@ -5,7 +5,7 @@ description: "Roll features out to a percentage of visitors, target audiences, a
 icon: "toggle-on"
 ---
 
-A feature flag turns a feature on or off — or splits visitors across several variants — without shipping new code. You create the flag in tinyanalytics, then read its value in your app with `window.tinyanalytics.flag()`. Every visitor gets a **sticky, consistent assignment**: the same person sees the same thing on every visit, and you can dial a rollout from 1% to 100% whenever you're ready.
+A feature flag turns a feature on or off — or splits visitors across several variants — without shipping new code. You create the flag in TinyAnalytics, then read its value in your app with `window.tinyanalytics.flag()`. Every visitor gets a **sticky, consistent assignment**: the same person sees the same thing on every visit, and you can dial a rollout from 1% to 100% whenever you're ready.
 
 ```js
 if (window.tinyanalytics.flag('new-checkout')) {
@@ -69,7 +69,7 @@ Stack rules into **condition sets** that are checked in order. The first set a v
 
 ## Why does every visitor stay on the same variant?
 
-Assignments are **deterministic**. tinyanalytics computes each visitor's bucket from a persistent visitor ID the tracker keeps in the browser, so the same inputs always produce the same result. No assignment is ever stored server-side, and it survives restarts and reloads. Two consequences worth knowing:
+Assignments are **deterministic**. TinyAnalytics computes each visitor's bucket from a persistent visitor ID the tracker keeps in the browser, so the same inputs always produce the same result. No assignment is ever stored server-side, and it survives restarts and reloads. Two consequences worth knowing:
 
 - Each flag buckets independently, so a visitor in the 10% of one flag isn't automatically in the 10% of another.
 - Stickiness is only as durable as that browser ID. If a visitor clears their site storage, they may re-bucket. Logging in mid-session never flips a variant — identity is used for *targeting rules*, not for bucketing.
@@ -82,16 +82,16 @@ Yes. A flag can evaluate per **account** instead of per person, so every seat in
 
 <AccordionGroup>
   <Accordion title="Why did a visitor suddenly switch to a different variant?">
-    They most likely cleared their site storage. tinyanalytics buckets each visitor from a persistent visitor ID the tracker keeps in the browser, so stickiness is only as durable as that ID. If the ID is gone, the visitor may re-bucket into a different variant.
+    They most likely cleared their site storage. TinyAnalytics buckets each visitor from a persistent visitor ID the tracker keeps in the browser, so stickiness is only as durable as that ID. If the ID is gone, the visitor may re-bucket into a different variant.
   </Accordion>
   <Accordion title="Does logging in change which variant a visitor sees?">
-    No. Logging in mid-session never flips a variant. tinyanalytics uses identity for *targeting rules*, not for bucketing — bucketing comes from the persistent browser visitor ID.
+    No. Logging in mid-session never flips a variant. TinyAnalytics uses identity for *targeting rules*, not for bucketing — bucketing comes from the persistent browser visitor ID.
   </Accordion>
-  <Accordion title="Does calling flag() send an event to tinyanalytics?">
+  <Accordion title="Does calling flag() send an event to TinyAnalytics?">
     Yes. `window.tinyanalytics.flag()` records one `feature_flag_exposure` event per value, per page load, proving the visitor saw the flag. That exposure is what powers [experiments](/ab-testing-analytics). `flagPayload()` and `flags()` never record an exposure.
   </Accordion>
   <Accordion title="If a visitor is in the 10% rollout of one flag, are they in the 10% of another?">
-    No. Each flag buckets independently in tinyanalytics, so membership in one flag's rollout says nothing about another's.
+    No. Each flag buckets independently in TinyAnalytics, so membership in one flag's rollout says nothing about another's.
   </Accordion>
 </AccordionGroup>
 

@@ -1,21 +1,21 @@
 ---
-title: "Install the tinyanalytics Tracking Script"
+title: "Install the TinyAnalytics Tracking Script"
 sidebarTitle: "Tracking script"
-description: "Add the tinyanalytics tracking script to your site to start collecting pageviews and events automatically — one script tag, under 6.5 KB gzipped."
+description: "Add the TinyAnalytics tracking script to your site to start collecting pageviews and events automatically — one script tag, under 6.5 KB gzipped."
 icon: "code"
 ---
 
-The tinyanalytics tracking script is a single `<script>` tag you add to your site's HTML `<head>`. Once it's live, tinyanalytics collects pageviews and common interactions automatically — you don't have to write any code to get started. The script is under **6.5 KB** gzipped, loads with `defer`, and never blocks your page.
+The TinyAnalytics tracking script is a single `<script>` tag you add to your site's HTML `<head>`. Once it's live, TinyAnalytics collects pageviews and common interactions automatically — you don't have to write any code to get started. The script is under **6.5 KB** gzipped, loads with `defer`, and never blocks your page.
 
 ## Prerequisites
 
-- A tinyanalytics account and a site added in the dashboard. If you haven't done this yet, follow the [Quickstart](/tinyanalytics-quickstart).
+- A TinyAnalytics account and a site added in the dashboard. If you haven't done this yet, follow the [Quickstart](/tinyanalytics-quickstart).
 
 ## Install the script
 
 <Steps>
   <Step title="Copy the script from your dashboard">
-    Open your site in tinyanalytics. On a new site, the tracking script is on the setup panel; on an existing site, it's in **Settings → Tracking**. Copy the tag exactly as shown — it already includes your numeric `data-site-id`:
+    Open your site in TinyAnalytics. On a new site, the tracking script is on the setup panel; on an existing site, it's in **Settings → Tracking**. Copy the tag exactly as shown — it already includes your numeric `data-site-id`:
 
     ```html
     <script defer src="https://dash.tinyanalytics.io/script.js" data-site-id="123"></script>
@@ -35,7 +35,7 @@ The tinyanalytics tracking script is a single `<script>` tag you add to your sit
 
 ## What the script tracks out of the box
 
-With the default tracking script, tinyanalytics captures the following automatically — no extra code:
+With the default tracking script, TinyAnalytics captures the following automatically — no extra code:
 
 - **Pageviews**, including client-side route changes in single-page apps.
 - **Outbound link clicks** and **file downloads**.
@@ -60,7 +60,7 @@ Step-by-step integration guides for individual platforms are being added. Until 
 
 ## Bypass ad blockers
 
-Some ad blockers block third-party analytics requests, which can undercount visits. tinyanalytics supports serving the script and receiving events through a **first-party proxy** on your own domain, so tracking looks like part of your site. You point the tracking script's `src` at your own domain, and requests are forwarded to tinyanalytics behind the scenes.
+Some ad blockers block third-party analytics requests, which can undercount visits. TinyAnalytics supports serving the script and receiving events through a **first-party proxy** on your own domain, so tracking looks like part of your site. You point the tracking script's `src` at your own domain, and requests are forwarded to TinyAnalytics behind the scenes.
 
 <Note>
   A dedicated proxy and custom-domain guide is being added. If you need it now, contact support from your dashboard.
@@ -69,14 +69,14 @@ Some ad blockers block third-party analytics requests, which can undercount visi
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="Does the tinyanalytics tracking script slow down my site?">
-    No. The tinyanalytics tracking script is under **6.5 KB** gzipped and loads with `defer`, so the browser runs it after the HTML has parsed. It never blocks your page from loading.
+  <Accordion title="Does the TinyAnalytics tracking script slow down my site?">
+    No. The TinyAnalytics tracking script is under **6.5 KB** gzipped and loads with `defer`, so the browser runs it after the HTML has parsed. It never blocks your page from loading.
   </Accordion>
   <Accordion title="Do I have to add the tracking script to every page?">
     Yes — add it to every page you want to measure. On a framework or CMS, add it once in a shared root layout, template, or "custom code" head setting so it loads site-wide instead of pasting it per page.
   </Accordion>
-  <Accordion title="Why is tinyanalytics undercounting my visits?">
-    Ad blockers are the usual cause: some block third-party analytics requests before they're sent. Serve the tinyanalytics tracking script through a **first-party proxy** on your own domain so requests look like part of your site and aren't blocked.
+  <Accordion title="Why is TinyAnalytics undercounting my visits?">
+    Ad blockers are the usual cause: some block third-party analytics requests before they're sent. Serve the TinyAnalytics tracking script through a **first-party proxy** on your own domain so requests look like part of your site and aren't blocked.
   </Accordion>
   <Accordion title="Where do I find my site ID?">
     Your numeric `data-site-id` is already filled in on the tracking script shown in your dashboard — on a new site's setup panel, or under **Settings → Tracking** for an existing site. Copy the tag from there rather than typing the ID by hand.
@@ -95,7 +95,7 @@ Some ad blockers block third-party analytics requests, which can undercount visi
   <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
     Send your own named events.
   </Card>
-  <Card title="How tinyanalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
+  <Card title="How TinyAnalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
     What the script sends and how it's counted.
   </Card>
 </Columns>

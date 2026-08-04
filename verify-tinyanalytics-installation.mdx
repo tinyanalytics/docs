@@ -1,11 +1,11 @@
 ---
-title: "Verify Your tinyanalytics Installation"
+title: "Verify Your TinyAnalytics Installation"
 sidebarTitle: "Verify your setup"
-description: "Confirm tinyanalytics is installed correctly by checking Realtime for your visit, and fix the common reasons pageviews and events don't show up."
+description: "Confirm TinyAnalytics is installed correctly by checking Realtime for your visit, and fix the common reasons pageviews and events don't show up."
 icon: "circle-check"
 ---
 
-Your tinyanalytics install is working when a visit to your own site shows up in the dashboard. The fastest way to confirm it is to open your site in one tab and watch the **Realtime** report in another. If your visit doesn't appear, the troubleshooting section below covers the common causes in order of likelihood.
+Your TinyAnalytics install is working when a visit to your own site shows up in the dashboard. The fastest way to confirm it is to open your site in one tab and watch the **Realtime** report in another. If your visit doesn't appear, the troubleshooting section below covers the common causes in order of likelihood.
 
 ## Confirm your first visit
 
@@ -14,12 +14,12 @@ Your tinyanalytics install is working when a visit to your own site shows up in 
     Open a published page that includes the tracking script. Use a normal browser tab, not a preview or a private window with tracking blocked.
   </Step>
   <Step title="Watch Realtime">
-    In tinyanalytics, open your site's **Realtime** report. Your visit appears within a few seconds. On a brand-new site, the setup panel is replaced by your dashboard once the first visit lands.
+    In TinyAnalytics, open your site's **Realtime** report. Your visit appears within a few seconds. On a brand-new site, the setup panel is replaced by your dashboard once the first visit lands.
   </Step>
 </Steps>
 
 <Check>
-  tinyanalytics is installed correctly when your own visit appears in the **Realtime** report within a few seconds. If nothing appears after a minute, work through the troubleshooting below.
+  TinyAnalytics is installed correctly when your own visit appears in the **Realtime** report within a few seconds. If nothing appears after a minute, work through the troubleshooting below.
 </Check>
 
 ## Check the network requests
@@ -43,7 +43,7 @@ If `script.js` is missing, the snippet isn't on the page. If `script.js` loads b
     - **This browser is opted out.** See "My own visits are missing" below.
   </Accordion>
   <Accordion title="My own visits are missing" icon="user-slash">
-    You may have opted this browser out. tinyanalytics stops tracking when a `disable-tinyanalytics` key is present in `localStorage`. Check for it in developer tools, and remove it to resume tracking:
+    You may have opted this browser out. TinyAnalytics stops tracking when a `disable-tinyanalytics` key is present in `localStorage`. Check for it in developer tools, and remove it to resume tracking:
 
     ```js
     localStorage.removeItem('disable-tinyanalytics')
@@ -54,7 +54,7 @@ If `script.js` is missing, the snippet isn't on the page. If `script.js` loads b
   <Accordion title="Requests are blocked by an ad blocker" icon="shield">
     Some ad blockers block analytics requests, which undercounts visits. To confirm, disable your blocker and reload — if the visit now appears, the blocker was the cause.
 
-    To collect data reliably from all visitors, serve tinyanalytics through a [first-party proxy](/install-tinyanalytics-tracking-script#bypass-ad-blockers) on your own domain, so requests are first-party and aren't blocked.
+    To collect data reliably from all visitors, serve TinyAnalytics through a [first-party proxy](/install-tinyanalytics-tracking-script#bypass-ad-blockers) on your own domain, so requests are first-party and aren't blocked.
   </Accordion>
   <Accordion title="Single-page app pageviews are wrong" icon="route">
     SPA route tracking is on by default. If you see **too few** pageviews, confirm `data-track-spa` isn't set to `"false"`. If you see **double** pageviews, you're likely sending manual pageviews on top of automatic ones — either remove your manual `pageview()` calls or set `data-auto-pageview="false"`. See [configure the script](/configure-tinyanalytics-tracking-script#track-single-page-apps).

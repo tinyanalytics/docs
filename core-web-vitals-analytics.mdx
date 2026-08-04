@@ -17,11 +17,11 @@ Performance data is collected only when you add the `data-web-vitals` attribute 
   data-web-vitals></script>
 ```
 
-With it on, tinyanalytics sends **one performance event per page load** carrying the five vitals. Until data arrives, the Performance report shows a notice explaining how to enable collection. See [Configure the tracking script](/configure-tinyanalytics-tracking-script#collect-core-web-vitals) for the full attribute reference.
+With it on, TinyAnalytics sends **one performance event per page load** carrying the five vitals. Until data arrives, the Performance report shows a notice explaining how to enable collection. See [Configure the tracking script](/configure-tinyanalytics-tracking-script#collect-core-web-vitals) for the full attribute reference.
 
 ## What are the five Core Web Vitals?
 
-Each metric captures a different part of the loading and interaction experience. tinyanalytics collects all five and marks each against its standard "good" threshold:
+Each metric captures a different part of the loading and interaction experience. TinyAnalytics collects all five and marks each against its standard "good" threshold:
 
 | Metric | What it measures | Unit | "Good" threshold |
 | --- | --- | --- | --- |
@@ -33,9 +33,9 @@ Each metric captures a different part of the loading and interaction experience.
 
 LCP, INP, and CLS are the three official Core Web Vitals; FCP and TTFB are supporting diagnostics that help explain a poor LCP.
 
-## Why does tinyanalytics show percentiles instead of an average?
+## Why does TinyAnalytics show percentiles instead of an average?
 
-Performance is reported at percentiles because averages hide your slowest experiences. A single very slow page load barely moves an average but is exactly the experience you want to find. tinyanalytics reports four percentiles for every metric:
+Performance is reported at percentiles because averages hide your slowest experiences. A single very slow page load barely moves an average but is exactly the experience you want to find. TinyAnalytics reports four percentiles for every metric:
 
 - **p50** — the median visit. Half of loads were faster than this.
 - **p75** — the headline percentile Google uses to grade Core Web Vitals. This is the default.
@@ -60,23 +60,23 @@ This is how you find *what* is slow. A high p75 LCP overall might trace to one h
 Turn on [period comparison](/analytics-period-comparison) to add a baseline and a change indicator to each metric card. Performance comparison is aware that **lower is better** for Core Web Vitals: a rising LCP is a regression, so its change indicator turns red with an up arrow, not green.
 
 <Note>
-  Because vitals are captured only when a metric actually fires before the visitor leaves, a metric can be missing on some loads (for example, INP needs an interaction). tinyanalytics skips missing values rather than counting them as zero, so each percentile reflects only real measurements.
+  Because vitals are captured only when a metric actually fires before the visitor leaves, a metric can be missing on some loads (for example, INP needs an interaction). TinyAnalytics skips missing values rather than counting them as zero, so each percentile reflects only real measurements.
 </Note>
 
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="Why is my tinyanalytics Performance report empty?">
-    Core Web Vitals collection is off by default. tinyanalytics collects performance data only when you add the `data-web-vitals` attribute to your tracking script and re-deploy. Until data arrives, the Performance report shows a notice explaining how to enable collection.
+  <Accordion title="Why is my TinyAnalytics Performance report empty?">
+    Core Web Vitals collection is off by default. TinyAnalytics collects performance data only when you add the `data-web-vitals` attribute to your tracking script and re-deploy. Until data arrives, the Performance report shows a notice explaining how to enable collection.
   </Accordion>
   <Accordion title="Which percentile should I use for Core Web Vitals?">
-    Use p75, the headline percentile Google uses to grade Core Web Vitals. It is also the tinyanalytics default, alongside LCP. Read p50 for the median visit, and p90 and p99 to see your slowest 10% and 1% of loads.
+    Use p75, the headline percentile Google uses to grade Core Web Vitals. It is also the TinyAnalytics default, alongside LCP. Read p50 for the median visit, and p90 and p99 to see your slowest 10% and 1% of loads.
   </Accordion>
   <Accordion title="Why does a rising LCP show as a red increase instead of green?">
-    Because lower is better for Core Web Vitals. tinyanalytics period comparison knows this, so a rising LCP is treated as a regression and its change indicator turns red with an up arrow rather than green. Turn on [period comparison](/analytics-period-comparison) to add a baseline to each metric card.
+    Because lower is better for Core Web Vitals. TinyAnalytics period comparison knows this, so a rising LCP is treated as a regression and its change indicator turns red with an up arrow rather than green. Turn on [period comparison](/analytics-period-comparison) to add a baseline to each metric card.
   </Accordion>
   <Accordion title="What are the good thresholds for each Core Web Vital?">
-    tinyanalytics marks each metric against its standard good threshold: LCP ≤ 2,500 ms, INP ≤ 200 ms, CLS ≤ 0.1, FCP ≤ 1,800 ms, and TTFB ≤ 800 ms. LCP, INP, and CLS are the three official Core Web Vitals; FCP and TTFB are supporting diagnostics that help explain a poor LCP.
+    TinyAnalytics marks each metric against its standard good threshold: LCP ≤ 2,500 ms, INP ≤ 200 ms, CLS ≤ 0.1, FCP ≤ 1,800 ms, and TTFB ≤ 800 ms. LCP, INP, and CLS are the three official Core Web Vitals; FCP and TTFB are supporting diagnostics that help explain a poor LCP.
   </Accordion>
 </AccordionGroup>
 

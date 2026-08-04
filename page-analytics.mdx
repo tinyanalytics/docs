@@ -45,7 +45,7 @@ By default the report is in **Pages** (path) mode, which groups `example.com/pri
 Selecting the **URLs** tab turns URL mode on, and selecting **Pages** turns it back off. While it's on, the **Entries** and **Exits** views become host-aware too, and their headings read **Entry URLs** and **Exit URLs**.
 
 <Tip>
-  When your selected date range contains more than one hostname, tinyanalytics shows a banner above the report offering to **Switch to URL**. Dismissing it hides it for your current visit only.
+  When your selected date range contains more than one hostname, TinyAnalytics shows a banner above the report offering to **Switch to URL**. Dismissing it hides it for your current visit only.
 </Tip>
 
 <Note>
@@ -56,7 +56,7 @@ Selecting the **URLs** tab turns URL mode on, and selecting **Pages** turns it b
 
 Turn on **Show full URL** to display each row as `hostname/pathname` while keeping the Pages report grouped by path. The switch appears when the current page rows contain more than one hostname.
 
-This display option is useful when you want hostname context without changing the report's grouping. It also makes the row's external link open the displayed hostname. Because the row still represents a path grouped across hostnames, tinyanalytics shows its latest representative hostname; it does not split traffic by host.
+This display option is useful when you want hostname context without changing the report's grouping. It also makes the row's external link open the displayed hostname. Because the row still represents a path grouped across hostnames, TinyAnalytics shows its latest representative hostname; it does not split traffic by host.
 
 <Tip>
   Use **Show full URL** for context. Use the **URLs** tab when `example.com/pricing` and `app.example.com/pricing` must become separate rows with separate metrics.
@@ -117,13 +117,13 @@ In **URLs** mode a row click applies **two** filters together, hostname and path
     The Pages view ranks pages by their path, which is the standard read of your top content. The Titles view ranks them by their HTML `<title>` instead, which is useful when one path serves many titles. Both views re-slice the same traffic by a different key.
   </Accordion>
   <Accordion title="What's the difference between an entry page and an exit page?">
-    An entry page is the first page of a session and an exit page is the last. In the tinyanalytics Pages report, the **Entries** view ranks pages by how many sessions start there, and the **Exits** view ranks them by how many sessions end there.
+    An entry page is the first page of a session and an exit page is the last. In the TinyAnalytics Pages report, the **Entries** view ranks pages by how many sessions start there, and the **Exits** view ranks them by how many sessions end there.
   </Accordion>
   <Accordion title="How do I see stats for a single page?">
-    Click that page's row in the Pages report. tinyanalytics opens the main dashboard already filtered to that page, carrying your date range and any other active filters with it, so you can read its sources, devices, and geography. The click navigates rather than toggling a filter in place, so you clear it by removing the page filter on the dashboard or using your browser's Back button. See [filter your data](/analytics-filters).
+    Click that page's row in the Pages report. TinyAnalytics opens the main dashboard already filtered to that page, carrying your date range and any other active filters with it, so you can read its sources, devices, and geography. The click navigates rather than toggling a filter in place, so you clear it by removing the page filter on the dashboard or using your browser's Back button. See [filter your data](/analytics-filters).
   </Accordion>
   <Accordion title="Why do two hostnames share one row in the Pages report?">
-    The report groups by path by default, so `example.com/pricing` and `app.example.com/pricing` combine into one `/pricing` row. Switch to the **URLs** tab to group by host and path together and see them separately. When your date range contains more than one hostname, tinyanalytics offers this switch in a banner above the report.
+    The report groups by path by default, so `example.com/pricing` and `app.example.com/pricing` combine into one `/pricing` row. Switch to the **URLs** tab to group by host and path together and see them separately. When your date range contains more than one hostname, TinyAnalytics offers this switch in a banner above the report.
   </Accordion>
   <Accordion title="What's the difference between Show full URL and the URLs tab?">
     **Show full URL** adds a representative hostname to each displayed path but keeps traffic grouped by path. The **URLs** tab changes the grouping to hostname plus path, so the same path on two hostnames becomes two rows with separate metrics.

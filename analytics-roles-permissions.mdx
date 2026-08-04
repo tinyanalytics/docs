@@ -5,9 +5,9 @@ description: "Compare owner, admin, and member permissions for viewing analytics
 icon: "shield-halved"
 ---
 
-Every member of a tinyanalytics organization has one of three roles: **owner**, **admin**, or **member**. The role decides what they can do — from viewing analytics to managing sites, members, and the organization. Owners have full control, admins manage day-to-day, and members view the data they have access to.
+Every member of a TinyAnalytics organization has one of three roles: **owner**, **admin**, or **member**. The role decides what they can do — from viewing analytics to managing sites, members, and the organization. Owners have full control, admins manage day-to-day, and members view the data they have access to.
 
-## What are the three tinyanalytics roles?
+## What are the three TinyAnalytics roles?
 
 - **Owner** — full control, including renaming and deleting the organization. An organization can have more than one owner.
 - **Admin** — manages sites, settings, members, and teams, but can't rename or delete the organization.
@@ -22,13 +22,15 @@ Every member of a tinyanalytics organization has one of three roles: **owner**, 
 | Add, edit, and remove sites | ✓ | ✓ | — |
 | Edit site settings and tracking configuration | ✓ | ✓ | — |
 | Create goals, funnels, annotations, and shared segments/cohorts | ✓ | ✓ | — |
+| Create and operate workflows | ✓ | ✓ | — |
+| Manage notification destinations | ✓ | ✓ | — |
 | Invite, remove, and re-role members | ✓ | ✓ | — |
 | Create and manage teams; restrict members | ✓ | ✓ | — |
 | Connect Google Search Console; run imports | ✓ | ✓ | — |
 | Rename the organization | ✓ | — | — |
 | Delete the organization | ✓ | — | — |
 
-Anything that creates or changes shared data requires the **owner** or **admin** role — that's the "requires an admin" note you'll see throughout these guides. A plain member can always view the reports they have access to and save their own personal [segments](/saved-analytics-segments) and [cohorts](/behavioral-cohort-analysis).
+Anything that creates or changes shared data requires the **owner** or **admin** role — that's the "requires an admin" note you'll see throughout these guides. A plain member can always view the reports and [workflow](/analytics-workflows) status they have access to and save their own personal [segments](/saved-analytics-segments) and [cohorts](/behavioral-cohort-analysis).
 
 ## Rules that protect ownership
 
@@ -43,7 +45,7 @@ Role controls *what* you can do; [teams](/team-site-access) control *which sites
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="What's the difference between an owner and an admin in tinyanalytics?">
+  <Accordion title="What's the difference between an owner and an admin in TinyAnalytics?">
     An **owner** has full control, including renaming and deleting the organization. An **admin** can do everything else — manage sites, settings, members, and teams — but can't rename or delete the organization. An organization can have more than one owner.
   </Accordion>
   <Accordion title="What can a plain member do without admin rights?">
@@ -71,5 +73,8 @@ Role controls *what* you can do; [teams](/team-site-access) control *which sites
   </Card>
   <Card title="Account settings" icon="user-gear" href="/tinyanalytics-account-settings">
     Your personal profile and password.
+  </Card>
+  <Card title="Notification destinations" icon="paper-plane" href="/notification-destinations">
+    See the organization-wide delivery endpoints owners and admins manage.
   </Card>
 </Columns>

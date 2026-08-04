@@ -1,8 +1,8 @@
-# tinyanalytics brand & marketing documentation
+# TinyAnalytics brand & marketing documentation
 
 **Version:** 1.1  
 **Last updated:** July 28, 2026  
-**Owner:** tinyanalytics product and marketing  
+**Owner:** TinyAnalytics product and marketing
 **Status:** Draft for product-owner review  
 **Source basis:** Public documentation, shipped product capability map, current plan catalog, and the positioning brief supplied for this document
 
@@ -33,11 +33,11 @@
 
 **Privacy-friendly web and product analytics**
 
-tinyanalytics belongs between simple web analytics and complex product analytics suites. It keeps the installation and daily dashboard approachable while covering the deeper work growing teams usually add separate products for: funnels, retention, feature flags, experiments, surveys, revenue, SQL analysis, alerts, and uptime monitoring.
+TinyAnalytics belongs between simple web analytics and complex product analytics suites. It keeps the installation and daily dashboard approachable while covering the deeper work growing teams usually add separate products for: funnels, retention, feature flags, experiments, surveys, revenue, SQL analysis, alerts, and uptime monitoring.
 
 ### Core positioning statement
 
-**tinyanalytics is privacy-friendly web and product analytics for teams that want clear answers without cookies, a complicated analytics stack, or a data-sharing bargain. One tracking script gives you traffic, behavior, conversion, revenue, AI discovery, experimentation, and monitoring in one hosted platform.**
+**TinyAnalytics is privacy-friendly web and product analytics for teams that want clear answers without cookies, a complicated analytics stack, or a data-sharing bargain. One tracking script gives you traffic, behavior, conversion, revenue, AI discovery, experimentation, and monitoring in one hosted platform.**
 
 ### Single promise
 
@@ -67,17 +67,17 @@ Use this as the short brand line. Use the positioning promise when more context 
 
 ### One-liner
 
-**tinyanalytics combines cookieless web analytics, product analytics, AI discovery reports, revenue, experiments, and monitoring in one easy-to-use platform.**
+**TinyAnalytics combines cookieless web analytics, product analytics, AI discovery reports, revenue, experiments, and monitoring in one easy-to-use platform.**
 
 ### Elevator pitch
 
 Most teams start with a traffic dashboard, then add separate products for funnels, feature flags, surveys, revenue, uptime, and AI traffic. The result is more scripts, more dashboards, and more data to reconcile.
 
-tinyanalytics keeps the setup small and the answers together. Add one tracking script—under 6.5 KB gzipped—to measure pageviews, sessions, events, journeys, funnels, retention, revenue, experiments, AI referrals, AI crawlers, and more. It sets no analytics cookies and stores no raw IP addresses in analytics data. You get a dashboard that is easy to start with and deep enough to keep.
+TinyAnalytics keeps the setup small and the answers together. Add one tracking script—under 6.5 KB gzipped—to measure pageviews, sessions, events, journeys, funnels, retention, revenue, experiments, AI referrals, AI crawlers, and more. It sets no analytics cookies and stores no raw IP addresses in analytics data. You get a dashboard that is easy to start with and deep enough to keep.
 
 ### Value proposition
 
-tinyanalytics helps you:
+TinyAnalytics helps you:
 
 - **See the whole journey:** connect acquisition, behavior, conversion, and revenue in one reporting model.
 - **Start quickly:** install one script and collect pageviews plus common interactions automatically.
@@ -102,7 +102,7 @@ Use messages in this order:
 
 ### Positioning guardrails
 
-- Write **tinyanalytics** as one word and lowercase, even at the start of a sentence.
+- Write **TinyAnalytics** as one word with a capital **T** and **A**, including at the start of a sentence.
 - Use **site** for a tracked website or app.
 - Say **privacy-friendly by design**, not “100% GDPR compliant.”
 - Say many sites can avoid an analytics-cookie banner, then note that consent requirements depend on jurisdiction and on the data the customer chooses to send.
@@ -142,7 +142,7 @@ The simplicity claim is supported by product behavior:
 
 **Message:** “Useful analytics without cookies or raw IP storage.”
 
-tinyanalytics does not bolt privacy controls onto a persistent tracker. Its default collection model is cookieless:
+TinyAnalytics does not bolt privacy controls onto a persistent tracker. Its default collection model is cookieless:
 
 - Core anonymous analytics writes no cookie or anonymous analytics ID to the visitor’s device.
 - The server derives a one-way identifier from the request instead of storing the raw IP address.
@@ -163,7 +163,7 @@ Optional features persist only the state their behavior requires: `identify()` k
 
 **Legal line:**
 
-> tinyanalytics is designed to support privacy-friendly analytics. Your consent and compliance obligations still depend on your jurisdiction, configuration, and the data you choose to send.
+> TinyAnalytics is designed to support privacy-friendly analytics. Your consent and compliance obligations still depend on your jurisdiction, configuration, and the data you choose to send.
 
 ### 3. AI-native where it changes the answer
 
@@ -173,7 +173,7 @@ Optional features persist only the state their behavior requires: `identify()` k
 
 1. **AI traffic:** See visits from ChatGPT, Perplexity, Gemini, Claude, Copilot, and other assistants, including trends, revenue, and landing pages.
 2. **AI crawler visibility:** See GPTBot, ClaudeBot, PerplexityBot, and other AI crawlers separately from human visitors.
-3. **Ask AI for SQL:** Describe the analysis you want in plain English. tinyanalytics drafts a site-scoped, read-only query for review before it runs.
+3. **Ask AI for SQL:** Describe the analysis you want in plain English. TinyAnalytics drafts a site-scoped, read-only query for review before it runs.
 
 It also has a documentation meaning:
 
@@ -192,7 +192,7 @@ It also has a documentation meaning:
 
 **Message:** “Web analytics is the starting point, not the limit.”
 
-tinyanalytics combines:
+TinyAnalytics combines:
 
 - **Web analytics:** overview, realtime, pages, sessions, users, events, journeys, funnels, goals, retention, maps, channels, and Core Web Vitals.
 - **Product analytics:** custom events, identify, behavioral cohorts, feature flags, experiments, surveys, B2B account analytics, and custom dashboards.
@@ -250,7 +250,7 @@ This can become a strong trust differentiator when it is supported with the same
 
 **Message:** “Switch tools without resetting your story.”
 
-tinyanalytics can import history from:
+TinyAnalytics can import history from:
 
 - Google Analytics 4 through a connected Google account.
 - Plausible export files.
@@ -424,7 +424,7 @@ The first three are the strongest candidates for testing.
 **No cookies. No raw IP storage. No cross-site profile.**
 
 **Body:**  
-tinyanalytics derives a one-way visitor identifier on the server instead of writing an analytics ID to the browser. Raw IP addresses are not stored in analytics data. You get useful trends and multi-day analysis with less personal data to manage.
+TinyAnalytics derives a one-way visitor identifier on the server instead of writing an analytics ID to the browser. Raw IP addresses are not stored in analytics data. You get useful trends and multi-day analysis with less personal data to manage.
 
 **Supporting points:**
 
@@ -453,7 +453,7 @@ Add one under-6.5 KB script and see your first visit in Realtime. Pageviews, SPA
 - First-party proxy support
 
 **CTA:**  
-**Install tinyanalytics**
+**Install TinyAnalytics**
 
 ### Homepage section 3: Web and product analytics
 
@@ -518,7 +518,7 @@ Bring historical data from GA4, Plausible, Umami, or Simple Analytics. Keep your
 **Free analytics you can actually use.**
 
 **Body before exact limits are verified:**  
-Start with the core analytics, real traffic volume, and enough product features to evaluate tinyanalytics on your own site. Upgrade when your team or product needs more—not before you can see the value.
+Start with the core analytics, real traffic volume, and enough product features to evaluate TinyAnalytics on your own site. Upgrade when your team or product needs more—not before you can see the value.
 
 **Body after the current catalog is confirmed:**  
 Track up to 100,000 monthly pageviews across three sites, keep 180 days of queryable history, and use the complete core analytics dashboard for free.
@@ -532,7 +532,7 @@ Track up to 100,000 monthly pageviews across three sites, keep 180 days of query
 **Made in Europe. Hosted in Europe.**
 
 **Body after verification:**  
-tinyanalytics is built and hosted in the EU on European-owned infrastructure, so your analytics does not depend on a US-owned hosting layer.
+TinyAnalytics is built and hosted in the EU on European-owned infrastructure, so your analytics does not depend on a US-owned hosting layer.
 
 **Proof links required beside the claim:**
 
@@ -547,7 +547,7 @@ tinyanalytics is built and hosted in the EU on European-owned infrastructure, so
 **See what your site is doing—without tracking people.**
 
 **Body:**  
-Add tinyanalytics, open Realtime, and see your first visit in minutes.
+Add TinyAnalytics, open Realtime, and see your first visit in minutes.
 
 **Primary CTA:**  
 **Start free**
@@ -565,17 +565,17 @@ Privacy-friendly web and product analytics. No cookies—just traffic, funnels, 
 
 ### Medium description
 
-tinyanalytics is cookieless web and product analytics for teams that want clear answers without a complicated stack. Install one under-6.5 KB script to measure traffic, sessions, funnels, retention, revenue, AI referrals, experiments, surveys, and uptime. No analytics cookies, no raw IP storage, and a generous free plan.
+TinyAnalytics is cookieless web and product analytics for teams that want clear answers without a complicated stack. Install one under-6.5 KB script to measure traffic, sessions, funnels, retention, revenue, AI referrals, experiments, surveys, and uptime. No analytics cookies, no raw IP storage, and a generous free plan.
 
 ### Long description
 
-tinyanalytics helps you understand how people find, use, and pay for your product without building a surveillance-heavy analytics stack.
+TinyAnalytics helps you understand how people find, use, and pay for your product without building a surveillance-heavy analytics stack.
 
 Start with the metrics you need every day: visitors, sessions, pages, sources, campaigns, devices, journeys, and realtime activity. Go deeper with custom events, funnels, goals, retention, behavioral cohorts, feature flags, A/B experiments, surveys, B2B account analytics, and revenue from client events or Stripe.
 
 AI discovery is part of the product, not a generic label. The AI traffic report shows visits and revenue from assistants such as ChatGPT, Perplexity, Gemini, Claude, and Copilot. The Bots & AI crawlers report shows which model crawlers read your site while keeping that traffic out of your human metrics. When a standard report is not enough, Ask AI can draft a read-only, site-scoped SQL query from a plain-English question.
 
-The tracking script is under 6.5 KB gzipped and supports automatic pageviews, SPA routes, outbound links, downloads, common interactions, engagement, Web Vitals, and error tracking. tinyanalytics sets no analytics cookies and stores no raw IP addresses in analytics data. It uses a cookieless, one-way identifier for anonymous reporting and lets signed-in products attach their own stable IDs with `identify()`.
+The tracking script is under 6.5 KB gzipped and supports automatic pageviews, SPA routes, outbound links, downloads, common interactions, engagement, Web Vitals, and error tracking. TinyAnalytics sets no analytics cookies and stores no raw IP addresses in analytics data. It uses a cookieless, one-way identifier for anonymous reporting and lets signed-in products attach their own stable IDs with `identify()`.
 
 Your traffic, product, revenue, and reliability data stay in one hosted platform—with migration from GA4, Plausible, Umami, and Simple Analytics and a free plan designed for real sites.
 
@@ -624,11 +624,11 @@ Build proof in this order:
 
 Ask customers:
 
-- What did you use before tinyanalytics?
+- What did you use before TinyAnalytics?
 - What was difficult or missing?
 - How long did installation take?
 - Which report do you use most?
-- What did tinyanalytics replace?
+- What did TinyAnalytics replace?
 - Did the privacy model change your consent or review process?
 - What decision did the data help you make?
 - What specific result can we publish?
@@ -649,15 +649,15 @@ The current public site displays claims including “19,000 websites,” “56.6
 
 ## FAQs
 
-### What is tinyanalytics?
+### What is TinyAnalytics?
 
-tinyanalytics is a hosted, privacy-friendly web and product analytics platform. It combines traffic reports, events, funnels, retention, revenue, feature flags, experiments, surveys, AI discovery reports, and monitoring in one product.
+TinyAnalytics is a hosted, privacy-friendly web and product analytics platform. It combines traffic reports, events, funnels, retention, revenue, feature flags, experiments, surveys, AI discovery reports, and monitoring in one product.
 
-### Does tinyanalytics use cookies?
+### Does TinyAnalytics use cookies?
 
 Core anonymous analytics does not write analytics cookies or an anonymous analytics ID to the visitor’s device. The server derives a one-way cookieless identifier from the request instead. Optional product features can use purpose-specific browser storage.
 
-### Does tinyanalytics store IP addresses?
+### Does TinyAnalytics store IP addresses?
 
 Raw IP addresses are used in memory to derive a cookieless identifier and approximate location, then discarded. They are not written to analytics data.
 
@@ -665,11 +665,11 @@ Raw IP addresses are used in memory to derive a cookieless identifier and approx
 
 Core anonymous analytics sets no analytics cookies and stores no anonymous analytics ID in the browser. Your obligations still depend on your jurisdiction, configuration, the data you send, and the optional features you enable. Identification, feature flags, groups, surveys, and browser opt-out use purpose-specific browser storage. This is product information, not legal advice.
 
-### Is tinyanalytics GDPR compliant?
+### Is TinyAnalytics GDPR compliant?
 
-Avoid a blanket legal guarantee. tinyanalytics is designed to support privacy-friendly use: no analytics cookies, no raw IP storage, and no personal data by default. Compliance depends on how you configure the product, what data you send, and which laws apply to you.
+Avoid a blanket legal guarantee. TinyAnalytics is designed to support privacy-friendly use: no analytics cookies, no raw IP storage, and no personal data by default. Compliance depends on how you configure the product, what data you send, and which laws apply to you.
 
-### How does tinyanalytics count visitors without cookies?
+### How does TinyAnalytics count visitors without cookies?
 
 The server hashes the visitor’s IP address and browser user agent into a short, one-way identifier. This creates useful multi-day estimates without storing the raw IP or writing an ID to the browser.
 
@@ -677,15 +677,15 @@ The server hashes the visitor’s IP address and browser user agent into a short
 
 No. People on the same network and browser can merge, while one person changing networks or browsers can split. When signed-in accuracy matters, call `identify()` with your own stable internal user ID.
 
-### What makes tinyanalytics AI-native?
+### What makes TinyAnalytics AI-native?
 
 It measures visits from AI assistants, reports which AI crawlers read your site, and converts plain-English analytics questions into reviewable, read-only SQL. Its documentation is also structured for AI assistants and editor tools.
 
-### Can tinyanalytics tell me whether ChatGPT cited my page?
+### Can TinyAnalytics tell me whether ChatGPT cited my page?
 
 Not directly. The AI traffic report measures people who clicked through from an AI answer. The AI crawler report shows that a model crawler read a page. A crawl does not prove a citation, and a citation without a click is not visible through web analytics.
 
-### Is tinyanalytics only for web analytics?
+### Is TinyAnalytics only for web analytics?
 
 No. It also includes product analytics, feature flags, experiments, surveys, B2B account analysis, client and Stripe revenue, alerts, scheduled reports, uptime monitoring, and custom dashboards.
 
@@ -693,27 +693,27 @@ No. It also includes product analytics, feature flags, experiments, surveys, B2B
 
 The browser tracking script is under 6.5 KB gzipped. Optional capabilities such as Web Vitals and surveys load only when enabled.
 
-### Does tinyanalytics work with single-page apps?
+### Does TinyAnalytics work with single-page apps?
 
 Yes. It tracks client-side navigation and has installation guides for Next.js, React, Vue, Nuxt, Angular, SvelteKit, Astro, Gatsby, Remix, and other platforms.
 
-### Does tinyanalytics support mobile apps?
+### Does TinyAnalytics support mobile apps?
 
 Yes. The React Native SDK tracks screens, custom events, errors, and identified users and sends them to the same dashboard as your sites.
 
 ### Can I import historical analytics?
 
-Yes. tinyanalytics imports from GA4, Plausible, Umami, and Simple Analytics. Some dimensions can be approximate or unavailable depending on the source.
+Yes. TinyAnalytics imports from GA4, Plausible, Umami, and Simple Analytics. Some dimensions can be approximate or unavailable depending on the source.
 
 ### Is there a free plan?
 
-Yes. tinyanalytics is designed to offer a generous free plan with the core analytics product. Publish exact limits only after the live pricing and product catalog are reconciled.
+Yes. TinyAnalytics is designed to offer a generous free plan with the core analytics product. Publish exact limits only after the live pricing and product catalog are reconciled.
 
-### Is tinyanalytics open source?
+### Is TinyAnalytics open source?
 
-No. tinyanalytics is a closed-source, hosted service. If auditing the source or self-hosting is a requirement, an open-source alternative may be a better fit. tinyanalytics earns trust through precise documentation of what it stores, what it does not store, and how its privacy mechanisms work.
+No. TinyAnalytics is a closed-source, hosted service. If auditing the source or self-hosting is a requirement, an open-source alternative may be a better fit. TinyAnalytics earns trust through precise documentation of what it stores, what it does not store, and how its privacy mechanisms work.
 
-### Where is tinyanalytics hosted?
+### Where is TinyAnalytics hosted?
 
 The approved marketing direction is “made and hosted in the EU on European-owned infrastructure.” Publish the provider, region, and subprocessor details before using that claim publicly. The current public website still describes London/UK hosting and must be updated.
 
@@ -736,7 +736,7 @@ Most analytics tools force a choice:
 
 Simple enough to use, or deep enough to keep.
 
-tinyanalytics is built for both.
+TinyAnalytics is built for both.
 
 One under-6.5 KB script gives you:
 
@@ -758,7 +758,7 @@ Understand your traffic and your product without tracking people.
 
 “Cookieless” should explain a mechanism, not hide one.
 
-tinyanalytics:
+TinyAnalytics:
 
 - Writes no analytics ID to the browser
 - Stores no raw IP address in analytics data
@@ -777,7 +777,7 @@ AI discovery has two sides:
 1. Crawlers reading your pages
 2. People clicking through from AI answers
 
-tinyanalytics reports both—separately.
+TinyAnalytics reports both—separately.
 
 See GPTBot, ClaudeBot, PerplexityBot, and other crawlers without inflating human traffic. Then see sessions, landing pages, trends, and revenue from ChatGPT, Perplexity, Gemini, Claude, Copilot, and more.
 
@@ -789,7 +789,7 @@ Web analytics tells you how people arrived.
 
 Product analytics tells you what happened next.
 
-tinyanalytics connects both:
+TinyAnalytics connects both:
 
 - Custom events
 - Funnels
@@ -806,7 +806,7 @@ One install. One identity model. One dashboard.
 
 Changing analytics tools should not erase your baseline.
 
-tinyanalytics imports history from:
+TinyAnalytics imports history from:
 
 - GA4
 - Plausible
@@ -821,7 +821,7 @@ Keep the past. Change what you collect next.
 
 Free should mean “use the product,” not “look at a locked dashboard.”
 
-tinyanalytics keeps core analytics available on its free plan so you can measure a real site before deciding whether your team needs more.
+TinyAnalytics keeps core analytics available on its free plan so you can measure a real site before deciding whether your team needs more.
 
 **[TODO: add exact limits after pricing is confirmed]**
 
@@ -829,7 +829,7 @@ tinyanalytics keeps core analytics available on its free plan so you can measure
 
 **Ad 1 — privacy**
 
-Understand your traffic without analytics cookies. tinyanalytics gives you web and product insight with no raw IP storage and one small script.
+Understand your traffic without analytics cookies. TinyAnalytics gives you web and product insight with no raw IP storage and one small script.
 
 **CTA:** Start free
 
@@ -849,7 +849,7 @@ See which AI crawlers read your site and which AI assistants send visitors. Keep
 
 Leave GA4 without leaving your history behind. Import past traffic, then continue with cookieless analytics.
 
-**CTA:** Switch to tinyanalytics
+**CTA:** Switch to TinyAnalytics
 
 ### Email subject lines
 
@@ -868,7 +868,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A site owner needs acquisition and content insights without adding analytics cookies or a complex consent workflow.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Install the tracking script.
 - Measure visitors, sessions, pages, sources, campaigns, devices, and locations.
@@ -882,7 +882,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A product team has web traffic data but cannot see activation, conversion, or retention.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Send custom events for key actions.
 - Use `identify()` for signed-in users.
@@ -896,7 +896,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A content team cannot separate AI referrals from ordinary referral traffic or connect crawler activity to human visits.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Monitor AI sessions and their landing pages.
 - Compare assistant trends over time.
@@ -910,7 +910,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A team sees purchases in Stripe and traffic in analytics but cannot connect the two.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Send client purchase events or connect Stripe.
 - Measure total and net revenue, refunds, orders, and paying sessions.
@@ -923,7 +923,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A team uses one tool for flags, another for experiments, and another for conversion reporting.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Create a multivariate feature flag.
 - Record exposure when the visitor experiences the variant.
@@ -936,7 +936,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** An agency or multi-brand company repeats reporting work and struggles with access control.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Organize sites under one organization.
 - Grant access through teams and roles.
@@ -950,11 +950,11 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A team wants a simpler, cookieless platform but needs historical context.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Connect GA4 and select the property and date range.
 - Import the available historical reports.
-- Install tinyanalytics for new collection.
+- Install TinyAnalytics for new collection.
 - Compare imported history with new data in the same dashboard.
 
 **Outcome:** The team changes its future collection model without resetting every benchmark.
@@ -963,7 +963,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A product has both a website and a React Native app, with behavior split across tools.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Track the site with the browser script.
 - Track the app with the React Native SDK.
@@ -976,7 +976,7 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 **Problem:** A traffic drop could mean lower demand, a broken page, or an outage.
 
-**tinyanalytics approach:**
+**TinyAnalytics approach:**
 
 - Track traffic and conversion.
 - Monitor HTTP or TCP availability.
@@ -992,18 +992,18 @@ Leave GA4 without leaving your history behind. Import past traffic, then continu
 
 ### Positioning principle
 
-Do not claim tinyanalytics wins every comparison. It does not.
+Do not claim TinyAnalytics wins every comparison. It does not.
 
 - Google Analytics is deeply connected to Google’s advertising ecosystem.
 - Plausible is open source, EU-hosted, and has a smaller tracking script.
 - Umami is open source and now offers a broad analytics surface, including funnels, retention, revenue, performance, heatmaps, and session replay.
-- tinyanalytics is closed-source and hosted-only.
+- TinyAnalytics is closed-source and hosted-only.
 
 The defensible position is the combination of **simplicity, cookieless identity, AI discovery, product analytics, monitoring, and a meaningful free tier**.
 
 ### At a glance
 
-| Capability | tinyanalytics | Google Analytics 4 | Plausible | Umami |
+| Capability | TinyAnalytics | Google Analytics 4 | Plausible | Umami |
 | --- | --- | --- | --- | --- |
 | Cookieless default | Yes | No; GA4 JavaScript uses first-party cookies | Yes | Yes |
 | Raw IP stored in analytics data | No | Different collection model; verify per Google policy | No personal data by stated design | No personal data by stated design |
@@ -1012,7 +1012,7 @@ The defensible position is the combination of **simplicity, cookieless identity,
 | Open source | No | No | Yes | Yes |
 | Web analytics | Yes | Yes | Yes | Yes |
 | Product analytics depth | Events, funnels, retention, cohorts, flags, experiments, surveys, B2B accounts | Broad | Focused web analytics | Broad and expanding |
-| AI traffic report | Yes | Not a first-class tinyanalytics-equivalent report | Verify current product | Verify current product |
+| AI traffic report | Yes | Not a first-class TinyAnalytics-equivalent report | Verify current product | Verify current product |
 | AI crawler report | Yes | Verify current product | Verify current product | Verify current product |
 | Natural-language to scoped SQL | Yes | Different exploration model | Verify current product | Verify current product |
 | Monitoring and alerts | Uptime, analytics alerts, scheduled reports | Different product ecosystem | Scheduled reports and related features; verify current scope | Verify current scope |
@@ -1025,16 +1025,16 @@ The defensible position is the combination of **simplicity, cookieless identity,
 
 **Recommended line:**
 
-> Google Analytics connects deeply to Google’s advertising ecosystem and uses first-party cookies in its standard JavaScript setup. tinyanalytics gives you web and product analytics without analytics cookies, with a smaller install and a dashboard designed to answer the daily questions first.
+> Google Analytics connects deeply to Google’s advertising ecosystem and uses first-party cookies in its standard JavaScript setup. TinyAnalytics gives you web and product analytics without analytics cookies, with a smaller install and a dashboard designed to answer the daily questions first.
 
 **Do not say:**
 
 - “Google Analytics is illegal.”
 - “GA4 always requires consent everywhere.”
-- “tinyanalytics is more accurate.”
+- “TinyAnalytics is more accurate.”
 - “Google sells your analytics data.”
 
-**Trade-off to acknowledge:** Teams centered on Google Ads and the wider Google marketing stack may value GA4’s native ecosystem more than tinyanalytics’ privacy and simplicity.
+**Trade-off to acknowledge:** Teams centered on Google Ads and the wider Google marketing stack may value GA4’s native ecosystem more than TinyAnalytics’ privacy and simplicity.
 
 ### vs Plausible
 
@@ -1042,14 +1042,14 @@ The defensible position is the combination of **simplicity, cookieless identity,
 
 **Recommended line:**
 
-> Plausible is an excellent open-source, EU-hosted choice for focused web analytics. tinyanalytics is for teams that want that cookieless starting point plus product analytics, AI traffic and crawler reports, feature flags, experiments, surveys, B2B analytics, and monitoring in one hosted platform.
+> Plausible is an excellent open-source, EU-hosted choice for focused web analytics. TinyAnalytics is for teams that want that cookieless starting point plus product analytics, AI traffic and crawler reports, feature flags, experiments, surveys, B2B analytics, and monitoring in one hosted platform.
 
 **Trade-offs to acknowledge:**
 
-- Plausible is open source; tinyanalytics is not.
-- Plausible can be self-hosted; tinyanalytics cannot.
-- Plausible publicly documents a 2.5 KB gzipped script; tinyanalytics is under 6.5 KB.
-- Plausible already publishes detailed EU infrastructure evidence. tinyanalytics must publish its own before using an equivalent claim.
+- Plausible is open source; TinyAnalytics is not.
+- Plausible can be self-hosted; TinyAnalytics cannot.
+- Plausible publicly documents a 2.5 KB gzipped script; TinyAnalytics is under 6.5 KB.
+- Plausible already publishes detailed EU infrastructure evidence. TinyAnalytics must publish its own before using an equivalent claim.
 
 ### vs Umami
 
@@ -1057,7 +1057,7 @@ The defensible position is the combination of **simplicity, cookieless identity,
 
 **Recommended line:**
 
-> Umami is an open-source, privacy-focused analytics platform with a broad and growing report set. tinyanalytics differentiates through its hosted-only simplicity, AI traffic and crawler reporting, natural-language SQL workflow, integrated feature delivery and experimentation, revenue, monitoring, and a product designed to keep those jobs in one organization.
+> Umami is an open-source, privacy-focused analytics platform with a broad and growing report set. TinyAnalytics differentiates through its hosted-only simplicity, AI traffic and crawler reporting, natural-language SQL workflow, integrated feature delivery and experimentation, revenue, monitoring, and a product designed to keep those jobs in one organization.
 
 **Trade-offs to acknowledge:**
 
@@ -1078,7 +1078,7 @@ The defensible position is the combination of **simplicity, cookieless identity,
 
 ### Summary competitive statement
 
-**tinyanalytics is the privacy-friendly analytics platform for teams that want an easy web-analytics start without giving up product analytics, AI discovery, experimentation, revenue, and monitoring as they grow.**
+**TinyAnalytics is the privacy-friendly analytics platform for teams that want an easy web-analytics start without giving up product analytics, AI discovery, experimentation, revenue, and monitoring as they grow.**
 
 ---
 
@@ -1187,11 +1187,11 @@ The defensible position is the combination of **simplicity, cookieless identity,
 
 ### Approved naming
 
-- **Brand:** tinyanalytics
+- **Brand:** TinyAnalytics
 - **Website:** `tinyanalytics.io`
 - **Dashboard:** `dash.tinyanalytics.io`
 - **Documentation:** `tinyanalytics.io/docs`
-- **Product noun:** tinyanalytics
+- **Product noun:** TinyAnalytics
 - **Tracked entity:** site
 
 ### Handle strategy
@@ -1240,7 +1240,7 @@ The current public website claims session recording, heatmaps, London/UK hosting
 - Replace UK/London hosting claims only after the EU infrastructure facts are verified.
 - Replace blanket legal guarantees with the approved privacy mechanism and legal caveat.
 - Update the product surface to include web analytics, product analytics, AI reporting, revenue, and monitoring.
-- Use lowercase **tinyanalytics** consistently.
+- Use **TinyAnalytics** with a capital **T** and **A** consistently.
 
 #### 2. Reconcile pricing and Free-plan limits
 
@@ -1389,7 +1389,7 @@ Possible measures:
 This document was built from a page-by-page inventory of the public documentation navigation and its 95+ guides/reference pages, with close reading of the core positioning and high-risk claims:
 
 - [Documentation introduction](./index.mdx)
-- [How tinyanalytics works](./how-it-works.mdx)
+- [How TinyAnalytics works](./how-it-works.mdx)
 - [Privacy and GDPR](./resources/privacy.mdx)
 - [Cookieless identity](./resources/cookieless-identity.mdx)
 - [Data handling](./resources/data-handling.mdx)
@@ -1410,7 +1410,7 @@ The product source repository contains self-hosting implementation material, but
 
 ### External sources checked on July 28, 2026
 
-- [Current tinyanalytics public website](https://tinyanalytics.io/) — treated as a legacy surface to audit, not a source of shipped product behavior.
+- [Current TinyAnalytics public website](https://tinyanalytics.io/) — treated as a legacy surface to audit, not a source of shipped product behavior.
 - [Google Analytics 4 cookie usage](https://support.google.com/analytics/answer/11397207) — Google documents first-party cookies in the standard GA4 JavaScript setup.
 - [Plausible privacy-focused analytics](https://plausible.io/privacy-focused-web-analytics) — official statements on cookieless analytics, open source, script size, and EU infrastructure.
 - [Umami product overview](https://docs.umami.is/docs/about) — official statements on privacy, open source, cloud/self-hosting, and its current feature surface.
@@ -1434,7 +1434,7 @@ The first two require infrastructure and subprocessor documentation. The third h
 
 **Version 1.0 — July 28, 2026**
 
-- Rebuilt the TechnologyChecker template for tinyanalytics.
+- Rebuilt the TechnologyChecker template for TinyAnalytics.
 - Defined the single promise and five primary differentiators.
 - Added evidence-backed website, product, FAQ, social, use-case, and competitor copy.
 - Added the EU hosting claim as owner-supplied positioning with a publication gate.

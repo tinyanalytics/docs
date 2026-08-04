@@ -1,7 +1,7 @@
 ---
 title: "Analytics Site Settings"
 sidebarTitle: "Site settings"
-description: "Manage a tinyanalytics site: its name, reporting settings, Stripe integration, visibility, traffic exclusions, organization, and deletion."
+description: "Manage a TinyAnalytics site: its name, reporting settings, Stripe integration, visibility, traffic exclusions, organization, and deletion."
 icon: "gear"
 ---
 
@@ -35,7 +35,7 @@ A site can be in one of two states:
 Setting a zone makes it canonical for the whole team, so two teammates in different countries read the same daily totals. Sites created in the dashboard start with the creator's browser time zone already filled in; sites created through the API start with no zone set.
 
 <Warning>
-  **Changing the reporting timezone re-buckets your historical charts.** Past daily totals and chart shapes can shift, because days are grouped by different boundaries. Your stored event data is never altered — only how it's grouped into days. tinyanalytics asks you to confirm before applying the change.
+  **Changing the reporting timezone re-buckets your historical charts.** Past daily totals and chart shapes can shift, because days are grouped by different boundaries. Your stored event data is never altered — only how it's grouped into days. TinyAnalytics asks you to confirm before applying the change.
 </Warning>
 
 <Note>
@@ -54,6 +54,10 @@ Two tabs shape what data comes in:
 - **Exclusions** — drop traffic you don't want counted, by IP, country, path, hostname, or user agent, and toggle bot blocking. The same tab holds **Referrer Exclusions**, which reclassify a referrer as Direct instead of dropping the visit. See [exclude traffic](/exclude-traffic-from-analytics).
 
 You can also **import** historical data on the Import tab — see the [migration overview](/migrate-analytics-data-to-tinyanalytics).
+
+## Where do I manage notification destinations?
+
+Notification destinations are organization-wide, so they do not live in a site's settings. Open the account menu and choose **Notification destinations** to manage the email, Slack, Discord, and webhook endpoints shared by [alerts](/analytics-alerts), [uptime monitoring](/website-api-uptime-monitoring), and [workflows](/analytics-workflows).
 
 ## Move a site to another organization
 
@@ -83,7 +87,7 @@ You can move a site — with all its history — into another [organization](/an
 
 ## How do I delete a site?
 
-The **Danger Zone** deletes a site and its data permanently. tinyanalytics asks you to confirm. If you only want to stop collecting for a while, remove the [tracking snippet](/install-tinyanalytics-tracking-script) from your site instead of deleting.
+The **Danger Zone** deletes a site and its data permanently. TinyAnalytics asks you to confirm. If you only want to stop collecting for a while, remove the [tracking snippet](/install-tinyanalytics-tracking-script) from your site instead of deleting.
 
 <Danger>
   Deleting a site removes the site and all of its data permanently. This can't be undone.
@@ -95,16 +99,16 @@ The **Danger Zone** deletes a site and its data permanently. tinyanalytics asks 
   <Accordion title="Does changing a site's domain break my tracking?">
     No. The domain is a label for your own reference — tracking works by **site ID**, not by matching the domain. You can rename the site and change its domain in **Settings** without touching the [tracking snippet](/install-tinyanalytics-tracking-script).
   </Accordion>
-  <Accordion title="Can I move a tinyanalytics site to another organization?">
+  <Accordion title="Can I move a TinyAnalytics site to another organization?">
     Yes, with all its history, from the site's **Settings → General**. You need to be an **owner or admin of both** the source and destination organization. The site keeps its ID, and the move is reversible — move it back the same way.
   </Accordion>
   <Accordion title="What happens to team access when I move a site?">
     Moving a site **clears its team-access grants**. Members of the old organization who aren't in the destination organization lose access to the site. See [organizations & members](/analytics-organizations-members) for how access is granted.
   </Accordion>
   <Accordion title="What happens if I change my site's reporting timezone?">
-    Your historical charts re-bucket to the new zone's day boundaries, so past daily totals and chart shapes can shift. The stored event data is unchanged — only how it's grouped into days. [Scheduled reports](/scheduled-analytics-reports) also start running on the new zone's boundaries. tinyanalytics asks you to confirm before applying the change.
+    Your historical charts re-bucket to the new zone's day boundaries, so past daily totals and chart shapes can shift. The stored event data is unchanged — only how it's grouped into days. [Scheduled reports](/scheduled-analytics-reports) also start running on the new zone's boundaries. TinyAnalytics asks you to confirm before applying the change.
   </Accordion>
-  <Accordion title="What timezone does tinyanalytics use if I never set one?">
+  <Accordion title="What timezone does TinyAnalytics use if I never set one?">
     Each viewer sees dates in their own browser time zone, so "today" means their today, and [scheduled reports](/scheduled-analytics-reports) run on UTC. Setting a **Reporting timezone** on the site's **Settings → General** tab replaces both with one zone that's canonical for the whole team.
   </Accordion>
   <Accordion title="How do I stop collecting data without deleting my site?">
@@ -129,5 +133,8 @@ The **Danger Zone** deletes a site and its data permanently. tinyanalytics asks 
   </Card>
   <Card title="Connect Stripe" icon="credit-card" href="/stripe-revenue-analytics">
     Receive verified charges and refunds.
+  </Card>
+  <Card title="Notification destinations" icon="paper-plane" href="/notification-destinations">
+    Manage organization-wide alert and workflow delivery.
   </Card>
 </Columns>

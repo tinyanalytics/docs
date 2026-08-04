@@ -1,20 +1,20 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
-  "name": "tinyanalytics",
-  "description": "Learn how to understand traffic and product behavior without analytics cookies using tinyanalytics: web and product analytics, AI discovery, revenue, experiments, monitoring, and API access.",
+  "name": "TinyAnalytics",
+  "description": "Learn how to understand traffic and product behavior without analytics cookies using TinyAnalytics: web and product analytics, AI discovery, revenue, experiments, monitoring, and API access.",
   "seo": {
     "indexing": "navigable",
     "metatags": {
-      "author": "tinyanalytics",
-      "og:site_name": "tinyanalytics documentation",
+      "author": "TinyAnalytics",
+      "og:site_name": "TinyAnalytics documentation",
       "og:locale": "en_US",
       "twitter:card": "summary_large_image",
       "theme-color": "#006420",
       "canonical": "https://tinyanalytics.io/docs"
     },
     "organization": {
-      "name": "tinyanalytics"
+      "name": "TinyAnalytics"
     }
   },
   "colors": {
@@ -484,6 +484,26 @@
     {
       "source": "/guides/scheduled-reports",
       "destination": "/scheduled-analytics-reports",
+      "permanent": true
+    },
+    {
+      "source": "/workflows",
+      "destination": "/analytics-workflows",
+      "permanent": true
+    },
+    {
+      "source": "/guides/workflows",
+      "destination": "/analytics-workflows",
+      "permanent": true
+    },
+    {
+      "source": "/notifications",
+      "destination": "/notification-destinations",
+      "permanent": true
+    },
+    {
+      "source": "/guides/notification-destinations",
+      "destination": "/notification-destinations",
       "permanent": true
     },
     {
@@ -1226,6 +1246,8 @@
                 "pages": [
                   "scheduled-analytics-reports",
                   "analytics-alerts",
+                  "analytics-workflows",
+                  "notification-destinations",
                   "website-api-uptime-monitoring",
                   "trackable-short-links"
                 ]
