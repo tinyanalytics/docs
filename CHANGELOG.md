@@ -7,7 +7,41 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Added
+
+- **Heatmaps page (2026-08-10, product decision 0287, sync marker advanced 11300b3 →
+  6ab578b):** new [website-heatmap-analytics.mdx](website-heatmap-analytics.mdx) under
+  Web Analytics → Behavior & conversion — click, rage-click, and scroll maps with the
+  verbatim capture inventory (coordinates + path only; no selectors, text, input values,
+  query strings, DOM, or session recording), the per-site Settings → Tracking opt-in
+  (fail-closed, 90-day retention, ~1 KB lazy script), device-width bands, the live-iframe
+  preview with wireframe fallback, the SPA scroll-attribution caveat, and the three read
+  endpoints.
+
 ### Changed
+
+- **Notification destinations rewritten for the Slack OAuth connection (2026-08-05, product
+  decision 0284, sync pass 10k):**
+  [notification-destinations.mdx](notification-destinations.mdx) now documents **Add to
+  Slack** — connecting a workspace once, inviting the bot with `/invite @tinyanalytics`,
+  picking a channel from the live dropdown (private channels shown with a lock, unjoined
+  channels flagged), refreshing the ~1 hour channel cache, connecting multiple workspaces,
+  and disconnecting. Adds the caveat that disconnecting removes our stored token but does
+  **not** uninstall the app from Slack, and keeps the incoming-webhook path documented for
+  self-hosted instances without a Slack app.
+
+  **Published a correction.** The page previously described a Slack "optional channel label"
+  alongside the webhook URL. That field never worked — Slack ignores a channel sent with an
+  incoming-webhook message, so notifications always went to the webhook's own channel. The
+  correction is called out in a dated `<Note>` on the page, with what a reader should check
+  if they had filled the field in, rather than being silently edited away. The claim was
+  audited across analytics-workflows, analytics-alerts and website-api-uptime-monitoring;
+  those pages reference Slack only generically and needed no change.
+
+  Audited through product commit `9016a3c`. Ship together with the product commit that adds
+  the Slack integration; until that deploy **and** the Slack app credentials are set on the
+  instance, the destinations page shows only the incoming-webhook form the older text
+  described (minus the removed field).
 
 - **Workflows guide updated for the UX v2 redesign (2026-08-05, product decision 0282,
   sync pass 10j):** [analytics-workflows.mdx](analytics-workflows.mdx) now documents the

@@ -1,11 +1,11 @@
 ---
 title: "Notification Destinations for Alerts and Workflows"
 sidebarTitle: "Notification destinations"
-description: "Connect organization-wide email, Slack, Discord, or webhook destinations for analytics alerts, uptime incidents, and event-triggered workflows."
+description: "Connect organization-wide email, Slack, Discord, or webhook destinations for analytics alerts, uptime incidents, and event-triggered workflows. Connect Slack once and pick a channel from a list."
 icon: "paper-plane"
 ---
 
-Notification destinations are the organization-wide delivery endpoints used by analytics alerts, uptime incidents, and workflows. Configure an email address, Slack incoming webhook, Discord webhook, or generic webhook once, then reuse it across the organization.
+Notification destinations are the organization-wide delivery endpoints used by analytics alerts, uptime incidents, and workflows. Connect Slack, or configure an email address, Discord webhook, or generic webhook once, then reuse it across the organization.
 
 If you're an organization owner or admin, open the account menu and choose **Notification destinations**. You can also find it through Command-K. Destinations no longer live under Uptime or a site's settings because they belong to an organization, not to one site.
 
@@ -20,15 +20,77 @@ If you're an organization owner or admin, open the account menu and choose **Not
     Click **Create** on **Email**, **Slack**, **Discord**, or **Webhook**.
   </Step>
   <Step title="Enter the connection details">
-    Give the destination a recognizable name. Enter an email address, a Slack
-    incoming-webhook URL with an optional channel label, a Discord webhook URL,
-    or a generic webhook URL, depending on the type.
+    Give the destination a recognizable name. For Slack, pick a channel from the
+    dropdown (see [Connect Slack](#connect-slack) below). For the other types,
+    enter an email address, a Discord webhook URL, or a generic webhook URL.
   </Step>
   <Step title="Create and test it">
     Click **Create destination**, open its action menu, and choose **Test**. A
     successful test confirms that TinyAnalytics can reach it.
   </Step>
 </Steps>
+
+## Connect Slack
+
+Connecting a Slack workspace lets you choose a channel from a live list, and lets one
+connection serve as many channels as you need.
+
+<Steps>
+  <Step title="Add TinyAnalytics to Slack">
+    On **Notification destinations**, click **Add to Slack**, choose your workspace, and
+    approve the requested permissions. TinyAnalytics asks only for what it needs to list
+    channels and post messages — it cannot read your conversations.
+  </Step>
+  <Step title="Invite the bot to the channels you want">
+    In Slack, run `/invite @tinyanalytics` in each channel you plan to notify. The channel
+    picker marks channels the bot has not joined, and messages to those channels will fail
+    until you invite it.
+  </Step>
+  <Step title="Create a Slack destination">
+    Click **Create** on **Slack**, name the destination, and pick a channel. Private channels
+    appear with a lock icon if you can see them in Slack.
+  </Step>
+</Steps>
+
+Channel lists are cached for about an hour. After creating a channel or inviting the bot,
+click **Refresh** in the picker to pull the current list.
+
+To connect more than one workspace, click **Add another workspace**. Each destination then
+chooses which workspace it uses.
+
+### Disconnecting a workspace
+
+Disconnect a workspace from the **Slack workspaces** card. You must first remove or repoint
+any destinations still using it — TinyAnalytics will tell you which ones.
+
+<Warning>
+  Disconnecting removes the token TinyAnalytics stores, so it stops posting immediately. It
+  does **not** uninstall the app from Slack. To fully revoke access, also remove
+  TinyAnalytics from your workspace's app settings in Slack.
+</Warning>
+
+### Using a Slack incoming webhook instead
+
+If **Add to Slack** is not available — for example on a self-hosted instance without a Slack
+app configured — Slack destinations use an incoming-webhook URL instead. Create the webhook
+in Slack, then paste the URL into the destination.
+
+<Warning>
+  **An incoming webhook always posts to the single channel it was created for.** You choose
+  that channel in Slack when you create the webhook, and it cannot be changed from
+  TinyAnalytics. To notify a different channel, create a second webhook in Slack, or connect
+  your workspace with **Add to Slack** and pick channels from the list.
+</Warning>
+
+<Note>
+  **Correction (August 2026).** Earlier versions of TinyAnalytics showed an optional
+  **Channel** field on Slack webhook destinations, and this page described it. That field
+  never worked: Slack ignores a channel sent with an incoming-webhook message, so
+  notifications were always delivered to the webhook's own channel. The field has been
+  removed. If you had filled it in, your notifications were going to the webhook's channel,
+  not the one you typed — check that it is the channel you expect, and use **Add to Slack**
+  if you need to route to a different one. No configuration is needed to pick up the fix.
+</Note>
 
 ## Where each destination is used
 
@@ -46,7 +108,7 @@ The **Active destinations** table shows each destination's name, type, connectio
 
 - **Disable** or **Enable** delivery without deleting the configuration.
 - **Test** an enabled destination.
-- **Edit** its name or connection details.
+- **Edit** its name, connection details, or Slack channel.
 - **Delete** it permanently.
 
 <Warning>
@@ -65,6 +127,12 @@ Organization members can read the destinations available to features they can ac
   Open the destination's action menu and choose **Test**. The setup is complete
   when TinyAnalytics reports **Test notification sent** and the message arrives
   at the configured email address, Slack channel, Discord channel, or webhook.
+</Check>
+
+<Check>
+  For a Slack destination, confirm the message arrives in the channel named on the
+  destination row. If the test reports that the bot is not in the channel, run
+  `/invite @tinyanalytics` there and test again.
 </Check>
 
 ## Related

@@ -1191,6 +1191,7 @@
                 "expanded": false,
                 "pages": [
                   "user-journey-analytics",
+                  "website-heatmap-analytics",
                   "funnel-analytics",
                   "conversion-goal-tracking",
                   "user-retention-analytics",

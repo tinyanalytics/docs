@@ -894,10 +894,12 @@ editor this pass's walkthroughs replace — so **publish this docs update togeth
 product web deploy of `11300b3`**, not before it (0276: neither side is release-complete
 alone).
 
-**Current sync marker:** product commit `11300b3` (`feat(web): workflows UX v2 — guided
-creation dialog + view-first detail (0282)`, 2026-08-05). The latest deployed customer
-application commit is `bf8ee39` (workflows conflict-detector fix, 2026-08-04, runbook row
-`cf25553`).
+**Current sync marker:** product commit `6ab578b` (`feat(heatmaps): click/rage-click/scroll
+maps, coordinate-only (0287)`, 2026-08-10). Audited 11300b3..6ab578b: the only
+customer-visible changes were the 0285 onboarding docs-link swap (docs-side no-op — the
+links point INTO this site and all 27 targets were 200-verified product-side), the 0286
+overview read-performance work (internal, no behavior change), and the 0287 heatmaps
+feature documented in this pass ([website-heatmap-analytics.mdx](website-heatmap-analytics.mdx)).
 
 ---
 

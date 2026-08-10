@@ -1,0 +1,89 @@
+---
+title: "Website Heatmaps: Click, Rage-Click, and Scroll Maps"
+sidebarTitle: "Heatmaps"
+description: "See where visitors click and how far they scroll, rendered over your live page — without recording sessions, content, or anything a visitor typed."
+icon: "fire"
+---
+
+A heatmap shows you what your visitors *do* on a page: where they click, where they get stuck
+clicking, and how far down they actually scroll. TinyAnalytics renders all three over a live
+preview of your page, from your existing [tracking snippet](/install-tinyanalytics-tracking-script)
+— there's no extra code to add.
+
+Heatmaps here are deliberately different from session-replay tools: **nothing in the pipeline can
+carry content**. That's the whole point — heatmaps that don't record your users.
+
+## What exactly is captured?
+
+When click capture is enabled for a site, each click records exactly this — and nothing else:
+
+- two coordinate pairs (position in the viewport, position on the page),
+- the viewport and page size at the time,
+- whether the clicked element was pinned (a sticky header or floating button),
+- the click type (`click` or `rageclick`),
+- the page's path.
+
+No CSS selectors, no element text, no input values, no query strings, and no DOM or session
+recording. The [identify()](/user-identification-analytics) id never reaches the heatmap store,
+and click data expires automatically after **90 days**. Query strings are dropped before capture,
+and any paths you've configured the tracker to skip or mask are skipped and masked here too.
+
+## How do I turn it on?
+
+Click capture is **off by default**. Enable it per site under **Site Settings → Tracking →
+Heatmaps**. Once enabled, the tracker lazy-loads a small (~1 KB) capture script on your pages;
+while it's off, nothing loads and nothing is captured — sites that never opt in pay zero extra
+bytes. Turning the toggle off later stops capture immediately, server-side, even for pages that
+are still open.
+
+<Note>
+  Scroll maps don't need the toggle at all: they're computed from the engagement data your
+  tracker already collects, so they work **retroactively** — including for date ranges before you
+  ever opened the Heatmaps page.
+</Note>
+
+## The three map modes
+
+Open **Engagement → Heatmaps**, pick a page from the list (searchable, busiest first), and choose
+a mode:
+
+| Mode | Shows | Data source |
+| --- | --- | --- |
+| **Clicks** | an intensity map of where visitors click — red is hottest | captured click coordinates |
+| **Rage clicks** | where visitors click repeatedly in frustration (3+ clicks in the same spot within a second) | detected in the browser at capture time |
+| **Scroll** | the share of sessions that reached each 10% depth of the page | existing engagement data |
+
+The click modes also show a **fold line** — the median visitor's viewport bottom — with the share
+of clicks that happen below it, and a summary of total clicks and unique visitors. You can weight
+the map by raw clicks or by unique visitors.
+
+## Device width bands
+
+A click at x = 600 means something different on a phone than on a desktop monitor, so clicks are
+never mixed across device sizes. Each map renders one **band** — Mobile, Tablet, or Desktop —
+and only the clicks from viewports in that band, gently rescaled to the band's render width:
+
+| Band | Viewport width | Rendered at |
+| --- | --- | --- |
+| Mobile | under 768 px | 375 px |
+| Tablet | 768 – 1099 px | 768 px |
+| Desktop | 1100 px and up | 1440 px |
+
+## The page preview
+
+The map is drawn over a live `<iframe>` of your page. If your site doesn't allow embedding
+(a `frame-ancestors` policy or `X-Frame-Options` header), the map switches to a neutral
+**wireframe** background instead — the coordinates, hotspots, and fold line are unaffected. You
+can also switch between **Live page** and **Wireframe** manually from the preview header.
+
+<Note>
+  Scroll depth is recorded once per page load and attributed to the path the visitor left from,
+  so scroll maps are approximate for single-page apps that navigate client-side.
+</Note>
+
+## Reading the data over the API
+
+Three endpoints power the page and are available in the
+[API playground](/api-reference/api-playground): `GET /api/sites/:id/heatmap/pages` (which pages have
+click data), `GET /api/sites/:id/heatmap/clicks` (binned intensity points for one page, band, and
+click type), and `GET /api/sites/:id/heatmap/scroll` (cumulative scroll reach per 10% band).
