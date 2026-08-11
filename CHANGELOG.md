@@ -48,8 +48,10 @@ project adheres to semantic versioning where practical.
   **57-tool catalog / 50 default tools**, adds `get_user_traits` (keys|values|users modes),
   `merge_user_traits` (the recommended merge write; `update_user_traits` stays replace-all), the
   `check_tracking` `trait_key` identify() probe, trait-filter support on the report tools, and the
-  named-scope 403 troubleshooting row. Ship together with the person-attributes product deploy
-  (0276 paired gate); the sync marker does not advance until that commit lands.
+  named-scope 403 troubleshooting row. Shipped with the person-attributes product deploy
+  (product `2866629`, live 2026-08-11): the 0276 paired gate is met and the sync marker
+  advanced `db807b8` → `2866629` (also closing the session-replay hold — deployed 2026-08-10).
+  Recorded remaining gap: page-presence (product 0290) has no dedicated pages yet (held batch).
 - **Pre-existing drift fulfilled:** [user-analytics.mdx](user-analytics.mdx) already claimed
   "Segment by trait" — it now describes the shipped behavior (User trait filter, Traits Explorer
   "View filtered dashboard" action, identified-profile coverage).

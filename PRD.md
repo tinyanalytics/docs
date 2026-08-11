@@ -983,7 +983,10 @@ edit; add the links in a follow-up pass).
 audited with no public docs impact. **Session replay is documented against decision `0289` with
 its product commit pending** — the implementation is uncommitted in the product working tree at
 the time of this pass. Do NOT treat these pages as release-complete, and advance the marker to
-the session-replay commit SHA, once it lands and deploys (0276 paired gate).
+the session-replay commit SHA, once it lands and deploys (0276 paired gate). **RESOLVED
+2026-08-11: session replay deployed to production as `0abb477`+ (2026-08-10, release table
+row in the product wiki) — these pages are release-complete; the sync marker below now
+covers them.**
 
 ## 10m. Product-sync pass (2026-08-11 — Person attributes, decision 0292)
 
@@ -1016,12 +1019,14 @@ marker stays held (session replay above is also held).
   quickstart, how-it-works, GTM were already scoped); lawful-basis guidance added to
   `user-identification-analytics.mdx`.
 
-**Current sync marker:** unchanged at product commit
-`db807b88a01c0ac0bf8b89cc730344a10880b797` for released work. **Person attributes is documented
-against decision `0292` with its product deploy pending** — the code is committed through
-`2866629` but has not shipped to production. Do NOT treat these pages as release-complete, and
-advance the marker to the person-attributes deploy SHA once it lands (0276 paired gate); the
-session-replay hold in §10l applies independently.
+**Current sync marker:** product commit `2866629` (person-attributes wave) — **deployed to
+production 2026-08-11** (api+web; release-table row in the product wiki), so these pages are
+release-complete and the marker advances from `db807b88a01c0ac0bf8b89cc730344a10880b797`
+through `2866629` (covering session replay `0abb477`+, deployed 2026-08-10, per §10l's
+resolution). **Recorded gap, not silent:** page-presence (product decision `0290`, deployed
+`2d69a9f`) still has NO dedicated docs pages — the held batch; document it and note it here
+when that pass runs. The follow-up deploy-record commit `8647919` is docs-only
+(`Public docs impact: none`).
 
 ---
 
