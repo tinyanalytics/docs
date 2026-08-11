@@ -1,0 +1,336 @@
+---
+title: "Set up a first-party analytics proxy"
+sidebarTitle: "First-party proxy"
+description: "Serve TinyAnalytics tracking through a path on your own domain to reduce ad-blocker loss while preserving visitor identity and location accuracy."
+icon: "route"
+---
+
+A first-party proxy serves the TinyAnalytics tracking script and forwards its requests through a
+path on your own domain. Use it when ad blockers prevent requests to
+`dash.tinyanalytics.io`, while keeping the same cookieless collection and dashboard.
+
+The recommended setup maps one prefix such as `/stats` to TinyAnalytics and loads the tracking
+script from that prefix:
+
+```text
+https://yourdomain.com/stats/<path> → https://dash.tinyanalytics.io/<path>
+```
+
+Your proxy must strip `/stats`, preserve the remaining path, method, headers, and body, and pass
+the visitor's real IP address. TinyAnalytics uses the IP address and user agent in memory to derive
+its one-way cookieless visitor ID; it does not write the raw IP address to analytics data.
+
+## Prerequisites
+
+- A site with the [TinyAnalytics tracking script](/install-tinyanalytics-tracking-script).
+- Access to your hosting platform's rewrite or reverse-proxy configuration.
+- A path prefix on the tracked domain. Use a neutral prefix such as `/stats`, `/ping`, or `/tel`;
+  filter lists can block obvious names such as `/analytics`.
+
+## Configure the proxy
+
+<Steps>
+  <Step title="Choose a prefix and forwarding rule">
+    Forward every request under your prefix to the same path at
+    `https://dash.tinyanalytics.io`, after removing the prefix. Keep the wildcard scoped to that
+    prefix rather than forwarding your whole domain.
+
+    For example, `/stats/script.js` must reach `/script.js`, and `/stats/api/track` must reach
+    `/api/track`.
+  </Step>
+
+  <Step title="Add the rule on your hosting platform">
+    Choose the configuration that matches where your site runs.
+
+    <Tabs>
+      <Tab title="Next.js">
+        Add a rewrite in `next.config.js`, `next.config.mjs`, or `next.config.ts`:
+
+        ```js
+        export default {
+          async rewrites() {
+            return [
+              {
+                source: "/stats/:path*",
+                destination: "https://dash.tinyanalytics.io/:path*",
+              },
+            ];
+          },
+        };
+        ```
+
+        On a managed host, continue to the visitor-IP step below. If you run Next.js behind your
+        own Nginx or Caddy server, proxy there instead so the visitor header is explicit.
+      </Tab>
+
+      <Tab title="Vercel">
+        Add the rewrite to `vercel.json`:
+
+        ```json
+        {
+          "rewrites": [
+            {
+              "source": "/stats/:path*",
+              "destination": "https://dash.tinyanalytics.io/:path*"
+            }
+          ]
+        }
+        ```
+      </Tab>
+
+      <Tab title="Netlify">
+        Add a forced proxy rewrite to `netlify.toml`:
+
+        ```toml
+        [[redirects]]
+          from = "/stats/*"
+          to = "https://dash.tinyanalytics.io/:splat"
+          status = 200
+          force = true
+        ```
+      </Tab>
+
+      <Tab title="Nginx">
+        Add a location block. The trailing slash on `proxy_pass` removes the `/stats/` prefix:
+
+        ```nginx
+        location /stats/ {
+            proxy_pass https://dash.tinyanalytics.io/;
+            proxy_ssl_server_name on;
+            proxy_set_header Host dash.tinyanalytics.io;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+        ```
+      </Tab>
+
+      <Tab title="Caddy">
+        Use `handle_path` to remove the prefix before forwarding:
+
+        ```caddy
+        yourdomain.com {
+          handle_path /stats/* {
+            reverse_proxy https://dash.tinyanalytics.io {
+              header_up Host dash.tinyanalytics.io
+              header_up X-Real-IP {remote_host}
+            }
+          }
+
+          # Your site's other routes.
+        }
+        ```
+      </Tab>
+
+      <Tab title="Cloudflare Workers">
+        Bind a Worker to `yourdomain.com/stats/*` and forward Cloudflare's verified visitor address
+        as `X-Real-IP`:
+
+        ```js
+        export default {
+          async fetch(request) {
+            const incoming = new URL(request.url);
+            const upstream = new URL(
+              incoming.pathname.replace(/^\/stats/, "") + incoming.search,
+              "https://dash.tinyanalytics.io",
+            );
+
+            const headers = new Headers(request.headers);
+            const visitorIp = request.headers.get("CF-Connecting-IP");
+            if (visitorIp) {
+              headers.set("X-Real-IP", visitorIp);
+              headers.set("X-Forwarded-For", visitorIp);
+            }
+
+            return fetch(upstream, {
+              method: request.method,
+              headers,
+              body: ["GET", "HEAD"].includes(request.method) ? undefined : request.body,
+            });
+          },
+        };
+        ```
+      </Tab>
+
+      <Tab title="Another proxy">
+        Configure the equivalent of these four rules:
+
+        1. Match `https://yourdomain.com/stats/*`.
+        2. Remove `/stats` and forward the rest to `https://dash.tinyanalytics.io`.
+        3. Preserve the method, body, `Content-Type`, `User-Agent`, and response headers.
+        4. Set `X-Real-IP` to the visitor's address, or preserve it as the first
+           `X-Forwarded-For` entry and use the dashboard setting in the next step.
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Preserve the visitor address">
+    Prefer setting `X-Real-IP` to the address your hosting edge or reverse proxy verified. This
+    keeps cookieless visitor counts, location, device context, and bot detection tied to the
+    visitor rather than your proxy server.
+
+    If your platform can only preserve the visitor as the first `X-Forwarded-For` entry, open
+    **Settings → Exclusions** for the site and turn on **First-party proxy**. That setting makes
+    TinyAnalytics prefer the first forwarded address over the address of its own Cloudflare edge.
+
+    <Warning>
+      Leave **First-party proxy** off when you are not using this topology. A browser can forge
+      `X-Forwarded-For` unless a trusted proxy replaces or appends it, so enabling the setting on a
+      direct tracking setup would let visitors spoof their address.
+    </Warning>
+  </Step>
+
+  <Step title="Generate and deploy the proxied tracking script">
+    In TinyAnalytics, open **Settings → Tracking** and enter the full prefix URL in **Custom Domain
+    (Proxy)**, for example `https://yourdomain.com/stats`. Copy the regenerated tag and replace the
+    existing tracking script on your site:
+
+    ```html
+    <script
+      src="https://yourdomain.com/stats/script.js"
+      data-site-id="123"
+      defer
+    ></script>
+    ```
+
+    The tracker derives `https://yourdomain.com/stats` from its own `src`, so pageviews and other
+    browser requests use the same prefix automatically. The dashboard field composes the tag; the
+    deployed tag is the configuration, so publish your site after you copy it.
+  </Step>
+</Steps>
+
+## What does the proxy forward?
+
+A prefix-wide wildcard keeps the setup current as you enable optional tracker features. These are
+the current browser-facing paths:
+
+| Paths after your prefix | When they are used |
+| --- | --- |
+| `/script.js`, `/api/track` | Every tracked site. |
+| `/api/identify`, `/api/group-identify` | User identification, traits, and group analytics. |
+| `/script-vitals.js` | Web Vitals collection. |
+| `/api/site/:siteId/tracking-config`, `/api/site/:siteId/feature-flags/evaluate`, `/script-surveys.js` | Feature flags and surveys. |
+| `/script-heatmap.js`, `/api/heatmap` | Click and rage-click heatmaps. |
+| `/script-replay.js`, `/api/replay` | Session replay recording. |
+
+You do not need to list these paths separately when your `/stats/*` rule strips the prefix and
+forwards the remaining path unchanged. Preserve `OPTIONS` requests and upstream response headers if
+you use a subdomain instead of a same-origin path.
+
+## Allow the proxied paths in a Content-Security-Policy
+
+If your site sends a `Content-Security-Policy`, the browser must be allowed to load tracker
+scripts from your prefix and to send analytics requests to it. Two directives matter:
+
+- **`script-src`** covers `script.js` and the lazy feature scripts the tracker loads from the
+  same host — including the [session replay](/session-replay) recorder `/script-replay.js`.
+- **`connect-src`** covers the tracker's `POST` requests — `/api/track`, `/api/heatmap`,
+  `/api/replay`, and the other API paths in the table above.
+
+With a same-origin prefix such as `/stats`, `'self'` covers both directives:
+
+```text
+Content-Security-Policy: script-src 'self'; connect-src 'self'
+```
+
+If you proxy on a subdomain instead of a path, list that origin explicitly in both directives:
+
+```text
+Content-Security-Policy: script-src 'self' https://stats.yourdomain.com; connect-src 'self' https://stats.yourdomain.com
+```
+
+Without a proxy, the same two directives must allow `https://dash.tinyanalytics.io`. A policy
+that only allows the script host but not the connect host loads the tracker and then silently
+drops every event — and blocks replay uploads — so always update both together.
+
+## Use split delivery with `data-api-host`
+
+The full proxy above is recommended because TinyAnalytics updates the tracking script without any
+work on your side. If you intentionally keep a copy of `script.js` in your own static assets, set
+`data-api-host` so events and lazy feature scripts still use your proxy:
+
+```html
+<script
+  src="/vendor/tinyanalytics.js"
+  data-site-id="123"
+  data-api-host="https://yourdomain.com/stats"
+  defer
+></script>
+```
+
+In this mode, you own the static copy and must replace it when the hosted tracking script changes.
+The prefix-wide proxy rule is still useful because Web Vitals, surveys, heatmaps, and feature gates
+load from `data-api-host` at runtime.
+
+## Troubleshooting
+
+| Symptom | Cause and fix |
+| --- | --- |
+| The script URL returns `404` | The rule did not strip the prefix. `/stats/script.js` must reach upstream `/script.js`. |
+| The script loads but no events arrive | The rule covers only the script. Forward the whole `/stats/*` prefix so `/api/track` reaches TinyAnalytics. |
+| A real `/api/track` request returns `400` | The proxy changed the body or `Content-Type`. Forward both without rewriting. |
+| Visitors appear in one location or collapse into too few users | The proxy address is being used. Set `X-Real-IP`, or preserve the visitor as the first `X-Forwarded-For` entry and enable **First-party proxy**. |
+| Optional features call `dash.tinyanalytics.io` directly | You copied the script locally without `data-api-host`, or the prefix does not cover the lazy script and feature-gate paths. |
+| The browser reports a CORS error | Prefer a path on the tracked domain. For a proxy subdomain, forward `OPTIONS` and preserve TinyAnalytics response headers. |
+| The console shows `Refused to load the script` or `Refused to connect` | Your Content-Security-Policy does not allow the proxied origin in `script-src` or `connect-src`. See [the CSP section](#allow-the-proxied-paths-in-a-content-security-policy). |
+
+## Verify the proxy
+
+<Steps>
+  <Step title="Check the tracking script route">
+    Confirm the proxied script returns JavaScript:
+
+    ```bash
+    curl -sI https://yourdomain.com/stats/script.js
+    ```
+
+    Expect `200` and a JavaScript `Content-Type`.
+  </Step>
+
+  <Step title="Check the ingestion route">
+    Send an intentionally incomplete payload:
+
+    ```bash
+    curl -si -X POST https://yourdomain.com/stats/api/track \
+      -H "Content-Type: application/json" \
+      -d '{}'
+    ```
+
+    Expect a TinyAnalytics JSON validation response with status `400`. A `404`, `405`, or HTML
+    response means the proxy did not preserve the path or method.
+  </Step>
+
+  <Step title="Observe a real event">
+    Open your deployed site with browser developer tools, filter the Network panel by `/stats`, and
+    navigate once. `script.js` should return `200`, and `/stats/api/track` should return `204`.
+    If you use heatmaps, surveys, flags, or Web Vitals, their optional requests should use the same
+    prefix.
+  </Step>
+
+  <Step title="Verify attribution">
+    Open [Realtime analytics](/realtime-analytics). Your visit should appear within seconds with
+    your network's location rather than the proxy server's location. Repeat from another network
+    if you need to confirm that visitor identity is not collapsing onto the proxy address.
+  </Step>
+</Steps>
+
+<Check>
+  The proxy is working when the tracking script loads from your domain, real events return `204`
+  through the prefix, and Realtime shows the visitor's location rather than the proxy's.
+</Check>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Install the tracking script" icon="code" href="/install-tinyanalytics-tracking-script">
+    Add the standard tag before switching its source to your proxy.
+  </Card>
+  <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
+    Use `data-api-host` and the other supported script attributes.
+  </Card>
+  <Card title="Exclude traffic" icon="filter-circle-xmark" href="/exclude-traffic-from-analytics">
+    Understand the First-party proxy IP-precedence setting.
+  </Card>
+  <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Diagnose a missing pageview or event.
+  </Card>
+</Columns>

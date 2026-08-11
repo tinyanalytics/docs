@@ -3,8 +3,8 @@
 **Status:** Repository migration complete — production launch pending  
 **Prepared:** 2026-07-30  
 **Executed:** 2026-07-30  
-**Scope:** 112 authored Mintlify pages, navigation, metadata, redirects, crawlability, and launch monitoring
-**Excluded:** 149 generated OpenAPI operations, which intentionally remain `noindex`
+**Scope:** 114 authored Mintlify pages, navigation, metadata, redirects, crawlability, and launch monitoring
+**Excluded:** 152 generated OpenAPI operations, which intentionally remain `noindex`
 
 The repository migration uses the approved decisions: `https://tinyanalytics.io/docs`, one atomic pre-index rename, the approved Title Case H1 pattern with **TinyAnalytics** brand casing, and concise sidebar labels. Mintlify `/docs` activation, the main-site rewrite or proxy, Search Console verification, sitemap submission, and eight-week monitoring remain owner actions.
 
@@ -41,13 +41,13 @@ The repository already sets `seo.indexing` to `navigable`, so the deployed crawl
 
 ### On-page inventory
 
-- 108 authored MDX pages are navigable and intended for indexing.
-- All 108 have `title` and `description` frontmatter.
-- 65 of 108 descriptions exceed 160 characters and should be compressed to roughly 120–155 characters without losing the page's answer-first promise.
+- The executed map now covers 114 authored MDX pages in navigation.
+- All 114 have `title` and `description` frontmatter.
+- At the initial 108-page audit, 65 descriptions exceeded 160 characters. The executed audit now enforces descriptions at 155 characters or fewer.
 - Many report pages use generic one-word titles and routes such as `Realtime`, `Pages`, `Users`, and `Funnels`. These are understandable inside the dashboard but weak outside that context.
 - Integration descriptions are strong, but their routes omit the high-intent platform + analytics phrase.
 - Mintlify uses frontmatter `title` for both the visible H1 and browser title, then appends the site name. Long SEO titles therefore need a separate short `sidebarTitle` for navigation.
-- The generated OpenAPI reference contains 148 operations across 29 tags. Every generated operation has `x-mint.metadata.noindex: true`; preserve that behavior to avoid thin/duplicative API pages competing with the authored API guides.
+- The generated OpenAPI reference contains 152 operations across 30 tags. Every generated operation has `x-mint.metadata.noindex: true`; preserve that behavior to avoid thin/duplicative API pages competing with the authored API guides.
 
 ### Live crawl baseline
 
@@ -96,6 +96,7 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | ----------------------- | ------------------------------------------ | ------------------------------------------- | -------------------- |
 | `/tracking-script`      | `/install-tinyanalytics-tracking-script`   | Install the TinyAnalytics Tracking Script   | Tracking script      |
 | `/script-configuration` | `/configure-tinyanalytics-tracking-script` | Configure the TinyAnalytics Tracking Script | Script configuration |
+| `/first-party-analytics-proxy` | `/first-party-analytics-proxy` | Set up a first-party analytics proxy | First-party proxy |
 | `/exclude-traffic`      | `/exclude-traffic-from-analytics`          | Exclude Internal and Unwanted Traffic       | Exclude traffic      |
 | `/verify-your-setup`    | `/verify-tinyanalytics-installation`       | Verify Your TinyAnalytics Installation      | Verify your setup    |
 
@@ -125,6 +126,7 @@ Routes below are repository-relative. The current preview adds `/doc`; a custom 
 | Current route | Proposed route                | Proposed H1 / page title   | Sidebar title |
 | ------------- | ----------------------------- | -------------------------- | ------------- |
 | `/journeys`   | `/user-journey-analytics`     | User Journey Analytics     | Journeys      |
+| `/website-heatmap-analytics` | `/website-heatmap-analytics` | Website Heatmaps: Click, Rage-Click, and Scroll Maps | Heatmaps |
 | `/funnels`    | `/funnel-analytics`           | Funnel Analytics           | Funnels       |
 | `/goals`      | `/conversion-goal-tracking`   | Conversion Goal Tracking   | Goals         |
 | `/retention`  | `/user-retention-analytics`   | User Retention Analytics   | Retention     |
@@ -290,7 +292,7 @@ Execution rules:
 4. Update every navigation entry, card, Related block, inline link, prompt, and product deep link to the new route.
 5. Update canonical URLs to the final production domain and verify each rendered page self-canonicalizes to its new URL.
 6. Keep redirects for at least one year; retaining them indefinitely is preferable for documentation links in old emails, issues, and AI answers.
-7. Keep the 149 generated endpoint pages `noindex` and outside the authored redirect migration unless an OpenAPI operation path itself changes.
+7. Keep the 152 generated endpoint pages `noindex` and outside the authored redirect migration unless an OpenAPI operation path itself changes.
 
 ## 6. Content enrichment during the same execution
 
@@ -352,7 +354,7 @@ bun run scripts/audit-components.mjs
 
 Add migration-specific checks:
 
-- Compare the 108 authored MDX files with the 108 approved mapping rows.
+- Compare the 114 authored MDX files with the 114 approved mapping rows.
 - Confirm every changed old route has exactly one permanent redirect.
 - Confirm redirect destinations return 200 and produce no chains or loops.
 - Confirm all new pages have one rendered H1, a unique browser title, and a unique description.
@@ -377,7 +379,7 @@ Add migration-specific checks:
 - [x] Canonical production host and base path approved.
 - [ ] Production `robots.txt` allows search crawling.
 - [ ] Production sitemap lists all intended authored pages.
-- [ ] All 108 authored pages appear exactly once in the approved mapping.
+- [ ] All 114 authored pages appear exactly once in the approved mapping.
 - [ ] Every changed route has a one-to-one permanent redirect.
 - [ ] No redirect chains, loops, soft 404s, or homepage catch-all redirects.
 - [ ] Every authored page has a unique, descriptive H1/title and concise `sidebarTitle` where needed.
@@ -408,4 +410,4 @@ Add migration-specific checks:
 - [Mintlify: host documentation at `/docs`](https://www.mintlify.com/docs/deploy/docs-subpath)
 - [Mintlify: page metadata](https://mintlify.com/docs/pages)
 - Live TinyAnalytics preview: rendered metadata, crawl policy, sitemap, and AI index endpoints.
-- Local documentation inventory: all 108 authored MDX pages, `docs.json`, and the generated OpenAPI configuration.
+- Local documentation inventory: all 114 authored MDX pages, `docs.json`, and the generated OpenAPI configuration.

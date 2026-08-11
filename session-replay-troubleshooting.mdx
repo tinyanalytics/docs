@@ -1,0 +1,111 @@
+---
+title: "Troubleshoot Missing Session Replays"
+sidebarTitle: "Replay troubleshooting"
+description: "Why session replays aren't appearing: the two-part enablement, deterministic sampling, the consent gate, the monthly cap, Content-Security-Policy blocks, and sessions without a full snapshot."
+icon: "wrench"
+---
+
+When no replays appear, start with the built-in diagnosis: open **Settings → Tracking → Session
+replay**. The card shows the **effective state** (Recording / Not recording), month-to-date
+usage, storage health, and a message naming the gate that's blocking recording. Then work
+through the checks below, ordered by likelihood.
+
+<Steps>
+  <Step title="Is session replay enabled for the site?">
+    [Session replay](/session-replay) is off by default. In **Settings → Tracking → Session
+    replay**, confirm **Enable session replay on this site** is on. While it's off, nothing
+    replay-related loads in visitors' browsers, so there is nothing to appear.
+  </Step>
+
+  <Step title="Does the site have the early-access grant?">
+    During the gated rollout, your toggle alone doesn't start recording — the site also needs
+    an early-access grant from the TinyAnalytics team. The settings card shows an **Early
+    access** badge when granted; if it reads **Off — no early-access grant**, or warns "Your
+    toggle is on, but this site has no early-access grant yet", ask us to enable your site.
+  </Step>
+
+  <Step title="Is your visit inside the sample?">
+    Sampling is deterministic **per visitor**: at a rate below 100%, each visitor is either
+    consistently recorded or consistently not. That means your own browser can be permanently
+    sampled out — your test visits will never appear, while other visitors record fine. Set
+    **Sampling** to 100% while you test, or visit from a different browser or device.
+  </Step>
+
+  <Step title="Is consent required but never granted?">
+    If **Require visitor consent** is on, nothing records until the page calls
+    `tinyanalytics.grantReplayConsent()`. Confirm your cookie banner's accept handler makes the
+    call, and that it runs on every page load where consent has already been given. To rule the
+    gate out during a test, run the call in the browser console, then navigate:
+
+    ```js
+    window.tinyanalytics.grantReplayConsent();
+    ```
+  </Step>
+
+  <Step title="Is the monthly cap reached?">
+    Early access includes 1,000 recordings per site per month. The settings card shows
+    **Recorded this month**, and the Replays page shows a banner when the cap is hit. Recording
+    resumes automatically on the first of the next month (UTC).
+  </Step>
+
+  <Step title="Is a Content-Security-Policy blocking the recorder?">
+    Session replay needs two CSP allowances beyond the core tracking script:
+
+    - **`script-src`** must allow your tracking host, because the recorder loads as a separate
+      `/script-replay.js` file from the same host as `script.js`.
+    - **`connect-src`** must also allow that host, because recordings upload with `POST`
+      requests to `/api/replay`.
+
+    A blocked recorder shows `Refused to load the script` or `Refused to connect` errors in the
+    browser console. For the default setup, allow TinyAnalytics in both directives:
+
+    ```text
+    Content-Security-Policy: script-src 'self' https://dash.tinyanalytics.io; connect-src 'self' https://dash.tinyanalytics.io
+    ```
+
+    If you serve TinyAnalytics through a [first-party proxy](/first-party-analytics-proxy) on a
+    same-origin path such as `/stats`, `'self'` already covers both directives; a proxy
+    subdomain must be listed explicitly in both.
+  </Step>
+
+  <Step title="Is this a web site rather than a mobile app?">
+    Session replay records browser sessions on websites only. Mobile app sites tracked with the
+    [React Native SDK](/integrations/react-native) never record, regardless of settings.
+  </Step>
+
+  <Step title="Was the visit substantial enough to appear?">
+    The Replays list shows playable recordings only — a session appears once its first full
+    snapshot of the page has been received. A visit that closes within a moment of loading may
+    never deliver one. Also check the list itself: the **Hide replays under 10 s** chip filters
+    out very short visits, and recordings older than 30 days have been deleted.
+  </Step>
+</Steps>
+
+<Check>
+  With every check passing, open your own site in a new tab and browse for a few seconds — your
+  visit appears on **Engagement → Replays** within about a minute.
+</Check>
+
+<Note>
+  The tracker-wide reasons a visit goes missing apply to replay too: the `disable-tinyanalytics`
+  opt-out key, IP and path [exclusion rules](/exclude-traffic-from-analytics), and
+  `data-skip-paths` (skipped pages are never recorded). See [Verify your
+  installation](/verify-tinyanalytics-installation) for those checks.
+</Note>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Session replay" icon="circle-play" href="/session-replay">
+    How recording, masking, consent, and limits work.
+  </Card>
+  <Card title="Verify your installation" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Confirm the core tracking script is working at all.
+  </Card>
+  <Card title="First-party proxy" icon="route" href="/first-party-analytics-proxy">
+    Serve the recorder and uploads from your own domain.
+  </Card>
+  <Card title="Exclude traffic" icon="filter-circle-xmark" href="/exclude-traffic-from-analytics">
+    Rules that stop visits — and recordings — from being captured.
+  </Card>
+</Columns>

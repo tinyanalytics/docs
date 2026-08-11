@@ -1157,6 +1157,7 @@
             "pages": [
               "install-tinyanalytics-tracking-script",
               "configure-tinyanalytics-tracking-script",
+              "first-party-analytics-proxy",
               "exclude-traffic-from-analytics",
               "verify-tinyanalytics-installation"
             ]
@@ -1192,6 +1193,8 @@
                 "pages": [
                   "user-journey-analytics",
                   "website-heatmap-analytics",
+                  "session-replay",
+                  "session-replay-troubleshooting",
                   "funnel-analytics",
                   "conversion-goal-tracking",
                   "user-retention-analytics",

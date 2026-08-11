@@ -7,7 +7,7 @@ icon: "fire"
 
 A heatmap shows you what your visitors *do* on a page: where they click, where they get stuck
 clicking, and how far down they actually scroll. TinyAnalytics renders all three over a live
-preview of your page, from your existing [tracking snippet](/install-tinyanalytics-tracking-script)
+preview of your page, from your existing [tracking script](/install-tinyanalytics-tracking-script)
 — there's no extra code to add.
 
 Heatmaps here are deliberately different from session-replay tools: **nothing in the pipeline can
@@ -41,6 +41,10 @@ are still open.
   tracker already collects, so they work **retroactively** — including for date ranges before you
   ever opened the Heatmaps page.
 </Note>
+
+If you use a [first-party proxy](/first-party-analytics-proxy), keep the prefix-wide forwarding
+rule. Heatmaps use `/api/site/:siteId/tracking-config`, `/script-heatmap.js`, and `/api/heatmap`
+through the same proxy prefix as the core tracking script.
 
 ## The three map modes
 
@@ -84,6 +88,13 @@ can also switch between **Live page** and **Wireframe** manually from the previe
 ## Reading the data over the API
 
 Three endpoints power the page and are available in the
-[API playground](/api-reference/api-playground): `GET /api/sites/:id/heatmap/pages` (which pages have
-click data), `GET /api/sites/:id/heatmap/clicks` (binned intensity points for one page, band, and
-click type), and `GET /api/sites/:id/heatmap/scroll` (cumulative scroll reach per 10% band).
+[API playground](/api-reference/api-playground):
+
+- [`GET /api/sites/:id/heatmap/pages`](/api-reference/heatmaps/get-heatmap-pages) lists pages with
+  click data.
+- [`GET /api/sites/:id/heatmap/clicks`](/api-reference/heatmaps/get-heatmap-clicks) returns binned
+  click or rage-click intensity for one page and device band.
+- [`GET /api/sites/:id/heatmap/scroll`](/api-reference/heatmaps/get-heatmap-scroll-reach) returns
+  cumulative reach for each 10% scroll band.
+
+A restricted API key needs **Analytics: Read**. The key owner must also have access to the site.

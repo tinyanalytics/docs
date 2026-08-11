@@ -56,15 +56,17 @@ The install is the same everywhere — the tracking script goes in the HTML `<he
 - **Frameworks** (Next.js, React, Vue, Svelte, and others) — add the tag to your root layout or document head component so it loads on every route. Single-page route changes are tracked automatically ([SPA routing](/configure-tinyanalytics-tracking-script#track-single-page-apps) is on by default).
 - **Site builders and CMSs** (WordPress, Webflow, Framer, Ghost, and others) — use the platform's "custom code" or "head" setting to add the tracking script site-wide.
 
-Step-by-step integration guides for individual platforms are being added. Until then, the rule is the same on every platform: put the tracking script in the `<head>` on every page.
+Use the [integration guides](/integrations/install-website-analytics) for platform-specific install
+points. The rule is the same on every platform: put the tracking script in a shared `<head>` so it
+loads on every page.
 
 ## Bypass ad blockers
 
 Some ad blockers block third-party analytics requests, which can undercount visits. TinyAnalytics supports serving the script and receiving events through a **first-party proxy** on your own domain, so tracking looks like part of your site. You point the tracking script's `src` at your own domain, and requests are forwarded to TinyAnalytics behind the scenes.
 
-<Note>
-  A dedicated proxy and custom-domain guide is being added. If you need it now, contact support from your dashboard.
-</Note>
+Follow [Set up a first-party analytics proxy](/first-party-analytics-proxy) for Next.js, Vercel,
+Netlify, Nginx, Caddy, Cloudflare Workers, and generic reverse proxies. The guide includes the
+visitor-IP forwarding check that keeps location and cookieless visitor counts accurate.
 
 ## Frequently asked questions
 
@@ -88,6 +90,9 @@ Some ad blockers block third-party analytics requests, which can undercount visi
 <Columns cols={2}>
   <Card title="Configure the script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
     Every `data-*` attribute and what it controls.
+  </Card>
+  <Card title="First-party proxy" icon="route" href="/first-party-analytics-proxy">
+    Serve tracking through your own domain and preserve visitor attribution.
   </Card>
   <Card title="Verify your setup" icon="circle-check" href="/verify-tinyanalytics-installation">
     Confirm the install and fix common problems.

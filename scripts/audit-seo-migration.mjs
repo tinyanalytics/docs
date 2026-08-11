@@ -70,8 +70,8 @@ function parseFrontmatter(file) {
   };
 }
 
-if (mappings.length !== 112) {
-  errors.push(`migration plan has ${mappings.length} rows; expected 112`);
+if (mappings.length !== 114) {
+  errors.push(`migration plan has ${mappings.length} rows; expected 114`);
 }
 
 const authoredFiles = findMdxFiles(root).sort();
@@ -295,9 +295,9 @@ for (const methods of Object.values(openapi.paths ?? {})) {
     }
   }
 }
-if (generatedNoindexCount !== 149) {
+if (generatedNoindexCount !== 152) {
   errors.push(
-    `openapi.json: ${generatedNoindexCount} generated operations set noindex; expected 149`,
+    `openapi.json: ${generatedNoindexCount} generated operations set noindex; expected 152`,
   );
 }
 

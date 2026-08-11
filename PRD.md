@@ -901,6 +901,90 @@ links point INTO this site and all 27 targets were 200-verified product-side), t
 overview read-performance work (internal, no behavior change), and the 0287 heatmaps
 feature documented in this pass ([website-heatmap-analytics.mdx](website-heatmap-analytics.mdx)).
 
+## 10k. Product-sync pass (2026-08-10 — heatmap integration and first-party proxy)
+
+Fetched `origin/main` and audited every committed product change after `6ab578b` through
+`db807b8`:
+
+- **Module integration matrix** (`b635fb5`, decision 0288) — internal release-process guidance.
+  Reviewed with **Public docs impact: none**, matching the commit's explicit classification.
+- **Heatmap integration follow-up** (`1074eee`, decisions 0287/0288) — the three heatmap GET routes
+  now require **Analytics: Read** for a restricted API key; the dashboard has the Heatmaps browser
+  title and a page-context starter; and the first-party proxy contract now carries
+  `/api/site/:siteId/tracking-config`, `/script-heatmap.js`, and `/api/heatmap`. Updated
+  `website-heatmap-analytics.mdx`, `api-reference/api-authentication.mdx`, and
+  `api-reference/analytics-read-api.mdx` for the permission and proxy behavior.
+- **Heatmaps deployment record** (`db807b8`) — records `1074eee` as live. Reviewed with **Public
+  docs impact: none** beyond treating the already-documented behavior as shipped.
+
+Closed an older public coverage gap at the same owner boundary: the product has had a verified
+first-party proxy contract and a **Custom Domain (Proxy)** snippet builder since decisions
+0127/0128, but the public install page still said the guide was "being added." Added
+`first-party-analytics-proxy.mdx` with the strip-prefix contract, provider recipes, the
+`X-Real-IP` / **First-party proxy** accuracy rule, split delivery through `data-api-host`,
+verification, and heatmap/flag/survey lazy-path coverage; added it to **Set up tracking** and linked
+it from the install and heatmap pages.
+
+The product playground registry contains 196 operations. Updated the generator's public curation
+to publish the three customer-facing heatmap reads and regenerated `openapi.json`: **149 → 152
+published endpoints, 29 → 30 groups**. The SEO operation-count guard and current API overview,
+read API, and playground counts moved with it. Uncommitted product working-tree changes remain
+outside this marker and were not treated as shipped.
+
+**Current sync marker:** product commit `db807b88a01c0ac0bf8b89cc730344a10880b797`
+(`docs(deploy): record heatmaps release 1074eee (0287)`, 2026-08-10).
+
+## 10l. Product-sync pass (2026-08-10 — Session replay, decision 0289)
+
+Audited the committed product changes after `db807b8` through `49ba3df`:
+
+- **Dual-track accuracy run notes** (`49ba3df`) — internal wiki-only test documentation
+  (`wiki/data-accuracy.md`, `wiki/ideas.md`, `wiki/log.md`). **Public docs impact: none.**
+
+Documented **session replay** (product decision `0289-session-replay.md`, spec
+`PRD-session-replay.md` v1.2) against the decision record and
+`wiki/architecture/session-replay.md`, with UI labels and defaults verified in the product
+source (`replay-settings-card.tsx`, `replay-capture.ts`, `replays/page.tsx`):
+
+- **New [session-replay.mdx](session-replay.mdx)** (Web Analytics → Behavior & conversion, next
+  to Heatmaps) — rrweb playback framed privacy-first: off by default; input masking as a
+  non-configurable floor (passwords/emails masked in the browser); strict all-text masking
+  default with the Standard opt-down; `ta-mask`/`ta-block`/`ta-ignore` element hooks;
+  deterministic per-visitor sampling (default 100%); the optional consent gate with
+  `tinyanalytics.grantReplayConsent()` and the plain EU/ePrivacy consent-required statement;
+  limits (1,000 recordings/site/month in early access, 30-minute recording cap, 50 MB/session,
+  30-day retention); the two-part enablement (site toggle + operator early-access grant) framed
+  honestly as gated early access; member-only viewing (never on public dashboards/share links);
+  the Engagement → Replays list and player (speed presets, skip-inactive, seekable timeline,
+  gap shading, masking badge, error deep-links); GDPR user-erasure and site-deletion purges;
+  the residual in-recording URL caveat.
+- **New [session-replay-troubleshooting.mdx](session-replay-troubleshooting.mdx)** (same group,
+  next to the feature page — no dedicated troubleshooting group exists) — the "no replays
+  appearing" checklist: toggle, early-access grant, deterministic sampled-out own-browser case,
+  ungranted consent, monthly cap, CSP (`script-src` for `/script-replay.js`, `connect-src` for
+  `POST /api/replay`, with a concrete policy line), web-only (React Native sites never record),
+  and no-full-snapshot/short-session/expiry cases.
+- **Extended [first-party-analytics-proxy.mdx](first-party-analytics-proxy.mdx)** — added
+  `/script-replay.js` + `/api/replay` to the forwarded-paths table, a new
+  "Allow the proxied paths in a Content-Security-Policy" section (same-origin `'self'` policy,
+  explicit subdomain origin, no-proxy `dash.tinyanalytics.io` variant), and a CSP symptom row
+  in the troubleshooting table.
+
+Deferred, recorded here so the gaps aren't silent: the decision's self-host storage walkthrough
+(open question #10 — self-hosting is not documented until it exists; the cloud product needs no
+customer-side storage setup); replay read-endpoint reference pages (the product's published
+OpenAPI curation does not yet include the replay routes); and cross-references from
+`website-heatmap-analytics.mdx`, `javascript-error-tracking.mdx`, `session-analytics.mdx`, and
+`resources/analytics-data-handling.mdx` (heatmaps file is owned by an in-flight concurrent
+edit; add the links in a follow-up pass).
+
+**Current sync marker:** unchanged at product commit
+`db807b88a01c0ac0bf8b89cc730344a10880b797` for released work; the intervening `49ba3df` was
+audited with no public docs impact. **Session replay is documented against decision `0289` with
+its product commit pending** — the implementation is uncommitted in the product working tree at
+the time of this pass. Do NOT treat these pages as release-complete, and advance the marker to
+the session-replay commit SHA, once it lands and deploys (0276 paired gate).
+
 ---
 
 ## 11. Assumptions & open questions
@@ -939,6 +1023,7 @@ The wiki is the behavioral spec; these are the primary sources per doc area. (Wi
 | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | How it works; Architecture                                | `architecture/overview.md`, `architecture/ingestion-pipeline.md`, `architecture/api-server.md`, `architecture/web-dashboard.md`                    |
 | The tracking script; Script config; SPA                   | `architecture/tracking-script.md`, decisions 0012, 0013                                                                                            |
+| First-party proxy / custom domain                         | `docs/proxy-guide.md`, decisions 0127, 0128, 0155, 0210                                                                                            |
 | Custom events; auto-capture; downloads; engagement; 404   | decisions 0110, 0135, 0134, 0136, `algorithms/event-list.md`                                                                                       |
 | Identify / cookieless identity                            | `concepts/cookieless-identity.md`, `algorithms/cookieless-identity-derivation.md`, decisions 0045, 0146                                            |
 | Proxy / custom domain                                     | `docs/proxy-guide.md` (product), decisions 0127, 0128                                                                                              |

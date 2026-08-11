@@ -57,6 +57,7 @@ const PUBLIC_CATEGORIES = new Set([
   "Funnels",
   "Revenue",
   "Performance",
+  "Heatmaps",
   "Sessions",
   "Users",
   "User Traits",
@@ -130,6 +131,8 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
     "Revenue totals and breakdowns from the revenue you attach to events.",
   Performance:
     "Core Web Vitals for a site, over time and broken down by dimension.",
+  Heatmaps:
+    "Pages with heatmap data, binned click and rage-click intensity, and cumulative scroll reach.",
   Sessions:
     "The session list and the full pageview and event timeline of one session.",
   Users:

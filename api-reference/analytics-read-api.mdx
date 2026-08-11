@@ -1,7 +1,7 @@
 ---
 title: "Analytics Read API"
 sidebarTitle: "Read API"
-description: "Read overview, time-series, breakdown, session, event, and live analytics as JSON through site-scoped GET endpoints authenticated by API key."
+description: "Read overview, time-series, breakdown, session, event, heatmap, and live analytics as JSON through site-scoped GET endpoints authenticated by API key."
 icon: "chart-line"
 noindex: true
 
@@ -86,7 +86,7 @@ For raw events, `GET /api/sites/{id}/events/log` returns individual events with 
 
 ## Where are the rest of the endpoints?
 
-These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **149 published endpoints across 29 groups**—every one with its full path, method, and parameters:
+These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **152 published endpoints across 30 groups**—every one with its full path, method, and parameters:
 
 <Columns cols={2}>
   <Card title="Overview" icon="gauge" href="/api-reference/overview/get-overview">
@@ -94,6 +94,9 @@ These six are the reads you'll reach for most, but they're a fraction of the API
   </Card>
   <Card title="Performance" icon="gauge-high" href="/api-reference/performance/get-performance-overview">
     Core Web Vitals over time and by dimension.
+  </Card>
+  <Card title="Heatmaps" icon="fire" href="/api-reference/heatmaps/get-heatmap-clicks">
+    Click, rage-click, and cumulative scroll-reach data.
   </Card>
   <Card title="Feature flags" icon="toggle-on" href="/api-reference/feature-flags/list-feature-flags">
     Manage flags and evaluate them for a user.
@@ -120,10 +123,10 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
     No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-authentication) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
   </Accordion>
   <Accordion title="How do I find an endpoint's exact parameters and response?">
-    For **parameters**, use the **Endpoints** section of this reference—149 published endpoints across 29 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
+    For **parameters**, use the **Endpoints** section of this reference—152 published endpoints across 30 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
   </Accordion>
   <Accordion title="Does TinyAnalytics have an API for goals, funnels, or feature flags?">
-    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 149 playground-backed endpoints across 29 groups; workflow reads are not listed in the playground yet.
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 152 playground-backed endpoints across 30 groups; workflow reads are not listed in the playground yet.
   </Accordion>
   <Accordion title="Can I compare a date range against the previous period?">
     Yes. Comparison-capable reads accept `previous_weekday`, `previous`, `year`,

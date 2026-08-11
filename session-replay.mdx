@@ -1,0 +1,204 @@
+---
+title: "Session Replay: Watch Real Visits Play Back"
+sidebarTitle: "Session replay"
+description: "Replay real visits to debug UX problems and see errors as they happened — off by default, inputs always masked, sampled, kept 30 days, and viewable only by your team."
+icon: "circle-play"
+---
+
+Session replay records what actually happened on a visitor's screen — the page, their clicks,
+their scrolling, each navigation — and plays it back like a video. Use it to debug confusing UX,
+see how people really move through a page, and watch a [JavaScript
+error](/javascript-error-tracking) at the exact moment it happened instead of reconstructing it
+from a stack trace.
+
+Replay is the most invasive capability an analytics tool can offer, so TinyAnalytics builds it
+the other way around: **off by default, masked by default, sampled, short-lived, and
+consent-native**. Every protection below is enforced in the product, not promised in a policy.
+
+<Info>
+  Session replay is rolling out as a **gated early access**. Recording needs your per-site
+  toggle *and* an early-access grant on the site from the TinyAnalytics team — ask us to enable
+  it for your site. The settings card shows an **Early access** badge once the grant is in
+  place.
+</Info>
+
+## How does session replay protect visitor privacy?
+
+- **Off by default.** No site records anything until you turn replay on, and nothing
+  replay-related loads in visitors' browsers while it's off.
+- **Inputs are always masked.** Anything a visitor types is masked in the browser before it is
+  recorded — passwords and email fields never leave the visitor's device, and there is no
+  setting that turns input masking off.
+- **All page text is masked by default.** The default **Strict** level masks every piece of text
+  on the page, not just inputs. Revealing page text is a deliberate, per-site opt-down to
+  **Standard** — which still always masks inputs.
+- **Not everything is recordable.** Canvas content and cross-origin iframes are never captured,
+  and pages matching your tracker's `data-skip-paths` rules are never recorded — navigating onto
+  a skipped page mid-recording pauses recording and discards the unsent segment.
+- **Sampled.** Only a percentage of visitors you choose is ever recorded, decided
+  deterministically per visitor.
+- **Kept 30 days.** Recordings delete automatically after 30 days, from the index and from
+  storage.
+- **Team members only.** Replays are visible only to members of your site's team. They never
+  appear on [public dashboards](/public-analytics-dashboards), share links, or embeds.
+- **Consent-ready.** An optional per-site gate delays recording until your page reports the
+  visitor's consent — see [the consent section](#ask-for-visitor-consent-before-recording).
+
+<Note>
+  The page URL indexed with each replay is stored without its query string. The recording
+  itself, however, includes the page as the visitor saw it — including the URL at capture time
+  and any URLs rendered in the page content. Keep pages with sensitive URL tokens out of replay
+  with `data-skip-paths`.
+</Note>
+
+## How do I turn it on?
+
+<Steps>
+  <Step title="Request early access">
+    Ask the TinyAnalytics team to grant your site early access. In **Settings → Tracking**, the
+    **Session replay** card shows an **Early access** badge once granted; until then it reads
+    **Off — no early-access grant**, and your toggle alone won't start recording.
+  </Step>
+  <Step title="Enable replay for the site">
+    On the same card, turn on **Enable session replay on this site**. Once both switches are on,
+    the tracker lazy-loads the recorder (about 58 KB compressed) for sampled visitors only —
+    visitors outside the sample download nothing.
+  </Step>
+  <Step title="Review sampling, masking, and consent">
+    The card exposes the **Sampling** percentage, the **Text masking** level, and **Require
+    visitor consent**, plus live status: month-to-date recordings, the effective recording
+    state, and storage health.
+  </Step>
+</Steps>
+
+<Check>
+  Replay is on when the settings card shows the **Early access** badge and an effective state of
+  **Recording**. From then on, sampled visits appear on **Engagement → Replays** within about a
+  minute.
+</Check>
+
+Turning the toggle off stops recording server-side, even for pages that are already open — the
+recorder is told to stand down on its next upload.
+
+## Control what gets masked
+
+Inputs are always masked regardless of any setting. On top of that floor, the **Text masking**
+level controls page text:
+
+| Level | What plays back |
+| --- | --- |
+| **Strict** (default) | All page text is masked. Layout, navigation, clicks, and scrolling remain fully visible. |
+| **Standard** | Page text is visible; everything a visitor types stays masked. |
+
+For element-level control, add these CSS classes in your site's markup:
+
+| Class | Effect in the recording |
+| --- | --- |
+| `ta-mask` | The element's text is masked, even at the Standard level. |
+| `ta-block` | The element is not captured at all — it plays back as an empty placeholder of the same size. |
+| `ta-ignore` | Input interactions on the element are not recorded. |
+
+```html
+<!-- Never capture the account balance widget -->
+<div class="ta-block">
+  <AccountBalance />
+</div>
+```
+
+The player always shows a masking badge — "All text masked — strict" or "Inputs masked" — so
+whoever is watching knows what the recording could contain.
+
+## Ask for visitor consent before recording
+
+In the EU and other ePrivacy jurisdictions, session recording generally requires the visitor's
+**consent** — disclosure in a privacy policy is not enough. If your audience is in scope, turn
+on **Require visitor consent** in the Session replay settings card.
+
+With the gate on, nothing loads and nothing records until your page calls
+`tinyanalytics.grantReplayConsent()`. Wire it to your cookie banner's accept handler, and call
+it on every page load where consent has already been given:
+
+```js
+// In your cookie banner's "Accept" handler:
+if (window.tinyanalytics) {
+  window.tinyanalytics.grantReplayConsent();
+}
+```
+
+Recording starts from the moment consent is granted — nothing before the call is captured.
+
+## Sampling and limits
+
+Sampling is a **deterministic per-visitor decision**: at your chosen rate (0–100%, default
+100%), each visitor is either consistently recorded or consistently not, across tabs and page
+loads. You never get half a journey, and lowering the rate keeps whole visitors rather than
+random fragments. The trade-off: your own browser can land outside the sample — see
+[troubleshooting](/session-replay-troubleshooting) if your test visit doesn't appear.
+
+| Limit | Value |
+| --- | --- |
+| Recordings per site | 1,000 per month during early access; the counter resets on the first of each month (UTC) |
+| Recording length | 30 minutes per session, then recording stops |
+| Recording size | 50 MB per session |
+| Retention | 30 days, then deleted automatically |
+
+The settings card shows month-to-date usage, and the Replays page tells you when the monthly
+cap is reached — recording resumes automatically with the new month.
+
+## Watch a replay
+
+Open **Engagement → Replays**. Each row shows the entry page and when the visit happened, the
+duration with an active-time bar, an error count badge when the session hit JavaScript errors,
+and device, browser, and country chips. A **Hide replays under 10 s** chip filters out
+drive-by visits. Only playable recordings are listed — a session appears once its first full
+snapshot has been received.
+
+Click a row to play it back:
+
+- **Playback controls** — play/pause, speed presets, a **skip inactive** toggle that jumps over
+  idle stretches, and fullscreen.
+- **A seekable timeline** — activity segments, navigation ticks, and error markers you can jump
+  to directly.
+- **Gap indicators** — if segments of a recording were not received, the timeline shades those
+  ranges and playback skips them rather than misrepresenting the visit.
+
+Errors deep-link into replays: from the [Errors report](/javascript-error-tracking), an error
+occurrence with a recording opens the player pre-seeked to the moment it happened. Sessions
+with a recording are also flagged in [Session analytics](/session-analytics).
+
+To see your first replay, open your own site in a new tab — the visit appears within about a
+minute, subject to sampling and the monthly cap.
+
+## When are recordings deleted?
+
+- **Automatically after 30 days** — retention is enforced on the index and the stored
+  recording alike.
+- **When you delete a replay** — team members with site management access can delete a
+  recording from the player.
+- **When you delete a user** — erasing a user for a GDPR request also erases that user's
+  recordings.
+- **When you delete a website** — all of the site's recordings are purged with it.
+
+## Does replay work through a first-party proxy?
+
+Yes. Replay uses two additional paths through the same prefix as the core tracking script:
+`/script-replay.js` (the recorder) and `/api/replay` (recording uploads). A prefix-wide
+forwarding rule covers both — see the [first-party proxy guide](/first-party-analytics-proxy),
+including its Content-Security-Policy section if your site sends a CSP.
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Replay troubleshooting" icon="wrench" href="/session-replay-troubleshooting">
+    Work through the checks when no replays appear.
+  </Card>
+  <Card title="Session analytics" icon="list-timeline" href="/session-analytics">
+    Every visit's timeline, with or without a recording.
+  </Card>
+  <Card title="Error tracking" icon="triangle-exclamation" href="/javascript-error-tracking">
+    Jump from an error straight into its replay.
+  </Card>
+  <Card title="First-party proxy" icon="route" href="/first-party-analytics-proxy">
+    Serve the recorder and uploads from your own domain.
+  </Card>
+</Columns>

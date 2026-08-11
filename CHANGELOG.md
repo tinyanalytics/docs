@@ -9,6 +9,29 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **Session replay pages (2026-08-10, product decision 0289 — product commit pending):** new
+  [session-replay.mdx](session-replay.mdx) under Web Analytics → Behavior & conversion — rrweb
+  visit playback documented privacy-first (off by default, input masking as a floor, strict
+  all-text masking default, `ta-mask`/`ta-block`/`ta-ignore` hooks, deterministic per-visitor
+  sampling, the `tinyanalytics.grantReplayConsent()` consent gate with the EU
+  consent-required statement, 1,000 recordings/site/month early-access cap, 30-minute and
+  50 MB session limits, 30-day retention, member-only viewing, GDPR/site-deletion purges, and
+  the gated early-access enablement) — plus
+  [session-replay-troubleshooting.mdx](session-replay-troubleshooting.mdx), the "no replays
+  appearing" checklist (toggle, early-access grant, sampled-out own browser, consent, monthly
+  cap, `script-src`/`connect-src` CSP allowances with a concrete policy line, web-only capture,
+  and short sessions without a full snapshot). Extended
+  [first-party-analytics-proxy.mdx](first-party-analytics-proxy.mdx) with the
+  `/script-replay.js` + `/api/replay` forwarded paths and a Content-Security-Policy section.
+  Ship together with the session-replay product deploy (0276 paired gate); the sync marker
+  does not advance until that commit lands.
+- **First-party proxy guide (2026-08-10):** added
+  [first-party-analytics-proxy.mdx](first-party-analytics-proxy.mdx) under **Set up tracking**.
+  It documents the strip-prefix forwarding contract, Next.js/Vercel/Netlify/Nginx/Caddy/
+  Cloudflare Workers recipes, visitor-IP forwarding, the narrowly scoped **First-party proxy**
+  setting, `data-api-host` split delivery, feature-dependent tracker paths, troubleshooting, and
+  an end-to-end verification sequence. Replaced the install page's stale “guide is being added”
+  note and linked the proxy contract from Heatmaps.
 - **Heatmaps page (2026-08-10, product decision 0287, sync marker advanced 11300b3 →
   6ab578b):** new [website-heatmap-analytics.mdx](website-heatmap-analytics.mdx) under
   Web Analytics → Behavior & conversion — click, rage-click, and scroll maps with the
@@ -20,8 +43,14 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Heatmap API integration (2026-08-10, product decisions 0287/0288, sync marker advanced
+  6ab578b → db807b8):** documented that restricted keys use **Analytics: Read** for the three
+  heatmap endpoints, published those operations in the generated OpenAPI reference, and refreshed
+  the public API totals from **149 endpoints across 29 groups** to **152 endpoints across 30
+  groups**. Audited the intervening process-only and deployment-record commits as having no
+  additional public docs impact.
 - **Notification destinations rewritten for the Slack OAuth connection (2026-08-05, product
-  decision 0284, sync pass 10k):**
+  decision 0284, sync pass 10i):**
   [notification-destinations.mdx](notification-destinations.mdx) now documents **Add to
   Slack** — connecting a workspace once, inviting the bot with `/invite @tinyanalytics`,
   picking a channel from the live dropdown (private channels shown with a lock, unjoined

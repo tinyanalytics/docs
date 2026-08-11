@@ -62,6 +62,11 @@
       "description": "Core Web Vitals for a site, over time and broken down by dimension."
     },
     {
+      "name": "heatmaps",
+      "x-group": "Heatmaps",
+      "description": "Pages with heatmap data, binned click and rage-click intensity, and cumulative scroll reach."
+    },
+    {
       "name": "sessions",
       "x-group": "Sessions",
       "description": "The session list and the full pageview and event timeline of one session."
@@ -4831,6 +4836,284 @@
                 "asc",
                 "desc"
               ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/heatmap/pages": {
+      "get": {
+        "operationId": "get-sites-site-heatmap-pages",
+        "summary": "Get Heatmap Pages",
+        "description": "Top pages with captured heatmap clicks (click count + unique sessions), for the heatmap page picker.",
+        "tags": [
+          "heatmaps"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/heatmap/clicks": {
+      "get": {
+        "operationId": "get-sites-site-heatmap-clicks",
+        "summary": "Get Heatmap Clicks",
+        "description": "Binned click or rage-click intensity points for one page at a device-width band, rescaled to the band's render width, plus a fold/geometry summary.",
+        "tags": [
+          "heatmaps"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "pathname",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Group Type. e.g. company.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "band",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "render_width",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/heatmap/scroll": {
+      "get": {
+        "operationId": "get-sites-site-heatmap-scroll",
+        "summary": "Get Heatmap Scroll Reach",
+        "description": "Cumulative scroll-depth reach for one page: % of sessions that reached each 10% band. Reads existing engagement data, so it works retroactively.",
+        "tags": [
+          "heatmaps"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "pathname",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
