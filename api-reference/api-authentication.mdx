@@ -53,7 +53,7 @@ Keys are managed from your account settings:
 | **Analytics** | Read | Traffic, acquisition, retention, revenue, performance, errors, and heatmaps. |
 | **Sessions** | Read | Visitor sessions and their activity. |
 | **Events** | Read / Write | Event reports and catalog descriptions. |
-| **Users** | Read / Write | Visitor profiles, traits, identify, and erasure. |
+| **Users** | Read / Write | Visitor profiles, traits, identify, and erasure. **Users: Read** covers the three user-trait reads (keys, values, users) and unlocks `trait:<key>` filters on analytics reads; **Users: Write** covers the merge (PATCH) and replace (PUT) trait writes. |
 | **Goals** | Read / Write | Conversion goals. |
 | **Funnels** | Read / Write | Conversion funnels. |
 | **Dashboards** | Read / Write | Dashboards, cards, and annotations. SQL-backed card preview separately needs **Custom SQL: Read**. |
@@ -77,6 +77,15 @@ remain full-access keys.
   A restricted key with **Sites: Read** can list the organizations and sites its
   owner may access, but organization-list responses omit member rosters. Cookie
   sessions and existing full-access keys retain the complete member directory.
+</Note>
+
+<Note>
+  Trait data can hold names and emails, so anything that reads it is gated on
+  **Users: Read**: the three user-trait reads and `trait:<key>` filters on
+  analytics reads. A scoped key without that grant gets a `403` naming the
+  missing scope. Trait filters additionally never run on a public site's open
+  dashboard, a share link, or an embed — those surfaces return `400` instead of
+  silently unfiltered results.
 </Note>
 
 <Warning>

@@ -295,9 +295,9 @@ for (const methods of Object.values(openapi.paths ?? {})) {
     }
   }
 }
-if (generatedNoindexCount !== 152) {
+if (generatedNoindexCount !== 153) {
   errors.push(
-    `openapi.json: ${generatedNoindexCount} generated operations set noindex; expected 152`,
+    `openapi.json: ${generatedNoindexCount} generated operations set noindex; expected 153`,
   );
 }
 

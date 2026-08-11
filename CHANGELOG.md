@@ -9,6 +9,45 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **Person attributes pages (2026-08-11, product decision 0292 — product deploy pending):**
+  documented the shipped person-attributes wave (product commits `21785b8` A0 security gate,
+  `591bb4d` Phase A, `97f3d48` filter engine, `a39ae5f` web UI + decision 0292, `2866629`
+  check_tracking probe + setup.md). [user-identification-analytics.mdx](user-identification-analytics.mdx)
+  gains the anonymous-vs-identified privacy boundary with the lawful-basis statement, the
+  identify-on-login/clearUserId-on-logout lifecycle recipe, the identify() verification recipe
+  (trait key in `GET /user-traits/keys` within ~a minute; MCP `check_tracking` `trait_key`
+  probe), the four-write-surface table (`/api/identify` · POST identify · PUT replace · PATCH
+  merge), and the platform connector contract (email→userId resolution with skip-and-count,
+  namespaced PATCH writes at ≤10 rps with retry-on-429/5xx, skip-unchanged idempotency,
+  `create=false` deletion propagation) with the RFC 9457 error table.
+  [analytics-filters.mdx](analytics-filters.mdx) gains the **User trait** entry — identified-only
+  and current-value semantics with the Q1/upgraded-in-March worked example and the funnel
+  survivorship caveat, the 8 ops (no regex), the caps (4 per query, 200-char key, 10,000-user
+  `TRAIT_FILTER_TOO_BROAD` with the is-set-composed recovery), the members-only access boundary,
+  and the "is set" ↔ `is_not_null` ↔ `user_trait` ↔ `trait:` vocabulary crosswalk.
+  [analytics-read-api.mdx](api-reference/analytics-read-api.mdx) gains a "Filter by user trait"
+  section with a copy-paste URL-encoded curl; `openapi.json` regenerated from the playground
+  registry — the `filters` parameter description now carries the `trait:<key>` template, the new
+  `PATCH /sites/{site}/users/{userId}/traits` page is published with its RFC 9457 error catalog,
+  and the user-traits reads document `totalIdentified` and `values?q=`: **152 → 153 published
+  endpoints across 30 groups** (the SEO operation-count guard moved with it).
+  [rate-limits-cors.mdx](api-reference/rate-limits-cors.mdx) gains the connector pacing posture
+  (≤10 rps, retry 429/5xx) and PATCH's CORS standing.
+  [api-authentication.mdx](api-reference/api-authentication.mdx) marks **Users: Read** as covering
+  the three user-traits reads and trait filters, with the 403 named-scope behavior and the
+  public/share/embed exclusion. [mcp-server.mdx](api-reference/mcp-server.mdx) moves to the
+  **57-tool catalog / 50 default tools**, adds `get_user_traits` (keys|values|users modes),
+  `merge_user_traits` (the recommended merge write; `update_user_traits` stays replace-all), the
+  `check_tracking` `trait_key` identify() probe, trait-filter support on the report tools, and the
+  named-scope 403 troubleshooting row. Ship together with the person-attributes product deploy
+  (0276 paired gate); the sync marker does not advance until that commit lands.
+- **Pre-existing drift fulfilled:** [user-analytics.mdx](user-analytics.mdx) already claimed
+  "Segment by trait" — it now describes the shipped behavior (User trait filter, Traits Explorer
+  "View filtered dashboard" action, identified-profile coverage).
+- **Agent front doors (product-side):** the product's `setup.md` and `llms.txt`/`mcp.md` were
+  updated in the same product wave (identify→verify→filter recipes; MCP tool-count drift corrected
+  47 → 50) — recorded here so the paired release has no silent gap; no docs-repo change needed.
+
 - **Session replay pages (2026-08-10, product decision 0289 — product commit pending):** new
   [session-replay.mdx](session-replay.mdx) under Web Analytics → Behavior & conversion — rrweb
   visit playback documented privacy-first (off by default, input masking as a floor, strict
@@ -43,6 +82,14 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Cookie-banner claims scoped to anonymous mode (2026-08-11, product decision 0292 §11):**
+  [privacy-friendly-analytics-gdpr.mdx](resources/privacy-friendly-analytics-gdpr.mdx) now states
+  the two modes plainly — anonymous measurement (default, no banner in most jurisdictions) and
+  identified mode (the site is the controller and owes a lawful basis, typically consent; the
+  consent-exempt audience-measurement carve-out does not cover cross-referencing identified
+  customer data). [react-native-analytics.mdx](integrations/react-native-analytics.mdx) scopes its
+  "no personal data at rest" line to anonymous usage. The index, quickstart, how-it-works, and GTM
+  pages were already scoped to core anonymous analytics and needed no change.
 - **Heatmap API integration (2026-08-10, product decisions 0287/0288, sync marker advanced
   6ab578b → db807b8):** documented that restricted keys use **Analytics: Read** for the three
   heatmap endpoints, published those operations in the generated OpenAPI reference, and refreshed

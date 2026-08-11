@@ -36,6 +36,24 @@ Common dimensions include page path, page title, hostname, referrer, channel, co
 
 Two dimensions are **session-scoped** rather than pageview-scoped: **Entry Page** and **Entry Hostname** match the first page of a session, so they mean "entered on" rather than "visited anywhere". Use them to isolate the sessions that *started* somewhere, and page path or hostname to catch every session that reached it at any point.
 
+**User trait** sits in the **People** group of the filter control, beside User ID. It filters reports by the traits you attached with [`identify()`](/user-identification-analytics) — "plan is pro", "country is not set". It is different from every other dimension in four ways:
+
+- **Identified users only.** A trait filter matches people your app has named — never anonymous traffic. Excluding works the same way: "plan is not pro" matches identified users whose plan isn't pro, **including identified users with no plan key at all**, but still no anonymous visitors. An active trait filter shows a banner stating the identified population it's filtering.
+- **Current value, not historical.** The filter reads the value the profile holds *at query time*, not the value during the reported period. A Q1 report filtered to "plan is pro" includes January activity of users who upgraded in March, and drops users who have since churned. For funnels this is a survivorship caveat — the cohort is defined by who matches *today*. To pin a value to the moment it happened, send it as an [event property](/custom-event-tracking) instead, which filters per-period.
+- **No regex, with caps.** Trait filters support is / is not, contains / does not contain, starts with / ends with, and is set / is not set — the regex operators are not available. You can apply at most **4 trait filters** per query, a key is at most 200 characters, and a single filter matching more than **10,000 identified users** is refused with a `TRAIT_FILTER_TOO_BROAD` error. To recover from that error, compose presence with exclusion — "plan is set" AND "plan is not free" — which narrows below the cap without changing the population the way a bare exclusion would.
+- **Members only.** Trait data can hold names and emails, so trait filters require a signed-in member or an API key with **Users: Read**. On [public dashboards](/public-analytics-dashboards), share links, and embeds the picker is hidden and a request carrying a trait filter returns `400` rather than silently unfiltered results. Saved definitions — [segments](/saved-analytics-segments), [cohorts](/behavioral-cohort-analysis), and [alerts](/analytics-alerts) — reject trait filters with a named error; trait filtering is for the live report in front of you.
+
+The same vocabulary appears under four names depending on where you look:
+
+| Where | What you see |
+| --- | --- |
+| Dashboard filter control | **User trait**, with **is set** / **is not set** operators |
+| HTTP API `filters` parameter | `{"dimension":"trait:plan","op":"is_not_null","value":[]}` |
+| Event catalog (data dictionary) | the `user_trait` kind |
+| Wire operators | `is_not_null` ("is set") / `is_null` ("is not set") |
+
+The **Traits** explorer in the Users report links straight into this: a key or value row's **View filtered dashboard** action opens the overview with the matching trait chip applied, and the explorer header shows how many identified profiles the site holds.
+
 The operators are:
 
 | Operator | Matches when the value… |
@@ -65,7 +83,10 @@ An active filter stays applied as you switch between Overview, Pages, Sessions, 
     Yes. A **User ID** filter matches a person whether their ID arrived as an anonymous visitor ID or as one you attached with [identify](/user-identification-analytics). This applies to the is, is not, is set, and is not set operators.
   </Accordion>
   <Accordion title="Can I filter TinyAnalytics with a regular expression?">
-    Yes. Every filter uses a dimension, an operator, and one or more values, and the operators include **matches regex** and **does not match regex**. The other operators are is / is not, contains / does not contain, starts with / ends with, and is set / is not set.
+    Yes. Every filter uses a dimension, an operator, and one or more values, and the operators include **matches regex** and **does not match regex**. The other operators are is / is not, contains / does not contain, starts with / ends with, and is set / is not set. The exception is **User trait**, where the regex operators are not available.
+  </Accordion>
+  <Accordion title="Can I filter reports by a user trait I set with identify()?">
+    Yes. The **User trait** dimension in the filter control (People group) matches [identified users](/user-identification-analytics) by the **current** value of a trait — "plan is pro" filters to people whose plan is pro *right now*, including their activity from before they upgraded. Anonymous traffic never matches, and the regex operators aren't available on trait filters. Up to 4 trait filters per query; a filter matching more than 10,000 identified users is refused, so compose "is set" with an exclusion to narrow it.
   </Accordion>
   <Accordion title="Do filters stay applied when I switch reports?">
     Yes. An active filter stays applied as you switch between Overview, Pages, Sessions, and the rest of the dashboard, until you clear it. Set up a view once — mobile visitors from a campaign, for example — and every report reflects it.
@@ -91,5 +112,8 @@ An active filter stays applied as you switch between Overview, Pages, Sessions, 
   </Card>
   <Card title="Events explorer" icon="bolt" href="/event-analytics">
     Filter by event and property.
+  </Card>
+  <Card title="Identify users" icon="user" href="/user-identification-analytics">
+    Attach the traits a User trait filter reads.
   </Card>
 </Columns>

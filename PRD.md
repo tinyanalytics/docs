@@ -985,6 +985,44 @@ its product commit pending** — the implementation is uncommitted in the produc
 the time of this pass. Do NOT treat these pages as release-complete, and advance the marker to
 the session-replay commit SHA, once it lands and deploys (0276 paired gate).
 
+## 10m. Product-sync pass (2026-08-11 — Person attributes, decision 0292)
+
+Audited the committed product changes after `db807b8` through `2866629` (product HEAD). The
+person-attributes wave is committed but **not yet deployed**; per the 0276 paired gate the
+marker stays held (session replay above is also held).
+
+- **A0 security gate** (`21785b8`, decision 0291) — the three `user-traits/*` reads are now
+  member/`users:read`-gated (they were anonymous-open on public sites); scoped keys without
+  `users:read` get a 403 naming the scope. Documented in
+  `api-reference/api-authentication.mdx` and the regenerated OpenAPI descriptions.
+- **Phase A** (`591bb4d`) — MCP `get_user_traits` + `merge_user_traits` tools (catalog 54 → 57,
+  defaults 47 → 50), `PATCH /sites/:id/users/:userId/traits` merge write with RFC 9457 errors,
+  `totalIdentified` on keys, `values?q=` search. Documented in `mcp-server.mdx`, the regenerated
+  `openapi.json` (152 → 153 published endpoints, 30 groups), `rate-limits-cors.mdx`, and
+  `user-identification-analytics.mdx` (write-surface table + connector contract).
+- **Filter engine** (`97f3d48`) — `trait:<key>` filter dimension: identified-only, current-value,
+  8 ops no regex, caps (4/query, 200-char key, 10k `TRAIT_FILTER_TOO_BROAD`), members-only access
+  boundary. Documented in `analytics-filters.mdx` and `analytics-read-api.mdx` (+ the `filters`
+  param description in `openapi.json`).
+- **Web UI + decision 0292** (`a39ae5f`) — People-group picker, editable chip, status banner,
+  Traits Explorer actions + coverage. Covered by the `analytics-filters.mdx` entry and the
+  `user-analytics.mdx:76` drift fulfillment ("Segment by trait" was aspirational; now true).
+- **check_tracking probe + setup.md** (`2866629`) — `check_tracking` gains `trait_key`; product
+  `setup.md` + `llms.txt`/`mcp.md` updated product-side (agent front doors; tool-count drift
+  47 → 50 corrected). Documented in `mcp-server.mdx` and the identify verification recipe;
+  product-side front-door changes need no docs-repo change.
+- **Privacy boundary (0292 §11)** — the blanket "no cookie banner" claim scoped to anonymous
+  mode in `privacy-friendly-analytics-gdpr.mdx` and `react-native-analytics.mdx` (index,
+  quickstart, how-it-works, GTM were already scoped); lawful-basis guidance added to
+  `user-identification-analytics.mdx`.
+
+**Current sync marker:** unchanged at product commit
+`db807b88a01c0ac0bf8b89cc730344a10880b797` for released work. **Person attributes is documented
+against decision `0292` with its product deploy pending** — the code is committed through
+`2866629` but has not shipped to production. Do NOT treat these pages as release-complete, and
+advance the marker to the person-attributes deploy SHA once it lands (0276 paired gate); the
+session-replay hold in §10l applies independently.
+
 ---
 
 ## 11. Assumptions & open questions

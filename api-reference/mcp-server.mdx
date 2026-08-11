@@ -1,7 +1,7 @@
 ---
 title: "Connect an AI Agent with the MCP Server"
 sidebarTitle: "MCP server"
-description: "Connect Claude Code, Cursor, VS Code, or Codex to TinyAnalytics over MCP with a scoped API key and 54 tools for analytics and setup."
+description: "Connect Claude Code, Cursor, VS Code, or Codex to TinyAnalytics over MCP with a scoped API key and 57 tools for analytics and setup."
 icon: "plug"
 noindex: true
 
@@ -28,8 +28,8 @@ Model Context Protocol (MCP) is an open standard that lets AI applications call 
 
 ## What can an agent do through MCP?
 
-The complete server catalog contains **54 tools** in nine domains. A full-access key receives the
-**47 default tools**. A restricted key receives only the tools allowed by its selected resources;
+The complete server catalog contains **57 tools** in nine domains. A full-access key receives the
+**50 default tools**. A restricted key receives only the tools allowed by its selected resources;
 an explicit matching write grant can also expose the catalog's gated configuration or delete tool
 for that resource.
 
@@ -37,10 +37,15 @@ for that resource.
 | --- | --- |
 | **Traffic questions** | Overview totals, metric time series, breakdowns by 18 dimensions, live visitors, landing pages, acquisition, journeys, retention, and revenue |
 | **Site health** | Core Web Vitals, JavaScript errors, and bot and AI-crawler traffic |
-| **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, and server-side identification |
+| **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, user-trait reads (`get_user_traits`: keys, values of one key, or users matching key=value), trait writes (`merge_user_traits` to set only the keys you send — the recommended write; `update_user_traits` to replace all traits wholesale), and server-side identification |
 | **Measurement setup** | Goals, funnels (including analysis without saving), custom SQL dashboards, and chart annotations |
 | **Anything else** | A read-only SQL query over your own event data, with the schema available as a tool |
-| **Getting started** | Create a site, get its tracking snippet, check whether tracking is live, and get the dashboard link |
+| **Getting started** | Create a site, get its tracking snippet, check whether tracking is live — optionally probing for an `identify()` trait key with `check_tracking`'s `trait_key` argument — and get the dashboard link |
+
+The analytics-report tools also accept a `trait:<key>` [filter](/analytics-filters) — for example
+"breakdown by page for users whose plan is pro" — which scopes the report to identified users by a
+trait's current value. Trait filters need a key with **Users: Read** and never match anonymous
+traffic.
 
 Every tool runs with both **your key's scopes and your account access**. The agent sees only the
 sites you can see, a restricted key sees only granted tools, and writes are refused unless your
@@ -171,7 +176,7 @@ Connecting an agent gives it your key's access. Understand these points before y
   permissions remain an additional boundary.
 - **Write scopes can include permanent actions.** A restricted key with an explicit matching write
   grant can receive configuration or delete tools for Sites, Goals, Funnels, Dashboards,
-  Annotations, or Users. Do not grant those write scopes to an agent that only needs reads. The 47
+  Annotations, or Users. Do not grant those write scopes to an agent that only needs reads. The 50
   tools on a full-access key omit these seven gated actions by default.
 - **Analytics text is untrusted input.** Page titles, referrers, and event names come from anonymous visitors to your site, which makes them a channel for prompt injection. TinyAnalytics strips control and bidirectional characters from every value it returns and tells the model explicitly that returned text is data, never instructions. Keep that assumption in your own prompts too.
 - **Revoke a key any time.** Deleting the key in your account settings cuts off the agent immediately.
@@ -189,7 +194,7 @@ Connecting an agent gives it your key's access. Understand these points before y
 | Your client tries to log you in, or reports a failed connection mentioning OAuth or an unexpected `<!DOCTYPE html>` response | The `Authorization` header is missing. The server answers `401`, and clients that see no header attempt an OAuth flow that doesn't exist yet. Add the header. |
 | `The API key was not recognized` | Stray whitespace, a wrapped line, or a missing `Bearer ` prefix in the header. |
 | `This API key has expired` or `is disabled` | Create a new key from the **API keys** card under [**Settings → Account**](/tinyanalytics-account-settings). |
-| A tool returns `403` | The key lacks the required resource scope, its owner can't access the site, or the action needs a higher organization role. Review the key's permissions and ask the agent to list your sites. |
+| A tool returns `403` | The key lacks the required resource scope — the message names it (for example `users:read` when an agent reads user traits or applies a `trait:<key>` filter, `users:write` when it merges traits) — its owner can't access the site, or the action needs a higher organization role. Review the key's permissions and ask the agent to list your sites. |
 | A tool returns `404` for an ID | The ID is wrong. Ask the agent to list goals, funnels, dashboards, or annotations to get valid IDs. |
 | `Wrong path. The MCP endpoint is POST /api/mcp` | The URL has a trailing slash or an extra segment. Use exactly `https://dash.tinyanalytics.io/api/mcp`. |
 | `Rate limit reached for this API key` | You've passed 120 requests in a minute. Wait for the window, then ask for fewer, more aggregated results. |
@@ -200,8 +205,8 @@ Connecting an agent gives it your key's access. Understand these points before y
 <AccordionGroup>
   <Accordion title="What is the TinyAnalytics MCP server?">
     It's an endpoint at `https://dash.tinyanalytics.io/api/mcp` that exposes a
-    54-tool catalog over the Model Context Protocol. A full-access key receives
-    47 default tools; a restricted key receives the subset allowed by its
+    57-tool catalog over the Model Context Protocol. A full-access key receives
+    50 default tools; a restricted key receives the subset allowed by its
     scopes and may receive matching gated actions when you explicitly grant
     write access. Connect Claude Code, Cursor, VS Code, or Codex CLI with your
     API key, then ask questions in plain language.
@@ -215,7 +220,7 @@ Connecting an agent gives it your key's access. Understand these points before y
   <Accordion title="Can an agent delete my analytics data?">
     Only if you explicitly give a restricted key the matching write scope. For
     example, **Sites: Write** can expose site configuration and deletion, while
-    **Users: Write** can expose user erasure. A full-access key receives 47
+    **Users: Write** can expose user erasure. A full-access key receives 50
     default tools that omit the seven gated configuration/delete actions. Use a
     restricted read-only key for analysis-only agents.
   </Accordion>

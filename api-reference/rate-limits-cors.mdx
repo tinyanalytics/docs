@@ -36,6 +36,10 @@ creation fails closed with `503` instead of minting an unbounded key.
 
 Calls to the [MCP server](/api-reference/mcp-server) are limited to **120 requests per minute per API key**. Beyond that the endpoint returns `429 Too Many Requests` with a `Retry-After` header. This limit is separate from the ingestion limit above, and it's sized for normal agent work — building a dashboard, where each card is previewed before it's saved, is typically 30–60 calls over a couple of minutes.
 
+## Connector writes to user traits
+
+Platform connectors merge traits with `PATCH /api/sites/{id}/users/{userId}/traits` — one call per user, authenticated with a `users:write` key. There is no batch endpoint: pace at **10 requests per second or less**, and retry `429` and `5xx` responses with backoff. `PATCH` is part of the API's CORS method vocabulary, so a browser-based caller on a trusted origin can use it; connectors almost always call server-to-server, where CORS doesn't apply. The full connector contract lives in [Identify users](/user-identification-analytics#connect-a-platform-shopify-crm-billing).
+
 ## CORS: which origins can call the API
 
 TinyAnalytics splits the API into two CORS zones:

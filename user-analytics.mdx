@@ -76,7 +76,7 @@ Open the user's profile and use **Delete User** in the header. Deleting a user i
 ## Common workflows
 
 - **Follow a signed-in customer.** Identify users, then read one customer's full journey across sessions and devices.
-- **Segment by trait.** Attach traits with `identify()` or `setTraits()`, then filter reports by them.
+- **Segment by trait.** Attach traits with `identify()` or `setTraits()`, then filter any report by them — the **User trait** dimension in the [filter control](/analytics-filters) matches identified users by a trait's current value ("plan is pro"). From the **Traits** explorer, a key or value row's **View filtered dashboard** action opens the overview with that filter already applied; the explorer header shows how many identified profiles the site holds.
 - **Investigate an account.** Open a profile to see everything one person did before and after a key action.
 
 ## Frequently asked questions
@@ -95,7 +95,7 @@ Open the user's profile and use **Delete User** in the header. Deleting a user i
     Yes. Click any of the **Last seen**, **First seen**, **Sessions**, **Pageviews**, or **Events** headings to sort by that column. The list is sorted by Last seen, newest first, by default. A newly clicked column starts with its largest values first, and clicking the active column reverses the order. The user, country, channel, browser, OS, and device columns aren't sortable.
   </Accordion>
   <Accordion title="What are user traits and where do I see them?">
-    Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`, or edit them directly with **Edit Traits** on the user's profile. They appear on the user's profile in the TinyAnalytics Users report, and you can filter reports by them to segment your audience.
+    Traits are your own attributes on a person, such as plan or signup date. Attach them with `identify()` or `setTraits()`, or edit them directly with **Edit Traits** on the user's profile. They appear on the user's profile in the TinyAnalytics Users report, and you can [filter reports by them](/analytics-filters) to segment your audience — a trait filter matches identified users by the trait's current value.
   </Accordion>
   <Accordion title="How do I fulfill a GDPR erasure request in TinyAnalytics?">
     Open the person's profile in the Users report and use **Delete User** in the header. It permanently erases their events across every linked device and removes their stored profile. Only an owner or admin can do it, and it can't be undone — it's the one deliberate exception to TinyAnalytics' rule that retention never deletes your history.

@@ -67,6 +67,32 @@ Custom comparison dates must be historical, non-overlapping, and equal in length
 window. `none` is a dashboard URL value, not an API comparison mode; omit `compare` when you do not
 want a baseline on timeseries or breakdown reads.
 
+## Filter by user trait
+
+The shared `filters` parameter accepts a templated **trait dimension**, `trait:<key>`, that scopes
+any analytics read to [identified users](/user-identification-analytics) by the **current** value of
+a trait. The filter matches identified users only — never anonymous traffic — and reads the value at
+query time, so a Q1 report filtered to `plan = pro` includes January activity of users who upgraded
+in March.
+
+```bash
+curl -G "https://dash.tinyanalytics.io/api/sites/1/overview" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  --data-urlencode "start_date=2026-01-01" \
+  --data-urlencode "end_date=2026-03-31" \
+  --data-urlencode 'filters=[{"dimension":"trait:plan","op":"equals","value":["pro"]}]'
+```
+
+The trait ops are `equals`, `not_equals`, `contains`, `not_contains`, `starts_with`, `ends_with`,
+`is_null`, and `is_not_null` — regex is not available on trait dimensions, and `not_equals` also
+matches identified users with no such key at all. The UI's "is set" / "is not set" labels map to
+`is_not_null` / `is_null`. Limits: at most 4 trait filters per query, a key of at most 200
+characters, and a filter matching more than 10,000 identified users fails with `400`
+`TRAIT_FILTER_TOO_BROAD` (recover by composing `is_not_null` with a `not_equals` exclusion). Trait
+filters require a member session or a key with **Users: Read**; requests through a public site's
+open dashboard, a share link, or an embed are refused with `400` rather than silently unfiltered
+results. See [Analytics filters](/analytics-filters) for the dashboard equivalent.
+
 ## Core endpoints
 
 | Endpoint | Returns |
@@ -86,7 +112,7 @@ For raw events, `GET /api/sites/{id}/events/log` returns individual events with 
 
 ## Where are the rest of the endpoints?
 
-These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **152 published endpoints across 30 groups**—every one with its full path, method, and parameters:
+These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **153 published endpoints across 30 groups**—every one with its full path, method, and parameters:
 
 <Columns cols={2}>
   <Card title="Overview" icon="gauge" href="/api-reference/overview/get-overview">
@@ -123,10 +149,10 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
     No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-authentication) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
   </Accordion>
   <Accordion title="How do I find an endpoint's exact parameters and response?">
-    For **parameters**, use the **Endpoints** section of this reference—152 published endpoints across 30 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
+    For **parameters**, use the **Endpoints** section of this reference—153 published endpoints across 30 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
   </Accordion>
   <Accordion title="Does TinyAnalytics have an API for goals, funnels, or feature flags?">
-    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 152 playground-backed endpoints across 30 groups; workflow reads are not listed in the playground yet.
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 153 playground-backed endpoints across 30 groups; workflow reads are not listed in the playground yet.
   </Accordion>
   <Accordion title="Can I compare a date range against the previous period?">
     Yes. Comparison-capable reads accept `previous_weekday`, `previous`, `year`,

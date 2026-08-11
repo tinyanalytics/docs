@@ -30,7 +30,7 @@ These values support a feature on your site; they are not a cross-site advertisi
 
 ## Do you still need a cookie-consent banner?
 
-Core anonymous analytics sets no cookies and does not persist an anonymous analytics ID in the browser. Whether *you* need consent still depends on your jurisdiction, the optional features you enable, and the data you choose to send. Review the rules that apply to you and your visitors.
+Core anonymous analytics — the default — sets no cookies and does not persist an anonymous analytics ID in the browser, so in most jurisdictions anonymous measurement alone needs no banner. **Identified mode is different**: the moment you call [`identify()`](/user-identification-analytics), the user ID and traits you send are personal data, you act as the data controller for them, and you owe your users a lawful basis — typically consent. The consent-exempt audience-measurement carve-out some jurisdictions allow does not cover cross-referencing identified customer data. Whether *you* need consent still depends on your jurisdiction, the optional features you enable, and the data you choose to send. Review the rules that apply to you and your visitors.
 
 <Note>
   This page describes how TinyAnalytics works, not legal advice. Your obligations under GDPR, ePrivacy, CCPA, or other regulations depend on your specific use, the data you collect, and where your visitors are. Consult those regulations — or a professional — for your situation.

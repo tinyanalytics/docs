@@ -103,7 +103,7 @@ Run the app and send a screen view with `analytics.screen()`.
 
 ## The mobile identity model
 
-Native apps sit behind carrier NAT and have no browser User-Agent, so the web fingerprint would collapse many devices into one. Instead the SDK mints a persistent **install ID** and sends it as `anonymousId`; the server derives a stable, site-scoped user ID from it. `identify()` layers your own product-user ID on top and backfills recent events — exactly as on the web. No cookies, no device fingerprinting, no personal data at rest. See [how cookieless identity works](/resources/cookieless-analytics-identity).
+Native apps sit behind carrier NAT and have no browser User-Agent, so the web fingerprint would collapse many devices into one. Instead the SDK mints a persistent **install ID** and sends it as `anonymousId`; the server derives a stable, site-scoped user ID from it. `identify()` layers your own product-user ID on top and backfills recent events — exactly as on the web. Without `identify()`, there are no cookies, no device fingerprinting, and no personal data at rest; once you identify users, the IDs and traits you send are personal data you're the controller for. See [how cookieless identity works](/resources/cookieless-analytics-identity).
 
 ## API
 

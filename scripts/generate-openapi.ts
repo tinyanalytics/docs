@@ -103,6 +103,14 @@ const EXCLUDED_CATEGORIES = new Set([
 ]);
 
 /**
+ * Individual paths withheld from an otherwise-published category, with the reason:
+ *   /sites/:site/presence — page-presence widget read; its feature docs are held
+ *     with the session-replay deploy (PRD.md §10l), so publishing the operation
+ *     here would promise a surface the public docs don't cover yet
+ */
+const EXCLUDED_PATHS = new Set(["/sites/:site/presence"]);
+
+/**
  * Display names for categories whose internal label doesn't read well publicly.
  * "Misc" survives curation as Retention and Journeys only, so it's named for them.
  */
@@ -190,7 +198,13 @@ const COMMON_PARAMS = [
     name: "filters",
     description:
       "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. " +
-      'Example: `[{"dimension":"country","op":"equals","value":["US"]}]`.',
+      'Example: `[{"dimension":"country","op":"equals","value":["US"]}]`. ' +
+      "A user-trait filter uses the templated dimension `trait:<key>` — " +
+      '`[{"dimension":"trait:plan","op":"equals","value":["pro"]}]` — and matches identified users ' +
+      "only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, " +
+      "starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. " +
+      "Trait filters require a member session or a `users:read` key, max 4 per query, and a filter " +
+      "matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
     schema: { type: "string" },
   },
 ];
@@ -201,6 +215,40 @@ const PATH_PARAM_OVERRIDES: Record<
   { description: string; schema: object }
 > = {
   site: { description: "Site ID.", schema: { type: "integer" } },
+};
+
+/**
+ * Per-operation enrichments the registry cannot express. EndpointConfig carries
+ * no error model, so the PATCH traits route's RFC 9457 problem-details catalog
+ * is documented here, beside the request the playground generates. Keyed by
+ * `"<method> <openapi path>"`.
+ */
+const OPERATION_OVERRIDES: Record<
+  string,
+  {
+    descriptionAppend?: string;
+    responses?: Record<string, { description: string }>;
+  }
+> = {
+  "patch /sites/{site}/users/{userId}/traits": {
+    descriptionAppend:
+      "\n\nErrors arrive as RFC 9457 problem+json with a machine-readable `code`:\n\n" +
+      "| Status | `code` | Cause and fix |\n| --- | --- | --- |\n" +
+      "| `400` | `INVALID_USER_ID` | The `userId` path segment is empty or over 255 characters. Percent-encode the segment — `auth0|abc`-style IDs round-trip intact. |\n" +
+      "| `400` | `INVALID_TRAITS` | The traits object is malformed or over 2,048 bytes serialized (`cap` names the limit). |\n" +
+      "| `403` | — | The key lacks `users:write` — the error names the missing scope. |\n" +
+      "| `404` | `USER_NOT_FOUND` | No profile exists and `create=false` was passed. Skip and count, or omit it to create the profile. |",
+    responses: {
+      "400": {
+        description:
+          "RFC 9457 problem+json — `INVALID_USER_ID` (empty or >255-character `userId`) or `INVALID_TRAITS` (malformed, or over the 2,048-byte `cap`).",
+      },
+      "404": {
+        description:
+          "RFC 9457 problem+json — `USER_NOT_FOUND` when `create=false` and no profile exists for the user.",
+      },
+    },
+  },
 };
 
 /** True when a label restates the parameter name and so adds nothing. */
@@ -325,9 +373,10 @@ for (const category of endpointCategories) {
     continue;
   }
 
-  const endpoints = keepAll
+  const endpoints = (keepAll
     ? category.endpoints
-    : category.endpoints.filter((e: any) => keepSome!.includes(e.path));
+    : category.endpoints.filter((e: any) => keepSome!.includes(e.path))
+  ).filter((e: any) => !EXCLUDED_PATHS.has(e.path));
 
   if (endpoints.length === 0) continue;
   if (keepSome) {
@@ -383,14 +432,27 @@ for (const category of endpointCategories) {
       });
     }
 
+    const opOverride =
+      OPERATION_OVERRIDES[
+        `${endpoint.method.toLowerCase()} ${openApiPath}`
+      ];
+
     const operation: Record<string, unknown> = {
       operationId: operationIdFor(endpoint.method, endpoint.path),
       summary: endpoint.name,
-      ...(endpoint.description ? { description: endpoint.description } : {}),
+      ...(endpoint.description
+        ? {
+            description:
+              endpoint.description + (opOverride?.descriptionAppend ?? ""),
+          }
+        : opOverride?.descriptionAppend
+          ? { description: opOverride.descriptionAppend }
+          : {}),
       tags: [tag],
       ...(parameters.length ? { parameters } : {}),
       responses: {
         "200": { description: "Success." },
+        ...opOverride?.responses,
         "401": { $ref: "#/components/responses/Unauthorized" },
         "403": { $ref: "#/components/responses/Forbidden" },
         "429": { $ref: "#/components/responses/RateLimited" },

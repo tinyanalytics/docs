@@ -982,7 +982,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -1093,7 +1093,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -1191,7 +1191,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -1329,7 +1329,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -1474,7 +1474,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -1603,7 +1603,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -1732,7 +1732,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -1863,7 +1863,7 @@
       "get": {
         "operationId": "get-sites-site-live",
         "summary": "Get Live Visitors",
-        "description": "Returns the count of active sessions within the specified time window",
+        "description": "Returns the count of active sessions within the last 5 minutes",
         "tags": [
           "overview"
         ],
@@ -1873,15 +1873,6 @@
             "in": "path",
             "required": true,
             "description": "Site ID.",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "minutes",
-            "in": "query",
-            "required": false,
-            "description": "Example: 5.",
             "schema": {
               "type": "integer"
             }
@@ -2023,7 +2014,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2120,7 +2111,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2259,7 +2250,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2464,7 +2455,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2543,7 +2534,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2622,7 +2613,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2710,7 +2701,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2798,7 +2789,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -2904,7 +2895,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -3011,7 +3002,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -3215,7 +3206,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -3321,7 +3312,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -3673,7 +3664,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -3809,7 +3800,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4106,7 +4097,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4185,7 +4176,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4289,7 +4280,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4529,7 +4520,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4640,7 +4631,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4770,7 +4761,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4910,7 +4901,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -4989,7 +4980,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -5101,7 +5092,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -5188,7 +5179,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -5409,7 +5400,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -5488,7 +5479,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -5904,13 +5895,103 @@
             }
           }
         }
+      },
+      "patch": {
+        "operationId": "patch-sites-site-users-userId-traits",
+        "summary": "Merge User Traits",
+        "description": "Merges traits into the profile — null deletes a key, absent keys are kept. 200 {\"success\":true}. create=false returns 404 for unknown users instead of creating the profile\n\nErrors arrive as RFC 9457 problem+json with a machine-readable `code`:\n\n| Status | `code` | Cause and fix |\n| --- | --- | --- |\n| `400` | `INVALID_USER_ID` | The `userId` path segment is empty or over 255 characters. Percent-encode the segment — `auth0|abc`-style IDs round-trip intact. |\n| `400` | `INVALID_TRAITS` | The traits object is malformed or over 2,048 bytes serialized (`cap` names the limit). |\n| `403` | — | The key lacks `users:write` — the error names the missing scope. |\n| `404` | `USER_NOT_FOUND` | No profile exists and `create=false` was passed. Skip and count, or omit it to create the profile. |",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "Example: User ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "create",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "400": {
+            "description": "RFC 9457 problem+json — `INVALID_USER_ID` (empty or >255-character `userId`) or `INVALID_TRAITS` (malformed, or over the 2,048-byte `cap`)."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "description": "RFC 9457 problem+json — `USER_NOT_FOUND` when `create=false` and no profile exists for the user."
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "traits": {
+                    "type": "object",
+                    "properties": {
+                      "plan": {
+                        "type": "string"
+                      },
+                      "orders_count": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "traits": {
+                  "plan": "pro",
+                  "orders_count": 3
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/sites/{site}/user-traits/keys": {
       "get": {
         "operationId": "get-sites-site-user-traits-keys",
         "summary": "Get User Trait Keys",
-        "description": "Returns known user trait keys with user counts",
+        "description": "Returns known user trait keys with user counts and the all-time identified-profile count (totalIdentified)",
         "tags": [
           "user-traits"
         ],
@@ -5950,7 +6031,7 @@
       "get": {
         "operationId": "get-sites-site-user-traits-values",
         "summary": "Get User Trait Values",
-        "description": "Returns values for a user trait key",
+        "description": "Returns values for a user trait key — q is a literal substring search",
         "tags": [
           "user-traits"
         ],
@@ -5969,6 +6050,14 @@
             "in": "query",
             "required": true,
             "description": "Example: Trait key.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -6876,7 +6965,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -7270,7 +7359,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -7349,7 +7438,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -7453,7 +7542,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -9369,7 +9458,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -10292,7 +10381,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -11412,7 +11501,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
@@ -11513,7 +11602,7 @@
           },
           {
             "name": "filters",
-            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`.",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
             "schema": {
               "type": "string"
             },
