@@ -9,6 +9,15 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **TinyAnalytics tracking on the docs site (2026-08-11):** added
+  [analytics.js](analytics.js), which loads `https://dash.tinyanalytics.io/script.js`
+  for site ID `221` with `data-web-vitals` and `data-track-errors` enabled. Mintlify
+  exposes no hook for `<head>` tags, so the tag is injected from a root-level `.js`
+  file — Mintlify runs any `.js` in the content directory on every page. The tracker
+  boots from `document.currentScript`, which dynamically inserted classic scripts
+  still set, so the `data-*` attributes parse exactly as an inline tag's would.
+  SPA route changes are covered by the tracker's `data-track-spa` default of `true`.
+  A `querySelector` guard keeps a second execution from stacking trackers.
 - **Person attributes pages (2026-08-11, product decision 0292 — product deploy pending):**
   documented the shipped person-attributes wave (product commits `21785b8` A0 security gate,
   `591bb4d` Phase A, `97f3d48` filter engine, `a39ae5f` web UI + decision 0292, `2866629`
@@ -82,6 +91,13 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Site logo refreshed (2026-08-11):** replaced [logo/light.svg](logo/light.svg) and
+  [logo/dark.svg](logo/dark.svg) with new artwork. The light/dark split in `docs.json`
+  is unchanged: `light.svg` keeps the dark palette (`#001408` wordmark, `#009b32` mark)
+  for light mode, `dark.svg` the light palette (`#eef9f3` wordmark, `#00ff64` mark) for
+  dark mode. Both files now share one `viewBox` (`0 0 779.443 128.781`), so the logo no
+  longer changes size when the theme is toggled — the previous pair differed
+  (754.143×130 against 752.343×128.781).
 - **Cookie-banner claims scoped to anonymous mode (2026-08-11, product decision 0292 §11):**
   [privacy-friendly-analytics-gdpr.mdx](resources/privacy-friendly-analytics-gdpr.mdx) now states
   the two modes plainly — anonymous measurement (default, no banner in most jurisdictions) and
