@@ -25,6 +25,8 @@ To share while keeping the site private, generate a **private link key** for the
 
 A shared dashboard is strictly **read-only**. Viewers can browse the reports — overview, pages, sessions, users, events, goals, funnels, journeys, retention, and performance — and change the date range and filters. They **cannot** edit anything, reach your site settings, run queries, or see your account. Nothing about sharing exposes a login.
 
+Shared dashboards also never show **who** your visitors are. On a public or share-link view, the reports that can carry identified-person data — Users, Sessions, and Events — render without the name, email, username, or any custom trait you attached with [`identify()`](/user-identification-analytics). Viewers see the same anonymous rows an unidentified visitor produces. Only signed-in members of the site's organization (or an API key scoped `users:read`) see identified people.
+
 ## Frequently asked questions
 
 <AccordionGroup>

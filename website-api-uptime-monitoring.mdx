@@ -11,8 +11,12 @@ Uptime monitoring checks that your site or API stays reachable and alerts you wh
 
 A monitor watches one endpoint. Choose the type and how often to check it:
 
-- **HTTP / HTTPS** — request a URL and check the response. Add authentication headers (basic, bearer, or API key), a custom user agent, or a request body if the endpoint needs them; redirects are followed automatically.
+- **HTTP / HTTPS** — request a URL and check the response. Add authentication headers (basic, bearer, or API key), a custom user agent, or a request body if the endpoint needs them; redirects are followed automatically (up to 5 hops).
 - **TCP** — check that a host and port accept a connection.
+
+<Note>
+  Authentication headers are sent only to the host you configured. If a check is redirected to a **different** host, TinyAnalytics drops your `Authorization` header and any custom headers before following the hop, so a redirect can never hand your credentials to a third party. If the endpoint you monitor redirects across hosts and needs authentication at the destination, point the monitor at the final URL instead.
+</Note>
 
 ## Decide what counts as "up"
 

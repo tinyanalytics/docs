@@ -7,6 +7,22 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Changed
+
+- **Shared dashboards documented as never showing identified people (2026-08-12, product
+  decision 0295):** `public-analytics-dashboards.mdx` listed the reports a share-link viewer
+  can browse (including Users) without saying what they see inside them. Now states the
+  guarantee explicitly — on a public or share-link view, Users, Sessions and Events render
+  without the name, email, username or custom traits attached via `identify()`; only signed-in
+  org members (or an API key scoped `users:read`) see identified people. Pairs the product-side
+  fix that closed the same gap in code.
+- **Uptime monitor redirect behaviour with authentication (2026-08-12, product decision 0295):**
+  `website-api-uptime-monitoring.mdx` said only that "redirects are followed automatically".
+  Now bounded (up to 5 hops) with a `<Note>` explaining that `Authorization` and custom headers
+  are dropped when a check is redirected to a different host — so a redirect can never hand
+  monitor credentials to a third party — and what to do if the destination needs auth (point
+  the monitor at the final URL).
+
 ### Added
 
 - **TinyAnalytics tracking on the docs site (2026-08-11):** added
