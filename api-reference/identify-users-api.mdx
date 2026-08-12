@@ -1,121 +1,126 @@
 ---
-title: "Identify Users API"
-sidebarTitle: "Identify API"
-description: "Attach a stable user ID and traits with POST /api/identify, then connect the visitor's recent anonymous events to that identified user."
+title: "Browser Identity API"
+sidebarTitle: "Browser identity"
+description: "Identify signed-in users, update traits, read the current user ID, and clear identity from client-side code with window.tinyanalytics."
 icon: "user"
 noindex: true
-
 ---
 
-`POST /api/identify` associates a visitor with a **stable user ID** of your choosing — a database ID, an email hash — and optionally stores **traits** describing them. TinyAnalytics backfills that ID onto the visitor's recent events, so their history ties together the moment they sign in. Like tracking, it returns **`204 No Content`**.
+Use the tracking script's browser identity API when your app knows who the visitor is. Call
+`identify()` after login or signup, update profile traits with `setTraits()`, and clear the stored ID
+on logout.
 
-```
-POST https://dash.tinyanalytics.io/api/identify
-```
-
-<CodeGroup>
-
-```bash cURL
-curl -X POST https://dash.tinyanalytics.io/api/identify \
-  -H "Content-Type: application/json" \
-  -d '{
-    "siteId": 1,
-    "userId": "user_8f3a",
-    "traits": { "plan": "pro", "company": "Acme" }
-  }'
-```
-
-```js JavaScript
-await fetch("https://dash.tinyanalytics.io/api/identify", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    siteId: 1,
-    userId: "user_8f3a",
-    traits: { plan: "pro", company: "Acme" },
-  }),
+```js
+window.tinyanalytics.identify('user_8f3a', {
+  plan: 'pro',
+  company: 'Acme'
 })
 ```
 
-```python Python
-import requests
+Browser identity is keyless. Do not put an API key in your frontend bundle.
 
-requests.post(
-    "https://dash.tinyanalytics.io/api/identify",
-    json={
-        "siteId": 1,
-        "userId": "user_8f3a",
-        "traits": {"plan": "pro", "company": "Acme"},
-    },
-)
+## Available identity methods
+
+| Method | What it does |
+| --- | --- |
+| `identify(userId, traits?)` | Attach your stable ID, backfill recent anonymous activity, merge traits, and remember the ID in this browser. |
+| `setTraits(traits)` | Merge traits for the current identified user without re-running the backfill. A `null` value deletes that key. |
+| `getUserId()` | Return the current identified user ID, or `null`. |
+| `clearUserId()` | Forget the identified user in this browser. |
+
+## Identify after login
+
+Call `identify()` as soon as your app knows the signed-in user's stable internal ID:
+
+```js
+window.tinyanalytics.identify('user_8f3a', {
+  plan: 'pro',
+  signupDate: '2026-01-15'
+})
 ```
 
-</CodeGroup>
-
-## Fields
-
-<ParamField body="siteId" type="number" required>
-  Your numeric site ID.
-</ParamField>
-
 <ParamField body="userId" type="string" required>
-  Your stable ID for the user, up to 255 characters.
+  Your stable ID for the user, up to 255 characters. Prefer an internal database ID over a value
+  that can change.
 </ParamField>
 
 <ParamField body="traits" type="object">
-  Key/value attributes, up to 2 KB serialized. A `null` value **deletes** that trait.
+  Optional profile attributes. The serialized object can be up to 2 KB.
 </ParamField>
 
-<ParamField body="isNewIdentify" type="boolean">
-  Defaults to `true`. Send `false` to update traits **without** re-running the event backfill.
-</ParamField>
+TinyAnalytics stores the ID in the browser's `localStorage`, so the user stays identified across
+page loads and later sessions on that device. It also attributes the visitor's recent anonymous
+events to the identified user.
 
-## When should I skip the backfill?
+## Update traits
 
-- **First identify** — send `{ siteId, userId, traits? }`. TinyAnalytics tags the visitor's recent events with `userId` and merges any traits onto their profile.
-- **Traits-only update** — send `isNewIdentify: false` to change traits without the backfill, the equivalent of the browser SDK's `setTraits()`.
-
-<Note>
-  Traits merge, they don't replace: each identify updates the keys you send and leaves the rest. Send a key with a `null` value to remove it.
-</Note>
-
-## The browser equivalent
-
-From a browser you don't call this endpoint directly — the tracking script wraps it:
+Once the user is identified, call `setTraits()` whenever a profile value changes:
 
 ```js
-window.tinyanalytics.identify('user_8f3a', { plan: 'pro' })
+window.tinyanalytics.setTraits({
+  plan: 'business',
+  trialEndsAt: null
+})
 ```
 
-See [identify users](/user-identification-analytics) for the full browser API.
+Traits merge with the existing profile. Keys you omit stay unchanged, and a key set to `null` is
+deleted. If no user is identified, `setTraits()` does nothing and writes a warning to the browser
+console.
 
-## Frequently asked questions
+## Read and clear the current identity
 
-<AccordionGroup>
-  <Accordion title="How do I update traits without re-running the backfill?">
-    Send `isNewIdentify: false` in the `POST /api/identify` body. TinyAnalytics updates the traits and skips tagging the visitor's recent events with the `userId` — the equivalent of the browser SDK's `setTraits()`.
-  </Accordion>
-  <Accordion title="How do I delete a trait?">
-    Send that key with a `null` value. Traits merge rather than replace: each identify updates only the keys you send and leaves the rest in place, so a `null` is the way to remove one.
-  </Accordion>
-  <Accordion title="Does identify overwrite a visitor's earlier events?">
-    No — it backfills. A first identify tags the visitor's recent events with the `userId` you sent and merges any traits onto their profile, so their history ties together the moment they sign in.
-  </Accordion>
-</AccordionGroup>
+Use `getUserId()` when another client-side integration needs the same ID. Clear it as part of your
+logout flow so another person using the browser does not inherit the previous identity.
+
+```js
+const userId = window.tinyanalytics.getUserId()
+
+function logOut() {
+  window.tinyanalytics.clearUserId()
+  endApplicationSession()
+}
+```
+
+## Handle privacy and consent
+
+Anonymous measurement does not store an analytics ID in the browser. Identified mode is different:
+the user ID and traits you send are stored personal data. Choose a lawful basis, disclose the
+processing, and send only the traits you need. See [Privacy & GDPR](/resources/privacy-friendly-analytics-gdpr).
+
+## Verify
+
+<Steps>
+  <Step title="Identify a test user">
+    Sign in to your app in a browser and trigger the client-side `identify()` call.
+  </Step>
+  <Step title="Open the user profile">
+    Open **Users** in TinyAnalytics and select the test user. Confirm the profile uses your user ID
+    and shows the traits you sent.
+  </Step>
+  <Step title="Test a trait update and logout">
+    Call `setTraits()` and confirm the changed value appears on the profile. Log out, then check in
+    the browser console that `window.tinyanalytics.getUserId()` returns `null`.
+  </Step>
+</Steps>
+
+<Check>
+  The client-side identity integration is working when the profile uses your stable ID, trait
+  changes appear, and logout clears the ID from the browser.
+</Check>
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track-events-api">
-    Send the events an identify ties together.
-  </Card>
   <Card title="Identify users" icon="user" href="/user-identification-analytics">
-    The browser identify() and setTraits() API.
+    Understand identity behavior, backfill, and consent.
   </Card>
-  <Card title="Analytics read API" icon="chart-line" href="/api-reference/analytics-read-api">
-    Read the users and traits you've set.
+  <Card title="Browser events" icon="browser" href="/api-reference/track-events-api">
+    Send events that belong to the identified user.
   </Card>
   <Card title="Group & B2B analytics" icon="building" href="/b2b-account-analytics">
-    Associate visitors with accounts, not just IDs.
+    Associate a visitor with an account from the browser.
+  </Card>
+  <Card title="Analytics filters" icon="filter" href="/analytics-filters">
+    Filter reports by the traits you attach.
   </Card>
 </Columns>

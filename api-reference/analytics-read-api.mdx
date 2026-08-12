@@ -108,7 +108,7 @@ results. See [Analytics filters](/analytics-filters) for the dashboard equivalen
 
 Three **composite dimensions** group by host and path together, for sites serving one path from several hostnames: `pathname_host`, `entry_page_host`, and `exit_page_host`. Their rows carry `hostname` and `pathname` as separate fields alongside the standard `value`, `count`, `percentage`, and `pageviews`, so you can read either part without parsing `value`. Hostnames are lowercased when grouped. See [Pages](/page-analytics) for the dashboard equivalent.
 
-For raw events, `GET /api/sites/{id}/events/log` returns individual events with a `{ data, cursor }` envelope. It paginates with an opaque composite `cursor` (pass the previous response's `nextCursor`), accepts `direction=older|newer` and `order=newest|oldest`, and filters server-side with `q` (search over event, URL, user, and session), `event_types`, `event_names`, and typed `event_props` property filters. `GET /api/sites/{id}/events/log/{eventId}` returns one event by its event ID. Both are documented with full parameters in the **Endpoints** section.
+For raw events, `GET /api/sites/{id}/events/log` returns individual events with a `{ data, cursor }` envelope. It paginates with an opaque composite `cursor` (pass the previous response's `nextCursor`), accepts `direction=older|newer` and `order=newest|oldest`, and applies `q` (search over event, URL, user, and session), `event_types`, `event_names`, and typed `event_props` property filters before returning results. `GET /api/sites/{id}/events/log/{eventId}` returns one event by its event ID. Both are documented with full parameters in the **Endpoints** section.
 
 ## Where are the rest of the endpoints?
 

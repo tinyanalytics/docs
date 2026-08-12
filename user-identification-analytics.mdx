@@ -79,37 +79,33 @@ TinyAnalytics has two modes. **Anonymous measurement** is the default: cookieles
 
 When you identify users, you are the data controller for that data and owe your users a lawful basis — typically consent. The consent-exempt audience-measurement carve-out that covers anonymous measurement in some jurisdictions does **not** cover cross-referencing identified customer data. See [Privacy & GDPR](/resources/privacy-friendly-analytics-gdpr).
 
-## Choose a write surface
+## Update traits from your app
 
-Four server-side writes can change a person's traits. They differ in who may call them and how they treat existing keys:
+Keep profile changes in the same client-side identity lifecycle as login and logout. Call
+`setTraits()` after `identify()` whenever a value changes:
 
-| Write surface | Auth | Semantics | Use it for |
-| --- | --- | --- | --- |
-| `POST /api/identify` | None (public tracker ingest) | Merge traits; backfills recent events onto the user ID | The browser `identify()`/`setTraits()` flow |
-| `POST /api/sites/{id}/users/identify` | Member session or `users:write` key | Merge traits and backfill a known device's events | Linking a device to a user after the fact |
-| `PUT /api/sites/{id}/users/{userId}/traits` | Member session or `users:write` key | **Replace** the whole trait set — omitted keys are deleted | Rebuilding a profile from scratch |
-| `PATCH /api/sites/{id}/users/{userId}/traits` | Member session or `users:write` key | **Merge** — keys you send are set, `null` deletes a key, omitted keys are untouched | Connectors and incremental updates |
+```js
+window.tinyanalytics.setTraits({
+  plan: 'business',
+  onboardingComplete: true
+})
+```
 
-Connectors and scripts belong on **PATCH**: it is authenticated, attributable to an API key, and never throttled as untrusted ingest. See [Identify API](/api-reference/identify-users-api) and the generated endpoint reference under **Users**.
+Trait updates merge with the existing profile. Omitted keys stay unchanged, and a key set to
+`null` is deleted:
 
-## Connect a platform (Shopify, CRM, billing)
+```js
+window.tinyanalytics.setTraits({ trialEndsAt: null })
+```
 
-A platform connector is any process that maps a platform identity to your site's `identify()` user ID and calls the merge write. Follow this contract:
+`setTraits()` does nothing until a user has been identified. Keep identity calls close to the
+matching app state:
 
-1. **Address users by your own user ID** — the one your site passes to `identify()`. When the platform only knows an email, resolve it with `GET /api/sites/{id}/user-traits/users?key=email&value=…`. Zero or more-than-one matches mean **skip and count** — trait values are not unique, so never guess.
-2. **Write with PATCH**, one call per user: `PATCH /api/sites/{id}/users/{userId}/traits` with a `users:write` [API key](/api-reference/api-authentication). Keep the `userId` percent-encoded in the path (IDs like `auth0|abc` round-trip intact). Pace at **10 requests per second or less**, and retry `429` and `5xx` responses with backoff.
-3. **Namespace your keys** — prefix connector traits (`shopify_*`, `stripe_*`) so your writes and the app's writes can co-own a profile without stomping each other. The reserved display keys (`username`, `name`, `email`) stay unprefixed. Only scalar values (string, number, boolean) are filterable; arrays and objects are display-only.
-4. **Skip unchanged writes.** Compare against your own cursor or read back with `GET /api/sites/{id}/users/{userId}` (the response carries the current `traits`). The store is last-write-wins per key.
-5. **Propagate deletions yourself.** Pass `?create=false` so a stale platform ID returns `404` instead of recreating a profile — a default PATCH would silently resurrect a [GDPR-erased](/user-analytics#how-do-i-permanently-delete-a-users-data-gdpr-erasure) user. Treat that `404` as "skip and count."
+- Call `identify(userId, traits?)` after login or signup.
+- Call `setTraits(traits)` after a known profile or subscription change.
+- Call `clearUserId()` before ending the app session on logout.
 
-Errors arrive as [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) problem+json with a machine-readable `code`:
-
-| Status | `code` | Cause and fix |
-| --- | --- | --- |
-| `400` | `INVALID_USER_ID` | The `userId` path segment is empty or over 255 characters. |
-| `400` | `INVALID_TRAITS` | The traits object is malformed or over 2,048 bytes serialized (`cap` names the limit). |
-| `403` | — | The key lacks `users:write` — the error names the missing scope. |
-| `404` | `USER_NOT_FOUND` | No profile exists and you passed `create=false`. Skip and count, or omit `create=false` to create the profile. |
+See the [browser identity API](/api-reference/identify-users-api) for the full method reference.
 
 ## Verify it's working
 
@@ -121,7 +117,9 @@ Errors arrive as [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) problem+json
     Open the **Users** report in TinyAnalytics. The visitor now appears under your ID, with their traits and their earlier activity attributed to them.
   </Step>
   <Step title="Confirm a trait key arrived">
-    `identify()` swallows network errors by design, so don't treat a quiet console as proof. The honest check is the trait key appearing in `GET /api/sites/{id}/user-traits/keys`, usually within a minute of an identified visit. An agent can run the same probe for you — the [MCP](/api-reference/mcp-server) `check_tracking` tool takes a `trait_key` argument. If the key is missing, check a *later* visit: a pageview fired in the same tick as `identify()` stays anonymous.
+    Open the user's profile and confirm the traits you sent appear. If a trait is missing, trigger a
+    later page interaction and check again: a pageview fired in the same tick as `identify()` can
+    remain anonymous because the backfill applies to events already saved.
   </Step>
 </Steps>
 
@@ -163,5 +161,8 @@ Errors arrive as [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) problem+json
   </Card>
   <Card title="Analytics filters" icon="filter" href="/analytics-filters">
     Filter reports by the traits you attach.
+  </Card>
+  <Card title="Browser identity API" icon="browser" href="/api-reference/identify-users-api">
+    Reference every client-side identity method.
   </Card>
 </Columns>

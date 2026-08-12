@@ -1,95 +1,91 @@
 ---
-title: "API Rate Limits and CORS"
-sidebarTitle: "Rate limits and CORS"
-description: "Understand per-key server ingestion limits, 429 responses, and the CORS rules that keep browser ingestion open while protecting private API calls."
+title: "API Access and CORS"
+sidebarTitle: "Access and CORS"
+description: "Understand keyless browser tracking, trusted-origin rules for private API calls, and the documented limits for API-key creation and MCP."
 icon: "shield-halved"
 noindex: true
-
 ---
 
-TinyAnalytics applies a **per-key rate limit to server-side ingestion** and restricts **which origins** may call the API. Browser tracking is deliberately open; authenticated reads and writes are locked to trusted origins.
+Browser tracking is deliberately keyless and available from any site origin. Private analytics
+reads and management calls require an API key and accept browser requests only from trusted
+origins.
 
-## Ingestion rate limit
+## Browser collection needs no API key
 
-Server-side calls to [`POST /api/track`](/api-reference/track-events-api) authenticated with an [API key](/api-reference/api-authentication) are rate-limited **per key**. Exceed the limit and the request returns:
+The tracking script sends pageviews, events, and identity updates directly from the visitor's
+browser. The snippet's `data-site-id` identifies the site, and the script supplies page context
+automatically.
 
-```
-429 Too Many Requests
-```
+Use the [browser event API](/api-reference/track-events-api) and
+[browser identity API](/api-reference/identify-users-api). Never add an API key to the page.
 
-A few things worth knowing:
+## CORS rules
 
-- The limit applies **only to keyed (server-side) ingestion**. Browser tracking and analytics reads are not rate-limited this way; [MCP](/api-reference/mcp-server) has its own per-key limit, described below.
-- A request with **no** or an **invalid** API key isn't rejected with `429` — it falls through to the normal browser-equivalent path (untrusted, with bot filtering on).
-- A valid restricted key without **Event ingestion: Write** receives `403`; it does not fall back to
-  untrusted browser ingestion.
-- Stay within your window and space out bursts; if you're batching a backfill, add a short delay between requests and retry a `429` after a pause.
-
-## API key creation limit
-
-Creating API keys is limited to **10 attempts per signed-in user per hour**. Invalid request bodies
-count toward the same security window. When the limit is reached, TinyAnalytics returns `429 Too
-Many Requests` with `Retry-After`; if the shared security limiter is temporarily unavailable, key
-creation fails closed with `503` instead of minting an unbounded key.
-
-## MCP request limit
-
-Calls to the [MCP server](/api-reference/mcp-server) are limited to **120 requests per minute per API key**. Beyond that the endpoint returns `429 Too Many Requests` with a `Retry-After` header. This limit is separate from the ingestion limit above, and it's sized for normal agent work — building a dashboard, where each card is previewed before it's saved, is typically 30–60 calls over a couple of minutes.
-
-## Connector writes to user traits
-
-Platform connectors merge traits with `PATCH /api/sites/{id}/users/{userId}/traits` — one call per user, authenticated with a `users:write` key. There is no batch endpoint: pace at **10 requests per second or less**, and retry `429` and `5xx` responses with backoff. `PATCH` is part of the API's CORS method vocabulary, so a browser-based caller on a trusted origin can use it; connectors almost always call server-to-server, where CORS doesn't apply. The full connector contract lives in [Identify users](/user-identification-analytics#connect-a-platform-shopify-crm-billing).
-
-## CORS: which origins can call the API
-
-TinyAnalytics splits the API into two CORS zones:
+TinyAnalytics splits browser access into two zones:
 
 | Paths | Origins | Credentials |
 | --- | --- | --- |
-| Ingestion & assets — `/api/track`, `/api/identify`, `/script.js` | **Any origin** | Never sent |
-| Everything else — reads, management | **Trusted origins only** | Sent |
+| Tracking and assets — `/api/track`, `/api/identify`, `/script.js` | Any origin | Never sent |
+| Private analytics and management endpoints | Trusted origins only | API key or dashboard session |
 
-This is what lets the tracking script POST from any of your visitors' pages while ensuring a third-party site can't read your logged-in analytics. A state-changing request from an untrusted origin is rejected with a `403`.
+This lets the tracking script run on your visitors' pages while preventing an unrelated site from
+reading private analytics through a signed-in browser. A state-changing private request from an
+untrusted origin returns `403`.
 
-<Note>
-  Server-to-server calls aren't subject to CORS — it's a browser mechanism. Reading analytics from your backend with a Bearer key works regardless of origin; CORS only governs requests made from a web page.
-</Note>
+<Warning>
+  CORS is not a safe place to hide an API key. Any credential shipped in client-side JavaScript can
+  be read by a visitor even when the origin is allowed.
+</Warning>
+
+## API-key creation limit
+
+Creating API keys is limited to **10 attempts per signed-in user per hour**. Invalid request bodies
+count toward the same security window. When the limit is reached, TinyAnalytics returns `429 Too
+Many Requests` with `Retry-After`. If the shared security limiter is unavailable, key creation
+returns `503` instead of creating an unbounded key.
+
+## MCP request limit
+
+Calls to the [MCP server](/api-reference/mcp-server) are limited to **120 requests per minute per
+API key**. Beyond that, the endpoint returns `429 Too Many Requests` with a `Retry-After` header.
+Building a dashboard, where each card is previewed before it is saved, typically uses 30–60 calls
+over a few minutes.
 
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="What happens when I exceed the ingestion rate limit?">
-    The request returns `429 Too Many Requests`. The limit applies per API key to server-side calls to [`POST /api/track`](/api-reference/track-events-api). Space out bursts, and if you're batching a backfill, add a short delay between requests and retry a `429` after a pause.
+  <Accordion title="Do browser events need an API key?">
+    No. The installed tracking script and every `window.tinyanalytics` collection method are
+    keyless.
   </Accordion>
-  <Accordion title="Are browser tracking and analytics reads rate-limited too?">
-    No. The per-key rate limit applies only to keyed server-side ingestion. Browser tracking and analytics reads are not rate-limited this way.
+  <Accordion title="Can my frontend call the private data API?">
+    Do not embed an API key in frontend code. Use the TinyAnalytics dashboard for interactive
+    browser access, or keep programmatic data access in a trusted environment where the key is not
+    exposed to visitors.
   </Accordion>
-  <Accordion title="Does a request without an API key get a 429?">
-    No. A request with no API key, or an invalid one, isn't rejected with `429` — it falls through to the normal browser-equivalent path, which is untrusted and has bot filtering on.
+  <Accordion title="Why does a private browser request return 403?">
+    Private analytics and management endpoints accept browser requests only from trusted origins.
+    An untrusted origin receives `403` even if the browser has a TinyAnalytics dashboard session.
   </Accordion>
-  <Accordion title="What happens if my restricted key cannot ingest events?">
-    A valid restricted key without **Event ingestion: Write** receives `403` on
-    `POST /api/track`. Remove the Authorization header for ordinary browser-style
-    ingestion, or add that write grant for trusted server-side ingestion.
-  </Accordion>
-  <Accordion title="Does CORS apply to calls from my backend?">
-    No. CORS is a browser mechanism, so server-to-server calls aren't subject to it. Reading analytics from your backend with a Bearer key works regardless of origin.
+  <Accordion title="What happens when an MCP client exceeds its limit?">
+    The MCP endpoint returns `429 Too Many Requests` with `Retry-After`. Wait for that interval before
+    retrying.
   </Accordion>
 </AccordionGroup>
 
 ## Related
 
 <Columns cols={2}>
+  <Card title="Browser event API" icon="browser" href="/api-reference/track-events-api">
+    Send events from client-side code without a key.
+  </Card>
+  <Card title="Browser identity API" icon="user" href="/api-reference/identify-users-api">
+    Identify users and update traits from the browser.
+  </Card>
   <Card title="API keys" icon="key" href="/api-reference/api-authentication">
-    Create the key ingestion is limited by.
-  </Card>
-  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track-events-api">
-    The endpoint the limit applies to.
-  </Card>
-  <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
-    Browser tracking needs no key or origin setup.
+    Create least-privilege credentials for private API access.
   </Card>
   <Card title="API reference" icon="book-open" href="/api-reference/tinyanalytics-api">
-    Authentication and response conventions.
+    Choose between browser collection and the HTTP data API.
   </Card>
 </Columns>

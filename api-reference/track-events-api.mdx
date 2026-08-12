@@ -1,234 +1,161 @@
 ---
-title: "Track Events API"
-sidebarTitle: "Tracking API"
-description: "Send pageviews and custom events to POST /api/track as typed JSON; the endpoint validates and queues each event, then returns 204."
-icon: "paper-plane"
+title: "Browser Event API"
+sidebarTitle: "Browser events"
+description: "Send pageviews, custom events, revenue, outbound-link events, and handled JavaScript errors from client-side code with window.tinyanalytics."
+icon: "browser"
 noindex: true
-
 ---
 
-`POST /api/track` is the ingestion endpoint every event flows through — the browser [tracking script](/install-tinyanalytics-tracking-script) uses it, and you can call it directly from a server to send events yourself. The body is a single JSON event, and the endpoint returns **`204 No Content`**: the event is validated and queued, then written asynchronously.
+Use the TinyAnalytics tracking script's browser API to record visitor activity. Install the
+[tracking script](/install-tinyanalytics-tracking-script), then call methods on
+`window.tinyanalytics`; you do not need an API key or a custom HTTP client.
 
-```
-POST https://dash.tinyanalytics.io/api/track
-```
-
-## The event shape
-
-Every event carries a `type` and the page context TinyAnalytics can't derive on its own. The server always derives identity, geo, channel, and device itself — **it never trusts the client for those** — so you send page context only.
-
-Send a **pageview**:
-
-<CodeGroup>
-
-```bash cURL
-curl -X POST https://dash.tinyanalytics.io/api/track \
-  -H "Content-Type: application/json" \
-  -d '{
-    "type": "pageview",
-    "siteId": 1,
-    "pathname": "/pricing",
-    "hostname": "example.com",
-    "referrer": "https://google.com",
-    "pageTitle": "Pricing"
-  }'
+```js
+window.tinyanalytics.event('signup', { plan: 'pro' })
 ```
 
-```js JavaScript
-await fetch("https://dash.tinyanalytics.io/api/track", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    type: "pageview",
-    siteId: 1,
-    pathname: "/pricing",
-    hostname: "example.com",
-    referrer: "https://google.com",
-    pageTitle: "Pricing",
-  }),
+<Warning>
+  Never put a TinyAnalytics API key in client-side code. Browser collection is
+  keyless, and the tracking script supplies the site and page context for you.
+</Warning>
+
+## Available event methods
+
+| Method | What it records |
+| --- | --- |
+| `pageview(path?)` | A pageview for the current URL, or for the path you pass. |
+| `event(name, props?)` | A named custom event with optional properties. |
+| `trackOutbound(url, text?, target?)` | An outbound-link event. |
+| `trackError(error, metadata?)` | A handled JavaScript error with optional metadata. |
+
+The tracker automatically records initial pageviews and SPA route changes by default. Call
+`pageview()` yourself only when you have disabled automatic pageviews or need to supply a custom
+path.
+
+## Send a custom event
+
+Call `event()` after the tracking script has loaded:
+
+```js
+window.tinyanalytics.event('checkout_completed', {
+  plan: 'pro',
+  seats: 5
 })
 ```
 
-```python Python
-import requests
-
-requests.post(
-    "https://dash.tinyanalytics.io/api/track",
-    json={
-        "type": "pageview",
-        "siteId": 1,
-        "pathname": "/pricing",
-        "hostname": "example.com",
-        "referrer": "https://google.com",
-        "pageTitle": "Pricing",
-    },
-)
-```
-
-</CodeGroup>
-
-Send a **custom event** with properties:
-
-<CodeGroup>
-
-```bash cURL
-curl -X POST https://dash.tinyanalytics.io/api/track \
-  -H "Content-Type: application/json" \
-  -d '{
-    "type": "custom_event",
-    "siteId": 1,
-    "pathname": "/checkout",
-    "eventName": "purchase",
-    "props": { "plan": "pro", "seats": 5 },
-    "revenue": 49.0,
-    "currency": "USD"
-  }'
-```
-
-```js JavaScript
-await fetch("https://dash.tinyanalytics.io/api/track", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    type: "custom_event",
-    siteId: 1,
-    pathname: "/checkout",
-    eventName: "purchase",
-    props: { plan: "pro", seats: 5 },
-    revenue: 49.0,
-    currency: "USD",
-  }),
-})
-```
-
-```python Python
-import requests
-
-requests.post(
-    "https://dash.tinyanalytics.io/api/track",
-    json={
-        "type": "custom_event",
-        "siteId": 1,
-        "pathname": "/checkout",
-        "eventName": "purchase",
-        "props": {"plan": "pro", "seats": 5},
-        "revenue": 49.0,
-        "currency": "USD",
-    },
-)
-```
-
-</CodeGroup>
-
-## Fields
-
-Every event includes these base fields:
-
-<ParamField body="type" type="string" required>
-  The event type. Valid values are listed below.
-</ParamField>
-
-<ParamField body="siteId" type="number" required>
-  Your numeric site ID.
-</ParamField>
-
-<ParamField body="pathname" type="string" required>
-  The page path, up to 2048 characters.
-</ParamField>
-
-<ParamField body="hostname" type="string">
-  Up to 253 characters.
-</ParamField>
-
-<ParamField body="querystring" type="string">
-  Up to 2048 characters.
-</ParamField>
-
-<ParamField body="referrer" type="string">
-  Up to 2048 characters.
-</ParamField>
-
-<ParamField body="pageTitle" type="string">
-  Up to 512 characters.
-</ParamField>
-
-<ParamField body="language" type="string">
-  Up to 35 characters.
-</ParamField>
-
-<ParamField body="screenWidth" type="number">
-  Viewport width in pixels, 0–65535.
-</ParamField>
-
-<ParamField body="screenHeight" type="number">
-  Viewport height in pixels, 0–65535.
-</ParamField>
-
-<ParamField body="userId" type="string">
-  A stable ID set via [identify](/api-reference/identify-users-api).
-</ParamField>
-
-A **`custom_event`** (and an `error`) adds:
-
-<ParamField body="eventName" type="string" required>
-  Up to 256 characters — the grouping key in your Events reports.
+<ParamField body="name" type="string" required>
+  A short, stable event name such as `signup` or `checkout_completed`. An empty name is rejected in
+  the browser.
 </ParamField>
 
 <ParamField body="props" type="object">
-  Free-form JSON, up to 8 KB serialized.
+  Optional JSON properties used for breakdowns and filters. The serialized object can be up to 8
+  KB.
 </ParamField>
 
-<ParamField body="revenue" type="number | string">
-  A revenue amount in major currency units (e.g. `49.0` = $49.00). See [Revenue analytics](/revenue-analytics).
-</ParamField>
+Keep the event name stable and put values that change into properties. For example, use one
+`checkout_completed` event with a `plan` property instead of a separate event name for every plan.
 
-<ParamField body="currency" type="string">
-  A 3-letter currency code, e.g. `USD`.
-</ParamField>
+## Attach revenue
 
-<Note>
-  Valid `type` values are `pageview`, `custom_event`, `error`, `performance`, `engagement`, and the auto-captured interactions (`outbound`, `file_download`, `button_click`, `copy`, `form_submit`, `input_change`). The browser tracker emits most of these for you — from a server you'll typically send `pageview` and `custom_event`. Unknown fields are rejected with a `400`.
-</Note>
+Put the reserved `revenue` and `currency` properties on a custom event:
 
-## Sending events from a server
-
-When you call `/api/track` from your backend, add an [API key](/api-reference/api-authentication)
-with **Event ingestion: Write** so the event is attributed to the **visitor**, not your server:
-
-```bash
-curl -X POST https://dash.tinyanalytics.io/api/track \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "type": "custom_event",
-    "siteId": 1,
-    "pathname": "/api/webhook",
-    "eventName": "subscription_renewed",
-    "ipAddress": "203.0.113.10",
-    "userAgent": "Mozilla/5.0 (Macintosh; …)"
-  }'
+```js
+window.tinyanalytics.event('purchase', {
+  revenue: 49.99,
+  currency: 'USD',
+  plan: 'pro'
+})
 ```
 
-With a valid key that grants **Event ingestion: Write**, TinyAnalytics honors the `ipAddress` and
-`userAgent` you supply so geo, device, and cookieless identity reflect the real visitor—without
-them, every server-sent event would collapse to your server's own IP. These override fields are
-ignored on a request without a valid key. A valid restricted key that lacks the ingestion grant
-receives `403` instead of falling back to the browser path. Server-side ingestion is subject to a
-[per-key rate limit](/api-reference/rate-limits-cors).
+- `revenue` accepts a positive number or numeric string in major currency units.
+- `currency` is a three-letter currency code such as `USD`, `EUR`, or `GBP`.
+
+See [Revenue analytics](/revenue-analytics) for reporting behavior, refunds, and currency
+conversion.
+
+## Send a manual pageview
+
+Automatic pageviews and SPA route tracking cover most sites. If you turn automatic pageviews off,
+send one when your app finishes navigation:
+
+```js
+window.tinyanalytics.pageview('/account/billing')
+```
+
+Omit the argument to use the browser's current location.
+
+## Send an outbound-link event
+
+Outbound links are captured automatically by default. Use `trackOutbound()` when your app opens an
+external destination without a normal anchor click:
+
+```js
+window.tinyanalytics.trackOutbound(
+  'https://partner.example.com',
+  'Open partner dashboard',
+  '_blank'
+)
+```
+
+## Track a handled error
+
+Automatic error capture sees uncaught errors when you enable it. Use `trackError()` inside a
+`catch` block or error boundary for an error your app handles:
+
+```js
+try {
+  await submitCheckout()
+} catch (error) {
+  window.tinyanalytics.trackError(error, { step: 'checkout' })
+}
+```
+
+See [JavaScript error tracking](/javascript-error-tracking) for automatic capture and privacy
+limits.
+
+## Call the API after the script loads
+
+The script loads with `defer`, so event handlers and app lifecycle callbacks can call it normally.
+Guard code that may run during early page boot:
+
+```js
+if (window.tinyanalytics) {
+  window.tinyanalytics.event('hero_viewed')
+}
+```
+
+## Verify
+
+<Steps>
+  <Step title="Trigger the browser call">
+    Open your site in a browser and perform the action that calls `event()`, `pageview()`,
+    `trackOutbound()`, or `trackError()`.
+  </Step>
+  <Step title="Check the matching report">
+    Open **Events** for custom and outbound events, **Pages** for pageviews, or **Errors** for
+    JavaScript errors. The new record should appear within a few seconds.
+  </Step>
+</Steps>
+
+<Check>
+  The client-side integration is working when the browser action appears in its matching
+  TinyAnalytics report.
+</Check>
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Identify API" icon="user" href="/api-reference/identify-users-api">
-    Attach a stable user ID to these events.
+  <Card title="Custom events" icon="hand-pointer" href="/custom-event-tracking">
+    Design stable event names and useful properties.
   </Card>
-  <Card title="API keys" icon="key" href="/api-reference/api-authentication">
-    Create the key server-side ingestion needs.
+  <Card title="Browser identity" icon="user" href="/api-reference/identify-users-api">
+    Identify signed-in users and update traits from client-side code.
   </Card>
-  <Card title="Rate limits & CORS" icon="shield-halved" href="/api-reference/rate-limits-cors">
-    The ingestion rate limit and origin rules.
+  <Card title="Configure the tracking script" icon="sliders" href="/configure-tinyanalytics-tracking-script">
+    Control automatic pageviews and capture options.
   </Card>
-  <Card title="Track custom events" icon="hand-pointer" href="/custom-event-tracking">
-    The browser way to send the same events.
+  <Card title="Verify installation" icon="circle-check" href="/verify-tinyanalytics-installation">
+    Diagnose script loading and event delivery.
   </Card>
 </Columns>

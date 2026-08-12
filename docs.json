@@ -1359,7 +1359,7 @@
                 ]
               },
               {
-                "group": "Server-side & tag managers",
+                "group": "Web platforms & tag managers",
                 "expanded": false,
                 "pages": [
                   "integrations/google-tag-manager-analytics",
@@ -1389,10 +1389,15 @@
             ]
           },
           {
-            "group": "Core API",
+            "group": "Browser APIs",
             "pages": [
               "api-reference/track-events-api",
-              "api-reference/identify-users-api",
+              "api-reference/identify-users-api"
+            ]
+          },
+          {
+            "group": "Data API",
+            "pages": [
               "api-reference/analytics-read-api",
               "api-reference/sql-analytics-api"
             ]

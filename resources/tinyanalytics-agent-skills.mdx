@@ -32,7 +32,7 @@ An Agent Skill is a Markdown file that an AI coding agent loads when a task matc
 | --- | --- |
 | `tinyanalytics-setup` | The orchestrator: obtains a working API key, reuses or creates the site, installs the snippet the way your framework expects, then verifies |
 | `verify-tinyanalytics-tracking` | Polls your site's overview for a real pageview and walks a diagnostic ladder—served HTML, site ID, script load, CSP, ad blocker—when it stays at zero |
-| `tinyanalytics-events` | Instruments [custom events](/custom-event-tracking) from the browser and server side, [revenue](/revenue-analytics) on events, [user identity and traits](/user-identification-analytics), and [B2B account tracking](/b2b-account-analytics) |
+| `tinyanalytics-events` | Instruments client-side [custom events](/custom-event-tracking), [revenue](/revenue-analytics) on events, [user identity and traits](/user-identification-analytics), and [B2B account tracking](/b2b-account-analytics) through the browser API |
 | `tinyanalytics-insights` | Answers questions from your data: overview totals, time series with comparisons, breakdowns across **17 dimensions**, acquisition, live visitors, ad-hoc funnels, and guarded [custom SQL](/sql-analytics-query-builder) |
 | `tinyanalytics-dashboards` | Builds the measurement layer: [goals](/conversion-goal-tracking) by path, event, revenue, or scroll; saved [funnels](/funnel-analytics); SQL-card [dashboards](/custom-analytics-dashboards); and [annotations](/analytics-annotations) |
 

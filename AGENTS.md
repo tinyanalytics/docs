@@ -18,7 +18,11 @@ TinyAnalytics is privacy-friendly, cookieless web **and** product analytics, off
 - **Never document the admin console or operator internals** — instance ops, system-admin tooling, email diagnostics.
 - **Never document unshipped features** — session replay is excluded by design. Check `../tinyanalytics/wiki/features.md` before writing about anything.
 - **Never expose internal reasoning** — decision records inform pages; they are not pages.
-- **API keys authenticate customer API access** — server-side ingestion, analytics reads, and site management. Reads and management inherit the key owner's permissions. Browser tracking stays keyless.
+- **Visitor collection is client-side** — document `window.tinyanalytics` as the supported surface
+  for events, identity, traits, groups, flags, and browser errors. Do not document event or identity
+  ingestion from application servers, raw HTTP clients, or API-key-authenticated collection.
+- **API keys are for private customer API access** — analytics reads, site management, SQL, and MCP.
+  Reads and management inherit the key owner's permissions. Never put an API key in browser code.
 
 ## Terminology
 

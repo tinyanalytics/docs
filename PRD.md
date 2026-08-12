@@ -1,6 +1,6 @@
 # PRD — TinyAnalytics documentation (AI-native, Mintlify)
 
-**Status:** Draft v1.5 (execution underway) · **Owner:** Docs · **Last updated:** 2026-08-04
+**Status:** Draft v1.6 (execution underway) · **Owner:** Docs · **Last updated:** 2026-08-12
 **Repo:** `tinyanalytics-docs` (Mintlify) · **Product repo:** `../tinyanalytics`
 **Reference (behavioral spec only):** `../rybbit/rybbit/docs` · **Competitor refs:** Plausible, Umami
 
@@ -138,9 +138,10 @@ Authoritative source: `../tinyanalytics/wiki/features.md` + the decision log (`w
 
 **Developer / API**
 
-- Tracking API (`POST /api/track` wire contract), Identify API
+- Client-side browser event API (`pageview()`, `event()`, `trackOutbound()`, `trackError()`)
+- Client-side browser identity API (`identify()`, `setTraits()`, `getUserId()`, `clearUserId()`)
 - Read/analytics API (overview, timeseries, breakdown, sessions, events, and the broader read surface)
-- Scoped SQL query endpoint, API keys (server-side ingestion, reads, and management as the key owner), API playground, rate limits & CORS
+- Scoped SQL query endpoint, API keys (reads, management, SQL, and MCP as the key owner), API playground, rate limits & CORS
 
 **Concepts & reference (the "why it's trustworthy" layer)**
 
@@ -156,7 +157,7 @@ Port the _topic list_ from Rybbit's `guides/` as a checklist; write original ins
 - **CMS / builders:** WordPress, Webflow, Framer, Ghost, Squarespace, Carrd, Bubble, Wix-style
 - **E-commerce:** Shopify, BigCommerce, PrestaShop, ThriveCart
 - **Docs / SSG:** Docusaurus, GitBook, Mintlify, VitePress, Hugo, Jekyll
-- **Server-side / tag managers / CMS backends:** Google Tag Manager, Laravel, Drupal, Joomla, TYPO3, Contentful, Sanity, Strapi
+- **Web platforms / tag managers / CMS templates:** Google Tag Manager, Laravel, Drupal, Joomla, TYPO3, Contentful, Sanity, Strapi
 - **Mobile:** React Native
 
 ---
@@ -281,14 +282,14 @@ Mintlify structure: **tabs** at the top, **groups** within, nested pages where d
 - **CMS & website builders** (WordPress, Webflow, Framer, Ghost, Squarespace, Carrd, Bubble)
 - **E-commerce** (Shopify, BigCommerce, PrestaShop, ThriveCart)
 - **Docs & static sites** (Docusaurus, GitBook, Mintlify, VitePress, Hugo, Jekyll)
-- **Server-side & tag managers** (Google Tag Manager, Laravel, Drupal, Joomla, TYPO3, Contentful, Sanity, Strapi)
+- **Web platforms & tag managers** (Google Tag Manager, Laravel, Drupal, Joomla, TYPO3, Contentful, Sanity, Strapi)
 - **Mobile** (React Native)
 
 ### Tab: API reference
 
-- Introduction & authentication (session cookie for dashboard calls; API key for server-side ingestion, reads, and management as the key owner; browser ingestion stays keyless)
-- Tracking API (`POST /api/track` — the discriminated-union wire contract)
-- Identify API
+- Introduction (client-side collection vs authenticated data and management APIs)
+- Browser event API (`pageview()`, `event()`, `trackOutbound()`, `trackError()`)
+- Browser identity API (`identify()`, `setTraits()`, `getUserId()`, `clearUserId()`)
 - Analytics read API (overview, timeseries, breakdown, sessions, events, live, …)
 - Scoped SQL query
 - API keys
@@ -415,7 +416,7 @@ A dedicated Resources page, "Use these docs with AI," embeds the install prompt 
 Replace the placeholder with TinyAnalytics specifics:
 
 - **Terminology:** "site" (a tracked website) vs "organization" vs "team"; "event" types; "cookieless identity"; product name **TinyAnalytics**, with a capital **T** and **A**.
-- **Content boundaries:** the product is **hosted-only** — never document self-hosting, installation, or operator internals (admin console, instance ops); don't document unshipped features (§9); don't expose internal decision-record reasoning as user docs; API keys authenticate server-side ingestion, reads, and management as their owner, while browser tracking stays keyless.
+- **Content boundaries:** the product is **hosted-only** — never document self-hosting, installation, or operator internals (admin console, instance ops); don't document unshipped features (§9); don't expose internal decision-record reasoning as user docs; document visitor collection through the keyless client-side browser API, and reserve API keys for reads, management, SQL, and MCP as their owner.
 - **Point at the project skills** (§8.5) so any AI tool loads them before editing.
 - **Style:** the §6.3 rules.
 - **Sources of truth:** `../tinyanalytics/wiki/features.md`, the decision log, and the product README — never invent behavior; when unsure, cite the wiki.
@@ -444,7 +445,7 @@ _(Domain assumption in §11.)_
 Two in-repo skills, so any AI tool editing these docs (Claude Code, Cursor, the Mintlify agent) picks up both the platform mechanics and this project's rules:
 
 - **`.agents/skills/mintlify/SKILL.md`** — the official Mintlify authoring skill (MIT): components, `docs.json` patterns, frontmatter, CLI (`mint dev`, `mint broken-links`, `mint validate`), writing standards, and the research → plan → write → verify workflow.
-- **`.agents/skills/tinyanalytics-docs/SKILL.md`** — the project layer: what the product is (hosted-only, closed-source), sources of truth (`../tinyanalytics/wiki`, with the Rybbit reference as a coverage checklist only), **hard content boundaries** (no self-hosting/operator docs, no unshipped features, keys stay server-side and inherit owner access), the terminology table, voice rules, page archetype shapes, and a pre-submit checklist that extends the Mintlify one.
+- **`.agents/skills/tinyanalytics-docs/SKILL.md`** — the project layer: what the product is (hosted-only, closed-source), sources of truth (`../tinyanalytics/wiki`, with the Rybbit reference as a coverage checklist only), **hard content boundaries** (no self-hosting/operator docs, no unshipped features, client-side visitor collection, and API keys kept out of browser code), the terminology table, voice rules, page archetype shapes, and a pre-submit checklist that extends the Mintlify one.
 
 Layering rationale: the generic skill can be refreshed from upstream (`npx skills add https://mintlify.com/docs`) without touching project rules; the project skill encodes what no upstream skill can know. `AGENTS.md` references both (§8.2).
 
@@ -493,8 +494,8 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 **Phase 4 — Integrations breadth** — 🚧 second wave done (2026-07-17)
 
 - ✅ First wave: Integrations tab + Overview and the top platforms — Next.js, React, WordPress, Webflow, Shopify, Google Tag Manager. Batch-authored from one template.
-- ✅ Second wave (long tail): Frameworks — Vue, Nuxt, Astro, SvelteKit, Gatsby, Remix, Angular; CMS & builders — Ghost, Squarespace, Framer, Carrd, Bubble; Docs & static sites (new nav group) — Hugo, Jekyll, Docusaurus, VitePress; E-commerce — BigCommerce; Server-side — Laravel, Drupal. 19 pages, same template, platform placement stated accurately (e.g. Astro `is:inline`, Gatsby `<Script>`, plan-gating for Squarespace/Carrd).
-- ⬜ Remaining candidates (later, if demand warrants): E-commerce (PrestaShop, ThriveCart); Server-side & tag managers (Joomla, TYPO3).
+- ✅ Second wave (long tail): Frameworks — Vue, Nuxt, Astro, SvelteKit, Gatsby, Remix, Angular; CMS & builders — Ghost, Squarespace, Framer, Carrd, Bubble; Docs & static sites (new nav group) — Hugo, Jekyll, Docusaurus, VitePress; E-commerce — BigCommerce; web platforms — Laravel, Drupal. 19 pages, same template, platform placement stated accurately (e.g. Astro `is:inline`, Gatsby `<Script>`, plan-gating for Squarespace/Carrd).
+- ⬜ Remaining candidates (later, if demand warrants): E-commerce (PrestaShop, ThriveCart); web platforms & tag managers (Joomla, TYPO3).
 - 🚫 Deliberately **not** documented as platforms — no fabricated support:
   - **React Native / native mobile** — this earlier gap conclusion was superseded when the `@tinyanalytics/react-native` SDK shipped in decision 0165. It is now documented under Mobile apps.
   - **Headless CMSs (Contentful, Sanity, Strapi)** — these have no rendered frontend of their own; the site is served by a framework (Next.js, Nuxt, Astro, …) that already has a guide. Point users to the framework page rather than the CMS.
@@ -510,7 +511,7 @@ Ship in waves; each wave is independently useful and immediately deployable (Min
 
 **Phase 6 — API reference & Resources** — ✅ done (2026-07-17)
 
-- ✅ **API reference** tab (8 pages, new tab with Get started · Ingestion · Reading data · Access & tools groups): Introduction & authentication, Tracking API, Identify API, Analytics read API, Scoped SQL query, API keys, Rate limits & CORS, API playground. Sourced from `architecture/{api-server,ingestion-pipeline}.md`, the actual tracker Zod schema (`apps/api/src/tracker/schema.ts` — exact wire fields/caps, read at source), and decisions 0036 (API-key ingestion + Valkey rate limit), 0096 (API-key Bearer for reads/management), 0090 (scoped SQL), 0050 (CORS). Base URL `https://dash.tinyanalytics.io`; the two-credential model (session cookie vs `Authorization: Bearer <key>`) stated exactly; ingestion returns 204, reads return `{ data }`. Accuracy calls: the `ipAddress`/`userAgent` overrides are documented as **key-gated** (ignored without a valid key); the ingestion rate limit is described as per-key → 429 **without** citing a specific numeric default (it's env-configured, `INGEST_RATE_LIMIT_*`, no citable constant); the read API is documented at the pattern level + the stable core endpoints (not all ~40) with a pointer to the in-product playground for the full surface.
+- ✅ **API reference** tab (8 pages): Introduction, Browser event API, Browser identity API, Analytics read API, Scoped SQL query, API keys, API access & CORS, and API playground. The 2026-08-12 client-side posture replaced raw HTTP event/identity guidance with the shipped `window.tinyanalytics` methods. API keys are documented only for private reads, management, SQL, and MCP; client-side collection remains keyless. The read API is documented at the pattern level with a pointer to the in-product playground for the full surface.
 - ✅ **Resources** tab (8 pages, new tab with Reference · How it works · Trust & privacy · AI groups): Metric definitions (glossary), How cookieless identity works, How bot detection works, How traffic is classified, How your data is handled, Privacy & GDPR, TinyAnalytics vs GA/Plausible/Umami, Use these docs with AI. Sourced from `concepts/cookieless-identity.md`, `algorithms/{bot-detection,channel-classification,overview-metrics}.md`, `architecture/data-model.md` (confirmed **no raw-IP column** — grounds the privacy claims), and decision 0152 (read-time retention). Trust pages stay at mechanism level per the hosted-only boundary — no infra vendors, no operator internals. Privacy page asserts mechanism, not legal conclusions (explicit "not legal advice / depends on jurisdiction" hedge; no blanket "GDPR compliant" claim). Comparison page is honest about closed-source vs open-source Plausible/Umami and answers the trust question with the mechanism pages rather than dodging it.
 - 🚫 **Changelog** page deliberately deferred: there is no verified public product changelog to source, and fabricating release history would violate the no-invention rule. Revisit once a real product changelog/release feed exists (the docs' own `CHANGELOG.md` tracks the documentation site, not the product).
 
@@ -740,7 +741,7 @@ Audited the shipped product from `964f322` through `f5dd577` and added or expand
 - **Ask AI** (0242–0246): site and organization scope, grounded reads and report links, approved write tools, team-aware access, conversation actions, AI credits, and Anthropic BYOK.
 - **Billing and plans** (0152 plus the current plan catalog): Free/Growth/Business, the 14-day Business trial, pageview metering without collection blocking, read-time reporting history, and monthly AI credits.
 - **Recent email/export behavior** (0239 and the July email wave): partial CSV success warnings, scheduled-report headline summaries and section links, and richer alert context.
-- **Authoring contract corrections**: removed the stale “rotating hash” and “ingestion-only API key” rules so contributor guidance now matches the shipped privacy and key-owner permission models.
+- **Authoring contract corrections**: removed the stale rotating-hash language and clarified the key-owner permission model for private customer API access.
 
 The generated OpenAPI reference is refreshed from the product playground registry in the same pass.
 

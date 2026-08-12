@@ -1,16 +1,17 @@
 ---
 title: "API Authentication Keys"
 sidebarTitle: "API keys"
-description: "Create full-access or least-privilege API keys for ingestion, analytics reads, site management, SQL, and MCP, bounded by the owner's access."
+description: "Create full-access or least-privilege API keys for analytics reads, site management, SQL, and MCP, bounded by the owner's access."
 icon: "key"
 noindex: true
 
 ---
 
-An API key authenticates programmatic access to TinyAnalytics—server-side event ingestion,
-analytics reads, site management, SQL, and MCP. Create either a full-access key or a restricted key
-with per-resource permissions in **Settings → Account**, then send it on every request as a Bearer
-token:
+An API key authenticates programmatic analytics reads, site management, scoped SQL, and MCP. It is
+not part of client-side tracking: the browser script and its event and identity methods are keyless.
+
+Create either a full-access key or a restricted key with per-resource permissions in **Settings →
+Account**, then send it as a Bearer token:
 
 <CodeGroup>
 
@@ -19,7 +20,7 @@ curl https://dash.tinyanalytics.io/api/sites/1/overview \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-```js JavaScript
+```js Node.js
 await fetch("https://dash.tinyanalytics.io/api/sites/1/overview", {
   headers: { Authorization: "Bearer YOUR_API_KEY" },
 })
@@ -38,78 +39,71 @@ requests.get(
 
 ## Create and manage keys
 
-Keys are managed from your account settings:
-
-- A key is **shown once** at creation — copy it then, because TinyAnalytics stores only a hash and can't show it again.
+- A key is **shown once** at creation. Copy it then; TinyAnalytics stores only a hash and cannot show
+  it again.
 - **Revoke** a key any time to cut off its access immediately.
-- A key inherits **its owner's access**: a request authenticates as the user who created the key, and is authorized by that user's organization membership and [team](/team-site-access) access. A key never grants more than its owner has.
+- A key inherits **its owner's access**. Organization membership, role, and [team](/team-site-access)
+  access still apply.
 - Leave **Restrict permissions** off for full access, or turn it on and select at least one resource
-  for a least-privilege key. A restricted key is refused on any API route outside its grants.
+  for a least-privilege key.
 
-## Which permissions can I grant?
+## Available permissions
 
 | Resource | Available access | What it covers |
 | --- | --- | --- |
 | **Analytics** | Read | Traffic, acquisition, retention, revenue, performance, errors, and heatmaps. |
 | **Sessions** | Read | Visitor sessions and their activity. |
 | **Events** | Read / Write | Event reports and catalog descriptions. |
-| **Users** | Read / Write | Visitor profiles, traits, identify, and erasure. **Users: Read** covers the three user-trait reads (keys, values, users) and unlocks `trait:<key>` filters on analytics reads; **Users: Write** covers the merge (PATCH) and replace (PUT) trait writes. |
+| **Users** | Read / Write | Visitor profiles, traits, profile management, and erasure. **Users: Read** also covers user-trait reads and `trait:<key>` filters. |
 | **Goals** | Read / Write | Conversion goals. |
 | **Funnels** | Read / Write | Conversion funnels. |
 | **Dashboards** | Read / Write | Dashboards, cards, and annotations. SQL-backed card preview separately needs **Custom SQL: Read**. |
 | **Workflows** | Read / Write | Workflow definitions, versions, runs, and metrics. API-key mutation is not available in workflow version 1. |
 | **Sites** | Read / Write | Sites, tracking setup, configuration, and deletion. |
 | **Custom SQL** | Read | Read-only, site-scoped SQL. |
-| **Event ingestion** | Write | Trusted server-side tracking. |
 
 Selecting **Write** also selects **Read** for that resource when both actions exist. It does not
-grant read or write access to any other resource. Existing keys created without a permission list
-remain full-access keys.
+grant access to any other resource. Existing keys created without a permission list remain
+full-access keys.
 
 <Note>
-  For workflows, use **Workflows: Read**. Although the shared permission model
-  includes a write grant, creating, editing, publishing, testing, pausing,
-  resuming, archiving, and cancelling require an owner or admin signed in with a
-  dashboard cookie session in workflow version 1.
+  For workflows, use **Workflows: Read**. Creating, editing, publishing, testing, pausing, resuming,
+  archiving, and cancelling require an owner or admin signed in with a dashboard session in workflow
+  version 1.
 </Note>
 
 <Note>
-  A restricted key with **Sites: Read** can list the organizations and sites its
-  owner may access, but organization-list responses omit member rosters. Cookie
-  sessions and existing full-access keys retain the complete member directory.
+  A restricted key with **Sites: Read** can list the organizations and sites its owner may access,
+  but organization-list responses omit member rosters. Dashboard sessions and existing full-access
+  keys retain the complete member directory.
 </Note>
 
 <Note>
-  Trait data can hold names and emails, so anything that reads it is gated on
-  **Users: Read**: the three user-trait reads and `trait:<key>` filters on
-  analytics reads. A scoped key without that grant gets a `403` naming the
-  missing scope. Trait filters additionally never run on a public site's open
-  dashboard, a share link, or an embed — those surfaces return `400` instead of
-  silently unfiltered results.
+  Trait data can contain names and emails, so user-trait reads and `trait:<key>` filters require
+  **Users: Read**. Trait filters do not run on a public site, share link, or embed.
 </Note>
 
 <Warning>
-  Treat an API key like a password. A leaked full-access key can use every API
-  capability its owner can access; a leaked restricted key can use every grant
-  you selected. Keep keys server-side, never ship one in browser code, and
-  revoke an exposed key. Browser tracking needs no key—the `data-site-id` in the
-  snippet is enough.
+  Treat an API key like a password. Never ship it in browser code, a public bundle, a URL, or a log.
+  Revoke an exposed key immediately. Browser tracking needs no key; the snippet's `data-site-id`
+  identifies the site.
 </Warning>
 
-## Where the key is required
+## Where a key is required
 
 | Use | Needs a key? |
 | --- | --- |
-| Browser tracking (the snippet) | No — the site ID identifies the site. |
-| [Server-side ingestion](/api-reference/track-events-api) | Yes — and it enables the real-visitor IP/UA overrides. |
-| [Analytics reads](/api-reference/analytics-read-api) | Yes (unless the site is public). |
+| [Browser events](/api-reference/track-events-api) | No. |
+| [Browser identity](/api-reference/identify-users-api) | No. |
+| [Analytics reads](/api-reference/analytics-read-api) | Yes, unless the site is public. |
 | [Scoped SQL query](/api-reference/sql-analytics-api) | Yes. |
-| Site management | Yes. |
-| [MCP server](/api-reference/mcp-server) (AI agents) | Yes — sent as a request header by your AI client. |
+| Site and analytics configuration management | Yes. |
+| [MCP server](/api-reference/mcp-server) | Yes. Your AI client sends it as a request header. |
 
-## Sending the key
+## Send the key safely
 
-Always send the key in the `Authorization` header — never in the URL. A key in a query string leaks into server logs, browser history, and referrer headers.
+Always send the key in the `Authorization` header, never in the URL. A key in a query string can leak
+into logs, browser history, and referrer headers.
 
 ```
 Authorization: Bearer YOUR_API_KEY
@@ -119,47 +113,43 @@ Authorization: Bearer YOUR_API_KEY
 
 <AccordionGroup>
   <Accordion title="I lost my API key — can I see it again?">
-    No. A key is shown once at creation, because TinyAnalytics stores only a hash of it. If you didn't copy it, create a new key in your account settings and revoke the old one.
+    No. Create a new key in account settings and revoke the old one.
   </Accordion>
-  <Accordion title="Can I put my API key in a query string?">
-    No — always send it in the `Authorization` header as `Bearer YOUR_API_KEY`. A key in a query string leaks into server logs, browser history, and referrer headers.
+  <Accordion title="Can I use an API key in client-side code?">
+    No. Use the keyless browser APIs for events and identity. API keys can expose private data and
+    management actions when bundled into client-side code.
   </Accordion>
   <Accordion title="What can someone do with a leaked API key?">
-    A full-access key can use every API capability its owner can access. A
-    restricted key can use only its selected resources and actions, still
-    bounded by the owner's organization and team permissions. Revoke either key
-    immediately in account settings. Keep keys server-side and never ship one
-    in browser code.
+    A full-access key can use every API capability its owner can access. A restricted key can use
+    its selected resources and actions, still bounded by the owner's permissions. Revoke either key
+    immediately.
   </Accordion>
-  <Accordion title="Does a write permission include read access?">
-    Yes, but only for the same resource. Selecting **Goals: Write**, for
-    example, also selects **Goals: Read**; it does not grant Funnels, Sites, or
-    any other resource. Write-only **Event ingestion** has no matching read
-    permission.
+  <Accordion title="Does write include read access?">
+    Yes, but only for the same resource. Selecting **Goals: Write**, for example, also selects
+    **Goals: Read**; it does not grant access to Funnels, Sites, or another resource.
   </Accordion>
   <Accordion title="How often can I create API keys?">
-    API-key creation is limited to 10 attempts per signed-in user each hour.
-    Invalid creation requests count toward the same security limit. A `429`
-    response includes `Retry-After`; wait for that window before trying again.
+    API-key creation is limited to 10 attempts per signed-in user each hour. Invalid creation
+    requests count toward the same limit. A `429` response includes `Retry-After`.
   </Accordion>
 </AccordionGroup>
 
 ## Related
 
 <Columns cols={2}>
-  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track-events-api">
-    Use a key for server-side ingestion.
+  <Card title="Browser event API" icon="browser" href="/api-reference/track-events-api">
+    Track visitor activity without a key.
   </Card>
-  <Card title="Rate limits & CORS" icon="shield-halved" href="/api-reference/rate-limits-cors">
-    The per-key ingestion limit.
+  <Card title="API access and CORS" icon="shield-halved" href="/api-reference/rate-limits-cors">
+    Understand browser origins and documented limits.
   </Card>
   <Card title="Account settings" icon="gear" href="/tinyanalytics-account-settings">
-    Where you create and revoke keys.
+    Create and revoke keys.
   </Card>
   <Card title="API playground" icon="terminal" href="/api-reference/api-playground">
-    Try the API with your key.
+    Try data and management endpoints with your key.
   </Card>
   <Card title="MCP server" icon="plug" href="/api-reference/mcp-server">
-    Use the same key to connect an AI agent.
+    Connect an AI agent with the same permission model.
   </Card>
 </Columns>

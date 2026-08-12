@@ -69,7 +69,7 @@ Stack rules into **condition sets** that are checked in order. The first set a v
 
 ## Why does every visitor stay on the same variant?
 
-Assignments are **deterministic**. TinyAnalytics computes each visitor's bucket from a persistent visitor ID the tracker keeps in the browser, so the same inputs always produce the same result. No assignment is ever stored server-side, and it survives restarts and reloads. Two consequences worth knowing:
+Assignments are **deterministic**. TinyAnalytics computes each visitor's bucket from a persistent visitor ID the tracker keeps in the browser, so the same inputs always produce the same result. TinyAnalytics does not store a separate assignment record, and the browser ID survives restarts and reloads. Two consequences worth knowing:
 
 - Each flag buckets independently, so a visitor in the 10% of one flag isn't automatically in the 10% of another.
 - Stickiness is only as durable as that browser ID. If a visitor clears their site storage, they may re-bucket. Logging in mid-session never flips a variant — identity is used for *targeting rules*, not for bucketing.

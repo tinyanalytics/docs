@@ -1,37 +1,41 @@
 ---
 title: "TinyAnalytics API Reference"
 sidebarTitle: "Introduction"
-description: "Send events, read analytics, manage sites, and run scoped SQL with the TinyAnalytics HTTP API at https://dash.tinyanalytics.io."
+description: "Use the client-side JavaScript API to collect visitor activity, then use the authenticated HTTP API to read analytics and manage sites."
 icon: "book-open"
 noindex: true
 
 ---
 
-The TinyAnalytics API lets you **send server-side events**, **read analytics**, and **manage sites programmatically** alongside the browser [tracking script](/install-tinyanalytics-tracking-script). Every endpoint uses one base URL:
+TinyAnalytics has two separate developer surfaces:
+
+| Surface | Use it for | Authentication |
+| --- | --- | --- |
+| **Browser API** | Pageviews, custom events, revenue, errors, user identity, traits, groups, flags, and replay consent. | No API key. The installed snippet supplies the site ID. |
+| **HTTP data API** | Reading analytics, running scoped SQL, and managing sites and analytics configuration. | API key as `Authorization: Bearer <key>`. |
+
+Visitor measurement is client-side. Install the [tracking script](/install-tinyanalytics-tracking-script),
+then use the [browser event API](/api-reference/track-events-api) and
+[browser identity API](/api-reference/identify-users-api) instead of building a separate ingestion
+client.
+
+## HTTP data API base URL
+
+Authenticated data and management endpoints use:
 
 ```
 https://dash.tinyanalytics.io
 ```
 
-Ingestion endpoints (`/api/track`, `/api/identify`) accept events; read endpoints (`/api/sites/{siteId}/…`) return your data as JSON. Most calls are a single request with a JSON body.
+The HTTP API covers **153 published endpoints across 30 groups**. You can read reports, manage sites,
+define goals and funnels, read heatmaps, drive feature flags and experiments, run surveys, build
+dashboards, configure alerts and scheduled reports, and operate uptime monitors. Every published
+endpoint has its own page in the **Endpoint reference** section.
 
-## What can the API do?
+## Authenticate data API requests
 
-The API covers **153 published endpoints across 30 groups**—far more than reading metrics. Alongside the analytics reads you can manage sites, define goals and funnels, read heatmaps, drive feature flags and experiments, run surveys, build dashboards, configure alerts and scheduled reports, and operate uptime monitors. Every published endpoint has its own page in the **Endpoints** section of this reference.
-
-## How do I authenticate?
-
-There are two credentials, and which you need depends on what you're doing:
-
-| What you're doing | Credential |
-| --- | --- |
-| **Sending events from a browser** | None — the `data-site-id` in the [snippet](/install-tinyanalytics-tracking-script) identifies the site. |
-| **Sending events from a server** | An **API key** as `Authorization: Bearer <key>` (lets you send the visitor's real IP and user agent). |
-| **Reading analytics or managing sites** | An **API key** as `Authorization: Bearer <key>`. |
-
-You create an API key in your **account settings** — see [API keys](/api-reference/api-authentication). Reads and management are authorized by the key owner's access, exactly as if they had signed in.
-
-If an **AI agent** is doing the work rather than code you write, you can skip the HTTP calls entirely: the [MCP server](/api-reference/mcp-server) exposes this same surface as tools that Claude Code, Cursor, VS Code, and Codex CLI can call with the same key.
+Create an API key in **Settings → Account**, then send it in the `Authorization` header. Reads and
+management use the key owner's organization, role, and team access.
 
 <CodeGroup>
 
@@ -40,7 +44,7 @@ curl https://dash.tinyanalytics.io/api/sites/1/overview \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-```js JavaScript
+```js Node.js
 await fetch("https://dash.tinyanalytics.io/api/sites/1/overview", {
   headers: { Authorization: "Bearer YOUR_API_KEY" },
 })
@@ -57,60 +61,64 @@ requests.get(
 
 </CodeGroup>
 
-<Note>
-  Browser ingestion is intentionally open (any origin, no credentials) so the tracker works from your visitors' pages. Every other endpoint requires a credential, and cross-origin reads are restricted to trusted origins — a third-party site can't read your logged-in analytics.
-</Note>
+<Warning>
+  Never expose an API key in browser code, a public bundle, or a URL. The browser tracking API does
+  not need one.
+</Warning>
 
-## What do responses look like?
+If an AI agent is doing the work, the [MCP server](/api-reference/mcp-server) exposes the data and
+management surface as tools for Claude Code, Cursor, VS Code, and Codex CLI.
 
-- **Ingestion** (`/api/track`, `/api/identify`) returns **`204 No Content`** — the event is queued and written asynchronously, so there's no response body to parse.
-- **Reads** return **`200`** with a JSON body. List endpoints are shaped `{ "data": [ … ] }`.
+## Response conventions
+
+Successful reads return **`200`** with a JSON body. List endpoints generally return an object with a
+`data` array.
 
 Common status codes:
 
 | Code | Meaning |
 | --- | --- |
-| `200` | Success (reads). |
-| `204` | Accepted (ingestion) — no body. |
-| `400` | Invalid input (a bad field or an unknown site ID). |
-| `401` | Missing or invalid credential on a private site. |
-| `403` | Authenticated, but not a member of the site's organization. |
-| `404` | Unknown site. |
-| `429` | Ingestion rate limit exceeded for the API key. |
+| `200` | The read or management request succeeded. |
+| `400` | The request contains an invalid field or parameter. |
+| `401` | The API key is missing or invalid. |
+| `403` | The key owner cannot access the resource, or a restricted key lacks the required grant. |
+| `404` | The requested resource does not exist or is not visible to the key owner. |
+| `429` | A documented security or tool-specific rate limit was exceeded. |
 
 ## Frequently asked questions
 
 <AccordionGroup>
-  <Accordion title="Do I need an API key to send events from the browser?">
-    No. Browser ingestion needs no credential — the `data-site-id` in the [tracking script](/install-tinyanalytics-tracking-script) identifies the site. You need an API key to send events from a server, to read analytics, or to manage sites.
+  <Accordion title="How do I send an event from my site?">
+    Install the tracking script and call `window.tinyanalytics.event()` in the browser. Browser
+    collection is keyless; see the [browser event API](/api-reference/track-events-api).
   </Accordion>
-  <Accordion title="Why do ingestion endpoints return no response body?">
-    `/api/track` and `/api/identify` return `204 No Content` because the event is queued and written asynchronously. There is nothing to parse. Read endpoints return `200` with a JSON body instead, and list endpoints are shaped `{ "data": [ … ] }`.
+  <Accordion title="Can I put an API key in my frontend?">
+    No. API keys grant access to private analytics and management capabilities. Keep them out of
+    frontend code and use the keyless browser API for visitor measurement.
   </Accordion>
-  <Accordion title="What is the difference between a 401 and a 403?">
-    A `401` means the credential is missing or invalid on a private site. A `403` means the request authenticated fine, but the key's owner is not a member of the site's organization.
+  <Accordion title="Where do I find the full endpoint list?">
+    Browse **Endpoint reference** in the sidebar or use the in-product [API
+    playground](/api-reference/api-playground), which generates examples for the current endpoint
+    registry.
   </Accordion>
 </AccordionGroup>
 
-## Start here
+## Related
 
 <Columns cols={2}>
-  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track-events-api">
-    Send pageviews and custom events to /api/track.
+  <Card title="Browser event API" icon="browser" href="/api-reference/track-events-api">
+    Send pageviews and custom events from client-side code.
   </Card>
-  <Card title="Identify API" icon="user" href="/api-reference/identify-users-api">
-    Attach a stable user ID and traits.
+  <Card title="Browser identity API" icon="user" href="/api-reference/identify-users-api">
+    Identify users and update traits from client-side code.
   </Card>
   <Card title="Analytics read API" icon="chart-line" href="/api-reference/analytics-read-api">
-    Read overview, timeseries, and breakdowns.
-  </Card>
-  <Card title="All endpoints" icon="list" href="/api-reference/overview/get-overview">
-    Browse all 153 published endpoints by group.
+    Read overview, time-series, breakdown, session, and event data.
   </Card>
   <Card title="API keys" icon="key" href="/api-reference/api-authentication">
-    Create and manage your keys.
+    Create a least-privilege credential for data and management calls.
   </Card>
   <Card title="API playground" icon="terminal" href="/api-reference/api-playground">
-    Run any call against your own data.
+    Browse and generate examples for published endpoints.
   </Card>
 </Columns>

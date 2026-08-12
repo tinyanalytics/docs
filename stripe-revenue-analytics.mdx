@@ -140,7 +140,7 @@ TinyAnalytics looks for these keys on the **charge, payment intent, and Checkout
 | --- | --- | --- |
 | `ta_identified_user_id` | The user you passed to `identify()` | `window.tinyanalytics.getUserId()` — **use this one** |
 | `ta_session_id` | A single analytics session | Not available in the browser; the tracking script does not expose session IDs |
-| `ta_user_id` | The cookieless visitor hash | Not available in the browser; the hash is derived server-side |
+| `ta_user_id` | The cookieless visitor hash | Not available in the browser; TinyAnalytics derives it during ingestion |
 
 <Note>
   `ta_session_id` and `ta_user_id` are still honored when a payment carries them, but the tracking script never hands those values to your page. `ta_identified_user_id` is the key to use.
@@ -153,7 +153,7 @@ The report separates revenue into three tabs:
 | Tab | Contains |
 | --- | --- |
 | **All** | client revenue events and Stripe revenue together |
-| **Client events** | revenue sent with [`event()`](/revenue-analytics#choose-a-revenue-source) or the Tracking API |
+| **Client events** | revenue sent from the browser with [`event()`](/revenue-analytics#choose-a-revenue-source) |
 | **Stripe** | server-verified charges, refunds, and lost disputes |
 
 Stripe charges add revenue. Refunds and lost disputes subtract revenue. A failed refund restores the amount that an earlier refund event subtracted.

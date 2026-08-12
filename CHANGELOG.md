@@ -9,6 +9,12 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Client-side collection posture (2026-08-12):** replaced raw HTTP and API-key-authenticated
+  event and identify guidance with references for the shipped `window.tinyanalytics` browser API.
+  Reworked the API introduction, authentication, CORS, identity, revenue, MCP, and agent-skill
+  pages so visitor collection is consistently keyless and client-side. Renamed the integration
+  navigation group from **Server-side & tag managers** to **Web platforms & tag managers** and
+  split API navigation into **Browser APIs** and **Data API**.
 - **Shared dashboards documented as never showing identified people (2026-08-12, product
   decision 0295):** `public-analytics-dashboards.mdx` listed the reports a share-link viewer
   can browse (including Users) without saying what they see inside them. Now states the

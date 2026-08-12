@@ -286,24 +286,12 @@ load from `data-api-host` at runtime.
     Expect `200` and a JavaScript `Content-Type`.
   </Step>
 
-  <Step title="Check the ingestion route">
-    Send an intentionally incomplete payload:
-
-    ```bash
-    curl -si -X POST https://yourdomain.com/stats/api/track \
-      -H "Content-Type: application/json" \
-      -d '{}'
-    ```
-
-    Expect a TinyAnalytics JSON validation response with status `400`. A `404`, `405`, or HTML
-    response means the proxy did not preserve the path or method.
-  </Step>
-
-  <Step title="Observe a real event">
+  <Step title="Observe a browser event">
     Open your deployed site with browser developer tools, filter the Network panel by `/stats`, and
-    navigate once. `script.js` should return `200`, and `/stats/api/track` should return `204`.
-    If you use heatmaps, surveys, flags, or Web Vitals, their optional requests should use the same
-    prefix.
+    navigate once. `script.js` should return `200`, and the browser's `/stats/api/track` request
+    should return `204`. A `404`, `405`, or HTML response means the proxy did not preserve the path
+    or method. If you use heatmaps, surveys, flags, or Web Vitals, their optional requests should
+    use the same prefix.
   </Step>
 
   <Step title="Verify attribution">

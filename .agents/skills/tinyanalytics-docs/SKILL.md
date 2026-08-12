@@ -69,10 +69,13 @@ Never document:
 
 Security-sensitive precision:
 
-- **API keys authenticate programmatic customer access** — server-side ingestion,
-  analytics reads, and site management. Reads and management use the key owner's
-  existing organization/team permissions (decision 0096). Browser tracking is
-  intentionally keyless; never put an API key in browser code.
+- **Visitor collection is client-side** — document the tracking script and
+  `window.tinyanalytics` methods as the supported event, identity, trait, group,
+  flag, and browser-error surfaces. Do not publish application-server, raw-HTTP,
+  or API-key-authenticated event and identity ingestion guidance.
+- **API keys authenticate private customer API access** — analytics reads, site
+  management, SQL, and MCP use the key owner's existing organization/team
+  permissions (decision 0096). Never put an API key in browser code.
 
 ## Terminology
 

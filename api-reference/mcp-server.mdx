@@ -37,7 +37,7 @@ for that resource.
 | --- | --- |
 | **Traffic questions** | Overview totals, metric time series, breakdowns by 18 dimensions, live visitors, landing pages, acquisition, journeys, retention, and revenue |
 | **Site health** | Core Web Vitals, JavaScript errors, and bot and AI-crawler traffic |
-| **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, user-trait reads (`get_user_traits`: keys, values of one key, or users matching key=value), trait writes (`merge_user_traits` to set only the keys you send — the recommended write; `update_user_traits` to replace all traits wholesale), and server-side identification |
+| **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, user-trait reads (`get_user_traits`: keys, values of one key, or users matching key=value), and profile-trait management (`merge_user_traits` sets only the keys you send; `update_user_traits` replaces all traits) |
 | **Measurement setup** | Goals, funnels (including analysis without saving), custom SQL dashboards, and chart annotations |
 | **Anything else** | A read-only SQL query over your own event data, with the schema available as a tool |
 | **Getting started** | Create a site, get its tracking snippet, check whether tracking is live — optionally probing for an `identify()` trait key with `check_tracking`'s `trait_key` argument — and get the dashboard link |
@@ -165,7 +165,7 @@ Live visitors, saved funnels, saved dashboards, and annotations don't take dates
 
 MCP calls are limited to **120 requests per minute per API key**. Beyond that the server returns `429 Too Many Requests` with a `Retry-After` header, and the agent should wait for the window to reset.
 
-That budget suits normal agent work: building a dashboard, where each card is previewed before saving, is typically 30–60 calls over a couple of minutes. This limit is separate from the [server-side ingestion limit](/api-reference/rate-limits-cors) on `POST /api/track`.
+That budget suits normal agent work: building a dashboard, where each card is previewed before saving, is typically 30–60 calls over a couple of minutes. Browser tracking uses the keyless client API and is separate from the MCP request budget.
 
 ## Is it safe to connect an agent?
 
@@ -247,8 +247,8 @@ Connecting an agent gives it your key's access. Understand these points before y
   <Card title="Use docs with AI" icon="wand-magic-sparkles" href="/resources/tinyanalytics-docs-ai-tools">
     Give an assistant these documentation pages.
   </Card>
-  <Card title="Rate limits & CORS" icon="shield-halved" href="/api-reference/rate-limits-cors">
-    The other limits that apply to API traffic.
+  <Card title="API access and CORS" icon="shield-halved" href="/api-reference/rate-limits-cors">
+    Browser-origin rules and documented API limits.
   </Card>
   <Card title="SQL query API" icon="database" href="/api-reference/sql-analytics-api">
     The read-only SQL an agent runs for you.

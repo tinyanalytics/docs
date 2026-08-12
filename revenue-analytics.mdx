@@ -34,7 +34,8 @@ Revenue analytics ties money to your traffic. Send revenue with a [custom event]
       Send one event per completed sale. Client revenue must be positive, so this source cannot represent refunds or negative adjustments.
     </Note>
 
-    You can send the same event [from your server](/api-reference/track-events-api) with an [API key](/api-reference/api-authentication). This is useful when the true paid moment occurs on your backend.
+    Send the event from the browser only after your app confirms the purchase. Keep the event call in
+    the same client-side success path that renders the receipt or confirmation state.
   </Tab>
   <Tab title="Stripe">
     Connect Stripe with a restricted key to receive server-verified charges, refunds, and lost disputes through a webhook. No tracking-code change is required.
@@ -117,8 +118,8 @@ These features currently read **client events only**; Stripe revenue is not incl
   <Card title="Funnels" icon="filter" href="/funnel-analytics">
     See revenue at each step of a path.
   </Card>
-  <Card title="Tracking API" icon="paper-plane" href="/api-reference/track-events-api">
-    Send revenue events from your server.
+  <Card title="Browser event API" icon="browser" href="/api-reference/track-events-api">
+    Send revenue events from client-side code.
   </Card>
   <Card title="Connect Stripe" icon="credit-card" href="/stripe-revenue-analytics">
     Receive verified payments and refunds.

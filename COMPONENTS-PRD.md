@@ -52,7 +52,9 @@ All work under this PRD follows the content, terminology, and voice requirements
 - Document TinyAnalytics as a hosted service at `dash.tinyanalytics.io`.
 - Do not add self-hosting, platform installation, operator administration, or internal implementation guidance.
 - Do not document unshipped features.
-- Treat API keys as sensitive customer API credentials. They authenticate server-side ingestion, analytics reads, and site management as the key owner; browser tracking remains keyless.
+- Treat API keys as sensitive customer API credentials for analytics reads, site management, SQL,
+  and MCP. Visitor collection uses the keyless client-side browser API; never publish API-key or
+  raw-HTTP event/identity collection examples.
 - Verify product behavior against the wiki and product sources before changing factual content.
 - Do not invent response fields, workflow states, UI controls, screenshots, or platform behavior to make a component complete.
 
@@ -365,8 +367,8 @@ Exit criteria:
 
 Prioritize:
 
-- tracking API;
-- identify;
+- browser event API;
+- browser identity API;
 - read API;
 - SQL;
 - API keys;
@@ -377,7 +379,8 @@ Work:
 - Convert verified inputs to consistent `ParamField` structures.
 - Add `RequestExample` and `CodeGroup` where tested examples exist.
 - Add `ResponseExample`, `ResponseField`, and `Expandable` only from verified schemas or behavior.
-- Keep authentication language aligned with the current API-key contract: server-side ingestion, reads, and management as the key owner; no key in browser tracking.
+- Keep authentication language aligned with the client-side contract: browser collection is
+  keyless, while private reads, management, SQL, and MCP use a key as its owner.
 - Record unresolved response-schema gaps as source follow-ups.
 
 Exit criteria:
