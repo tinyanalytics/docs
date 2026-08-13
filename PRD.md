@@ -1020,9 +1020,14 @@ marker stays held (session replay above is also held).
   quickstart, how-it-works, GTM were already scoped); lawful-basis guidance added to
   `user-identification-analytics.mdx`.
 
-**Current sync marker:** product commit `2866629` (person-attributes wave) — **deployed to
-production 2026-08-11** (api+web; release-table row in the product wiki), so these pages are
-release-complete and the marker advances from `db807b88a01c0ac0bf8b89cc730344a10880b797`
+**Current sync marker:** product commit `7a32b77` (pages entry/exit completion, decision 0296,
+audited 2026-08-13) — **pushed to origin, NOT yet deployed**: the paired pages
+(`page-analytics.mdx`, `analytics-alerts.mdx`, `analytics-filters.mdx`, `/exit-pages` in
+`openapi.json`) are content-complete and validated (mint validate + broken-links green), and the
+0276 gate closes for this wave when the product deploy lands — advance this note to
+"deployed" then. Prior marker `2866629` (person-attributes wave) — **deployed to
+production 2026-08-11** (api+web; release-table row in the product wiki), advanced from
+`db807b88a01c0ac0bf8b89cc730344a10880b797`
 through `2866629` (covering session replay `0abb477`+, deployed 2026-08-10, per §10l's
 resolution). **Recorded gap, not silent:** page-presence (product decision `0290`, deployed
 `2d69a9f`) still has NO dedicated docs pages — the held batch; document it and note it here

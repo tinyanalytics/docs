@@ -1,7 +1,7 @@
 ---
 title: "Page Analytics"
 sidebarTitle: "Pages"
-description: "Rank pages and URLs by distinct sessions before the top-N limit, then inspect pageviews, trends, titles, entries, exits, and hostnames."
+description: "Rank pages and URLs by distinct sessions, then inspect trends, titles, entry pages, and exit pages — including each page's exit rate."
 icon: "file-lines"
 ---
 
@@ -24,6 +24,10 @@ Pageviews do not control the order, so one repeat-heavy session cannot push a pa
 session reach out of the list.
 
 ## How do I switch to URLs, titles, entries, exits, or hostnames?
+
+On the dedicated Pages report the three main views — **Pages**, **Entry pages**, and
+**Exit pages** — live in the address bar as `?tab=entry` and `?tab=exit`, so a link you
+copy reopens on the exact view you were reading.
 
 The Pages section has tabs that re-slice the same traffic by a different key, so you can answer different questions from one place:
 
@@ -62,26 +66,51 @@ This display option is useful when you want hostname context without changing th
   Use **Show full URL** for context. Use the **URLs** tab when `example.com/pricing` and `app.example.com/pricing` must become separate rows with separate metrics.
 </Tip>
 
-## How do I read the Landing pages report?
+## How do I read the Entry pages report?
 
-A **landing page** is the first page a visitor sees in a session — where the visit begins. The **Landing pages** report ranks your entry pages and adds the engagement metrics that tell you whether each one actually holds attention:
+An **entry page** (also called a landing page) is the first page a visitor sees in a session — where the visit begins. The **Entry pages** report ranks your entry pages and adds the engagement metrics that tell you whether each one actually holds attention:
 
 | Column | What it means |
 | --- | --- |
-| **Landing page** | The path where sessions started, with a link to open it. |
-| **Trend** | A sparkline of sessions starting on this page over your date range. |
+| **Entry page** | The path where sessions started, with a link to open it. |
 | **Sessions** | Sessions that began here, with the change versus the previous period. |
 | **Bounce** | The share of those sessions that viewed only this one page and left. |
-| **Avg. duration** | How long those sessions lasted on average. |
-| **Avg. scroll** | How far down the landing page visitors scrolled on average. |
-| **Avg. time** | The average time spent on the landing page itself. |
+| **Session duration** | How long those sessions lasted on average — the whole session, first event to last. |
+| **Avg. scroll** | How far down the entry page visitors scrolled on average. |
+| **Avg. time** | The average time spent on the entry page itself. |
+| **Trend** | A sparkline of sessions starting on this page over your date range. |
 
 <Accordion title="How bounce and missing engagement values are calculated">
-  Bounce here is measured against each session's **real, unfiltered pageview count** — so applying a dashboard filter can't inflate or deflate it. Missing engagement data shows as "—" rather than zero, so a page with no scroll signal isn't mistaken for one nobody scrolled.
+  Bounce here is measured against each session's **real, unfiltered pageview count** — so applying a dashboard filter can't inflate or deflate it. The same rule protects the ranking and the duration column: filters choose **which sessions** qualify, and each qualifying session still reports its true first page and full duration. Missing engagement data shows as "—" rather than zero, so a page with no scroll signal isn't mistaken for one nobody scrolled.
 </Accordion>
 
 <Tip>
-  Read landing pages to judge your **acquisition quality**, not just volume: a page that draws many sessions but bounces most of them is pulling the wrong traffic — or making the wrong first impression.
+  Read entry pages to judge your **acquisition quality**, not just volume: a page that draws many sessions but bounces most of them is pulling the wrong traffic — or making the wrong first impression.
+</Tip>
+
+## How do I read the Exit pages report?
+
+An **exit page** is the last page of a session — where the visit ended. The **Exit pages** report answers "where do people leave?", and its key column is the **exit rate**:
+
+| Column | What it means |
+| --- | --- |
+| **Exit page** | The path where sessions ended, with a link to open it. |
+| **Exit rate** | Sessions ending on this page **divided by its total pageviews**. This is the leak detector: a raw exit count mostly restates popularity, but a high *rate* says visits to this page tend to end there. |
+| **Sessions** | Sessions that ended here, with the change versus the previous period and a share bar. |
+| **Session duration** | How long the exiting sessions lasted — the whole session, not time on this page. |
+| **Single-page** | The share of these exits that entered *and* exited on this page (the bounce population). |
+| **Trend** | A sparkline of sessions ending on this page over your date range. |
+
+<Note>
+  **A high exit rate isn't automatically bad.** On a receipt or thank-you page it means the flow *completed*. On a checkout or signup step it usually marks a leak. The single-page column helps you tell the two apart: high single-page exits mean the page answered — or lost — the visitor on its own.
+</Note>
+
+<Accordion title="When the exit rate shows a dash">
+  Exit rate needs a clean denominator (the page's views). It shows **—** in two cases: while an **event-level filter** (like Path or Browser version) is active — those change pageview counts independently of sessions, making the ratio undefined — and for pages with no counted views. Rates from fewer than 10 exiting sessions render muted with a "low sample" hint, so one stray session can't paint a 100% headline.
+</Accordion>
+
+<Tip>
+  Spot a leak? Hover a row and click the **bell** to create an **exit-rate spike alert** for that page — you'll get notified when its exit rate rises instead of discovering it by browsing. See [alerts](/analytics-alerts).
 </Tip>
 
 ## How do I see one page's full stats?
@@ -92,9 +121,9 @@ Because the click navigates rather than toggling a filter in place, you clear it
 
 In **URLs** mode a row click applies **two** filters together, hostname and path, so you scope to that exact URL rather than to the path across every host.
 
-<Warning>
-  A click on an **Entries** row filters by **entry page** — sessions that *started* there — not by sessions that viewed the page at any point. The **Exits** view still filters by pages *visited*, so an Exits row click and an Entries row click don't mean the same thing.
-</Warning>
+<Note>
+  Row clicks are **edge-honest**: an Entry pages row filters by sessions that *started* there, and an Exit pages row filters by sessions that *ended* there — never merely "sessions that visited the page at some point". The same `Entry Page` and `Exit Page` filters are available from the filter picker on every report.
+</Note>
 
 ## Common workflows
 
@@ -117,7 +146,10 @@ In **URLs** mode a row click applies **two** filters together, hostname and path
     The Pages view ranks pages by their path, which is the standard read of your top content. The Titles view ranks them by their HTML `<title>` instead, which is useful when one path serves many titles. Both views re-slice the same traffic by a different key.
   </Accordion>
   <Accordion title="What's the difference between an entry page and an exit page?">
-    An entry page is the first page of a session and an exit page is the last. In the TinyAnalytics Pages report, the **Entries** view ranks pages by how many sessions start there, and the **Exits** view ranks them by how many sessions end there.
+    An entry page is the first page of a session and an exit page is the last. In the TinyAnalytics Pages report, the **Entry pages** view ranks pages by how many sessions start there, and the **Exit pages** view ranks them by how many sessions end there — with each page's exit rate alongside.
+  </Accordion>
+  <Accordion title="How is the exit rate calculated?">
+    For each page: sessions that ended on the page, divided by that page's total pageviews in the same date range, as a percentage. Session-scoped filters (like Channel or Entry Page) apply to both halves of the ratio; the exit-page condition itself never restricts the pageview count. A session counts toward the page shown as its **last pageview inside your selected range**.
   </Accordion>
   <Accordion title="How do I see stats for a single page?">
     Click that page's row in the Pages report. TinyAnalytics opens the main dashboard already filtered to that page, carrying your date range and any other active filters with it, so you can read its sources, devices, and geography. The click navigates rather than toggling a filter in place, so you clear it by removing the page filter on the dashboard or using your browser's Back button. See [filter your data](/analytics-filters).

@@ -34,7 +34,7 @@ A filter has three parts: a **dimension** (what to filter on), an **operator** (
 
 Common dimensions include page path, page title, hostname, referrer, channel, country, region, city, browser, operating system, device type, screen size, UTM parameters, event name, and tag.
 
-Two dimensions are **session-scoped** rather than pageview-scoped: **Entry Page** and **Entry Hostname** match the first page of a session, so they mean "entered on" rather than "visited anywhere". Use them to isolate the sessions that *started* somewhere, and page path or hostname to catch every session that reached it at any point.
+Four dimensions are **session-scoped** rather than pageview-scoped: **Entry Page** and **Entry Hostname** match the first page of a session ("entered on"), and **Exit Page** and **Exit Hostname** match its last ("ended on") — neither means "visited anywhere". Use them to isolate the sessions that *started* or *ended* somewhere, and page path or hostname to catch every session that reached a page at any point. Note that an exit filter changes which sessions you see, not how often a page was viewed — the Exit pages report's exit rate is computed the same way.
 
 **User trait** sits in the **People** group of the filter control, beside User ID. It filters reports by the traits you attached with [`identify()`](/user-identification-analytics) — "plan is pro", "country is not set". It is different from every other dimension in four ways:
 

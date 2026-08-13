@@ -7,6 +7,17 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Added
+
+- **Exit pages report + exit-rate alerts (2026-08-13, product decision 0296, product commit
+  `7a32b77` — pushed, not yet deployed):** `page-analytics.mdx` gains "How do I read the Exit
+  pages report?" (column table, good-exit vs leak note, dash-state accordion, the Watch bell,
+  `?tab=entry|exit` deep links, and the Landing → Entry rename); `analytics-alerts.mdx` adds
+  the **Exit-rate spike** template and `exit rate` metric rows, the single-page identity rule,
+  and the 30-minute settling-delay note; `analytics-filters.mdx` now documents all **four**
+  session-scoped dimensions (Entry/Exit Page + Hostname — it claimed two); `openapi.json`
+  gains the `GET /sites/{site}/exit-pages` operation (`mode=path|url`, suppression semantics).
+
 ### Changed
 
 - **Client-side collection posture (2026-08-12):** replaced raw HTTP and API-key-authenticated

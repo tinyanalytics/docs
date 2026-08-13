@@ -1682,6 +1682,149 @@
         }
       }
     },
+    "/sites/{site}/exit-pages": {
+      "get": {
+        "operationId": "get-sites-site-exit-pages",
+        "summary": "Get Exit Pages",
+        "description": "Returns exit pages — one row per page sessions ended on — with the exit rate (sessions exiting there ÷ that page’s total pageviews), the exiting sessions’ average duration, and their single-page share, with pagination. `exit_rate` is null and `exit_rate_suppressed` is true while any active filter is not session-scoped (event-level filters make the rate’s denominator ill-defined). `mode=url` returns (hostname, path) rows with a host-scoped denominator; compare is path mode only.",
+        "tags": [
+          "overview"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Example: 10.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "Example: 1.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "description": "Row identity: `path` (default) aggregates each path across hostnames; `url` returns one row per (hostname, path).",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "path",
+                "url"
+              ],
+              "default": "path"
+            }
+          },
+          {
+            "name": "compare",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "previous_weekday",
+                "previous",
+                "year",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "compare_start_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison Start Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "compare_end_date",
+            "in": "query",
+            "required": false,
+            "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
     "/sites/{site}/user-acquisition": {
       "get": {
         "operationId": "get-sites-site-user-acquisition",
