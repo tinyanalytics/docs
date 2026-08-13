@@ -10,7 +10,7 @@ project adheres to semantic versioning where practical.
 ### Added
 
 - **Exit pages report + exit-rate alerts (2026-08-13, product decision 0296, product commit
-  `7a32b77` — pushed, not yet deployed):** `page-analytics.mdx` gains "How do I read the Exit
+  `7a32b77`, deployed 2026-08-13 as `8c85147`):** `page-analytics.mdx` gains "How do I read the Exit
   pages report?" (column table, good-exit vs leak note, dash-state accordion, the Watch bell,
   `?tab=entry|exit` deep links, and the Landing → Entry rename); `analytics-alerts.mdx` adds
   the **Exit-rate spike** template and `exit rate` metric rows, the single-page identity rule,
