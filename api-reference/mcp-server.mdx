@@ -35,7 +35,7 @@ for that resource.
 
 | You ask for | Tools the agent uses |
 | --- | --- |
-| **Traffic questions** | Overview totals, metric time series, breakdowns by 18 dimensions, live visitors, landing pages, acquisition, journeys, retention, and revenue |
+| **Traffic questions** | Overview totals, metric time series (or one sessions series per value of a dimension — `get_timeseries` with `dimension`, for example `ai_assistant` to see which assistant is rising), breakdowns by 18 dimensions (with an optional `first_seen` date per value), live visitors, landing pages, acquisition, journeys, retention, and revenue |
 | **Site health** | Core Web Vitals, JavaScript errors, and bot and AI-crawler traffic |
 | **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, user-trait reads (`get_user_traits`: keys, values of one key, or users matching key=value), and profile-trait management (`merge_user_traits` sets only the keys you send; `update_user_traits` replaces all traits) |
 | **Measurement setup** | Goals, funnels (including analysis without saving), custom SQL dashboards, and chart annotations |
@@ -151,6 +151,8 @@ Once connected, ask in plain language — the agent picks the tool:
 
 - "What were my top pages last week?"
 - "How much traffic came from AI assistants this month?"
+- "Which AI assistant is growing fastest — chart sessions per assistant by week." (`get_timeseries` with `dimension: "ai_assistant"`; with a `dimension` set, the metric must be `sessions` and `compare` is not accepted — the tool returns an error rather than silently ignoring either)
+- "When did Perplexity first send us traffic?" (`get_breakdown` with `first_seen: true`, which adds each value's all-time first appearance; session dimensions only)
 - "Which pages do people land on and immediately leave?"
 - "Create a goal for anyone who reaches /pricing."
 - "Build me a dashboard of signups per day."

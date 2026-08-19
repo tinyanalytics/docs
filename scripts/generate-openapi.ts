@@ -226,10 +226,45 @@ const PATH_PARAM_OVERRIDES: Record<
 const OPERATION_OVERRIDES: Record<
   string,
   {
+    /** Replaces the registry description outright (the playground's is a one-liner). */
+    description?: string;
     descriptionAppend?: string;
+    /** Per-query-parameter enrichments the registry cannot express (prose, defaults). */
+    parameters?: Record<string, { description?: string; default?: string }>;
     responses?: Record<string, { description: string }>;
   }
 > = {
+  // 0296: the exit-pages semantics were hand-patched into openapi.json once; now they
+  // ride the generator so a regeneration can't silently drop them.
+  "get /sites/{site}/exit-pages": {
+    description:
+      "Returns exit pages — one row per page sessions ended on — with the exit rate (sessions exiting there ÷ that page’s total pageviews), the exiting sessions’ average duration, and their single-page share, with pagination. `exit_rate` is null and `exit_rate_suppressed` is true while any active filter is not session-scoped (event-level filters make the rate’s denominator ill-defined). `mode=url` returns (hostname, path) rows with a host-scoped denominator; compare is path mode only.",
+    parameters: {
+      mode: {
+        description:
+          "Row identity: `path` (default) aggregates each path across hostnames; `url` returns one row per (hostname, path).",
+        default: "path",
+      },
+    },
+  },
+  // 0304: the breakdown first_seen flag and the by-dimension split.
+  "get /sites/{site}/breakdown": {
+    parameters: {
+      first_seen: {
+        description:
+          "`true` adds `firstSeen` to every row — a UTC datetime of the value's all-time first appearance, unrestricted by the date range. Session dimensions only (hostname, referrer, channel, country, region, city, language, browser, operating_system, device_type, ai_assistant, utm_*); a page or event dimension returns 400.",
+      },
+    },
+  },
+  "get /sites/{site}/timeseries/by-dimension": {
+    parameters: {
+      dimension: { description: "The session dimension to split sessions by." },
+      limit: {
+        description:
+          "How many top values (by total sessions) to return as series. Default 100, max 1000.",
+      },
+    },
+  },
   "patch /sites/{site}/users/{userId}/traits": {
     descriptionAppend:
       "\n\nErrors arrive as RFC 9457 problem+json with a machine-readable `code`:\n\n" +
@@ -262,8 +297,14 @@ function isRedundantLabel(label: string, name: string): boolean {
  * so they become prose rather than schema examples — an `example` that doesn't parse as
  * its own type is worse than no example.
  */
-function schemaFor(name: string) {
-  const meta = parameterMetadata[name];
+function schemaFor(
+  name: string,
+  overrides?: Record<string, (typeof parameterMetadata)[string]>,
+) {
+  // An endpoint's own `parameterMetadata` overrides the shared map — the playground
+  // resolves the same way (exit-pages `mode` is path|url, not the funnel modes;
+  // by-dimension `dimension` is the session-mode subset).
+  const meta = overrides?.[name] ?? parameterMetadata[name];
   if (!meta) return { schema: { type: "string" }, description: undefined };
 
   const parts: string[] = [];
@@ -421,8 +462,19 @@ for (const category of endpointCategories) {
       }
     }
 
+    const opOverride =
+      OPERATION_OVERRIDES[
+        `${endpoint.method.toLowerCase()} ${openApiPath}`
+      ];
+
     for (const name of endpoint.specificParams ?? []) {
-      const { schema, description } = schemaFor(name);
+      const generated = schemaFor(name, endpoint.parameterMetadata);
+      const paramOverride = opOverride?.parameters?.[name];
+      const description = paramOverride?.description ?? generated.description;
+      const schema =
+        paramOverride?.default !== undefined
+          ? { ...generated.schema, default: paramOverride.default }
+          : generated.schema;
       parameters.push({
         name,
         in: "query",
@@ -432,18 +484,14 @@ for (const category of endpointCategories) {
       });
     }
 
-    const opOverride =
-      OPERATION_OVERRIDES[
-        `${endpoint.method.toLowerCase()} ${openApiPath}`
-      ];
-
     const operation: Record<string, unknown> = {
       operationId: operationIdFor(endpoint.method, endpoint.path),
       summary: endpoint.name,
-      ...(endpoint.description
+      ...((opOverride?.description ?? endpoint.description)
         ? {
             description:
-              endpoint.description + (opOverride?.descriptionAppend ?? ""),
+              (opOverride?.description ?? endpoint.description) +
+              (opOverride?.descriptionAppend ?? ""),
           }
         : opOverride?.descriptionAppend
           ? { description: opOverride.descriptionAppend }

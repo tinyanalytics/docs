@@ -1,7 +1,7 @@
 ---
 title: "Analytics Alerts"
 sidebarTitle: "Alerts"
-description: "Watch traffic, page, event, revenue, or account activity and get notified when it crosses a threshold by email, Slack, Discord, or webhook."
+description: "Watch traffic, page, event, revenue, AI share of traffic, or account activity and get notified when it crosses a threshold by email, Slack, Discord, or webhook."
 icon: "bell"
 ---
 
@@ -9,7 +9,7 @@ An alert watches one metric on your site and notifies you when it crosses a thre
 
 ## Start from a template
 
-The create dialog starts with eight templates that prefill the metric, condition, and alert name:
+The create dialog starts with ten templates that prefill the metric, condition, and alert name:
 
 - **Traffic spike +50%**
 - **Traffic drop −50%**
@@ -18,6 +18,8 @@ The create dialog starts with eight templates that prefill the metric, condition
 - **Event users**
 - **Revenue −20%**
 - **Exit-rate spike +10pts**
+- **AI traffic surge** — AI share of traffic up 50% versus the previous day
+- **AI traffic drop** — AI share of traffic down 50% versus the previous day
 - **Blank**
 
 <Tip>
@@ -43,6 +45,7 @@ Pick the metric to watch and the window to measure it over — the last **hour**
 | **Revenue**         | total client-event [revenue](/revenue-analytics) in your reporting currency |
 | **Active accounts** | distinct [B2B accounts](/b2b-account-analytics) active                  |
 | **Exit rate**       | one page's exit rate — sessions ending on the page ÷ its pageviews (see the [Pages report](/page-analytics#how-do-i-read-the-exit-pages-report)) |
+| **AI share of traffic (%)** | AI sessions ÷ all sessions × 100 — an AI session is one that entered from an AI assistant, the same rule as the [AI traffic report](/ai-referral-traffic-analytics)'s AI Sessions headline |
 
 <Note>
   Alert windows roll backwards from the current moment — the last hour or the
@@ -64,6 +67,8 @@ An **Exit rate** alert always watches exactly one page: its **Exit page** field 
   so visitors who are still browsing can never fire the alert. The alert's number can
   therefore differ slightly from the Exit pages report, which reads each range as-is.
 </Note>
+
+An **AI share of traffic** alert is site-wide and stays **silent** when the window holds fewer than **10 sessions** — too small a sample to call a share; it neither fires nor reports 0%. It accepts only session-level scopes (a channel, country, entry page, or a saved segment of that kind); event-level filters such as a page path are rejected, so the **Page path** field is hidden for this metric. Unlike exit rate, it has no settling delay.
 
 For **Event count** or **Event users**, enter the event name and optionally add up to five property filters. Property filters use exact key/value matches, all joined with **AND**. For example, an event-users alert can watch distinct users who fired `checkout_failed` with both `plan = pro` and `country = DE`.
 
@@ -126,6 +131,12 @@ A fire notification includes the site, watched metric, window, breach reason, an
     **Event count** counts every matching event occurrence. **Event users**
     counts distinct users who fired the named event. Both can be narrowed with
     up to five exact-match event property filters, joined with AND.
+  </Accordion>
+  <Accordion title="Why did my AI traffic alert not fire on a quiet day?">
+    An **AI share of traffic** alert stays silent whenever the window — the last hour or
+    the last day — holds fewer than 10 sessions. A share computed on a handful of sessions
+    is noise, so TinyAnalytics treats it as indeterminate rather than reporting 0% or a
+    breach. Once the window has 10 or more sessions, the alert evaluates normally.
   </Accordion>
   <Accordion title="Can I alert on one page without creating a segment?">
     Yes. Add a Page path and choose **is**, **contains**, or **starts with**. A

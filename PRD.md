@@ -1035,6 +1035,53 @@ resolution). **Recorded gap, not silent:** page-presence (product decision `0290
 when that pass runs. The follow-up deploy-record commit `8647919` is docs-only
 (`Public docs impact: none`).
 
+## 10n. Product-sync pass (2026-08-19 — AI Traffic v2, decision 0304)
+
+Audited the shipped product from `8c85147` through product commit `123f766` — the AI Traffic v2
+wave (product decision `0304`, spec `docs/PRD-ai-traffic-v2.md`), four commits, plus the intervening
+`/qa` and trust-gate work that landed earlier without a docs pass:
+
+- **`8f8a14f`** — PRD + positioning decision (AI-traffic-native is the wedge). Docs-only in the
+  product; `Public docs impact: none` (positioning copy is a marketing follow-up).
+- **`259f3a0` (PR1)** — the redesigned AI traffic report: 5-card strip incl. AI Crawl Requests,
+  per-assistant trend (top-5 + Other AI, by-assistant default, legend isolate), by-assistant table
+  with sparklines + Revenue/Orders/AOV/Conv. + expandable AI Tools, Conversions from AI (per-goal
+  AI CVR vs site CVR, labeled attribution basis), AI visibility (crawlers by operator, renders on
+  crawl-but-no-click sites), landing engagement columns, honest-limits card, F1/F2 error/degrade
+  states; new `GET /sites/{site}/timeseries/by-dimension`. Documented in
+  `ai-referral-traffic-analytics.mdx` (rewritten) and `api-reference/analytics-read-api.mdx`.
+- **`6a3ecc1` (PR3)** — `ai_share` alert metric (entry-attributed AI sessions ÷ all sessions;
+  10-session floor; session-lifted filters only; "AI traffic surge/drop" templates, ±50% vs the
+  previous day), the weekly-report **AI Traffic** section (0207 reversal; hidden at zero),
+  `GET /breakdown?first_seen=true` (session dimensions only), the by-dimension route classified for
+  scoped API keys as `get_timeseries`'s second target, MCP + assistant `get_timeseries.dimension`
+  and `get_breakdown.first_seen`, and both new surfaces in the API playground registry. Documented
+  in `analytics-alerts.mdx`, `scheduled-analytics-reports.mdx`, `api-reference/analytics-read-api.mdx`,
+  `api-reference/mcp-server.mdx`, and the regenerated `openapi.json`.
+- **`123f766` (PR2)** — the landing table's **Crawled** column (additive `ai_requests` on bots
+  by-dimension rows — AI-crawler-only requests per page; locked correlation footnote, no ratio),
+  the inline "first seen" note on new assistants, the organic-share hint (paid AI > 0 only), the
+  Explain-this-report handoff carrying the trend view. Documented in `ai-referral-traffic-analytics.mdx`
+  and `bot-ai-crawler-analytics.mdx` (cross-link).
+
+**Generator fix.** `scripts/generate-openapi.ts` now honors an endpoint's own
+`parameterMetadata` (the playground already did) and carries per-operation parameter/description
+overrides — the 0296 exit-pages description and `mode=path|url` default that had been hand-patched
+into `openapi.json` now come out of the generator, and 18 other operations gained their correct
+per-endpoint enums (bots dimensions, retention/acquisition modes, heatmap click types, …).
+Published count 153/154 → **155** endpoints across 30 groups (`analytics-read-api.mdx`,
+`api-playground.mdx`, `tinyanalytics-api.mdx` updated).
+
+**Not documented, deliberately:** the by-dimension endpoint's and bots rows' response bodies
+(the reference documents requests only, as before); the MCP tool count (unchanged).
+
+**Current sync marker:** product commit `123f766` (AI Traffic v2 wave, decision 0304, audited
+through PR1 `259f3a0` + PR3 `6a3ecc1` + PR2 `123f766`) — **NOT yet deployed to production**
+(prod remains on `9e25fc5`, the 2026-08-15 /qa wave). The paired pages are validated (mint
+validate + broken-links green) so the 0276 gate is met on the docs side; the marker records what
+is *audited*, and the deployment record should be added here when the wave ships. Prior marker
+`8c85147` (pages entry/exit, deployed 2026-08-13).
+
 ---
 
 ## 11. Assumptions & open questions

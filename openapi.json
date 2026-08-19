@@ -1279,11 +1279,145 @@
         }
       }
     },
+    "/sites/{site}/timeseries/by-dimension": {
+      "get": {
+        "operationId": "get-sites-site-timeseries-by-dimension",
+        "summary": "Get Time Series by Dimension",
+        "description": "Sessions bucketed over time and split by a session dimension — one series per top value (by total sessions, unfolded, no server-side 'Other'). Answers 'how is each AI assistant / channel / country trending' in one call. Session-mode dimensions only; no compare.",
+        "tags": [
+          "overview"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "dimension",
+            "in": "query",
+            "required": true,
+            "description": "The session dimension to split sessions by.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hostname",
+                "referrer",
+                "channel",
+                "country",
+                "region",
+                "city",
+                "language",
+                "browser",
+                "operating_system",
+                "device_type",
+                "ai_assistant",
+                "utm_source",
+                "utm_medium",
+                "utm_campaign",
+                "utm_term",
+                "utm_content"
+              ]
+            }
+          },
+          {
+            "name": "bucket",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "minute",
+                "five_minutes",
+                "ten_minutes",
+                "fifteen_minutes",
+                "hour",
+                "day",
+                "week",
+                "month",
+                "year"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "How many top values (by total sessions) to return as series. Default 100, max 1000.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
     "/sites/{site}/breakdown": {
       "get": {
         "operationId": "get-sites-site-breakdown",
         "summary": "Get Breakdown",
-        "description": "Returns dimensional analytics broken down by a specific dimension, optionally with a period-over-period comparison",
+        "description": "Returns dimensional analytics broken down by a specific dimension, optionally with a period-over-period comparison. first_seen=true adds each row's all-time first appearance (firstSeen) — session-mode dimensions only.",
         "tags": [
           "overview"
         ],
@@ -1344,11 +1478,22 @@
               "type": "string",
               "enum": [
                 "pathname",
+                "entry_page",
+                "exit_page",
+                "event_name",
+                "referrer",
+                "channel",
                 "country",
                 "region",
+                "city",
                 "browser",
                 "operating_system",
-                "device_type"
+                "device_type",
+                "utm_source",
+                "utm_medium",
+                "utm_campaign",
+                "utm_term",
+                "utm_content"
               ]
             }
           },
@@ -1400,6 +1545,19 @@
             "description": "Comparison End Date. Example: YYYY-MM-DD (custom only).",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "first_seen",
+            "in": "query",
+            "required": false,
+            "description": "`true` adds `firstSeen` to every row — a UTC datetime of the value's all-time first appearance, unrestricted by the date range. Session dimensions only (hostname, referrer, channel, country, region, city, language, browser, operating_system, device_type, ai_assistant, utm_*); a page or event dimension returns 400.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           }
         ],
@@ -1889,12 +2047,12 @@
             "schema": {
               "type": "string",
               "enum": [
-                "pathname",
-                "country",
-                "region",
-                "browser",
-                "operating_system",
-                "device_type"
+                "channel",
+                "source",
+                "medium",
+                "campaign",
+                "source_medium",
+                "referrer"
               ]
             }
           },
@@ -1905,10 +2063,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "day",
-                "week",
-                "reached",
-                "dropped"
+                "table",
+                "timeseries"
               ]
             }
           },
@@ -1917,7 +2073,12 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "all",
+                "identified",
+                "anonymous"
+              ]
             }
           },
           {
@@ -1927,15 +2088,10 @@
             "schema": {
               "type": "string",
               "enum": [
-                "minute",
-                "five_minutes",
-                "ten_minutes",
-                "fifteen_minutes",
                 "hour",
                 "day",
                 "week",
-                "month",
-                "year"
+                "month"
               ]
             }
           },
@@ -2064,9 +2220,13 @@
             "name": "minutes",
             "in": "query",
             "required": false,
-            "description": "Example: 5.",
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "enum": [
+                "30",
+                "1440",
+                "10080"
+              ]
             }
           },
           {
@@ -2074,7 +2234,11 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           },
           {
@@ -2082,7 +2246,11 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           }
         ],
@@ -2767,9 +2935,14 @@
             "name": "type",
             "in": "query",
             "required": true,
-            "description": "Group Type. e.g. company.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "outbound",
+                "button_click",
+                "form_submit",
+                "copy"
+              ]
             }
           }
         ],
@@ -2855,9 +3028,14 @@
             "name": "type",
             "in": "query",
             "required": true,
-            "description": "Group Type. e.g. company.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "outbound",
+                "button_click",
+                "form_submit",
+                "copy"
+              ]
             }
           }
         ],
@@ -3957,8 +4135,6 @@
             "schema": {
               "type": "string",
               "enum": [
-                "day",
-                "week",
                 "reached",
                 "dropped"
               ]
@@ -4333,12 +4509,17 @@
             "schema": {
               "type": "string",
               "enum": [
-                "pathname",
+                "channel",
                 "country",
                 "region",
+                "referrer",
+                "ai_assistant",
+                "device_type",
                 "browser",
                 "operating_system",
-                "device_type"
+                "utm_source",
+                "utm_medium",
+                "utm_campaign"
               ]
             }
           },
@@ -4952,11 +5133,38 @@
             "schema": {
               "type": "string",
               "enum": [
-                "first_seen",
-                "last_seen",
-                "pageviews",
-                "sessions",
-                "events"
+                "pathname",
+                "country",
+                "region",
+                "browser",
+                "operating_system",
+                "device_type",
+                "event_count",
+                "lcp_avg",
+                "lcp_p50",
+                "lcp_p75",
+                "lcp_p90",
+                "lcp_p99",
+                "cls_avg",
+                "cls_p50",
+                "cls_p75",
+                "cls_p90",
+                "cls_p99",
+                "inp_avg",
+                "inp_p50",
+                "inp_p75",
+                "inp_p90",
+                "inp_p99",
+                "fcp_avg",
+                "fcp_p50",
+                "fcp_p75",
+                "fcp_p90",
+                "fcp_p99",
+                "ttfb_avg",
+                "ttfb_p50",
+                "ttfb_p75",
+                "ttfb_p90",
+                "ttfb_p99"
               ]
             }
           },
@@ -5134,6 +5342,7 @@
             "name": "pathname",
             "in": "query",
             "required": true,
+            "description": "Example: /pricing.",
             "schema": {
               "type": "string"
             }
@@ -5142,25 +5351,36 @@
             "name": "type",
             "in": "query",
             "required": false,
-            "description": "Group Type. e.g. company.",
+            "description": "Click Type.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "click",
+                "rageclick"
+              ]
             }
           },
           {
             "name": "band",
             "in": "query",
             "required": false,
+            "description": "Device Band.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "mobile",
+                "tablet",
+                "desktop"
+              ]
             }
           },
           {
             "name": "render_width",
             "in": "query",
             "required": false,
+            "description": "Example: 1440.",
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -5246,6 +5466,7 @@
             "name": "pathname",
             "in": "query",
             "required": true,
+            "description": "Example: /pricing.",
             "schema": {
               "type": "string"
             }
@@ -6070,7 +6291,11 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
             }
           }
         ],
@@ -7151,8 +7376,8 @@
               "enum": [
                 "first_seen",
                 "last_seen",
-                "pageviews",
                 "sessions",
+                "users",
                 "events"
               ]
             }
@@ -7173,7 +7398,7 @@
             "name": "search",
             "in": "query",
             "required": false,
-            "description": "Example: Search users.",
+            "description": "Example: Search accounts.",
             "schema": {
               "type": "string"
             }
@@ -7595,12 +7820,21 @@
             "schema": {
               "type": "string",
               "enum": [
+                "referrer",
                 "pathname",
+                "hostname",
                 "country",
                 "region",
+                "city",
                 "browser",
                 "operating_system",
-                "device_type"
+                "device_type",
+                "bot_category",
+                "bot_pattern",
+                "bot_asn_provider",
+                "bot_referrer_spam_domain",
+                "bot_client_signals",
+                "ai_crawler"
               ]
             }
           },
@@ -10538,12 +10772,10 @@
             "schema": {
               "type": "string",
               "enum": [
-                "pathname",
+                "query",
+                "page",
                 "country",
-                "region",
-                "browser",
-                "operating_system",
-                "device_type"
+                "device"
               ]
             }
           }
@@ -10922,15 +11154,9 @@
             "schema": {
               "type": "string",
               "enum": [
-                "minute",
-                "five_minutes",
-                "ten_minutes",
-                "fifteen_minutes",
                 "hour",
                 "day",
-                "week",
-                "month",
-                "year"
+                "week"
               ]
             }
           },
@@ -10997,7 +11223,12 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "success",
+                "failure",
+                "timeout"
+              ]
             }
           },
           {
@@ -11471,7 +11702,13 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "active",
+                "acknowledged",
+                "resolved",
+                "all"
+              ]
             }
           },
           {
@@ -11659,9 +11896,7 @@
               "type": "string",
               "enum": [
                 "day",
-                "week",
-                "reached",
-                "dropped"
+                "week"
               ]
             }
           },
@@ -11670,7 +11905,15 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "user",
+                "group_0",
+                "group_1",
+                "group_2",
+                "group_3",
+                "group_4"
+              ]
             }
           }
         ],

@@ -9,6 +9,30 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **AI Traffic v2 — the GEO report (2026-08-19, product decision 0304, product commits `8f8a14f`,
+  `259f3a0`, `6a3ecc1`, `123f766`; not yet deployed):** `ai-referral-traffic-analytics.mdx`
+  rewritten for the six-section report — five stat cards incl. **AI Crawl Requests** ("bot hits ·
+  not visits") and the organic-share hint, the per-assistant trend (top-5 + Other AI, legend
+  isolate, aggregate toggle), the by-assistant table with sparklines, Revenue/Orders/AOV/Conv.,
+  the AI Tools expander and the inline "first seen" note, **Conversions from AI** with its
+  labeled attribution basis, **AI visibility** by operator, the landing table's engagement columns
+  and **Crawled** column with the verbatim correlation footnote, and new FAQs (crawl/click ratio,
+  "first seen"); `analytics-alerts.mdx` adds the **AI share of traffic (%)** metric, the **AI
+  traffic surge/drop** templates, the 10-session floor, and the session-scope-only rule;
+  `scheduled-analytics-reports.mdx` documents the weekly email's **AI Traffic** section;
+  `api-reference/analytics-read-api.mdx` adds `GET /sites/{id}/timeseries/by-dimension` and
+  `breakdown?first_seen=true`; `api-reference/mcp-server.mdx` documents `get_timeseries.dimension`
+  and `get_breakdown.first_seen`; `bot-ai-crawler-analytics.mdx` cross-links the new crawler
+  surfaces on the AI report; `openapi.json` regenerated (155 published endpoints).
+
+### Fixed
+
+- **OpenAPI generator honors per-endpoint parameter metadata (2026-08-19):**
+  `scripts/generate-openapi.ts` now applies an endpoint's own `parameterMetadata` over the shared
+  map and carries per-operation description/parameter overrides — the hand-patched 0296 exit-pages
+  semantics are reproduced by the generator, and 18 operations (bots dimensions, retention and
+  acquisition modes, heatmap click types, uptime statuses, …) gained their correct enums.
+
 - **Exit pages report + exit-rate alerts (2026-08-13, product decision 0296, product commit
   `7a32b77`, deployed 2026-08-13 as `8c85147`):** `page-analytics.mdx` gains "How do I read the Exit
   pages report?" (column table, good-exit vs leak note, dash-state accordion, the Watch bell,

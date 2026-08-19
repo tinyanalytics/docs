@@ -1,11 +1,11 @@
 ---
 title: "AI Referral Traffic Analytics"
 sidebarTitle: "AI traffic"
-description: "Measure sessions and revenue from ChatGPT, Claude, Perplexity, Gemini, Copilot, and other AI assistants, including their landing pages."
+description: "Measure sessions, per-assistant trends, conversions, and revenue from ChatGPT, Claude, Perplexity, Gemini, Copilot, and other AI assistants — plus which AI crawlers read your pages."
 icon: "robot"
 ---
 
-The AI traffic report shows how many visitors arrive at your site by clicking through from an **AI assistant** — ChatGPT, Perplexity, Gemini, Claude, Copilot, and others. It reports AI sessions, their share of all traffic, revenue from AI (when you track revenue), a breakdown by assistant, the pages AI sends people to, and how AI traffic is trending versus the previous period. It's one of the few analytics tools that surfaces AI referrals as a first-class report instead of burying them in "Referral".
+The AI traffic report shows how many visitors arrive at your site by clicking through from an **AI assistant** — ChatGPT, Perplexity, Gemini, Claude, Copilot, and others — and whether that traffic is worth anything. It reports AI sessions and their share of all traffic, a **per-assistant trend**, a by-assistant table with revenue depth, **conversions from AI** against your goals, **AI crawler visibility** (which AI crawlers are reading your pages, by operator), and the pages AI sends people to with engagement and crawl counts side by side. It's one of the few analytics tools that surfaces AI referrals as a first-class report instead of burying them in "Referral".
 
 ## What counts as AI traffic?
 
@@ -18,22 +18,39 @@ Each session is attributed to the assistant it **entered from**. A visitor who a
 The report breaks AI traffic down by assistant, with search-style engines leading and tool-style products grouped together:
 
 - **ChatGPT, Perplexity, Gemini, Claude, Copilot, You.com** — named individually.
-- **AI Tools** — a single row rolling up assistant products that link out (such as coding and writing assistants), so the headline stays about citations without discarding data.
+- **AI Tools** — a single row rolling up assistant products that link out (such as coding and writing assistants), so the headline stays about citations without discarding data. Expand the row to see each tool.
 - **Other AI** — recognized AI traffic that doesn't match a specific assistant.
 
 Paid AI visits keep their assistant label — a paid ChatGPT visit still counts as ChatGPT.
 
-## Which pages does AI send people to?
+## What does the AI traffic report show?
 
-The report includes a **"Pages AI sends people to"** breakdown, ranking the entry pages AI visitors land on. This tells you which of your pages AI assistants are citing and linking — the content that's earning you AI referrals — so you can double down on what's working.
+The report reads top to bottom as one story — measure, attribute, prove, and watch the crawlers:
 
-## Is my AI traffic growing?
+1. **Five stat cards** — **AI Sessions** (with the change versus the previous period), AI's **share of traffic**, **AI revenue** when you [track revenue](/revenue-analytics), the number of **assistants** sending traffic, and **AI Crawl Requests**, labeled **bot hits · not visits**. Crawl requests are a separate unit and are never added to sessions. When some AI sessions arrived through the **Paid AI** channel, the AI Sessions card also notes the organic share (for example "of 4,120 total · 92% organic"); when no paid AI traffic exists, that note doesn't appear.
+2. **Per-assistant trend** — the top five assistants as separate lines plus a single **Other AI** line for everything else. The chart opens by assistant; an **aggregate** toggle collapses it to one AI-sessions line, and clicking a legend entry isolates that assistant.
+3. **By-assistant table** — for each assistant: a sparkline, sessions, share of AI traffic, change versus the previous period, and **Revenue**, **Orders**, **AOV**, and **Conv.** (conversion rate) — shown as "—" on sites without revenue. An assistant whose first-ever session falls inside the selected window carries an inline **first seen** date, so you notice the day a new assistant starts sending traffic.
+4. **Conversions from AI** — for each [goal](/conversion-goal-tracking), the AI conversion rate next to your site's overall conversion rate. If the site has no goals yet, the section asks you to set one up.
+5. **AI visibility** — AI crawlers that read your site in the window, grouped by operator (OpenAI, Anthropic, Google, and others), with a link to the [Bots & AI crawlers report](/bot-ai-crawler-analytics). This section renders even when a site has crawls but zero AI clicks — that state is the story: AIs are reading you, nobody clicks yet.
+6. **Pages AI sends people to** — the entry pages AI visitors land on, with **bounce rate**, **average duration**, **engaged time**, and a **Crawled** column: the number of AI-crawler requests to that page in the same window.
 
-The report answers this directly with a **trend chart** of AI sessions over time and a **change versus the previous period** on the AI Sessions card. The chart works like the main dashboard's — hover for a tooltip, drag to zoom into a window — and its header shows icons for the assistants sending you the most traffic. [Annotations](/analytics-annotations) aren't drawn on this chart. Each assistant row also carries its own change column, so you can see, for example, that Perplexity is rising while another assistant falls. A row with no traffic last period shows as new rather than a misleading "+100%".
+Under the landing table the report states: *"Crawled = bot requests, not visits. Crawl and click correlate per page; one does not cause the other."* TinyAnalytics deliberately shows no ratio between crawls and clicks.
+
+<Info>
+  **How conversions are attributed.** The Conversions from AI section counts a goal conversion for any session that had an AI-attributed event, while the **AI Sessions** headline counts sessions that *entered* from an AI assistant. The conversion rate compares like with like — its numerator and denominator use the same rule — but the section is not meant to reconcile with the headline card, and it says so in its footnote.
+</Info>
+
+## Is my AI traffic growing — and which assistant is driving it?
+
+The **per-assistant trend** answers both at a glance: each of the top five assistants is its own line, so you can see Perplexity rising while another assistant falls without exporting anything. Hover for a tooltip and click a legend entry to isolate one assistant; the **aggregate** view works like the main dashboard chart, including drag to zoom into a window. The **AI Sessions** card carries the change versus the previous period, and each table row has its own change column. A row with no traffic last period shows as new rather than a misleading "+100%". [Annotations](/analytics-annotations) aren't drawn on this chart.
 
 ## Where do I see AI traffic at a glance?
 
 Each **website card** on your home grid — the list of all your sites — shows **AI Traffic** as one of its four glance metrics, next to Users, Pages / Session, and average visit Duration. It's the count of sessions that entered from an AI assistant over the card's window, so you can spot which sites AI is sending people to without opening each one. The number matches the **AI Sessions** headline on that site's AI traffic report exactly — one attribution rule, wherever it's shown.
+
+## Can I get alerted when AI traffic moves?
+
+Yes. [Alerts](/analytics-alerts) include an **AI share of traffic** metric with two templates — **AI traffic surge** and **AI traffic drop** — that notify you when AI's share of your sessions rises or falls by 50% versus the previous day. The [weekly report email](/scheduled-analytics-reports) also opens with an **AI Traffic** section (total, share, and top assistants) whenever the site had AI-referred sessions in the period.
 
 ## How do I use AI traffic across the dashboard?
 
@@ -42,11 +59,12 @@ Because the assistant is a first-class dimension, you can use it everywhere:
 - **Filter** any report to a single assistant (for example, "visitors from Perplexity").
 - **Save a segment** like "arrived via ChatGPT" and apply it across every report.
 - **Build a cohort** such as "AI visitors who bought".
+- **Ask AI** — the report's **Explain this report** button passes which trend view you're looking at (by assistant or aggregate) into [Ask AI](/ai-analytics-assistant), so the explanation matches what's on screen.
 
 See [Filter your data](/analytics-filters), [Saved segments](/saved-analytics-segments), and [Behavioral cohorts](/behavioral-cohort-analysis).
 
 <Info>
-  **What this report can and can't see.** It counts **click-throughs only** — humans who followed a link from an AI answer. It cannot see AI crawlers reading your site to train or ground their models, nor citations that are shown but never clicked. To see which AI crawlers are reading your pages, use the [Bots & AI crawlers report](/bot-ai-crawler-analytics). Crawling comes before citation, and citation comes before the click — this report measures the click.
+  **What this report can and can't see.** It counts **click-throughs** and **crawl requests** — first-party facts. It cannot see citations that are shown in an AI answer but never clicked; no analytics tool can measure that from your own traffic, and this report never implies it. The honest proxy is the pair it does show: rising crawls with flat clicks means AIs are reading you but not yet sending people. Crawling comes before citation, and citation comes before the click.
 </Info>
 
 ## Frequently asked questions
@@ -56,7 +74,13 @@ See [Filter your data](/analytics-filters), [Saved segments](/saved-analytics-se
     Yes. The AI traffic report works over all of your history the day you first open it, including traffic from before you knew to look for it. Attribution happens when the report is read rather than from a stored tag, so there's nothing to enable in advance.
   </Accordion>
   <Accordion title="Does the AI traffic report show AI crawlers reading my site?">
-    No. The AI traffic report counts click-throughs only — humans who followed a link from an AI assistant's answer. To see which AI crawlers read your pages, use the [Bots & AI crawlers report](/bot-ai-crawler-analytics). The report also can't see citations that are shown in an AI answer but never clicked.
+    Yes, in two places: the **AI Crawl Requests** card and the **AI visibility** section list AI-crawler requests by operator, and the landing table's **Crawled** column shows requests per page. Crawl requests are bot hits, never visits, and are never added to sessions. For the full crawler breakdown, use the [Bots & AI crawlers report](/bot-ai-crawler-analytics). The report still can't see citations that are shown in an AI answer but never clicked.
+  </Accordion>
+  <Accordion title="Why does the Crawled column not divide clicks by crawls?">
+    Because a crawl-to-click ratio would imply that crawling caused the clicks, and no first-party data can prove that. The two numbers are shown side by side because they correlate per page; the report states that one does not cause the other and deliberately shows no ratio.
+  </Accordion>
+  <Accordion title="What does &quot;first seen&quot; mean next to an assistant?">
+    The date of the first session that assistant ever sent to your site — all time, not just the selected window. The note appears only when that first-ever date falls inside the window you're viewing, so it marks a genuinely new assistant and never re-labels an established one.
   </Accordion>
   <Accordion title="How is a visitor counted if they arrive from ChatGPT and then browse my site?">
     Once, as ChatGPT. Each session is attributed to the assistant it entered from, so later pages in that visit don't create a second attribution. Paid AI visits keep their assistant label too — a paid ChatGPT visit still counts as ChatGPT.
@@ -67,13 +91,19 @@ See [Filter your data](/analytics-filters), [Saved segments](/saved-analytics-se
 
 <Columns cols={2}>
   <Card title="Bots & AI crawlers" icon="spider" href="/bot-ai-crawler-analytics">
-    See which AI crawlers read your site — the other half of the AI picture.
+    The full crawler breakdown — every bot and AI crawler reading your site.
+  </Card>
+  <Card title="Alerts" icon="bell" href="/analytics-alerts">
+    Get notified when AI's share of your traffic surges or drops.
   </Card>
   <Card title="Search Console" icon="magnifying-glass" href="/google-search-console-analytics">
     How people find you through Google Search.
   </Card>
   <Card title="Saved segments" icon="bookmark" href="/saved-analytics-segments">
     Save "arrived via AI" and apply it everywhere.
+  </Card>
+  <Card title="Scheduled reports" icon="envelope" href="/scheduled-analytics-reports">
+    The weekly email opens with an AI Traffic section.
   </Card>
   <Card title="Dashboard overview" icon="gauge" href="/web-analytics-dashboard">
     Where AI traffic fits among all your channels.

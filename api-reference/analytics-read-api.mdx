@@ -100,11 +100,16 @@ results. See [Analytics filters](/analytics-filters) for the dashboard equivalen
 | `GET /api/sites/{id}/live` | `{ "count" }` — distinct sessions active in the last 5 minutes. |
 | `GET /api/sites/{id}/overview` | `{ "current", "previous", "change" }` — the headline metrics, the previous equal-length period, and the percent change. |
 | `GET /api/sites/{id}/timeseries` | `{ "data": [{ "time", "value" }] }` — one `metric` bucketed over the range, zero-filled. |
-| `GET /api/sites/{id}/breakdown` | `{ "data": [{ "value", "count", "percentage", "pageviews" }] }` — the top values of one `dimension`. |
+| `GET /api/sites/{id}/timeseries/by-dimension` | `{ "data": [{ "value", "series": [{ "time", "value" }] }] }` — sessions per `bucket`, one series per top value of one session `dimension` (`limit` values, default 100, max 1000), ranked by total sessions. |
+| `GET /api/sites/{id}/breakdown` | `{ "data": [{ "value", "count", "percentage", "pageviews" }] }` — the top values of one `dimension`. Add `first_seen=true` to include each row's `firstSeen`. |
 | `GET /api/sites/{id}/sessions` | `{ "data": [ … ] }` — the paginated session list (`page`, `limit`), newest first. |
 | `GET /api/sites/{id}/events` | `{ "data": [ … ] }` — the custom-event list, or one event's property breakdown when you pass `event_name`. |
 
 `breakdown` accepts dimensions including `pathname`, `hostname`, `entry_page`, `exit_page`, `referrer`, `channel`, `country`, `region`, `city`, `browser`, `os`, `device_type`, `utm_*`, and `event_name`.
+
+`breakdown?first_seen=true` adds `firstSeen` to every row — a UTC datetime of the value's **all-time first appearance**, unrestricted by the date range (for example, the day an AI assistant first sent you a session). It works for **session dimensions only** — `hostname`, `referrer`, `channel`, `country`, `region`, `city`, `language`, `browser`, `operating_system`, `device_type`, `ai_assistant`, and the `utm_*` dimensions; a page or event dimension such as `pathname` or `event_name` returns `400`.
+
+`timeseries/by-dimension` is the per-value split of the sessions series: pass a required session `dimension` (the same list as `first_seen`), an optional `bucket`, and `limit` (default 100, max 1000) with the common date, time-zone, and `filters` parameters. It returns one series per top value, ranked by total sessions and **not folded** — there is no server-side "Other" row — and it does not accept `compare`. Series are not zero-filled: a bucket with no sessions for a value is simply absent from that value's series. Both endpoints use the same API-key authentication and the `analytics:read` scope as every other read on this page.
 
 Three **composite dimensions** group by host and path together, for sites serving one path from several hostnames: `pathname_host`, `entry_page_host`, and `exit_page_host`. Their rows carry `hostname` and `pathname` as separate fields alongside the standard `value`, `count`, `percentage`, and `pageviews`, so you can read either part without parsing `value`. Hostnames are lowercased when grouped. See [Pages](/page-analytics) for the dashboard equivalent.
 
@@ -112,7 +117,7 @@ For raw events, `GET /api/sites/{id}/events/log` returns individual events with 
 
 ## Where are the rest of the endpoints?
 
-These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **153 published endpoints across 30 groups**—every one with its full path, method, and parameters:
+These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **155 published endpoints across 30 groups**—every one with its full path, method, and parameters:
 
 <Columns cols={2}>
   <Card title="Overview" icon="gauge" href="/api-reference/overview/get-overview">
@@ -149,10 +154,10 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
     No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-authentication) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
   </Accordion>
   <Accordion title="How do I find an endpoint's exact parameters and response?">
-    For **parameters**, use the **Endpoints** section of this reference—153 published endpoints across 30 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
+    For **parameters**, use the **Endpoints** section of this reference—155 published endpoints across 30 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
   </Accordion>
   <Accordion title="Does TinyAnalytics have an API for goals, funnels, or feature flags?">
-    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 153 playground-backed endpoints across 30 groups; workflow reads are not listed in the playground yet.
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 155 playground-backed endpoints across 30 groups; workflow reads are not listed in the playground yet.
   </Accordion>
   <Accordion title="Can I compare a date range against the previous period?">
     Yes. Comparison-capable reads accept `previous_weekday`, `previous`, `year`,
