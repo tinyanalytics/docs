@@ -1075,14 +1075,15 @@ Published count 153/154 → **155** endpoints across 30 groups (`analytics-read-
 **Not documented, deliberately:** the by-dimension endpoint's and bots rows' response bodies
 (the reference documents requests only, as before); the MCP tool count (unchanged).
 
-**Current sync marker:** product commit `2248ac5` (AI Traffic v2 wave, decision 0304, audited
-through PR1 `259f3a0` + PR3 `6a3ecc1` + PR2 `123f766` + the follow-up `2248ac5` — sparkline
-zero-fill, mobile first-seen note, extract-script key order; `Public docs impact: none`, so no
-page changed for it) — **NOT yet deployed to production**
-(prod remains on `9e25fc5`, the 2026-08-15 /qa wave). The paired pages are validated (mint
-validate + broken-links green) so the 0276 gate is met on the docs side; the marker records what
-is *audited*, and the deployment record should be added here when the wave ships. Prior marker
-`8c85147` (pages entry/exit, deployed 2026-08-13).
+**Current sync marker:** product commit `b1fca69` (AI Traffic v2 wave, decision 0304, audited
+through PR1 `259f3a0` + PR3 `6a3ecc1` + PR2 `123f766` + follow-ups `2248ac5` + the production
+QA fixes `b1fca69`) — **DEPLOYED to production 2026-08-19**: `2248ac5` full stack with
+migration 0058, then `b1fca69` web-only after a `/qa` pass on real traffic. That pass corrected
+one statement on `ai-referral-traffic-analytics.mdx` (`9f1aab9`): the aggregate view no longer
+offers drag-to-zoom — it now sums the per-assistant data, so its total always matches the AI
+Sessions card — and a row's change column appears only when a comparison period is on. The
+paired pages are validated (mint validate + broken-links green): the 0276 gate is met on both
+sides for this wave. Prior marker `8c85147` (pages entry/exit, deployed 2026-08-13).
 
 ---
 
