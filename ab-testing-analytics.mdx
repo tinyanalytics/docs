@@ -5,13 +5,19 @@ description: "Compare feature-flag variants against a goal, then measure convers
 icon: "flask"
 ---
 
-An experiment tells you which variant of a feature actually converts better — not which one you *think* wins. You point an experiment at a [multivariate feature flag](/feature-flag-analytics) and a [goal](/conversion-goal-tracking), and TinyAnalytics counts conversions for each variant, computes the lift over your control, and tells you when the difference is statistically significant.
+An experiment tells you which variant of a feature actually converts better — not which one you *think* wins. You connect an experiment to a [multivariate feature flag](/feature-flag-analytics) and a [goal](/conversion-goal-tracking), and TinyAnalytics counts conversions for each variant, computes the lift over your control, and tells you when the difference is statistically significant.
 
 ## Before you start
 
 - A **multivariate feature flag** with the variants you want to test (for example `control` and `treatment`).
-- A **goal** that defines the conversion you care about — a signup, a purchase, a key page view.
+- A conversion you want to measure — a signup, a purchase, or a key page view. You can select an existing goal, create one in the experiment wizard, or add one later.
 - Your app calls `window.tinyanalytics.flag()` where the visitor experiences the variant. This is what makes the measurement accurate.
+
+## How do I choose the experiment goal?
+
+In the experiment wizard, choose **Create a new goal**, **Use existing**, or **Skip for now**. A new goal can match a page path or a custom event. For an event goal, start typing to filter event names recorded in the dashboard's current date range; you can still enter a new name that has no data in that range.
+
+Skipping lets you create the experiment and attach its primary goal later. Conversion, lift, and significance results need a goal before TinyAnalytics can calculate them.
 
 ## How does an experiment count conversions?
 

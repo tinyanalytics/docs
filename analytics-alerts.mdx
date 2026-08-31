@@ -70,7 +70,7 @@ An **Exit rate** alert always watches exactly one page: its **Exit page** field 
 
 An **AI share of traffic** alert is site-wide and stays **silent** when the window holds fewer than **10 sessions** — too small a sample to call a share; it neither fires nor reports 0%. It accepts only session-level scopes (a channel, country, entry page, or a saved segment of that kind); event-level filters such as a page path are rejected, so the **Page path** field is hidden for this metric. Unlike exit rate, it has no settling delay.
 
-For **Event count** or **Event users**, enter the event name and optionally add up to five property filters. Property filters use exact key/value matches, all joined with **AND**. For example, an event-users alert can watch distinct users who fired `checkout_failed` with both `plan = pro` and `country = DE`.
+For **Event count** or **Event users**, search up to 100 custom events seen in the last 30 days; the suggestions show how often each event occurred. You can still enter a new name. An amber “not seen” message warns that the exact name has not appeared recently without blocking the alert. Optionally add up to five property filters. Property filters use exact key/value matches, all joined with **AND**. For example, an event-users alert can watch distinct users who fired `checkout_failed` with both `plan = pro` and `country = DE`.
 
 <Warning>
   A saved segment overrides the inline page-path scope; they do not combine.

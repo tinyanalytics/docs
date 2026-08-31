@@ -1109,6 +1109,73 @@ DEPLOYED 2026-08-31. Prior marker `b1fca69` (AI Traffic v2, deployed 2026-08-19)
 
 ---
 
+## 10p. Product-sync pass (2026-08-31 — Guides authoring UX)
+
+Audited all three product commits after `f0f65f90` through `429208e8`:
+
+- **`65169018`** — deployment automation now recreates Caddy when its configuration changes and
+  records the `f0f65f90` release. **Public docs impact: none.** This is operator-only release
+  machinery; the onboarding guide was already documented as deployed in §10o.
+- **`16221f0`** — the Guides authoring follow-up to decision 0311. Updated
+  `onboarding-guides.mdx` for the direct **Preview on my site** action, draft-save-before-preview,
+  the picker’s automatic **Use this selector** return with Copy fallback, the exact picker query,
+  recent-event suggestions with counts, and the centered-step editor behavior. Updated
+  `conversion-goal-tracking.mdx` and `analytics-alerts.mdx` for the shared last-30-day event picker
+  and its non-blocking unseen-name message. Updated `funnel-analytics.mdx` and
+  `ab-testing-analytics.mdx` for their dashboard-range event suggestions; the Experiments page also
+  now states that you can create, select, or postpone the primary goal in the wizard.
+- **`429208e8`** — deployment release row for `16221f0`. **Public docs impact: none** beyond
+  confirming that the behavior above is deployed.
+
+Closed the explicitly deferred 0305 public-doc gap carried into §10o:
+`b2b-account-analytics.mdx` now explains that the accounts list follows the dashboard date range
+while an account page shows **All time** totals. The owning product change is `0c623d9`, deployed in
+the `d5659d4` wave on 2026-08-20. This correction does not change the marker boundary; it repairs a
+gap that was recorded before `f0f65f90` advanced it.
+
+No product API Playground registry, route, schema, or navigation entry changed in this pass, so
+`openapi.json` and `docs.json` remain unchanged.
+
+**Current sync marker:** product commit `429208e80dda99433118897883d0005851eb0426`
+(`docs(wiki): deployment release row for 16221f0`, 2026-08-31). The deployed customer application
+commit at this marker is `16221f06566f98e8a88efb222dde0063dd5225ae`.
+
+---
+
+## 10q. Product-sync pass (2026-08-31 — Guides agent surface)
+
+Product commit `56a5ebfd` (PR #16 squash) — **DEPLOYED to production 2026-08-31**. The squash
+carries three logical changes (two rode along from unpushed local-main work, content-verified
+identical to the branch tip before merge):
+
+- **Guides agent surface (decision 0311 second amendment).** Six MCP tools
+  (`list_guides`, `get_guide_stats`, `get_guide_step_stats`, `create_guide`, `update_guide`,
+  `delete_guide` — soft archive, behind the destructive gate) take the catalog 58 → 64 tools
+  (51 → 56 default). Updated `api-reference/mcp-server.mdx` (counts in three places, the
+  gated-actions count seven → eight, and an "Onboarding guides" row in the tools-by-task table),
+  added a "Can I manage guides from the API or an AI agent?" section to `onboarding-guides.mdx`
+  (REST/MCP table, lifecycle semantics, minimal create body), and regenerated `openapi.json` with
+  the new **Guides** category (`scripts/generate-openapi.ts` gained it in `PUBLIC_CATEGORIES` +
+  `CATEGORY_DESCRIPTIONS`). Dogfooded live post-deploy with a scoped `guides:read|write` key:
+  the key's catalog is exactly the six guide tools, `create_guide` → `update_guide` launch →
+  `list_guides` → `get_guide_stats` → `delete_guide` all succeeded, and a non-guide tool was
+  refused. The dogfood guide was archived and the key revoked.
+- **`0e19c7a2` public-share viewer fix** (hide Site Settings and the account menu from anonymous
+  public viewers). **Public docs impact: none** — no public-dashboards page documents those
+  controls.
+- **`b9e90946` deploy tooling** (tolerate missing `CF_*` keys in the `.env` fallback) and its
+  release row. **Public docs impact: none** — operator-only release machinery.
+
+Also in this commit: a docs-internal anchor fix in `verify-tinyanalytics-installation.mdx`
+(`#when-is-windowtinyanalytics-available` → `#when-can-i-call-the-event-api`), unbound to any
+product commit. `mint validate` and `mint broken-links` both pass.
+
+**Current sync marker:** product commit `56a5ebfd67a32d46a60a28111b4758a32ef8a326`
+(guides agent surface, decision 0311 second amendment) — DEPLOYED 2026-08-31. The deployed
+customer application commit at this marker is the same `56a5ebfd`.
+
+---
+
 ## 11. Assumptions & open questions
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |

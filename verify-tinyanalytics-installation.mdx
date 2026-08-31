@@ -61,7 +61,7 @@ If `script.js` is missing, the snippet isn't on the page. If `script.js` loads b
   </Accordion>
   <Accordion title="My custom events don't appear" icon="hand-pointer">
     - The event name can't be empty — an empty name is rejected.
-    - The call must run after the script loads. If you call `event()` very early in the page, guard it with `if (window.tinyanalytics)`. See [track custom events](/custom-event-tracking#when-is-windowtinyanalytics-available).
+    - The call must run after the script loads. If you call `event()` very early in the page, guard it with `if (window.tinyanalytics)`. See [track custom events](/custom-event-tracking#when-can-i-call-the-event-api).
   </Accordion>
   <Accordion title="A specific path isn't being tracked" icon="filter">
     Check your tracking script for `data-skip-paths` — a path matching a skip pattern is never tracked. If a path shows up under a pattern like `/orders/*` instead of its real value, that's `data-mask-paths` working as intended to hide sensitive URLs. See [hide sensitive paths](/configure-tinyanalytics-tracking-script#hide-sensitive-paths-with-skip-and-mask).

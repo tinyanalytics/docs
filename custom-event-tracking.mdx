@@ -36,7 +36,7 @@ window.tinyanalytics.event('purchase', {
 
 Pick a small set of event names and reuse them. Put the things that vary into properties rather than encoding them in the name, so `purchase` with `{ plan: 'pro' }` and `{ plan: 'free' }` stay one event you can compare.
 
-## When is window.tinyanalytics available?
+## When can I call the event API?
 
 The tracking script loads with `defer`, so `window.tinyanalytics` becomes available after the page's HTML has parsed. Calls made in response to user actions — clicks, form submits, route changes — are always safe, because they happen well after load.
 

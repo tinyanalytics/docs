@@ -9,6 +9,31 @@ project adheres to semantic versioning where practical.
 
 ### Added
 
+- **Guides agent surface (2026-08-31, product decision 0311 second amendment, product commit
+  `56a5ebfd`, deployed 2026-08-31):** guides are creatable and manageable by AI agents and scripts.
+  `api-reference/mcp-server.mdx` moves to the true catalog (64 tools, 56 default, eight gated
+  actions) and gains an "Onboarding guides" row in the tools-by-task table; `onboarding-guides.mdx`
+  gains "Can I manage guides from the API or an AI agent?" (REST/MCP table, launch/stop via
+  `update_guide` lifecycle fields, minimal create body); `openapi.json` regenerated with the new
+  **Guides** category (`scripts/generate-openapi.ts` `PUBLIC_CATEGORIES` + description). Verified
+  live with a scoped `guides:read|write` key: exactly the six guide tools advertised,
+  create → launch → list → stats → archive all succeeded, non-guide tools refused.
+- **Guide authoring UX (2026-08-31, product decision 0311, product commit `16221f0`, deployed
+  2026-08-31):** `onboarding-guides.mdx` now follows the shipped **Preview on my site** action,
+  draft-save-before-preview behavior, automatic **Use this selector** return, Copy fallback, and
+  centered-step controls. Goals and event alerts document the searchable last-30-day event picker
+  with counts and its non-blocking unseen-name message; Funnels and Experiments document their
+  current-date-range event suggestions, and the Experiments page now covers creating, selecting,
+  or postponing its primary goal. Navigation and the generated API reference are unchanged.
+
+- **Account page scope FAQ (2026-08-19, product decision 0305, product commit `0c623d9`, deployed
+  2026-08-20 as `d5659d4`):** `b2b-account-analytics.mdx` gains "Why does an account's page show more sessions
+  than the accounts list?" — the accounts list is scoped to the dashboard date range, an individual
+  account's page always shows its full history under an **All time** heading. The page had never
+  stated the detail scope at all, which a production QA pass surfaced as a real reader gap (an
+  account reading 1 session under "Today" opens on 58). `mint validate` and `mint broken-links`
+  both pass.
+
 - **AI Traffic v2 — the GEO report (2026-08-19, product decision 0304, product commits `8f8a14f`,
   `259f3a0`, `6a3ecc1`, `123f766`; not yet deployed):** `ai-referral-traffic-analytics.mdx`
   rewritten for the six-section report — five stat cards incl. **AI Crawl Requests** ("bot hits ·

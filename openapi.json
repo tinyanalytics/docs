@@ -122,6 +122,11 @@
       "description": "In-product surveys and their responses."
     },
     {
+      "name": "guides",
+      "x-group": "Guides",
+      "description": "Onboarding checklists and product tours — create, launch, and measure them."
+    },
+    {
       "name": "feature-flags",
       "x-group": "Feature Flags",
       "description": "Feature flags, their rollout rules, and flag evaluation for a given user."
@@ -9019,6 +9024,443 @@
             "schema": {
               "type": "integer"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/guides": {
+      "get": {
+        "operationId": "get-sites-site-guides",
+        "summary": "List Guides",
+        "description": "Returns all onboarding guides (checklists + tours) for the site",
+        "tags": [
+          "guides"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      },
+      "post": {
+        "operationId": "post-sites-site-guides",
+        "summary": "Create Guide",
+        "description": "Creates a guide as a draft — launch via Update Guide startDate. Steps must match type. Requires manage role.",
+        "tags": [
+          "guides"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "steps": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "eventName": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "conditions": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "urlMatchType": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "name": "Get started checklist",
+                "type": "checklist",
+                "steps": [
+                  {
+                    "id": "task-1",
+                    "title": "Invite your team"
+                  },
+                  {
+                    "id": "task-2",
+                    "title": "Create your first funnel",
+                    "eventName": "funnel_created"
+                  }
+                ],
+                "conditions": {
+                  "url": "/app",
+                  "urlMatchType": "contains"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sites/{site}/guides/{guideId}": {
+      "put": {
+        "operationId": "put-sites-site-guides-guideId",
+        "summary": "Update Guide",
+        "description": "Partial update including lifecycle (startDate = launch, endDate = stop, archived = archive/restore). Steps replace wholesale when sent.",
+        "tags": [
+          "guides"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "guideId",
+            "in": "path",
+            "required": true,
+            "description": "Example: Guide ID.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "startDate": {
+                    "type": "string"
+                  },
+                  "endDate": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "startDate": "2026-09-01T09:00:00.000Z",
+                "endDate": null
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-sites-site-guides-guideId",
+        "summary": "Delete Guide",
+        "description": "Soft-archives the guide (restorable via Update Guide archived:false)",
+        "tags": [
+          "guides"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "guideId",
+            "in": "path",
+            "required": true,
+            "description": "Example: Guide ID.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/guides/{guideId}/stats": {
+      "get": {
+        "operationId": "get-sites-site-guides-guideId-stats",
+        "summary": "Get Guide Stats",
+        "description": "Started / completed / dismissed counts and completion rate",
+        "tags": [
+          "guides"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "guideId",
+            "in": "path",
+            "required": true,
+            "description": "Example: Guide ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/guides/{guideId}/steps": {
+      "get": {
+        "operationId": "get-sites-site-guides-guideId-steps",
+        "summary": "Get Guide Step Stats",
+        "description": "Per-step funnel — where visitors drop off inside the guide",
+        "tags": [
+          "guides"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "guideId",
+            "in": "path",
+            "required": true,
+            "description": "Example: Guide ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
           }
         ],
         "responses": {

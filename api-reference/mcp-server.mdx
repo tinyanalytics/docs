@@ -1,7 +1,7 @@
 ---
 title: "Connect an AI Agent with the MCP Server"
 sidebarTitle: "MCP server"
-description: "Connect Claude Code, Cursor, VS Code, or Codex to TinyAnalytics over MCP with a scoped API key and 57 tools for analytics and setup."
+description: "Connect Claude Code, Cursor, VS Code, or Codex to TinyAnalytics over MCP with a scoped API key and 64 tools for analytics and setup."
 icon: "plug"
 noindex: true
 
@@ -28,8 +28,8 @@ Model Context Protocol (MCP) is an open standard that lets AI applications call 
 
 ## What can an agent do through MCP?
 
-The complete server catalog contains **57 tools** in nine domains. A full-access key receives the
-**50 default tools**. A restricted key receives only the tools allowed by its selected resources;
+The complete server catalog contains **64 tools** in ten domains. A full-access key receives the
+**56 default tools**. A restricted key receives only the tools allowed by its selected resources;
 an explicit matching write grant can also expose the catalog's gated configuration or delete tool
 for that resource.
 
@@ -39,6 +39,7 @@ for that resource.
 | **Site health** | Core Web Vitals, JavaScript errors, and bot and AI-crawler traffic |
 | **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, user-trait reads (`get_user_traits`: keys, values of one key, or users matching key=value), and profile-trait management (`merge_user_traits` sets only the keys you send; `update_user_traits` replaces all traits) |
 | **Measurement setup** | Goals, funnels (including analysis without saving), custom SQL dashboards, and chart annotations |
+| **Onboarding guides** | Create a checklist or product tour (`create_guide` — it starts as a draft), launch, stop, or restore it (`update_guide` lifecycle fields), list guides, and read started/completed/dismissed counts plus the per-step funnel (`get_guide_stats`, `get_guide_step_stats`) |
 | **Anything else** | A read-only SQL query over your own event data, with the schema available as a tool |
 | **Getting started** | Create a site, get its tracking snippet, check whether tracking is live — optionally probing for an `identify()` trait key with `check_tracking`'s `trait_key` argument — and get the dashboard link |
 
@@ -207,8 +208,8 @@ Connecting an agent gives it your key's access. Understand these points before y
 <AccordionGroup>
   <Accordion title="What is the TinyAnalytics MCP server?">
     It's an endpoint at `https://dash.tinyanalytics.io/api/mcp` that exposes a
-    57-tool catalog over the Model Context Protocol. A full-access key receives
-    50 default tools; a restricted key receives the subset allowed by its
+    64-tool catalog over the Model Context Protocol. A full-access key receives
+    56 default tools; a restricted key receives the subset allowed by its
     scopes and may receive matching gated actions when you explicitly grant
     write access. Connect Claude Code, Cursor, VS Code, or Codex CLI with your
     API key, then ask questions in plain language.
@@ -222,8 +223,8 @@ Connecting an agent gives it your key's access. Understand these points before y
   <Accordion title="Can an agent delete my analytics data?">
     Only if you explicitly give a restricted key the matching write scope. For
     example, **Sites: Write** can expose site configuration and deletion, while
-    **Users: Write** can expose user erasure. A full-access key receives 50
-    default tools that omit the seven gated configuration/delete actions. Use a
+    **Users: Write** can expose user erasure. A full-access key receives 56
+    default tools that omit the eight gated configuration/delete actions. Use a
     restricted read-only key for analysis-only agents.
   </Accordion>
   <Accordion title="How is this different from Ask AI inside TinyAnalytics?">

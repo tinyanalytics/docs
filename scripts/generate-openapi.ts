@@ -69,6 +69,7 @@ const PUBLIC_CATEGORIES = new Set([
   "Alerts",
   "Annotations",
   "Surveys",
+  "Guides",
   "Feature Flags",
   "Experiments",
   "Dashboards",
@@ -157,6 +158,8 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   Annotations:
     "Dated notes drawn on your dashboard charts to mark what changed.",
   Surveys: "In-product surveys and their responses.",
+  Guides:
+    "Onboarding checklists and product tours — create, launch, and measure them.",
   "Feature Flags":
     "Feature flags, their rollout rules, and flag evaluation for a given user.",
   Experiments: "A/B experiments built on feature flags, and their results.",
