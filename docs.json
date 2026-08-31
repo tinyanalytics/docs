@@ -1239,6 +1239,7 @@
                   "feature-flag-analytics",
                   "ab-testing-analytics",
                   "product-feedback-surveys",
+                  "onboarding-guides",
                   "custom-analytics-dashboards",
                   "sql-analytics-query-builder",
                   "b2b-account-analytics"

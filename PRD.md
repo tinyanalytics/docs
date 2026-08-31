@@ -1087,6 +1087,28 @@ sides for this wave. Prior marker `8c85147` (pages entry/exit, deployed 2026-08-
 
 ---
 
+## 10o. Product-sync pass (2026-08-31 — User onboarding guides, decision 0311)
+
+Product commit `f0f65f90` (PR #14, squash of 17 branch commits) — **DEPLOYED to production
+2026-08-31**, full stack with migration 0059 (verified applied: `guides` + `guide_progress`
+tables, `sites.guides_enabled` default false). The guides wave: checklists + tours built from
+the dashboard, event-driven task auto-completion, element-anchored tour steps with the
+"Pick on my site" selector picker, `?ta_preview_guide=` preview, per-step funnel analytics,
+cross-device progress for identified users. Documented in the new `onboarding-guides.mdx`
+(sibling of `product-feedback-surveys.mdx`, nav entry after it), validated with mint validate
++ broken-links green.
+
+Intermediate product deploys since the prior marker (through the `c8a3a8f` speed wave,
+2026-08-27) were perf/internal/QA work with `Public docs impact: none` recorded in the product
+CHANGELOG; the 0305 group-analytics docs page is in flight separately in this repo (pending
+its own product commit). The guides squash also carried 5 pre-existing alerts-dialog QA fixes —
+no public-docs impact.
+
+**Current sync marker:** product commit `f0f65f90` (user onboarding guides, decision 0311) —
+DEPLOYED 2026-08-31. Prior marker `b1fca69` (AI Traffic v2, deployed 2026-08-19).
+
+---
+
 ## 11. Assumptions & open questions
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |

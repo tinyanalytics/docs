@@ -1,0 +1,115 @@
+---
+title: "Onboarding Checklists and Product Tours"
+sidebarTitle: "Guides"
+description: "Guide new users with in-app checklists and step-by-step tours — tasks that auto-complete from your custom events, with per-step funnel analytics."
+icon: "list-check"
+---
+
+A guide walks your visitors through your product without sending them anywhere — a checklist of getting-started tasks, or a tour of tooltips anchored to elements on the page — using a widget TinyAnalytics shows inside your site. You build the guide in the dashboard. Delivery, targeting, and analytics all work off your existing [tracking snippet](/install-tinyanalytics-tracking-script), so there's **no extra code to add**.
+
+## What are the two guide types?
+
+| Type | What it is | Best for |
+| --- | --- | --- |
+| **Checklist** | a persistent launcher that opens a task panel | self-paced onboarding ("Create your first project", "Invite a teammate") |
+| **Tour** | a sequence of tooltips, each anchored to an element on the page | a guided walkthrough of one screen or flow |
+
+A tour step carries a title, a body, an optional call-to-action button, and an optional CSS selector to anchor to. You pick a preferred placement (top, bottom, left, or right) and how the step advances: the **Next** button, or **clicking the anchored element** itself. If an anchor selector matches nothing on the page, the step renders as a centered modal instead, so a layout change never breaks the tour.
+
+<Note>
+  Guide content renders as **plain text only** — the widget never interprets HTML, so a guide can't inject markup into your page.
+</Note>
+
+## How do I turn guides on?
+
+Enable guides for the site first under **Settings → Tracking**. Guides are **off by default** for a new site, and until you enable them, creating a guide alone won't put anything in front of visitors — the widget code never loads. This keeps the tracker lean for sites that don't use guides.
+
+## How do I create a guide?
+
+From the site's **Guides** page, choose **New guide**, pick **Checklist** or **Tour**, and build the steps in the editor dialog. Each guide can have up to 20 steps, and a site can have up to 20 active guides.
+
+- **Tour steps** — title, body, optional CTA (an `https://` link), optional anchor selector, placement, and advance trigger.
+- **Checklist tasks** — title, optional description, an optional link the task opens when tapped, and an optional custom event that completes the task automatically (below).
+
+The editor shows a live preview of the widget as you build. To see the guide on your real site, use the **preview URL** the editor gives you — opening your site with `?ta_preview_guide=<id>` in the address renders that exact draft with a **Preview** badge. Preview mode records nothing: no events, no stored progress.
+
+## How do tasks auto-complete from events?
+
+A checklist task can name one of your [custom events](/custom-event-tracking). When a visitor has fired that event, the task checks itself off — **no instrumentation beyond the event itself**, which you're usually sending already. The check works across devices for visitors you've [identified](/user-identification-analytics), and looks back over the last 180 days of their events.
+
+If you name an event that hasn't been sent yet, the task simply waits for it — you can build the checklist before the feature ships.
+
+## How does the selector picker work?
+
+Instead of hand-writing a CSS selector for a tour step, choose **Pick on my site** in the step editor. This opens your own site in picker mode (`?ta_pick_selector`): the page dims, elements highlight as you hover, and clicking one generates the selector for you to confirm and copy back into the step. Fragile selectors (ones likely to break on a redesign) are flagged.
+
+The picker runs on your live site, so it needs your tracking snippet installed there and guides enabled for the site. Both the guides widget and the picker are served from the same TinyAnalytics host as your snippet.
+
+## Who sees a guide, and when?
+
+Guides use the same targeting conditions as [surveys](/product-feedback-surveys). A guide can be limited by:
+
+- **URL** — show it only on matching pages (exact, contains, does-not-contain, or regex).
+- **CSS selector** — require a specific element to be present on the page.
+- **Device type** — desktop, mobile, or tablet.
+- **Wait period** — don't show it again to the same visitor for a number of days.
+
+At most one tour and one checklist appear per page load — the first eligible of each wins — and a guide never stacks on top of an open survey. Guides evaluate once when the page loads; they don't re-appear on client-side navigation within a single-page app.
+
+A visitor who finishes or dismisses a guide never sees it again. Dismissing a tour is final (the **Esc** key or the dismiss action); a checklist's **Esc** only collapses its panel — dismissing a checklist for good is the explicit **Dismiss** button.
+
+## What do the guide analytics show?
+
+The guide's results view reports over a rolling 30-day window:
+
+- **Starts, completions, and dismissals** — unique runs through the guide, with the completion rate counted per person.
+- **A per-step funnel** — how far visitors progress, step by step, so you can see exactly where a tour loses people.
+
+Guide interactions also arrive as ordinary events (`guide_started`, `guide_step_completed`, `guide_completed`, and so on) that you can explore in the [events explorer](/event-analytics) alongside everything else.
+
+## What is the privacy posture?
+
+Anonymous visitors' progress never leaves their browser — it's held in local storage on their device. Progress is stored server-side only for visitors your site [identifies](/user-identification-analytics), keyed on the identified user ID you provided, so an identified user's checklist follows them across devices. Server-side progress is covered by the standard [GDPR erasure](/resources/privacy-friendly-analytics-gdpr) flow — deleting a user deletes their guide progress too.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why isn't my guide showing on my site?">
+    Guides are **off by default** for a new site, so check that guides are enabled under **Settings → Tracking**. Also check the guide's targeting rules — URL, CSS selector, device type, and wait period all limit who sees it — and that the visitor hasn't already completed or dismissed the guide, which is final.
+  </Accordion>
+  <Accordion title="Do I need to add code to my site to run a guide?">
+    No. TinyAnalytics guides need **no extra code beyond your tracking snippet**. You build the guide in the dashboard, and the widget, targeting, and analytics all work off the [tracking snippet](/install-tinyanalytics-tracking-script) you already installed. Task auto-completion reuses the custom events you already send.
+  </Accordion>
+  <Accordion title="What happens when I edit a guide that people are partway through?">
+    In-progress runs keep going. A visitor resumes at their first incomplete step, and if an edit deleted the step they were on, they resume at the next sensible point instead of the tour breaking. A tour keeps its run identity across edits, so your funnel analytics stay continuous.
+  </Accordion>
+  <Accordion title="Do guides work in single-page apps?">
+    Guides evaluate once per page load and don't re-evaluate on client-side navigation. A guide targeted at one SPA route appears when the visitor loads that route directly or reloads on it.
+  </Accordion>
+  <Accordion title="Can I preview a guide without publishing it?">
+    Yes. Open your site with `?ta_preview_guide=<id>` (the editor gives you the URL) to render that draft with a **Preview** badge — including archived or unpublished guides. Preview mode records no events and stores no progress.
+  </Accordion>
+  <Accordion title="What happens to a visitor's progress when they log in?">
+    Identified users get server-side progress keyed on their identified ID, so their checklist and tour state follows them across devices and merges with what they did anonymously. Progress from two devices merges — completed tasks union together, and a dismissal on any device wins.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+<Columns cols={2}>
+  <Card title="Surveys" icon="comment-dots" href="/product-feedback-surveys">
+    Ask visitors targeted questions with the same delivery chassis.
+  </Card>
+  <Card title="Custom events" icon="bolt" href="/custom-event-tracking">
+    The events that auto-complete checklist tasks.
+  </Card>
+  <Card title="Identify users" icon="user" href="/user-identification-analytics">
+    Give visitors a stable ID so progress follows them across devices.
+  </Card>
+  <Card title="Events explorer" icon="magnifying-glass-chart" href="/event-analytics">
+    Explore the guide interaction events your widget emits.
+  </Card>
+  <Card title="Install the tracking script" icon="code" href="/install-tinyanalytics-tracking-script">
+    The one snippet that powers guides, surveys, and analytics.
+  </Card>
+</Columns>
