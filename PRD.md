@@ -1174,6 +1174,29 @@ product commit. `mint validate` and `mint broken-links` both pass.
 (guides agent surface, decision 0311 second amendment) — DEPLOYED 2026-08-31. The deployed
 customer application commit at this marker is the same `56a5ebfd`.
 
+## 10r. Product-sync pass (2026-09-01)
+
+Audited product commits `56a5ebfd..a5dd482a` (the /qa data-accuracy wave, deployed 2026-09-01):
+
+- **`077a9ec` Viewed Page filter (decision 0312)** — new pageview-scoped path dimension; the
+  Pages-card row drill now applies it so filtered numbers equal the clicked row. Documented in
+  `analytics-filters.mdx` ("What is a filter made of?"): a new paragraph distinguishing
+  **Viewed Page** (pageviews only, what a Pages-row click applies) from **Path** (any event
+  carrying the path).
+- **`a5dd482` Viewed URL filter (decision 0313)** — the URL-mode sibling over the host+path pair;
+  the URLs-card row drill applies it. Same paragraph extended: matches the pair on a single
+  pageview, so it never mixes a host from one page with a path from another.
+- **`5c54db1` breakdown truncation hint** ("top 100 ·" header on full lists) and **`3be6ec7`
+  Entrances/Exits column labels**. **Public docs impact: none beyond the above** — no docs page
+  enumerates the dashboard cards' column headers or list lengths; the filters page is the only
+  surface that names dimensions.
+
+`mint validate` and `mint broken-links` pass; anchor and component audits clean.
+
+**Current sync marker:** product commit `a5dd482ab475cbb129775de32f22331ed86b6134`
+(/qa data-accuracy wave: viewed_page 0312 + viewed_url 0313 + list-header honesty) — DEPLOYED
+2026-09-01. The deployed customer application commit at this marker is the same `a5dd482a`.
+
 ---
 
 ## 11. Assumptions & open questions
