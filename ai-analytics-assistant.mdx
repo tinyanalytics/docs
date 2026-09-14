@@ -9,8 +9,11 @@ Ask AI lets you explore TinyAnalytics in plain language. It reads the same repor
 power the dashboard, keeps the site, organization, date range, filters, and permissions explicit,
 and links you back to the report behind an answer.
 
-Use **Ask AI** in the dashboard header, press **⌘J**, or open **Ask AI** from site or organization
-navigation for a full-page conversation. Supported report headers also offer **Explain this report**.
+Use the **Browse | Chat** switch at the top of the sidebar to move between your dashboards and the
+full-page Ask AI conversation for the current site or organization. Away from the chat pages, press
+**⌘J** or use **Ask AI** in the dashboard header to open the assistant as a quick drawer; on a chat
+page, **⌘J** focuses the composer instead. Supported report headers also offer **Explain this
+report**.
 
 ## What can Ask AI do?
 
@@ -106,15 +109,23 @@ comparison you care about when they are not already clear from the conversation.
 
 Ask AI uses your existing TinyAnalytics permissions:
 
-- You must be a member of the site or organization. A public-dashboard viewer cannot use the assistant.
+- You must be a member of the site or organization. A public-dashboard viewer cannot use the
+  assistant; opening its chat page asks you to sign in.
 - A team-restricted member can query only the sites that team grants them.
 - Owners and admins can enable or disable AI features under **Settings → Organization**.
 - Write tools appear only to roles that can manage the target, and every persistent change requires
   an explicit approval step.
 
-Ask AI stores your conversation history so you can reopen, rename through the generated title, or
-delete a thread. The full-page view groups past conversations by date. Each answer supports copy,
-feedback, regeneration of the latest answer, and suggested follow-up questions.
+Ask AI stores your conversation history so you can reopen or delete a thread. On the chat pages the
+sidebar lists past conversations grouped by date, and the active conversation lives in the page URL,
+so you can reload, bookmark, or share a link to a thread. A link to a deleted conversation starts a
+new thread and tells you why; switching sites or organizations never carries a thread into the wrong
+scope. Each answer supports copy, feedback, regeneration of the latest answer, and suggested
+follow-up questions.
+
+The drawer's **Open full page** button carries the active conversation into the full-page view. It
+stays unavailable while an answer is streaming, because navigating away stops the answer in
+progress; once the answer completes, the full page picks the thread up where the drawer left it.
 
 ## How do AI credits and my Anthropic key work?
 

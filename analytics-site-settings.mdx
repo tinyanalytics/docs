@@ -1,7 +1,7 @@
 ---
 title: "Analytics Site Settings"
 sidebarTitle: "Site settings"
-description: "Manage a TinyAnalytics site: its name, reporting settings, Stripe integration, visibility, traffic exclusions, organization, and deletion."
+description: "Manage a TinyAnalytics site: its name, reporting settings, app modules and tracker tools, Stripe integration, visibility, traffic exclusions, organization, and deletion."
 icon: "gear"
 ---
 
@@ -45,6 +45,26 @@ Setting a zone makes it canonical for the whole team, so two teammates in differ
 ## Who can see my dashboard?
 
 The **Public Dashboard** toggle controls who can see your analytics. Off (the default) keeps the dashboard private to your team; on makes it viewable by anyone with the link. For a shareable link that doesn't make everything public, use a private link instead — see [public dashboards](/public-analytics-dashboards) and [embedding a dashboard](/embed-analytics-dashboard).
+
+## Which apps and tracker tools are active?
+
+Open **Settings → Apps** to activate optional per-site modules. The tab has two groups:
+
+- **Navigation modules** — Site Health (Core Web Vitals, JavaScript errors, bot traffic),
+  Experimentation (A/B experiments, feature flags, surveys, onboarding guides), Scheduled
+  Reports, Alerts, Workflows, and Data Tools (data dictionary, custom query, API playground).
+  These switches are cosmetic visibility only: a hidden module leaves the sidebar, its direct
+  links keep working and show an activation banner, and nothing — no data, no configuration —
+  is ever deleted by turning a module off. All six are off by default for a newly created
+  site; sites created before the tab existed keep every module on.
+- **Tracker tools** — Surveys, Onboarding guides, Heatmaps, Page presence, and Session replay.
+  These control what the tracking script on your site captures or delivers, and each is off
+  until you opt in: while a tool is off, nothing extra loads on your pages. (They moved here
+  from the Tracking tab, which keeps the tracking snippet, its configuration options, and the
+  Identity and Groups settings.) Surveys and guides appear in navigation under Experimentation,
+  so the tab signposts when that module needs activating too.
+
+Only owners and admins of the site's organization can change these switches.
 
 ## Tracking and exclusions
 

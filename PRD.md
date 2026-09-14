@@ -1199,6 +1199,63 @@ Audited product commits `56a5ebfd..a5dd482a` (the /qa data-accuracy wave, deploy
 
 ---
 
+## 10s. Product-sync pass (2026-09-14 — Site feature activation, signup onboarding, Ask AI chat mode)
+
+Audited product commits `a5dd482a..73a47530` (25 commits; Ask AI chat mode deployed 2026-09-14):
+
+- **`d75d4009` per-site feature activation (decision 0314)** — six cosmetic visibility flags gate
+  the Optimization section and Workspace hubs behind a new Site Settings → **Apps** tab. Documented
+  in `analytics-site-settings.mdx`: a new "Which apps and tracker tools are active?" section names
+  all six modules, states the flags are cosmetic visibility (direct links keep working, nothing is
+  deleted), notes new sites default off while existing sites stay on, and records the owner/admin
+  gate. Frontmatter description updated to match.
+- **`36bf8052` tracker tools → Apps tab + mobile-app creation dropped** — Surveys, Onboarding
+  guides, Heatmaps, Page presence, and Session replay moved from the Tracking tab to the Apps tab.
+  The same new `analytics-site-settings.mdx` section documents the tracker-tools group (each tool
+  gates what the on-site script captures; the Tracking tab keeps the snippet, its options,
+  Identity, and Groups), and every stale enable-path was re-pointed: `onboarding-guides.mdx`
+  (three references), `website-heatmap-analytics.mdx`, `session-replay.mdx`, and
+  `session-replay-troubleshooting.mdx` now say **Settings → Apps**. The Add-website dialog no
+  longer offers mobile-app creation, so `integrations/react-native-analytics.mdx` "Create a mobile
+  site" now says the dashboard creates web sites only and mobile-site creation is not currently
+  self-serve (with a `{/* TODO: verify against product */}` marker — the API still accepts
+  `type: "mobile"` but is session-gated, so no public path exists today); existing mobile sites
+  are unchanged.
+- **Signup onboarding wave (`ce6408f7` values-first auth + lazy personal org + `/welcome`,
+  `a333d07e` shared AddSiteForm with Optional-apps disclosure + URL-paste cleaning, `e408efa9`
+  browser-pass fixes, `098550e5` has-sites guard race fix)** — `tinyanalytics-quickstart.mdx`
+  Step 1 rewritten: new accounts land on an **Add your first website** screen (domain autofocused,
+  pasted URLs cleaned to the bare domain, optional name, collapsed **Optional apps** disclosure
+  with the six switches off by default, organization created automatically — no org-creation
+  detour), and later sites use the same form in the **Add website** dialog.
+- **`73a47530` Ask AI chat mode (decision 0315)** — already documented this session in
+  `ai-analytics-assistant.mdx` (written from the same tree as the merged squash, re-verified here):
+  the **Browse | Chat** sidebar switch, full-page chat with the conversation history in the
+  sidebar, URL-addressable threads (`?c=`, deleted-thread notice, scope-safe switching), the
+  drawer's **Open full page** handoff (unavailable mid-stream), ⌘J focusing the composer on chat
+  pages, and the sign-in prompt for anonymous public-site viewers.
+- **`d73f9390` brand capitalization (TinyAnalytics)**. **Public docs impact: none** — prose across
+  every `.mdx` already says "TinyAnalytics"; the remaining lowercase hits are technical
+  identifiers (`window.tinyanalytics`, package names, URLs, `disable-tinyanalytics`).
+- **`873f7f9e` site creation carries app-visibility flags + quota gate + URL-clean domains**.
+  **Public docs impact: none beyond the above** — its customer-visible parts (URL cleaning,
+  optional apps at creation) are covered by the quickstart and site-settings updates; the quota
+  gate is inert while billing is off.
+- **`2db55a7d` query-cache clear on account switch**, **`d3a99230` credentials test fixture**,
+  **`dcdb6f4c` + `567653c2` ClickHouse ops (profilers off, system-log TTLs)**, **`6e54893a` wiki
+  data-accuracy log**, **`cb0c3a0b` product changelog/wiki**, **`b9c6f62d` / `b2803cfd` /
+  `b2d112f2` PRD documents**, and the seven wiki deployment rows (`8497332c`, `69f043e8`,
+  `7b4b466b`, `60a8f233`, `7fe9df64`, `ae11a408`, `e8a07fc5`). **Public docs impact: none** —
+  internal fixes, operator infrastructure, and planning/record documents.
+
+`mint validate` and `mint broken-links` both pass.
+
+**Current sync marker:** product commit `73a47530ace4fc8f1f9045978f7751f380d0fa5e`
+(feat: Ask AI chat mode (0315), deployed 2026-09-14). The deployed customer application commit
+at this marker is the same `73a47530`.
+
+---
+
 ## 11. Assumptions & open questions
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |

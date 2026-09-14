@@ -16,8 +16,11 @@ The **`@tinyanalytics/react-native`** SDK brings cookieless analytics to React N
 ## Create a mobile site
 
 <Steps>
-  <Step title="Add a website">
-    In the dashboard, start adding a new site, then set the **Type** to **Mobile app** instead of Website.
+  <Step title="Request a mobile site">
+    The dashboard's **Add website** dialog creates web sites only — mobile-app site creation
+    is not currently self-serve. Ask the TinyAnalytics team to create the mobile site for you;
+    existing mobile sites keep reporting and remain editable as before.
+    {/* TODO: verify against product — mobile-app creation was dropped from the Add-website dialog (product 36bf8052, 2026-09-07); the API still accepts `type: "mobile"` (session-gated), so a self-serve path may return. */}
   </Step>
   <Step title="Enter your app identifier">
     Give the site your app's **bundle ID / package name** (for example `com.example.app`). This is read-only after the site is created.

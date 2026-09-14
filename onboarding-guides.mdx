@@ -22,7 +22,7 @@ A tour step carries a title, a body, an optional call-to-action button, and an o
 
 ## How do I turn guides on?
 
-Enable guides for the site first under **Settings → Tracking**. Guides are **off by default** for a new site, and until you enable them, creating a guide alone won't put anything in front of visitors — the widget code never loads. This keeps the tracker lean for sites that don't use guides.
+Enable guides for the site first under **Settings → Apps**. Guides are **off by default** for a new site, and until you enable them, creating a guide alone won't put anything in front of visitors — the widget code never loads. This keeps the tracker lean for sites that don't use guides.
 
 ## How do I create a guide?
 
@@ -77,7 +77,7 @@ Anonymous visitors' progress never leaves their browser — it's held in local s
 
 <AccordionGroup>
   <Accordion title="Why isn't my guide showing on my site?">
-    Guides are **off by default** for a new site, so check that guides are enabled under **Settings → Tracking**. Also check the guide's targeting rules — URL, CSS selector, device type, and wait period all limit who sees it — and that the visitor hasn't already completed or dismissed the guide, which is final.
+    Guides are **off by default** for a new site, so check that guides are enabled under **Settings → Apps**. Also check the guide's targeting rules — URL, CSS selector, device type, and wait period all limit who sees it — and that the visitor hasn't already completed or dismissed the guide, which is final.
   </Accordion>
   <Accordion title="Do I need to add code to my site to run a guide?">
     No. TinyAnalytics guides need **no extra code beyond your tracking snippet**. You build the guide in the dashboard, and the widget, targeting, and analytics all work off the [tracking snippet](/install-tinyanalytics-tracking-script) you already installed. Task auto-completion reuses the custom events you already send.
@@ -122,7 +122,7 @@ There are no separate publish endpoints: `update_guide`'s lifecycle fields drive
 }
 ```
 
-Step shapes differ by `type`: tours take `title` + `body` with an optional anchor `selector`, checklists take `title` with an optional auto-completing `eventName`. New guides always start as drafts, and visitors only see a launched guide once guides are enabled for the site under **Settings → Tracking**. Full request and response schemas live in the [API reference](/api-reference/tinyanalytics-api).
+Step shapes differ by `type`: tours take `title` + `body` with an optional anchor `selector`, checklists take `title` with an optional auto-completing `eventName`. New guides always start as drafts, and visitors only see a launched guide once guides are enabled for the site under **Settings → Apps**. Full request and response schemas live in the [API reference](/api-reference/tinyanalytics-api).
 
 ## Related
 
