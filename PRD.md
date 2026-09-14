@@ -1256,6 +1256,38 @@ at this marker is the same `73a47530`.
 
 ---
 
+## 10t. Product-sync pass (2026-09-14 — Ask AI entry reversal, decision 0316)
+
+Audited product commits `73a47530..6fca4baf` (6 commits; deployed 2026-09-14):
+
+- **`6fca4baf` Ask AI entry reverts to the icon row + right drawer (decision 0316)** — reverses
+  the sidebar half of 0315 one day after it shipped: the Browse | Chat switch and the sidebar
+  conversation-history mode are gone, and the green **Ask AI** icon row (filled sparkles) opens
+  the right-side drawer in BOTH global and site contexts (the global row was a page link
+  pre-0315). Kept from 0315: the single-pane `/ask` pages with `?c=` deep links and the session
+  gate, the drawer's **Open full page** handoff (disabled while streaming) and its own history
+  picker, and drawer suppression on chat routes (⌘J focuses the page composer, the ⌘K row hides).
+  `ai-analytics-assistant.mdx` corrected: entry points are now the sidebar's **Ask AI** row
+  (right-side drawer over any page, site or organization), **⌘J**, and the site header's **Ask
+  AI** button; conversation history lives in the drawer's picker again (the sidebar-resident
+  history sentence is removed); the full-page view keeps URL-addressable threads, the
+  deleted-thread notice, scope-safe switching, and the mid-stream navigation warning. No other
+  page named the switch (§10s's other edits are unaffected).
+- **`50f0e3ee` attached-tabs sidebar frame (PR #19)**. **Public docs impact: none** — REVERTED in
+  full by `6fca4baf` the same day; the frame never settled into a documentable state.
+- **`53d0d0cc` filled sparkles Ask AI mark (PR #18)**. **Public docs impact: none** — an icon
+  fill change; no docs page enumerates icon variants.
+- **`a7ca08d6` / `909bd99e` wiki deployment rows and `e2df9849` wiki prettier fix**. **Public
+  docs impact: none** — internal release records.
+
+`mint validate` and `mint broken-links` both pass.
+
+**Current sync marker:** product commit `6fca4bafdf362c84d4a85564e4c9ee4c1f7562c9`
+(revert: left sidebar to icon row + drawer; drop the 0315 mode switch (0316), deployed
+2026-09-14). The deployed customer application commit at this marker is the same `6fca4baf`.
+
+---
+
 ## 11. Assumptions & open questions
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |
