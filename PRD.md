@@ -1288,6 +1288,31 @@ Audited product commits `73a47530..6fca4baf` (6 commits; deployed 2026-09-14):
 
 ---
 
+## 10u. Product-sync pass (2026-09-14 — Assistant panel docks right, decision 0317)
+
+Audited product commits `6fca4baf..f65b2aae` (3 commits; deployed 2026-09-14):
+
+- **`4d8c6ed0` assistant panel docks right + single-spark assistant mark (decision 0317)** — the
+  assistant's panel drops the modal sheet for a docked right panel: on desktop the dashboard
+  shifts left and stays fully interactive (no dim backdrop), on small screens it covers the
+  viewport as before, and Esc + a Close button replace the sheet's built-ins. Same triggers as
+  the 0316 model (sidebar Ask AI row, ⌘J, site header pill); the history picker and the
+  Open-full-page handoff (disabled while streaming) are unchanged. `ai-analytics-assistant.mdx`
+  updated: the open-behavior paragraph now describes the docked panel (dashboard stays
+  interactive on desktop, covers the page on small screens, Esc/Close), and the remaining
+  "drawer" mentions were renamed to "panel". The single-spark icon change is icon-neutral here —
+  no docs page shows or describes the icon, so no prose mention.
+- **`02ddd38f` wiki deployment row for 6fca4baf and `f65b2aae` wiki deployment row + TODOS
+  entry**. **Public docs impact: none** — internal release records.
+
+`mint validate` and `mint broken-links` both pass.
+
+**Current sync marker:** product commit `f65b2aae47df7fd23037265be541bd08e0011561`
+(docs(wiki): deployment row for 4d8c6ed0 (assistant panel docks right, 0317), deployed
+2026-09-14). The deployed customer application commit at this marker is `4d8c6ed0`.
+
+---
+
 ## 11. Assumptions & open questions
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |
