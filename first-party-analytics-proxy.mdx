@@ -186,8 +186,7 @@ its one-way cookieless visitor ID; it does not write the raw IP address to analy
 
     ```html
     <script
-      src="https://yourdomain.com/stats/script.js"
-      data-site-id="123"
+      src="https://yourdomain.com/stats/script.js?siteId=123"
       defer
     ></script>
     ```
@@ -250,8 +249,7 @@ work on your side. If you intentionally keep a copy of `script.js` in your own s
 
 ```html
 <script
-  src="/vendor/tinyanalytics.js"
-  data-site-id="123"
+  src="/vendor/tinyanalytics.js?siteId=123"
   data-api-host="https://yourdomain.com/stats"
   defer
 ></script>

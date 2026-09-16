@@ -37,8 +37,8 @@ If `script.js` is missing, the snippet isn't on the page. If `script.js` loads b
   <Accordion title="I don't see any data at all" icon="circle-xmark">
     Work through these in order:
 
-    - **The tracking script isn't on the live page.** View the page source of your published site and confirm the `<script … data-site-id="…">` tag is in the `<head>`. Drafts and previews don't count.
-    - **The site ID is wrong.** The `data-site-id` must match the site you're viewing in the dashboard. An invalid ID makes the script do nothing.
+    - **The tracking script isn't on the live page.** View the page source of your published site and confirm the `<script … src="…script.js?siteId=…">` tag is in the `<head>`. Drafts and previews don't count. (A script optimizer that strips `data-*` attributes can't remove the site ID — it rides on the URL.)
+    - **The site ID is wrong.** The `?siteId=` parameter on the script URL (or the legacy `data-site-id` attribute) must match the site you're viewing in the dashboard. An invalid ID makes the script do nothing.
     - **An ad blocker is blocking the request.** See the ad-blocker section below.
     - **This browser is opted out.** See "My own visits are missing" below.
   </Accordion>

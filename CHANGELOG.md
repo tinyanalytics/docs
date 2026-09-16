@@ -7,6 +7,20 @@ project adheres to semantic versioning where practical.
 
 ## [Unreleased]
 
+### Changed
+
+- **Install snippets carry the site ID on the script URL (2026-09-16, product decision 0321):**
+  every snippet example across the site — the install page, quickstart, script-configuration
+  reference, all 30 integration guides, the first-party proxy guide, and the error/vitals/
+  autocapture recipes — now shows `<script defer src="…/script.js?siteId=YOUR_SITE_ID">` instead
+  of a `data-site-id` attribute, because script optimizers (Rocket Loader–class tools, some CMS
+  minifiers) strip `data-*` attributes and silently disabled tracking. The
+  script-configuration page documents that `data-site-id` remains supported indefinitely, that
+  `?siteId=` wins on conflict (with a console warning naming both values), and the honest
+  residual: optimizers can still strip the *other* `data-*` options (API host, path masking,
+  capture toggles), so sites relying on those should exclude the tag from optimization.
+  `mint validate` and `mint broken-links` pass.
+
 ### Added
 
 - **Guides agent surface (2026-08-31, product decision 0311 second amendment, product commit

@@ -26,11 +26,11 @@ Install TinyAnalytics in about five minutes: add a site, paste one tracking scri
     Copy the tracking script shown on the setup panel. It looks like this, with your own site ID already filled in:
 
     ```html
-    <script defer src="https://dash.tinyanalytics.io/script.js" data-site-id="123"></script>
+    <script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"></script>
     ```
 
     <Note>
-      Always copy the tracking script from your dashboard rather than typing it by hand. The dashboard fills in the correct script URL and your numeric `data-site-id` for you.
+      Always copy the tracking script from your dashboard rather than typing it by hand. The dashboard fills in the correct script URL and your numeric site ID (the `?siteId=` parameter) for you.
     </Note>
   </Step>
   <Step title="Add the tracking script to your site">
@@ -55,7 +55,7 @@ Install TinyAnalytics in about five minutes: add a site, paste one tracking scri
 If nothing appears after a minute, work through these three causes in order:
 
 - Confirm the tracking script is in the `<head>` of a **published** page, not a draft or preview.
-- Confirm the `data-site-id` matches the site you're viewing in the dashboard.
+- Confirm the `?siteId=` parameter on the script URL matches the site you're viewing in the dashboard.
 - Disable ad blockers for the test, or set up a [first-party proxy](/install-tinyanalytics-tracking-script#bypass-ad-blockers) so tracking isn't blocked.
 
 For a full checklist, see [verify your setup](/verify-tinyanalytics-installation).
