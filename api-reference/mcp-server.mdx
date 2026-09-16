@@ -52,6 +52,23 @@ Every tool runs with both **your key's scopes and your account access**. The age
 sites you can see, a restricted key sees only granted tools, and writes are refused unless your
 organization role also allows them.
 
+## How do I keep tool responses small?
+
+Three tools that return whole rows accept an optional `fields` argument — `list_sessions`,
+`list_users`, and `get_events_log`. Pass the row fields you actually need (for example
+`["country", "entry_page"]`) and each row comes back with only those fields, pruned on the server
+before it reaches your agent's context. The row's identity fields are always kept — `session_id`
+for sessions, `id` for users, and `event_id`, `session_id`, and `timestamp_ms` for the event log —
+so follow-up calls like `get_session` still work. An unknown field name is an error that lists
+every valid field name, so the agent corrects itself on the next call instead of guessing.
+
+List and breakdown reads are capped at **100 rows** (`get_breakdown`, landing and exit pages,
+journeys, and the dimension-split limits included). When a capped read returns a full page, the
+response says so: it gains `truncated: true`, the `limit` that was applied, and `guidance` on how
+to narrow — for example with filters or a shorter date window, or by requesting the next page.
+An agent that reads the response knows it saw a partial answer rather than mistaking the top 100
+for the whole picture.
+
 ## Which AI clients can connect today?
 
 The requirement is simple: the client must speak **Streamable HTTP** and let you set a **request header**. Clients that only support OAuth cannot connect yet.
@@ -161,6 +178,8 @@ Once connected, ask in plain language — the agent picks the tool:
 ## Do I need to give dates?
 
 Yes, for anything over a date range. Every date-ranged report requires a start and end date in `YYYY-MM-DD`, read in the time zone you pass (UTC by default). Agents supply these automatically from your question — "last week" becomes concrete dates — but there is no relative range like `7d`, and there is no "all time" shortcut. For all of your history, ask for a range starting before the site existed.
+
+The `time_zone` argument takes an [IANA time zone name](https://www.iana.org/time-zones). The MCP server validates it before calling the API: an unknown zone is rejected immediately with examples (`UTC`, `America/New_York`, `Europe/Istanbul`) and the database link, not a bare API error.
 
 Live visitors, saved funnels, saved dashboards, and annotations don't take dates.
 
