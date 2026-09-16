@@ -14,7 +14,7 @@ Your TinyAnalytics install is working when a visit to your own site shows up in 
     Open a published page that includes the tracking script. Use a normal browser tab, not a preview or a private window with tracking blocked.
   </Step>
   <Step title="Watch Realtime">
-    In TinyAnalytics, open your site's **Realtime** report. Your visit appears within a few seconds. On a brand-new site, the setup panel is replaced by your dashboard once the first visit lands.
+    In TinyAnalytics, open your site's **Realtime** report. Your visit appears within a few seconds. On a brand-new site, the setup panel re-checks automatically every few seconds and is replaced by your dashboard once the first live pageview lands — no reload needed.
   </Step>
 </Steps>
 
@@ -58,6 +58,9 @@ If `script.js` is missing, the snippet isn't on the page. If `script.js` loads b
   </Accordion>
   <Accordion title="Single-page app pageviews are wrong" icon="route">
     SPA route tracking is on by default. If you see **too few** pageviews, confirm `data-track-spa` isn't set to `"false"`. If you see **double** pageviews, you're likely sending manual pageviews on top of automatic ones — either remove your manual `pageview()` calls or set `data-auto-pageview="false"`. See [configure the script](/configure-tinyanalytics-tracking-script#track-single-page-apps).
+  </Accordion>
+  <Accordion title="I imported historical data and the setup panel is still showing" icon="clock-rotate-left">
+    An import (GA4, Plausible, Simple Analytics, Umami) is not an installation. The setup panel stays up — with a note that imported history was found — until the live tracking snippet sends its first pageview. Your imported data is already on the dashboard behind the panel; install the snippet (or fix it with the steps above) and the panel clears on its own within seconds of the first live visit.
   </Accordion>
   <Accordion title="My custom events don't appear" icon="hand-pointer">
     - The event name can't be empty — an empty name is rejected.
