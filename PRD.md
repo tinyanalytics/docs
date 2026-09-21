@@ -1412,3 +1412,11 @@ Audited product commit: `697300b7f08607fcea770bddded5a42438647f49`. Updated `api
 Mintlify build validation and broken-link checks passed for the paired QA changes.
 This is a targeted audit of this fix only; it does not advance the overall product
 sync marker or claim deployment. Product changes remain local pending release.
+
+## Targeted agentic QA sync — Ask AI access and retry states (2026-09-21)
+
+Audited product commit: `cf7a218bc9c8cf06672a631a9d3e225c80286390`. Updated `ai-analytics-assistant.mdx`.
+
+Mintlify build validation and broken-link checks passed for the paired QA changes.
+This is a targeted audit of this fix only; it does not advance the overall product
+sync marker or claim deployment. Product changes remain local pending release.
