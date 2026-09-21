@@ -5211,7 +5211,7 @@
       "get": {
         "operationId": "get-sites-site-heatmap-pages",
         "summary": "Get Heatmap Pages",
-        "description": "Top pages with captured heatmap clicks (click count + unique sessions), for the heatmap page picker.",
+        "description": "Top pages by unique sessions. Defaults to captured clicks; source=scroll discovers existing engagement data without click capture (clicks is zero). Includes the top page's map payloads.",
         "tags": [
           "heatmaps"
         ],
@@ -5263,6 +5263,19 @@
             },
             "in": "query",
             "required": false
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "description": "Page Source.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "clicks",
+                "scroll"
+              ]
+            }
           }
         ],
         "responses": {

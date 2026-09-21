@@ -48,8 +48,9 @@ through the same proxy prefix as the core tracking script.
 
 ## The three map modes
 
-Open **Engagement → Heatmaps**, pick a page from the list (searchable, busiest first), and choose
-a mode:
+Open **Engagement → Heatmaps** and choose a mode, then pick a page from the list
+(searchable, busiest first). Scroll lists pages with engagement data even if click capture
+is off or has no data. Switching back to Clicks restores the captured-click page list:
 
 | Mode | Shows | Data source |
 | --- | --- | --- |
@@ -91,7 +92,9 @@ Three endpoints power the page and are available in the
 [API playground](/api-reference/api-playground):
 
 - [`GET /api/sites/:id/heatmap/pages`](/api-reference/heatmaps/get-heatmap-pages) lists pages with
-  click data.
+  click data by default. Add `source=scroll` to list pages with existing engagement data
+  instead; `clicks` is zero for these rows. Both sources return up to 100 pages ranked by
+  sessions, with the top page's map payloads included.
 - [`GET /api/sites/:id/heatmap/clicks`](/api-reference/heatmaps/get-heatmap-clicks) returns binned
   click or rage-click intensity for one page and device band.
 - [`GET /api/sites/:id/heatmap/scroll`](/api-reference/heatmaps/get-heatmap-scroll-reach) returns

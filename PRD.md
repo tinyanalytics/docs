@@ -1441,3 +1441,12 @@ Both REST-only bot reads require `analytics:read`, with the per-site gate still
 enforced. The summary documents its explicit-date, no-filter/no-compare contract.
 This is a targeted audit; the overall sync marker is unchanged. These changes
 remain local pending product deployment and docs publication.
+
+### 2026-09-21 targeted QA sync — Scroll heatmap page discovery
+
+- Product fix: `acc52ce08ef61ee01c41995d1ff5a687520cb133` (decision 0331).
+- Audited `website-heatmap-analytics.mdx` and regenerated `openapi.json`: optional
+  `source=scroll` discovers engagement-only pages; default clicks preserved.
+- Only the heatmap-pages operation changed; endpoint count remains 162.
+- `mint validate` and `mint broken-links`: passed. This targeted sync does not
+  advance the repository-wide audit marker or imply product deployment.
