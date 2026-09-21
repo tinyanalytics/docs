@@ -14,7 +14,7 @@
 // filtering here.
 
 (function () {
-  var SRC = "https://dash.tinyanalytics.io/script.js";
+  var SRC = "https://dash.tinyanalytics.io/script.js?siteId=221";
 
   if (document.querySelector('script[src="' + SRC + '"]')) {
     return;
@@ -22,7 +22,6 @@
 
   var script = document.createElement("script");
   script.src = SRC;
-  script.setAttribute("data-site-id", "221");
   script.setAttribute("data-web-vitals", "true");
   script.setAttribute("data-track-errors", "true");
 

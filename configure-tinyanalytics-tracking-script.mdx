@@ -7,9 +7,10 @@ icon: "sliders"
 
 You configure the TinyAnalytics tracking script with `data-*` attributes on the script tag. Every option has a sensible default, so the basic snippet works on its own — you only add attributes to change behavior. Configuration is set in the HTML itself, so to change an option you update the snippet and re-deploy.
 
+The one exception is the site ID, which rides on the script URL as `?siteId=` rather than as an attribute. Script optimizers (Rocket Loader–class tools and some CMS minifiers) strip `data-*` attributes, which would silently disable tracking — a URL parameter can't be stripped. The `data-site-id` attribute form keeps working indefinitely, but every snippet the dashboard issues uses the URL form.
+
 ```html
-<script defer src="https://dash.tinyanalytics.io/script.js"
-  data-site-id="123"
+<script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"
   data-web-vitals
   data-mask-paths='["/orders/*"]'></script>
 ```
@@ -17,6 +18,10 @@ You configure the TinyAnalytics tracking script with `data-*` attributes on the 
 <Tip>
   You don't have to write these by hand. In **Settings → Tracking**, the snippet builder lets you toggle options and copies the updated tag for you. Only non-default options are added, so your snippet stays as short as possible.
 </Tip>
+
+<Note>
+  Optimizer resilience covers the site ID only. An aggressive optimizer can still strip the *other* `data-*` options on this page (`data-mask-paths`, `data-skip-paths`, `data-api-host`, capture toggles, and so on) — if you rely on those and use such an optimizer, exclude the TinyAnalytics tag from optimization.
+</Note>
 
 ## Which `data-*` attributes can I set?
 
@@ -28,7 +33,7 @@ Set any of the attributes below on the tracking script tag. Each one has a defau
 
 | Attribute | Default | What it does |
 | --- | --- | --- |
-| `data-site-id` | *(required)* | Your site's numeric ID. Without a valid ID, the script does nothing. |
+| `?siteId=` on the `src` URL | *(required)* | Your site's numeric ID. Without a valid ID, the script does nothing. The legacy `data-site-id` attribute form remains supported indefinitely; if both are present and differ, `?siteId=` wins and the script logs a console warning naming both values. |
 | `data-api-host` | derived from `src` | Where events are sent. Defaults to the script's own origin. |
 | `data-namespace` | `tinyanalytics` | The global variable name (`window.tinyanalytics`) and the opt-out key prefix. |
 | `data-auto-pageview` | `true` | Send a pageview automatically when the page loads. |
@@ -65,8 +70,7 @@ A debounced pageview can be missed if the tab closes inside the window; the init
 TinyAnalytics captures outbound links, downloads, button clicks, copies, form submissions, and engagement by default. To disable one, set its attribute to `"false"`:
 
 ```html
-<script defer src="https://dash.tinyanalytics.io/script.js"
-  data-site-id="123"
+<script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"
   data-track-copy="false"
   data-track-forms="false"></script>
 ```
@@ -78,8 +82,7 @@ Form capture records only the shape of a submission — the form's name, action,
 Web Vitals collection is off by default because it loads a small extra chunk of code only when needed. Turn it on with `data-web-vitals`:
 
 ```html
-<script defer src="https://dash.tinyanalytics.io/script.js"
-  data-site-id="123"
+<script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"
   data-web-vitals></script>
 ```
 
@@ -90,8 +93,7 @@ TinyAnalytics then sends one performance event per page load with LCP, CLS, INP,
 Error capture is also off by default. Turn it on with `data-track-errors`:
 
 ```html
-<script defer src="https://dash.tinyanalytics.io/script.js"
-  data-site-id="123"
+<script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"
   data-track-errors></script>
 ```
 
@@ -111,8 +113,7 @@ Patterns use this syntax:
 - `re:<expression>` matches a raw regular expression.
 
 ```html
-<script defer src="https://dash.tinyanalytics.io/script.js"
-  data-site-id="123"
+<script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"
   data-mask-paths='["/orders/*", "/reset/**"]'></script>
 ```
 
@@ -123,8 +124,7 @@ With this, a visit to `/orders/abc123` is recorded as `/orders/*`. Masking happe
 Use `data-tag` to stamp a label on every event sent from a page — useful for grouping a campaign, an A/B variant, or a section of your site. The label is truncated to 256 characters.
 
 ```html
-<script defer src="https://dash.tinyanalytics.io/script.js"
-  data-site-id="123"
+<script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"
   data-tag="black-friday"></script>
 ```
 

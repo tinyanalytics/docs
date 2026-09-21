@@ -15,10 +15,10 @@ The TinyAnalytics tracking script is a single `<script>` tag you add to your sit
 
 <Steps>
   <Step title="Copy the script from your dashboard">
-    Open your site in TinyAnalytics. On a new site, the tracking script is on the setup panel; on an existing site, it's in **Settings → Tracking**. Copy the tag exactly as shown — it already includes your numeric `data-site-id`:
+    Open your site in TinyAnalytics. On a new site, the tracking script is on the setup panel; on an existing site, it's in **Settings → Tracking**. Copy the tag exactly as shown — it already includes your numeric site ID as `?siteId=` on the script URL:
 
     ```html
-    <script defer src="https://dash.tinyanalytics.io/script.js" data-site-id="123"></script>
+    <script defer src="https://dash.tinyanalytics.io/script.js?siteId=123"></script>
     ```
   </Step>
   <Step title="Paste it into your HTML head">
@@ -46,7 +46,7 @@ You can turn any of these off, and turn on optional captures like Web Vitals, wi
 
 ## Where do I get my tracking script?
 
-Always copy the tracking script from your dashboard. It fills in the correct `data-site-id` and uses the exact script URL for your account. Find it on a new site's setup panel, or under **Settings → Tracking** for any existing site. Copy it rather than typing it by hand.
+Always copy the tracking script from your dashboard. It fills in the correct site ID as `?siteId=` on the script URL and uses the exact script URL for your account. Find it on a new site's setup panel, or under **Settings → Tracking** for any existing site. Copy it rather than typing it by hand.
 
 ## Framework and CMS installs
 
@@ -81,7 +81,7 @@ visitor-IP forwarding check that keeps location and cookieless visitor counts ac
     Ad blockers are the usual cause: some block third-party analytics requests before they're sent. Serve the TinyAnalytics tracking script through a **first-party proxy** on your own domain so requests look like part of your site and aren't blocked.
   </Accordion>
   <Accordion title="Where do I find my site ID?">
-    Your numeric `data-site-id` is already filled in on the tracking script shown in your dashboard — on a new site's setup panel, or under **Settings → Tracking** for an existing site. Copy the tag from there rather than typing the ID by hand.
+    Your numeric site ID is already filled in on the tracking script shown in your dashboard (as `?siteId=` on the script URL) — on a new site's setup panel, or under **Settings → Tracking** for an existing site. Copy the tag from there rather than typing the ID by hand.
   </Accordion>
 </AccordionGroup>
 

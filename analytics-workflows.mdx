@@ -77,6 +77,10 @@ A published workflow opens in a read-first view: its status, one sentence descri
 
 The editor saves draft changes automatically. If someone else changes the same workflow first, TinyAnalytics stops autosaving and shows **Reload latest** instead of silently overwriting their draft. Publishing never changes a run already in progress; that run keeps the immutable version it started with.
 
+If a **Notify** step has no destination, its validation warning names the step so you can
+find it. Choose at least one destination before publishing. Warning counts and the dismiss
+button use your dashboard language; the step name stays as you entered it.
+
 ## Test before publishing
 
 Open **Test** from the workflow editor to simulate the current draft against one sample event. You can enter the sample yourself or load a recent event that matches the trigger.

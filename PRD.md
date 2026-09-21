@@ -1313,6 +1313,27 @@ Audited product commits `6fca4baf..f65b2aae` (3 commits; deployed 2026-09-14):
 
 ---
 
+## 10v. Targeted GSC/MCP clarification (2026-09-21)
+
+**Audited product commit:** `0e70b6534904cc33a605d5c0e552d6b0e7b5281f` (decision 0326).
+
+Updated `api-reference/mcp-server.mdx` and `google-search-console-analytics.mdx` to
+explain that the connected-site GSC integration is separate from scoped SQL/MCP,
+that `get_query_schema` cannot establish connection status, and that index coverage
+and URL inspection are not exposed. Added the entry-channel landing-pages filter
+example. Product checks executed that exact filter on both ClickHouse 25.10 and
+25.3, including session-attribution and landing-page semantics.
+
+Public docs impact of the metric-log tuning itself: none (operator-only). The
+schema guidance and report boundaries are covered by the two pages above.
+`mint validate` and `mint broken-links` pass. This targeted audit covers the named
+product commit only; it does not advance the overall sync marker in §10u or claim
+audit coverage for intervening unrelated product commits. Product source changes
+and these docs are committed for release; the operational table tuning was applied
+live separately.
+
+---
+
 ## 11. Assumptions & open questions
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |
@@ -1383,3 +1404,86 @@ The wiki is the behavioral spec; these are the primary sources per doc area. (Wi
 - **Plausible** (task-oriented): Get Started · Website Settings · Stats Dashboard · Goals and Events · Bypass Adblockers · APIs & Data Access · Account · Team · Billing.
 - **Umami** (feature-oriented): Introduction · Quickstart · Configuration · Tracking (functions, config, events, IDs, tags, links, pixels) · Filtering (sessions, replays, performance, breakdown, goals, funnel, journey, retention, UTM, revenue, attribution) · Boards · Teams · Reference (metric definitions, integrations).
 - **TinyAnalytics** takes the _superset_: task spine (Plausible) for setup + feature spine (Umami) for the dashboard + its own advanced product-analytics/ops tier that neither documents in depth.
+
+## Targeted agentic QA sync — Claude Code MCP environment expansion (2026-09-21)
+
+Audited product commit: `697300b7f08607fcea770bddded5a42438647f49`. Updated `api-reference/mcp-server.mdx`.
+
+Mintlify build validation and broken-link checks passed for the paired QA changes.
+This is a targeted audit of this fix only; it does not advance the overall product
+sync marker or claim deployment. Product changes remain local pending release.
+
+## Targeted agentic QA sync — Ask AI access and retry states (2026-09-21)
+
+Audited product commit: `cf7a218bc9c8cf06672a631a9d3e225c80286390`. Updated `ai-analytics-assistant.mdx`.
+
+Mintlify build validation and broken-link checks passed for the paired QA changes.
+This is a targeted audit of this fix only; it does not advance the overall product
+sync marker or claim deployment. Product changes remain local pending release.
+
+## Targeted agentic QA sync — API Playground narrow panes and Run authentication (2026-09-21)
+
+Audited product commit: `018d6a9092e4b5239c83c7f05c64feb8c686cc5a`. Updated `api-reference/api-playground.mdx`.
+
+Mintlify build validation and broken-link checks passed for the paired QA changes.
+This is a targeted audit of this fix only; it does not advance the overall product
+sync marker or claim deployment. Product changes remain local pending release.
+
+
+## Targeted last-30-days QA sync — bot REST scopes and discovery (2026-09-21)
+
+Audited product commit: `6356f7d91a018fa9e74739387449acda2dd6784b` (decision 0330).
+Updated `api-reference/analytics-read-api.mdx` and regenerated `openapi.json`.
+The generated diff adds only the AI summary operation; existing operations are
+unchanged. The reference now contains 162 operations across 31 tags.
+
+Both REST-only bot reads require `analytics:read`, with the per-site gate still
+enforced. The summary documents its explicit-date, no-filter/no-compare contract.
+This is a targeted audit; the overall sync marker is unchanged. These changes
+remain local pending product deployment and docs publication.
+
+### 2026-09-21 targeted QA sync — Scroll heatmap page discovery
+
+- Product fix: `acc52ce08ef61ee01c41995d1ff5a687520cb133` (decision 0331).
+- Audited `website-heatmap-analytics.mdx` and regenerated `openapi.json`: optional
+  `source=scroll` discovers engagement-only pages; default clicks preserved.
+- Only the heatmap-pages operation changed; endpoint count remains 162.
+- `mint validate` and `mint broken-links`: passed. This targeted sync does not
+  advance the repository-wide audit marker or imply product deployment.
+
+### 2026-09-21 targeted QA sync — workflow warning localization
+
+- Product fix: `8c6917a148487f54eeef0a73231cf27fa1762916` (L30-001, decision 0208 amendment).
+- `analytics-workflows.mdx` explains named-step destination warnings and localized
+  warning controls. No API contract or OpenAPI change.
+- `mint validate` and `mint broken-links`: passed. Product deployment remains
+  outstanding; this targeted sync does not advance the full-repository audit marker.
+
+### 2026-09-21 targeted pre-release sync — funnel ordering and Has replay defaults
+
+- Targeted product sync through `8a4650ce54f0b1846d5897a13eb425d773e16961`.
+- `funnel-analytics.mdx` documents strict event progression: one recorded event
+  cannot satisfy two steps, while distinct same-millisecond events can advance in
+  their stable order without a later step walking backward.
+- `analytics-filters.mdx` documents that changing an existing filter to **Has replay**
+  immediately initializes the boolean filter to **True**.
+- Reviewed with **Public docs impact: none**: the optional Docker query-user secret,
+  forensic bot-observation kill switch, bot-rollup classification key, and internal
+  release bookkeeping. No public API or OpenAPI contract changed.
+- This is a targeted sync through the named product commit. It does not advance the
+  full-repository audit marker or claim product deployment.
+
+### 2026-09-21 targeted internal audit — release verification and tracker size
+
+- Audited product commits `a44faa16f039a65464a36bebd7956aca71fa72b5`
+  and `7e7db89a4c82d09ba2766378a943959a2e86c064`; this targeted audit reaches
+  the latter exact SHA.
+- Reviewed with **Public docs impact: none**: the live assistant eval now recognizes
+  every supported September date spelling, and release metadata records version
+  `0.1.0.0`. These changes do not alter model or analytics behavior.
+- Reviewed with **Public docs impact: none**: the tracker shares its existing lazy
+  chunk loaders and passive API construction so the Linux Node 22 build measures
+  7,101 bytes gzip under the unchanged 7,168-byte core limit. Feature gates,
+  opt-out behavior, queued calls, and the public tracking API remain unchanged.
+- No public page or OpenAPI contract changed. This targeted audit does not advance
+  the full-repository sync marker or claim product deployment.

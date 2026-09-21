@@ -11,16 +11,16 @@ The Bots & AI crawlers report shows automated traffic **separately from your hum
 
 The report opens with eight cards summarizing automated traffic for the current window and filters. The first two are totals; the remaining six count how many requests each detection layer caught.
 
-| Card | What it means |
-| --- | --- |
-| **Bot requests** | Total automated requests detected. |
-| **Bot share of traffic** | Bot requests as a percentage of all traffic (bots + humans). |
-| **UA pattern** | Caught by a known crawler, scanner, or automation string in the user agent. |
-| **Bot ASN** | Caught by originating from a hosting, cloud, proxy, or datacenter network. |
-| **Header heuristics** | Caught by HTTP headers missing what a real browser always sends. |
-| **Rate anomaly** | Caught by crawl-shaped bursts — many requests from one visitor, or one IP fanning across many paths or hosts. |
-| **Client signals** | Caught by automation tells in the browser itself, such as `navigator.webdriver` or impossible screen dimensions. |
-| **Referrer spam** | Caught by a referrer host on the Matomo referrer-spam blocklist. |
+| Card                     | What it means                                                                                                    |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| **Bot requests**         | Total automated requests detected.                                                                               |
+| **Bot share of traffic** | Bot requests as a percentage of all traffic (bots + humans).                                                     |
+| **UA pattern**           | Caught by a known crawler, scanner, or automation string in the user agent.                                      |
+| **Bot ASN**              | Caught by originating from a hosting, cloud, proxy, or datacenter network.                                       |
+| **Header heuristics**    | Caught by HTTP headers missing what a real browser always sends.                                                 |
+| **Rate anomaly**         | Caught by crawl-shaped bursts — many requests from one visitor, or one IP fanning across many paths or hosts.    |
+| **Client signals**       | Caught by automation tells in the browser itself, such as `navigator.webdriver` or impossible screen dimensions. |
+| **Referrer spam**        | Caught by a referrer host on the Matomo referrer-spam blocklist.                                                 |
 
 ## How does TinyAnalytics detect bots?
 
@@ -31,14 +31,18 @@ A request flagged by **any** layer is counted here instead of in your human anal
 Detected bots are given synthetic sessions and kept entirely out of your session counts and live visitor counter, so automated traffic can never inflate your real numbers.
 
 <Note>
-  Period comparison isn't available on this report. The date-range picker on the Bots & AI crawlers page has no compare option — see [compare periods](/analytics-period-comparison).
+  Period comparison isn't available on this report. The date-range picker on the
+  Bots & AI crawlers page has no compare option — see [compare
+  periods](/analytics-period-comparison).
 </Note>
 
 ## Which AI crawlers are reading my site?
 
 The report leads with an **AI crawlers** section naming the AI bots that visited — GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Bytespider, CCBot, and others. A crawler that hides its user-agent but comes from a known AI network is still counted and named by its **operator** (such as Anthropic or OpenAI). AI crawlers that can't be named individually roll up into **Other AI crawler**.
 
-The bot-traffic-over-time chart draws a second **"of which AI crawlers"** line beneath the total, so you can see AI crawling grow independently of ordinary bot traffic. It's styled in violet rather than the red of the total line — an AI crawler reading your site is usually something you *want* if you care about being cited in AI answers.
+Each AI bot is also classified by **purpose**, visible in the Categories breakdown: **AI training** (crawls that feed model training, such as GPTBot and ClaudeBot), **AI search** (crawls that feed an answer engine's index, such as OAI-SearchBot and PerplexityBot), and **AI agent** (on-demand fetches triggered by a person's prompt, such as ChatGPT-User and Claude-User). An agent fetch is the closest bot signal to a human visit — someone asked the AI about your page.
+
+The bot-traffic-over-time chart draws a second **"of which AI crawlers"** line beneath the total, so you can see AI crawling grow independently of ordinary bot traffic. It's styled in violet rather than the red of the total line — an AI crawler reading your site is usually something you _want_ if you care about being cited in AI answers.
 
 ## How is bot traffic broken down?
 
@@ -46,28 +50,52 @@ Below the chart, bot traffic is broken down the same way human traffic is:
 
 - **Referrers, Pages, Countries** — where bots come from and what they hit.
 - **Devices** — the browser, operating system, and device a bot reports (often sparse for headless crawlers).
-- **Categories, patterns, and networks** — the bot's category (search, AI, social), the matched pattern, and the operating network.
+- **Categories, patterns, and networks** — the bot's category (search, AI training, AI search, AI agent, social), the matched pattern, and the operating network.
 
 Click a filterable row to narrow the whole report to it.
 
+## Crawls vs referred visits, per operator
+
+For API users, `GET /api/sites/:id/bots/ai-summary` answers "who crawls me versus who sends me visitors" in one call: per AI **operator** (OpenAI, Anthropic, Perplexity, and others) it returns AI crawler requests next to the sessions that operator's assistant referred to your site over the same window — the two halves of the AI loop joined under one name.
+
 <Info>
-  **Crawling is not citation.** This report shows that an AI crawler *read* a page — the step that comes before you're cited in an AI answer. It cannot tell you whether a crawl produced a citation, and no user-agent or referrer can: that needs the AI platforms' own data. To see the *other* end of the funnel — humans who clicked through from an AI answer — use the [AI traffic report](/ai-referral-traffic-analytics), which now also summarizes AI crawlers by operator and shows a per-page **Crawled** count (AI-crawler requests) beside the pages AI sends people to — as correlated facts, never a ratio.
+  **Crawling is not citation.** This report shows that an AI crawler *read* a
+  page — the step that comes before you're cited in an AI answer. It cannot tell
+  you whether a crawl produced a citation, and no user-agent or referrer can:
+  that needs the AI platforms' own data. To see the *other* end of the funnel —
+  humans who clicked through from an AI answer — use the [AI traffic
+  report](/ai-referral-traffic-analytics), which now also summarizes AI crawlers
+  by operator and shows a per-page **Crawled** count (AI-crawler requests)
+  beside the pages AI sends people to — as correlated facts, never a ratio.
 </Info>
 
 ## Frequently asked questions
 
 <AccordionGroup>
   <Accordion title="Do bots count toward my visitor numbers in TinyAnalytics?">
-    No. Detected bots are given synthetic sessions and kept entirely out of your session counts, visitor counts, and live visitor counter, so automated traffic can never inflate your real numbers. The Bots & AI crawlers report is where you see that traffic on purpose.
+    No. Detected bots are given synthetic sessions and kept entirely out of your
+    session counts, visitor counts, and live visitor counter, so automated
+    traffic can never inflate your real numbers. The Bots & AI crawlers report
+    is where you see that traffic on purpose.
   </Accordion>
   <Accordion title="Can TinyAnalytics detect bots that hide their user-agent?">
-    Yes. TinyAnalytics flags a request as a bot in two ways: a known user-agent pattern, and a known network (the ASN a crawler operates from). The network check catches crawlers that disguise their user-agent, and those are named by their operator, such as Anthropic or OpenAI.
+    Yes. TinyAnalytics flags a request as a bot in two ways: a known user-agent
+    pattern, and a known network (the ASN a crawler operates from). The network
+    check catches crawlers that disguise their user-agent, and those are named
+    by their operator, such as Anthropic or OpenAI.
   </Accordion>
   <Accordion title="Which AI crawlers does the TinyAnalytics bots report name?">
-    The AI crawlers section names GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Bytespider, CCBot, and others. AI crawlers that can't be named individually roll up into **Other AI crawler**.
+    The AI crawlers section names GPTBot, OAI-SearchBot, ChatGPT-User,
+    ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Bytespider,
+    CCBot, and others. AI crawlers that can't be named individually roll up into
+    **Other AI crawler**.
   </Accordion>
   <Accordion title="Does a crawl mean an AI assistant cited my page?">
-    No. The Bots & AI crawlers report shows only that an AI crawler read a page — the step that comes before a citation. No user-agent or referrer can tell you whether a crawl produced a citation. To see humans who clicked through from an AI answer, use the [AI traffic report](/ai-referral-traffic-analytics).
+    No. The Bots & AI crawlers report shows only that an AI crawler read a page
+    — the step that comes before a citation. No user-agent or referrer can tell
+    you whether a crawl produced a citation. To see humans who clicked through
+    from an AI answer, use the [AI traffic
+    report](/ai-referral-traffic-analytics).
   </Accordion>
 </AccordionGroup>
 
@@ -77,7 +105,11 @@ Click a filterable row to narrow the whole report to it.
   <Card title="AI traffic" icon="robot" href="/ai-referral-traffic-analytics">
     Humans who clicked through from an AI assistant — the other half.
   </Card>
-  <Card title="How TinyAnalytics works" icon="diagram-project" href="/how-tinyanalytics-works">
+  <Card
+    title="How TinyAnalytics works"
+    icon="diagram-project"
+    href="/how-tinyanalytics-works"
+  >
     Why bot traffic is kept out of your human analytics.
   </Card>
   <Card title="Filter your data" icon="filter" href="/analytics-filters">

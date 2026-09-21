@@ -25,8 +25,7 @@ const { title } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>
-    <script is:inline defer src="https://dash.tinyanalytics.io/script.js"
-      data-site-id="YOUR_SITE_ID"></script>
+    <script is:inline defer src="https://dash.tinyanalytics.io/script.js?siteId=YOUR_SITE_ID"></script>
   </head>
   <body>
     <slot />

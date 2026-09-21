@@ -28,8 +28,7 @@ To add TinyAnalytics to a **Next.js** app, load the tracking script with Next's 
           <body>
             {children}
             <Script
-              src="https://dash.tinyanalytics.io/script.js"
-              data-site-id="YOUR_SITE_ID"
+              src="https://dash.tinyanalytics.io/script.js?siteId=YOUR_SITE_ID"
               strategy="afterInteractive"
             />
           </body>
@@ -50,8 +49,7 @@ To add TinyAnalytics to a **Next.js** app, load the tracking script with Next's 
         <>
           <Component {...pageProps} />
           <Script
-            src="https://dash.tinyanalytics.io/script.js"
-            data-site-id="YOUR_SITE_ID"
+            src="https://dash.tinyanalytics.io/script.js?siteId=YOUR_SITE_ID"
             strategy="afterInteractive"
           />
         </>

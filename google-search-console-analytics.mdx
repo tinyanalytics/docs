@@ -71,6 +71,17 @@ Two things answer this on the page:
 - **The trend chart** plots clicks and impressions per day across the window. Clicks read on the left axis with a shaded area; impressions read on their own right axis as a lighter line, because impressions typically dwarf clicks and a shared axis would flatten the clicks line. Hover for a per-day tooltip.
 - **Period comparison.** The totals strip shows each metric's change against the **previous equal-length window** — the same number of days immediately before your current one. A metric with no comparable prior data hides its change chip rather than showing a misleading swing.
 
+## Can I query Search Console data through SQL or MCP?
+
+Search Console metrics are fetched separately from your tracked events. They are
+available in this report and the member-authorized `GET /api/sites/:id/gsc/data`
+endpoint, but are not columns in `scoped_events` and have no MCP tool. An agent's
+`get_query_schema` result therefore cannot establish whether your site has connected
+Search Console. See [MCP coverage](/api-reference/mcp-server#can-an-agent-read-google-search-console-data-through-mcp).
+
+TinyAnalytics shows search-performance metrics, not index coverage or URL inspection
+results. Use Google Search Console directly to check whether a URL is indexed.
+
 ## Can I export my Search Console data?
 
 Yes. The table exports to **CSV** — the rows currently displayed, with their visible columns, including the joined TinyAnalytics metrics on the Pages, Countries, and Devices tabs. Use it to pull rankings and traffic into a spreadsheet or a report.
