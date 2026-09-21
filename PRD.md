@@ -1487,3 +1487,17 @@ remain local pending product deployment and docs publication.
   opt-out behavior, queued calls, and the public tracking API remain unchanged.
 - No public page or OpenAPI contract changed. This targeted audit does not advance
   the full-repository sync marker or claim product deployment.
+
+
+### 2026-09-21 targeted sync — GSC MCP reads
+
+- Product commit: `4a8bc24c1f5069f6c7cfc6d60610ee0e3fc2949a` (decision 0332).
+- Updated `api-reference/mcp-server.mdx` and `google-search-console-analytics.mdx`
+  for `get_gsc_status`/`get_gsc_data`, analytics scope plus membership, Pacific
+  dates, comparison, response limits and the continuing SQL/indexation boundary.
+- Catalog counts: 66 total, 58 default tools.
+- `mint validate` and `mint broken-links`: passed.
+- Product implementation was tested locally against Seomator's real GSC REST
+  reads; production MCP has not yet been deployed with these new tools.
+- This targeted sync does not advance the full-repository audit marker. Keep
+  these pages paired with the product release; neither branch is published yet.
