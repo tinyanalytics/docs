@@ -1313,6 +1313,27 @@ Audited product commits `6fca4baf..f65b2aae` (3 commits; deployed 2026-09-14):
 
 ---
 
+## 10v. Targeted GSC/MCP clarification (2026-09-21)
+
+**Audited product commit:** `0e70b6534904cc33a605d5c0e552d6b0e7b5281f` (decision 0326).
+
+Updated `api-reference/mcp-server.mdx` and `google-search-console-analytics.mdx` to
+explain that the connected-site GSC integration is separate from scoped SQL/MCP,
+that `get_query_schema` cannot establish connection status, and that index coverage
+and URL inspection are not exposed. Added the entry-channel landing-pages filter
+example. Product checks executed that exact filter on both ClickHouse 25.10 and
+25.3, including session-attribution and landing-page semantics.
+
+Public docs impact of the metric-log tuning itself: none (operator-only). The
+schema guidance and report boundaries are covered by the two pages above.
+`mint validate` and `mint broken-links` pass. This targeted audit covers the named
+product commit only; it does not advance the overall sync marker in §10u or claim
+audit coverage for intervening unrelated product commits. Product source changes
+and these docs are committed for release; the operational table tuning was applied
+live separately.
+
+---
+
 ## 11. Assumptions & open questions
 
 | #   | Assumption / question                         | Working default                                                                                                          | Needs confirmation                                                                                                            |

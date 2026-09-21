@@ -52,6 +52,22 @@ Every tool runs with both **your key's scopes and your account access**. The age
 sites you can see, a restricted key sees only granted tools, and writes are refused unless your
 organization role also allows them.
 
+## Can an agent read Google Search Console data through MCP?
+
+Google Search Console data is available in the connected site's [Search Console
+report](/google-search-console-analytics), but the MCP catalog has no GSC tool.
+`get_query_schema` describes the SQL views available to `run_query`; it does not
+list every TinyAnalytics integration or tell you whether your site has connected GSC.
+
+Search queries, clicks, impressions, CTR, and average position are outside those SQL
+views. Use the Search Console report for those metrics. TinyAnalytics does not expose
+index coverage or URL inspection results; use Google Search Console for indexation checks.
+
+To analyze the visitors who arrived from search, use `get_landing_pages` with
+`filters: [{"dimension":"channel","op":"equals","value":["Organic Search"]}]`,
+your `site_id`, `start_date`, and `end_date`. The filter uses each session's entry
+channel and the report retains its original landing page and full session metrics.
+
 ## How do I keep tool responses small?
 
 Three tools that return whole rows accept an optional `fields` argument — `list_sessions`,
