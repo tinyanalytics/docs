@@ -1450,3 +1450,11 @@ remain local pending product deployment and docs publication.
 - Only the heatmap-pages operation changed; endpoint count remains 162.
 - `mint validate` and `mint broken-links`: passed. This targeted sync does not
   advance the repository-wide audit marker or imply product deployment.
+
+### 2026-09-21 targeted QA sync — workflow warning localization
+
+- Product fix: `8c6917a148487f54eeef0a73231cf27fa1762916` (L30-001, decision 0208 amendment).
+- `analytics-workflows.mdx` explains named-step destination warnings and localized
+  warning controls. No API contract or OpenAPI change.
+- `mint validate` and `mint broken-links`: passed. Product deployment remains
+  outstanding; this targeted sync does not advance the full-repository audit marker.
