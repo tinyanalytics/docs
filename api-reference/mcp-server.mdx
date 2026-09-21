@@ -150,7 +150,7 @@ The requirement is simple: the client must speak **Streamable HTTP** and let you
     Cursor reads `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project), VS Code reads `.vscode/mcp.json`, and Codex CLI reads `~/.codex/config.toml`.
   </Step>
   <Step title="Keep the key out of your repository">
-    If the configuration file is committed, read the key from your environment instead of pasting it. In Claude Code, a project `.mcp.json` supports `${env:VAR}`:
+    If the configuration file is committed, read the key from your environment instead of pasting it. In Claude Code, a project `.mcp.json` supports `${VAR}`. Export `TINYANALYTICS_API_KEY` before starting Claude Code:
 
     ```json .mcp.json
     {
@@ -158,7 +158,7 @@ The requirement is simple: the client must speak **Streamable HTTP** and let you
         "TinyAnalytics": {
           "type": "http",
           "url": "https://dash.tinyanalytics.io/api/mcp",
-          "headers": { "Authorization": "Bearer ${env:TINYANALYTICS_API_KEY}" }
+          "headers": { "Authorization": "Bearer ${TINYANALYTICS_API_KEY}" }
         }
       }
     }

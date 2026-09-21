@@ -1404,3 +1404,11 @@ The wiki is the behavioral spec; these are the primary sources per doc area. (Wi
 - **Plausible** (task-oriented): Get Started · Website Settings · Stats Dashboard · Goals and Events · Bypass Adblockers · APIs & Data Access · Account · Team · Billing.
 - **Umami** (feature-oriented): Introduction · Quickstart · Configuration · Tracking (functions, config, events, IDs, tags, links, pixels) · Filtering (sessions, replays, performance, breakdown, goals, funnel, journey, retention, UTM, revenue, attribution) · Boards · Teams · Reference (metric definitions, integrations).
 - **TinyAnalytics** takes the _superset_: task spine (Plausible) for setup + feature spine (Umami) for the dashboard + its own advanced product-analytics/ops tier that neither documents in depth.
+
+## Targeted agentic QA sync — Claude Code MCP environment expansion (2026-09-21)
+
+Audited product commit: `697300b7f08607fcea770bddded5a42438647f49`. Updated `api-reference/mcp-server.mdx`.
+
+Mintlify build validation and broken-link checks passed for the paired QA changes.
+This is a targeted audit of this fix only; it does not advance the overall product
+sync marker or claim deployment. Product changes remain local pending release.
