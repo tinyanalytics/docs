@@ -1458,3 +1458,17 @@ remain local pending product deployment and docs publication.
   warning controls. No API contract or OpenAPI change.
 - `mint validate` and `mint broken-links`: passed. Product deployment remains
   outstanding; this targeted sync does not advance the full-repository audit marker.
+
+### 2026-09-21 targeted pre-release sync — funnel ordering and Has replay defaults
+
+- Targeted product sync through `8a4650ce54f0b1846d5897a13eb425d773e16961`.
+- `funnel-analytics.mdx` documents strict event progression: one recorded event
+  cannot satisfy two steps, while distinct same-millisecond events can advance in
+  their stable order without a later step walking backward.
+- `analytics-filters.mdx` documents that changing an existing filter to **Has replay**
+  immediately initializes the boolean filter to **True**.
+- Reviewed with **Public docs impact: none**: the optional Docker query-user secret,
+  forensic bot-observation kill switch, bot-rollup classification key, and internal
+  release bookkeeping. No public API or OpenAPI contract changed.
+- This is a targeted sync through the named product commit. It does not advance the
+  full-repository audit marker or claim product deployment.

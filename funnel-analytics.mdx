@@ -25,6 +25,8 @@ For an autocapture step, the step's value is a **value pattern** matched against
 
 For each step, the funnel shows how many sessions reached it and what share continued from the previous step. The gaps between steps are your drop-off points — the places where the most people leave the flow.
 
+Each recorded event can satisfy only one funnel step. When two different events happen in the same millisecond, TinyAnalytics gives them a stable order so they can advance consecutive steps, but a later step never walks backward and reuses an earlier event.
+
 Use the date picker at the top of **Funnels** to change the reporting window. Select **Add filter** to narrow every funnel on the page; active filter chips appear beside the controls and can be removed without editing the funnel.
 
 ## How do I see who converted or dropped off?
