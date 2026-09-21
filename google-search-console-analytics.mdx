@@ -73,11 +73,18 @@ Two things answer this on the page:
 
 ## Can I query Search Console data through SQL or MCP?
 
-Search Console metrics are fetched separately from your tracked events. They are
-available in this report and the member-authorized `GET /api/sites/:id/gsc/data`
-endpoint, but are not columns in `scoped_events` and have no MCP tool. An agent's
-`get_query_schema` result therefore cannot establish whether your site has connected
-Search Console. See [MCP coverage](/api-reference/mcp-server#can-an-agent-read-google-search-console-data-through-mcp).
+Use the MCP tools `get_gsc_status` and `get_gsc_data` to read your connected site's
+Search Console data. Both require **Analytics: Read** and membership with access to
+the site. Connect Google and select a property in this report first.
+
+`get_gsc_data` supports queries, pages, countries, devices, and daily metrics, with
+optional previous-period comparisons. It accepts inclusive Pacific dates, up to
+366 days per call, and returns at most 100 rows with explicit truncation metadata.
+See [MCP arguments and examples](/api-reference/mcp-server#can-an-agent-read-google-search-console-data-through-mcp).
+
+The member-authorized `GET /api/sites/:id/gsc/data` endpoint remains available for
+REST clients. GSC metrics are fetched separately from tracked events and are not
+columns in `scoped_events`, so `run_query` cannot retrieve them.
 
 TinyAnalytics shows search-performance metrics, not index coverage or URL inspection
 results. Use Google Search Console directly to check whether a URL is indexed.

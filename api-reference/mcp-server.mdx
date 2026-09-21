@@ -1,7 +1,7 @@
 ---
 title: "Connect an AI Agent with the MCP Server"
 sidebarTitle: "MCP server"
-description: "Connect Claude Code, Cursor, VS Code, or Codex to TinyAnalytics over MCP with a scoped API key and 64 tools for analytics and setup."
+description: "Connect Claude Code, Cursor, VS Code, or Codex to TinyAnalytics over MCP with a scoped API key and 66 tools for analytics and setup."
 icon: "plug"
 noindex: true
 
@@ -28,14 +28,15 @@ Model Context Protocol (MCP) is an open standard that lets AI applications call 
 
 ## What can an agent do through MCP?
 
-The complete server catalog contains **64 tools** in ten domains. A full-access key receives the
-**56 default tools**. A restricted key receives only the tools allowed by its selected resources;
+The complete server catalog contains **66 tools** in eleven domains. A full-access key receives the
+**58 default tools**. A restricted key receives only the tools allowed by its selected resources;
 an explicit matching write grant can also expose the catalog's gated configuration or delete tool
 for that resource.
 
 | You ask for | Tools the agent uses |
 | --- | --- |
 | **Traffic questions** | Overview totals, metric time series (or one sessions series per value of a dimension — `get_timeseries` with `dimension`, for example `ai_assistant` to see which assistant is rising), breakdowns by 18 dimensions (with an optional `first_seen` date per value), live visitors, landing pages, acquisition, journeys, retention, and revenue |
+| **Google Search Console** | Connection status and search performance by query, page, country, device, or date, with prior-period comparisons |
 | **Site health** | Core Web Vitals, JavaScript errors, and bot and AI-crawler traffic |
 | **Events and people** | Custom event names and properties, the raw event log, the data dictionary, user and session lists, user-trait reads (`get_user_traits`: keys, values of one key, or users matching key=value), and profile-trait management (`merge_user_traits` sets only the keys you send; `update_user_traits` replaces all traits) |
 | **Measurement setup** | Goals, funnels (including analysis without saving), custom SQL dashboards, and chart annotations |
@@ -54,14 +55,55 @@ organization role also allows them.
 
 ## Can an agent read Google Search Console data through MCP?
 
-Google Search Console data is available in the connected site's [Search Console
-report](/google-search-console-analytics), but the MCP catalog has no GSC tool.
-`get_query_schema` describes the SQL views available to `run_query`; it does not
-list every TinyAnalytics integration or tell you whether your site has connected GSC.
+Use `get_gsc_status` to check the connection and selected Google property, then
+`get_gsc_data` to read search queries, pages, countries, devices, or daily performance.
+Both tools require **Analytics: Read** and membership with access to the site.
+A public dashboard or shared link does not grant access to Search Console data.
 
-Search queries, clicks, impressions, CTR, and average position are outside those SQL
-views. Use the Search Console report for those metrics. TinyAnalytics does not expose
-index coverage or URL inspection results; use Google Search Console for indexation checks.
+Connect Google and select a property in the site's [Search Console
+report](/google-search-console-analytics) first. A disconnected or unfinished
+connection returns guidance and a link to that report.
+
+After resolving your numeric site ID with `list_sites`, call `get_gsc_data` with:
+
+```json
+{
+  "site_id": 1,
+  "start_date": "2026-09-01",
+  "end_date": "2026-09-07",
+  "dimension": "query",
+  "compare": true,
+  "limit": 25
+}
+```
+
+| Argument | Meaning |
+| --- | --- |
+| `site_id` | Required numeric site ID from `list_sites`. |
+| `start_date`, `end_date` | Required inclusive `YYYY-MM-DD` dates in Pacific time (`America/Los_Angeles`). Maximum 366 calendar days per call; split longer ranges. |
+| `dimension` | Required: `query`, `page`, `country`, `device`, or `date`. |
+| `compare` | Boolean, default `false`. `true` adds the previous equal-length period to each row as `previous`; an unmatched row has `previous: null`. |
+| `limit` | Maximum rows returned, 1–100, default 100. |
+
+Each row includes `name`, `clicks`, `impressions`, `ctr` (a fraction from 0 to 1),
+and average `position`. Results also identify the source, date range, Pacific
+timezone, applied limit, and whether TinyAnalytics cropped rows (`truncated`).
+
+Daily rows are oldest first, with missing days filled with zeros. Other dimensions
+return top rows by clicks. If a daily result is truncated, split the range into
+smaller windows before summing clicks or impressions. Google may omit rows even
+when `truncated` is false, so query or page totals must not be treated as site totals.
+Recent data can be delayed. Use `dimension: "date"` for daily clicks and impressions;
+never sum CTR or average position.
+
+Verify the connection with `get_gsc_status`: `connected: true` and a non-null
+`gscPropertyUrl` mean a property is selected. Then verify that `get_gsc_data` returns
+a successful result; an empty result may mean Google has no data for that window.
+
+Search Console data remains outside `run_query` and its SQL views.
+TinyAnalytics does not expose index coverage or URL inspection results; use
+Google Search Console for indexation checks. These tools read data only; connection,
+property selection, and disconnection stay in the dashboard.
 
 To analyze the visitors who arrived from search, use `get_landing_pages` with
 `filters: [{"dimension":"channel","op":"equals","value":["Organic Search"]}]`,
@@ -243,8 +285,8 @@ Connecting an agent gives it your key's access. Understand these points before y
 <AccordionGroup>
   <Accordion title="What is the TinyAnalytics MCP server?">
     It's an endpoint at `https://dash.tinyanalytics.io/api/mcp` that exposes a
-    64-tool catalog over the Model Context Protocol. A full-access key receives
-    56 default tools; a restricted key receives the subset allowed by its
+    66-tool catalog over the Model Context Protocol. A full-access key receives
+    58 default tools; a restricted key receives the subset allowed by its
     scopes and may receive matching gated actions when you explicitly grant
     write access. Connect Claude Code, Cursor, VS Code, or Codex CLI with your
     API key, then ask questions in plain language.
@@ -258,7 +300,7 @@ Connecting an agent gives it your key's access. Understand these points before y
   <Accordion title="Can an agent delete my analytics data?">
     Only if you explicitly give a restricted key the matching write scope. For
     example, **Sites: Write** can expose site configuration and deletion, while
-    **Users: Write** can expose user erasure. A full-access key receives 56
+    **Users: Write** can expose user erasure. A full-access key receives 58
     default tools that omit the eight gated configuration/delete actions. Use a
     restricted read-only key for analysis-only agents.
   </Accordion>
