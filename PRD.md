@@ -1420,3 +1420,11 @@ Audited product commit: `cf7a218bc9c8cf06672a631a9d3e225c80286390`. Updated `ai-
 Mintlify build validation and broken-link checks passed for the paired QA changes.
 This is a targeted audit of this fix only; it does not advance the overall product
 sync marker or claim deployment. Product changes remain local pending release.
+
+## Targeted agentic QA sync — API Playground narrow panes and Run authentication (2026-09-21)
+
+Audited product commit: `018d6a9092e4b5239c83c7f05c64feb8c686cc5a`. Updated `api-reference/api-playground.mdx`.
+
+Mintlify build validation and broken-link checks passed for the paired QA changes.
+This is a targeted audit of this fix only; it does not advance the overall product
+sync marker or claim deployment. Product changes remain local pending release.
