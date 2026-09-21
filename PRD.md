@@ -1428,3 +1428,16 @@ Audited product commit: `018d6a9092e4b5239c83c7f05c64feb8c686cc5a`. Updated `api
 Mintlify build validation and broken-link checks passed for the paired QA changes.
 This is a targeted audit of this fix only; it does not advance the overall product
 sync marker or claim deployment. Product changes remain local pending release.
+
+
+## Targeted last-30-days QA sync — bot REST scopes and discovery (2026-09-21)
+
+Audited product commit: `6356f7d91a018fa9e74739387449acda2dd6784b` (decision 0330).
+Updated `api-reference/analytics-read-api.mdx` and regenerated `openapi.json`.
+The generated diff adds only the AI summary operation; existing operations are
+unchanged. The reference now contains 162 operations across 31 tags.
+
+Both REST-only bot reads require `analytics:read`, with the per-site gate still
+enforced. The summary documents its explicit-date, no-filter/no-compare contract.
+This is a targeted audit; the overall sync marker is unchanged. These changes
+remain local pending product deployment and docs publication.

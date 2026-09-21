@@ -139,6 +139,16 @@ These six are the reads you'll reach for most, but they're a fraction of the API
 
 Goals, funnels, segments, cohorts, surveys, experiments, dashboards, alerts, annotations, errors, revenue, sessions, users, bots, retention, and journeys each have their own group in the sidebar.
 
+The bot reads use the `analytics:read` API-key scope. This includes
+`GET /api/sites/:site/bots/over-time` and the
+[bot AI summary](/api-reference/bots/get-bot-ai-summary), which returns AI crawler
+requests (`crawls`) and AI-referred sessions (`referred_sessions`) per operator,
+plus `capture: "enabled"` or `"disabled"`. The summary requires `start_date` and
+`end_date`; `time_zone` and `limit` (1–100) are optional. It does not support
+`range`, filters, or comparison. Bot capture being disabled does not disable
+the referred-session half of the summary.
+
+
 <Note>
   **Response bodies aren't documented yet.** Each endpoint page lists its parameters in full, but not the shape of what comes back. To see a real response, run the call in the built-in [API playground](/api-reference/api-playground) against your own data.
 </Note>
@@ -157,7 +167,7 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
     For **parameters**, use the **Endpoints** section of this reference—155 published endpoints across 30 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
   </Accordion>
   <Accordion title="Does TinyAnalytics have an API for goals, funnels, or feature flags?">
-    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 155 playground-backed endpoints across 30 groups; workflow reads are not listed in the playground yet.
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 162 playground-backed endpoints across 31 groups; workflow reads are not listed in the playground yet.
   </Accordion>
   <Accordion title="Can I compare a date range against the previous period?">
     Yes. Comparison-capable reads accept `previous_weekday`, `previous`, `year`,

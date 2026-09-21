@@ -7874,6 +7874,82 @@
         }
       }
     },
+    "/sites/{site}/bots/ai-summary": {
+      "get": {
+        "operationId": "get-sites-site-bots-ai-summary",
+        "summary": "Get Bot AI Summary",
+        "description": "AI crawler requests and referred sessions by operator, with capture enabled/disabled state. Requires explicit dates; filters and comparison are not supported.",
+        "tags": [
+          "bots"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": true,
+            "description": "Example: YYYY-MM-DD.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": true,
+            "description": "Example: YYYY-MM-DD.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "time_zone",
+            "in": "query",
+            "required": false,
+            "description": "Example: UTC.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Limit (1–100). Example: 100.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
     "/sites/{site}/bots/over-time": {
       "get": {
         "operationId": "get-sites-site-bots-over-time",
