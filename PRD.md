@@ -1472,3 +1472,18 @@ remain local pending product deployment and docs publication.
   release bookkeeping. No public API or OpenAPI contract changed.
 - This is a targeted sync through the named product commit. It does not advance the
   full-repository audit marker or claim product deployment.
+
+### 2026-09-21 targeted internal audit — release verification and tracker size
+
+- Audited product commits `a44faa16f039a65464a36bebd7956aca71fa72b5`
+  and `7e7db89a4c82d09ba2766378a943959a2e86c064`; this targeted audit reaches
+  the latter exact SHA.
+- Reviewed with **Public docs impact: none**: the live assistant eval now recognizes
+  every supported September date spelling, and release metadata records version
+  `0.1.0.0`. These changes do not alter model or analytics behavior.
+- Reviewed with **Public docs impact: none**: the tracker shares its existing lazy
+  chunk loaders and passive API construction so the Linux Node 22 build measures
+  7,101 bytes gzip under the unchanged 7,168-byte core limit. Feature gates,
+  opt-out behavior, queued calls, and the public tracking API remain unchanged.
+- No public page or OpenAPI contract changed. This targeted audit does not advance
+  the full-repository sync marker or claim product deployment.
