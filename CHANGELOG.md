@@ -9,6 +9,10 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- Explain the Live sessions drawer in the session guide: online badge entry, five-minute
+  scope, refresh while open, independence from dashboard filters and 100-row limit.
+  Paired with the October 2 product repair; Mintlify validation and link checks pass.
+
 - **MCP tool arguments: `fields`, 100-row caps, time_zone errors (2026-09-16, product decision
   0322):** `api-reference/mcp-server.mdx` gains "How do I keep tool responses small?" — the
   optional `fields` argument on `list_sessions`, `list_users`, and `get_events_log` (server-side

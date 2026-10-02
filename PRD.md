@@ -1502,3 +1502,14 @@ remain local pending product deployment and docs publication.
   existing REST reads. Local trust gate 16/125 and production gate 4/41 passed.
 - This targeted sync does not advance the full-repository audit marker. These pages
   are the paired public documentation for the verified product release.
+
+
+## Targeted sync — Live sessions drawer repair (2026-10-02)
+
+- Audited the live-session repair through product commit
+  `5641b11f38445f43bca03eb921190fb7fd998256` (decision 0058 amendment).
+- `session-analytics.mdx` now explains opening the online badge, the independent
+  five-minute window, 10-second refresh while open, expandable rows and 100-session cap.
+- This targeted sync leaves the broader full-audit marker unchanged. Production memory
+  acceptance records in product PRs 26–28 have no public API or user workflow changes.
+- Verification: `mint validate` and `mint broken-links` passed for the updated guide.
