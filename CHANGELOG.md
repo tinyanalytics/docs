@@ -9,6 +9,7 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- **Report selection context (2026-10-04, product decision 0335):** the dashboard guide documents date/comparison continuity when opening a website and selected report controls that stay visible while scrolling.
 - Explain the Live sessions drawer in the session guide: online badge entry, five-minute
   scope, refresh while open, independence from dashboard filters and 100-row limit.
   Paired with the October 2 product repair; Mintlify validation and link checks pass.

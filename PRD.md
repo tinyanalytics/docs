@@ -1513,3 +1513,11 @@ remain local pending product deployment and docs publication.
 - This targeted sync leaves the broader full-audit marker unchanged. Production memory
   acceptance records in product PRs 26–28 have no public API or user workflow changes.
 - Verification: `mint validate` and `mint broken-links` passed for the updated guide.
+
+## 2026-10-04 — Report selection context (0335)
+
+Targeted product sync: `ac24bd40b9ecd8c2b9013bbb406bf936b9072bbf`.
+Updated `web-analytics-dashboard.mdx` for date/comparison continuity when opening
+a website and selected report controls that remain visible during scroll.
+`mint validate` and `mint broken-links` pass. This targeted sync does not advance
+the full-repository sync marker or include unrelated local positioning changes.
