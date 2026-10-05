@@ -1521,3 +1521,11 @@ Updated `web-analytics-dashboard.mdx` for date/comparison continuity when openin
 a website and selected report controls that remain visible during scroll.
 `mint validate` and `mint broken-links` pass. This targeted sync does not advance
 the full-repository sync marker or include unrelated local positioning changes.
+
+## 2026-10-04 — Selected-only scroll summary (0335 amendment)
+
+Targeted product sync: `14aaf724ab1a53876844b7a6b12bb5d13e378eeb` (product PR #32).
+The dashboard guide now specifies that only selected dates/comparisons and active
+filter chips appear after the full toolbar scrolls away. The owner-requested
+correction removes the green divider and leaves other options at the top.
+Mintlify validation and broken-link checks pass; the full-audit marker is unchanged.

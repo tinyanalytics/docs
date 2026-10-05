@@ -9,6 +9,8 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- Clarify the selected-only scroll summary (0335 amendment): the full toolbar stays at the top; only the chosen date/comparison and active filter chips follow report scrolling.
+
 - **Report selection context (2026-10-04, product decision 0335):** the dashboard guide documents date/comparison continuity when opening a website and selected report controls that stay visible while scrolling.
 - Explain the Live sessions drawer in the session guide: online badge entry, five-minute
   scope, refresh while open, independence from dashboard filters and 100-row limit.
