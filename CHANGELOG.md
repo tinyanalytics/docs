@@ -9,6 +9,10 @@ project adheres to semantic versioning where practical.
 
 ### Changed
 
+- Clarify bot filtering as best effort and conditional on bot blocking in the
+  Bots & AI crawlers guide. Paired with product PR #33, v0.3.0.0, audited through
+  `b1e21cec4b90fcaf328de9fcf8137dc1fe7eeea7`.
+
 - Clarify the selected-only scroll summary (0335 amendment): the full toolbar stays at the top; only the chosen date/comparison and active filter chips follow report scrolling.
 
 - **Report selection context (2026-10-04, product decision 0335):** the dashboard guide documents date/comparison continuity when opening a website and selected report controls that stay visible while scrolling.

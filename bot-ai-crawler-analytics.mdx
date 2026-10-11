@@ -5,7 +5,7 @@ description: "Separate automated requests from human analytics, measure bot traf
 icon: "spider"
 ---
 
-The Bots & AI crawlers report shows automated traffic **separately from your human analytics**: how many bot requests your site gets, what share of all traffic they are, and which bots and AI crawlers are visiting. Bots never appear in your human sessions, visitor counts, or the live counter — so this report is where you go to see them on purpose, especially the AI crawlers reading your pages for models like ChatGPT, Claude, and Perplexity.
+The Bots & AI crawlers report shows **detected automated traffic**: how many bot requests your site gets, what share of recorded traffic they represent, and which bots and AI crawlers visit. With bot blocking enabled, detected bots stay out of your human sessions, visitor counts, and live counter. Detection is best effort, so bots that evade it can still affect those numbers.
 
 ## What do the overview cards show?
 
@@ -26,9 +26,9 @@ The report opens with eight cards summarizing automated traffic for the current 
 
 TinyAnalytics runs **six detection layers** over every request, listed in the table above. They range from the obvious — a crawler that announces itself in its user agent — to signals that catch bots actively hiding, like datacenter networks, missing browser headers, crawl-shaped request bursts, and automation flags in the browser runtime.
 
-A request flagged by **any** layer is counted here instead of in your human analytics. Because the layers overlap, one request can be caught by several at once, so the six layer counts can add up to more than the **Bot requests** total.
+A request flagged by **any** layer appears in bot activity. Because the layers overlap, one request can be caught by several at once, so the six layer counts can add up to more than the **Bot requests** total.
 
-Detected bots are given synthetic sessions and kept entirely out of your session counts and live visitor counter, so automated traffic can never inflate your real numbers.
+With bot blocking enabled, detected bots are kept out of your human session counts and live visitor counter. Detection is best effort: bots that evade the available signals can still affect your reports.
 
 <Note>
   Period comparison isn't available on this report. The date-range picker on the
@@ -73,10 +73,10 @@ For API users, `GET /api/sites/:id/bots/ai-summary` answers "who crawls me versu
 
 <AccordionGroup>
   <Accordion title="Do bots count toward my visitor numbers in TinyAnalytics?">
-    No. Detected bots are given synthetic sessions and kept entirely out of your
-    session counts, visitor counts, and live visitor counter, so automated
-    traffic can never inflate your real numbers. The Bots & AI crawlers report
-    is where you see that traffic on purpose.
+    With bot blocking enabled, detected bots are excluded from human session,
+    visitor, and live counts. Detection cannot catch every automated request, so
+    some bot traffic may remain. Use the Bots & AI crawlers report to inspect
+    detected traffic separately.
   </Accordion>
   <Accordion title="Can TinyAnalytics detect bots that hide their user-agent?">
     Yes. TinyAnalytics flags a request as a bot in two ways: a known user-agent
