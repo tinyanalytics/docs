@@ -1529,3 +1529,14 @@ The dashboard guide now specifies that only selected dates/comparisons and activ
 filter chips appear after the full toolbar scrolls away. The owner-requested
 correction removes the green divider and leaves other options at the top.
 Mintlify validation and broken-link checks pass; the full-audit marker is unchanged.
+
+## 2026-10-11 — Bot detection accuracy clarification (0336)
+
+Targeted product sync: `b1e21cec4b90fcaf328de9fcf8137dc1fe7eeea7` (product PR #33, v0.3.0.0).
+Updated `bot-ai-crawler-analytics.mdx` to qualify exclusion by bot blocking and
+detected traffic, and to explain that evading bots can still affect human reports.
+The product now retains recent document bot verdicts for later telemetry; the
+guide avoids promising complete bot removal. Internal parity diagnostics and
+operator baseline procedures have **Public docs impact: none**. This targeted
+sync preserves the full-repository audit marker and does not claim live PostHog
+verification. Product deployment is tracked in the product release record.
