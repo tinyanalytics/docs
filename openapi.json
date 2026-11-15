@@ -2673,6 +2673,240 @@
         }
       }
     },
+    "/sites/{site}/export/events/count": {
+      "get": {
+        "operationId": "get-sites-site-export-events-count",
+        "summary": "Count Event Export",
+        "description": "Returns the bounded matching-event count, the 250,000-row cap, and whether the result is over limit",
+        "tags": [
+          "events"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_props",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/export/events": {
+      "get": {
+        "operationId": "get-sites-site-export-events",
+        "summary": "Export Events",
+        "description": "Downloads all matching events oldest first as CSV or NDJSON; requires member access and events:read plus users:read for identified IDs",
+        "tags": [
+          "events"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "ndjson"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_props",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
     "/sites/{site}/events/log/{eventId}": {
       "get": {
         "operationId": "get-sites-site-events-log-eventId",
@@ -10353,6 +10587,94 @@
             },
             "in": "query",
             "required": false
+          },
+          {
+            "name": "time_zone",
+            "description": "IANA time zone used to bucket the range, e.g. `America/New_York`.",
+            "schema": {
+              "type": "string",
+              "example": "America/New_York"
+            },
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "filters",
+            "description": "JSON-encoded array of filter objects, each `{ dimension, op, value }` where `value` is an array. Example: `[{\"dimension\":\"country\",\"op\":\"equals\",\"value\":[\"US\"]}]`. A user-trait filter uses the templated dimension `trait:<key>` — `[{\"dimension\":\"trait:plan\",\"op\":\"equals\",\"value\":[\"pro\"]}]` — and matches identified users only, by the trait's current value. Trait ops: equals, not_equals, contains, not_contains, starts_with, ends_with, is_null (\"is not set\"), is_not_null (\"is set\"); regex is not available. Trait filters require a member session or a `users:read` key, max 4 per query, and a filter matching more than 10,000 identified users fails with `TRAIT_FILTER_TOO_BROAD`.",
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "noindex": true
+          }
+        }
+      }
+    },
+    "/sites/{site}/experiments/{experimentId}/timeseries": {
+      "get": {
+        "operationId": "get-sites-site-experiments-experimentId-timeseries",
+        "summary": "Get Experiment Cumulative Trend",
+        "description": "Daily cumulative sessions and conversions per variant, using the results' window and exposure/assignment measurement",
+        "tags": [
+          "experiments"
+        ],
+        "parameters": [
+          {
+            "name": "site",
+            "in": "path",
+            "required": true,
+            "description": "Site ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "experimentId",
+            "in": "path",
+            "required": true,
+            "description": "Example: Experiment ID.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_date",
+            "description": "Start of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "end_date",
+            "description": "End of the range, as `YYYY-MM-DD`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "in": "query",
+            "required": true
           },
           {
             "name": "time_zone",

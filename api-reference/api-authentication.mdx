@@ -83,6 +83,12 @@ full-access keys.
   **Users: Read**. Trait filters do not run on a public site, share link, or embed.
 </Note>
 
+<Note>
+  Event export counts require **Events: Read**. CSV and NDJSON downloads additionally require
+  **Users: Read** because they include identified user IDs. Neither is available through a public
+  site's open dashboard or a share link.
+</Note>
+
 <Warning>
   Treat an API key like a password. Never ship it in browser code, a public bundle, a URL, or a log.
   Revoke an exposed key immediately. Browser tracking needs no key; the snippet's `?siteId=`

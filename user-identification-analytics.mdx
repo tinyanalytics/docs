@@ -73,6 +73,12 @@ Tie the identity lifecycle to your own session lifecycle:
 - **On login**, call `identify(userId, traits?)` as soon as you know who the visitor is.
 - **On logout**, call `clearUserId()` so the next person on that device starts anonymous. Skipping this is how two people sharing one browser end up merged under the first person's ID.
 
+## Shared browsers and sessions
+
+Each identified account gets its own session on a shared browser. Activity from two accounts does not merge into one visit, and the session-cache key contains a one-way digest rather than your raw customer ID. One person using two devices has separate visit sessions while remaining one user in people reports.
+
+Identified activity starts a new session boundary when this behavior rolls out. Existing event history is not rewritten. Continue calling `clearUserId()` on logout so the next account starts with the correct identity.
+
 ## Anonymous and identified modes
 
 TinyAnalytics has two modes. **Anonymous measurement** is the default: cookieless, no analytics ID stored in the browser, and no cookie-consent banner required in most jurisdictions. **Identified mode** starts when you call `identify()`: the user ID and traits you send are personal data, stored so they can describe a person over time.

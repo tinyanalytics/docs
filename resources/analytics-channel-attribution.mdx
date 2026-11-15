@@ -11,7 +11,7 @@ TinyAnalytics labels every visit with a single marketing **channel** — where t
 
 A visit is classified into one channel, such as:
 
-`Direct` · `Organic Search` · `Paid Search` · `Organic Social` · `Paid Social` · `Referral` · `Email` · `AI` · `Display` · `Affiliate` · `Internal` · `Unknown`
+`Direct` · `Organic Search` · `Paid Search` · `Organic Social` · `Paid Social` · `Organic Video` · `Paid Video` · `Referral` · `Email` · `AI` · `Display` · `Affiliate` · `Internal` · `Unknown`
 
 ## How the channel is decided
 
@@ -36,10 +36,13 @@ flowchart TD
   I -- "No" --> K["Search, social, or referral lookup"]
 ```
 
-Two rules resolve the overlaps:
+Three rules resolve the overlaps:
 
 - **Paid beats organic** — a visit from a search source *with* a paid signal (an ad medium or a click ID) is Paid Search, not Organic Search.
 - **AI is checked before search** — a visit from an AI assistant's domain is classified as AI rather than being mistaken for a search engine.
+- **The most specific domain wins** — a hostname matches only the exact domain or one of its subdomains, not text contained in an unrelated domain. For example, `mail.google.com` is Email, `docs.google.com` is Referral, and `tieba.baidu.com` is Organic Social rather than Baidu Organic Search.
+
+YouTube and Twitch are **Organic Video**, and `utm_source=yt` also classifies as Organic Video. DuckDuckGo's products remain distinct: `duckduckgo.com` is Organic Search, while `duck.ai` is AI.
 
 <Note>
   A visit from one of your own pages to another is labeled **Internal**, not counted as a new external referral — so on-site navigation doesn't pollute your acquisition data.

@@ -1540,3 +1540,70 @@ guide avoids promising complete bot removal. Internal parity diagnostics and
 operator baseline procedures have **Public docs impact: none**. This targeted
 sync preserves the full-repository audit marker and does not claim live PostHog
 verification. Product deployment is tracked in the product release record.
+
+## 2026-11-14 — Bounded event export (product PR #35)
+
+Prepared paired updates for product decision 0341:
+
+- `event-analytics.mdx` documents the Explore export dialog, complete filters, CSV/NDJSON, honest counts,
+  and the 250,000-row cap.
+- `api-reference/analytics-read-api.mdx` adds the count-then-download workflow, parameters, scopes, and
+  failure behavior. `api-reference/api-authentication.mdx` records Events: Read plus Users: Read for
+  identified-user downloads.
+- Regenerated `openapi.json` publishes both operations with required dates and the format enum: **164
+  endpoints across 31 groups**. Updated the counts in `tinyanalytics-api.mdx`, `api-playground.mdx`, and
+  the read guide. The generator honors explicit required common parameters.
+- Product `setup.md`, `mcp.md`, and `llms.txt` document the authenticated agent workflow and deliberate
+  no-giant-file MCP exception.
+
+Product tests, real ClickHouse integration/benchmark, browser downloads, and production builds passed.
+`mint validate` and `mint broken-links` pass. Targeted product sync: `fb692d669053db4edef82e943a5b65c361d3a476` (product PR #35). This targeted
+sync does not advance the full-repository audit marker or claim production deployment.
+
+## 2026-11-14 — Channel, AI, and device classification (product PR #35)
+
+Prepared paired updates for product decision 0340:
+
+- `ai-referral-traffic-analytics.mdx` names the expanded assistant vocabulary and explains
+  exact-domain/subdomain matching and the Organic Search versus Duck.ai split.
+- `resources/analytics-channel-attribution.mdx` documents Organic/Paid Video, most-specific-domain
+  precedence, webmail/non-search hosts, YouTube/Twitch, and `utm_source=yt`.
+
+The device parser upgrade changes classification accuracy without introducing a new customer
+workflow. Product build and test gates are green. `mint validate` and `mint broken-links` pass.
+Targeted product sync: `fb692d669053db4edef82e943a5b65c361d3a476` (product PR #35); this targeted sync does not advance the full-repository
+audit marker or claim production deployment.
+
+## 2026-11-14 — Identified sessions and passive Web Vitals (product PR #35)
+
+Prepared paired updates for product decisions 0338 and 0339:
+
+- `user-identification-analytics.mdx` and `session-analytics.mdx` explain separate
+  identified sessions on a shared browser, separate visit sessions across devices,
+  hashed session-cache keys, and the forward-only rollout boundary.
+- `core-web-vitals-analytics.mdx` explains the first-20-seconds-or-hidden snapshot,
+  updates for visitors who never interact, INP's interaction requirement, missing
+  values, and duplicate-event suppression.
+
+Targeted product sync: `fb692d669053db4edef82e943a5b65c361d3a476` (product PR #35).
+This targeted sync leaves the full-repository audit marker unchanged and is not a
+production deployment record.
+
+## 2026-11-14 — Experiment evidence and cumulative trends (product PR #35)
+
+Prepared paired updates for product decision 0342:
+
+- `ab-testing-analytics.mdx` documents session-level beta-posterior comparisons, chance to beat control,
+  95% lift intervals, expected loss, bounded sample projections, SRM, and the 100-session/active-arm plus
+  10-total-conversion evidence guard. Statistical assessment never selects the manually stored winner.
+- The cumulative chart follows the summary's date range, filters, post-exposure attribution, and
+  exposure/assignment mode; it zero-fills days, shows at most 366 days, and carries earlier totals forward.
+- `api-reference/analytics-read-api.mdx` links the new cumulative trend read. Regenerated `openapi.json`
+  publishes **165 endpoints across 31 groups**, with required dates for the trend; the three endpoint-count
+  references are updated.
+
+Shared statistical tests, real ClickHouse trend and result-handler integration, browser
+evidence/empty/error/narrow states, and product suites/builds are recorded in the product PRD. `mint
+validate` and `mint broken-links` pass; the generated trend link was checked in a live docs preview.
+Targeted product sync: `fb692d669053db4edef82e943a5b65c361d3a476` (product PR #35). This targeted sync does not advance the full-repository
+audit marker or claim production deployment.

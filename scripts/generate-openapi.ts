@@ -461,7 +461,7 @@ for (const category of endpointCategories) {
 
     if (endpoint.hasCommonParams) {
       for (const p of COMMON_PARAMS) {
-        parameters.push({ ...p, in: "query", required: false });
+        parameters.push({ ...p, in: "query", required: required.has(p.name) });
       }
     }
 

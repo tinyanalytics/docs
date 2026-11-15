@@ -1,11 +1,11 @@
 ---
 title: "A/B Testing Analytics"
 sidebarTitle: "Experiments"
-description: "Compare feature-flag variants against a goal, then measure conversion, lift over control, sample size, and statistical significance."
+description: "Compare experiment variants with conversion, lift intervals, expected loss, allocation checks, and cumulative trends."
 icon: "flask"
 ---
 
-An experiment tells you which variant of a feature actually converts better — not which one you *think* wins. You connect an experiment to a [multivariate feature flag](/feature-flag-analytics) and a [goal](/conversion-goal-tracking), and TinyAnalytics counts conversions for each variant, computes the lift over your control, and tells you when the difference is statistically significant.
+An experiment shows how each variant of a feature converts against a control, with uncertainty and risk alongside the headline rate. You connect an experiment to a [multivariate feature flag](/feature-flag-analytics) and a [goal](/conversion-goal-tracking); TinyAnalytics counts conversions, compares posterior evidence, and shows progress over time without selecting a winner for you.
 
 ## Before you start
 
@@ -47,15 +47,28 @@ Each variant shows its **sessions**, **conversions**, **conversion rate**, and *
 
 - **Control** is the variant named `control`, or the first one you declared. Every variant you declared appears in the table even before it has any traffic.
 - **Lift** is the variant's conversion rate relative to control. It reads as blank (not "0%") when the control itself hasn't converted yet — there's no baseline to compare against.
-- **Significance** is a two-proportion z-test computed against control. TinyAnalytics needs **at least 30 converting-or-exposed sessions in each arm** before it will call anything — until then it shows **"Gathering data."** A result is marked **significant at 95% confidence** or higher.
+- **Statistical assessment** uses a beta-posterior comparison against control, rather than a simple z-test. TinyAnalytics needs at least **100 sessions per active arm** and **10 total conversions** before showing comparative evidence. Until then it shows **"Gathering data."**
 
-TinyAnalytics never auto-picks a winner and applies no multiple-comparison correction. It surfaces which variant is leading once that lead is significant, and the call to ship stays yours.
+TinyAnalytics never auto-picks a winner and applies no multiple-comparison correction. Statistical assessments and projections inform your decision; the call to ship stays yours.
+
+## How do I read uncertainty and progress?
+
+When enough data exists, each non-control variant shows:
+
+- **Chance to beat control** — the posterior probability that its conversion rate is higher. Values near 0% or 100% remain bounded instead of appearing certain.
+- **95% lift interval** — a relative-lift range, so a noisy percentage does not look like a precise outcome.
+- **Expected loss if chosen** — the estimated conversion-rate cost of choosing that variant incorrectly. This is a risk measure, not a promised loss.
+- **Projected scale** — when a comparison is not yet clear, an estimate of how much more session volume could produce a decision if current rates hold. It is a projection, not a date or guarantee.
+
+A **sample-ratio mismatch** warning appears when observed exposure counts disagree with the configured arm weights at `p < 0.001`. Check allocation before trusting those comparisons. Assignment-fallback results keep their measurement caveat and do not pretend assignment is verified exposure, so they do not run this check.
+
+The **cumulative conversion rate** chart uses the same date window, filters, post-exposure attribution, and exposure/assignment mode as the summary. It zero-fills missing days and shows at most 366 days. When a longer window is truncated, earlier totals carry into the first visible point so the chart still agrees with the summary.
 
 ## Frequently asked questions
 
 <AccordionGroup>
   <Accordion title="Why does my experiment say 'Gathering data'?">
-    Your arms don't have enough traffic yet. TinyAnalytics needs **at least 30 converting-or-exposed sessions in each arm** before it calls significance, and shows "Gathering data" until then. Significance is a two-proportion z-test against control, marked significant at 95% confidence or higher.
+    Each active arm needs at least **100 sessions**, with **10 total conversions**, before TinyAnalytics shows comparative evidence. Until then it shows "Gathering data" rather than claiming statistical confidence.
   </Accordion>
   <Accordion title="Why is the lift column blank for my variant?">
     The control hasn't converted yet, so there's no baseline to compare against. TinyAnalytics shows lift as blank rather than "0%" in that case. Lift is the variant's conversion rate relative to control.
