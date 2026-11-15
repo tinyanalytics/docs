@@ -18,6 +18,8 @@ Performance data is collected only when you add the `data-web-vitals` attribute 
 
 With it on, TinyAnalytics sends **one performance event per page load** carrying the five vitals. Until data arrives, the Performance report shows a notice explaining how to enable collection. See [Configure the tracking script](/configure-tinyanalytics-tracking-script#collect-core-web-vitals) for the full attribute reference.
 
+The event snapshots the first 20 seconds of the page, or its state when the page becomes hidden or unloads first. LCP, CLS, and INP report updates as they happen, so LCP and CLS are included even when a visitor never clicks, taps, presses a key, or scrolls. INP still requires an actual interaction to produce a value. Repeated lifecycle events cannot emit duplicate performance events.
+
 ## What are the five Core Web Vitals?
 
 Each metric captures a different part of the loading and interaction experience. TinyAnalytics collects all five and marks each against its standard "good" threshold:
@@ -59,7 +61,7 @@ This is how you find *what* is slow. A high p75 LCP overall might trace to one h
 Turn on [period comparison](/analytics-period-comparison) to add a baseline and a change indicator to each metric card. Performance comparison is aware that **lower is better** for Core Web Vitals: a rising LCP is a regression, so its change indicator turns red with an up arrow, not green.
 
 <Note>
-  Because vitals are captured only when a metric actually fires before the visitor leaves, a metric can be missing on some loads (for example, INP needs an interaction). TinyAnalytics skips missing values rather than counting them as zero, so each percentile reflects only real measurements.
+  A metric can be missing when it produces no value during the snapshot window (for example, INP needs an interaction). TinyAnalytics skips missing values rather than counting them as zero, so each percentile reflects only real measurements.
 </Note>
 
 ## Frequently asked questions

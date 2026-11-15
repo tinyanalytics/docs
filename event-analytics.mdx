@@ -33,6 +33,14 @@ Explore searches and filters on the server, across your whole selected range —
 
 Every active constraint appears as a chip you can remove individually, and **Reset** clears the page's search and filters without touching your date range. When nothing matches, the page says **"No events match this query"** with **Clear search** and **Reset filters** actions.
 
+## How do I export filtered events?
+
+In **Explore**, choose **Export** in the toolbar. TinyAnalytics counts every event matching the current date range, shared filters, search, event types, event names, and typed property filters before offering the download.
+
+Choose **CSV** for spreadsheets or **NDJSON** for programmatic processing. Both formats contain the complete matching result in oldest-first order, not only the pages loaded in your browser. The dialog handles exact counts, loading, empty results, and errors before downloading.
+
+One file is limited to **250,000 rows**. If more events match, narrow the date range or filters; the dialog says "more than 250,000" rather than presenting a capped probe as an exact total. Public and share-link viewers cannot export. API downloads require **Events: Read** and **Users: Read** for identified user IDs.
+
 ## How do I change which columns the table shows?
 
 The **Columns** control shows, hides, and reorders columns — event, type, time, user, URL, device, country, referrer, channel, and more — and can add up to three **property columns** (for example, the `plan` property as its own column). **Timestamp order** switches the table between **Newest first** and **Oldest first**. Your column choices are remembered in the browser and travel in shared URLs.

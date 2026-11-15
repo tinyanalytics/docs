@@ -115,9 +115,33 @@ Three **composite dimensions** group by host and path together, for sites servin
 
 For raw events, `GET /api/sites/{id}/events/log` returns individual events with a `{ data, cursor }` envelope. It paginates with an opaque composite `cursor` (pass the previous response's `nextCursor`), accepts `direction=older|newer` and `order=newest|oldest`, and applies `q` (search over event, URL, user, and session), `event_types`, `event_names`, and typed `event_props` property filters before returning results. `GET /api/sites/{id}/events/log/{eventId}` returns one event by its event ID. Both are documented with full parameters in the **Endpoints** section.
 
+## Export filtered events
+
+Use `GET /api/sites/{id}/export/events/count` before downloading. It returns `{ rows, maxRows, overLimit }`; when `overLimit` is true, `rows` is the capped probe and the result is **more than 250,000**, not an exact total. Narrow the window or filters before downloading.
+
+`GET /api/sites/{id}/export/events?format=csv|ndjson` downloads the same filtered result oldest first. Both endpoints accept the shared date, time-zone, filters, and activity parameters. Counts require **Events: Read**; downloads also require **Users: Read**. Public and share-link viewers cannot export.
+
+```bash
+curl -G "https://dash.tinyanalytics.io/api/sites/1/export/events/count" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  --data-urlencode "start_date=2026-11-01" \
+  --data-urlencode "end_date=2026-11-14" \
+  --data-urlencode "time_zone=UTC"
+
+curl --fail --show-error -G "https://dash.tinyanalytics.io/api/sites/1/export/events" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  --data-urlencode "start_date=2026-11-01" \
+  --data-urlencode "end_date=2026-11-14" \
+  --data-urlencode "time_zone=UTC" \
+  --data-urlencode "format=ndjson" \
+  -o events.ndjson
+```
+
+A `413` response means the result exceeds the row or file limit. Narrow the query instead of accepting a partial file. These download endpoints are intentionally not giant-file MCP tools; the existing event-log tools provide bounded reads for agents.
+
 ## Where are the rest of the endpoints?
 
-These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **155 published endpoints across 30 groups**—every one with its full path, method, and parameters:
+These six are the reads you'll reach for most, but they're a fraction of the API. The **Endpoints** section of this reference documents **165 published endpoints across 31 groups**—every one with its full path, method, and parameters:
 
 <Columns cols={2}>
   <Card title="Overview" icon="gauge" href="/api-reference/overview/get-overview">
@@ -138,6 +162,8 @@ These six are the reads you'll reach for most, but they're a fraction of the API
 </Columns>
 
 Goals, funnels, segments, cohorts, surveys, experiments, dashboards, alerts, annotations, errors, revenue, sessions, users, bots, retention, and journeys each have their own group in the sidebar.
+
+For experiment progress, `GET /api/sites/:site/experiments/:experimentId/timeseries` returns cumulative daily sessions and conversions per variant. It uses the same required dates, timezone, filters, and exposure/assignment measurement as the experiment summary. The [cumulative trend endpoint](/api-reference/experiments/get-experiment-cumulative-trend) zero-fills missing days and limits the displayed range to 366 days.
 
 The bot reads use the `analytics:read` API-key scope. This includes
 `GET /api/sites/:site/bots/over-time` and the
@@ -164,10 +190,10 @@ A read is authorized exactly like signing in: the API key resolves to its owner,
     No. A public site's reads are open. A private site's reads require an [API key](/api-reference/api-authentication) sent as `Authorization: Bearer <key>` — an invalid key on a private site returns `401`, and a valid key whose owner lacks access to the site returns `403`.
   </Accordion>
   <Accordion title="How do I find an endpoint's exact parameters and response?">
-    For **parameters**, use the **Endpoints** section of this reference—155 published endpoints across 30 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
+    For **parameters**, use the **Endpoints** section of this reference—165 published endpoints across 31 groups, each page listing its full path, method, and parameters. For the **response shape**, run the call in the built-in [API playground](/api-reference/api-playground) against your own data; response bodies aren't documented in the reference yet.
   </Accordion>
   <Accordion title="Does TinyAnalytics have an API for goals, funnels, or feature flags?">
-    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 162 playground-backed endpoints across 31 groups; workflow reads are not listed in the playground yet.
+    Yes. Beyond the six core analytics reads, the API covers goals, funnels, segments, cohorts, groups, surveys, [feature flags](/api-reference/feature-flags/list-feature-flags), experiments, dashboards, alerts, annotations, scheduled reports, errors, revenue, [performance](/api-reference/performance/get-performance-overview), [heatmaps](/api-reference/heatmaps/get-heatmap-clicks), sessions, users, user traits, bots, catalog, retention, journeys, [uptime monitoring](/api-reference/uptime-monitors/list-monitors), and read-only [workflow](/analytics-workflows#who-can-manage-workflows) definitions, runs, and metrics. The generated reference publishes 165 playground-backed endpoints across 31 groups; workflow reads are not listed in the playground yet.
   </Accordion>
   <Accordion title="Can I compare a date range against the previous period?">
     Yes. Comparison-capable reads accept `previous_weekday`, `previous`, `year`,
